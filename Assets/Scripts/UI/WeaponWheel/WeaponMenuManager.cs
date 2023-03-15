@@ -50,6 +50,17 @@ namespace UI.WeaponWheel
             
             _isMenuOpen = _isMenuOpen == false;
             
+            //change player state
+            if (_isMenuOpen == false)
+            {
+                WeaponWheelButtonController button = EventSystem.current.currentSelectedGameObject.GetComponent<WeaponWheelButtonController>();
+                if (button != null)
+                {
+                    button.Select();
+                }
+            }
+            ResetSelection();
+            
             _weaponUI.SetActive(_isMenuOpen);
             Time.timeScale = _isMenuOpen ? 1f : 1f;
         }
@@ -68,11 +79,15 @@ namespace UI.WeaponWheel
                     _harpoonButton.Exit();
                     break;
                 default:
-                    EventSystem.current.SetSelectedGameObject(null);
                     _netButton.Exit();
                     _harpoonButton.Exit();
                     break;
             }
+        }
+
+        public void ResetSelection()
+        {
+            EventSystem.current.SetSelectedGameObject(null);
         }
     }
 }
