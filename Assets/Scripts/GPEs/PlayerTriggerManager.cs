@@ -26,6 +26,7 @@ namespace GPEs
         public UnityEvent OnPlayerExited = new UnityEvent();
 
         protected KayakController KayakController;
+        public KayakController PropKayakController => KayakController;
 
         public virtual void Update()
         {
