@@ -50,15 +50,12 @@ public class SwitchToCameraTrackAndNormal : MonoBehaviour
                     BoxPosition boxPosition = box;
                     boxPosition.IsTrigger = true;
                     BoxPositions[i] = boxPosition;
-
                 }
                 else
                 {
                     BoxPosition boxPosition = box;
                     boxPosition.IsTrigger = false;
                     BoxPositions[i] = boxPosition;
-
-         
                 }
             }
         }
