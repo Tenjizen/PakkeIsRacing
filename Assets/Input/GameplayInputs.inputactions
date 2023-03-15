@@ -67,6 +67,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "OpenWheelMenu",
+                    "type": "Value",
+                    "id": "3897178e-d8e5-42d2-b1c6-075428adc16c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "SelectOnWheel",
+                    "type": "Value",
+                    "id": "41104c3d-e5eb-4b95-9d70-09869384b221",
+                    "expectedControlType": "Analog",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -210,6 +228,39 @@
                     "processors": "",
                     "groups": "GamePad",
                     "action": "DialogSkip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0f43ca2a-d8b2-442e-bf39-32832d7c4143",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "OpenWheelMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d7fa617b-1ea1-4ae8-831d-a0f69de7ae94",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "OpenWheelMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2f65d129-1c19-4806-aa4d-dc91c9bd8998",
+                    "path": "<Gamepad>/rightStick/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "SelectOnWheel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

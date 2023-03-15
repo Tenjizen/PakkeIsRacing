@@ -89,6 +89,24 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenWheelMenu"",
+                    ""type"": ""Value"",
+                    ""id"": ""3897178e-d8e5-42d2-b1c6-075428adc16c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SelectOnWheel"",
+                    ""type"": ""Value"",
+                    ""id"": ""41104c3d-e5eb-4b95-9d70-09869384b221"",
+                    ""expectedControlType"": ""Analog"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -234,6 +252,39 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""action"": ""DialogSkip"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0f43ca2a-d8b2-442e-bf39-32832d7c4143"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""OpenWheelMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d7fa617b-1ea1-4ae8-831d-a0f69de7ae94"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""OpenWheelMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f65d129-1c19-4806-aa4d-dc91c9bd8998"",
+                    ""path"": ""<Gamepad>/rightStick/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""SelectOnWheel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -260,6 +311,8 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         m_Boat_RotateCameraActivation = m_Boat.FindAction("RotateCameraActivation", throwIfNotFound: true);
         m_Boat_RotateCamera = m_Boat.FindAction("RotateCamera", throwIfNotFound: true);
         m_Boat_DialogSkip = m_Boat.FindAction("DialogSkip", throwIfNotFound: true);
+        m_Boat_OpenWheelMenu = m_Boat.FindAction("OpenWheelMenu", throwIfNotFound: true);
+        m_Boat_SelectOnWheel = m_Boat.FindAction("SelectOnWheel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -326,6 +379,8 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Boat_RotateCameraActivation;
     private readonly InputAction m_Boat_RotateCamera;
     private readonly InputAction m_Boat_DialogSkip;
+    private readonly InputAction m_Boat_OpenWheelMenu;
+    private readonly InputAction m_Boat_SelectOnWheel;
     public struct BoatActions
     {
         private @GameplayInputs m_Wrapper;
@@ -337,6 +392,8 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         public InputAction @RotateCameraActivation => m_Wrapper.m_Boat_RotateCameraActivation;
         public InputAction @RotateCamera => m_Wrapper.m_Boat_RotateCamera;
         public InputAction @DialogSkip => m_Wrapper.m_Boat_DialogSkip;
+        public InputAction @OpenWheelMenu => m_Wrapper.m_Boat_OpenWheelMenu;
+        public InputAction @SelectOnWheel => m_Wrapper.m_Boat_SelectOnWheel;
         public InputActionMap Get() { return m_Wrapper.m_Boat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -367,6 +424,12 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @DialogSkip.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnDialogSkip;
                 @DialogSkip.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnDialogSkip;
                 @DialogSkip.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnDialogSkip;
+                @OpenWheelMenu.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnOpenWheelMenu;
+                @OpenWheelMenu.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnOpenWheelMenu;
+                @OpenWheelMenu.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnOpenWheelMenu;
+                @SelectOnWheel.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnSelectOnWheel;
+                @SelectOnWheel.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnSelectOnWheel;
+                @SelectOnWheel.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnSelectOnWheel;
             }
             m_Wrapper.m_BoatActionsCallbackInterface = instance;
             if (instance != null)
@@ -392,6 +455,12 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @DialogSkip.started += instance.OnDialogSkip;
                 @DialogSkip.performed += instance.OnDialogSkip;
                 @DialogSkip.canceled += instance.OnDialogSkip;
+                @OpenWheelMenu.started += instance.OnOpenWheelMenu;
+                @OpenWheelMenu.performed += instance.OnOpenWheelMenu;
+                @OpenWheelMenu.canceled += instance.OnOpenWheelMenu;
+                @SelectOnWheel.started += instance.OnSelectOnWheel;
+                @SelectOnWheel.performed += instance.OnSelectOnWheel;
+                @SelectOnWheel.canceled += instance.OnSelectOnWheel;
             }
         }
     }
@@ -423,5 +492,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         void OnRotateCameraActivation(InputAction.CallbackContext context);
         void OnRotateCamera(InputAction.CallbackContext context);
         void OnDialogSkip(InputAction.CallbackContext context);
+        void OnOpenWheelMenu(InputAction.CallbackContext context);
+        void OnSelectOnWheel(InputAction.CallbackContext context);
     }
 }
