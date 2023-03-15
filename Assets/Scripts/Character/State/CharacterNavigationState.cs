@@ -164,7 +164,6 @@ namespace Character.State
         /// </summary>
         private void StopCharacter()
         {
-            Debug.Log("stop character");
             _kayakRigidbody.velocity = Vector3.Lerp(_kayakRigidbody.velocity, Vector3.zero, 0.01f);
         }
 

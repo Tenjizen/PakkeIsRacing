@@ -31,6 +31,9 @@ namespace Character
             Inputs.RotateCameraClick = GameplayInputs.Boat.RotateCameraActivation.ReadValue<float>() > 0;
             
             Inputs.RotateCamera = GameplayInputs.Boat.RotateCamera.ReadValue<Vector2>();
+
+            Inputs.OpenWeaponMenu = GameplayInputs.Boat.OpenWheelMenu.ReadValue<float>() > 0.5f;
+            Inputs.SelectWeaponMenu = GameplayInputs.Boat.SelectOnWheel.ReadValue<float>();
         }
     }
     
@@ -43,5 +46,7 @@ namespace Character
         public bool RotateCameraClick;
         public Vector2 RotateCamera;
         public float DEADZONE;
+        public bool OpenWeaponMenu;
+        public float SelectWeaponMenu;
     }
 }
