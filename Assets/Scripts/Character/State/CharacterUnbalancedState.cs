@@ -58,9 +58,10 @@ namespace Character.State
 
             Rebalance();
 
-
             if (Mathf.Abs(CharacterManagerRef.Balance) < CharacterManagerRef.RebalanceAngle)
+            {
                 this.SwitchState(character);
+            }
         }
 
         public override void FixedUpdate(CharacterManager character)

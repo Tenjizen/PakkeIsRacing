@@ -13,9 +13,9 @@ namespace Character.State
             CameraManagerRef = cameraManagerRef;
         }
 
-        protected CharacterManager CharacterManagerRef;
-        protected CameraManager CameraManagerRef;
-        protected MonoBehaviour MonoBehaviourRef;
+        public CharacterManager CharacterManagerRef;
+        public CameraManager CameraManagerRef;
+        public MonoBehaviour MonoBehaviourRef;
         
         public bool CanBeMoved = true;
         public bool CanCharacterMove = true;

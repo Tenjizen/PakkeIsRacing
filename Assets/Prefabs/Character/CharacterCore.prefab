@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 5891022636374673604}
-  m_PathPosition: 0.5678284
+  m_PathPosition: 0.56782836
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
   m_XDamping: 3
@@ -372,8 +372,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2902698180730398354}
-  m_LocalRotation: {x: 0.23933394, y: -0.66537136, z: 0.23933381, w: 0.6653717}
-  m_LocalPosition: {x: 10.418289, y: 8.912755, z: 8.5078945}
+  m_LocalRotation: {x: 0.239334, y: -0.6653712, z: 0.23933375, w: 0.6653719}
+  m_LocalPosition: {x: 10.418288, y: 8.912755, z: 8.507887}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -444,7 +444,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3014273842563118509}
   m_LocalRotation: {x: 0.130805, y: 0.0053463127, z: -0.00070539623, w: 0.99139345}
-  m_LocalPosition: {x: -1.3265305, y: 3.5162826, z: 1.2501512}
+  m_LocalPosition: {x: -1.3265305, y: 3.5162826, z: 1.2501503}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -564,7 +564,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3858187113969445702}
   m_LocalRotation: {x: 0.12158245, y: -0, z: -0, w: 0.99258137}
-  m_LocalPosition: {x: 0, y: 4.883527, z: -7.291047}
+  m_LocalPosition: {x: 0, y: 4.883527, z: -7.291048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -847,7 +847,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7217796708440880408}
   m_Layer: 0
-  m_Name: PaddleAndCharacter
+  m_Name: Paddle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -963,8 +963,9 @@ MonoBehaviour:
   MinimumTimeUnbalanced: 2
   RotationToBalanceMultiplier: 10
   FloatersLevelDifferenceToBalanceMultiplier: 0.1
-  _paddleLeftParticle: {fileID: 8176147450691830271}
-  _paddleRightParticle: {fileID: 900554225378323000}
+  _paddleLeftParticle: {fileID: 0}
+  _paddleRightParticle: {fileID: 0}
+  CurrentWeapon: 0
 --- !u!114 &7217796708653836311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1119,6 +1120,10 @@ MonoBehaviour:
   ValueAddForTopDownWhenDeath: 0.1
   ValueAddForDistanceWhenDeath: 0.05
   MaxValueDistanceToStartDeath: 10
+  CameraDistanceRespawn: 25
+  MultiplyTimeForDistanceWhenRespawn: 5
+  CameraAngleTopDownRespawn: 28
+  MultiplyTimeForTopDownWhenRespawn: 6
   AmplitudShakeWhenUnbalanced: 0.5
   AmplitudShakeWhenWaterFlow: 0.2
   AmplitudShakeWhenWaterWave: 0.5
@@ -1273,12 +1278,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7e12af05b510e84a853a95766b42a98, type: 3}
---- !u!198 &900554225378323000 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 950529896740582016, guid: e7e12af05b510e84a853a95766b42a98,
-    type: 3}
-  m_PrefabInstance: {fileID: 94466381276944568}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2135214579272588941 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2084694887860373045, guid: e7e12af05b510e84a853a95766b42a98,
@@ -1300,12 +1299,6 @@ Animator:
 --- !u!4 &7291271243992024869 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7232869222602301341, guid: e7e12af05b510e84a853a95766b42a98,
-    type: 3}
-  m_PrefabInstance: {fileID: 94466381276944568}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &8176147450691830271 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 8086246553683581255, guid: e7e12af05b510e84a853a95766b42a98,
     type: 3}
   m_PrefabInstance: {fileID: 94466381276944568}
   m_PrefabAsset: {fileID: 0}
