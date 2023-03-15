@@ -1,4 +1,7 @@
 using System;
+using Character;
+using Character.State;
+using UI.WeaponWheel;
 using UnityEditor.U2D.Animation;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,6 +12,8 @@ public class WeaponWheelButtonController : MonoBehaviour, IPointerEnterHandler, 
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private Button _button;
+    [SerializeField] private CharacterManager _characterManager;
+    [SerializeField] private Weapon _weapon;
     public UnityEvent OnSelected = new UnityEvent();
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -34,7 +39,13 @@ public class WeaponWheelButtonController : MonoBehaviour, IPointerEnterHandler, 
 
     public void Select()
     {
+        Debug.Log($"select {_weapon}");
+        
         OnSelected.Invoke();
-        Debug.Log($"select {gameObject.name}");
+        _characterManager.CurrentWeapon = _weapon;
+
+        CharacterWeaponState characterWeaponState = 
+            new CharacterWeaponState(_characterManager,_characterManager.CurrentStateBase.MonoBehaviourRef,_characterManager.CurrentStateBase.CameraManagerRef);
+        _characterManager.SwitchState(characterWeaponState);
     }
 }

@@ -3,6 +3,7 @@ using Character.Camera;
 using Character.State;
 using Kayak;
 using SceneTransition;
+using UI.WeaponWheel;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -47,6 +48,7 @@ namespace Character
         [SerializeField] private ParticleSystem _paddleLeftParticle;
         [SerializeField] private ParticleSystem _paddleRightParticle;
 
+        [Header("Weapon"), ReadOnly] public Weapon CurrentWeapon;
 
         private void Awake()
         {
