@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using Character;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
@@ -13,13 +14,16 @@ namespace UI.WeaponWheel
         [SerializeField] private CharacterManager _characterManager;
         [SerializeField] private CameraManager _cameraManager;
         [SerializeField] private GameObject _weaponUI;
+        [SerializeField] private Transform _vignette;
         [SerializeField] private WeaponWheelButtonController _harpoonButton;
         [SerializeField] private WeaponWheelButtonController _netButton;
 
+        private Vector3 _vignetteBaseScale;
         private bool _isMenuOpen;
 
         private void Start()
         {
+            _vignetteBaseScale = _vignette.localScale;
             _weaponUI.SetActive(_isMenuOpen);
         }
 
@@ -48,10 +52,7 @@ namespace UI.WeaponWheel
             _characterManager.CurrentStateBase.CanCharacterMakeActions = _isMenuOpen;
             _cameraManager.CanMoveCameraManually = _isMenuOpen;
             
-            _isMenuOpen = _isMenuOpen == false;
-            
-            //change player state
-            if (_isMenuOpen == false)
+            if (_isMenuOpen && EventSystem.current.currentSelectedGameObject != null)
             {
                 WeaponWheelButtonController button = EventSystem.current.currentSelectedGameObject.GetComponent<WeaponWheelButtonController>();
                 if (button != null)
@@ -59,10 +60,16 @@ namespace UI.WeaponWheel
                     button.Select();
                 }
             }
+            _isMenuOpen = _isMenuOpen == false;
             ResetSelection();
             
             _weaponUI.SetActive(_isMenuOpen);
             Time.timeScale = _isMenuOpen ? 1f : 1f;
+
+            if (_isMenuOpen)
+            {
+                VignetteZoom();
+            }
         }
 
         private void WeaponChoice()
@@ -88,6 +95,12 @@ namespace UI.WeaponWheel
         public void ResetSelection()
         {
             EventSystem.current.SetSelectedGameObject(null);
+        }
+
+        private void VignetteZoom()
+        {
+            _vignette.localScale = _vignetteBaseScale * 2;
+            _vignette.DOScale(_vignetteBaseScale, 0.3f);
         }
     }
 }
