@@ -3,38 +3,92 @@ using UnityEngine;
 
 public class EnemyCombatState : EnemyBaseState
 {
-    private float timer;
+
+    private float _timerToPassUnderPlayer;
+    float _timeAnimationCurve = 0;
+    private Keyframe _lastKey;
+    float _timerTargetFollow = 0;
+    float _timerToJump = 0;
+    float _elevationOffsetBase;
+
+    public enum CombatState { RotateBeforeJump = 0, Wait = 1, Jump = 2, RotateAfterJump = 3 };
+    private CombatState _state;
+
+
     public override void EnterState(EnemyManager enemyManager)
     {
-        Debug.Log("combat");
-        circle = enemyManager.GetComponentInChildren<SpriteRenderer>().gameObject;
+        Debug.Log("combat state");
+        _elevationOffsetBase = enemyManager.ElevationOffset;
+        _state = CombatState.RotateBeforeJump;
     }
 
     public override void UpdateState(EnemyManager enemyManager)
     {
-        timer += Time.deltaTime;
         if (enemyManager.Target != null)
         {
-            if (timer > enemyManager.TimerToJump && jump == false)
+
+            switch (_state)
             {
-                circle.SetActive(true);
-                CircleUI(enemyManager);
-                //Jump(enemyManager);
+                #region BeforeJump
+                case CombatState.RotateBeforeJump:
+
+                    _timerToPassUnderPlayer += Time.deltaTime;
+
+                    RotateAround(enemyManager);
+
+                    if (_timerToPassUnderPlayer > enemyManager.TimerToPassUnderPlayer /*&& _state == CombatState.RotateBeforeJump*/)
+                    {
+                        if (enemyManager.ElevationOffset > -enemyManager.DiveDistance)
+                        {
+                            enemyManager.ElevationOffset -= enemyManager.DiveSpeed;
+                        }
+                        else
+                            _state = CombatState.Wait;
+                    }
+
+                    break;
+                #endregion
+                #region Wait for jump
+                case CombatState.Wait:
+
+                    enemyManager.Shadow.SetActive(true);
+                    CircleUI(enemyManager);
+
+                    break;
+                #endregion
+
+                #region Jump
+                case CombatState.Jump:
+
+                    Jump(enemyManager);
+
+                    break;
+                #endregion
+
+                #region After jump
+                case CombatState.RotateAfterJump:
+
+                    RotateAround(enemyManager);
+
+                    if (enemyManager.ElevationOffset < _elevationOffsetBase)
+                    {
+                        enemyManager.ElevationOffset += enemyManager.DiveSpeed;
+                    }
+                    else
+                    {
+                        enemyManager.ElevationOffset = _elevationOffsetBase;
+                        _state = CombatState.RotateBeforeJump;
+                    }
+
+                    break;
+                #endregion
+
+                default:
+
+                    break;
             }
-            else
-            {
-                RotateAround(enemyManager);
-                circle.SetActive(false);
-
-            }
-
-
-            if (jump == true)
-                Jump(enemyManager);
-
         }
     }
-    private bool jump = false;
     public override void FixedUpdate(EnemyManager enemyManager)
     {
 
@@ -45,12 +99,19 @@ public class EnemyCombatState : EnemyBaseState
 
     }
 
+    #region Fonction
     private void RotateAround(EnemyManager enemyManager)
     {
         Vector3 position = enemyManager.Target != null ? enemyManager.Target.position : Vector3.zero;
 
-        enemyManager.PositionOffset.Set(Mathf.Cos(enemyManager.Angle) * enemyManager.CircleRadius, enemyManager.ElevationOffset, Mathf.Sin(enemyManager.Angle) * enemyManager.CircleRadius);
-        enemyManager.transform.position = new Vector3(enemyManager.Target.position.x + enemyManager.PositionOffset.x, 0, enemyManager.Target.position.z + enemyManager.PositionOffset.z);
+        enemyManager.PositionOffset.Set(Mathf.Cos(enemyManager.Angle) * enemyManager.RadiusRotateAroundTarget,
+            enemyManager.ElevationOffset,
+            Mathf.Sin(enemyManager.Angle) * enemyManager.RadiusRotateAroundTarget);
+
+        enemyManager.transform.position = new Vector3(enemyManager.Target.position.x + enemyManager.PositionOffset.x, 
+            enemyManager.ElevationOffset, 
+            enemyManager.Target.position.z + enemyManager.PositionOffset.z);
+
         enemyManager.Angle += Time.deltaTime * enemyManager.RotationSpeed;
 
         Quaternion rotation = enemyManager.transform.rotation;
@@ -64,35 +125,48 @@ public class EnemyCombatState : EnemyBaseState
         enemyManager.Angle += Time.deltaTime * enemyManager.RotationSpeed;
     }
 
-    float time = 0;
-    private Keyframe lastKey;
-
-    private void Jump(EnemyManager enemyManager)
+    private void CircleUI(EnemyManager enemyManager)
     {
-        time += Time.deltaTime;
-
-        if (enemyManager.Local == true)
+        if (_timerTargetFollow < enemyManager.TimerTargetFollow)
         {
-            Vector3 posTarget = circle.transform.localPosition;
-            enemyManager.transform.localPosition = posTarget;
+            enemyManager.Shadow.transform.position = enemyManager.Target.position;
+        }
+
+        _timerTargetFollow += Time.deltaTime;
+
+        if (enemyManager.Shadow.transform.localScale.x < enemyManager.ShadowMaxSizeForJump)
+        {
+            enemyManager.Shadow.transform.localScale += (Vector3.one / 2) * Time.deltaTime;
         }
         else
         {
-            Vector3 posTarget = circle.transform.position;
-            enemyManager.transform.position = posTarget;
+            _state = CombatState.Jump;
+
+            enemyManager.Shadow.SetActive(false);
+            enemyManager.Shadow.transform.localScale = Vector3.one;
+            _timerTargetFollow = 0;
+            _timerToJump = 0;
         }
+    }
+
+    private void Jump(EnemyManager enemyManager)
+    {
+        _timeAnimationCurve += Time.deltaTime;
+
+        //Vector3 posTarget = enemyManager.Shadow.transform.position;
+        //enemyManager.transform.position = posTarget;
+        enemyManager.transform.position = enemyManager.Shadow.transform.position;
 
         Vector3 pos = enemyManager.transform.position;
-        pos.y = enemyManager.jumpCurve.Evaluate(time);
+        pos.y = enemyManager.JumpCurve.Evaluate(_timeAnimationCurve);
         enemyManager.transform.position = pos;
 
-        
-        
-        lastKey = enemyManager.jumpCurve[enemyManager.jumpCurve.length - 1];
+        #region animation curve
+        _lastKey = enemyManager.JumpCurve[enemyManager.JumpCurve.length - 1];
 
-        #region rotation y
+        // rotation y
         Vector3 rotation = enemyManager.transform.eulerAngles;
-        if (time > lastKey.time / 2)
+        if (_timeAnimationCurve > _lastKey.time / 2)
         {
             rotation.z = -90;
             enemyManager.transform.eulerAngles = rotation;
@@ -102,40 +176,19 @@ public class EnemyCombatState : EnemyBaseState
             rotation.z = 90;
             enemyManager.transform.eulerAngles = rotation;
         }
+
+
+
+        // end of the jump
+        if (_timeAnimationCurve >= _lastKey.time)
+        {
+            _state = CombatState.RotateAfterJump;
+            _timerToPassUnderPlayer = 0;
+            _timeAnimationCurve = 0;
+        }
         #endregion
-
-        if (time >= lastKey.time)
-        {
-            RotateAround(enemyManager);
-            timer = 0;
-            time = 0;
-            jump = false;
-        }
-
     }
 
 
-
-    private GameObject circle;
-    float timerFollow = 0;
-    private void CircleUI(EnemyManager enemyManager)
-    {
-        if (timerFollow < enemyManager.TimerCircleFollow)
-        {
-            circle.transform.position = enemyManager.Target.position;
-
-        }
-
-        circle.transform.localScale += (Vector3.one / 2) * Time.deltaTime;
-        timerFollow += Time.deltaTime;
-
-        if (circle.transform.localScale.x >= 2.5f && timerFollow > 3)
-        {
-            jump = true;
-            //Jump(enemyManager);
-            circle.transform.localScale = Vector3.one;
-            timerFollow = 0;
-        }
-
-    }
+    #endregion
 }
