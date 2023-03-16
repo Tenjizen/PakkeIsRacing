@@ -8,7 +8,6 @@ public class EnemyCombatState : EnemyBaseState
     float _timeAnimationCurve = 0;
     private Keyframe _lastKey;
     float _timerTargetFollow = 0;
-    float _timerToJump = 0;
     float _elevationOffsetBase;
 
     public enum CombatState { RotateBeforeJump = 0, Wait = 1, Jump = 2, RotateAfterJump = 3 };
@@ -104,9 +103,11 @@ public class EnemyCombatState : EnemyBaseState
     {
         Vector3 position = enemyManager.Target != null ? enemyManager.Target.position : Vector3.zero;
 
-        enemyManager.PositionOffset.Set(Mathf.Cos(enemyManager.Angle) * enemyManager.RadiusRotateAroundTarget,
+        float radius = Random.Range(enemyManager.RadiusRotateAroundTargetMin, enemyManager.RadiusRotateAroundTargetMax);
+
+        enemyManager.PositionOffset.Set(Mathf.Cos(enemyManager.Angle) * radius,
             enemyManager.ElevationOffset,
-            Mathf.Sin(enemyManager.Angle) * enemyManager.RadiusRotateAroundTarget);
+            Mathf.Sin(enemyManager.Angle) * radius);
 
         enemyManager.transform.position = new Vector3(enemyManager.Target.position.x + enemyManager.PositionOffset.x, 
             enemyManager.ElevationOffset, 
@@ -145,7 +146,6 @@ public class EnemyCombatState : EnemyBaseState
             enemyManager.Shadow.SetActive(false);
             enemyManager.Shadow.transform.localScale = Vector3.one;
             _timerTargetFollow = 0;
-            _timerToJump = 0;
         }
     }
 
@@ -153,8 +153,6 @@ public class EnemyCombatState : EnemyBaseState
     {
         _timeAnimationCurve += Time.deltaTime;
 
-        //Vector3 posTarget = enemyManager.Shadow.transform.position;
-        //enemyManager.transform.position = posTarget;
         enemyManager.transform.position = enemyManager.Shadow.transform.position;
 
         Vector3 pos = enemyManager.transform.position;
@@ -166,7 +164,8 @@ public class EnemyCombatState : EnemyBaseState
 
         // rotation y
         Vector3 rotation = enemyManager.transform.eulerAngles;
-        if (_timeAnimationCurve > _lastKey.time / 2)
+
+        if (_timeAnimationCurve > _lastKey.time / enemyManager.ValueBeforeLastKeyFrameInCurve)
         {
             rotation.z = -90;
             enemyManager.transform.eulerAngles = rotation;
@@ -176,8 +175,6 @@ public class EnemyCombatState : EnemyBaseState
             rotation.z = 90;
             enemyManager.transform.eulerAngles = rotation;
         }
-
-
 
         // end of the jump
         if (_timeAnimationCurve >= _lastKey.time)
