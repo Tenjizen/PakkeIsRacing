@@ -82,10 +82,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   RotationSpeed: 0.5
-  RadiusRotateAroundTarget: 15
+  RadiusRotateAroundTargetMin: 10
+  RadiusRotateAroundTargetMax: 20
   ElevationOffset: -2.38
   TimerToPassUnderPlayer: 2
-  TimerToJump: 2
   TimerTargetFollow: 2
   JumpCurve:
     serializedVersion: 2
@@ -101,6 +101,15 @@ MonoBehaviour:
       outWeight: 0.04982415
     - serializedVersion: 3
       time: 2
+      value: 8
+      inSlope: -1.6735834
+      outSlope: -1.6735834
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.18779951
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 4
       value: -10
       inSlope: -39.1481
       outSlope: -39.1481
@@ -117,6 +126,7 @@ MonoBehaviour:
   DiveSpeed: 0.2
   PositionOffset: {x: 0, y: 0, z: 0}
   Angle: 2.98
+  test: 1.4
 --- !u!114 &4724983407922079715
 MonoBehaviour:
   m_ObjectHideFlags: 0
