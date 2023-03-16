@@ -29,11 +29,6 @@ namespace UI.WeaponWheel
 
         private void Update()
         {
-            if (Input.GetJoystickNames().Length <= 0)
-            {
-                return;
-            }
-            
             if ((_inputManagement.Inputs.OpenWeaponMenu && _isMenuOpen == false) || 
                 (_inputManagement.Inputs.OpenWeaponMenu == false && _isMenuOpen))
             {

@@ -34,6 +34,7 @@ namespace Character
 
             Inputs.OpenWeaponMenu = GameplayInputs.Boat.OpenWheelMenu.ReadValue<float>() > 0.5f;
             Inputs.SelectWeaponMenu = GameplayInputs.Boat.SelectOnWheel.ReadValue<float>();
+            Inputs.DeselectWeapon = GameplayInputs.Boat.DeselectWeapon.triggered;
         }
     }
     
@@ -48,5 +49,6 @@ namespace Character
         public float DEADZONE;
         public bool OpenWeaponMenu;
         public float SelectWeaponMenu;
+        public bool DeselectWeapon;
     }
 }

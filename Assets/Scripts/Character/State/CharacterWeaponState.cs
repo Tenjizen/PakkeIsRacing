@@ -21,6 +21,18 @@ namespace Character.State
 
         public override void UpdateState(CharacterManager character)
         {
+            Debug.Log(CharacterManagerRef.InputManagement.Inputs.DeselectWeapon);
+            if (CharacterManagerRef.InputManagement.Inputs.DeselectWeapon)
+            {
+                Debug.Log("deselect weapon");
+                
+                CharacterNavigationState characterNavigationState = new CharacterNavigationState(CharacterManagerRef.KayakController, CharacterManagerRef.InputManagement, CharacterManagerRef, MonoBehaviourRef, CameraManagerRef);
+                CharacterManagerRef.SwitchState(characterNavigationState);
+
+                CameraNavigationState cameraNavigationState = new CameraNavigationState(CameraManagerRef, MonoBehaviourRef);
+                CameraManagerRef.SwitchState(cameraNavigationState);
+
+            }
         }
 
         public override void FixedUpdate(CharacterManager character)
