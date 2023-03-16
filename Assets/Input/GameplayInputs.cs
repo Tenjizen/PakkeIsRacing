@@ -256,7 +256,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0f43ca2a-d8b2-442e-bf39-32832d7c4143"",
-                    ""path"": ""<Keyboard>/z"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
