@@ -14,7 +14,7 @@ namespace Character.State
         private bool _cameraSwitchState = false;
         private float _timerToRespawnCheckpoint = 0;
         private float _timerFadeOutStart = 0;
-            
+
         public CharacterDeathState(CharacterManager characterManagerRef, KayakController kayakController, InputManagement inputs, MonoBehaviour monoBehaviour, CameraManager cameraManagerRef) :
             base(characterManagerRef, monoBehaviour, cameraManagerRef)
         {
@@ -25,6 +25,7 @@ namespace Character.State
         public override void EnterState(CharacterManager character)
         {
             Debug.Log("death");
+            IsDead = true;
         }
 
         public override void UpdateState(CharacterManager character)
@@ -36,7 +37,7 @@ namespace Character.State
             {
                 CharacterManagerRef.Balance += 0.5f;
             }
-            else if (CharacterManagerRef.Balance < 0 && CharacterManagerRef.Balance > -60)
+            else if (CharacterManagerRef.Balance < -0 && CharacterManagerRef.Balance > -60)
             {
                 CharacterManagerRef.Balance -= 0.5f;
             }
@@ -81,6 +82,8 @@ namespace Character.State
         {
             //Transition out
             CharacterManagerRef.TransitionManager.LaunchTransitionOut(SceneTransition.TransitionType.Fade);
+
+            IsDead = false;
 
             //Switch state character
             CharacterNavigationState characterNavigationState = new CharacterNavigationState(_kayakController, _inputs, CharacterManagerRef, MonoBehaviourRef, CameraManagerRef);

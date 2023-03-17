@@ -43,7 +43,7 @@ namespace Character
         public float RebalanceAngle = 8f;
         [Range(0, 10), Tooltip("Minimum Time/Balance the player has to react when unbalanced")]
         public float MinimumTimeUnbalanced = 2f;
-        [Range(0,20), Tooltip("The multiplier applied to the paddle force to the balance")]
+        [Range(0, 20), Tooltip("The multiplier applied to the paddle force to the balance")]
         public float RotationToBalanceMultiplier = 10f;
         [Range(0, 10), Tooltip("The multiplier to the floaters' level difference added to the balance value")]
         public float FloatersLevelDifferenceToBalanceMultiplier = 1f;
@@ -52,11 +52,11 @@ namespace Character
         [SerializeField] private ParticleSystem _paddleLeftParticle;
         [SerializeField] private ParticleSystem _paddleRightParticle;
 
-        [Header("Weapon Mode"), ReadOnly] 
+        [Header("Weapon Mode"), ReadOnly]
         public Weapon CurrentWeapon;
         [Range(0, 0.1f), Tooltip("The lerp applied to the boat following camera direction when aiming")]
         public float BoatFollowAimLerp = 0.05f;
-        [SerializeField] 
+        [SerializeField]
         public Projectile HarpoonPrefab;
         public Projectile NetPrefab;
 
@@ -77,7 +77,10 @@ namespace Character
         {
             CurrentStateBase.UpdateState(this);
 
-            BalanceManagement();
+            if (CurrentStateBase.IsDead == false)
+            {
+                BalanceManagement();
+            }
         }
         private void FixedUpdate()
         {
@@ -109,7 +112,7 @@ namespace Character
             float sign = Mathf.Sign(Balance);
             Balance = value * sign;
         }
-        
+
         /// <summary>
         /// Add to the current balance value
         /// </summary>
@@ -157,5 +160,11 @@ namespace Character
         }
 
         #endregion
+
+        public void SwitchToDeathState()
+        {
+            CharacterDeathState characterDeathState = new CharacterDeathState(this, KayakController, InputManagement, this, CameraManagerRef);
+            SwitchState(characterDeathState);
+        }
     }
 }
