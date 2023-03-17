@@ -58,6 +58,7 @@ namespace Character.State
                 
                 CharacterManagerRef.weaponUIManagerRef.SetPaddleDownImage(false);
                 CharacterManagerRef.weaponUIManagerRef.SetCursor(false);
+                CharacterManagerRef.weaponUIManagerRef.SetCooldownUI(0);
             }
             
             ManageCooldown();
