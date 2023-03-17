@@ -40,6 +40,7 @@ namespace Character.State
                 CameraManagerRef.SwitchState(cameraNavigationState);
                 
                 CharacterManagerRef.weaponUIManagerRef.SetPaddleDownImage(false);
+                CharacterManagerRef.weaponUIManagerRef.SetCursor(false);
             }
             
             HandleAim();
@@ -63,6 +64,9 @@ namespace Character.State
             bool aimingState = _isAiming;
             _isAiming = CharacterManagerRef.InputManagement.Inputs.Aim;
             
+            //aim directly
+            _isAiming = true;
+
             float fovLerp = 0.1f;
             _currentFov = Mathf.Lerp(_currentFov, _isAiming ? AimFOV : BaseFov, fovLerp);
             CharacterManagerRef.CameraManagerRef.CurrentStateBase.SetFOV(_currentFov);
