@@ -134,6 +134,15 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Value"",
+                    ""id"": ""7057980f-4ac7-41c6-a33c-ea6ca6e9401e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -378,6 +387,28 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""action"": ""MoveAim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fc693c8b-5880-425f-86fc-1b9a97e8014d"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0c5181f8-75d8-4536-a0a7-ae0ef4a05301"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -409,6 +440,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         m_Boat_DeselectWeapon = m_Boat.FindAction("DeselectWeapon", throwIfNotFound: true);
         m_Boat_Aim = m_Boat.FindAction("Aim", throwIfNotFound: true);
         m_Boat_MoveAim = m_Boat.FindAction("MoveAim", throwIfNotFound: true);
+        m_Boat_Shoot = m_Boat.FindAction("Shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -480,6 +512,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Boat_DeselectWeapon;
     private readonly InputAction m_Boat_Aim;
     private readonly InputAction m_Boat_MoveAim;
+    private readonly InputAction m_Boat_Shoot;
     public struct BoatActions
     {
         private @GameplayInputs m_Wrapper;
@@ -496,6 +529,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         public InputAction @DeselectWeapon => m_Wrapper.m_Boat_DeselectWeapon;
         public InputAction @Aim => m_Wrapper.m_Boat_Aim;
         public InputAction @MoveAim => m_Wrapper.m_Boat_MoveAim;
+        public InputAction @Shoot => m_Wrapper.m_Boat_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_Boat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -541,6 +575,9 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @MoveAim.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnMoveAim;
                 @MoveAim.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnMoveAim;
                 @MoveAim.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnMoveAim;
+                @Shoot.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnShoot;
+                @Shoot.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnShoot;
+                @Shoot.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnShoot;
             }
             m_Wrapper.m_BoatActionsCallbackInterface = instance;
             if (instance != null)
@@ -581,6 +618,9 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @MoveAim.started += instance.OnMoveAim;
                 @MoveAim.performed += instance.OnMoveAim;
                 @MoveAim.canceled += instance.OnMoveAim;
+                @Shoot.started += instance.OnShoot;
+                @Shoot.performed += instance.OnShoot;
+                @Shoot.canceled += instance.OnShoot;
             }
         }
     }
@@ -617,5 +657,6 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         void OnDeselectWeapon(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnMoveAim(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
     }
 }
