@@ -34,8 +34,9 @@ namespace UI.WeaponWheel
 
         private void Update()
         {
-            if ((_inputManagement.Inputs.OpenWeaponMenu && _isMenuOpen == false) || 
-                (_inputManagement.Inputs.OpenWeaponMenu == false && _isMenuOpen))
+            if (((_inputManagement.Inputs.OpenWeaponMenu && _isMenuOpen == false) || 
+                (_inputManagement.Inputs.OpenWeaponMenu == false && _isMenuOpen)) &&
+                _characterManager.CurrentStateBase.CanCharacterOpenWeapons)
             {
                 PressMenu();
             }

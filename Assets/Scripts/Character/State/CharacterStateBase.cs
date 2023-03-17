@@ -20,6 +20,7 @@ namespace Character.State
         public bool CanBeMoved = true;
         public bool CanCharacterMove = true;
         public bool CanCharacterMakeActions = true;
+        public bool CanCharacterOpenWeapons = true;
         
         public float RotationStaticForceY = 0f;
         public float RotationPaddleForceY = 0f;

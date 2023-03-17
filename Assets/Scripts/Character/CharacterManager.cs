@@ -1,6 +1,7 @@
 using System;
 using Character.Camera;
 using Character.State;
+using Fight;
 using Kayak;
 using SceneTransition;
 using UI.WeaponWheel;
@@ -51,7 +52,13 @@ namespace Character
         [SerializeField] private ParticleSystem _paddleLeftParticle;
         [SerializeField] private ParticleSystem _paddleRightParticle;
 
-        [Header("Weapon"), ReadOnly] public Weapon CurrentWeapon;
+        [Header("Weapon Mode"), ReadOnly] 
+        public Weapon CurrentWeapon;
+        [Range(0, 0.1f), Tooltip("The lerp applied to the boat following camera direction when aiming")]
+        public float BoatFollowAimLerp = 0.05f;
+        [SerializeField] 
+        public Projectile HarpoonPrefab;
+        public Projectile NetPrefab;
 
         private void Awake()
         {

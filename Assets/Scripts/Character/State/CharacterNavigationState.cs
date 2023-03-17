@@ -64,6 +64,7 @@ namespace Character.State
             //booleans
             CharacterManagerRef.LerpBalanceTo0 = true;
             CanBeMoved = true;
+            CanCharacterMakeActions = true;
         }
 
         public override void UpdateState(CharacterManager character)

@@ -40,6 +40,7 @@ namespace Character.State
             _rightPaddleCooldown = _kayakValues.UnbalancePaddleCooldown;
             _leftPaddleCooldown = _kayakValues.UnbalancePaddleCooldown;
             CanBeMoved = false;
+            CanCharacterOpenWeapons = false;
 
             //balance
             if (Mathf.Abs(CharacterManagerRef.Balance) >
@@ -90,7 +91,7 @@ namespace Character.State
                 _kayakController.CanReduceDrag = true;
                 CameraManagerRef.CanMoveCameraManually = true;
                 CharacterManagerRef.SetBalanceValueToCurrentSide(0);
-
+                CanCharacterMakeActions = true;
 
                 CharacterNavigationState characterNavigationState = new CharacterNavigationState(_kayakController, _inputs, CharacterManagerRef, MonoBehaviourRef, CameraManagerRef);
                 CharacterManagerRef.SwitchState(characterNavigationState);
