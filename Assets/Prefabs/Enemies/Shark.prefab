@@ -77,56 +77,57 @@ MonoBehaviour:
   m_GameObject: {fileID: 4724983407922079716}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 714740ddb4fccdf478d732e2aa4e467b, type: 3}
+  m_Script: {fileID: 11500000, guid: 54add8b8ff38ba248838fa6b6f1d7a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   RotationSpeed: 0.5
   RadiusRotateAroundTargetMin: 10
   RadiusRotateAroundTargetMax: 20
-  ElevationOffset: -2.38
+  ElevationOffset: -2.83
   TimerToPassUnderPlayer: 2
-  TimerTargetFollow: 2
+  TimerTargetFollow: 1
   JumpCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: -10
-      inSlope: 35.86191
-      outSlope: 35.86191
+      inSlope: 34.916077
+      outSlope: 34.916077
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.04982415
+      outWeight: 0.04703895
     - serializedVersion: 3
-      time: 2
-      value: 8
-      inSlope: -1.6735834
-      outSlope: -1.6735834
+      time: 2.5
+      value: 10
+      inSlope: -0.12194193
+      outSlope: -0.12194193
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.18779951
-      outWeight: 0.33333334
+      inWeight: 0.4518721
+      outWeight: 0.6036969
     - serializedVersion: 3
-      time: 4
+      time: 5
       value: -10
-      inSlope: -39.1481
-      outSlope: -39.1481
+      inSlope: -27.339157
+      outSlope: -27.339157
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.05041033
+      inWeight: 0.056571387
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Shadow: {fileID: 4724983409132137046}
-  ShadowMaxSizeForJump: 2.5
+  ValueBeforeLastKeyFrameInCurve: 1.4
   DiveDistance: 20
   DiveSpeed: 0.2
+  Shadow: {fileID: 4724983409132137046}
+  ShadowMaxSizeForJump: 2.5
+  ShadowDivideGrowSpeed: 2
   PositionOffset: {x: 0, y: 0, z: 0}
-  Angle: 2.98
-  test: 1.4
+  Angle: 0
 --- !u!114 &4724983407922079715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,7 +282,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7939839375029718065}
   m_Father: {fileID: 4724983407922079714}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -335,6 +337,52 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &5772364064975906067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7939839375029718065}
+  - component: {fileID: 4516524656782423813}
+  m_Layer: 0
+  m_Name: collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7939839375029718065
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5772364064975906067}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0, z: -0.095}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4724983409385222546}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!136 &4516524656782423813
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5772364064975906067}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.17
+  m_Height: 1.21
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &4724983408118198668
 PrefabInstance:
   m_ObjectHideFlags: 0
