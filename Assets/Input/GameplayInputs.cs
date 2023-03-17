@@ -116,6 +116,24 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Value"",
+                    ""id"": ""e8cecd45-fe58-4e62-880c-2d553338bee1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MoveAim"",
+                    ""type"": ""Value"",
+                    ""id"": ""6d1491e7-7ca5-413c-9386-98053f453c4b"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -316,6 +334,50 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""action"": ""DeselectWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4672f842-d893-4358-8095-fc96aa2b4492"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8583a4d7-eb25-49b8-9fec-64b882d52bc5"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b782da75-3bc2-4af1-928a-9a0947ee8542"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""MoveAim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc51c2ad-af2e-40ca-be76-584bc7d914fd"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveAim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -345,6 +407,8 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         m_Boat_OpenWheelMenu = m_Boat.FindAction("OpenWheelMenu", throwIfNotFound: true);
         m_Boat_SelectOnWheel = m_Boat.FindAction("SelectOnWheel", throwIfNotFound: true);
         m_Boat_DeselectWeapon = m_Boat.FindAction("DeselectWeapon", throwIfNotFound: true);
+        m_Boat_Aim = m_Boat.FindAction("Aim", throwIfNotFound: true);
+        m_Boat_MoveAim = m_Boat.FindAction("MoveAim", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -414,6 +478,8 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Boat_OpenWheelMenu;
     private readonly InputAction m_Boat_SelectOnWheel;
     private readonly InputAction m_Boat_DeselectWeapon;
+    private readonly InputAction m_Boat_Aim;
+    private readonly InputAction m_Boat_MoveAim;
     public struct BoatActions
     {
         private @GameplayInputs m_Wrapper;
@@ -428,6 +494,8 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         public InputAction @OpenWheelMenu => m_Wrapper.m_Boat_OpenWheelMenu;
         public InputAction @SelectOnWheel => m_Wrapper.m_Boat_SelectOnWheel;
         public InputAction @DeselectWeapon => m_Wrapper.m_Boat_DeselectWeapon;
+        public InputAction @Aim => m_Wrapper.m_Boat_Aim;
+        public InputAction @MoveAim => m_Wrapper.m_Boat_MoveAim;
         public InputActionMap Get() { return m_Wrapper.m_Boat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -467,6 +535,12 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @DeselectWeapon.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnDeselectWeapon;
                 @DeselectWeapon.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnDeselectWeapon;
                 @DeselectWeapon.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnDeselectWeapon;
+                @Aim.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnAim;
+                @Aim.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnAim;
+                @Aim.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnAim;
+                @MoveAim.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnMoveAim;
+                @MoveAim.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnMoveAim;
+                @MoveAim.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnMoveAim;
             }
             m_Wrapper.m_BoatActionsCallbackInterface = instance;
             if (instance != null)
@@ -501,6 +575,12 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @DeselectWeapon.started += instance.OnDeselectWeapon;
                 @DeselectWeapon.performed += instance.OnDeselectWeapon;
                 @DeselectWeapon.canceled += instance.OnDeselectWeapon;
+                @Aim.started += instance.OnAim;
+                @Aim.performed += instance.OnAim;
+                @Aim.canceled += instance.OnAim;
+                @MoveAim.started += instance.OnMoveAim;
+                @MoveAim.performed += instance.OnMoveAim;
+                @MoveAim.canceled += instance.OnMoveAim;
             }
         }
     }
@@ -535,5 +615,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         void OnOpenWheelMenu(InputAction.CallbackContext context);
         void OnSelectOnWheel(InputAction.CallbackContext context);
         void OnDeselectWeapon(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
+        void OnMoveAim(InputAction.CallbackContext context);
     }
 }
