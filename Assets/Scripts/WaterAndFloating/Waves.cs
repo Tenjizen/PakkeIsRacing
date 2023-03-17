@@ -516,6 +516,20 @@ namespace WaterAndFloating
         [Tooltip("Number of circular vertices points the wave will manage")]
         public int NumberOfPoints;
     }
+    
+    [Serializable]
+    public struct LinearWave
+    {
+        [ReadOnly] public Vector2 Center;
+        public float Distance;
+        public float StartWidth;
+        public float EndWidth;
+        public float Amplitude;
+        [Range(0,360)] public float Angle;
+        public float Duration;
+        public AnimationCurve AmplitudeCurve;
+        public int NumberOfPoints;
+    }
 
     [Serializable]
     public struct Octave
