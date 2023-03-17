@@ -4,10 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using WaterAndFloating;
 
-public class EnemyManager : MonoBehaviour
+public class SharkManager : MonoBehaviour
 {
-    public EnemyBaseState CurrentStateBase;
+    public SharkBaseState CurrentStateBase;
 
     [ReadOnly] public Transform Target;
 
@@ -46,15 +47,27 @@ public class EnemyManager : MonoBehaviour
     public GameObject Shadow;
     [Tooltip("The maximum size that the shadow takes before the shark jumps")]
     public float ShadowMaxSizeForJump = 3;
+    [Tooltip("The speed at which the circle will grow (Ex : 1 / ShadowDivideGrowSpeed)")]
+    public float ShadowDivideGrowSpeed = 2; 
+
+    [ReadOnly] public KayakController kayak;
 
     [ReadOnly] public Vector3 PositionOffset;
     [ReadOnly] public float Angle;
 
+    [Header("Waves")]
+    public Waves WavesData;
+
+    public CircularWave StartJumpCircularWaveData;
+    public CircularWave EndJumpCircularWaveData;
+    [Space]
+    public float EndJumpCircularWaveTime = 1;
 
     private void Awake()
     {
-        EnemyCombatState enemyCombatState = new EnemyCombatState();
-        CurrentStateBase = enemyCombatState;
+        //ColliderShadow.enabled = false;
+        SharkCombatState sharkCombatState = new SharkCombatState();
+        CurrentStateBase = sharkCombatState;
 
         //EnemyFreeRoamState enemyFreeRoamState = new EnemyFreeRoamState();
         //CurrentStateBase = enemyFreeRoamState;
@@ -72,7 +85,7 @@ public class EnemyManager : MonoBehaviour
     {
         CurrentStateBase.FixedUpdate(this);
     }
-    public void SwitchState(EnemyBaseState stateBaseCharacter)
+    public void SwitchState(SharkBaseState stateBaseCharacter)
     {
         CurrentStateBase = stateBaseCharacter;
         stateBaseCharacter.EnterState(this);
@@ -80,15 +93,15 @@ public class EnemyManager : MonoBehaviour
 
     public void OnEnter()
     {
-        EnemyCombatState enemyCombatState = new EnemyCombatState();
-        SwitchState(enemyCombatState);
+        SharkCombatState sharkCombatState = new SharkCombatState();
+        SwitchState(sharkCombatState);
         Target = GetComponent<PlayerTriggerManager>().PropKayakController.gameObject.GetComponent<Transform>();
     }
 
     public void OnExit()
     {
-        EnemyFreeRoamState enemyFreeRoamState = new EnemyFreeRoamState();
-        SwitchState(enemyFreeRoamState);
+        SharkFreeRoamState sharkFreeRoamState = new SharkFreeRoamState();
+        SwitchState(sharkFreeRoamState);
         Target = null;
     }
 }
