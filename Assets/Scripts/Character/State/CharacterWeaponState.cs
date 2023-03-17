@@ -42,7 +42,8 @@ namespace Character.State
                     _weaponPrefab = CharacterManagerRef.NetPrefab;
                     break;
             }
-            Debug.Log(_weapon);
+            
+            _currentWeaponCooldown = _weaponPrefab.Data.Cooldown;
         }
 
         public override void UpdateState(CharacterManager character)
@@ -79,6 +80,8 @@ namespace Character.State
         private void ManageCooldown()
         {
             _currentWeaponCooldown -= Time.deltaTime;
+            float value = _currentWeaponCooldown / _weaponPrefab.Data.Cooldown;
+            CharacterManagerRef.weaponUIManagerRef.SetCooldownUI(value);
         }
         
         private void HandleAim()

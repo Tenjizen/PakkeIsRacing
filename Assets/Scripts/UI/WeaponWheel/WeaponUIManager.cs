@@ -19,6 +19,7 @@ namespace UI.WeaponWheel
         
         [SerializeField] private Image _paddleArrowDownImage;
         [SerializeField] private Image _cursor;
+        [SerializeField] private Image _cooldown;
 
         private Vector3 _vignetteBaseScale;
         private bool _isMenuOpen;
@@ -29,6 +30,7 @@ namespace UI.WeaponWheel
             _weaponUI.SetActive(_isMenuOpen);
             
             SetCursor(false);
+            SetCooldownUI(0);
             SetPaddleDownImage(false);
         }
 
@@ -114,6 +116,21 @@ namespace UI.WeaponWheel
         public void SetCursor(bool show)
         {
             _cursor.DOFade(show ? 1 : 0, 0.2f);
+        }
+
+        public void SetCooldownUI(float value)
+        {
+            value = Mathf.Clamp01(value);
+            _cooldown.fillAmount = value;
+
+            if (value is 0 or 1)
+            {
+                _cooldown.DOFade(0, 0.5f);
+            }
+            else
+            {
+                _cooldown.DOFade(1, 0.2f);
+            }
         }
 
         #endregion
