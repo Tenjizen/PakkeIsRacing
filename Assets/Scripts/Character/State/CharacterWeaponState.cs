@@ -75,12 +75,10 @@ namespace Character.State
             if (_isAiming)
             {
                 Quaternion kayakTransformRotation = CharacterManagerRef.KayakController.transform.rotation;
-                float currentAngle = kayakTransformRotation.eulerAngles.y;
                 float targetAngle = CharacterManagerRef.CameraManagerRef.CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-                Debug.Log($"{currentAngle} -> {targetAngle}");
-                float angle = Mathf.Lerp(currentAngle, targetAngle, 0.05f);
-                Quaternion targetRotation = Quaternion.Euler(new Vector3(kayakTransformRotation.eulerAngles.x, angle, kayakTransformRotation.eulerAngles.z));
-                CharacterManagerRef.KayakController.transform.rotation = targetRotation;
+                Quaternion targetRotation = Quaternion.Euler(new Vector3(kayakTransformRotation.eulerAngles.x, targetAngle, kayakTransformRotation.eulerAngles.z));
+                Quaternion rotation = Quaternion.Lerp(kayakTransformRotation,targetRotation,0.05f);
+                CharacterManagerRef.KayakController.transform.rotation = rotation;
             }
         }
 
