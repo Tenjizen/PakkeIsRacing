@@ -4,6 +4,6 @@ namespace Fight
 {
     public interface IHittable
     {
-        public void Hit(Projectile projectile);
+        public void Hit(Projectile projectile, GameObject owner);
     }
 }
