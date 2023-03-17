@@ -94,30 +94,6 @@ public class CameraManager : MonoBehaviour
     //other
     [HideInInspector] public bool StartDeath = false;
     [HideInInspector] public bool WaterFlow = false;
-    //pas tej jsp si on le garde
-
-    //[Header("Pendulum")]
-    //[Tooltip("The angle you have on the first pendulum")]
-    //public float PendulumFirstAngle = 10;
-    //[Tooltip("The speed you have in the first pendulum")]
-    //public float PendulumFirstSpeed = 1;
-    //[Tooltip("The degree of angle you remove from the pendulum at each pendulum")]
-    //public float PendulumRemoveAngle = 1;
-    //[Tooltip("The speed you take away from the speed with each pendulum")]
-    //public float PendulumRemoveSpeed = 0.1f;
-    //[Tooltip("Division of the position in X according to the angle")]
-    //public float DivisionMoveForceX = 10;
-    //[Tooltip("Division of the position in Y according to the angle")]
-    //public float DivisionMoveForceY = 50;
-
-    //pendulum 
-    //public float PendulumValue;
-    //public float SpeedPendulum;
-    //public float PendulumValueMoins;
-    //public float SpeedPendulumMoins;
-    //public bool PlayOnce = false;
-    //public bool Left;
-
 
     private void Awake()
     {
@@ -143,9 +119,7 @@ public class CameraManager : MonoBehaviour
     private void Update()
     {
         CurrentStateBase.UpdateState(this);
-
-
-
+        
         FieldOfView();
     }
     private void FixedUpdate()

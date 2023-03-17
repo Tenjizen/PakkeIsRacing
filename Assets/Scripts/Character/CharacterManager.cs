@@ -6,6 +6,7 @@ using SceneTransition;
 using UI.WeaponWheel;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Character
 {
@@ -23,6 +24,8 @@ namespace Character
         public Animator PaddleAnimator;
         [Tooltip("Reference of the TransitionManager script")]
         public TransitionManager TransitionManager;
+        [Tooltip("Reference of the WeaponMenuManager script")]
+        public WeaponUIManager weaponUIManagerRef;
 
         [Header("Balance")]
         [SerializeField, Range(0, 1), Tooltip("The lerp value that reset the balance to 0 over time")]

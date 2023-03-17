@@ -1,5 +1,6 @@
 using System;
 using Character;
+using Character.Camera.State;
 using Character.State;
 using UI.WeaponWheel;
 using UnityEditor.U2D.Animation;
@@ -47,5 +48,8 @@ public class WeaponWheelButtonController : MonoBehaviour, IPointerEnterHandler, 
         CharacterWeaponState characterWeaponState = 
             new CharacterWeaponState(_characterManager,_characterManager.CurrentStateBase.MonoBehaviourRef,_characterManager.CurrentStateBase.CameraManagerRef);
         _characterManager.SwitchState(characterWeaponState);
+        
+        CameraCombatState cameraCombatState = new CameraCombatState(_characterManager.CameraManagerRef, _characterManager.CurrentStateBase.MonoBehaviourRef);
+        _characterManager.CameraManagerRef.SwitchState(cameraCombatState);
     }
 }

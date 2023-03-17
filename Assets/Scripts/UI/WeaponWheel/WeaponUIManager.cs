@@ -1,22 +1,24 @@
-using System;
-using System.Runtime.CompilerServices;
 using Character;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 namespace UI.WeaponWheel
 {
-    public class WeaponMenuManager : MonoBehaviour
+    public class WeaponUIManager : MonoBehaviour
     {
         [SerializeField] private InputManagement _inputManagement;
         [SerializeField] private CharacterManager _characterManager;
         [SerializeField] private CameraManager _cameraManager;
         [SerializeField] private GameObject _weaponUI;
         [SerializeField] private Transform _vignette;
+        
         [SerializeField] private WeaponWheelButtonController _harpoonButton;
         [SerializeField] private WeaponWheelButtonController _netButton;
+        
+        [SerializeField] private Image _paddleArrowDownImage;
+        [SerializeField] private Image _cursor;
 
         private Vector3 _vignetteBaseScale;
         private bool _isMenuOpen;
@@ -25,6 +27,9 @@ namespace UI.WeaponWheel
         {
             _vignetteBaseScale = _vignette.localScale;
             _weaponUI.SetActive(_isMenuOpen);
+            
+            SetCursor(false);
+            SetPaddleDownImage(false);
         }
 
         private void Update()
@@ -97,5 +102,19 @@ namespace UI.WeaponWheel
             _vignette.localScale = _vignetteBaseScale * 2;
             _vignette.DOScale(_vignetteBaseScale, 0.3f);
         }
+
+        #region Set images
+
+        public void SetPaddleDownImage(bool show)
+        {
+            _paddleArrowDownImage.DOFade(show ? 1 : 0, 0.4f);
+        }
+
+        public void SetCursor(bool show)
+        {
+            _cursor.DOFade(show ? 1 : 0, 0.2f);
+        }
+
+        #endregion
     }
 }

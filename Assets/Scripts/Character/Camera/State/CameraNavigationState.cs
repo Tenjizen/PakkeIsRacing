@@ -70,23 +70,7 @@ public class CameraNavigationState : CameraStateBase
         _timerCameraReturnBehindBoat += Time.deltaTime;
         if (rotateInput && CameraManagerRef.CanMoveCameraManually)
         {
-            //Cinemachine yaw/pitch
-
-            //Controller
-            CameraManagerRef.CinemachineTargetYaw += CameraManagerRef.JoystickFreeRotationX.Evaluate(CameraManagerRef.Input.Inputs.RotateCamera.x);
-            CameraManagerRef.CinemachineTargetPitch += CameraManagerRef.JoystickFreeRotationY.Evaluate(CameraManagerRef.Input.Inputs.RotateCamera.y);
-
-            #region clavier souris
-            //KBM
-            //CameraManagerRef.CinemachineTargetYaw += CameraManagerRef.Input.Inputs.RotateCamera.x;
-            //CameraManagerRef.CinemachineTargetPitch += CameraManagerRef.Input.Inputs.RotateCamera.y;
-            #endregion
-
-            //last inputs
-            CameraManagerRef.LastInputX = CameraManagerRef.Input.Inputs.RotateCamera.x != 0 ? CameraManagerRef.Input.Inputs.RotateCamera.x : CameraManagerRef.LastInputX;
-            CameraManagerRef.LastInputY = CameraManagerRef.Input.Inputs.RotateCamera.y != 0 ? CameraManagerRef.Input.Inputs.RotateCamera.y : CameraManagerRef.LastInputY;
-
-            _timerCameraReturnBehindBoat = 0;
+            ManageFreeCameraMove(ref _timerCameraReturnBehindBoat, CameraMode.Navigation);
         }
         //manage rotate to stay behind boat
         else if (Mathf.Abs(CameraManagerRef.RigidbodyKayak.velocity.x + CameraManagerRef.RigidbodyKayak.velocity.z) > minimumVelocityToReplaceCamera && _timerCameraReturnBehindBoat > CameraManagerRef.TimerCameraReturnBehindBoat ||
