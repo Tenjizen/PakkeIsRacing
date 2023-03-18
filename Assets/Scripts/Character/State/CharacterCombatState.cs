@@ -40,7 +40,7 @@ namespace Character.State
                     break;
             }
             
-            _currentWeaponCooldown = _weaponPrefab.Data.Cooldown;
+            //_currentWeaponCooldown = _weaponPrefab.Data.Cooldown;
         }
 
         public override void UpdateState(CharacterManager character)
