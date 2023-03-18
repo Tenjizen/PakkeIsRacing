@@ -80,8 +80,12 @@ public class CameraManager : MonoBehaviour
     public float AmplitudShakeWhenWaterWave = 0.2f;
     public Waves Waves;
 
+    [Header("Combat")] 
+    public Vector3 combatOffset = new Vector3(-1,-1,0);
+    public float combatFov = 40f;
+
     //camera
-    [ReadOnly] public float CameraAngleOverride = 0.0f;
+    [Space(5), Header("Infos"), ReadOnly] public float CameraAngleOverride = 0.0f;
     [HideInInspector] public float CameraBaseFov;
     [HideInInspector] public Vector3 CameraTargetBasePos;
     [HideInInspector] public float RotationZ = 0;
@@ -94,6 +98,10 @@ public class CameraManager : MonoBehaviour
     //other
     [HideInInspector] public bool StartDeath = false;
     [HideInInspector] public bool WaterFlow = false;
+    //base values
+    [ReadOnly] public float BaseFOV;
+    [HideInInspector] public Cinemachine3rdPersonFollow Cinemachine3rdPersonFollow;
+    [ReadOnly] public Vector3 BaseShoulderOffset;
 
     private void Awake()
     {
@@ -110,6 +118,9 @@ public class CameraManager : MonoBehaviour
 
         CameraNavigationState navigationState = new CameraNavigationState(this, this);
         CurrentStateBase = navigationState;
+
+        Cinemachine3rdPersonFollow = VirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
+        BaseShoulderOffset = Cinemachine3rdPersonFollow.ShoulderOffset;
     }
 
     private void Start()
@@ -119,6 +130,7 @@ public class CameraManager : MonoBehaviour
     private void Update()
     {
         CurrentStateBase.UpdateState(this);
+        CurrentStateBase.ResetShoulderOffset();
         
         FieldOfView();
     }

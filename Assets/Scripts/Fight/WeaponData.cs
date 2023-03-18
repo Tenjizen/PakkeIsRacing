@@ -6,8 +6,7 @@ namespace Fight
     public class WeaponData : ScriptableObject
     {
         public string WeaponName;
-        public float MaxSpeed;
-        public AnimationCurve SpeedCurve;
+        public float LaunchForce;
         public float Cooldown;
     }
 }

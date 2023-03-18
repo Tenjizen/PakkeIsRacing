@@ -23,5 +23,6 @@ namespace Fight
         protected virtual void HitHittable() { }
         
         protected virtual void HitNonHittable() { }
+        public virtual void Launch(Vector3 direction) { }
     }
 }

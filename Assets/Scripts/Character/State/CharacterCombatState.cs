@@ -5,21 +5,17 @@ using UnityEngine;
 
 namespace Character.State
 {
-    public class CharacterWeaponState : CharacterStateBase
+    public class CharacterCombatState : CharacterStateBase
     {
         private Weapon _weapon;
         private bool _isAiming;
-        
-        private float _currentFov;
-        private const float AimFOV = 40f;
-        private const float BaseFov = 55f;
 
         private Projectile _weaponPrefab;
         private float _currentWeaponCooldown;
         
         #region Constructor
 
-        public CharacterWeaponState(CharacterManager characterManagerRef, MonoBehaviour monoBehaviour, CameraManager cameraManagerRef) : base(characterManagerRef, monoBehaviour, cameraManagerRef)
+        public CharacterCombatState(CharacterManager characterManagerRef, MonoBehaviour monoBehaviour, CameraManager cameraManagerRef) : base(characterManagerRef, monoBehaviour, cameraManagerRef)
         {
         }
 
@@ -30,7 +26,6 @@ namespace Character.State
         public override void EnterState(CharacterManager character)
         {
             CharacterManagerRef.weaponUIManagerRef.SetPaddleDownImage(true);
-            _currentFov = BaseFov;
             
             _weapon = CharacterManagerRef.CurrentWeapon;
             switch (_weapon)
@@ -93,23 +88,18 @@ namespace Character.State
             //aim directly
             _isAiming = true;
 
-            float fovLerp = 0.1f;
-            _currentFov = Mathf.Lerp(_currentFov, _isAiming ? AimFOV : BaseFov, fovLerp);
-            CharacterManagerRef.CameraManagerRef.CurrentStateBase.SetFOV(_currentFov);
-
+            //cursor
             if (aimingState != _isAiming)
             {
                 CharacterManagerRef.weaponUIManagerRef.SetCursor(_isAiming);
             }
-            
-            if (_isAiming)
-            {
-                Quaternion kayakTransformRotation = CharacterManagerRef.KayakController.transform.rotation;
-                float targetAngle = CharacterManagerRef.CameraManagerRef.CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-                Quaternion targetRotation = Quaternion.Euler(new Vector3(kayakTransformRotation.eulerAngles.x, targetAngle, kayakTransformRotation.eulerAngles.z));
-                Quaternion rotation = Quaternion.Lerp(kayakTransformRotation,targetRotation,CharacterManagerRef.BoatFollowAimLerp);
-                CharacterManagerRef.KayakController.transform.rotation = rotation;
-            }
+
+            //kayak rotation
+            Quaternion kayakTransformRotation = CharacterManagerRef.KayakController.transform.rotation;
+            float targetAngle = CharacterManagerRef.CameraManagerRef.CinemachineCameraTarget.transform.rotation.eulerAngles.y;
+            Quaternion targetRotation = Quaternion.Euler(new Vector3(kayakTransformRotation.eulerAngles.x, targetAngle, kayakTransformRotation.eulerAngles.z));
+            Quaternion rotation = Quaternion.Lerp(kayakTransformRotation,targetRotation,CharacterManagerRef.BoatFollowAimLerp);
+            CharacterManagerRef.KayakController.transform.rotation = rotation;
         }
 
         private void HandleShoot()
@@ -119,6 +109,12 @@ namespace Character.State
                 _currentWeaponCooldown = _weaponPrefab.Data.Cooldown;
                 Projectile projectile = GameObject.Instantiate(_weaponPrefab, CharacterManagerRef.transform.position, Quaternion.identity);
                 projectile.Owner = CharacterManagerRef.gameObject;
+                
+                UnityEngine.Camera main = UnityEngine.Camera.main;
+                if (main != null)
+                {
+                    projectile.Launch(main.transform.forward);
+                }
             }
         }
 

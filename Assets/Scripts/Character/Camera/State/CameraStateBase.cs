@@ -18,6 +18,8 @@ public abstract class CameraStateBase
     protected CameraManager CameraManagerRef;
     protected MonoBehaviour MonoBehaviourRef;
 
+    protected bool CanResetShoulderOffset = true;
+
     public abstract void EnterState(CameraManager camera);
 
     public abstract void UpdateState(CameraManager camera);
@@ -82,6 +84,17 @@ public abstract class CameraStateBase
     public void SetFOV(float value)
     {
         CameraManagerRef.VirtualCamera.m_Lens.FieldOfView = value;
+    }
+
+    public void ResetShoulderOffset()
+    {
+        if (CanResetShoulderOffset == false)
+        {
+            return;
+        }
+
+        Vector3 currentOffset = Vector3.Lerp(CameraManagerRef.Cinemachine3rdPersonFollow.ShoulderOffset, CameraManagerRef.BaseShoulderOffset, 0.1f);
+        CameraManagerRef.Cinemachine3rdPersonFollow.ShoulderOffset = currentOffset;
     }
 }
 

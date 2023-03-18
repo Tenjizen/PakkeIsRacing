@@ -13,29 +13,5 @@ MonoBehaviour:
   m_Name: Harpoon
   m_EditorClassIdentifier: 
   WeaponName: Harpoon
-  MaxSpeed: 10
-  SpeedCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 15.246963
-      outSlope: 15.246963
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0
-      outWeight: 0.0625
-    - serializedVersion: 3
-      time: 0.99164736
-      value: 1.0117921
-      inSlope: 0.047173224
-      outSlope: 0.047173224
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.22499615
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  LaunchForce: 4000
   Cooldown: 1.5

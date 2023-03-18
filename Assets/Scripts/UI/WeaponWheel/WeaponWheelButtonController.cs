@@ -45,9 +45,9 @@ public class WeaponWheelButtonController : MonoBehaviour, IPointerEnterHandler, 
         OnSelected.Invoke();
         _characterManager.CurrentWeapon = _weapon;
 
-        CharacterWeaponState characterWeaponState = 
-            new CharacterWeaponState(_characterManager,_characterManager.CurrentStateBase.MonoBehaviourRef,_characterManager.CurrentStateBase.CameraManagerRef);
-        _characterManager.SwitchState(characterWeaponState);
+        CharacterCombatState characterCombatState = 
+            new CharacterCombatState(_characterManager,_characterManager.CurrentStateBase.MonoBehaviourRef,_characterManager.CurrentStateBase.CameraManagerRef);
+        _characterManager.SwitchState(characterCombatState);
         
         CameraCombatState cameraCombatState = new CameraCombatState(_characterManager.CameraManagerRef, _characterManager.CurrentStateBase.MonoBehaviourRef);
         _characterManager.CameraManagerRef.SwitchState(cameraCombatState);
