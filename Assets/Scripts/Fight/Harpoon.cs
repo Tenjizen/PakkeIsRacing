@@ -5,6 +5,10 @@ namespace Fight
 {
     public class Harpoon : Projectile
     {
+        [Header("VFX"), SerializeField] private ParticleSystem _dieParticles;
+        [Header("Sound"), SerializeField] private AudioClip _launchSound;
+        [SerializeField] private AudioClip _dieSound;
+        
         private Rigidbody _rigidbody;
 
         private void FixedUpdate()
@@ -19,14 +23,16 @@ namespace Fight
             }
         }
 
-        protected override void HitHittable()
+        protected override void Die()
         {
-            base.HitHittable();
-        }
-
-        protected override void HitNonHittable()
-        {
-            base.HitNonHittable();
+            base.Die();
+            
+            SoundManager.Instance.PlaySound(_dieSound);
+            
+            _dieParticles.transform.parent = null;
+            _dieParticles.Play();
+            
+            Destroy(gameObject);
         }
         
         public override void Launch(Vector3 direction)
@@ -39,6 +45,8 @@ namespace Fight
             _rigidbody.useGravity = true;
             
             _rigidbody.AddForce(direction * Data.LaunchForce);
+            
+            SoundManager.Instance.PlaySound(_launchSound);
         }
     }
 }

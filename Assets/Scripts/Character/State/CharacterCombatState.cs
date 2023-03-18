@@ -12,6 +12,8 @@ namespace Character.State
 
         private Projectile _weaponPrefab;
         private float _currentWeaponCooldown;
+
+        private bool _projectileInShoot;
         
         #region Constructor
 
@@ -75,9 +77,12 @@ namespace Character.State
 
         private void ManageCooldown()
         {
-            _currentWeaponCooldown -= Time.deltaTime;
-            float value = _currentWeaponCooldown / _weaponPrefab.Data.Cooldown;
-            CharacterManagerRef.weaponUIManagerRef.SetCooldownUI(value);
+            if (_projectileInShoot == false)
+            {
+                _currentWeaponCooldown -= Time.deltaTime;
+                float value = _currentWeaponCooldown / _weaponPrefab.Data.Cooldown;
+                CharacterManagerRef.weaponUIManagerRef.SetCooldownUI(value);
+            }
         }
         
         private void HandleAim()
@@ -107,15 +112,26 @@ namespace Character.State
             if (CharacterManagerRef.InputManagement.Inputs.Shoot && _currentWeaponCooldown <= 0 && _weaponPrefab != null)
             {
                 _currentWeaponCooldown = _weaponPrefab.Data.Cooldown;
-                Projectile projectile = GameObject.Instantiate(_weaponPrefab, CharacterManagerRef.transform.position, Quaternion.identity);
-                projectile.Owner = CharacterManagerRef.gameObject;
+                _projectileInShoot = true;
                 
-                UnityEngine.Camera main = UnityEngine.Camera.main;
-                if (main != null)
-                {
-                    projectile.Launch(main.transform.forward);
-                }
+                Projectile projectile = GameObject.Instantiate(_weaponPrefab, CharacterManagerRef.transform.position, Quaternion.identity);
+                
+                GameObject owner = CharacterManagerRef.gameObject;
+                projectile.Owner = owner;
+                
+                projectile.Data.ForbiddenColliders.Add(owner);
+                projectile.Data.ForbiddenColliders.Add(CharacterManagerRef.KayakController.gameObject);
+
+                const float pointDistance = 30f;
+                projectile.Launch(MathTools.GetDirectionToPointCameraLooking(CharacterManagerRef.transform, pointDistance));
+                
+                projectile.OnProjectileDie.AddListener(ProjectileHit);
             }
+        }
+
+        private void ProjectileHit()
+        {
+            _projectileInShoot = false;
         }
 
         #endregion

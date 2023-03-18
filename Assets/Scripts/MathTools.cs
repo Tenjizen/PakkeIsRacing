@@ -38,4 +38,23 @@ public class MathTools
 
         return rotatedPoint;
     }
+    
+    public static Vector3 GetDirectionToPointCameraLooking(Transform transformOrigin, float distanceFromCamera)
+    {
+        // Get the position of the player
+        Vector3 playerPos = transformOrigin.position;
+
+        // Get the position and forward direction of the camera
+        Camera mainCamera = Camera.main;
+        Vector3 cameraPos = mainCamera.transform.position;
+        Vector3 cameraForward = mainCamera.transform.forward;
+
+        // Calculate the position of the point at the specified distance from the camera along its forward direction
+        Vector3 pointPos = cameraPos + cameraForward * distanceFromCamera;
+
+        // Calculate the direction from the player to the point
+        Vector3 direction = (pointPos - playerPos).normalized;
+
+        return direction;
+    }
 }

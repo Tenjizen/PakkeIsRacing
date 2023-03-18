@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Fight
 {
@@ -8,5 +9,7 @@ namespace Fight
         public string WeaponName;
         public float LaunchForce;
         public float Cooldown;
+        public float Lifetime = 4f;
+        public List<GameObject> ForbiddenColliders;
     }
 }
