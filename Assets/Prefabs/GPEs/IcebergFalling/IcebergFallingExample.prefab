@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 6949417466565779057}
   - {fileID: 6829306435168865609}
-  - {fileID: 1431781508063294177}
+  - {fileID: 7982456587029522066}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -47,156 +47,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e5bcccd9b12b00408e41f15d5a7eb27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerSize: {x: 58.79, y: 12.37, z: 138}
+  _triggerType: 0
+  _showTriggerGizmos: 1
+  _triggerBoxSize: {x: 1, y: 1, z: 1}
+  _triggerSphereSize: 1
   _triggerOffsetPosition: {x: -0.7, y: -2.95, z: 10.33}
   _playerLayerMask:
     serializedVersion: 2
     m_Bits: 2147483647
-  OnPlayerDetected:
+  OnPlayerEntered:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6829306435168865602}
-        m_TargetAssemblyTypeName: IcebergFallingGPE.IcebergFalling, Assembly-CSharp
-        m_MethodName: SetFall
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!1001 &1431781508063146793
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 6829306437002386997}
-    m_Modifications:
-    - target: {fileID: 196758, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: m_Name
-      value: WaterSplashSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 6.427834
-      objectReference: {fileID: 0}
-    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 6.427834
-      objectReference: {fileID: 0}
-    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 6.427834
-      objectReference: {fileID: 0}
-    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -7.53
-      objectReference: {fileID: 0}
-    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.82
-      objectReference: {fileID: 0}
-    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -3.92
-      objectReference: {fileID: 0}
-    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19811136, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19861780, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19873706, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: lengthInSec
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 19873706, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19873706, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: UVModule.cycles
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19873706, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: simulationSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19873706, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19873706, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 19873706, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: EmissionModule.m_Bursts.Array.data[0].time
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19873706, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: EmissionModule.m_Bursts.Array.data[0].repeatInterval
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 19873706, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].value
-      value: 0.2560727
-      objectReference: {fileID: 0}
-    - target: {fileID: 198113975042880732, guid: e2550dae06524a94bbc4bcdf375a88b9,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
---- !u!4 &1431781508063294177 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1431781508063146793}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &1431781508082601091 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 19873706, guid: e2550dae06524a94bbc4bcdf375a88b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1431781508063146793}
-  m_PrefabAsset: {fileID: 0}
+      m_Calls: []
+  OnPlayerStay:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayerExited:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &6829306436010109843
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -287,6 +154,69 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6829306436010109843}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7982456587029145434
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6829306437002386997}
+    m_Modifications:
+    - target: {fileID: 196758, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
+      propertyPath: m_Name
+      value: WaterSplashIcebergFall
+      objectReference: {fileID: 0}
+    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -22.311499
+      objectReference: {fileID: 0}
+    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.0299668
+      objectReference: {fileID: 0}
+    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 35.10456
+      objectReference: {fileID: 0}
+    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
+--- !u!4 &7982456587029522066 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7982456587029145434}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8992271099045440027
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -373,7 +303,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _particleWhenHitWater
       value: 
-      objectReference: {fileID: 1431781508082601091}
+      objectReference: {fileID: 0}
     - target: {fileID: 2453446874202040153, guid: 81bd7ce35f9b3c4419b0fb054e23afbb,
         type: 3}
       propertyPath: _circularWaveData.Distance
@@ -396,18 +326,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81bd7ce35f9b3c4419b0fb054e23afbb, type: 3}
---- !u!114 &6829306435168865602 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2453446874202040153, guid: 81bd7ce35f9b3c4419b0fb054e23afbb,
-    type: 3}
-  m_PrefabInstance: {fileID: 8992271099045440027}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f945c15673834c82b71434b7d74d4964, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &6829306435168865609 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2453446874202040146, guid: 81bd7ce35f9b3c4419b0fb054e23afbb,
