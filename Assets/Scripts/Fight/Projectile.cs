@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
+using WaterFlowGPE;
 
 namespace Fight
 {
@@ -22,7 +23,8 @@ namespace Fight
         private void OnTriggerEnter(Collider other)
         {
             if (Data.ForbiddenColliders.Contains(other.gameObject) ||
-                Data.ForbiddenColliders.Contains(other.gameObject.transform.parent.gameObject))
+                Data.ForbiddenColliders.Contains(other.gameObject.transform.parent.gameObject) ||
+                other.gameObject.GetComponent<WaterFlowBlock>() != null)
             {
                 return;
             }
