@@ -10,7 +10,6 @@ namespace Character.Camera.State
         private Vector3 _currentOffset;
         private Vector3 _targetOffset;
         private float _lookAtPosition;
-        private float _baseLookAtHeight;
 
         public CameraCombatState(CameraManager cameraManagerRef, MonoBehaviour monoBehaviour) :
             base(cameraManagerRef, monoBehaviour)
@@ -30,7 +29,6 @@ namespace Character.Camera.State
             
             //look-at
             CameraManagerRef.VirtualCamera.LookAt = CameraManagerRef.CameraTargetCombatLookAt.transform;
-            _baseLookAtHeight = CameraManagerRef.CameraTargetCombatLookAt.transform.position.y;
         }
         public override void UpdateState(CameraManager camera)
         {
@@ -49,7 +47,7 @@ namespace Character.Camera.State
             _lookAtPosition += -CameraManagerRef.Input.Inputs.RotateCamera.y/10;
             _lookAtPosition = Mathf.Clamp(_lookAtPosition, CameraManagerRef.HeightClamp.x, CameraManagerRef.HeightClamp.y);
             Vector3 position = CameraManagerRef.CameraTargetCombatLookAt.transform.position;
-            CameraManagerRef.CameraTargetCombatLookAt.transform.position = new Vector3(position.x, _baseLookAtHeight + _lookAtPosition, position.z);
+            CameraManagerRef.CameraTargetCombatLookAt.transform.position = new Vector3(position.x, CameraManagerRef.CameraTargetCombatBaseHeight + _lookAtPosition, position.z);
         }
         public override void FixedUpdate(CameraManager camera)
         {

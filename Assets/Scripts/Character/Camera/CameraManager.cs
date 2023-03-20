@@ -12,7 +12,6 @@ public class CameraManager : MonoBehaviour
     [Header("Cinemachine"), Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
     public GameObject CinemachineCameraTarget;
     public GameObject CinemachineCameraTargetFollow;
-    public GameObject CameraTargetCombatLookAt;
     public Animator AnimatorRef;
     [Tooltip("How far in degrees can you move the camera up")]
     public float TopClamp = 70.0f;
@@ -86,6 +85,8 @@ public class CameraManager : MonoBehaviour
     public Vector3 combatOffset = new Vector3(-1,-1,0);
     public float combatFov = 40f;
     public Vector2 HeightClamp = new Vector2(-30,30);
+    public GameObject CameraTargetCombatLookAt;
+    public float CameraTargetCombatBaseHeight;
 
     //camera
     [Space(5), Header("Infos"), ReadOnly] public float CameraAngleOverride = 0.0f;
@@ -124,6 +125,8 @@ public class CameraManager : MonoBehaviour
 
         Cinemachine3rdPersonFollow = VirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
         BaseShoulderOffset = Cinemachine3rdPersonFollow.ShoulderOffset;
+
+        CameraTargetCombatBaseHeight = CameraTargetCombatLookAt.transform.position.y;
     }
 
     private void Start()

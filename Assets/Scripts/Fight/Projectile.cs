@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 using WaterFlowGPE;
@@ -71,6 +72,9 @@ namespace Fight
             SednaWeaponToPlayerController sedna = Instantiate(_sednaWeaponToPlayerPrefab,transform.position,Quaternion.identity);
             Transform player = Owner.transform;
             sedna.PlayerTransform = player;
+            sedna.transform.DOMove(player.position, Data.Cooldown);
+
+            Data.ForbiddenColliders.Clear();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace Fight
 {
@@ -9,20 +10,15 @@ namespace Fight
         [SerializeField] private ParticleSystem _dieParticle;
         public Transform PlayerTransform;
 
-        private float _slerpValue = 0.02f;
-        
         private void Update()
         {
-            transform.position = Vector3.Slerp(transform.position, PlayerTransform.position, _slerpValue);
-            _slerpValue += 0.0002f;
-
-            if (Vector3.Distance(transform.position, PlayerTransform.position) <= 5f)
+            if (Vector3.Distance(transform.position, PlayerTransform.position) < 5f)
             {
-                transform.DOScale(Vector3.zero, 1f).OnComplete(Die);
+                transform.DOScale(Vector3.zero, 0.7f).OnComplete(Die);
             }
         }
 
-        private void Die()
+        public void Die()
         {
             _dieParticle.Play();
             _dieParticle.transform.parent = null;
