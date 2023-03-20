@@ -167,7 +167,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4447602596650765176}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.17, y: 1.09, z: 5.14}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -222,6 +222,9 @@ MonoBehaviour:
   Data: {fileID: 11400000, guid: 2f66cc1fc962647478a68e686d304648, type: 2}
   _sednaWeaponToPlayerPrefab: {fileID: 1804849885034642166, guid: 50640a99ba2a579448150b15cf51f016,
     type: 3}
+  OnProjectileDie:
+    m_PersistentCalls:
+      m_Calls: []
   _dieParticles: {fileID: 8734386948639349553}
   _launchSound: {fileID: 8300000, guid: 9dc32e7fa53cf4940acc7f48483736f1, type: 3}
   _dieSound: {fileID: 8300000, guid: afd6d421b02d4aa448f871f0cad96c78, type: 3}
