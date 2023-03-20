@@ -126,10 +126,16 @@ namespace Kayak
                     switch (_particleSide)
                     {
                         case CharacterNavigationState.Direction.Left:
-                            _leftPaddleParticle.Play();
+                            if (_leftPaddleParticle != null)
+                            {
+                                _leftPaddleParticle.Play();
+                            }
                             break;
                         case CharacterNavigationState.Direction.Right:
-                            _rightPaddleParticle.Play();
+                            if (_rightPaddleParticle != null)
+                            {
+                                _rightPaddleParticle.Play();
+                            }
                             break;
                     }
                 }
