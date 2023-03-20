@@ -11,6 +11,7 @@ public class CameraManager : MonoBehaviour
     [Header("Cinemachine"), Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
     public GameObject CinemachineCameraTarget;
     public GameObject CinemachineCameraTargetFollow;
+    public GameObject CameraTargetCombatLookAt;
     public Animator AnimatorRef;
     [Tooltip("How far in degrees can you move the camera up")]
     public float TopClamp = 70.0f;
@@ -83,6 +84,7 @@ public class CameraManager : MonoBehaviour
     [Header("Combat")] 
     public Vector3 combatOffset = new Vector3(-1,-1,0);
     public float combatFov = 40f;
+    public Vector2 HeightClamp = new Vector2(-30,30);
 
     //camera
     [Space(5), Header("Infos"), ReadOnly] public float CameraAngleOverride = 0.0f;
@@ -158,6 +160,18 @@ public class CameraManager : MonoBehaviour
         CinemachineTargetPitch, //pitch
         CinemachineTargetYaw, //yaw
         RotationZ); //z rotation
+    }
+    public void ApplyRotationCameraInCombat()
+    {
+        CinemachineCameraTarget.transform.rotation = Quaternion.Euler(
+            CinemachineCameraTarget.transform.rotation.x, //pitch
+            CinemachineTargetYaw, //yaw
+            RotationZ); //z rotation
+        
+        CinemachineCameraTargetFollow.transform.rotation = Quaternion.Euler(
+            CinemachineCameraTargetFollow.transform.rotation.x, //pitch
+            CinemachineTargetYaw, //yaw
+            RotationZ); //z rotation
     }
     public void ApplyRotationCameraWhenCharacterDeath()
     {

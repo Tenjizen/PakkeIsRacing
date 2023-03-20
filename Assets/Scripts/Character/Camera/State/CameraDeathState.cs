@@ -19,6 +19,9 @@ public class CameraDeathState : CameraStateBase
         CameraManagerRef.ShakeCamera(0);
         CameraManagerRef.CameraAngleOverride = 0;
         _rotationZ = CameraManagerRef.RotationZ;
+        
+        //look-at
+        CameraManagerRef.VirtualCamera.LookAt = null;
     }
     public override void UpdateState(CameraManager camera)
     {

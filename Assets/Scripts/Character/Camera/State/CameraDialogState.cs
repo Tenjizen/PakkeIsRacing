@@ -11,7 +11,8 @@ public class CameraDialogState : CameraStateBase
 
     public override void EnterState(CameraManager camera)
     {
-
+        //look-at
+        CameraManagerRef.VirtualCamera.LookAt = null;
     }
     public override void UpdateState(CameraManager camera)
     {
