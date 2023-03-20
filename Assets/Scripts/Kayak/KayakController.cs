@@ -24,8 +24,6 @@ namespace Kayak
         public bool CanReduceDrag = true;
         
         [Header("References")]
-        [SerializeField, Tooltip("References of the water particles in front of the kayak")] 
-        private List<ParticleSystem> _frontParticles;
         [FormerlySerializedAs("_characterManager")] [Tooltip("Reference of the character manager in the scene")] 
         public CharacterManager CharacterManager;
         [Tooltip("Reference of the kayak rigidbody")]
@@ -48,7 +46,6 @@ namespace Kayak
         }
         private void Update()
         {
-            ParticleManagement();
             ClampVelocity();
         }
 
@@ -79,21 +76,6 @@ namespace Kayak
             velocityZ = Mathf.Clamp(velocityZ, -KayakValues.MaximumFrontVelocity, KayakValues.MaximumFrontVelocity);
             
             Rigidbody.velocity = new Vector3(velocityX, velocity.y, velocityZ);
-        }
-
-        /// <summary>
-        /// Manage the play/stop of particles at the front kayak
-        /// </summary>
-        private void ParticleManagement()
-        {
-            if (Rigidbody.velocity.magnitude > 1)
-            {
-                _frontParticles.ForEach(x => x.Play());
-            }
-            else
-            {
-                _frontParticles.ForEach(x => x.Stop());
-            }
         }
 
         /// <summary>
