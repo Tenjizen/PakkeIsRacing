@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using Character.Camera.State;
 using UnityEngine;
 
 public class CameraRespawnState : CameraStateBase

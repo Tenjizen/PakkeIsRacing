@@ -1,4 +1,5 @@
 ﻿using Character.Camera;
+using Character.Camera.State;
 using Kayak;
 using UnityEngine;
 

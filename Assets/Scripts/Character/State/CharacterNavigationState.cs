@@ -205,6 +205,7 @@ namespace Character.State
             
             //animation
             CharacterManagerRef.PaddleAnimator.SetTrigger(direction == Direction.Left ? "PaddleLeft" : "PaddleRight");
+            CharacterManagerRef.KayakController.PlayPaddleParticle(direction);
 
             //events
             switch (direction)

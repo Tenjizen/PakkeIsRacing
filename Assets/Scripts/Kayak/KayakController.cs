@@ -39,6 +39,12 @@ namespace Kayak
         [SerializeField, Tooltip("The audio clip of the kayak colliding")] 
         private AudioClip CollisionAudioClip;
 
+        [Header("VFX")] 
+        [SerializeField] private float _timeToPlayParticlesAfterPaddle;
+        [SerializeField] private ParticleSystem _leftPaddleParticle, _rightPaddleParticle;
+        private float _particleTimer = -1;
+        private CharacterNavigationState.Direction _particleSide;
+
         private void Start()
         {
             Rigidbody = GetComponent<Rigidbody>();
@@ -47,6 +53,7 @@ namespace Kayak
         private void Update()
         {
             ClampVelocity();
+            ManageParticlePaddle();
         }
 
         private void FixedUpdate()
@@ -99,6 +106,33 @@ namespace Kayak
                     velocity.x * _dragReducingMultiplier * Time.deltaTime, 
                       velocity.y, 
                     velocity.z * _dragReducingMultiplier * Time.deltaTime);
+            }
+        }
+
+        public void PlayPaddleParticle(CharacterNavigationState.Direction side)
+        {
+            _particleTimer = _timeToPlayParticlesAfterPaddle;
+            _particleSide = side;
+        }
+
+        private void ManageParticlePaddle()
+        {
+            if (_particleTimer > 0)
+            {
+                _particleTimer -= Time.deltaTime;
+                if (_particleTimer <= 0)
+                {
+                    _particleTimer = -1;
+                    switch (_particleSide)
+                    {
+                        case CharacterNavigationState.Direction.Left:
+                            _leftPaddleParticle.Play();
+                            break;
+                        case CharacterNavigationState.Direction.Right:
+                            _rightPaddleParticle.Play();
+                            break;
+                    }
+                }
             }
         }
     }

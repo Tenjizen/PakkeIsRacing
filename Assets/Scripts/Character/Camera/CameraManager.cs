@@ -1,4 +1,5 @@
 using Character;
+using Character.Camera.State;
 using Cinemachine;
 using UnityEngine;
 using WaterAndFloating;

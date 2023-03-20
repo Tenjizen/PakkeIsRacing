@@ -337,6 +337,9 @@ MonoBehaviour:
     BackRight: {fileID: 333907970869196805}
   PaddlingAudioClip: {fileID: 8300000, guid: cc79f0cc1ba16294cb28181e5ed1db4e, type: 3}
   CollisionAudioClip: {fileID: 8300000, guid: 6fcbe11d2b48cf540aa7cd7c670420f2, type: 3}
+  _timeToPlayParticlesAfterPaddle: 0.5
+  _leftPaddleParticle: {fileID: 0}
+  _rightPaddleParticle: {fileID: 0}
 --- !u!136 &4595948853936165718
 CapsuleCollider:
   m_ObjectHideFlags: 0
