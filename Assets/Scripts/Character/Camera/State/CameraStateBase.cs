@@ -93,7 +93,7 @@ public abstract class CameraStateBase
             return;
         }
 
-        Vector3 currentOffset = Vector3.Lerp(CameraManagerRef.Cinemachine3rdPersonFollow.ShoulderOffset, CameraManagerRef.BaseShoulderOffset, 0.1f);
+        Vector3 currentOffset = Vector3.Lerp(CameraManagerRef.Cinemachine3rdPersonFollow.ShoulderOffset, CameraManagerRef.BaseShoulderOffset, 0.01f);
         CameraManagerRef.Cinemachine3rdPersonFollow.ShoulderOffset = currentOffset;
     }
 }

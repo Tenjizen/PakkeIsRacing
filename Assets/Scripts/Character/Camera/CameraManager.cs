@@ -191,17 +191,9 @@ public class CameraManager : MonoBehaviour
     }
     public void ResetNavigationValue()
     {
-        VirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = 7;
+        const float cameraDistance = 7;
+        VirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = cameraDistance;
         StartDeath = false;
-
-        #region pendulum
-        //_pendulumValue = PendulumFirstAngle;
-        //_speedPendulum = PendulumFirstSpeed;
-        //_pendulumValueMoins = PendulumRemoveAngle;
-        //_speedPendulumMoins = PendulumRemoveSpeed;
-        //_playOnce = false;
-        //DeadState = false;
-        #endregion
     }
 
     public void ResetCameraLocalPos()

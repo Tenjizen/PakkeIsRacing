@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 namespace UI
@@ -17,12 +18,16 @@ namespace UI
 
         public void SetBalanceCursor(float angle)
         {
-            Debug.Log(angle);
             angle *= _cursorAngleMultiplier;
-            Debug.Log(angle);
             Vector3 rotation = _cursor.transform.rotation.eulerAngles;
             _currentAngle = Mathf.Lerp(_currentAngle, angle, 0.1f);
             _cursor.transform.rotation = Quaternion.Euler(rotation.x, rotation.y, _currentAngle);
+        }
+
+        public void MakeCursorFeedback()
+        {
+            _cursor.DOComplete();
+            _cursor.DOPunchScale(Vector3.one * 0.1f, 0.4f);
         }
     }
 }

@@ -7,8 +7,8 @@ namespace Character.Camera.State
     {
         private float _currentFov;
         private float _baseFov = 55f;
-        private Vector3 _currentOffset;
         private Vector3 _targetOffset;
+        private Vector3 _currentOffset;
         private float _lookAtPosition;
 
         public CameraCombatState(CameraManager cameraManagerRef, MonoBehaviour monoBehaviour) :
@@ -24,8 +24,8 @@ namespace Character.Camera.State
             _currentFov = _baseFov;
 
             CanResetShoulderOffset = false;
+            _targetOffset = CameraManagerRef.BaseShoulderOffset + CameraManagerRef.combatOffset;
             _currentOffset = CameraManagerRef.Cinemachine3rdPersonFollow.ShoulderOffset;
-            _targetOffset = _currentOffset + CameraManagerRef.combatOffset;
             
             //look-at
             CameraManagerRef.VirtualCamera.LookAt = CameraManagerRef.CameraTargetCombatLookAt.transform;
@@ -35,11 +35,11 @@ namespace Character.Camera.State
             CameraManagerRef.CurrentStateBase.ManageFreeCameraMove(CameraMode.Combat);
             CameraManagerRef.ApplyRotationCameraInCombat();
             
-            const float fovLerp = 0.1f;
+            const float fovLerp = 0.05f;
             _currentFov = Mathf.Lerp(_currentFov, CameraManagerRef.combatFov, fovLerp);
             CameraManagerRef.CurrentStateBase.SetFOV(_currentFov);
 
-            const float offsetLerp = 0.1f;
+            const float offsetLerp = 0.05f;
             _currentOffset = Vector3.Lerp(_currentOffset, _targetOffset, offsetLerp);
             CameraManagerRef.Cinemachine3rdPersonFollow.ShoulderOffset = _currentOffset;
             

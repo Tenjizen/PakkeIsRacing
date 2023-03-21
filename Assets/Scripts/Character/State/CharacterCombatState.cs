@@ -48,12 +48,12 @@ namespace Character.State
         {
             if (CharacterManagerRef.InputManagement.Inputs.DeselectWeapon)
             {
-                CharacterNavigationState characterNavigationState = new CharacterNavigationState(CharacterManagerRef.KayakController, CharacterManagerRef.InputManagement, CharacterManagerRef, MonoBehaviourRef, CameraManagerRef);
-                CharacterManagerRef.SwitchState(characterNavigationState);
-
                 CameraNavigationState cameraNavigationState = new CameraNavigationState(CameraManagerRef, MonoBehaviourRef);
                 CameraManagerRef.SwitchState(cameraNavigationState);
                 
+                CharacterNavigationState characterNavigationState = new CharacterNavigationState(CharacterManagerRef.KayakController, CharacterManagerRef.InputManagement, CharacterManagerRef, MonoBehaviourRef, CameraManagerRef);
+                CharacterManagerRef.SwitchState(characterNavigationState);
+
                 CharacterManagerRef.weaponUIManagerRef.SetPaddleDownImage(false);
                 CharacterManagerRef.weaponUIManagerRef.SetCursor(false);
                 CharacterManagerRef.weaponUIManagerRef.SetCooldownUI(0);

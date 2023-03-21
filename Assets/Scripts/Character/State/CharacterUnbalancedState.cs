@@ -123,17 +123,21 @@ namespace Character.State
                 CharacterManagerRef.Balance += _kayakValues.UnbalancePaddleForce;
                 _leftPaddleCooldown = _kayakValues.UnbalancePaddleCooldown;
 
-                //audio
-                SoundManager.Instance.PlaySound(_kayakController.PaddlingAudioClip);
+                RebalanceEffect();
             }
             if (_inputs.Inputs.PaddleRight && _rightPaddleCooldown <= 0 && CharacterManagerRef.Balance > 0)
             {
                 CharacterManagerRef.Balance -= _kayakValues.UnbalancePaddleForce;
                 _rightPaddleCooldown = _kayakValues.UnbalancePaddleCooldown;
 
-                //audio
-                SoundManager.Instance.PlaySound(_kayakController.PaddlingAudioClip);
+                RebalanceEffect();
             }
+        }
+
+        private void RebalanceEffect()
+        {
+            SoundManager.Instance.PlaySound(_kayakController.PaddlingAudioClip);
+            CharacterManagerRef.BalanceGaugeManagerRef.MakeCursorFeedback();
         }
 
         #endregion

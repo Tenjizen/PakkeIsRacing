@@ -24,7 +24,6 @@ namespace Character.Camera.State
         }
         public override void UpdateState(CameraManager camera)
         {
-
             if (Mathf.Abs(CameraManagerRef.RotationZ) > 0)
             {
                 CameraManagerRef.SmoothResetRotateZ();
@@ -43,8 +42,10 @@ namespace Character.Camera.State
             }
 
             if (CameraManagerRef.Waves.CircularWavesDurationList.Count > 0)
+            {
                 CameraManagerRef.ShakeCamera(CameraManagerRef.AmplitudShakeWhenWaterWave);
-            else if (CameraManagerRef.WaterFlow == true)
+            }
+            else if (CameraManagerRef.WaterFlow)
             {
                 CameraManagerRef.ShakeCamera(CameraManagerRef.AmplitudShakeWhenWaterFlow);
             }
