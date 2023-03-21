@@ -4,6 +4,7 @@ using Character.State;
 using Fight;
 using Kayak;
 using SceneTransition;
+using UI;
 using UI.WeaponWheel;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -27,6 +28,8 @@ namespace Character
         public TransitionManager TransitionManager;
         [Tooltip("Reference of the WeaponMenuManager script")]
         public WeaponUIManager weaponUIManagerRef;
+        [Tooltip("Reference of the BalanceGaugeManager script")]
+        public BalanceGaugeManager BalanceGaugeManagerRef;
 
         [Header("Balance")]
         [SerializeField, Range(0, 1), Tooltip("The lerp value that reset the balance to 0 over time")]
@@ -72,6 +75,8 @@ namespace Character
             CurrentStateBase.EnterState(this);
             CurrentStateBase.OnPaddleRight.AddListener(PlayPaddleRightParticle);
             CurrentStateBase.OnPaddleLeft.AddListener(PlayPaddleLeftParticle);
+            
+            BalanceGaugeManagerRef.SetBalanceGaugeActive(false);
         }
         private void Update()
         {
@@ -88,6 +93,7 @@ namespace Character
         }
         public void SwitchState(CharacterStateBase stateBaseCharacter)
         {
+            CurrentStateBase.ExitState(this);
             CurrentStateBase = stateBaseCharacter;
             stateBaseCharacter.EnterState(this);
         }
@@ -101,6 +107,7 @@ namespace Character
             {
                 Balance = Mathf.Lerp(Balance, 0, balanceLerpTo0Value);
             }
+            BalanceGaugeManagerRef.SetBalanceCursor(Balance);
         }
 
         /// <summary>

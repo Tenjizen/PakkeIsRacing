@@ -49,6 +49,9 @@ namespace Character.State
             {
                 CharacterManagerRef.SetBalanceValueToCurrentSide(CharacterManagerRef.BalanceDeathLimit - CharacterManagerRef.MinimumTimeUnbalanced);
             }
+            
+            //gauge
+            CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeActive(true);
         }
 
         public override void UpdateState(CharacterManager character)
@@ -73,6 +76,11 @@ namespace Character.State
         public override void SwitchState(CharacterManager character)
         {
 
+        }
+
+        public override void ExitState(CharacterManager character)
+        {
+            CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeActive(false);
         }
 
         #endregion

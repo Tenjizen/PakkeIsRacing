@@ -12,12 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db459a061a41480abf5929fa5c1fb2c3, type: 3}
   m_Name: Net
   m_EditorClassIdentifier: 
-  WeaponName: 
-  MaxSpeed: 0
-  SpeedCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  Cooldown: 0
+  WeaponName: Net
+  LaunchForce: 3000
+  Cooldown: 2
+  Lifetime: 4
+  ForbiddenColliders: []

@@ -1033,6 +1033,7 @@ MonoBehaviour:
   PaddleAnimator: {fileID: 6793741366818239509}
   TransitionManager: {fileID: 0}
   weaponUIManagerRef: {fileID: 0}
+  BalanceGaugeManagerRef: {fileID: 0}
   balanceLerpTo0Value: 0.03
   LerpBalanceTo0: 1
   Balance: 0
@@ -1077,7 +1078,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CinemachineCameraTarget: {fileID: 5773740044235661809}
   CinemachineCameraTargetFollow: {fileID: 3814212815698604900}
-  CameraTargetCombatLookAt: {fileID: 1094441883}
   AnimatorRef: {fileID: 4963052748703314965}
   TopClamp: 28
   BottomClamp: -18
@@ -1216,6 +1216,8 @@ MonoBehaviour:
   combatOffset: {x: -1, y: -1, z: 0}
   combatFov: 40
   HeightClamp: {x: -2.5, y: 2.5}
+  CameraTargetCombatLookAt: {fileID: 1094441883}
+  CameraTargetCombatBaseHeight: 0
   CameraAngleOverride: 10
   CameraBaseFov: 0
   CameraTargetBasePos: {x: 0, y: 0, z: 0}

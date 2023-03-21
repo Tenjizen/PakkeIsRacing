@@ -24,4 +24,14 @@ public class CheckpointManager : MonoBehaviour
     #endregion
     
     public Checkpoint CurrentCheckpoint;
+
+    public Transform GetRespawnPoint()
+    {
+        if (CurrentCheckpoint == null)
+        {
+            return transform;
+        }
+
+        return CurrentCheckpoint.TargetRespawnTransform;
+    }
 }

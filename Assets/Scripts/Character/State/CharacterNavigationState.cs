@@ -119,6 +119,10 @@ namespace Character.State
         {
         }
 
+        public override void ExitState(CharacterManager character)
+        {
+        }
+
         #endregion
 
         #region Methods

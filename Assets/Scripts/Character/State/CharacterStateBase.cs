@@ -39,6 +39,8 @@ namespace Character.State
         public abstract void FixedUpdate(CharacterManager character);
 
         public abstract void SwitchState(CharacterManager character);
+        
+        public abstract void ExitState(CharacterManager character);
 
         /// <summary>
         /// Rotate the boat alongside the Balance value

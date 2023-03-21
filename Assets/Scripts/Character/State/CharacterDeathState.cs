@@ -30,7 +30,7 @@ namespace Character.State
 
         public override void UpdateState(CharacterManager character)
         {
-            Transform checkpoint = CheckpointManager.Instance.CurrentCheckpoint.TargetRespawnTransform;
+            Transform checkpoint = CheckpointManager.Instance.GetRespawnPoint();
 
             //Rotate kayak at 180 in z with balance
             if (CharacterManagerRef.Balance > 0 && CharacterManagerRef.Balance < 60)
@@ -89,6 +89,10 @@ namespace Character.State
             CharacterNavigationState characterNavigationState = new CharacterNavigationState(_kayakController, _inputs, CharacterManagerRef, MonoBehaviourRef, CameraManagerRef);
             CharacterManagerRef.SwitchState(characterNavigationState);
 
+        }
+
+        public override void ExitState(CharacterManager character)
+        {
         }
 
         private void RespawnCheckpoint(Transform checkpoint)
