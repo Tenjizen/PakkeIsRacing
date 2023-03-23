@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ public abstract class CameraStateBase
         Navigation = 0,
         Combat = 1,
     }
-    
+
     public CameraStateBase(CameraManager cameraManagerRef, MonoBehaviour monoBehaviour)
     {
         CameraManagerRef = cameraManagerRef;
@@ -27,11 +28,11 @@ public abstract class CameraStateBase
     public abstract void FixedUpdate(CameraManager camera);
 
     public abstract void SwitchState(CameraManager camera);
-    
-    protected void ClampRotationCameraValue()
+
+    protected void ClampRotationCameraValue(float min, float max)
     {
         CameraManagerRef.CinemachineTargetYaw = ClampAngle(CameraManagerRef.CinemachineTargetYaw, float.MinValue, float.MaxValue);
-        CameraManagerRef.CinemachineTargetPitch = ClampAngle(CameraManagerRef.CinemachineTargetPitch, CameraManagerRef.BottomClamp, CameraManagerRef.TopClamp);
+        CameraManagerRef.CinemachineTargetPitch = ClampAngle(CameraManagerRef.CinemachineTargetPitch, min, max);
     }
     public float ClampAngle(float lfAngle, float lfMin, float lfMax)
     {
@@ -50,16 +51,19 @@ public abstract class CameraStateBase
             {
                 case CameraMode.Navigation:
                     aim = CameraManagerRef.Input.Inputs.RotateCamera;
+                    CameraManagerRef.CinemachineTargetPitch += CameraManagerRef.JoystickFreeRotationY.Evaluate(aim.y);
                     break;
+
                 case CameraMode.Combat:
                     aim = CameraManagerRef.Input.Inputs.MovingAim;
                     aim = new Vector2(aim.x, aim.y * -1);
-;                   break;
+                    CameraManagerRef.CinemachineTargetPitch += CameraManagerRef.JoystickFreeRotationY.Evaluate(aim.y);
+                    break;
             }
-            
+
             //Controller
             CameraManagerRef.CinemachineTargetYaw += CameraManagerRef.JoystickFreeRotationX.Evaluate(aim.x);
-            CameraManagerRef.CinemachineTargetPitch += CameraManagerRef.JoystickFreeRotationY.Evaluate(aim.y);
+            //CameraManagerRef.CinemachineTargetPitch = CameraManagerRef.JoystickFreeRotationY.Evaluate(aim.y); (jsp pk ici ça fait de la merde)
 
             #region clavier souris
             //KBM
@@ -81,9 +85,9 @@ public abstract class CameraStateBase
         ManageFreeCameraMove(ref _uselessFloatForRef, cameraMode);
     }
 
-    public void SetFOV(float value)
+    public void SetFOV(CinemachineVirtualCamera virtualCamera ,float value)
     {
-        CameraManagerRef.VirtualCamera.m_Lens.FieldOfView = value;
+        virtualCamera.m_Lens.FieldOfView = value;
     }
 
     public void ResetShoulderOffset()

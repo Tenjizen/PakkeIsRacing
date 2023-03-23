@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class CameraDeathState : CameraStateBase
 {
-
-    private float _rotationZ;
-
     public CameraDeathState(CameraManager cameraManagerRef, MonoBehaviour monoBehaviour) :
       base(cameraManagerRef, monoBehaviour)
     {
@@ -18,10 +15,6 @@ public class CameraDeathState : CameraStateBase
         Debug.Log("cam death");
         CameraManagerRef.ShakeCamera(0);
         CameraManagerRef.CameraAngleOverride = 0;
-        _rotationZ = CameraManagerRef.RotationZ;
-        
-        //look-at
-        CameraManagerRef.VirtualCamera.LookAt = null;
     }
     public override void UpdateState(CameraManager camera)
     {

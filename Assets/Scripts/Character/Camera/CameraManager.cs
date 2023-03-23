@@ -12,6 +12,8 @@ public class CameraManager : MonoBehaviour
     [Header("Cinemachine"), Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
     public GameObject CinemachineCameraTarget;
     public GameObject CinemachineCameraTargetFollow;
+    public GameObject CinemachineCameraFollowCombat;
+
     public Animator AnimatorRef;
     [Tooltip("How far in degrees can you move the camera up")]
     public float TopClamp = 70.0f;
@@ -38,6 +40,7 @@ public class CameraManager : MonoBehaviour
 
     [Header("Virtual Camera")]
     public CinemachineBrain Brain;
+    public CinemachineVirtualCamera VirtualCameraFreeLook;
     public CinemachineVirtualCamera VirtualCamera;
     [Range(0, 5)] public float MultiplierFovCamera = 1;
 
@@ -81,10 +84,10 @@ public class CameraManager : MonoBehaviour
     public float AmplitudShakeWhenWaterWave = 0.2f;
     public Waves Waves;
 
-    [Header("Combat")] 
-    public Vector3 combatOffset = new Vector3(-1,-1,0);
+    [Header("Combat")]
+    public Vector3 combatOffset = new Vector3(-1, -1, 0);
     public float combatFov = 40f;
-    public Vector2 HeightClamp = new Vector2(-30,30);
+    public Vector2 HeightClamp = new Vector2(-30, 30);
     public GameObject CameraTargetCombatLookAt;
     public float CameraTargetCombatBaseHeight;
 
@@ -93,6 +96,7 @@ public class CameraManager : MonoBehaviour
     [HideInInspector] public float CameraBaseFov;
     [HideInInspector] public Vector3 CameraTargetBasePos;
     [HideInInspector] public float RotationZ = 0;
+    //[HideInInspector] public float RotationX = 0;
     //cinemachine yaw&pitch
     [HideInInspector] public float CinemachineTargetYaw;
     [HideInInspector] public float CinemachineTargetPitch;
@@ -104,7 +108,7 @@ public class CameraManager : MonoBehaviour
     [HideInInspector] public bool WaterFlow = false;
     //base values
     [ReadOnly] public float BaseFOV;
-    [HideInInspector] public Cinemachine3rdPersonFollow Cinemachine3rdPersonFollow;
+     public Cinemachine3rdPersonFollow Cinemachine3rdPersonFollow;
     [ReadOnly] public Vector3 BaseShoulderOffset;
 
     private void Awake()
@@ -118,7 +122,7 @@ public class CameraManager : MonoBehaviour
 
         CameraTargetBasePos = CinemachineCameraTarget.transform.localPosition;
 
-        CameraBaseFov = VirtualCamera.m_Lens.FieldOfView;
+        CameraBaseFov = VirtualCameraFreeLook.m_Lens.FieldOfView;
 
         CameraNavigationState navigationState = new CameraNavigationState(this, this);
         CurrentStateBase = navigationState;
@@ -137,8 +141,8 @@ public class CameraManager : MonoBehaviour
     {
         CurrentStateBase.UpdateState(this);
         CurrentStateBase.ResetShoulderOffset();
-        
-        FieldOfView();
+
+        FieldOfView(VirtualCameraFreeLook);
     }
     private void FixedUpdate()
     {
@@ -150,10 +154,10 @@ public class CameraManager : MonoBehaviour
         stateBaseCharacter.EnterState(this);
     }
 
-    private void FieldOfView()
+    private void FieldOfView(CinemachineVirtualCamera virtualCamera)
     {
         float velocityXZ = Mathf.Abs(RigidbodyKayak.velocity.x) + Mathf.Abs(RigidbodyKayak.velocity.z);
-        VirtualCamera.m_Lens.FieldOfView = Mathf.Lerp(VirtualCamera.m_Lens.FieldOfView,
+        virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(virtualCamera.m_Lens.FieldOfView,
                                             CameraBaseFov + (velocityXZ * MultiplierFovCamera),
                                             LerpFOV);
     }
@@ -167,13 +171,15 @@ public class CameraManager : MonoBehaviour
     }
     public void ApplyRotationCameraInCombat()
     {
-        CinemachineCameraTarget.transform.rotation = Quaternion.Euler(
-            CinemachineCameraTarget.transform.rotation.x, //pitch
-            CinemachineTargetYaw, //yaw
-            RotationZ); //z rotation
-        
-        CinemachineCameraTargetFollow.transform.rotation = Quaternion.Euler(
-            CinemachineCameraTargetFollow.transform.rotation.x, //pitch
+        //CinemachineCameraTarget.transform.rotation = Quaternion.Euler(
+        //    0,
+        //    //CinemachineTargetPitch, //pitch
+        //    //CinemachineCameraTarget.transform.rotation.x, //pitch
+        //    CinemachineTargetYaw, //yaw
+        //    RotationZ); //z rotation
+
+        CinemachineCameraFollowCombat.transform.rotation = Quaternion.Euler(
+            CinemachineTargetPitch, //pitch
             CinemachineTargetYaw, //yaw
             RotationZ); //z rotation
     }
@@ -192,7 +198,7 @@ public class CameraManager : MonoBehaviour
     public void ResetNavigationValue()
     {
         const float cameraDistance = 7;
-        VirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = cameraDistance;
+        VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = cameraDistance;
         StartDeath = false;
     }
 
@@ -261,7 +267,7 @@ public class CameraManager : MonoBehaviour
     }
     public void ShakeCamera(float intensity)
     {
-        CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = VirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = VirtualCameraFreeLook.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
     }
     #endregion

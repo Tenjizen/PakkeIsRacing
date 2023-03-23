@@ -107,7 +107,7 @@ namespace Character.State
 
             //kayak rotation
             Quaternion kayakTransformRotation = CharacterManagerRef.KayakController.transform.rotation;
-            float targetAngle = CharacterManagerRef.CameraManagerRef.CinemachineCameraTarget.transform.rotation.eulerAngles.y;
+            float targetAngle = CharacterManagerRef.CameraManagerRef.CinemachineCameraFollowCombat.transform.rotation.eulerAngles.y;
             Quaternion targetRotation = Quaternion.Euler(new Vector3(kayakTransformRotation.eulerAngles.x, targetAngle, kayakTransformRotation.eulerAngles.z));
             Quaternion rotation = Quaternion.Lerp(kayakTransformRotation,targetRotation,CharacterManagerRef.BoatFollowAimLerp);
             CharacterManagerRef.KayakController.transform.rotation = rotation;

@@ -13,14 +13,16 @@ namespace Character.Camera.State
 
         public override void EnterState(CameraManager camera)
         {
+            Time.timeScale = 1;
+            CameraManagerRef.LastInputX = 0;
+            CameraManagerRef.LastInputY = 0;
+
             CameraManagerRef.ShakeCamera(0);
-            CameraManagerRef.AnimatorRef.Play("VCam FreeLook");
+            CameraManagerRef.AnimatorRef.Play("FreeLook");
             CameraManagerRef.Brain.m_BlendUpdateMethod = Cinemachine.CinemachineBrain.BrainUpdateMethod.LateUpdate;
-        
+
             CameraManagerRef.ResetNavigationValue();
-        
-            //look-at
-            CameraManagerRef.VirtualCamera.LookAt = null;
+
         }
         public override void UpdateState(CameraManager camera)
         {
@@ -31,7 +33,7 @@ namespace Character.Camera.State
 
             MoveCamera();
 
-            ClampRotationCameraValue();
+            ClampRotationCameraValue(CameraManagerRef.BottomClamp, CameraManagerRef.TopClamp);
 
             CameraManagerRef.ApplyRotationCamera();
 

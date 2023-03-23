@@ -9,7 +9,6 @@ namespace Character.Camera.State
         private float _baseFov = 55f;
         private Vector3 _targetOffset;
         private Vector3 _currentOffset;
-        private float _lookAtPosition;
 
         public CameraCombatState(CameraManager cameraManagerRef, MonoBehaviour monoBehaviour) :
             base(cameraManagerRef, monoBehaviour)
@@ -19,35 +18,28 @@ namespace Character.Camera.State
         public override void EnterState(CameraManager camera)
         {
             Debug.Log("Camera Combat");
-            
+
+            CameraManagerRef.AnimatorRef.Play("Combat");
+
             _baseFov = CameraManagerRef.VirtualCamera.m_Lens.FieldOfView;
             _currentFov = _baseFov;
-
-            CanResetShoulderOffset = false;
-            _targetOffset = CameraManagerRef.BaseShoulderOffset + CameraManagerRef.combatOffset;
-            _currentOffset = CameraManagerRef.Cinemachine3rdPersonFollow.ShoulderOffset;
-            
-            //look-at
-            CameraManagerRef.VirtualCamera.LookAt = CameraManagerRef.CameraTargetCombatLookAt.transform;
         }
         public override void UpdateState(CameraManager camera)
         {
             CameraManagerRef.CurrentStateBase.ManageFreeCameraMove(CameraMode.Combat);
             CameraManagerRef.ApplyRotationCameraInCombat();
-            
+
+            CameraManagerRef.CinemachineTargetPitch = ClampAngle(CameraManagerRef.CinemachineTargetPitch, CameraManagerRef.HeightClamp.x, CameraManagerRef.HeightClamp.y);
+
+            ClampRotationCameraValue(CameraManagerRef.HeightClamp.x, CameraManagerRef.HeightClamp.y);
+
             const float fovLerp = 0.05f;
             _currentFov = Mathf.Lerp(_currentFov, CameraManagerRef.combatFov, fovLerp);
-            CameraManagerRef.CurrentStateBase.SetFOV(_currentFov);
+            CameraManagerRef.CurrentStateBase.SetFOV(CameraManagerRef.VirtualCamera, _currentFov);
 
             const float offsetLerp = 0.05f;
             _currentOffset = Vector3.Lerp(_currentOffset, _targetOffset, offsetLerp);
             CameraManagerRef.Cinemachine3rdPersonFollow.ShoulderOffset = _currentOffset;
-            
-            //look-at y
-            _lookAtPosition += -CameraManagerRef.Input.Inputs.RotateCamera.y/10;
-            _lookAtPosition = Mathf.Clamp(_lookAtPosition, CameraManagerRef.HeightClamp.x, CameraManagerRef.HeightClamp.y);
-            Vector3 position = CameraManagerRef.CameraTargetCombatLookAt.transform.position;
-            CameraManagerRef.CameraTargetCombatLookAt.transform.position = new Vector3(position.x, CameraManagerRef.CameraTargetCombatBaseHeight + _lookAtPosition, position.z);
         }
         public override void FixedUpdate(CameraManager camera)
         {
