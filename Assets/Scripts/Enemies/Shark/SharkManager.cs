@@ -1,16 +1,25 @@
 using GPEs;
 using Kayak;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using WaterAndFloating;
+using Fight;
 
-public class SharkManager : MonoBehaviour
+public class SharkManager : MonoBehaviour, IHittable
 {
     public SharkBaseState CurrentStateBase;
 
     [ReadOnly] public Transform Target;
+    public GameObject Parent;
+
+    [Header("Life")]
+    public float Life = 3;
+    [Header("Hit")]
+    public Collider SharkCollider;
+    public float TimeStartHittable = 1;
+    public float TimeEndHittable = 4;
+
+    [Header("VFX")] public ParticleSystem HitParticles;
+    [Header("Sound")] public AudioClip HitSound;
 
     [Header("Rotation")]
     [Tooltip("The speed of rotation")]
@@ -48,7 +57,7 @@ public class SharkManager : MonoBehaviour
     [Tooltip("The maximum size that the shadow takes before the shark jumps")]
     public float ShadowMaxSizeForJump = 3;
     [Tooltip("The speed at which the circle will grow (Ex : 1 / ShadowDivideGrowSpeed)")]
-    public float ShadowDivideGrowSpeed = 2; 
+    public float ShadowDivideGrowSpeed = 2;
 
     [ReadOnly] public KayakController kayak;
 
@@ -62,6 +71,9 @@ public class SharkManager : MonoBehaviour
     public CircularWave EndJumpCircularWaveData;
     [Space]
     public float EndJumpCircularWaveTime = 1;
+
+
+
 
     private void Awake()
     {
@@ -93,9 +105,12 @@ public class SharkManager : MonoBehaviour
 
     public void OnEnter()
     {
-        SharkCombatState sharkCombatState = new SharkCombatState();
-        SwitchState(sharkCombatState);
-        Target = GetComponent<PlayerTriggerManager>().PropKayakController.gameObject.GetComponent<Transform>();
+        if (Target == null)
+        {
+            SharkCombatState sharkCombatState = new SharkCombatState();
+            SwitchState(sharkCombatState);
+            Target = GetComponent<PlayerTriggerManager>().PropKayakController.gameObject.GetComponent<Transform>();
+        }
     }
 
     public void OnExit()
@@ -104,4 +119,20 @@ public class SharkManager : MonoBehaviour
         SwitchState(sharkFreeRoamState);
         Target = null;
     }
+
+    public void Hit(Projectile projectile, GameObject owner)
+    {
+
+        Life -= 1;
+        //Life -= projectile.Data.Damage
+
+        HitParticles.transform.parent = null;
+        HitParticles.Play();
+        SoundManager.Instance.PlaySound(HitSound);
+
+        if (Life <= 0)
+            Destroy(Parent.gameObject);
+    }
+
+
 }

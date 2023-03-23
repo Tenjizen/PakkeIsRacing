@@ -11,6 +11,8 @@ public class SharkCombatState : SharkBaseState
     float _timerTargetFollow = 0;
     float _elevationOffsetBase;
 
+    float _timerHittable;
+
     float _radius;
 
     public enum CombatState { RotateBeforeJump = 0, Wait = 1, Jump = 2, RotateAfterJump = 3 };
@@ -66,6 +68,16 @@ public class SharkCombatState : SharkBaseState
                 #region Jump
                 case CombatState.Jump:
 
+                    _timerHittable += Time.deltaTime;
+                    if (_timerHittable >= sharkManager.TimeEndHittable)
+                    {
+                        sharkManager.SharkCollider.enabled = false;
+                    }
+                    else if (_timerHittable >= sharkManager.TimeStartHittable && _timerHittable < sharkManager.TimeEndHittable)
+                    {
+                        sharkManager.SharkCollider.enabled = true;
+                    }
+
                     Jump(sharkManager);
 
                     break;
@@ -73,7 +85,7 @@ public class SharkCombatState : SharkBaseState
 
                 #region After jump
                 case CombatState.RotateAfterJump:
-
+                    _timerHittable = 0;
                     RotateAround(sharkManager);
 
                     if (sharkManager.ElevationOffset < _elevationOffsetBase)

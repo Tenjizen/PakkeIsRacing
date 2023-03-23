@@ -3,16 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColliderBetweenObject : MonoBehaviour
+public class ColliderBetweenPlayer : MonoBehaviour
 {
 
-    public SharkManager SharkManagerRef;
+    public SharkManager ManagerRef;
     private void OnTriggerEnter(Collider other)
     {
         KayakController kayakController = other.gameObject.GetComponent<KayakController>();
         if (kayakController != null)
         {
-            SharkManagerRef.kayak = kayakController;
+            ManagerRef.kayak = kayakController;
         }
         
     }
@@ -22,7 +22,7 @@ public class ColliderBetweenObject : MonoBehaviour
 
         if (kayakController != null)
         {
-            SharkManagerRef.kayak = null;
+            ManagerRef.kayak = null;
         }
     }
 }
