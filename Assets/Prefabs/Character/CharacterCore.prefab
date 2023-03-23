@@ -12,7 +12,7 @@ GameObject:
   m_Layer: 0
   m_Name: CameraTargetCombat
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -23,8 +23,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094441883}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.0621266, y: 3.583109, z: 8.209103}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.03, y: 2.46, z: -5.02}
   m_LocalScale: {x: 1.3134564, y: 1.3134564, z: 1.3134564}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -208,12 +208,12 @@ MonoBehaviour:
   - {fileID: 4192299973026284776}
   - {fileID: 6638202092221173266}
   m_Instructions:
-  - m_FullHash: 1127691755
+  - m_FullHash: -1195735313
     m_VirtualCamera: {fileID: 4192299973026284776}
     m_ActivateAfter: 0
     m_MinDuration: 0
-  - m_FullHash: 658966004
-    m_VirtualCamera: {fileID: 0}
+  - m_FullHash: -1982969619
+    m_VirtualCamera: {fileID: 6638202092221173266}
     m_ActivateAfter: 0
     m_MinDuration: 0
   m_DefaultBlend:
@@ -227,9 +227,9 @@ MonoBehaviour:
       m_RotationOrder: 4
   m_CustomBlends: {fileID: 0}
   m_ParentHash:
-  - m_Hash: 1127691755
+  - m_Hash: -1195735313
     m_ParentHash: 756556552
-  - m_Hash: 658966004
+  - m_Hash: -1982969619
     m_ParentHash: 756556552
 --- !u!95 &4963052748703314965
 Animator:
@@ -365,7 +365,7 @@ GameObject:
   - component: {fileID: 520549039398618064}
   - component: {fileID: 5415165836197390458}
   m_Layer: 0
-  m_Name: CameraTargetPivot
+  m_Name: CameraTargetFreeLook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -546,7 +546,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  m_CustomBlends: {fileID: 11400000, guid: a4d07c7fa72b9514e9e5272675039d01, type: 2}
+  m_CustomBlends: {fileID: 0}
   m_CameraCutEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -706,7 +706,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7023581499585263752}
   m_LocalRotation: {x: -0, y: -0.047786213, z: -0, w: 0.9988576}
-  m_LocalPosition: {x: -1.0563731, y: 1.4927555, z: 14.879232}
+  m_LocalPosition: {x: -0.8770902, y: 0.6376766, z: 4.7782397}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
