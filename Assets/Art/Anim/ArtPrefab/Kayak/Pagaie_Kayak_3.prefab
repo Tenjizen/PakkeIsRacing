@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 79f7a05f49029fb41a8361c757a476ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -247,6 +247,11 @@ PrefabInstance:
       propertyPath: m_UseCustomVertexStreams
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6537242373168085201, guid: 564ba88c84b64954bb3ea2809fe61aaa,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 79f7a05f49029fb41a8361c757a476ae, type: 2}
     - target: {fileID: 9071419740121720286, guid: 564ba88c84b64954bb3ea2809fe61aaa,
         type: 3}
       propertyPath: m_RootOrder
