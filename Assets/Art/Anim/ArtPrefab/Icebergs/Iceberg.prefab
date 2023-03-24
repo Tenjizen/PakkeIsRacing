@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4519318627688101346}
   - component: {fileID: -5754084199372789682}
   - component: {fileID: -7511558181221131132}
+  - component: {fileID: 5523453579135493940}
   m_Layer: 0
   m_Name: Iceberg
   m_TagString: Untagged
@@ -84,6 +85,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5523453579135493940
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6884524515434628086}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5541478557329291275, guid: 56fe5071030152545a15128098e51a0e, type: 3}
 --- !u!1001 &5280176845283459083
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -173,6 +188,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56fe5071030152545a15128098e51a0e, type: 3}
+--- !u!1 &5010145787927084378 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 56fe5071030152545a15128098e51a0e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5280176845283459083}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &5727664698616606912
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5010145787927084378}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: -1
+  m_Mesh: {fileID: -5541478557329291275, guid: 56fe5071030152545a15128098e51a0e, type: 3}
 --- !u!4 &5677998579812165600 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 56fe5071030152545a15128098e51a0e,
