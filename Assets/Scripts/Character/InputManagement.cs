@@ -40,6 +40,8 @@ namespace Character
             Inputs.Aim = GameplayInputs.Boat.Aim.ReadValue<float>() > 0.5f;
             Inputs.Shoot = GameplayInputs.Boat.Shoot.ReadValue<float>() > 0.5f;
             Inputs.MovingAim = GameplayInputs.Boat.MoveAim.ReadValue<Vector2>();
+
+            Inputs.Unbalanced = GameplayInputs.Boat.Unbalanced.ReadValue<float>() > 0.8f;
         }
     }
     
@@ -63,5 +65,7 @@ namespace Character
         public bool Aim;
         public bool Shoot;
         public Vector2 MovingAim;
+
+        public bool Unbalanced;
     }
 }

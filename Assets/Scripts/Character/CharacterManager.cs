@@ -51,6 +51,19 @@ namespace Character
         [Range(0, 10), Tooltip("The multiplier to the floaters' level difference added to the balance value")]
         public float FloatersLevelDifferenceToBalanceMultiplier = 1f;
 
+        [Header("UnBalanced")]
+        [Tooltip("The number of times to press the button")]
+        public int NumberPressButton;
+        [Tooltip("Conversion of a 'balance' unit to time")]
+        public float UnitBlanceToTimer;
+        [Tooltip("The more balance you have the less time you have (formula: (unitbalance * balance) - ((balance - balanceLimit) * ReductionForce))")]
+        public float ReductionForce;
+        [Tooltip("The timer")]
+        [ReadOnly]public float TimerUnbalanced = 0;
+        [Tooltip("The number of times the button has been pressed")]
+        [ReadOnly]public int NumberButtonIsPressed = 0;
+
+
         [Header("VFX")]
         [SerializeField] private ParticleSystem _paddleLeftParticle;
         [SerializeField] private ParticleSystem _paddleRightParticle;
