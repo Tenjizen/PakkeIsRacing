@@ -143,6 +143,15 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Unbalanced"",
+                    ""type"": ""Button"",
+                    ""id"": ""536c1b49-1bbd-4281-94e8-66356b26c49c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -409,6 +418,28 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""49bda660-71e9-4e16-86c9-83ad83133148"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""Unbalanced"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4b2180a7-d9a1-460f-85d4-84709a35f4ad"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""Unbalanced"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -441,6 +472,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         m_Boat_Aim = m_Boat.FindAction("Aim", throwIfNotFound: true);
         m_Boat_MoveAim = m_Boat.FindAction("MoveAim", throwIfNotFound: true);
         m_Boat_Shoot = m_Boat.FindAction("Shoot", throwIfNotFound: true);
+        m_Boat_Unbalanced = m_Boat.FindAction("Unbalanced", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -513,6 +545,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Boat_Aim;
     private readonly InputAction m_Boat_MoveAim;
     private readonly InputAction m_Boat_Shoot;
+    private readonly InputAction m_Boat_Unbalanced;
     public struct BoatActions
     {
         private @GameplayInputs m_Wrapper;
@@ -530,6 +563,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         public InputAction @Aim => m_Wrapper.m_Boat_Aim;
         public InputAction @MoveAim => m_Wrapper.m_Boat_MoveAim;
         public InputAction @Shoot => m_Wrapper.m_Boat_Shoot;
+        public InputAction @Unbalanced => m_Wrapper.m_Boat_Unbalanced;
         public InputActionMap Get() { return m_Wrapper.m_Boat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -578,6 +612,9 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @Shoot.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnShoot;
+                @Unbalanced.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnUnbalanced;
+                @Unbalanced.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnUnbalanced;
+                @Unbalanced.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnUnbalanced;
             }
             m_Wrapper.m_BoatActionsCallbackInterface = instance;
             if (instance != null)
@@ -621,6 +658,9 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @Unbalanced.started += instance.OnUnbalanced;
+                @Unbalanced.performed += instance.OnUnbalanced;
+                @Unbalanced.canceled += instance.OnUnbalanced;
             }
         }
     }
@@ -658,5 +698,6 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         void OnAim(InputAction.CallbackContext context);
         void OnMoveAim(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+        void OnUnbalanced(InputAction.CallbackContext context);
     }
 }
