@@ -307,7 +307,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3014273842563118509}
   m_LocalRotation: {x: 0.130805, y: 0.0053463127, z: -0.00070539623, w: 0.99139345}
-  m_LocalPosition: {x: -1.3265305, y: 3.5162826, z: 1.2501512}
+  m_LocalPosition: {x: -1.3265305, y: 3.5162826, z: 1.2501503}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -459,7 +459,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3858187113969445702}
   m_LocalRotation: {x: 0.12158245, y: -0, z: -0, w: 0.99258137}
-  m_LocalPosition: {x: 0, y: 4.883527, z: -7.291047}
+  m_LocalPosition: {x: 0, y: 4.883527, z: -7.291048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -738,7 +738,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7023581499585263752}
   m_LocalRotation: {x: -0, y: -0.047786213, z: -0, w: 0.9988576}
-  m_LocalPosition: {x: -0.8770905, y: 0.6376766, z: 4.7782397}
+  m_LocalPosition: {x: -0.8770902, y: 0.6376766, z: 4.7782397}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1085,7 +1085,7 @@ MonoBehaviour:
   CanMoveCameraManually: 1
   Brain: {fileID: 1967899735}
   VirtualCameraFreeLook: {fileID: 4192299973026284776}
-  VirtualCamera: {fileID: 6638202092221173266}
+  VirtualCameraCombat: {fileID: 6638202092221173266}
   MultiplierFovCamera: 2.03
   LerpTimeX: 0.035
   LerpTimeY: 0.035
@@ -1206,11 +1206,10 @@ MonoBehaviour:
   AmplitudShakeWhenWaterFlow: 0.2
   AmplitudShakeWhenWaterWave: 0.5
   Waves: {fileID: 0}
-  combatOffset: {x: -1, y: -1, z: 0}
-  combatFov: 40
+  CombatOffset: {x: 0, y: -0.5, z: -1}
+  CombatFov: 40
   HeightClamp: {x: -25, y: 10}
   CameraTargetCombatLookAt: {fileID: 1094441883}
-  CameraTargetCombatBaseHeight: 0
   CameraAngleOverride: 10
   CameraBaseFov: 0
   CameraTargetBasePos: {x: 0, y: 0, z: 0}
@@ -1221,9 +1220,8 @@ MonoBehaviour:
   LastInputY: 0
   StartDeath: 0
   WaterFlow: 0
-  BaseFOV: 0
-  Cinemachine3rdPersonFollow: {fileID: 0}
-  BaseShoulderOffset: {x: 0, y: 0, z: 0}
+  CinemachineCombat3rdPersonFollow: {fileID: 0}
+  CombatBaseShoulderOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &8337715506076774778
 GameObject:
   m_ObjectHideFlags: 0

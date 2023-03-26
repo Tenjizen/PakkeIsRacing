@@ -90,6 +90,7 @@ namespace Character
             CurrentStateBase.OnPaddleLeft.AddListener(PlayPaddleLeftParticle);
             
             BalanceGaugeManagerRef.SetBalanceGaugeActive(false);
+            BalanceGaugeManagerRef.ShowTrigger(false, false);
         }
         private void Update()
         {

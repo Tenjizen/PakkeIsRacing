@@ -59,6 +59,8 @@ namespace Character.State
 
             //gauge
             CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeActive(true);
+            float balance = CharacterManagerRef.Balance;
+            CharacterManagerRef.BalanceGaugeManagerRef.ShowTrigger(balance < 0, balance > 0);
         }
 
         public override void UpdateState(CharacterManager character)
@@ -92,6 +94,7 @@ namespace Character.State
         public override void ExitState(CharacterManager character)
         {
             CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeActive(false);
+            CharacterManagerRef.BalanceGaugeManagerRef.ShowTrigger(false, false);
         }
 
         #endregion
@@ -155,14 +158,14 @@ namespace Character.State
             if (_inputs.Inputs.PaddleLeft && _leftPaddleCooldown <= 0 && CharacterManagerRef.Balance < 0)
             {
                 _leftPaddleCooldown = _kayakValues.UnbalancePaddleCooldown;
-
                 CharacterManagerRef.NumberButtonIsPressed++;
+                CharacterManagerRef.BalanceGaugeManagerRef.MakeCursorFeedback();
             }
             if (_inputs.Inputs.PaddleRight && _rightPaddleCooldown <= 0 && CharacterManagerRef.Balance > 0)
             {
                 _rightPaddleCooldown = _kayakValues.UnbalancePaddleCooldown;
-
                 CharacterManagerRef.NumberButtonIsPressed++;
+                CharacterManagerRef.BalanceGaugeManagerRef.MakeCursorFeedback();
             }
         }
 

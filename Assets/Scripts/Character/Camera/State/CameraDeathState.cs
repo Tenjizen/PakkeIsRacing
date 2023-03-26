@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using Character.Camera.State;
 using UnityEngine;
 
 public class CameraDeathState : CameraStateBase
@@ -38,9 +39,9 @@ public class CameraDeathState : CameraStateBase
     private void Isdead()
     {
 
-        CameraManagerRef.VirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance += CameraManagerRef.ValueAddForDistanceWhenDeath;
+        CameraManagerRef.VirtualCameraCombat.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance += CameraManagerRef.ValueAddForDistanceWhenDeath;
 
-        if (CameraManagerRef.VirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance > CameraManagerRef.MaxValueDistanceToStartDeath)
+        if (CameraManagerRef.VirtualCameraCombat.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance > CameraManagerRef.MaxValueDistanceToStartDeath)
         {
             CameraManagerRef.StartDeath = true;
         }

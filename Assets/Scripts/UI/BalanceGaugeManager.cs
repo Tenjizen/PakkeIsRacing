@@ -8,6 +8,7 @@ namespace UI
         [SerializeField] private GameObject _BalanceGaugeUI;
         [SerializeField] private Transform _cursor;
         [SerializeField] private float _cursorAngleMultiplier = 4;
+        [SerializeField] private GameObject _LT, _RT;
 
         private float _currentAngle;
 
@@ -28,6 +29,12 @@ namespace UI
         {
             _cursor.DOComplete();
             _cursor.DOPunchScale(Vector3.one * 0.1f, 0.4f);
+        }
+
+        public void ShowTrigger(bool showLT, bool showRT)
+        {
+            _LT.SetActive(showLT);
+            _RT.SetActive(showRT);
         }
     }
 }

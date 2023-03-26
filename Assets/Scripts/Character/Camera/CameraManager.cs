@@ -41,7 +41,7 @@ public class CameraManager : MonoBehaviour
     [Header("Virtual Camera")]
     public CinemachineBrain Brain;
     public CinemachineVirtualCamera VirtualCameraFreeLook;
-    public CinemachineVirtualCamera VirtualCamera;
+    public CinemachineVirtualCamera VirtualCameraCombat;
     [Range(0, 5)] public float MultiplierFovCamera = 1;
 
     [Header("Input rotation smooth values")]
@@ -85,11 +85,10 @@ public class CameraManager : MonoBehaviour
     public Waves Waves;
 
     [Header("Combat")]
-    public Vector3 combatOffset = new Vector3(-1, -1, 0);
-    public float combatFov = 40f;
+    public Vector3 CombatOffset = new Vector3(-1, -1, 0);
+    public float CombatFov = 40f;
     public Vector2 HeightClamp = new Vector2(-30, 30);
     public GameObject CameraTargetCombatLookAt;
-    public float CameraTargetCombatBaseHeight;
 
     //camera
     [Space(5), Header("Infos"), ReadOnly] public float CameraAngleOverride = 0.0f;
@@ -106,10 +105,9 @@ public class CameraManager : MonoBehaviour
     //other
     [HideInInspector] public bool StartDeath = false;
     [HideInInspector] public bool WaterFlow = false;
-    //base values
-    [ReadOnly] public float BaseFOV;
-     public Cinemachine3rdPersonFollow Cinemachine3rdPersonFollow;
-    [ReadOnly] public Vector3 BaseShoulderOffset;
+    //combat values
+    [HideInInspector] public Cinemachine3rdPersonFollow CinemachineCombat3rdPersonFollow;
+    [HideInInspector] public Vector3 CombatBaseShoulderOffset;
 
     private void Awake()
     {
@@ -127,10 +125,8 @@ public class CameraManager : MonoBehaviour
         CameraNavigationState navigationState = new CameraNavigationState(this, this);
         CurrentStateBase = navigationState;
 
-        Cinemachine3rdPersonFollow = VirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
-        BaseShoulderOffset = Cinemachine3rdPersonFollow.ShoulderOffset;
-
-        CameraTargetCombatBaseHeight = CameraTargetCombatLookAt.transform.position.y;
+        CinemachineCombat3rdPersonFollow = VirtualCameraCombat.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
+        CombatBaseShoulderOffset = CinemachineCombat3rdPersonFollow.ShoulderOffset;
     }
 
     private void Start()

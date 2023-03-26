@@ -21,7 +21,7 @@ public class CameraTrackState : CameraStateBase
         CameraManagerRef.Brain.m_BlendUpdateMethod = Cinemachine.CinemachineBrain.BrainUpdateMethod.FixedUpdate;
 
         //look-at
-        CameraManagerRef.VirtualCamera.LookAt = null;
+        CameraManagerRef.VirtualCameraCombat.LookAt = null;
     }
     public override void UpdateState(CameraManager camera)
     {

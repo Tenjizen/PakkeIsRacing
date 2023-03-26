@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Character.Camera.State;
 using UnityEngine;
 
 public class CameraDialogState : CameraStateBase
@@ -12,7 +13,7 @@ public class CameraDialogState : CameraStateBase
     public override void EnterState(CameraManager camera)
     {
         //look-at
-        CameraManagerRef.VirtualCamera.LookAt = null;
+        CameraManagerRef.VirtualCameraCombat.LookAt = null;
     }
     public override void UpdateState(CameraManager camera)
     {
