@@ -1,4 +1,5 @@
 ﻿using Character.Camera;
+using GPEs.Checkpoint;
 using Kayak;
 using UnityEngine;
 

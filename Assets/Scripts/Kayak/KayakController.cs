@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Character;
 using Character.State;
+using Sound;
 using UnityEngine;
 using UnityEngine.Serialization;
 

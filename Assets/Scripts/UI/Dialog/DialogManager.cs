@@ -1,30 +1,13 @@
 ﻿using System;
 using TMPro;
+using Tools.SingletonClassBase;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Dialog
 {
-    public class DialogManager : MonoBehaviour
+    public class DialogManager : Singleton<DialogManager>
     {
-        #region Singleton
-        
-        public static DialogManager Instance;
-
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
-        
-        #endregion
 
         public TypeWriter TypeWriterText;
         public GameObject DialogUIGameObject;

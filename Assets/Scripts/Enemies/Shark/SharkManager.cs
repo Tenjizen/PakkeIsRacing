@@ -3,6 +3,7 @@ using Kayak;
 using UnityEngine;
 using WaterAndFloating;
 using Fight;
+using Sound;
 
 public class SharkManager : MonoBehaviour, IHittable
 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Character;
 using DG.Tweening;
 using Dialog;
+using Sound;
 using UnityEngine;
 using UnityEngine.Events;
 

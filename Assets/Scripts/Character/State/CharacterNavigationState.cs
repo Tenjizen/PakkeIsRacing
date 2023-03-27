@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Character.Camera;
 using Kayak;
+using Sound;
 using UnityEngine;
 using UnityEngine.Events;
 

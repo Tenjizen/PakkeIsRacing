@@ -1,37 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
-using GPEs.Checkpoint;
 using UnityEngine;
+using Tools.SingletonClassBase;
 
-public class CheckpointManager : MonoBehaviour
+namespace GPEs.Checkpoint
 {
-    #region SINGLETON
-
-    public static CheckpointManager Instance;
-    
-    private void Awake()
+    public class CheckpointManager : Singleton<CheckpointManager>
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
-    #endregion
-    
-    public Checkpoint CurrentCheckpoint;
+        public Checkpoint CurrentCheckpoint;
 
-    public Transform GetRespawnPoint()
-    {
-        if (CurrentCheckpoint == null)
+        public Transform GetRespawnPoint()
         {
-            return transform;
-        }
+            if (CurrentCheckpoint == null)
+            {
+                return transform;
+            }
 
-        return CurrentCheckpoint.TargetRespawnTransform;
+            return CurrentCheckpoint.TargetRespawnTransform;
+        }
     }
 }

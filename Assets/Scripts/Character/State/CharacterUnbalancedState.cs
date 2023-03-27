@@ -1,6 +1,7 @@
 ﻿using Character.Camera;
 using Character.Camera.State;
 using Kayak;
+using Sound;
 using UnityEngine;
 
 namespace Character.State
