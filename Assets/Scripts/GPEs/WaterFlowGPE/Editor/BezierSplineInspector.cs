@@ -30,7 +30,7 @@ namespace WaterFlowGPE.Editor
         {
             _spline = target as BezierSpline;
             _handleTransform = _spline.transform;
-            _handleRotation = Tools.pivotRotation == PivotRotation.Local ?
+            _handleRotation = UnityEditor.Tools.pivotRotation == PivotRotation.Local ?
                 _handleTransform.rotation : Quaternion.identity;
 		
             Vector3 p0 = ShowPoint(0);
