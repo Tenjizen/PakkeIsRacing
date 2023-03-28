@@ -1,3 +1,5 @@
+using Enemies.Shark;
+
 public abstract class SharkBaseState
 {
     public abstract void EnterState(SharkManager sharkManager);

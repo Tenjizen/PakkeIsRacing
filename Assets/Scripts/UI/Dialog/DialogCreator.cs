@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Character;
+using Character.Camera;
 using DG.Tweening;
 using Dialog;
 using Sound;
@@ -144,7 +145,7 @@ namespace UI.Dialog
 
             if (_blockPlayerMovement)
             {
-                _characterManager.CurrentStateBase.CanCharacterMove = false;
+                _characterManager.CurrentStateBaseProperty.CanCharacterMove = false;
             }
 
             if (_blockCameraMovement)
@@ -196,7 +197,7 @@ namespace UI.Dialog
             dialog.transform.DOScale(Vector3.zero, 0.25f).OnComplete(DeactivateDialogObject);
 
             //booleans
-            _characterManager.CurrentStateBase.CanCharacterMove = true;
+            _characterManager.CurrentStateBaseProperty.CanCharacterMove = true;
             _cameraManager.CanMoveCameraManually = true;
         }
 

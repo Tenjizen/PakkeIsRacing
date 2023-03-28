@@ -6,13 +6,13 @@ namespace Character
 {
     public class InputManagement : MonoBehaviour
     {
-        public GameplayInputs GameplayInputs;
-        public InputsEnum Inputs;
+        private GameplayInputs _gameplayInputs;
+        public InputsEnum Inputs { get; private set; }
 
         private void Awake()
         {
-            GameplayInputs = new GameplayInputs();
-            GameplayInputs.Enable();
+            _gameplayInputs = new GameplayInputs();
+            _gameplayInputs.Enable();
         }
 
         private void Update()
@@ -22,26 +22,31 @@ namespace Character
         
         private void GatherInputs()
         {
-            Inputs.PaddleLeft = GameplayInputs.Boat.PaddleLeft.ReadValue<float>() > 0;
-            Inputs.PaddleRight = GameplayInputs.Boat.PaddleRight.ReadValue<float>() > 0;
-
-            Inputs.RotateLeft = GameplayInputs.Boat.StaticRotateLeft.ReadValue<float>();
-            Inputs.RotateRight = GameplayInputs.Boat.StaticRotateRight.ReadValue<float>();
-
-            Inputs.RotateCameraClick = GameplayInputs.Boat.RotateCameraActivation.ReadValue<float>() > 0;
+            InputsEnum inputsEnum = Inputs;
             
-            Inputs.RotateCamera = GameplayInputs.Boat.RotateCamera.ReadValue<Vector2>();
+            inputsEnum.PaddleLeft = _gameplayInputs.Boat.PaddleLeft.ReadValue<float>() > 0;
+            inputsEnum.PaddleRight = _gameplayInputs.Boat.PaddleRight.ReadValue<float>() > 0;
 
-            Inputs.OpenWeaponMenu = GameplayInputs.Boat.OpenWheelMenu.ReadValue<float>() > 0.5f;
-            Inputs.SelectWeaponMenu = GameplayInputs.Boat.SelectOnWheel.ReadValue<float>();
-            Inputs.DeselectWeapon = GameplayInputs.Boat.DeselectWeapon.triggered;
-            
-            
-            Inputs.Aim = GameplayInputs.Boat.Aim.ReadValue<float>() > 0.5f;
-            Inputs.Shoot = GameplayInputs.Boat.Shoot.ReadValue<float>() > 0.5f;
-            Inputs.MovingAim = GameplayInputs.Boat.MoveAim.ReadValue<Vector2>();
+            inputsEnum.RotateLeft = _gameplayInputs.Boat.StaticRotateLeft.ReadValue<float>();
+            inputsEnum.RotateRight = _gameplayInputs.Boat.StaticRotateRight.ReadValue<float>();
 
-            Inputs.Unbalanced = GameplayInputs.Boat.Unbalanced.ReadValue<float>() > 0.8f;
+            inputsEnum.RotateCameraClick = _gameplayInputs.Boat.RotateCameraActivation.ReadValue<float>() > 0;
+            
+            inputsEnum.RotateCamera = _gameplayInputs.Boat.RotateCamera.ReadValue<Vector2>();
+
+            inputsEnum.OpenWeaponMenu = _gameplayInputs.Boat.OpenWheelMenu.ReadValue<float>() > 0.5f;
+            inputsEnum.SelectWeaponMenu = _gameplayInputs.Boat.SelectOnWheel.ReadValue<float>();
+            inputsEnum.DeselectWeapon = _gameplayInputs.Boat.DeselectWeapon.triggered;
+
+            inputsEnum.Aim = _gameplayInputs.Boat.Aim.ReadValue<float>() > 0.5f;
+            inputsEnum.Shoot = _gameplayInputs.Boat.Shoot.ReadValue<float>() > 0.5f;
+            inputsEnum.MovingAim = _gameplayInputs.Boat.MoveAim.ReadValue<Vector2>();
+
+            inputsEnum.Unbalanced = _gameplayInputs.Boat.Unbalanced.ReadValue<float>() > 0.8f;
+
+            inputsEnum.Deadzone = 0.3f;
+            
+            Inputs = inputsEnum;
         }
     }
     
@@ -56,7 +61,7 @@ namespace Character
         public bool RotateCameraClick;
         public Vector2 RotateCamera;
         
-        public float DEADZONE;
+        public float Deadzone;
         
         public bool OpenWeaponMenu;
         public float SelectWeaponMenu;

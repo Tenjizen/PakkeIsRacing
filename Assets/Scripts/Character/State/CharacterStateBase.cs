@@ -1,3 +1,4 @@
+using Character.Camera;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
@@ -57,13 +58,13 @@ namespace Character.State
         /// </summary>
         protected void VelocityToward()
         {
-            Vector3 oldVelocity = CharacterManagerRef.KayakController.Rigidbody.velocity;
+            Vector3 oldVelocity = CharacterManagerRef.KayakControllerProperty.Rigidbody.velocity;
             float oldVelocityMagnitude = new Vector2(oldVelocity.x, oldVelocity.z).magnitude;
-            Vector3 forward = CharacterManagerRef.KayakController.transform.forward;
+            Vector3 forward = CharacterManagerRef.KayakControllerProperty.transform.forward;
             
             Vector2 newVelocity = oldVelocityMagnitude * new Vector2(forward.x,forward.z).normalized;
 
-            CharacterManagerRef.KayakController.Rigidbody.velocity = new Vector3(newVelocity.x, oldVelocity.y, newVelocity.y);
+            CharacterManagerRef.KayakControllerProperty.Rigidbody.velocity = new Vector3(newVelocity.x, oldVelocity.y, newVelocity.y);
         }
     }
 }

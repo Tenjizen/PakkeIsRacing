@@ -1,55 +1,56 @@
-using System;
 using Character;
 using Character.Camera.State;
 using Character.State;
-using UI.WeaponWheel;
-using UnityEditor.U2D.Animation;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class WeaponWheelButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+namespace UI.WeaponWheel
 {
-    [SerializeField] private Animator _animator;
-    [SerializeField] private Button _button;
-    [SerializeField] private CharacterManager _characterManager;
-    [SerializeField] private Weapon _weapon;
-    public UnityEvent OnSelected = new UnityEvent();
-
-    public void OnPointerEnter(PointerEventData eventData)
+    public class WeaponWheelButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        Hover();
-    }
+        [SerializeField] private Animator _animator;
+        [SerializeField] private Button _button;
+        [SerializeField] private CharacterManager _characterManager;
+        [SerializeField] private Weapon _weapon;
+    
+        public UnityEvent OnSelected = new UnityEvent();
 
-    public void Hover()
-    {
-        _animator.SetBool("Hover",true);
-        _button.Select();
-    }
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            Hover();
+        }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        Exit();
-    }
+        public void Hover()
+        {
+            _animator.SetBool("Hover",true);
+            _button.Select();
+        }
 
-    public void Exit()
-    {
-        _animator.SetBool("Hover",false);
-    }
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            Exit();
+        }
 
-    public void Select()
-    {
-        Debug.Log($"select {_weapon}");
+        public void Exit()
+        {
+            _animator.SetBool("Hover",false);
+        }
+
+        public void Select()
+        {
+            Debug.Log($"select {_weapon}");
         
-        OnSelected.Invoke();
-        _characterManager.CurrentWeapon = _weapon;
+            OnSelected.Invoke();
+            _characterManager.CurrentWeapon = _weapon;
 
-        CharacterCombatState characterCombatState = 
-            new CharacterCombatState(_characterManager,_characterManager.CurrentStateBase.MonoBehaviourRef,_characterManager.CurrentStateBase.CameraManagerRef);
-        _characterManager.SwitchState(characterCombatState);
+            CharacterCombatState characterCombatState = 
+                new CharacterCombatState(_characterManager,_characterManager.CurrentStateBaseProperty.MonoBehaviourRef,_characterManager.CurrentStateBaseProperty.CameraManagerRef);
+            _characterManager.SwitchState(characterCombatState);
         
-        CameraCombatState cameraCombatState = new CameraCombatState(_characterManager.CameraManagerRef, _characterManager.CurrentStateBase.MonoBehaviourRef);
-        _characterManager.CameraManagerRef.SwitchState(cameraCombatState);
+            CameraCombatState cameraCombatState = new CameraCombatState(_characterManager.CameraManagerProperty, _characterManager.CurrentStateBaseProperty.MonoBehaviourRef);
+            _characterManager.CameraManagerProperty.SwitchState(cameraCombatState);
+        }
     }
 }

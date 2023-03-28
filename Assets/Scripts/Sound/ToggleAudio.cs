@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class ToggleAudio : MonoBehaviour
 {
-    public enum AudioType
+    [Serializable]
+    private enum AudioType
     {
         Music,
         Effects,

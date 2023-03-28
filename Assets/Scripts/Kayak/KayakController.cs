@@ -5,6 +5,7 @@ using Character.State;
 using Sound;
 using UnityEngine;
 using UnityEngine.Serialization;
+using WaterAndFloating;
 
 namespace Kayak
 {
@@ -12,6 +13,7 @@ namespace Kayak
     [RequireComponent(typeof(Rigidbody))]
     public class KayakController : MonoBehaviour
     {
+        //TODO to scriptable object
         [Header("Drag")]
         [SerializeField, Range(50,51f), Tooltip("The multiplier of the current velocity to reduce drag -> velocity * DragReducingMultiplier * deltaTime")] 
         private float _dragReducingMultiplier = 50.5f;
@@ -24,13 +26,12 @@ namespace Kayak
         [ReadOnly, Tooltip("= is the drag reducing method activated ?")] 
         public bool CanReduceDrag = true;
         
-        [Header("References")]
-        [FormerlySerializedAs("_characterManager")] [Tooltip("Reference of the character manager in the scene")] 
-        public CharacterManager CharacterManager;
-        [Tooltip("Reference of the kayak rigidbody")]
-        public Rigidbody Rigidbody;
-        [Tooltip("Reference of the kayak mesh")]
-        public Transform Mesh;
+        [field:SerializeField, Header("References"), Tooltip("Reference of the character manager in the scene")] 
+        public CharacterManager CharacterManagerProperty { get; private set; }
+        
+        [field:SerializeField, Tooltip("Reference of the kayak rigidbody")]
+        public Rigidbody Rigidbody { get; private set; }
+        
         [SerializeField, Tooltip("The floaters associated to the kayak's rigidbody")] 
         public Floaters FloatersRef;
         
@@ -66,7 +67,7 @@ namespace Kayak
         {
             float value = collision.relativeVelocity.magnitude / KayakValues.CollisionToBalanceMagnitudeDivider;
             Debug.Log($"collision V.M. :{Math.Round(collision.relativeVelocity.magnitude)} -> {Math.Round(value,2)}");
-            CharacterManager.AddBalanceValueToCurrentSide(value);
+            CharacterManagerProperty.AddBalanceValueToCurrentSide(value);
             SoundManager.Instance.PlaySound(CollisionAudioClip);
         }
 

@@ -55,7 +55,7 @@ namespace Character.State
             //Transition In
             if (CameraManagerRef.StartDeath == true && _transitionIn == false)
             {
-                CharacterManagerRef.TransitionManager.LaunchTransitionIn(SceneTransition.TransitionType.Fade);
+                CharacterManagerRef.TransitionManagerProperty.LaunchTransitionIn(SceneTransition.TransitionType.Fade);
                 _transitionIn = true;
             }
 
@@ -82,7 +82,7 @@ namespace Character.State
         public override void SwitchState(CharacterManager character)
         {
             //Transition out
-            CharacterManagerRef.TransitionManager.LaunchTransitionOut(SceneTransition.TransitionType.Fade);
+            CharacterManagerRef.TransitionManagerProperty.LaunchTransitionOut(SceneTransition.TransitionType.Fade);
 
             IsDead = false;
 

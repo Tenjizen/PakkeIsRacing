@@ -48,7 +48,7 @@ namespace Character.State
 
             CharacterManagerRef.NumberButtonIsPressed = 0;
             _timerUnbalanced = 0;
-            CharacterManagerRef.TimerUnbalanced = (CharacterManagerRef.UnitBlanceToTimer * Mathf.Abs(CharacterManagerRef.Balance)) - 
+            CharacterManagerRef.TimerUnbalanced = (CharacterManagerRef.UnitBalanceToTimer * Mathf.Abs(CharacterManagerRef.Balance)) - 
                                                     ((Mathf.Abs(CharacterManagerRef.Balance) - CharacterManagerRef.BalanceLimit)*CharacterManagerRef.ReductionForce);
 
             //balance

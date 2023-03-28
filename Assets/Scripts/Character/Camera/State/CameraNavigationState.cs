@@ -68,7 +68,7 @@ namespace Character.Camera.State
         private void MoveCamera()
         {
             //rotate freely with inputs
-            bool rotateInput = Mathf.Abs(CameraManagerRef.Input.Inputs.RotateCamera.x) + Mathf.Abs(CameraManagerRef.Input.Inputs.RotateCamera.y) >= CameraManagerRef.Input.Inputs.DEADZONE; //0.5f;
+            bool rotateInput = Mathf.Abs(CameraManagerRef.Input.Inputs.RotateCamera.x) + Mathf.Abs(CameraManagerRef.Input.Inputs.RotateCamera.y) >= CameraManagerRef.Input.Inputs.Deadzone; //0.5f;
             const float minimumVelocityToReplaceCamera = 0.2f;
             _timerCameraReturnBehindBoat += Time.deltaTime;
             if (rotateInput && CameraManagerRef.CanMoveCameraManually)
@@ -77,7 +77,7 @@ namespace Character.Camera.State
             }
             //manage rotate to stay behind boat
             else if (Mathf.Abs(CameraManagerRef.RigidbodyKayak.velocity.x + CameraManagerRef.RigidbodyKayak.velocity.z) > minimumVelocityToReplaceCamera && _timerCameraReturnBehindBoat > CameraManagerRef.TimerCameraReturnBehindBoat ||
-                     (Mathf.Abs(CameraManagerRef.CharacterManager.CurrentStateBase.RotationStaticForceY) > minimumVelocityToReplaceCamera / 20) && _timerCameraReturnBehindBoat > CameraManagerRef.TimerCameraReturnBehindBoat)
+                     (Mathf.Abs(CameraManagerRef.CharacterManager.CurrentStateBaseProperty.RotationStaticForceY) > minimumVelocityToReplaceCamera / 20) && _timerCameraReturnBehindBoat > CameraManagerRef.TimerCameraReturnBehindBoat)
             {
                 #region clavier souris
                 //avoid last input to be 0
@@ -92,14 +92,14 @@ namespace Character.Camera.State
                 //get target rotation
                 Quaternion localRotation = CameraManagerRef.CinemachineCameraTarget.transform.localRotation;
                 Quaternion targetQuaternion = Quaternion.Euler(new Vector3(0,
-                    -(CameraManagerRef.CharacterManager.CurrentStateBase.RotationStaticForceY + CameraManagerRef.CharacterManager.CurrentStateBase.RotationPaddleForceY) * CameraManagerRef.MultiplierValueRotation,
+                    -(CameraManagerRef.CharacterManager.CurrentStateBaseProperty.RotationStaticForceY + CameraManagerRef.CharacterManager.CurrentStateBaseProperty.RotationPaddleForceY) * CameraManagerRef.MultiplierValueRotation,
                     localRotation.z));
                 //get camera local position
                 Vector3 cameraTargetLocalPosition = CameraManagerRef.CinemachineCameraTarget.transform.localPosition;
 
                 const float rotationThreshold = 0.15f;
-                float rotationStaticY = CameraManagerRef.CharacterManager.CurrentStateBase.RotationStaticForceY;
-                float rotationPaddleY = CameraManagerRef.CharacterManager.CurrentStateBase.RotationPaddleForceY;
+                float rotationStaticY = CameraManagerRef.CharacterManager.CurrentStateBaseProperty.RotationStaticForceY;
+                float rotationPaddleY = CameraManagerRef.CharacterManager.CurrentStateBaseProperty.RotationPaddleForceY;
                 #endregion
 
                 //calculate camera rotation & position

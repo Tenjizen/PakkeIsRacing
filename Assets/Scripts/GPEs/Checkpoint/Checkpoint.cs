@@ -7,9 +7,9 @@ namespace GPEs.Checkpoint
     public class Checkpoint : PlayerTriggerManager
     {
         [SerializeField] private string _zoneName;
-        public Transform TargetRespawnTransform;
-    
+        
         [Header("References"), SerializeField] private ZoneManager _zoneManager;
+        [SerializeField] private Transform _targetRespawnTransform;
         [SerializeField] private ParticleSystem _activationParticles;
         [SerializeField] private AudioClip _activationClip;
     
@@ -36,16 +36,21 @@ namespace GPEs.Checkpoint
                 _zoneManager.ShowZone(_zoneName);
             }
         }
-    
+
+        public Transform GetTargetRespawnTransform()
+        {
+            return _targetRespawnTransform;
+        }
+
 #if UNITY_EDITOR
 
         public override void OnDrawGizmos()
         {
             base.OnDrawGizmos();
-            if (TargetRespawnTransform != null)
+            if (_targetRespawnTransform != null)
             {
                 Gizmos.color = Color.cyan;
-                Gizmos.DrawCube(TargetRespawnTransform.position,Vector3.one*0.5f);
+                Gizmos.DrawCube(_targetRespawnTransform.position,Vector3.one*0.5f);
             }
         }
 

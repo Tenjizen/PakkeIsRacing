@@ -1,15 +1,16 @@
-
-using Sound;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VolumeSlider : MonoBehaviour
+namespace Sound
 {
-    [SerializeField] private Slider _slider;
-
-    private void Start()
+    public class VolumeSlider : MonoBehaviour
     {
-        SoundManager.Instance.ChangeMasterVolume(_slider.value);
-        _slider.onValueChanged.AddListener(value => SoundManager.Instance.ChangeMasterVolume(value));
+        [SerializeField] private Slider _slider;
+
+        private void Start()
+        {
+            SoundManager.Instance.ChangeMasterVolume(_slider.value);
+            _slider.onValueChanged.AddListener(value => SoundManager.Instance.ChangeMasterVolume(value));
+        }
     }
 }

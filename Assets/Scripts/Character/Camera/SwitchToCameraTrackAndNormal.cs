@@ -1,6 +1,7 @@
 using Kayak;
 using System;
 using System.Linq;
+using Character.Camera;
 using Character.Camera.State;
 using UnityEngine;
 

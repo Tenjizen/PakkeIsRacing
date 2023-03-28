@@ -15,7 +15,7 @@ namespace GPEs.Checkpoint
                 return transform;
             }
 
-            return CurrentCheckpoint.TargetRespawnTransform;
+            return CurrentCheckpoint.GetTargetRespawnTransform();
         }
     }
 }

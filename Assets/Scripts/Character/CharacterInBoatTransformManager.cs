@@ -5,7 +5,7 @@ namespace Character
 {
     public class CharacterInBoatTransformManager : MonoBehaviour
     {
-        public Transform KayakTransform;
+        [field:SerializeField] public Transform KayakTransform { get; private set; }
 
         private Vector3 _playerPosition;
 

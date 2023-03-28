@@ -47,7 +47,6 @@ namespace Character.State
             _kayakRigidbody = kayak.Rigidbody;
             _kayakValues = kayak.KayakValues;
             _inputs = inputManagement;
-            _inputs.Inputs.DEADZONE = 0.3f;
         }
 
         #endregion
@@ -60,7 +59,7 @@ namespace Character.State
             _rightPaddleCooldown = _kayakValues.PaddleCooldown;
             _leftPaddleCooldown = _kayakValues.PaddleCooldown;
             _staticInputTimer = _kayakValues.StaticRotationCooldownAfterPaddle;
-            _floaters = CharacterManagerRef.KayakController.FloatersRef;
+            _floaters = CharacterManagerRef.KayakControllerProperty.FloatersRef;
                 
             //booleans
             CharacterManagerRef.LerpBalanceTo0 = true;
@@ -178,8 +177,8 @@ namespace Character.State
         /// </summary>
         private void SetBrakeAnimationToFalse()
         {
-            CharacterManagerRef.PaddleAnimator.SetBool("BrakeLeft", false);
-            CharacterManagerRef.PaddleAnimator.SetBool("BrakeRight", false);
+            CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeLeft", false);
+            CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeRight", false);
         }
 
         #endregion
@@ -209,8 +208,8 @@ namespace Character.State
             SoundManager.Instance.PlaySound(_kayakController.PaddlingAudioClip);
             
             //animation
-            CharacterManagerRef.PaddleAnimator.SetTrigger(direction == Direction.Left ? "PaddleLeft" : "PaddleRight");
-            CharacterManagerRef.KayakController.PlayPaddleParticle(direction);
+            CharacterManagerRef.PaddleAnimatorProperty.SetTrigger(direction == Direction.Left ? "PaddleLeft" : "PaddleRight");
+            CharacterManagerRef.KayakControllerProperty.PlayPaddleParticle(direction);
 
             //events
             switch (direction)
@@ -284,7 +283,7 @@ namespace Character.State
             bool isFast = Mathf.Abs(_kayakRigidbody.velocity.x + _kayakRigidbody.velocity.z) >= 0.1f;
 
             //left
-            if (_inputs.Inputs.RotateLeft > _inputs.Inputs.DEADZONE)
+            if (_inputs.Inputs.RotateLeft > _inputs.Inputs.Deadzone)
             {
                 if (isFast)
                 {
@@ -292,11 +291,11 @@ namespace Character.State
                 }
                 RotationStaticForceY += _kayakValues.StaticRotationForce;
                 
-                CharacterManagerRef.PaddleAnimator.SetBool("BrakeLeft", true);
+                CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeLeft", true);
             }
             
             //right
-            if (_inputs.Inputs.RotateRight > _inputs.Inputs.DEADZONE)
+            if (_inputs.Inputs.RotateRight > _inputs.Inputs.Deadzone)
             {
                 if (isFast)
                 {
@@ -304,7 +303,7 @@ namespace Character.State
                 }
                 RotationStaticForceY -= _kayakValues.StaticRotationForce;
                 
-                CharacterManagerRef.PaddleAnimator.SetBool("BrakeRight", true);
+                CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeRight", true);
             }
         }
 

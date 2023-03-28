@@ -1,4 +1,5 @@
 using Character;
+using Character.Camera;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -38,7 +39,7 @@ namespace UI.WeaponWheel
         {
             if (((_inputManagement.Inputs.OpenWeaponMenu && _isMenuOpen == false) || 
                 (_inputManagement.Inputs.OpenWeaponMenu == false && _isMenuOpen)) &&
-                _characterManager.CurrentStateBase.CanCharacterOpenWeapons)
+                _characterManager.CurrentStateBaseProperty.CanCharacterOpenWeapons)
             {
                 PressMenu();
             }
@@ -51,8 +52,8 @@ namespace UI.WeaponWheel
 
         private void PressMenu()
         {
-            _characterManager.CurrentStateBase.CanCharacterMove = _isMenuOpen;
-            _characterManager.CurrentStateBase.CanCharacterMakeActions = _isMenuOpen;
+            _characterManager.CurrentStateBaseProperty.CanCharacterMove = _isMenuOpen;
+            _characterManager.CurrentStateBaseProperty.CanCharacterMakeActions = _isMenuOpen;
             _cameraManager.CanMoveCameraManually = _isMenuOpen;
             
             if (_isMenuOpen && EventSystem.current.currentSelectedGameObject != null)

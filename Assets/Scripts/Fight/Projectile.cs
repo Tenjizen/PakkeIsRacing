@@ -8,8 +8,9 @@ namespace Fight
 {
     public abstract class Projectile : MonoBehaviour
     {
-        public GameObject Owner;
-        public WeaponData Data;
+        [field:SerializeField] public GameObject Owner { get; private set; }
+        [field:SerializeField] public WeaponData Data { get; private set; }
+        
         [SerializeField] private SednaWeaponToPlayerController _sednaWeaponToPlayerPrefab;
 
         public UnityEvent OnProjectileDie = new UnityEvent();
@@ -19,6 +20,11 @@ namespace Fight
         private void Start()
         {
             _lifetime = Data.Lifetime;
+        }
+
+        public void SetOwner(GameObject owner)
+        {
+            Owner = owner;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -49,12 +55,12 @@ namespace Fight
             }
         }
 
-        protected virtual void HitHittable(Collider collider)
+        protected virtual void HitHittable(Collider colliderHittable)
         {
             Die();
         }
 
-        protected virtual void HitNonHittable(Collider collider)
+        protected virtual void HitNonHittable(Collider colliderNonHittable)
         {
             Die();
         }
@@ -63,6 +69,7 @@ namespace Fight
         {
             Die();
         }
+        
         public virtual void Launch(Vector3 direction) { }
 
         protected virtual void Die()
@@ -71,7 +78,7 @@ namespace Fight
             
             SednaWeaponToPlayerController sedna = Instantiate(_sednaWeaponToPlayerPrefab,transform.position,Quaternion.identity);
             Transform player = Owner.transform;
-            sedna.PlayerTransform = player;
+            sedna.SetSednaPlayerTransform(player);
             sedna.transform.DOMove(player.position, Data.Cooldown);
 
             Data.ForbiddenColliders.Clear();
