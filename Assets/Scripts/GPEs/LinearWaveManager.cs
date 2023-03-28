@@ -6,7 +6,7 @@ namespace GPEs
 {
     public class LinearWaveManager : PlayerTriggerManager
     {
-        [field:SerializeField] private Waves Waves { get; set; }
+        [SerializeField] private Waves _waves;
         
         [SerializeField] private LinearWave _waveData;
         [ReadOnly, SerializeField] private bool _hasBeenLaunched;
@@ -25,7 +25,7 @@ namespace GPEs
             if (_hasBeenLaunched == false)
             {
                 _waveData.Center = new Vector2(transform.position.x, transform.position.z);
-                Waves.LaunchLinearWave(_waveData);
+                _waves.LaunchLinearWave(_waveData);
                 _hasBeenLaunched = true;
             }
         }

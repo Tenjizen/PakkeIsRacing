@@ -6,7 +6,7 @@ namespace UI.Compass
 {
     public class CompassMarker : MonoBehaviour
     {
-        public Sprite Icon;
+        [field:SerializeField] public Sprite Icon { get; private set; }
         [ReadOnly] public Image Image;
 
         public Vector2 Position
@@ -18,7 +18,7 @@ namespace UI.Compass
             }
         }
         
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
 
         private void OnDrawGizmos()
         {

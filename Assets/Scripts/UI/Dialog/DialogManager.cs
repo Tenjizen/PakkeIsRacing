@@ -8,10 +8,9 @@ namespace Dialog
 {
     public class DialogManager : Singleton<DialogManager>
     {
-
-        public TypeWriter TypeWriterText;
-        public GameObject DialogUIGameObject;
-        public Image PressButtonImage;
+        [field:SerializeField] public TypeWriter TypeWriterText { get; set; }
+        [field:SerializeField] public GameObject DialogUIGameObject { get; set; }
+        [field:SerializeField] public Image PressButtonImage { get; set; }
 
         private void Start()
         {

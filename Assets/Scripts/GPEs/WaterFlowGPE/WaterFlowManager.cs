@@ -1,9 +1,8 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using WaterFlowGPE.Bezier;
 
-namespace WaterFlowGPE
+namespace GPEs.WaterFlowGPE
 {
     public class WaterFlowManager : MonoBehaviour
     {

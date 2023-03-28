@@ -1,3 +1,4 @@
+using Character.Camera;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,14 +7,7 @@ namespace Character.State
 {
     public abstract class CharacterStateBase 
     {
-        public CharacterStateBase(CharacterManager characterManagerRef, MonoBehaviour monoBehaviour, CameraManager cameraManagerRef)
-        {
-            CharacterManagerRef = characterManagerRef;
-            MonoBehaviourRef = monoBehaviour;
-            CameraManagerRef = cameraManagerRef;
-        }
-
-        public CharacterManager CharacterManagerRef;
+        protected CharacterManager CharacterManagerRef;
         public CameraManager CameraManagerRef;
         public MonoBehaviour MonoBehaviourRef;
         
@@ -31,6 +25,21 @@ namespace Character.State
         public UnityEvent OnPaddleRight = new UnityEvent();
         
         protected Transform PlayerPosition;
+        
+        protected CharacterStateBase()
+        {
+            if (CharacterManager.Instance != null)
+            {
+                Initialize();
+            }
+        }
+
+        public void Initialize()
+        {
+            CharacterManagerRef = CharacterManager.Instance;
+            CameraManagerRef = CharacterManager.Instance.CameraManagerProperty;
+            MonoBehaviourRef = CharacterManager.Instance.CharacterMonoBehaviour;
+        }
 
         public abstract void EnterState(CharacterManager character);
 
@@ -47,9 +56,12 @@ namespace Character.State
         /// </summary>
         protected void MakeBoatRotationWithBalance(Transform kayakTransform, float multiplier)
         {
-            Vector3 boatRotation = kayakTransform.localRotation.eulerAngles;
+            Quaternion localRotation = kayakTransform.localRotation;
+            Vector3 boatRotation = localRotation.eulerAngles;
             Quaternion targetBoatRotation = Quaternion.Euler(boatRotation.x,boatRotation.y, CharacterManagerRef.Balance * 3 * multiplier);
-            kayakTransform.localRotation = Quaternion.Lerp(kayakTransform.localRotation, targetBoatRotation, 0.025f);
+            
+            localRotation = Quaternion.Lerp(localRotation, targetBoatRotation, 0.025f);
+            kayakTransform.localRotation = localRotation;
         }
 
         /// <summary>
@@ -57,13 +69,13 @@ namespace Character.State
         /// </summary>
         protected void VelocityToward()
         {
-            Vector3 oldVelocity = CharacterManagerRef.KayakController.Rigidbody.velocity;
+            Vector3 oldVelocity = CharacterManagerRef.KayakControllerProperty.Rigidbody.velocity;
             float oldVelocityMagnitude = new Vector2(oldVelocity.x, oldVelocity.z).magnitude;
-            Vector3 forward = CharacterManagerRef.KayakController.transform.forward;
+            Vector3 forward = CharacterManagerRef.KayakControllerProperty.transform.forward;
             
             Vector2 newVelocity = oldVelocityMagnitude * new Vector2(forward.x,forward.z).normalized;
 
-            CharacterManagerRef.KayakController.Rigidbody.velocity = new Vector3(newVelocity.x, oldVelocity.y, newVelocity.y);
+            CharacterManagerRef.KayakControllerProperty.Rigidbody.velocity = new Vector3(newVelocity.x, oldVelocity.y, newVelocity.y);
         }
     }
 }

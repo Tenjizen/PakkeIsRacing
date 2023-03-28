@@ -1,3 +1,4 @@
+using Enemies.Shark;
 using Kayak;
 using UnityEngine;
 

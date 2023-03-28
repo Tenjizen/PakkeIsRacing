@@ -2,35 +2,36 @@ using System;
 using Character.Camera;
 using Character.State;
 using Fight;
+using GPEs.Checkpoint;
 using Kayak;
 using SceneTransition;
+using Sound;
+using Tools.SingletonClassBase;
 using UI;
 using UI.WeaponWheel;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 namespace Character
 {
-    public class CharacterManager : MonoBehaviour
+    public class CharacterManager : Singleton<CharacterManager>
     {
+        #region Property
+        
+        [field:SerializeField, Header("Properties")] public CharacterStateBase CurrentStateBaseProperty { get; private set; }
+        [field:SerializeField] public CameraManager CameraManagerProperty { get; private set; }
+        [field:SerializeField] public KayakController KayakControllerProperty { get; private set; }
+        [field:SerializeField] public InputManagement InputManagementProperty { get; private set; }
+        [field:SerializeField] public Animator PaddleAnimatorProperty { get; private set; }
+        [field:SerializeField] public TransitionManager TransitionManagerProperty { get; private set; } 
+        [field:SerializeField] public WeaponUIManager WeaponUIManagerProperty { get; private set; } 
+        [field:SerializeField] public BalanceGaugeManager BalanceGaugeManagerRef { get; private set; }
+        [field:SerializeField] public SoundManager SoundManagerProperty { get; private set; }
+        [field:SerializeField] public CheckpointManager CheckpointManagerProperty { get; private set; }
+        [field:SerializeField] public MonoBehaviour CharacterMonoBehaviour { get; private set; }
+        
+        #endregion
 
-        [Header("References")]
-        public CharacterStateBase CurrentStateBase;
-        public CameraManager CameraManagerRef;
-        [Tooltip("Reference of the KayakController script")]
-        public KayakController KayakController;
-        [Tooltip("Reference of the InputManagement script")]
-        public InputManagement InputManagement;
-        [Tooltip("Reference of the paddle Animator")]
-        public Animator PaddleAnimator;
-        [Tooltip("Reference of the TransitionManager script")]
-        public TransitionManager TransitionManager;
-        [Tooltip("Reference of the WeaponMenuManager script")]
-        public WeaponUIManager weaponUIManagerRef;
-        [Tooltip("Reference of the BalanceGaugeManager script")]
-        public BalanceGaugeManager BalanceGaugeManagerRef;
-
+        //TODO to scriptable objets
         [Header("Balance")]
         [SerializeField, Range(0, 1), Tooltip("The lerp value that reset the balance to 0 over time")]
         private float balanceLerpTo0Value = 0.01f;
@@ -51,11 +52,12 @@ namespace Character
         [Range(0, 10), Tooltip("The multiplier to the floaters' level difference added to the balance value")]
         public float FloatersLevelDifferenceToBalanceMultiplier = 1f;
 
+        //TODO to scriptable objets
         [Header("UnBalanced")]
         [Tooltip("The number of times to press the button")]
         public int NumberPressButton;
         [Tooltip("Conversion of a 'balance' unit to time")]
-        public float UnitBlanceToTimer;
+        public float UnitBalanceToTimer;
         [Tooltip("The more balance you have the less time you have (formula: (unitbalance * balance) - ((balance - balanceLimit) * ReductionForce))")]
         public float ReductionForce;
         [Tooltip("The timer")]
@@ -68,47 +70,50 @@ namespace Character
         [SerializeField] private ParticleSystem _paddleLeftParticle;
         [SerializeField] private ParticleSystem _paddleRightParticle;
 
+        //TODO to scriptable objets
         [Header("Weapon Mode"), ReadOnly]
         public Weapon CurrentWeapon;
         [Range(0, 0.1f), Tooltip("The lerp applied to the boat following camera direction when aiming")]
         public float BoatFollowAimLerp = 0.05f;
-        [SerializeField]
-        public Projectile HarpoonPrefab;
-        public Projectile NetPrefab;
+        [field:SerializeField] public Projectile HarpoonPrefab { get; set; }
+        [field:SerializeField] public Projectile NetPrefab { get; set; }
 
-        private void Awake()
+        protected override void Awake()
         {
-            CharacterNavigationState navigationState =
-                new CharacterNavigationState(KayakController, InputManagement, this, this, CameraManagerRef);
-            CurrentStateBase = navigationState;
+            base.Awake();
+            CharacterMonoBehaviour = this;
         }
 
         private void Start()
         {
-            CurrentStateBase.EnterState(this);
-            CurrentStateBase.OnPaddleRight.AddListener(PlayPaddleRightParticle);
-            CurrentStateBase.OnPaddleLeft.AddListener(PlayPaddleLeftParticle);
+            CharacterNavigationState navigationState = new CharacterNavigationState();
+            CurrentStateBaseProperty = navigationState;
+            CurrentStateBaseProperty.Initialize();
+            
+            CurrentStateBaseProperty.EnterState(this);
+            CurrentStateBaseProperty.OnPaddleRight.AddListener(PlayPaddleRightParticle);
+            CurrentStateBaseProperty.OnPaddleLeft.AddListener(PlayPaddleLeftParticle);
             
             BalanceGaugeManagerRef.SetBalanceGaugeActive(false);
             BalanceGaugeManagerRef.ShowTrigger(false, false);
         }
         private void Update()
         {
-            CurrentStateBase.UpdateState(this);
+            CurrentStateBaseProperty.UpdateState(this);
 
-            if (CurrentStateBase.IsDead == false)
+            if (CurrentStateBaseProperty.IsDead == false)
             {
                 BalanceManagement();
             }
         }
         private void FixedUpdate()
         {
-            CurrentStateBase.FixedUpdate(this);
+            CurrentStateBaseProperty.FixedUpdate(this);
         }
         public void SwitchState(CharacterStateBase stateBaseCharacter)
         {
-            CurrentStateBase.ExitState(this);
-            CurrentStateBase = stateBaseCharacter;
+            CurrentStateBaseProperty.ExitState(this);
+            CurrentStateBaseProperty = stateBaseCharacter;
             stateBaseCharacter.EnterState(this);
         }
 
@@ -184,7 +189,7 @@ namespace Character
 
         public void SwitchToDeathState()
         {
-            CharacterDeathState characterDeathState = new CharacterDeathState(this, KayakController, InputManagement, this, CameraManagerRef);
+            CharacterDeathState characterDeathState = new CharacterDeathState();
             SwitchState(characterDeathState);
         }
     }

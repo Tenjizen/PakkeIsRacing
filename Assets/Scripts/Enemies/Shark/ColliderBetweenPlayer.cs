@@ -1,28 +1,30 @@
 using Kayak;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ColliderBetweenPlayer : MonoBehaviour
+namespace Enemies.Shark
 {
-
-    public SharkManager ManagerRef;
-    private void OnTriggerEnter(Collider other)
+    public class ColliderBetweenPlayer : MonoBehaviour
     {
-        KayakController kayakController = other.gameObject.GetComponent<KayakController>();
-        if (kayakController != null)
+        [field:SerializeField] public SharkManager ManagerRef { get; private set; }
+        
+        private void OnTriggerEnter(Collider other)
         {
-            ManagerRef.kayak = kayakController;
+            KayakController kayakController = other.gameObject.GetComponent<KayakController>();
+            if (kayakController != null)
+            {
+                ManagerRef.KayakControllerProperty = kayakController;
+            }
+        
         }
         
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        KayakController kayakController = other.gameObject.GetComponent<KayakController>();
-
-        if (kayakController != null)
+        private void OnTriggerExit(Collider other)
         {
-            ManagerRef.kayak = null;
+            KayakController kayakController = other.gameObject.GetComponent<KayakController>();
+
+            if (kayakController != null)
+            {
+                ManagerRef.KayakControllerProperty = null;
+            }
         }
     }
 }

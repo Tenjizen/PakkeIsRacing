@@ -1,4 +1,5 @@
 using Character;
+using Character.Camera;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,9 +9,6 @@ namespace UI.WeaponWheel
 {
     public class WeaponUIManager : MonoBehaviour
     {
-        [SerializeField] private InputManagement _inputManagement;
-        [SerializeField] private CharacterManager _characterManager;
-        [SerializeField] private CameraManager _cameraManager;
         [SerializeField] private GameObject _weaponUI;
         [SerializeField] private Transform _vignette;
         
@@ -23,9 +21,17 @@ namespace UI.WeaponWheel
 
         private Vector3 _vignetteBaseScale;
         private bool _isMenuOpen;
+        
+        private InputManagement _inputManagement;
+        private CharacterManager _characterManager;
+        private CameraManager _cameraManager;
 
         private void Start()
         {
+            _characterManager = CharacterManager.Instance;
+            _inputManagement = _characterManager.InputManagementProperty;
+            _cameraManager = _characterManager.CameraManagerProperty;
+            
             _vignetteBaseScale = _vignette.localScale;
             _weaponUI.SetActive(_isMenuOpen);
             
@@ -38,7 +44,7 @@ namespace UI.WeaponWheel
         {
             if (((_inputManagement.Inputs.OpenWeaponMenu && _isMenuOpen == false) || 
                 (_inputManagement.Inputs.OpenWeaponMenu == false && _isMenuOpen)) &&
-                _characterManager.CurrentStateBase.CanCharacterOpenWeapons)
+                _characterManager.CurrentStateBaseProperty.CanCharacterOpenWeapons)
             {
                 PressMenu();
             }
@@ -51,8 +57,8 @@ namespace UI.WeaponWheel
 
         private void PressMenu()
         {
-            _characterManager.CurrentStateBase.CanCharacterMove = _isMenuOpen;
-            _characterManager.CurrentStateBase.CanCharacterMakeActions = _isMenuOpen;
+            _characterManager.CurrentStateBaseProperty.CanCharacterMove = _isMenuOpen;
+            _characterManager.CurrentStateBaseProperty.CanCharacterMakeActions = _isMenuOpen;
             _cameraManager.CanMoveCameraManually = _isMenuOpen;
             
             if (_isMenuOpen && EventSystem.current.currentSelectedGameObject != null)

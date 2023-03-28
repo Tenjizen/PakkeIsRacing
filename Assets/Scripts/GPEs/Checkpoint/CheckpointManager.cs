@@ -1,21 +1,26 @@
+using Character;
 using UnityEngine;
-using Tools.SingletonClassBase;
 
 namespace GPEs.Checkpoint
 {
-    public class CheckpointManager : Singleton<CheckpointManager>
+    public class CheckpointManager : MonoBehaviour
     {
-
-        public Checkpoint CurrentCheckpoint;
+        [field:SerializeField] public Checkpoint CurrentCheckpoint { get; private set; }
 
         public Transform GetRespawnPoint()
         {
             if (CurrentCheckpoint == null)
             {
-                return transform;
+                Debug.LogError("No checkPoint Set");
+                return CharacterManager.Instance.transform;
             }
 
-            return CurrentCheckpoint.TargetRespawnTransform;
+            return CurrentCheckpoint.GetTargetRespawnTransform();
+        }
+
+        public void SetCheckpoint(Checkpoint checkpoint)
+        {
+            CurrentCheckpoint = checkpoint;
         }
     }
 }

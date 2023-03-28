@@ -198,6 +198,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b8b12a494d71cd4c9616e7f6e385d2b, type: 3}
+--- !u!114 &104156355 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3477313372640795618, guid: 2b8b12a494d71cd4c9616e7f6e385d2b,
+    type: 3}
+  m_PrefabInstance: {fileID: 104156354}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72e1d7c14746c0f4da0efa76bcf0ab12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &242873120
 GameObject:
   m_ObjectHideFlags: 0
@@ -2488,10 +2500,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1158828331, guid: c65dbc6e6a13448468e3141d768ce52b, type: 3}
-      propertyPath: _zoneName
-      value: "Entr\xE9e de la grotte"
-      objectReference: {fileID: 0}
-    - target: {fileID: 1158828331, guid: c65dbc6e6a13448468e3141d768ce52b, type: 3}
       propertyPath: _zoneManager
       value: 
       objectReference: {fileID: 1632394491191998869}
@@ -2554,11 +2562,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Checkpoint (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4285338905635752386, guid: c65dbc6e6a13448468e3141d768ce52b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c65dbc6e6a13448468e3141d768ce52b, type: 3}
@@ -2774,6 +2777,31 @@ PrefabInstance:
       propertyPath: BalanceGaugeManagerRef
       value: 
       objectReference: {fileID: 1632394491191998873}
+    - target: {fileID: 7217796708653836310, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: <SoundManagerProperty>k__BackingField
+      value: 
+      objectReference: {fileID: 223048470903394162}
+    - target: {fileID: 7217796708653836310, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: <BalanceGaugeManagerRef>k__BackingField
+      value: 
+      objectReference: {fileID: 1632394491191998873}
+    - target: {fileID: 7217796708653836310, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: <WeaponUIManagerProperty>k__BackingField
+      value: 
+      objectReference: {fileID: 1632394491191998870}
+    - target: {fileID: 7217796708653836310, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: <CheckpointManagerProperty>k__BackingField
+      value: 
+      objectReference: {fileID: 104156355}
+    - target: {fileID: 7217796708653836310, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: <TransitionManagerProperty>k__BackingField
+      value: 
+      objectReference: {fileID: 1878337776}
     - target: {fileID: 7609300824562711772, guid: 36e32e7372e41e346abb29f843dd75b3,
         type: 3}
       propertyPath: _waves
@@ -2782,6 +2810,11 @@ PrefabInstance:
     - target: {fileID: 7611706348771366613, guid: 36e32e7372e41e346abb29f843dd75b3,
         type: 3}
       propertyPath: Waves
+      value: 
+      objectReference: {fileID: 419315132}
+    - target: {fileID: 7611706348771366613, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: <Waves>k__BackingField
       value: 
       objectReference: {fileID: 419315132}
     m_RemovedComponents: []
@@ -2882,6 +2915,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4d290d6ca08a2b44ae8d9e317445a3f, type: 3}
+--- !u!114 &223048470903394162 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 223048472116426440, guid: d4d290d6ca08a2b44ae8d9e317445a3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 223048470903394161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9bb3b0d204bf044a8e940bb99c4847b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1632394491191998868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3875,6 +3920,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7847624547261126131, guid: e7ffe73d6c5ab7449944915d5b332dae,
+        type: 3}
+      propertyPath: _waves
+      value: 
+      objectReference: {fileID: 419315132}
     - target: {fileID: 7847624547261126131, guid: e7ffe73d6c5ab7449944915d5b332dae,
         type: 3}
       propertyPath: _triggerType

@@ -1,4 +1,5 @@
 using Character.State;
+using Enemies.Shark;
 using Kayak;
 using UnityEngine;
 
@@ -31,7 +32,7 @@ public class SharkCombatState : SharkBaseState
 
     public override void UpdateState(SharkManager sharkManager)
     {
-        if (sharkManager.Target != null)
+        if (sharkManager.TargetTransform != null)
         {
 
             switch (_state)
@@ -121,7 +122,7 @@ public class SharkCombatState : SharkBaseState
     #region Fonction
     private void RotateAround(SharkManager sharkManager)
     {
-        Vector3 position = sharkManager.Target != null ? sharkManager.Target.position : Vector3.zero;
+        Vector3 position = sharkManager.TargetTransform != null ? sharkManager.TargetTransform.position : Vector3.zero;
 
         // float radius = Random.Range(enemyManager.RadiusRotateAroundTargetMin, enemyManager.RadiusRotateAroundTargetMax);
 
@@ -129,16 +130,16 @@ public class SharkCombatState : SharkBaseState
             sharkManager.ElevationOffset,
             Mathf.Sin(sharkManager.Angle) * _radius);
 
-        sharkManager.transform.position = new Vector3(sharkManager.Target.position.x + sharkManager.PositionOffset.x,
+        sharkManager.transform.position = new Vector3(sharkManager.TargetTransform.position.x + sharkManager.PositionOffset.x,
             sharkManager.ElevationOffset,
-            sharkManager.Target.position.z + sharkManager.PositionOffset.z);
+            sharkManager.TargetTransform.position.z + sharkManager.PositionOffset.z);
 
         sharkManager.Angle += Time.deltaTime * sharkManager.RotationSpeed;
 
         Quaternion rotation = sharkManager.transform.rotation;
         Vector3 enemyPos = sharkManager.transform.position;
 
-        rotation = Quaternion.LookRotation(new Vector3(position.x - enemyPos.x, 0, position.z - enemyPos.z), sharkManager.Target.up);
+        rotation = Quaternion.LookRotation(new Vector3(position.x - enemyPos.x, 0, position.z - enemyPos.z), sharkManager.TargetTransform.up);
         rotation.x = 0;
         rotation.z = 0;
         sharkManager.transform.rotation = rotation;
@@ -150,7 +151,7 @@ public class SharkCombatState : SharkBaseState
     {
         if (_timerTargetFollow < sharkManager.TimerTargetFollow)
         {
-            sharkManager.Shadow.transform.position = sharkManager.Target.position;
+            sharkManager.Shadow.transform.position = sharkManager.TargetTransform.position;
         }
 
         _timerTargetFollow += Time.deltaTime;
@@ -167,10 +168,10 @@ public class SharkCombatState : SharkBaseState
 
             _state = CombatState.Jump;
 
-            if (sharkManager.kayak != null)
+            if (sharkManager.KayakControllerProperty != null)
             {
                 Debug.Log("perso dead");
-                sharkManager.kayak.CharacterManager.SwitchToDeathState();
+                sharkManager.KayakControllerProperty.CharacterManagerProperty.SwitchToDeathState();
             }
 
             sharkManager.Shadow.SetActive(false);

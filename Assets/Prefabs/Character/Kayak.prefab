@@ -327,17 +327,16 @@ MonoBehaviour:
     UnbalancePaddleCooldown: 0.5
     UnbalancePaddleForce: 2
   CanReduceDrag: 1
-  CharacterManager: {fileID: 0}
-  Rigidbody: {fileID: 333907971529626019}
-  Mesh: {fileID: 6105224612437298787}
+  <Rigidbody>k__BackingField: {fileID: 333907971529626019}
   FloatersRef:
     FrontLeft: {fileID: 333907970047417243}
     FrontRight: {fileID: 333907970277157176}
     BackLeft: {fileID: 333907971254692470}
     BackRight: {fileID: 333907970869196805}
-  PaddlingAudioClip: {fileID: 8300000, guid: cc79f0cc1ba16294cb28181e5ed1db4e, type: 3}
+  <PaddlingAudioClip>k__BackingField: {fileID: 8300000, guid: cc79f0cc1ba16294cb28181e5ed1db4e,
+    type: 3}
   CollisionAudioClip: {fileID: 8300000, guid: 6fcbe11d2b48cf540aa7cd7c670420f2, type: 3}
-  _timeToPlayParticlesAfterPaddle: 0.5
+  _timeToPlayParticlesAfterPaddle: 0.3
   _leftPaddleParticle: {fileID: 0}
   _rightPaddleParticle: {fileID: 0}
 --- !u!136 &4595948853936165718

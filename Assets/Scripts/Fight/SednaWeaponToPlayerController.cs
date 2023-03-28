@@ -8,7 +8,7 @@ namespace Fight
     public class SednaWeaponToPlayerController : MonoBehaviour
     {
         [SerializeField] private ParticleSystem _dieParticle;
-        public Transform PlayerTransform;
+        [field:SerializeField] public Transform PlayerTransform { get; private set; }
 
         private void Update()
         {
@@ -18,11 +18,16 @@ namespace Fight
             }
         }
 
-        public void Die()
+        private void Die()
         {
             _dieParticle.Play();
             _dieParticle.transform.parent = null;
             Destroy(gameObject);
+        }
+
+        public void SetSednaPlayerTransform(Transform transformToSet)
+        {
+            PlayerTransform = transformToSet;
         }
     }
 }

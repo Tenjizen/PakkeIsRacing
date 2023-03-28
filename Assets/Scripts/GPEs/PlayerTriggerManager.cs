@@ -1,14 +1,14 @@
+using System;
 using Kayak;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
-using UnityEngine.UIElements;
 
 namespace GPEs
 {
     public class PlayerTriggerManager : MonoBehaviour
     {
-        public enum TriggerType
+        [Serializable]
+        private enum TriggerType
         {
             BoxTrigger = 0,
             SphereTrigger = 1
@@ -25,8 +25,7 @@ namespace GPEs
         public UnityEvent OnPlayerStay = new UnityEvent();
         public UnityEvent OnPlayerExited = new UnityEvent();
 
-        protected KayakController KayakController;
-        public KayakController PropKayakController => KayakController;
+        public KayakController PropKayakController { get; private set; }
 
         public virtual void Update()
         {
@@ -47,9 +46,9 @@ namespace GPEs
                 KayakController kayakController = hit.collider.gameObject.GetComponent<KayakController>();
                 if (kayakController != null)
                 {
-                    if (KayakController == null)
+                    if (PropKayakController == null)
                     {
-                        KayakController = kayakController;
+                        PropKayakController = kayakController;
                         OnPlayerEntered.Invoke();
                     }
                     OnPlayerStay.Invoke();
@@ -57,9 +56,9 @@ namespace GPEs
                 }
             }
 
-            if (KayakController != null && kayak == false)
+            if (PropKayakController != null && kayak == false)
             {
-                KayakController = null;
+                PropKayakController = null;
                 OnPlayerExited.Invoke();
             }
         }

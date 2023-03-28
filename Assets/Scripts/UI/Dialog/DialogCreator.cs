@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Character;
+using Character.Camera;
 using DG.Tweening;
 using Dialog;
 using Sound;
@@ -31,23 +32,30 @@ namespace UI.Dialog
 
         #endregion
 
-        [Header("Parameters"), SerializeField] private LaunchType _launchType;
-        [SerializeField] private List<DialogStruct> _dialog;
-        [SerializeField] private bool _canBeReplayed;
-        [SerializeField, ReadOnly] private bool _hasEnded;
-        [SerializeField] private bool _blockPlayerMovement, _blockCameraMovement;
+        [Header("Parameters"), SerializeField] 
+        private LaunchType _launchType;
+        [SerializeField] 
+        private List<DialogStruct> _dialog;
+        [SerializeField] 
+        private bool _canBeReplayed;
+        [SerializeField, ReadOnly] 
+        private bool _hasEnded;
+        [SerializeField] 
+        private bool _blockPlayerMovement, _blockCameraMovement;
 
         [Space(20), Header("Events")] 
         public UnityEvent OnDialogLaunch = new UnityEvent();
         public UnityEvent OnDialogEnd = new UnityEvent();
 
-        [Space(20), Header("References"), SerializeField] private CharacterManager _characterManager;
-        [SerializeField] private CameraManager _cameraManager;
-
-        [Header("Debug")]
+        [Space(20), Header("References"), SerializeField] 
+        private CharacterManager _characterManager;
+        [SerializeField] 
+        private CameraManager _cameraManager;
+        
+        [Header("Debug"), SerializeField, ReadOnly] 
+        private DialogState _currentDialogState = DialogState.NotLaunched;
         private int _dialogIndex;
         private float _currentDialogCooldown; 
-        [SerializeField, ReadOnly] private DialogState _currentDialogState = DialogState.NotLaunched;
         private GameplayInputs _gameplayInputs;
 
         private void Start()
@@ -144,7 +152,7 @@ namespace UI.Dialog
 
             if (_blockPlayerMovement)
             {
-                _characterManager.CurrentStateBase.CanCharacterMove = false;
+                _characterManager.CurrentStateBaseProperty.CanCharacterMove = false;
             }
 
             if (_blockCameraMovement)
@@ -182,7 +190,7 @@ namespace UI.Dialog
             DialogManager.Instance.PressButtonImage.DOFade(0, 0.1f);
         
             //audio
-            SoundManager.Instance.PlayDialog(_dialog[index].Clip);
+            CharacterManager.Instance.SoundManagerProperty.PlayDialog(_dialog[index].Clip);
         }
 
         private void EndDialog()
@@ -196,7 +204,7 @@ namespace UI.Dialog
             dialog.transform.DOScale(Vector3.zero, 0.25f).OnComplete(DeactivateDialogObject);
 
             //booleans
-            _characterManager.CurrentStateBase.CanCharacterMove = true;
+            _characterManager.CurrentStateBaseProperty.CanCharacterMove = true;
             _cameraManager.CanMoveCameraManually = true;
         }
 

@@ -4,8 +4,8 @@ namespace Sedna
 {
     public class CompanionFollowManager : MonoBehaviour
     {
-        [SerializeField] Transform _sednaTargetPosition;
-        [SerializeField] Transform _kayakTransform;
+        [SerializeField] private Transform _sednaTargetPosition;
+        [SerializeField] private Transform _kayakTransform;
 
         private Rigidbody _rigidbody;
         private Vector3 _velocity;

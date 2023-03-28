@@ -1,15 +1,15 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Sound;
+using Character;
 using UnityEngine;
 
-public class PlaySoundOnStart : MonoBehaviour
+namespace Sound
 {
-    [SerializeField] private AudioClip _clip;
-
-    private void Start()
+    public class PlaySoundOnStart : MonoBehaviour
     {
-        SoundManager.Instance.PlaySound(_clip);
+        [SerializeField] private AudioClip _clip;
+
+        private void Start()
+        {
+            CharacterManager.Instance.SoundManagerProperty.PlaySound(_clip);
+        }
     }
 }
