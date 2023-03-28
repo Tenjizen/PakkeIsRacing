@@ -23,12 +23,11 @@ namespace Character.State
 
         #region Constructor
 
-        public CharacterUnbalancedState(KayakController kayak, InputManagement inputManagement, CharacterManager characterManagerRef, MonoBehaviour monoBehaviour, CameraManager cameraManager) :
-            base(characterManagerRef, monoBehaviour, cameraManager)
+        public CharacterUnbalancedState() : base()
         {
-            _kayakController = kayak;
-            _inputs = inputManagement;
-            _kayakValues = kayak.KayakValues;
+            _kayakController = CharacterManagerRef.KayakControllerProperty;
+            _inputs = CharacterManagerRef.InputManagementProperty;
+            _kayakValues = CharacterManagerRef.KayakControllerProperty.KayakValues;
         }
 
         #endregion
@@ -112,15 +111,15 @@ namespace Character.State
                 CharacterManagerRef.SetBalanceValueToCurrentSide(0);
                 CanCharacterMakeActions = true;
 
-                CharacterNavigationState characterNavigationState = new CharacterNavigationState(_kayakController, _inputs, CharacterManagerRef, MonoBehaviourRef, CameraManagerRef);
+                CharacterNavigationState characterNavigationState = new CharacterNavigationState();
                 CharacterManagerRef.SwitchState(characterNavigationState);
 
-                CameraNavigationState cameraNavigationState = new CameraNavigationState(CameraManagerRef, MonoBehaviourRef);
+                CameraNavigationState cameraNavigationState = new CameraNavigationState();
                 CameraManagerRef.SwitchState(cameraNavigationState);
             }
             else if (_timerUnbalanced >= CharacterManagerRef.TimerUnbalanced)
             {
-                CharacterDeathState characterDeathState = new CharacterDeathState(CharacterManagerRef, _kayakController, _inputs, MonoBehaviourRef, CameraManagerRef);
+                CharacterDeathState characterDeathState = new CharacterDeathState();
                 CharacterManagerRef.SwitchState(characterDeathState);
             }
         }
@@ -130,7 +129,7 @@ namespace Character.State
             CharacterManagerRef.Balance += Time.deltaTime * Mathf.Sign(CharacterManagerRef.Balance);
             if (Mathf.Abs(CharacterManagerRef.Balance) >= CharacterManagerRef.BalanceDeathLimit)
             {
-                CharacterDeathState characterDeathState = new CharacterDeathState(CharacterManagerRef, _kayakController, _inputs, MonoBehaviourRef, CameraManagerRef);
+                CharacterDeathState characterDeathState = new CharacterDeathState();
                 CharacterManagerRef.SwitchState(characterDeathState);
             }
             else if (Mathf.Abs(CharacterManagerRef.Balance) < CharacterManagerRef.RebalanceAngle)
@@ -140,10 +139,10 @@ namespace Character.State
                 CharacterManagerRef.SetBalanceValueToCurrentSide(0);
                 CanCharacterMakeActions = true;
 
-                CharacterNavigationState characterNavigationState = new CharacterNavigationState(_kayakController, _inputs, CharacterManagerRef, MonoBehaviourRef, CameraManagerRef);
+                CharacterNavigationState characterNavigationState = new CharacterNavigationState();
                 CharacterManagerRef.SwitchState(characterNavigationState);
 
-                CameraNavigationState cameraNavigationState = new CameraNavigationState(CameraManagerRef, MonoBehaviourRef);
+                CameraNavigationState cameraNavigationState = new CameraNavigationState();
                 CameraManagerRef.SwitchState(cameraNavigationState);
             }
         }
@@ -194,7 +193,7 @@ namespace Character.State
 
         private void RebalanceEffect()
         {
-            SoundManager.Instance.PlaySound(_kayakController.PaddlingAudioClip);
+            CharacterManager.Instance.SoundManagerProperty.PlaySound(_kayakController.PaddlingAudioClip);
             CharacterManagerRef.BalanceGaugeManagerRef.MakeCursorFeedback();
         }
 

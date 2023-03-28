@@ -2,17 +2,18 @@ using System;
 using Character.Camera;
 using Character.State;
 using Fight;
+using GPEs.Checkpoint;
 using Kayak;
 using SceneTransition;
+using Sound;
+using Tools.SingletonClassBase;
 using UI;
 using UI.WeaponWheel;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 namespace Character
 {
-    public class CharacterManager : MonoBehaviour
+    public class CharacterManager : Singleton<CharacterManager>
     {
         #region Property
         
@@ -24,6 +25,9 @@ namespace Character
         [field:SerializeField] public TransitionManager TransitionManagerProperty { get; private set; } 
         [field:SerializeField] public WeaponUIManager WeaponUIManagerProperty { get; private set; } 
         [field:SerializeField] public BalanceGaugeManager BalanceGaugeManagerRef { get; private set; }
+        [field:SerializeField] public SoundManager SoundManagerProperty { get; private set; }
+        [field:SerializeField] public CheckpointManager CheckpointManagerProperty { get; private set; }
+        [field:SerializeField] public MonoBehaviour CharacterMonoBehaviour { get; private set; }
         
         #endregion
 
@@ -77,8 +81,10 @@ namespace Character
         private void Awake()
         {
             CharacterNavigationState navigationState =
-                new CharacterNavigationState(KayakControllerProperty, InputManagementProperty, this, this, CameraManagerProperty);
+                new CharacterNavigationState();
             CurrentStateBaseProperty = navigationState;
+
+            CharacterMonoBehaviour = this;
         }
 
         private void Start()
@@ -182,7 +188,7 @@ namespace Character
 
         public void SwitchToDeathState()
         {
-            CharacterDeathState characterDeathState = new CharacterDeathState(this, KayakControllerProperty, InputManagementProperty, this, CameraManagerProperty);
+            CharacterDeathState characterDeathState = new CharacterDeathState();
             SwitchState(characterDeathState);
         }
     }

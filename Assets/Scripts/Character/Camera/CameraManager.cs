@@ -123,7 +123,7 @@ namespace Character.Camera
 
             CameraBaseFov = VirtualCameraFreeLook.m_Lens.FieldOfView;
 
-            CameraNavigationState navigationState = new CameraNavigationState(this, this);
+            CameraNavigationState navigationState = new CameraNavigationState();
             CurrentStateBase = navigationState;
 
             CinemachineCombat3rdPersonFollow = VirtualCameraCombat.GetCinemachineComponent<Cinemachine3rdPersonFollow>();

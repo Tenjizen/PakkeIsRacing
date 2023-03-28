@@ -1,3 +1,4 @@
+using Character;
 using UnityEngine;
 
 namespace Sound
@@ -8,7 +9,7 @@ namespace Sound
 
         private void Start()
         {
-            SoundManager.Instance.PlaySound(_clip);
+            CharacterManager.Instance.SoundManagerProperty.PlaySound(_clip);
         }
     }
 }

@@ -1,3 +1,4 @@
+using Character;
 using Fight;
 using GPEs;
 using Kayak;
@@ -123,7 +124,7 @@ namespace Enemies.Shark
 
             HitParticles.transform.parent = null;
             HitParticles.Play();
-            SoundManager.Instance.PlaySound(HitSound);
+            CharacterManager.Instance.SoundManagerProperty.PlaySound(HitSound);
 
             if (Life <= 0)
                 Destroy(ParentGameObject.gameObject);

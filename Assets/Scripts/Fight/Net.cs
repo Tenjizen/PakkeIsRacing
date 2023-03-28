@@ -1,4 +1,5 @@
 using System;
+using Character;
 using Sound;
 using UnityEngine;
 
@@ -24,7 +25,7 @@ namespace Fight
         {
             base.Die();
             
-            SoundManager.Instance.PlaySound(_dieSound);
+            CharacterManager.Instance.SoundManagerProperty.PlaySound(_dieSound);
             
             _dieParticles.transform.parent = null;
             _dieParticles.Play();
@@ -43,7 +44,7 @@ namespace Fight
             
             _rigidbody.AddForce(direction * Data.LaunchForce);
             
-            SoundManager.Instance.PlaySound(_launchSound);
+            CharacterManager.Instance.SoundManagerProperty.PlaySound(_launchSound);
         }
     }
 }

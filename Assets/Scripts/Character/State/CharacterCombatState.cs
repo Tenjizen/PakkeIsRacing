@@ -16,14 +16,6 @@ namespace Character.State
         private float _currentWeaponCooldown;
 
         private bool _projectileInShoot;
-        
-        #region Constructor
-
-        public CharacterCombatState(CharacterManager characterManagerRef, MonoBehaviour monoBehaviour, CameraManager cameraManagerRef) : base(characterManagerRef, monoBehaviour, cameraManagerRef)
-        {
-        }
-
-        #endregion
 
         #region Base methods
 
@@ -49,10 +41,10 @@ namespace Character.State
         {
             if (CharacterManagerRef.InputManagementProperty.Inputs.DeselectWeapon)
             {
-                CameraNavigationState cameraNavigationState = new CameraNavigationState(CameraManagerRef, MonoBehaviourRef);
+                CameraNavigationState cameraNavigationState = new CameraNavigationState();
                 CameraManagerRef.SwitchState(cameraNavigationState);
                 
-                CharacterNavigationState characterNavigationState = new CharacterNavigationState(CharacterManagerRef.KayakControllerProperty, CharacterManagerRef.InputManagementProperty, CharacterManagerRef, MonoBehaviourRef, CameraManagerRef);
+                CharacterNavigationState characterNavigationState = new CharacterNavigationState();
                 CharacterManagerRef.SwitchState(characterNavigationState);
 
                 CharacterManagerRef.WeaponUIManagerProperty.SetPaddleDownImage(false);

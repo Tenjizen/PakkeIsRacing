@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Character.Camera;
+using Character.Camera.State;
 using Kayak;
 using Sound;
 using UnityEngine;
@@ -30,7 +31,6 @@ namespace Character.State
         //kayak
         private Vector2 _paddleForceValue;
         private float _leftPaddleCooldown, _rightPaddleCooldown;
-        private float _currentInputPaddleFrontForce = 30;
 
         //reference
         private KayakController _kayakController;
@@ -40,13 +40,12 @@ namespace Character.State
 
         #region Constructor
 
-        public CharacterNavigationState(KayakController kayak, InputManagement inputManagement, CharacterManager characterManagerRef, MonoBehaviour monoBehaviour, CameraManager cameraManagerRef) : 
-            base(characterManagerRef, monoBehaviour, cameraManagerRef)
+        public CharacterNavigationState() : base()
         {
-            _kayakController = kayak;
-            _kayakRigidbody = kayak.Rigidbody;
-            _kayakValues = kayak.KayakValues;
-            _inputs = inputManagement;
+            _kayakController = CharacterManagerRef.KayakControllerProperty;
+            _kayakRigidbody = CharacterManagerRef.KayakControllerProperty.Rigidbody;
+            _kayakValues = CharacterManagerRef.KayakControllerProperty.KayakValues;
+            _inputs = CharacterManagerRef.InputManagementProperty;
         }
 
         #endregion
@@ -78,10 +77,10 @@ namespace Character.State
                 _kayakController.CanReduceDrag = false;
                 
                 //switch states
-                CharacterUnbalancedState characterUnbalancedState = new CharacterUnbalancedState(_kayakController, _inputs, CharacterManagerRef, MonoBehaviourRef, CameraManagerRef);
+                CharacterUnbalancedState characterUnbalancedState = new CharacterUnbalancedState();
                 CharacterManagerRef.SwitchState(characterUnbalancedState);
 
-                CameraUnbalancedState cameraUnbalancedState = new CameraUnbalancedState(CameraManagerRef, MonoBehaviourRef);
+                CameraUnbalancedState cameraUnbalancedState = new CameraUnbalancedState();
                 CameraManagerRef.SwitchState(cameraUnbalancedState);
             }
             
@@ -205,7 +204,7 @@ namespace Character.State
             MonoBehaviourRef.StartCoroutine(PaddleForceCurve());
 
             //audio
-            SoundManager.Instance.PlaySound(_kayakController.PaddlingAudioClip);
+            CharacterManager.Instance.SoundManagerProperty.PlaySound(_kayakController.PaddlingAudioClip);
             
             //animation
             CharacterManagerRef.PaddleAnimatorProperty.SetTrigger(direction == Direction.Left ? "PaddleLeft" : "PaddleRight");

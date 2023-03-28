@@ -1,3 +1,4 @@
+using Character;
 using Sound;
 using UI;
 using UnityEngine;
@@ -28,11 +29,11 @@ namespace GPEs.Checkpoint
         {
             if (_hasBeenUsed == false)
             {
-                CheckpointManager.Instance.CurrentCheckpoint = this;
+                CharacterManager.Instance.CheckpointManagerProperty.SetCheckpoint(this);
                 _hasBeenUsed = true;
             
                 _activationParticles.Play();
-                SoundManager.Instance.PlaySound(_activationClip);
+                CharacterManager.Instance.SoundManagerProperty.PlaySound(_activationClip);
                 _zoneManager.ShowZone(_zoneName);
             }
         }

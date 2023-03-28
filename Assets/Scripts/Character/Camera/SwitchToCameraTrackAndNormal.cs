@@ -24,13 +24,13 @@ public class SwitchToCameraTrackAndNormal : MonoBehaviour
 
         if (_isTrigger && _cameraTrack == false)
         {
-            CameraTrackState cameraTrackState = new CameraTrackState(_cameraManager, this, _nameOfCamera);
+            CameraTrackState cameraTrackState = new CameraTrackState(_nameOfCamera);
             _cameraManager.SwitchState(cameraTrackState);
             _cameraTrack = true;
         }
         else if(_isTrigger == false && _cameraTrack)
         {
-            CameraNavigationState cameraNavigationState = new CameraNavigationState(_cameraManager, this);
+            CameraNavigationState cameraNavigationState = new CameraNavigationState();
             _cameraManager.SwitchState(cameraNavigationState);
             _cameraTrack = false;
         }

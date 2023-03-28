@@ -183,7 +183,7 @@ namespace UI.Dialog
             DialogManager.Instance.PressButtonImage.DOFade(0, 0.1f);
         
             //audio
-            SoundManager.Instance.PlayDialog(_dialog[index].Clip);
+            CharacterManager.Instance.SoundManagerProperty.PlayDialog(_dialog[index].Clip);
         }
 
         private void EndDialog()

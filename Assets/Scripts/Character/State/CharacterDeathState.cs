@@ -1,4 +1,5 @@
 ﻿using Character.Camera;
+using Character.Camera.State;
 using GPEs.Checkpoint;
 using Kayak;
 using UnityEngine;
@@ -16,11 +17,10 @@ namespace Character.State
         private float _timerToRespawnCheckpoint = 0;
         private float _timerFadeOutStart = 0;
 
-        public CharacterDeathState(CharacterManager characterManagerRef, KayakController kayakController, InputManagement inputs, MonoBehaviour monoBehaviour, CameraManager cameraManagerRef) :
-            base(characterManagerRef, monoBehaviour, cameraManagerRef)
+        public CharacterDeathState() : base()
         {
-            _kayakController = kayakController;
-            _inputs = inputs;
+            _kayakController = CharacterManagerRef.KayakControllerProperty;
+            _inputs = CharacterManagerRef.InputManagementProperty;
         }
 
         public override void EnterState(CharacterManager character)
@@ -31,7 +31,7 @@ namespace Character.State
 
         public override void UpdateState(CharacterManager character)
         {
-            Transform checkpoint = CheckpointManager.Instance.GetRespawnPoint();
+            Transform checkpoint = CharacterManager.Instance.CheckpointManagerProperty.GetRespawnPoint();
 
             //Rotate kayak at 180 in z with balance
             if (CharacterManagerRef.Balance > 0 && CharacterManagerRef.Balance < 60)
@@ -47,7 +47,7 @@ namespace Character.State
             if (Mathf.Abs(CharacterManagerRef.Balance) > 60 && _cameraSwitchState == false)
             {
                 _cameraSwitchState = true;
-                CameraDeathState cameraDeathState = new CameraDeathState(CameraManagerRef, MonoBehaviourRef);
+                CameraDeathState cameraDeathState = new CameraDeathState();
                 CameraManagerRef.SwitchState(cameraDeathState);
             }
             MakeBoatRotationWithBalance(_kayakController.transform, 1);
@@ -71,7 +71,9 @@ namespace Character.State
             }
 
             if (_timerFadeOutStart > 1.5f && _respawned == true)
+            {
                 this.SwitchState(character);
+            }
 
         }
 
@@ -87,7 +89,7 @@ namespace Character.State
             IsDead = false;
 
             //Switch state character
-            CharacterNavigationState characterNavigationState = new CharacterNavigationState(_kayakController, _inputs, CharacterManagerRef, MonoBehaviourRef, CameraManagerRef);
+            CharacterNavigationState characterNavigationState = new CharacterNavigationState();
             CharacterManagerRef.SwitchState(characterNavigationState);
 
         }
@@ -115,7 +117,7 @@ namespace Character.State
                 _respawned = true;
 
                 //Switch state camera
-                CameraRespawnState cameraRespawnState = new CameraRespawnState(CameraManagerRef, MonoBehaviourRef);
+                CameraRespawnState cameraRespawnState = new CameraRespawnState();
                 CameraManagerRef.SwitchState(cameraRespawnState);
                 //CameraNavigationState cameraNavigationState = new CameraNavigationState(CameraManagerRef, MonoBehaviourRef);
                 //CameraManagerRef.SwitchState(cameraNavigationState);

@@ -11,16 +11,14 @@ namespace Character.Camera.State
             Combat = 1,
         }
 
-        public CameraStateBase(CameraManager cameraManagerRef, MonoBehaviour monoBehaviour)
-        {
-            CameraManagerRef = cameraManagerRef;
-            MonoBehaviourRef = monoBehaviour;
-        }
-
-        protected CameraManager CameraManagerRef;
-        protected MonoBehaviour MonoBehaviourRef;
-
         protected bool CanResetShoulderOffset = true;
+
+        protected CameraManager CamManager { get; }
+
+        public CameraStateBase()
+        {
+            CamManager = CharacterManager.Instance.CameraManagerProperty;
+        }
 
         public abstract void EnterState(CameraManager camera);
 
@@ -32,8 +30,8 @@ namespace Character.Camera.State
 
         protected void ClampRotationCameraValue(float min, float max)
         {
-            CameraManagerRef.CinemachineTargetYaw = ClampAngle(CameraManagerRef.CinemachineTargetYaw, float.MinValue, float.MaxValue);
-            CameraManagerRef.CinemachineTargetPitch = ClampAngle(CameraManagerRef.CinemachineTargetPitch, min, max);
+            CamManager.CinemachineTargetYaw = ClampAngle(CamManager.CinemachineTargetYaw, float.MinValue, float.MaxValue);
+            CamManager.CinemachineTargetPitch = ClampAngle(CamManager.CinemachineTargetPitch, min, max);
         }
         public float ClampAngle(float lfAngle, float lfMin, float lfMax)
         {
@@ -45,25 +43,25 @@ namespace Character.Camera.State
         public void ManageFreeCameraMove(ref float timerCameraReturnBehindBoat, CameraMode cameraMode)
         {
             //rotate freely with inputs
-            if (CameraManagerRef.CanMoveCameraManually)
+            if (CamManager.CanMoveCameraManually)
             {
                 Vector2 aim = Vector2.zero;
                 switch (cameraMode)
                 {
                     case CameraMode.Navigation:
-                        aim = CameraManagerRef.Input.Inputs.RotateCamera;
-                        CameraManagerRef.CinemachineTargetPitch += CameraManagerRef.JoystickFreeRotationY.Evaluate(aim.y);
+                        aim = CamManager.Input.Inputs.RotateCamera;
+                        CamManager.CinemachineTargetPitch += CamManager.JoystickFreeRotationY.Evaluate(aim.y);
                         break;
 
                     case CameraMode.Combat:
-                        aim = CameraManagerRef.Input.Inputs.MovingAim;
+                        aim = CamManager.Input.Inputs.MovingAim;
                         aim = new Vector2(aim.x, aim.y * -1);
-                        CameraManagerRef.CinemachineTargetPitch += CameraManagerRef.JoystickFreeRotationY.Evaluate(aim.y);
+                        CamManager.CinemachineTargetPitch += CamManager.JoystickFreeRotationY.Evaluate(aim.y);
                         break;
                 }
 
                 //Controller
-                CameraManagerRef.CinemachineTargetYaw += CameraManagerRef.JoystickFreeRotationX.Evaluate(aim.x);
+                CamManager.CinemachineTargetYaw += CamManager.JoystickFreeRotationX.Evaluate(aim.x);
                 //CameraManagerRef.CinemachineTargetPitch = CameraManagerRef.JoystickFreeRotationY.Evaluate(aim.y); (jsp pk ici ça fait de la merde)
 
                 #region clavier souris
@@ -73,8 +71,8 @@ namespace Character.Camera.State
                 #endregion
 
                 //last inputs
-                CameraManagerRef.LastInputX = aim.x != 0 ? aim.x : CameraManagerRef.LastInputX;
-                CameraManagerRef.LastInputY = aim.y != 0 ? aim.y : CameraManagerRef.LastInputY;
+                CamManager.LastInputX = aim.x != 0 ? aim.x : CamManager.LastInputX;
+                CamManager.LastInputY = aim.y != 0 ? aim.y : CamManager.LastInputY;
 
                 timerCameraReturnBehindBoat = 0;
             }
@@ -98,8 +96,8 @@ namespace Character.Camera.State
                 return;
             }
 
-            Vector3 currentOffset = Vector3.Lerp(CameraManagerRef.CinemachineCombat3rdPersonFollow.ShoulderOffset, CameraManagerRef.CombatBaseShoulderOffset, 0.01f);
-            CameraManagerRef.CinemachineCombat3rdPersonFollow.ShoulderOffset = currentOffset;
+            Vector3 currentOffset = Vector3.Lerp(CamManager.CinemachineCombat3rdPersonFollow.ShoulderOffset, CamManager.CombatBaseShoulderOffset, 0.01f);
+            CamManager.CinemachineCombat3rdPersonFollow.ShoulderOffset = currentOffset;
         }
     }
 }

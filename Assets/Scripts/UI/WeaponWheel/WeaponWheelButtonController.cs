@@ -45,11 +45,10 @@ namespace UI.WeaponWheel
             OnSelected.Invoke();
             _characterManager.CurrentWeapon = _weapon;
 
-            CharacterCombatState characterCombatState = 
-                new CharacterCombatState(_characterManager,_characterManager.CurrentStateBaseProperty.MonoBehaviourRef,_characterManager.CurrentStateBaseProperty.CameraManagerRef);
+            CharacterCombatState characterCombatState = new CharacterCombatState();
             _characterManager.SwitchState(characterCombatState);
         
-            CameraCombatState cameraCombatState = new CameraCombatState(_characterManager.CameraManagerProperty, _characterManager.CurrentStateBaseProperty.MonoBehaviourRef);
+            CameraCombatState cameraCombatState = new CameraCombatState();
             _characterManager.CameraManagerProperty.SwitchState(cameraCombatState);
         }
     }

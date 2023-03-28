@@ -1,31 +1,32 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Sound;
+using Character;
 using UnityEngine;
 
-public class ToggleAudio : MonoBehaviour
+namespace Sound
 {
-    [Serializable]
-    private enum AudioType
+    public class ToggleAudio : MonoBehaviour
     {
-        Music,
-        Effects,
-        Dialog
-    }
-
-    [SerializeField] private AudioType _toggleType;
-
-    public void Toggle()
-    {
-        switch (_toggleType)
+        [Serializable]
+        private enum AudioType
         {
-            case AudioType.Music:
-                SoundManager.Instance.ToggleMusic();
-                break;
-            case AudioType.Effects:
-                SoundManager.Instance.ToggleEffects();
-                break;
+            Music,
+            Effects,
+            Dialog
+        }
+
+        [SerializeField] private AudioType _toggleType;
+
+        public void Toggle()
+        {
+            switch (_toggleType)
+            {
+                case AudioType.Music:
+                    CharacterManager.Instance.SoundManagerProperty.ToggleMusic();
+                    break;
+                case AudioType.Effects:
+                    CharacterManager.Instance.SoundManagerProperty.ToggleEffects();
+                    break;
+            }
         }
     }
 }

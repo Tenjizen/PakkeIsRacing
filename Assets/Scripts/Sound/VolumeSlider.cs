@@ -1,3 +1,4 @@
+using Character;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,8 +10,8 @@ namespace Sound
 
         private void Start()
         {
-            SoundManager.Instance.ChangeMasterVolume(_slider.value);
-            _slider.onValueChanged.AddListener(value => SoundManager.Instance.ChangeMasterVolume(value));
+            CharacterManager.Instance.SoundManagerProperty.ChangeMasterVolume(_slider.value);
+            _slider.onValueChanged.AddListener(value => CharacterManager.Instance.SoundManagerProperty.ChangeMasterVolume(value));
         }
     }
 }

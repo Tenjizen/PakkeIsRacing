@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Sound
 {
-    public class SoundManager : Singleton<SoundManager>
+    public class SoundManager
     {
 
         [Header("Sources")]
