@@ -1,3 +1,4 @@
+using System;
 using Character;
 using Character.Camera.State;
 using Character.State;
@@ -12,10 +13,16 @@ namespace UI.WeaponWheel
     {
         [SerializeField] private Animator _animator;
         [SerializeField] private Button _button;
-        [SerializeField] private CharacterManager _characterManager;
         [SerializeField] private Weapon _weapon;
     
         public UnityEvent OnSelected = new UnityEvent();
+        
+        private CharacterManager _characterManager;
+
+        private void Start()
+        {
+            _characterManager = CharacterManager.Instance;
+        }
 
         public void OnPointerEnter(PointerEventData eventData)
         {

@@ -13,44 +13,33 @@ namespace Kayak
     [RequireComponent(typeof(Rigidbody))]
     public class KayakController : MonoBehaviour
     {
+        public CharacterManager CharacterManagerProperty { get; private set; }
+
         //TODO to scriptable object
-        [Header("Drag")]
-        [SerializeField, Range(50,51f), Tooltip("The multiplier of the current velocity to reduce drag -> velocity * DragReducingMultiplier * deltaTime")] 
+        [Header("Drag"), SerializeField, Range(50,51f), Tooltip("The multiplier of the current velocity to reduce drag -> velocity * DragReducingMultiplier * deltaTime")] 
         private float _dragReducingMultiplier = 50.5f;
         [ReadOnly, Tooltip("If this value is <= 0, the drag reducing will be activated")] 
         public float DragReducingTimer;
         
-        [Header("Parameters")]
-        [Tooltip("The different values related to the kayak")]
-        public KayakParameters KayakValues;
-        [ReadOnly, Tooltip("= is the drag reducing method activated ?")] 
-        public bool CanReduceDrag = true;
+        [Header("Parameters"), Tooltip("The different values related to the kayak")] public KayakParameters KayakValues;
+        [ReadOnly, Tooltip("= is the drag reducing method activated ?")] public bool CanReduceDrag = true;
         
-        [field:SerializeField, Header("References"), Tooltip("Reference of the character manager in the scene")] 
-        public CharacterManager CharacterManagerProperty { get; private set; }
-        
-        [field:SerializeField, Tooltip("Reference of the kayak rigidbody")]
-        public Rigidbody Rigidbody { get; private set; }
-        
-        [SerializeField, Tooltip("The floaters associated to the kayak's rigidbody")] 
-        public Floaters FloatersRef;
-        
-        [Header("Audio")] 
-        [Tooltip("The audio clip of the paddling")]
-        public AudioClip PaddlingAudioClip;
-        [SerializeField, Tooltip("The audio clip of the kayak colliding")] 
-        private AudioClip CollisionAudioClip;
+        [field:SerializeField, Tooltip("Reference of the kayak rigidbody")] public Rigidbody Rigidbody { get; private set; }
+        [SerializeField, Tooltip("The floaters associated to the kayak's rigidbody")] public Floaters FloatersRef;
+       
+        [field:SerializeField, Tooltip("The audio clip of the paddling"), Header("Audio")] public AudioClip PaddlingAudioClip { get; private set; }
+        [SerializeField, Tooltip("The audio clip of the kayak colliding")] private AudioClip CollisionAudioClip;
 
         [Header("VFX")] 
         [SerializeField] private float _timeToPlayParticlesAfterPaddle;
         [SerializeField] private ParticleSystem _leftPaddleParticle, _rightPaddleParticle;
         private float _particleTimer = -1;
         private CharacterNavigationState.Direction _particleSide;
-
+        
         private void Start()
         {
             Rigidbody = GetComponent<Rigidbody>();
-
+            CharacterManagerProperty = CharacterManager.Instance;
         }
         private void Update()
         {

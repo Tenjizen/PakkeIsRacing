@@ -59,17 +59,17 @@ namespace Enemies.Shark
         public float ShadowMaxSizeForJump = 3;
         [Tooltip("The speed at which the circle will grow (Ex : 1 / ShadowDivideGrowSpeed)")]
         public float ShadowDivideGrowSpeed = 2;
-
-        [field:SerializeField, ReadOnly] public KayakController KayakControllerProperty { get; set; }
         [ReadOnly] public Vector3 PositionOffset;
         [ReadOnly] public float Angle;
 
         [Header("Waves")]
         public Waves WavesData;
-
         public CircularWave StartJumpCircularWaveData;
         public CircularWave EndJumpCircularWaveData;
         [Space(5)] public float EndJumpCircularWaveTime = 1;
+        
+        public KayakController KayakControllerProperty { get; set; }
+
 
         private void Awake()
         {
@@ -83,6 +83,7 @@ namespace Enemies.Shark
 
         private void Start()
         {
+            KayakControllerProperty = CharacterManager.Instance.KayakControllerProperty;
             CurrentStateBase.EnterState(this);
         }
         private void Update()

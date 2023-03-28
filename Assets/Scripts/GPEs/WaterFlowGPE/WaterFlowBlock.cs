@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Character;
 using Character.Camera;
 using Kayak;
 using UnityEngine;
-using UnityEngine.UI;
+using WaterFlowGPE;
 using Random = System.Random;
 
-namespace WaterFlowGPE
+namespace GPEs.WaterFlowGPE
 {
     public class WaterFlowBlock : MonoBehaviour
     {
+        //TODO to scriptable object
         [Header("Parameters"), SerializeField] 
         private float _speed;
 
@@ -26,15 +26,14 @@ namespace WaterFlowGPE
         [SerializeField, Range(0, 0.1f), Tooltip("The lerp applied to the boat rotation to match the flow direction when the boat is already facing the flow direction")]
         private float _rotationLerpWhenInDirection = 0.05f;
 
-        [SerializeField, Range(0, 0.05f),
-         Tooltip("The lerp applied to the boat rotation to match the flow direction when the boat is not facing the flow direction")]
+        [SerializeField, Range(0, 0.05f), Tooltip("The lerp applied to the boat rotation to match the flow direction when the boat is not facing the flow direction")]
         private float _rotationLerpWhenNotInDirection = 0.005f;
 
-        [SerializeField, Range(0, 0.05f),
-         Tooltip("The lerp applied to the boat rotation to match the flow direction when the player is trying to move away")]
+        [SerializeField, Range(0, 0.05f), Tooltip("The lerp applied to the boat rotation to match the flow direction when the player is trying to move away")]
         private float _rotationLerpWhenMoving = 0.005f;
 
-        [Header("Particles"), SerializeField] private List<ParticleSystem> _particlesList;
+        [Header("Particles"), SerializeField] 
+        private List<ParticleSystem> _particlesList;
 
         [SerializeField, Tooltip("One of the particles will play at a random time between those two values")]
         private Vector2 _randomPlayOfParticleTime;
