@@ -17,7 +17,7 @@ namespace Character
     {
         #region Property
         
-        [field:SerializeField] public CharacterStateBase CurrentStateBaseProperty { get; private set; }
+        [field:SerializeField, Header("Properties")] public CharacterStateBase CurrentStateBaseProperty { get; private set; }
         [field:SerializeField] public CameraManager CameraManagerProperty { get; private set; }
         [field:SerializeField] public KayakController KayakControllerProperty { get; private set; }
         [field:SerializeField] public InputManagement InputManagementProperty { get; private set; }
@@ -78,17 +78,18 @@ namespace Character
         [field:SerializeField] public Projectile HarpoonPrefab { get; set; }
         [field:SerializeField] public Projectile NetPrefab { get; set; }
 
-        private void Awake()
+        protected override void Awake()
         {
-            CharacterNavigationState navigationState =
-                new CharacterNavigationState();
-            CurrentStateBaseProperty = navigationState;
-
+            base.Awake();
             CharacterMonoBehaviour = this;
         }
 
         private void Start()
         {
+            CharacterNavigationState navigationState = new CharacterNavigationState();
+            CurrentStateBaseProperty = navigationState;
+            CurrentStateBaseProperty.Initialize();
+            
             CurrentStateBaseProperty.EnterState(this);
             CurrentStateBaseProperty.OnPaddleRight.AddListener(PlayPaddleRightParticle);
             CurrentStateBaseProperty.OnPaddleLeft.AddListener(PlayPaddleLeftParticle);

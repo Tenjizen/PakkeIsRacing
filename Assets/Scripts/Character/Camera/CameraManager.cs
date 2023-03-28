@@ -112,15 +112,8 @@ namespace Character.Camera
 
         private void Awake()
         {
-            if (Waves == null)
-            {
-                Debug.LogError("Missing wave reference");
-            }
-
             CinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-
             CameraTargetBasePos = CinemachineCameraTarget.transform.localPosition;
-
             CameraBaseFov = VirtualCameraFreeLook.m_Lens.FieldOfView;
 
             CameraNavigationState navigationState = new CameraNavigationState();
@@ -135,8 +128,10 @@ namespace Character.Camera
             CharacterManager = CharacterManager.Instance;
             Input = CharacterManager.InputManagementProperty;
             
+            CurrentStateBase.Initialize();
             CurrentStateBase.EnterState(this);
         }
+        
         private void Update()
         {
             CurrentStateBase.UpdateState(this);

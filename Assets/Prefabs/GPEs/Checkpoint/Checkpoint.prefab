@@ -48,7 +48,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4285338905635752385
 Transform:
   m_ObjectHideFlags: 0
@@ -93,17 +93,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80ac52b023f917488fcc26e5862f92d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerSize: {x: 21.51, y: 6.7, z: 23.02}
+  _triggerType: 0
+  _showTriggerGizmos: 1
+  _triggerBoxSize: {x: 1, y: 1, z: 1}
+  _triggerSphereSize: 1
   _triggerOffsetPosition: {x: 0, y: 0.43, z: 0}
   _playerLayerMask:
     serializedVersion: 2
     m_Bits: 2147483647
-  OnPlayerDetected:
+  OnPlayerEntered:
     m_PersistentCalls:
       m_Calls: []
-  _zoneName: 
-  TargetRespawnTransform: {fileID: 5824427334280982204}
+  OnPlayerStay:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayerExited:
+    m_PersistentCalls:
+      m_Calls: []
+  _zoneName: "Entr\xE9e de la grotte"
   _zoneManager: {fileID: 0}
+  _targetRespawnTransform: {fileID: 5824427334280982204}
   _activationParticles: {fileID: 5389502103451266307}
   _activationClip: {fileID: 8300000, guid: 6e310188983e697438ee8a2c57dd70f5, type: 3}
 --- !u!1 &5169849621225320633

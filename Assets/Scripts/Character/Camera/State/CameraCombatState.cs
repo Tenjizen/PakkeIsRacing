@@ -12,8 +12,6 @@ namespace Character.Camera.State
 
         public override void EnterState(CameraManager camera)
         {
-            Debug.Log("Camera Combat");
-
             CamManager.AnimatorRef.Play("Combat");
 
             _baseFov = CamManager.VirtualCameraCombat.m_Lens.FieldOfView;

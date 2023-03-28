@@ -1,10 +1,9 @@
 using Character;
 using UnityEngine;
-using Tools.SingletonClassBase;
 
 namespace GPEs.Checkpoint
 {
-    public class CheckpointManager
+    public class CheckpointManager : MonoBehaviour
     {
         [field:SerializeField] public Checkpoint CurrentCheckpoint { get; private set; }
 

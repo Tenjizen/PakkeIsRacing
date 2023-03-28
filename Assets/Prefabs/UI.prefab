@@ -1925,9 +1925,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fc77b2ed8a746dab03fd863584f75ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TypeWriterText: {fileID: 2848470980093469852}
-  DialogUIGameObject: {fileID: 3128447822129208163}
-  PressButtonImage: {fileID: 7237106428786210801}
+  isPersistant: 0
+  <TypeWriterText>k__BackingField: {fileID: 2848470980093469852}
+  <DialogUIGameObject>k__BackingField: {fileID: 3128447822129208163}
+  <PressButtonImage>k__BackingField: {fileID: 7237106428786210801}
 --- !u!114 &8196072682807055919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1959,9 +1960,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ea49a6991265b4fadf2babf5294196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputManagement: {fileID: 0}
-  _characterManager: {fileID: 0}
-  _cameraManager: {fileID: 0}
   _weaponUI: {fileID: 4216831512123217972}
   _vignette: {fileID: 4000094957696149738}
   _harpoonButton: {fileID: 5136905873225464168}
@@ -2608,7 +2606,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 4581768685808714618}
   _button: {fileID: 8915026329068762112}
-  _characterManager: {fileID: 0}
   _weapon: 0
   OnSelected:
     m_PersistentCalls:
@@ -3098,9 +3095,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d4685e9ea2f4cfd8a52476449823a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <DisplayText>k__BackingField: {fileID: 0}
   Delay: 0.1
   FullText: 
-  DisplayText: {fileID: 6652371328360516097}
 --- !u!1 &5161613773871335917
 GameObject:
   m_ObjectHideFlags: 0
@@ -3411,7 +3408,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 3181481962802028928}
   _button: {fileID: 3422054008274702466}
-  _characterManager: {fileID: 0}
   _weapon: 1
   OnSelected:
     m_PersistentCalls:

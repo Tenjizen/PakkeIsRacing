@@ -28,6 +28,14 @@ namespace Character.State
         
         protected CharacterStateBase()
         {
+            if (CharacterManager.Instance != null)
+            {
+                Initialize();
+            }
+        }
+
+        public void Initialize()
+        {
             CharacterManagerRef = CharacterManager.Instance;
             CameraManagerRef = CharacterManager.Instance.CameraManagerProperty;
             MonoBehaviourRef = CharacterManager.Instance.CharacterMonoBehaviour;

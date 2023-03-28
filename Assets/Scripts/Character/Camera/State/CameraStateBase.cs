@@ -13,11 +13,19 @@ namespace Character.Camera.State
 
         protected bool CanResetShoulderOffset = true;
 
-        protected CameraManager CamManager { get; }
+        protected CameraManager CamManager { get; private set; }
 
-        public CameraStateBase()
+        protected CameraStateBase()
         {
-            CamManager = CharacterManager.Instance.CameraManagerProperty;
+            Initialize();
+        }
+        
+        public void Initialize()
+        {
+            if (CharacterManager.Instance != null)
+            {
+                CamManager = CharacterManager.Instance.CameraManagerProperty;
+            }
         }
 
         public abstract void EnterState(CameraManager camera);

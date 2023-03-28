@@ -1069,9 +1069,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d49cd67baff6c54aa5d47073fe1fc45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CinemachineCameraTarget>k__BackingField: {fileID: 0}
-  <CinemachineCameraTargetFollow>k__BackingField: {fileID: 0}
-  <CinemachineCameraFollowCombat>k__BackingField: {fileID: 0}
+  <CinemachineCameraTarget>k__BackingField: {fileID: 5773740044235661809}
+  <CinemachineCameraTargetFollow>k__BackingField: {fileID: 3814212815698604900}
+  <CinemachineCameraFollowCombat>k__BackingField: {fileID: 1094441883}
   <AnimatorRef>k__BackingField: {fileID: 4963052748703314965}
   TopClamp: 28
   BottomClamp: -18
@@ -1799,16 +1799,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kayak
       objectReference: {fileID: 0}
-    - target: {fileID: 905236005931874319, guid: bc06d1e844ba3694bbdecce4a99ba863,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.91
-      objectReference: {fileID: 0}
-    - target: {fileID: 4950148468892883501, guid: bc06d1e844ba3694bbdecce4a99ba863,
-        type: 3}
-      propertyPath: CharacterManager
-      value: 
-      objectReference: {fileID: 7217796708653836310}
     - target: {fileID: 4950148468892883501, guid: bc06d1e844ba3694bbdecce4a99ba863,
         type: 3}
       propertyPath: _leftPaddleParticle
@@ -1819,11 +1809,6 @@ PrefabInstance:
       propertyPath: _rightPaddleParticle
       value: 
       objectReference: {fileID: 3972387942190074206}
-    - target: {fileID: 4950148468892883501, guid: bc06d1e844ba3694bbdecce4a99ba863,
-        type: 3}
-      propertyPath: _timeToPlayParticlesAfterPaddle
-      value: 0.3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc06d1e844ba3694bbdecce4a99ba863, type: 3}
 --- !u!54 &2610664555048439513 stripped
