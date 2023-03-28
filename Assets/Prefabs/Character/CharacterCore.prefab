@@ -1013,13 +1013,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9ad99accd13d042bb402174874e832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraManagerRef: {fileID: 7611706348771366613}
-  KayakController: {fileID: 7217796708516857175}
-  InputManagement: {fileID: 5885439514833416252}
-  PaddleAnimator: {fileID: 6793741366818239509}
-  TransitionManager: {fileID: 0}
-  weaponUIManagerRef: {fileID: 0}
-  BalanceGaugeManagerRef: {fileID: 0}
+  isPersistant: 0
+  <CameraManagerProperty>k__BackingField: {fileID: 7611706348771366613}
+  <KayakControllerProperty>k__BackingField: {fileID: 7217796708516857175}
+  <InputManagementProperty>k__BackingField: {fileID: 5885439514833416252}
+  <PaddleAnimatorProperty>k__BackingField: {fileID: 6793741366818239509}
+  <TransitionManagerProperty>k__BackingField: {fileID: 0}
+  <WeaponUIManagerProperty>k__BackingField: {fileID: 0}
+  <BalanceGaugeManagerRef>k__BackingField: {fileID: 0}
+  <CharacterMonoBehaviour>k__BackingField: {fileID: 7217796708653836310}
   balanceLerpTo0Value: 0.03
   LerpBalanceTo0: 1
   Balance: 0
@@ -1030,17 +1032,17 @@ MonoBehaviour:
   RotationToBalanceMultiplier: 10
   FloatersLevelDifferenceToBalanceMultiplier: 0.5
   NumberPressButton: 10
-  UnitBlanceToTimer: 1
+  UnitBalanceToTimer: 0
   ReductionForce: 2
   TimerUnbalanced: 5
   NumberButtonIsPressed: 0
-  _paddleLeftParticle: {fileID: 0}
-  _paddleRightParticle: {fileID: 0}
+  _paddleLeftParticle: {fileID: 4051004596906029745}
+  _paddleRightParticle: {fileID: 3972387942190074206}
   CurrentWeapon: 0
   BoatFollowAimLerp: 0.05
-  HarpoonPrefab: {fileID: 4447602596650765180, guid: 3c5bd57966ac3044bb55ce1daa1a52fd,
+  <HarpoonPrefab>k__BackingField: {fileID: 4447602596650765180, guid: 3c5bd57966ac3044bb55ce1daa1a52fd,
     type: 3}
-  NetPrefab: {fileID: 5818197527617267939, guid: 5fe0b6ba9c8ba064c8d71b53722431ad,
+  <NetPrefab>k__BackingField: {fileID: 5818197527617267939, guid: 5fe0b6ba9c8ba064c8d71b53722431ad,
     type: 3}
 --- !u!114 &7217796708653836311
 MonoBehaviour:
@@ -1054,7 +1056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be024ccb8e2a2048aabfa8fe7abd17e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KayakTransform: {fileID: 2610664555048439514}
+  <KayakTransform>k__BackingField: {fileID: 2610664555048439514}
 --- !u!114 &7611706348771366613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1067,15 +1069,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d49cd67baff6c54aa5d47073fe1fc45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CinemachineCameraTarget: {fileID: 5773740044235661809}
-  CinemachineCameraTargetFollow: {fileID: 3814212815698604900}
-  CinemachineCameraFollowCombat: {fileID: 1094441883}
-  AnimatorRef: {fileID: 4963052748703314965}
+  <CinemachineCameraTarget>k__BackingField: {fileID: 0}
+  <CinemachineCameraTargetFollow>k__BackingField: {fileID: 0}
+  <CinemachineCameraFollowCombat>k__BackingField: {fileID: 0}
+  <AnimatorRef>k__BackingField: {fileID: 4963052748703314965}
   TopClamp: 28
   BottomClamp: -18
-  RigidbodyKayak: {fileID: 2610664555048439513}
-  CharacterManager: {fileID: 7217796708653836310}
-  Input: {fileID: 5885439514833416252}
+  <RigidbodyKayak>k__BackingField: {fileID: 2610664555048439513}
   BalanceRotationMultiplier: 0
   BalanceRotationZLerp: 0.01
   MultiplierValueRotation: 0.5
@@ -1083,9 +1083,9 @@ MonoBehaviour:
   MultiplierValuePosition: 0.5
   LerpLocalPositionMove: 0.01
   CanMoveCameraManually: 1
-  Brain: {fileID: 1967899735}
-  VirtualCameraFreeLook: {fileID: 4192299973026284776}
-  VirtualCameraCombat: {fileID: 6638202092221173266}
+  <Brain>k__BackingField: {fileID: 1967899735}
+  <VirtualCameraFreeLook>k__BackingField: {fileID: 4192299973026284776}
+  <VirtualCameraCombat>k__BackingField: {fileID: 6638202092221173266}
   MultiplierFovCamera: 2.03
   LerpTimeX: 0.035
   LerpTimeY: 0.035
@@ -1205,11 +1205,10 @@ MonoBehaviour:
   AmplitudShakeWhenUnbalanced: 0.5
   AmplitudShakeWhenWaterFlow: 0.2
   AmplitudShakeWhenWaterWave: 0.5
-  Waves: {fileID: 0}
+  <Waves>k__BackingField: {fileID: 0}
   CombatOffset: {x: 0, y: -0.5, z: -1}
   CombatFov: 40
   HeightClamp: {x: -25, y: 10}
-  CameraTargetCombatLookAt: {fileID: 1094441883}
   CameraAngleOverride: 10
   CameraBaseFov: 0
   CameraTargetBasePos: {x: 0, y: 0, z: 0}

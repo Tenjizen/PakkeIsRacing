@@ -20,8 +20,8 @@ namespace Character.Camera
         public float BottomClamp = -30.0f;
 
         [field:SerializeField, Header("References")] public Rigidbody RigidbodyKayak { get; private set; }
-        [field:SerializeField] public CharacterManager CharacterManager { get; private set; }
-        [field:SerializeField] public InputManagement Input { get; private set; }
+        public CharacterManager CharacterManager { get; private set; }
+        public InputManagement Input { get; private set; }
 
         [Header("Rotation Values")]
         public float BalanceRotationMultiplier = 1f;
@@ -132,6 +132,9 @@ namespace Character.Camera
 
         private void Start()
         {
+            CharacterManager = CharacterManager.Instance;
+            Input = CharacterManager.InputManagementProperty;
+            
             CurrentStateBase.EnterState(this);
         }
         private void Update()
