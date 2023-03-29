@@ -123,12 +123,21 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Unbalanced",
+                    "name": "UnbalancedRight",
                     "type": "Button",
                     "id": "536c1b49-1bbd-4281-94e8-66356b26c49c",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UnbalancedLeft",
+                    "type": "Button",
+                    "id": "825655f2-9165-416b-a147-181bd2009188",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 }
             ],
@@ -399,23 +408,23 @@
                 },
                 {
                     "name": "",
-                    "id": "49bda660-71e9-4e16-86c9-83ad83133148",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "Press",
+                    "id": "5d8d0ac4-d8c4-4be2-ac02-0f4af55d9156",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
                     "processors": "",
                     "groups": "GamePad",
-                    "action": "Unbalanced",
+                    "action": "UnbalancedRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "4b2180a7-d9a1-460f-85d4-84709a35f4ad",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "Press",
+                    "id": "d7e15cc8-3a1e-4c6f-8f2c-18357324baa4",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
                     "processors": "",
                     "groups": "GamePad",
-                    "action": "Unbalanced",
+                    "action": "UnbalancedLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

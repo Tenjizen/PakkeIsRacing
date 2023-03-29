@@ -145,12 +145,21 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Unbalanced"",
+                    ""name"": ""UnbalancedRight"",
                     ""type"": ""Button"",
                     ""id"": ""536c1b49-1bbd-4281-94e8-66356b26c49c"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UnbalancedLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""825655f2-9165-416b-a147-181bd2009188"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -421,23 +430,23 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""49bda660-71e9-4e16-86c9-83ad83133148"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": ""Press"",
+                    ""id"": ""5d8d0ac4-d8c4-4be2-ac02-0f4af55d9156"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""GamePad"",
-                    ""action"": ""Unbalanced"",
+                    ""action"": ""UnbalancedRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4b2180a7-d9a1-460f-85d4-84709a35f4ad"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": ""Press"",
+                    ""id"": ""d7e15cc8-3a1e-4c6f-8f2c-18357324baa4"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""GamePad"",
-                    ""action"": ""Unbalanced"",
+                    ""action"": ""UnbalancedLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -472,7 +481,8 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         m_Boat_Aim = m_Boat.FindAction("Aim", throwIfNotFound: true);
         m_Boat_MoveAim = m_Boat.FindAction("MoveAim", throwIfNotFound: true);
         m_Boat_Shoot = m_Boat.FindAction("Shoot", throwIfNotFound: true);
-        m_Boat_Unbalanced = m_Boat.FindAction("Unbalanced", throwIfNotFound: true);
+        m_Boat_UnbalancedRight = m_Boat.FindAction("UnbalancedRight", throwIfNotFound: true);
+        m_Boat_UnbalancedLeft = m_Boat.FindAction("UnbalancedLeft", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -545,7 +555,8 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Boat_Aim;
     private readonly InputAction m_Boat_MoveAim;
     private readonly InputAction m_Boat_Shoot;
-    private readonly InputAction m_Boat_Unbalanced;
+    private readonly InputAction m_Boat_UnbalancedRight;
+    private readonly InputAction m_Boat_UnbalancedLeft;
     public struct BoatActions
     {
         private @GameplayInputs m_Wrapper;
@@ -563,7 +574,8 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         public InputAction @Aim => m_Wrapper.m_Boat_Aim;
         public InputAction @MoveAim => m_Wrapper.m_Boat_MoveAim;
         public InputAction @Shoot => m_Wrapper.m_Boat_Shoot;
-        public InputAction @Unbalanced => m_Wrapper.m_Boat_Unbalanced;
+        public InputAction @UnbalancedRight => m_Wrapper.m_Boat_UnbalancedRight;
+        public InputAction @UnbalancedLeft => m_Wrapper.m_Boat_UnbalancedLeft;
         public InputActionMap Get() { return m_Wrapper.m_Boat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -612,9 +624,12 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @Shoot.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnShoot;
-                @Unbalanced.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnUnbalanced;
-                @Unbalanced.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnUnbalanced;
-                @Unbalanced.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnUnbalanced;
+                @UnbalancedRight.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnUnbalancedRight;
+                @UnbalancedRight.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnUnbalancedRight;
+                @UnbalancedRight.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnUnbalancedRight;
+                @UnbalancedLeft.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnUnbalancedLeft;
+                @UnbalancedLeft.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnUnbalancedLeft;
+                @UnbalancedLeft.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnUnbalancedLeft;
             }
             m_Wrapper.m_BoatActionsCallbackInterface = instance;
             if (instance != null)
@@ -658,9 +673,12 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
-                @Unbalanced.started += instance.OnUnbalanced;
-                @Unbalanced.performed += instance.OnUnbalanced;
-                @Unbalanced.canceled += instance.OnUnbalanced;
+                @UnbalancedRight.started += instance.OnUnbalancedRight;
+                @UnbalancedRight.performed += instance.OnUnbalancedRight;
+                @UnbalancedRight.canceled += instance.OnUnbalancedRight;
+                @UnbalancedLeft.started += instance.OnUnbalancedLeft;
+                @UnbalancedLeft.performed += instance.OnUnbalancedLeft;
+                @UnbalancedLeft.canceled += instance.OnUnbalancedLeft;
             }
         }
     }
@@ -698,6 +716,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         void OnAim(InputAction.CallbackContext context);
         void OnMoveAim(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
-        void OnUnbalanced(InputAction.CallbackContext context);
+        void OnUnbalancedRight(InputAction.CallbackContext context);
+        void OnUnbalancedLeft(InputAction.CallbackContext context);
     }
 }
