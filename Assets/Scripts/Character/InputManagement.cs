@@ -7,6 +7,7 @@ namespace Character
     public class InputManagement : MonoBehaviour
     {
         private GameplayInputs _gameplayInputs;
+        public GameplayInputs GameplayInputs { get { return _gameplayInputs; } private set { } }
         public InputsEnum Inputs { get; private set; }
 
         private void Awake()
@@ -19,7 +20,8 @@ namespace Character
         {
             GatherInputs();
         }
-        
+
+
         private void GatherInputs()
         {
             InputsEnum inputsEnum = Inputs;
@@ -42,7 +44,7 @@ namespace Character
             inputsEnum.Shoot = _gameplayInputs.Boat.Shoot.ReadValue<float>() > 0.5f;
             inputsEnum.MovingAim = _gameplayInputs.Boat.MoveAim.ReadValue<Vector2>();
 
-            inputsEnum.Unbalanced = _gameplayInputs.Boat.Unbalanced.ReadValue<float>() > 0.8f;
+            //inputsEnum.Unbalanced = _gameplayInputs.Boat.Unbalanced.ReadValue<float>() > 0.8f;
 
             inputsEnum.Deadzone = 0.3f;
             
