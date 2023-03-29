@@ -284,61 +284,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e0857b45e56e14f88336079beaccaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dragReducingMultiplier: 50.654
-  DragReducingTimer: 0
-  KayakValues:
-    MaximumFrontVelocity: 12
-    CollisionToBalanceMagnitudeDivider: 1.4
-    PaddleSideRotationForce: 0.254
-    PaddleCooldown: 1
-    PaddleRotationDeceleration: 0.008
-    PaddleForce: 52.6
-    NumberOfForceAppliance: 9
-    TimeBetweenEveryAppliance: 0.0386
-    ForceCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    StaticRotationForce: 0.0106
-    StaticRotationDeceleration: 0.0152
-    StaticRotationCooldownAfterPaddle: 1
-    VelocityDecelerationLerp: 0.004
-    VelocityDecelerationRotationForce: 0.01
-    UnbalancePaddleCooldown: 0.5
-    UnbalancePaddleForce: 2
-  CanReduceDrag: 1
+  Data: {fileID: 11400000, guid: ca77eaa68c7c4c340be565067d8cbf5a, type: 2}
   <Rigidbody>k__BackingField: {fileID: 333907971529626019}
+  DragReducingTimer: 0
+  CanReduceDrag: 1
   FloatersRef:
     FrontLeft: {fileID: 333907970047417243}
     FrontRight: {fileID: 333907970277157176}
     BackLeft: {fileID: 333907971254692470}
     BackRight: {fileID: 333907970869196805}
-  <PaddlingAudioClip>k__BackingField: {fileID: 8300000, guid: cc79f0cc1ba16294cb28181e5ed1db4e,
-    type: 3}
-  CollisionAudioClip: {fileID: 8300000, guid: 6fcbe11d2b48cf540aa7cd7c670420f2, type: 3}
-  _timeToPlayParticlesAfterPaddle: 0.3
-  _leftPaddleParticle: {fileID: 0}
-  _rightPaddleParticle: {fileID: 0}
+  TimeToPlayParticlesAfterPaddle: 0
+  LeftPaddleParticle: {fileID: 0}
+  RightPaddleParticle: {fileID: 0}
 --- !u!136 &4595948853936165718
 CapsuleCollider:
   m_ObjectHideFlags: 0

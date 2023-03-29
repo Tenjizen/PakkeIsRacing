@@ -1,3 +1,4 @@
+using Character;
 using Character.State;
 using Enemies.Shark;
 using Kayak;
@@ -171,7 +172,7 @@ public class SharkCombatState : SharkBaseState
             if (sharkManager.KayakControllerProperty != null)
             {
                 Debug.Log("perso dead");
-                sharkManager.KayakControllerProperty.CharacterManagerProperty.SwitchToDeathState();
+                CharacterManager.Instance.SwitchToDeathState();
             }
 
             sharkManager.Shadow.SetActive(false);

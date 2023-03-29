@@ -77,7 +77,7 @@ namespace GPEs.WaterFlowGPE
             KayakController kayakController = collider.GetComponent<KayakController>();
             if (kayakController != null && WaterFlowManager != null)
             {
-                if (kayakController.CharacterManagerProperty.CurrentStateBaseProperty.CanBeMoved == false)
+                if (CharacterManager.Instance.CurrentStateBaseProperty.CanBeMoved == false)
                 {
                     return;
                 }
@@ -98,7 +98,7 @@ namespace GPEs.WaterFlowGPE
                     bool isFacingFlow = angleDifference <= ANGLE_TO_FACE_FLOW;
 
                     //apply rotation
-                    InputManagement inputManagement = kayakController.CharacterManagerProperty.InputManagementProperty;
+                    InputManagement inputManagement = CharacterManager.Instance.InputManagementProperty;
                     bool isMoving = inputManagement.Inputs.PaddleLeft || inputManagement.Inputs.PaddleRight ||
                                     Mathf.Abs(inputManagement.Inputs.RotateLeft) > 0.1f ||
                                     Mathf.Abs(inputManagement.Inputs.RotateRight) > 0.1f;
@@ -117,7 +117,7 @@ namespace GPEs.WaterFlowGPE
                     
                     //balance
                     double value = _balanceValue * UnityEngine.Random.Range(_balanceValueRandomMultiplierRange.x, _balanceValueRandomMultiplierRange.y);
-                    kayakController.CharacterManagerProperty.AddBalanceValueToCurrentSide(value);
+                    CharacterManager.Instance.AddBalanceValueToCurrentSide(value);
                 }
             }
         }

@@ -12,15 +12,18 @@ namespace Character.Camera.State
         {
             CamManager.MakeSmoothCameraBehindBoat();
             CamManager.MakeTargetFollowRotationWithKayak();
-            if (Mathf.Abs(CamManager.CharacterManager.Balance) < CamManager.CharacterManager.BalanceDeathLimit)
+            if (Mathf.Abs(CamManager.CharacterManager.Balance) < CamManager.CharacterManager.Data.BalanceDeathLimit)
+            {
                 RotateCameraInZ();
+            }
             else
+            {
                 CamManager.SmoothResetRotateZ();
-
+            }
+ 
             CamManager.ApplyRotationCamera();
-
-
-            CamManager.ShakeCamera(CamManager.AmplitudShakeWhenUnbalanced);
+            
+            CamManager.ShakeCamera(CamManager.Data.AmplitudeShakeWhenUnbalanced);
         }
         
         public override void FixedUpdate(CameraManager camera)

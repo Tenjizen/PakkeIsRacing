@@ -28,7 +28,7 @@ namespace Character.Camera.State
 
             MoveCamera();
 
-            ClampRotationCameraValue(CamManager.BottomClamp, CamManager.TopClamp);
+            ClampRotationCameraValue(CamManager.Data.BottomClamp, CamManager.Data.TopClamp);
 
             CamManager.ApplyRotationCamera();
 
@@ -40,11 +40,11 @@ namespace Character.Camera.State
 
             if (CamManager.Waves.CircularWavesDurationList.Count > 0)
             {
-                CamManager.ShakeCamera(CamManager.AmplitudShakeWhenWaterWave);
+                CamManager.ShakeCamera(CamManager.Data.AmplitudeShakeWhenWaterWave);
             }
             else if (CamManager.WaterFlow)
             {
-                CamManager.ShakeCamera(CamManager.AmplitudShakeWhenWaterFlow);
+                CamManager.ShakeCamera(CamManager.Data.AmplitudeShakeWhenWaterFlow);
             }
             else
             {
@@ -71,8 +71,8 @@ namespace Character.Camera.State
                 ManageFreeCameraMove(ref _timerCameraReturnBehindBoat, CameraMode.Navigation);
             }
             //manage rotate to stay behind boat
-            else if (Mathf.Abs(CamManager.RigidbodyKayak.velocity.x + CamManager.RigidbodyKayak.velocity.z) > minimumVelocityToReplaceCamera && _timerCameraReturnBehindBoat > CamManager.TimerCameraReturnBehindBoat ||
-                     (Mathf.Abs(CamManager.CharacterManager.CurrentStateBaseProperty.RotationStaticForceY) > minimumVelocityToReplaceCamera / 20) && _timerCameraReturnBehindBoat > CamManager.TimerCameraReturnBehindBoat)
+            else if (Mathf.Abs(CamManager.RigidbodyKayak.velocity.x + CamManager.RigidbodyKayak.velocity.z) > minimumVelocityToReplaceCamera && _timerCameraReturnBehindBoat > CamManager.Data.TimerCameraReturnBehindBoat ||
+                     (Mathf.Abs(CamManager.CharacterManager.CurrentStateBaseProperty.RotationStaticForceY) > minimumVelocityToReplaceCamera / 20) && _timerCameraReturnBehindBoat > CamManager.Data.TimerCameraReturnBehindBoat)
             {
                 #region clavier souris
                 //avoid last input to be 0
@@ -84,10 +84,11 @@ namespace Character.Camera.State
                 #endregion
 
                 #region variable
+                
                 //get target rotation
                 Quaternion localRotation = CamManager.CinemachineCameraTarget.transform.localRotation;
                 Quaternion targetQuaternion = Quaternion.Euler(new Vector3(0,
-                    -(CamManager.CharacterManager.CurrentStateBaseProperty.RotationStaticForceY + CamManager.CharacterManager.CurrentStateBaseProperty.RotationPaddleForceY) * CamManager.MultiplierValueRotation,
+                    -(CamManager.CharacterManager.CurrentStateBaseProperty.RotationStaticForceY + CamManager.CharacterManager.CurrentStateBaseProperty.RotationPaddleForceY) * CamManager.Data.MultiplierValueRotation,
                     localRotation.z));
                 //get camera local position
                 Vector3 cameraTargetLocalPosition = CamManager.CinemachineCameraTarget.transform.localPosition;
@@ -95,6 +96,7 @@ namespace Character.Camera.State
                 const float rotationThreshold = 0.15f;
                 float rotationStaticY = CamManager.CharacterManager.CurrentStateBaseProperty.RotationStaticForceY;
                 float rotationPaddleY = CamManager.CharacterManager.CurrentStateBaseProperty.RotationPaddleForceY;
+                
                 #endregion
 
                 //calculate camera rotation & position
@@ -102,25 +104,25 @@ namespace Character.Camera.State
                     Mathf.Abs(rotationPaddleY) > rotationThreshold) //if kayak moving
                 {
                     //rotation
-                    CamManager.CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, targetQuaternion, CamManager.LerpLocalRotationMove);
+                    CamManager.CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, targetQuaternion, CamManager.Data.LerpLocalRotationMove);
 
                     //position
                     if (Mathf.Abs(rotationStaticY) > rotationThreshold / 2)// if kayak is rotating
                     {
-                        cameraTargetLocalPosition.x = Mathf.Lerp(cameraTargetLocalPosition.x, 0, CamManager.LerpLocalPositionNotMoving);
+                        cameraTargetLocalPosition.x = Mathf.Lerp(cameraTargetLocalPosition.x, 0, CamManager.Data.LerpLocalPositionNotMoving);
                     }
                     else if (Mathf.Abs(rotationPaddleY) > rotationThreshold / 2)// if kayak is moving
                     {
                         cameraTargetLocalPosition.x = Mathf.Lerp(cameraTargetLocalPosition.x,
-                            (rotationStaticY + rotationPaddleY) * CamManager.MultiplierValuePosition, //value
-                            CamManager.LerpLocalPositionMove); //time lerp
+                            (rotationStaticY + rotationPaddleY) * CamManager.Data.MultiplierValuePosition, //value
+                            CamManager.Data.LerpLocalPositionMove); //time lerp
                         cameraTargetLocalPosition.z = 0;
                     }
                 }
                 else //if kayak not moving or rotating
                 {
-                    CamManager.CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, Quaternion.Euler(new Vector3(0, 0, localRotation.z)), CamManager.LerpLocalRotationNotMoving);
-                    cameraTargetLocalPosition.x = Mathf.Lerp(cameraTargetLocalPosition.x, 0, CamManager.LerpLocalPositionNotMoving);
+                    CamManager.CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, Quaternion.Euler(new Vector3(0, 0, localRotation.z)), CamManager.Data.LerpLocalRotationNotMoving);
+                    cameraTargetLocalPosition.x = Mathf.Lerp(cameraTargetLocalPosition.x, 0, CamManager.Data.LerpLocalPositionNotMoving);
                 }
 
 

@@ -27,10 +27,10 @@ namespace Character.State
             switch (_weapon)
             {
                 case Weapon.Harpoon:
-                    _weaponPrefab = CharacterManagerRef.HarpoonPrefab;
+                    _weaponPrefab = CharacterManagerRef.Data.HarpoonPrefab;
                     break;
                 case Weapon.Net:
-                    _weaponPrefab = CharacterManagerRef.NetPrefab;
+                    _weaponPrefab = CharacterManagerRef.Data.NetPrefab;
                     break;
             }
             
@@ -102,7 +102,7 @@ namespace Character.State
             Quaternion kayakTransformRotation = CharacterManagerRef.KayakControllerProperty.transform.rotation;
             float targetAngle = CharacterManagerRef.CameraManagerProperty.CinemachineCameraFollowCombat.transform.rotation.eulerAngles.y;
             Quaternion targetRotation = Quaternion.Euler(new Vector3(kayakTransformRotation.eulerAngles.x, targetAngle, kayakTransformRotation.eulerAngles.z));
-            Quaternion rotation = Quaternion.Lerp(kayakTransformRotation,targetRotation,CharacterManagerRef.BoatFollowAimLerp);
+            Quaternion rotation = Quaternion.Lerp(kayakTransformRotation,targetRotation,CharacterManagerRef.Data.BoatFollowAimLerp);
             CharacterManagerRef.KayakControllerProperty.transform.rotation = rotation;
         }
 

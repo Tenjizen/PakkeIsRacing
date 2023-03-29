@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 163cd6086d794bc8aeff3e105899c98d, type: 3}
+  m_Name: Kayak
+  m_EditorClassIdentifier: 
+  DragReducingMultiplier: 50.654
+  KayakValues:
+    MaximumFrontVelocity: 12
+    CollisionToBalanceMagnitudeDivider: 1.4
+    PaddleSideRotationForce: 0.254
+    PaddleCooldown: 1
+    PaddleRotationDeceleration: 0.008
+    PaddleForce: 52.6
+    NumberOfForceAppliance: 9
+    TimeBetweenEveryAppliance: 0.0386
+    ForceCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    StaticRotationForce: 0.0106
+    StaticRotationDeceleration: 0.0152
+    StaticRotationCooldownAfterPaddle: 1
+    VelocityDecelerationLerp: 0.004
+    VelocityDecelerationRotationForce: 0.01
+    UnbalancePaddleCooldown: 0.5
+    UnbalancePaddleForce: 2
+  <PaddlingAudioClip>k__BackingField: {fileID: 8300000, guid: cc79f0cc1ba16294cb28181e5ed1db4e,
+    type: 3}
+  <CollisionAudioClip>k__BackingField: {fileID: 8300000, guid: 6fcbe11d2b48cf540aa7cd7c670420f2,
+    type: 3}
+  TimeToPlayParticlesAfterPaddle: 0.22

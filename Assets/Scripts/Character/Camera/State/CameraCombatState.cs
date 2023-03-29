@@ -17,7 +17,7 @@ namespace Character.Camera.State
             _baseFov = CamManager.VirtualCameraCombat.m_Lens.FieldOfView;
             _currentFov = _baseFov;
 
-            _targetOffset = CamManager.CombatBaseShoulderOffset + CamManager.CombatOffset;
+            _targetOffset = CamManager.CombatBaseShoulderOffset + CamManager.Data.CombatOffset;
         }
         
         public override void UpdateState(CameraManager camera)
@@ -25,17 +25,17 @@ namespace Character.Camera.State
             CamManager.CurrentStateBase.ManageFreeCameraMove(CameraMode.Combat);
             CamManager.ApplyRotationCameraInCombat();
 
-            CamManager.CinemachineTargetPitch = ClampAngle(CamManager.CinemachineTargetPitch, CamManager.HeightClamp.x, CamManager.HeightClamp.y);
+            CamManager.CinemachineTargetPitch = ClampAngle(CamManager.CinemachineTargetPitch, CamManager.Data.HeightClamp.x, CamManager.Data.HeightClamp.y);
 
-            ClampRotationCameraValue(CamManager.HeightClamp.x, CamManager.HeightClamp.y);
+            ClampRotationCameraValue(CamManager.Data.HeightClamp.x, CamManager.Data.HeightClamp.y);
 
             const float fovLerp = 0.05f;
-            _currentFov = Mathf.Lerp(_currentFov, CamManager.CombatFov, fovLerp);
+            _currentFov = Mathf.Lerp(_currentFov, CamManager.Data.CombatFov, fovLerp);
             CamManager.CurrentStateBase.SetFOV(CamManager.VirtualCameraCombat, _currentFov);
 
             const float offsetLerp = 0.05f;
             _currentOffset = Vector3.Lerp(_currentOffset, _targetOffset, offsetLerp);
-            CamManager.CinemachineCombat3rdPersonFollow.ShoulderOffset = _currentOffset;
+            CamManager.CinemachineCombat3RdPersonFollow.ShoulderOffset = _currentOffset;
         }
         public override void FixedUpdate(CameraManager camera)
         {

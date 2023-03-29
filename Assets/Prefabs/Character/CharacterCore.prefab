@@ -1021,29 +1021,17 @@ MonoBehaviour:
   <TransitionManagerProperty>k__BackingField: {fileID: 0}
   <WeaponUIManagerProperty>k__BackingField: {fileID: 0}
   <BalanceGaugeManagerRef>k__BackingField: {fileID: 0}
+  <SoundManagerProperty>k__BackingField: {fileID: 0}
+  <CheckpointManagerProperty>k__BackingField: {fileID: 0}
   <CharacterMonoBehaviour>k__BackingField: {fileID: 7217796708653836310}
-  balanceLerpTo0Value: 0.03
+  Data: {fileID: 11400000, guid: 9383b9325ce5e464e84beb6010a91e0a, type: 2}
   LerpBalanceTo0: 1
   Balance: 0
-  BalanceLimit: 8.5
-  BalanceDeathLimit: 14
-  RebalanceAngle: 2
-  MinimumTimeUnbalanced: 2
-  RotationToBalanceMultiplier: 10
-  FloatersLevelDifferenceToBalanceMultiplier: 0.5
-  NumberPressButton: 10
-  UnitBalanceToTimer: 0
-  ReductionForce: 2
   TimerUnbalanced: 5
   NumberButtonIsPressed: 0
-  _paddleLeftParticle: {fileID: 4051004596906029745}
-  _paddleRightParticle: {fileID: 3972387942190074206}
+  PaddleLeftParticle: {fileID: 4051004596906029745}
+  PaddleRightParticle: {fileID: 3972387942190074206}
   CurrentWeapon: 0
-  BoatFollowAimLerp: 0.05
-  <HarpoonPrefab>k__BackingField: {fileID: 4447602596650765180, guid: 3c5bd57966ac3044bb55ce1daa1a52fd,
-    type: 3}
-  <NetPrefab>k__BackingField: {fileID: 5818197527617267939, guid: 5fe0b6ba9c8ba064c8d71b53722431ad,
-    type: 3}
 --- !u!114 &7217796708653836311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1073,153 +1061,23 @@ MonoBehaviour:
   <CinemachineCameraTargetFollow>k__BackingField: {fileID: 3814212815698604900}
   <CinemachineCameraFollowCombat>k__BackingField: {fileID: 1094441883}
   <AnimatorRef>k__BackingField: {fileID: 4963052748703314965}
-  TopClamp: 28
-  BottomClamp: -18
   <RigidbodyKayak>k__BackingField: {fileID: 2610664555048439513}
-  BalanceRotationMultiplier: 0
-  BalanceRotationZLerp: 0.01
-  MultiplierValueRotation: 0.5
-  LerpLocalRotationMove: 0.01
-  MultiplierValuePosition: 0.5
-  LerpLocalPositionMove: 0.01
-  CanMoveCameraManually: 1
   <Brain>k__BackingField: {fileID: 1967899735}
   <VirtualCameraFreeLook>k__BackingField: {fileID: 4192299973026284776}
   <VirtualCameraCombat>k__BackingField: {fileID: 6638202092221173266}
-  MultiplierFovCamera: 2.03
-  LerpTimeX: 0.035
-  LerpTimeY: 0.035
-  TimerCameraReturnBehindBoat: 2
-  JoystickFreeRotationX:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: -1.0005085
-      value: -0.9997541
-      inSlope: 1.6429578
-      outSlope: 1.6429578
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.14086258
-    - serializedVersion: 3
-      time: -0.009878133
-      value: -0.009975115
-      inSlope: 0.0039650975
-      outSlope: 0.0039650975
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.9637195
-    - serializedVersion: 3
-      time: 0.00005506538
-      value: -0.000013513694
-      inSlope: -0.008547281
-      outSlope: -0.008547281
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.59614134
-      outWeight: 0.011789803
-    - serializedVersion: 3
-      time: 0.00996596
-      value: 0.009966732
-      inSlope: 0.0028130584
-      outSlope: 0.0028130584
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.010330245
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1.4651144
-      outSlope: 1.4651144
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.09702311
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  JoystickFreeRotationY:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: -1.0005085
-      value: -0.9997541
-      inSlope: 1.6429578
-      outSlope: 1.6429578
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.14086258
-    - serializedVersion: 3
-      time: -0.009878133
-      value: -0.009975115
-      inSlope: 0.0039650975
-      outSlope: 0.0039650975
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.9637195
-    - serializedVersion: 3
-      time: 0.00005506538
-      value: -0.000013513694
-      inSlope: -0.008547281
-      outSlope: -0.008547281
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.59614134
-      outWeight: 0.011789803
-    - serializedVersion: 3
-      time: 0.00996596
-      value: 0.009966732
-      inSlope: 0.0028130584
-      outSlope: 0.0028130584
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.010330245
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1.4651144
-      outSlope: 1.4651144
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.09702311
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  LerpFOV: 0.01
-  LerpLocalPositionNotMoving: 0.003
-  LerpLocalRotationNotMoving: 0.003
-  ValueAddForTopDownWhenDeath: 0.1
-  ValueAddForDistanceWhenDeath: 0.05
-  MaxValueDistanceToStartDeath: 10
-  CameraDistanceRespawn: 25
-  MultiplyTimeForDistanceWhenRespawn: 5
-  CameraAngleTopDownRespawn: 28
-  MultiplyTimeForTopDownWhenRespawn: 6
-  AmplitudShakeWhenUnbalanced: 0.5
-  AmplitudShakeWhenWaterFlow: 0.2
-  AmplitudShakeWhenWaterWave: 0.5
   <Waves>k__BackingField: {fileID: 0}
-  CombatOffset: {x: 0, y: -0.5, z: -1}
-  CombatFov: 40
-  HeightClamp: {x: -25, y: 10}
+  Data: {fileID: 11400000, guid: 494193eeed361fd42bc8e95857ae59a3, type: 2}
   CameraAngleOverride: 10
   CameraBaseFov: 0
   CameraTargetBasePos: {x: 0, y: 0, z: 0}
   RotationZ: 0
+  CanMoveCameraManually: 1
   CinemachineTargetYaw: 0
   CinemachineTargetPitch: 0
   LastInputX: 0
   LastInputY: 0
   StartDeath: 0
   WaterFlow: 0
-  CinemachineCombat3rdPersonFollow: {fileID: 0}
   CombatBaseShoulderOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &8337715506076774778
 GameObject:
@@ -1801,12 +1659,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4950148468892883501, guid: bc06d1e844ba3694bbdecce4a99ba863,
         type: 3}
-      propertyPath: _leftPaddleParticle
+      propertyPath: LeftPaddleParticle
       value: 
       objectReference: {fileID: 4051004596906029745}
     - target: {fileID: 4950148468892883501, guid: bc06d1e844ba3694bbdecce4a99ba863,
         type: 3}
-      propertyPath: _rightPaddleParticle
+      propertyPath: RightPaddleParticle
       value: 
       objectReference: {fileID: 3972387942190074206}
     m_RemovedComponents: []

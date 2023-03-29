@@ -3,6 +3,7 @@ using System.Collections;
 using Character.Camera;
 using Character.Camera.State;
 using Kayak;
+using Kayak.Data;
 using Sound;
 using UnityEngine;
 using UnityEngine.Events;
@@ -44,7 +45,7 @@ namespace Character.State
         {
             _kayakController = CharacterManagerRef.KayakControllerProperty;
             _kayakRigidbody = CharacterManagerRef.KayakControllerProperty.Rigidbody;
-            _kayakValues = CharacterManagerRef.KayakControllerProperty.KayakValues;
+            _kayakValues = CharacterManagerRef.KayakControllerProperty.Data.KayakValues;
             _inputs = CharacterManagerRef.InputManagementProperty;
         }
 
@@ -71,7 +72,7 @@ namespace Character.State
             PaddleCooldownManagement();
             
             //check balanced -> unbalanced
-            if (Mathf.Abs(CharacterManagerRef.Balance) >= CharacterManagerRef.BalanceLimit)
+            if (Mathf.Abs(CharacterManagerRef.Balance) >= CharacterManagerRef.Data.BalanceLimit)
             {
                 CameraManagerRef.CanMoveCameraManually = false;
                 _kayakController.CanReduceDrag = false;
@@ -196,19 +197,19 @@ namespace Character.State
             //rotation
             float rotation = _kayakValues.PaddleSideRotationForce;
             RotationPaddleForceY += direction == Direction.Right ? -rotation : rotation;
-
+            
             //balance
-            CharacterManagerRef.Balance += RotationPaddleForceY * CharacterManagerRef.RotationToBalanceMultiplier;
+            CharacterManagerRef.Balance += RotationPaddleForceY * CharacterManagerRef.Data.RotationToBalanceMultiplier;
             
             //force
             MonoBehaviourRef.StartCoroutine(PaddleForceCurve());
-
-            //audio
-            CharacterManager.Instance.SoundManagerProperty.PlaySound(_kayakController.PaddlingAudioClip);
             
-            //animation
+            //audio
+            CharacterManager.Instance.SoundManagerProperty.PlaySound(_kayakController.Data.PaddlingAudioClip);
+            
+            //animation & particles
             CharacterManagerRef.PaddleAnimatorProperty.SetTrigger(direction == Direction.Left ? "PaddleLeft" : "PaddleRight");
-            CharacterManagerRef.KayakControllerProperty.PlayPaddleParticle(direction);
+            _kayakController.PlayPaddleParticle(direction);
 
             //events
             switch (direction)
@@ -340,7 +341,7 @@ namespace Character.State
             float leftLevel = (frontLeftY + backLeftY) / 2;
             float rightLevel = (frontRightY + backRightY) / 2;
 
-            float multiplier = CharacterManagerRef.FloatersLevelDifferenceToBalanceMultiplier;
+            float multiplier = CharacterManagerRef.Data.FloatersLevelDifferenceToBalanceMultiplier;
             float frontBackDifference = Mathf.Abs(frontLevel - backLevel) * multiplier;
             float leftRightDifference = Mathf.Abs(leftLevel - rightLevel) * multiplier;
             

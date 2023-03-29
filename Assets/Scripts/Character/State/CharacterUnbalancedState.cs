@@ -1,6 +1,7 @@
 ﻿using Character.Camera;
 using Character.Camera.State;
 using Kayak;
+using Kayak.Data;
 using Sound;
 using UnityEngine;
 
@@ -27,7 +28,7 @@ namespace Character.State
         {
             _kayakController = CharacterManagerRef.KayakControllerProperty;
             _inputs = CharacterManagerRef.InputManagementProperty;
-            _kayakValues = CharacterManagerRef.KayakControllerProperty.KayakValues;
+            _kayakValues = CharacterManagerRef.KayakControllerProperty.Data.KayakValues;
         }
 
         #endregion
@@ -47,14 +48,14 @@ namespace Character.State
 
             CharacterManagerRef.NumberButtonIsPressed = 0;
             _timerUnbalanced = 0;
-            CharacterManagerRef.TimerUnbalanced = (CharacterManagerRef.UnitBalanceToTimer * Mathf.Abs(CharacterManagerRef.Balance)) - 
-                                                    ((Mathf.Abs(CharacterManagerRef.Balance) - CharacterManagerRef.BalanceLimit)*CharacterManagerRef.ReductionForce);
+            CharacterManagerRef.TimerUnbalanced = (CharacterManagerRef.Data.UnitBalanceToTimer * Mathf.Abs(CharacterManagerRef.Balance)) - 
+                                                    ((Mathf.Abs(CharacterManagerRef.Balance) - CharacterManagerRef.Data.BalanceLimit)*CharacterManagerRef.Data.ReductionForce);
 
             //balance
             if (Mathf.Abs(CharacterManagerRef.Balance) >
-                CharacterManagerRef.BalanceDeathLimit - CharacterManagerRef.MinimumTimeUnbalanced)
+                CharacterManagerRef.Data.BalanceDeathLimit - CharacterManagerRef.Data.MinimumTimeUnbalanced)
             {
-                CharacterManagerRef.SetBalanceValueToCurrentSide(CharacterManagerRef.BalanceDeathLimit - CharacterManagerRef.MinimumTimeUnbalanced);
+                CharacterManagerRef.SetBalanceValueToCurrentSide(CharacterManagerRef.Data.BalanceDeathLimit - CharacterManagerRef.Data.MinimumTimeUnbalanced);
             }
 
             //gauge
@@ -74,7 +75,7 @@ namespace Character.State
             //Rebalance();
             ClickSpam();
 
-            if (Mathf.Abs(CharacterManagerRef.Balance) < CharacterManagerRef.RebalanceAngle)
+            if (Mathf.Abs(CharacterManagerRef.Balance) < CharacterManagerRef.Data.RebalanceAngle)
             {
                 this.SwitchState(character);
             }
@@ -104,7 +105,7 @@ namespace Character.State
         {
             _timerUnbalanced += Time.deltaTime;
 
-            if (CharacterManagerRef.NumberButtonIsPressed >= CharacterManagerRef.NumberPressButton && _timerUnbalanced <= CharacterManagerRef.TimerUnbalanced)
+            if (CharacterManagerRef.NumberButtonIsPressed >= CharacterManagerRef.Data.NumberPressButton && _timerUnbalanced <= CharacterManagerRef.TimerUnbalanced)
             {
                 _kayakController.CanReduceDrag = true;
                 CameraManagerRef.CanMoveCameraManually = true;
@@ -127,12 +128,12 @@ namespace Character.State
         private void TimerManagement()
         {
             CharacterManagerRef.Balance += Time.deltaTime * Mathf.Sign(CharacterManagerRef.Balance);
-            if (Mathf.Abs(CharacterManagerRef.Balance) >= CharacterManagerRef.BalanceDeathLimit)
+            if (Mathf.Abs(CharacterManagerRef.Balance) >= CharacterManagerRef.Data.BalanceDeathLimit)
             {
                 CharacterDeathState characterDeathState = new CharacterDeathState();
                 CharacterManagerRef.SwitchState(characterDeathState);
             }
-            else if (Mathf.Abs(CharacterManagerRef.Balance) < CharacterManagerRef.RebalanceAngle)
+            else if (Mathf.Abs(CharacterManagerRef.Balance) < CharacterManagerRef.Data.RebalanceAngle)
             {
                 _kayakController.CanReduceDrag = true;
                 CameraManagerRef.CanMoveCameraManually = true;
@@ -193,7 +194,7 @@ namespace Character.State
 
         private void RebalanceEffect()
         {
-            CharacterManager.Instance.SoundManagerProperty.PlaySound(_kayakController.PaddlingAudioClip);
+            CharacterManager.Instance.SoundManagerProperty.PlaySound(_kayakController.Data.PaddlingAudioClip);
             CharacterManagerRef.BalanceGaugeManagerRef.MakeCursorFeedback();
         }
 

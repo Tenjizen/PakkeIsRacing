@@ -8,8 +8,8 @@ namespace Character.Camera.State
         public override void EnterState(CameraManager camera)
         {
             CamManager.ShakeCamera(0);
-            CamManager.VirtualCameraCombat.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = CamManager.CameraDistanceRespawn;
-            CamManager.CameraAngleOverride = CamManager.CameraAngleTopDownRespawn;
+            CamManager.VirtualCameraCombat.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = CamManager.Data.CameraDistanceRespawn;
+            CamManager.CameraAngleOverride = CamManager.Data.CameraAngleTopDownRespawn;
             ResetCameraBehindBoat();
         }
         public override void UpdateState(CameraManager camera)
@@ -49,7 +49,7 @@ namespace Character.Camera.State
         private void Respawn()
         {
             if (CamManager.VirtualCameraCombat.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance >= 7)
-                CamManager.VirtualCameraCombat.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance -= Time.deltaTime * CamManager.MultiplyTimeForDistanceWhenRespawn /* CameraManagerRef.ValueRemoveForDistanceWhenRespawn*/;
+                CamManager.VirtualCameraCombat.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance -= Time.deltaTime * CamManager.Data.MultiplyTimeForDistanceWhenRespawn /* CameraManagerRef.ValueRemoveForDistanceWhenRespawn*/;
 
             if (CamManager.VirtualCameraCombat.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance <= 7 && CamManager.CameraAngleOverride <= 0)
             {
@@ -58,7 +58,7 @@ namespace Character.Camera.State
             }
 
             if (CamManager.CameraAngleOverride > 0)
-                CamManager.CameraAngleOverride -= Time.deltaTime *  CamManager.MultiplyTimeForTopDownWhenRespawn;
+                CamManager.CameraAngleOverride -= Time.deltaTime *  CamManager.Data.MultiplyTimeForTopDownWhenRespawn;
         }
     }
 }
