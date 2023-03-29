@@ -13,10 +13,9 @@ namespace Character.State
 
         private KayakController _kayakController;
         private InputManagement _inputs;
-        private GameplayInputs _gameplayInputs;
-        private KayakParameters _kayakValues;
 
-        private float _rightPaddleCooldown, _leftPaddleCooldown;
+        //private KayakParameters _kayakValues;
+        //private float _rightPaddleCooldown, _leftPaddleCooldown;
 
         private float _timerUnbalanced = 0;
 
@@ -28,7 +27,7 @@ namespace Character.State
         {
             _kayakController = CharacterManagerRef.KayakControllerProperty;
             _inputs = CharacterManagerRef.InputManagementProperty;
-            _kayakValues = CharacterManagerRef.KayakControllerProperty.Data.KayakValues;
+            //_kayakValues = CharacterManagerRef.KayakControllerProperty.Data.KayakValues;
         }
 
         #endregion
@@ -41,15 +40,15 @@ namespace Character.State
             CharacterManagerRef.LerpBalanceTo0 = false;
 
             //values
-            _rightPaddleCooldown = _kayakValues.UnbalancePaddleCooldown;
-            _leftPaddleCooldown = _kayakValues.UnbalancePaddleCooldown;
+            //_rightPaddleCooldown = _kayakValues.UnbalancePaddleCooldown;
+            //_leftPaddleCooldown = _kayakValues.UnbalancePaddleCooldown;
             CanBeMoved = false;
             CanCharacterOpenWeapons = false;
 
             CharacterManagerRef.NumberButtonIsPressed = 0;
             _timerUnbalanced = 0;
-            CharacterManagerRef.TimerUnbalanced = (CharacterManagerRef.Data.UnitBalanceToTimer * Mathf.Abs(CharacterManagerRef.Balance)) - 
-                                                    ((Mathf.Abs(CharacterManagerRef.Balance) - CharacterManagerRef.Data.BalanceLimit)*CharacterManagerRef.Data.ReductionForce);
+            CharacterManagerRef.TimerUnbalanced = (CharacterManagerRef.Data.UnitBalanceToTimer * Mathf.Abs(CharacterManagerRef.Balance)) -
+                                                    ((Mathf.Abs(CharacterManagerRef.Balance) - CharacterManagerRef.Data.BalanceLimit) * CharacterManagerRef.Data.ReductionForce);
 
             //balance
             if (Mathf.Abs(CharacterManagerRef.Balance) >
@@ -66,14 +65,15 @@ namespace Character.State
 
         public override void UpdateState(CharacterManager character)
         {
-            //TimerManagement();
             NewTimer();
-            PaddleCooldownManagement();
+            ClickSpam();
+
+            //TimerManagement();
+            //PaddleCooldownManagement();
 
             MakeBoatRotationWithBalance(_kayakController.transform, 2);
 
             //Rebalance();
-            ClickSpam();
 
             if (Mathf.Abs(CharacterManagerRef.Balance) < CharacterManagerRef.Data.RebalanceAngle)
             {
@@ -125,78 +125,121 @@ namespace Character.State
             }
         }
 
-        private void TimerManagement()
-        {
-            CharacterManagerRef.Balance += Time.deltaTime * Mathf.Sign(CharacterManagerRef.Balance);
-            if (Mathf.Abs(CharacterManagerRef.Balance) >= CharacterManagerRef.Data.BalanceDeathLimit)
-            {
-                CharacterDeathState characterDeathState = new CharacterDeathState();
-                CharacterManagerRef.SwitchState(characterDeathState);
-            }
-            else if (Mathf.Abs(CharacterManagerRef.Balance) < CharacterManagerRef.Data.RebalanceAngle)
-            {
-                _kayakController.CanReduceDrag = true;
-                CameraManagerRef.CanMoveCameraManually = true;
-                CharacterManagerRef.SetBalanceValueToCurrentSide(0);
-                CanCharacterMakeActions = true;
-
-                CharacterNavigationState characterNavigationState = new CharacterNavigationState();
-                CharacterManagerRef.SwitchState(characterNavigationState);
-
-                CameraNavigationState cameraNavigationState = new CameraNavigationState();
-                CameraManagerRef.SwitchState(cameraNavigationState);
-            }
-        }
-
-        private void PaddleCooldownManagement()
-        {
-            _leftPaddleCooldown -= Time.deltaTime;
-            _rightPaddleCooldown -= Time.deltaTime;
-        }
-
         private void ClickSpam()
         {
-            if (_inputs.Inputs.PaddleLeft && _leftPaddleCooldown <= 0 && CharacterManagerRef.Balance < 0)
+            if (_inputs.GameplayInputs.Boat.UnbalancedLeft.WasPerformedThisFrame() && CharacterManagerRef.Balance < 0)
             {
-                _leftPaddleCooldown = _kayakValues.UnbalancePaddleCooldown;
                 CharacterManagerRef.NumberButtonIsPressed++;
                 CharacterManagerRef.BalanceGaugeManagerRef.MakeCursorFeedback();
             }
-            if (_inputs.Inputs.PaddleRight && _rightPaddleCooldown <= 0 && CharacterManagerRef.Balance > 0)
+            if (_inputs.GameplayInputs.Boat.UnbalancedRight.WasPerformedThisFrame() && CharacterManagerRef.Balance > 0)
             {
-                _rightPaddleCooldown = _kayakValues.UnbalancePaddleCooldown;
                 CharacterManagerRef.NumberButtonIsPressed++;
                 CharacterManagerRef.BalanceGaugeManagerRef.MakeCursorFeedback();
             }
         }
 
-        private void Rebalance()
-        {
-            if (_inputs.Inputs.PaddleLeft && _leftPaddleCooldown <= 0 && CharacterManagerRef.Balance < 0)
-            {
-                //CharacterManagerRef.Balance += _kayakValues.UnbalancePaddleForce;
-                _leftPaddleCooldown = _kayakValues.UnbalancePaddleCooldown;
+        #region old
+        //private void TimerManagement()
+        //{
+        //    CharacterManagerRef.Balance += Time.deltaTime * Mathf.Sign(CharacterManagerRef.Balance);
+        //    if (Mathf.Abs(CharacterManagerRef.Balance) >= CharacterManagerRef.Data.BalanceDeathLimit)
+        //    {
+        //        CharacterDeathState characterDeathState = new CharacterDeathState();
+        //        CharacterManagerRef.SwitchState(characterDeathState);
+        //    }
+        //    else if (Mathf.Abs(CharacterManagerRef.Balance) < CharacterManagerRef.Data.RebalanceAngle)
+        //    {
+        //        _kayakController.CanReduceDrag = true;
+        //        CameraManagerRef.CanMoveCameraManually = true;
+        //        CharacterManagerRef.SetBalanceValueToCurrentSide(0);
+        //        CanCharacterMakeActions = true;
 
-                    CharacterManagerRef.NumberButtonIsPressed++;
+        //        CharacterNavigationState characterNavigationState = new CharacterNavigationState();
+        //        CharacterManagerRef.SwitchState(characterNavigationState);
 
-                //RebalanceEffect();
-            }
-            if (_inputs.Inputs.PaddleRight && _rightPaddleCooldown <= 0 && CharacterManagerRef.Balance > 0)
-            {
-                //CharacterManagerRef.Balance -= _kayakValues.UnbalancePaddleForce;
-                _rightPaddleCooldown = _kayakValues.UnbalancePaddleCooldown;
+        //        CameraNavigationState cameraNavigationState = new CameraNavigationState();
+        //        CameraManagerRef.SwitchState(cameraNavigationState);
+        //    }
+        //}
+        //private void PaddleCooldownManagement()
+        //{
+        //    _leftPaddleCooldown -= Time.deltaTime;
+        //    _rightPaddleCooldown -= Time.deltaTime;
+        //}
+        //private void Rebalance()
+        //{
+        //    if (_inputs.Inputs.PaddleLeft && _leftPaddleCooldown <= 0 && CharacterManagerRef.Balance < 0)
+        //    {
+        //        CharacterManagerRef.Balance += _kayakValues.UnbalancePaddleForce;
+        //        _leftPaddleCooldown = _kayakValues.UnbalancePaddleCooldown;
 
-                    CharacterManagerRef.NumberButtonIsPressed++;
+        //        RebalanceEffect();
+        //    }
+        //    if (_inputs.Inputs.PaddleRight && _rightPaddleCooldown <= 0 && CharacterManagerRef.Balance > 0)
+        //    {
+        //        CharacterManagerRef.Balance -= _kayakValues.UnbalancePaddleForce;
+        //        _rightPaddleCooldown = _kayakValues.UnbalancePaddleCooldown;
 
-                //RebalanceEffect();
-            }
-        }
+        //        RebalanceEffect();
+        //    }
+        //}
 
-        private void RebalanceEffect()
-        {
-            CharacterManager.Instance.SoundManagerProperty.PlaySound(_kayakController.Data.PaddlingAudioClip);
-            CharacterManagerRef.BalanceGaugeManagerRef.MakeCursorFeedback();
-        }
+        //private void RebalanceEffect()
+        //{
+        //    CharacterManager.Instance.SoundManagerProperty.PlaySound(_kayakController.Data.PaddlingAudioClip);
+        //    CharacterManagerRef.BalanceGaugeManagerRef.MakeCursorFeedback();
+        //}        //private void TimerManagement()
+        //{
+        //    CharacterManagerRef.Balance += Time.deltaTime * Mathf.Sign(CharacterManagerRef.Balance);
+        //    if (Mathf.Abs(CharacterManagerRef.Balance) >= CharacterManagerRef.Data.BalanceDeathLimit)
+        //    {
+        //        CharacterDeathState characterDeathState = new CharacterDeathState();
+        //        CharacterManagerRef.SwitchState(characterDeathState);
+        //    }
+        //    else if (Mathf.Abs(CharacterManagerRef.Balance) < CharacterManagerRef.Data.RebalanceAngle)
+        //    {
+        //        _kayakController.CanReduceDrag = true;
+        //        CameraManagerRef.CanMoveCameraManually = true;
+        //        CharacterManagerRef.SetBalanceValueToCurrentSide(0);
+        //        CanCharacterMakeActions = true;
+
+        //        CharacterNavigationState characterNavigationState = new CharacterNavigationState();
+        //        CharacterManagerRef.SwitchState(characterNavigationState);
+
+        //        CameraNavigationState cameraNavigationState = new CameraNavigationState();
+        //        CameraManagerRef.SwitchState(cameraNavigationState);
+        //    }
+        //}
+        //private void PaddleCooldownManagement()
+        //{
+        //    _leftPaddleCooldown -= Time.deltaTime;
+        //    _rightPaddleCooldown -= Time.deltaTime;
+        //}
+        //private void Rebalance()
+        //{
+        //    if (_inputs.Inputs.PaddleLeft && _leftPaddleCooldown <= 0 && CharacterManagerRef.Balance < 0)
+        //    {
+        //        CharacterManagerRef.Balance += _kayakValues.UnbalancePaddleForce;
+        //        _leftPaddleCooldown = _kayakValues.UnbalancePaddleCooldown;
+
+        //        RebalanceEffect();
+        //    }
+        //    if (_inputs.Inputs.PaddleRight && _rightPaddleCooldown <= 0 && CharacterManagerRef.Balance > 0)
+        //    {
+        //        CharacterManagerRef.Balance -= _kayakValues.UnbalancePaddleForce;
+        //        _rightPaddleCooldown = _kayakValues.UnbalancePaddleCooldown;
+
+        //        RebalanceEffect();
+        //    }
+        //}
+
+        //private void RebalanceEffect()
+        //{
+        //    CharacterManager.Instance.SoundManagerProperty.PlaySound(_kayakController.Data.PaddlingAudioClip);
+        //    CharacterManagerRef.BalanceGaugeManagerRef.MakeCursorFeedback();
+        //}
+        #endregion
 
         #endregion
     }
