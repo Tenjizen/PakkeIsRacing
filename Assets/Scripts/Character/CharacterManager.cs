@@ -17,10 +17,10 @@ namespace Character
 {
     public class CharacterManager : Singleton<CharacterManager>
     {
-        #region Property
+        #region Properties
         
-        [field:SerializeField, Header("Properties")] public CharacterStateBase CurrentStateBaseProperty { get; private set; }
-        [field:SerializeField] public CameraManager CameraManagerProperty { get; private set; }
+        [field:SerializeField] public CharacterStateBase CurrentStateBaseProperty { get; private set; }
+        [field:SerializeField, Header("Properties")] public CameraManager CameraManagerProperty { get; private set; }
         [field:SerializeField] public KayakController KayakControllerProperty { get; private set; }
         [field:SerializeField] public InputManagement InputManagementProperty { get; private set; }
         [field:SerializeField] public Animator PaddleAnimatorProperty { get; private set; }
@@ -35,22 +35,16 @@ namespace Character
 
         [Header("Character Data")]
         public CharacterData Data;
-        
-        [Header("Balance"), ReadOnly, Tooltip("Can the balance lerp itself to 0 ?")]
+        [Header("Balance Infos"), ReadOnly, Tooltip("Can the balance lerp itself to 0 ?")]
         public bool LerpBalanceTo0 = true;
         [ReadOnly, Tooltip("The current balance value")]
         public float Balance = 0f;
-        
-        [Tooltip("The timer")]
-        [ReadOnly] public float TimerUnbalanced = 0;
-        [Tooltip("The number of times the button has been pressed")]
-        [ReadOnly] public int NumberButtonIsPressed = 0;
-        
-        [Header("VFX")]
-        public ParticleSystem PaddleLeftParticle;
-        public ParticleSystem PaddleRightParticle;
-        
-        [ReadOnly] public Weapon CurrentWeapon;
+        [Tooltip("The timer"), ReadOnly] 
+        public float TimerUnbalanced = 0;
+        [Tooltip("The number of times the button has been pressed"), ReadOnly]
+        public int NumberButtonIsPressed = 0;
+        [ReadOnly] 
+        public Weapon CurrentWeapon;
 
         protected override void Awake()
         {

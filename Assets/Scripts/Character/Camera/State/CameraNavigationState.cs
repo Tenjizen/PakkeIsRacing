@@ -13,7 +13,7 @@ namespace Character.Camera.State
             CamManager.LastInputY = 0;
 
             CamManager.ShakeCamera(0);
-            CamManager.AnimatorRef.Play("FreeLook");
+            CamManager.CameraAnimator.Play("FreeLook");
             CamManager.Brain.m_BlendUpdateMethod = Cinemachine.CinemachineBrain.BrainUpdateMethod.LateUpdate;
 
             CamManager.ResetNavigationValue();

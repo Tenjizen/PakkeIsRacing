@@ -12,7 +12,7 @@ namespace Character.Camera.State
 
         public override void EnterState(CameraManager camera)
         {
-            CamManager.AnimatorRef.Play("Combat");
+            CamManager.CameraAnimator.Play("Combat");
 
             _baseFov = CamManager.VirtualCameraCombat.m_Lens.FieldOfView;
             _currentFov = _baseFov;

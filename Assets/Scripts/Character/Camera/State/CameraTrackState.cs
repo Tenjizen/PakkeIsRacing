@@ -14,7 +14,7 @@ namespace Character.Camera.State
         public override void EnterState(CameraManager camera)
         {
             Debug.Log("track");
-            CamManager.AnimatorRef.Play(_cameraName);
+            CamManager.CameraAnimator.Play(_cameraName);
             CamManager.Brain.m_BlendUpdateMethod = Cinemachine.CinemachineBrain.BrainUpdateMethod.FixedUpdate;
 
             //look-at

@@ -14,14 +14,15 @@ namespace Character.Camera
         [field:SerializeField] public GameObject CinemachineCameraTarget { get; private set; }
         [field:SerializeField] public GameObject CinemachineCameraTargetFollow { get; private set; }
         [field:SerializeField] public GameObject CinemachineCameraFollowCombat { get; private set; }
-        [field:SerializeField] public Animator AnimatorRef { get; private set; }
+        [field:SerializeField] public Animator CameraAnimator { get; private set; }
         [field:SerializeField] public Rigidbody RigidbodyKayak { get; private set; }
         [field:SerializeField, Header("Virtual Camera")] public CinemachineBrain Brain { get; private set; }
         [field:SerializeField] public CinemachineVirtualCamera VirtualCameraFreeLook { get; private set; }
         [field:SerializeField] public CinemachineVirtualCamera VirtualCameraCombat { get; private set; }
         [field:SerializeField] public Waves Waves { get; private set; }
 
-        [Header("Data")] public CameraData Data;
+        
+        [Space(5), Header("Camera Data")] public CameraData Data;
         
         public CharacterManager CharacterManager { get; private set; }
         public InputManagement Input { get; private set; }
