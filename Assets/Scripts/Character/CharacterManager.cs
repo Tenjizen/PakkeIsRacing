@@ -11,6 +11,7 @@ using Tools.SingletonClassBase;
 using UI;
 using UI.WeaponWheel;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 namespace Character
@@ -18,19 +19,19 @@ namespace Character
     public class CharacterManager : Singleton<CharacterManager>
     {
         #region Properties
-        
-        [field:SerializeField] public CharacterStateBase CurrentStateBaseProperty { get; private set; }
-        [field:SerializeField, Header("Properties")] public CameraManager CameraManagerProperty { get; private set; }
-        [field:SerializeField] public KayakController KayakControllerProperty { get; private set; }
-        [field:SerializeField] public InputManagement InputManagementProperty { get; private set; }
-        [field:SerializeField] public Animator PaddleAnimatorProperty { get; private set; }
-        [field:SerializeField] public TransitionManager TransitionManagerProperty { get; private set; } 
-        [field:SerializeField] public WeaponUIManager WeaponUIManagerProperty { get; private set; } 
-        [field:SerializeField] public BalanceGaugeManager BalanceGaugeManagerRef { get; private set; }
-        [field:SerializeField] public SoundManager SoundManagerProperty { get; private set; }
-        [field:SerializeField] public CheckpointManager CheckpointManagerProperty { get; private set; }
-        [field:SerializeField] public MonoBehaviour CharacterMonoBehaviour { get; private set; }
-        
+
+        [field: SerializeField] public CharacterStateBase CurrentStateBaseProperty { get; private set; }
+        [field: SerializeField, Header("Properties")] public CameraManager CameraManagerProperty { get; private set; }
+        [field: SerializeField] public KayakController KayakControllerProperty { get; private set; }
+        [field: SerializeField] public InputManagement InputManagementProperty { get; private set; }
+        [field: SerializeField] public Animator PaddleAnimatorProperty { get; private set; }
+        [field: SerializeField] public TransitionManager TransitionManagerProperty { get; private set; }
+        [field: SerializeField] public WeaponUIManager WeaponUIManagerProperty { get; private set; }
+        [field: SerializeField] public BalanceGaugeManager BalanceGaugeManagerRef { get; private set; }
+        [field: SerializeField] public SoundManager SoundManagerProperty { get; private set; }
+        [field: SerializeField] public CheckpointManager CheckpointManagerProperty { get; private set; }
+        [field: SerializeField] public MonoBehaviour CharacterMonoBehaviour { get; private set; }
+
         #endregion
 
         [Header("Character Data")]
@@ -39,11 +40,11 @@ namespace Character
         public bool LerpBalanceTo0 = true;
         [ReadOnly, Tooltip("The current balance value")]
         public float Balance = 0f;
-        [Tooltip("The timer"), ReadOnly] 
+        [Tooltip("The timer"), ReadOnly]
         public float TimerUnbalanced = 0;
         [Tooltip("The number of times the button has been pressed"), ReadOnly]
         public int NumberButtonIsPressed = 0;
-        [ReadOnly] 
+        [ReadOnly]
         public Weapon CurrentWeapon;
 
         protected override void Awake()
@@ -57,7 +58,7 @@ namespace Character
             CharacterNavigationState navigationState = new CharacterNavigationState();
             CurrentStateBaseProperty = navigationState;
             CurrentStateBaseProperty.Initialize();
-            
+
             CurrentStateBaseProperty.EnterState(this);
 
             BalanceGaugeManagerRef.SetBalanceGaugeActive(false);
@@ -92,7 +93,18 @@ namespace Character
             {
                 Balance = Mathf.Lerp(Balance, 0, Data.BalanceLerpTo0Value);
             }
-            BalanceGaugeManagerRef.SetBalanceCursor(Balance);
+
+            if (Balance >= 0)
+            {
+                float function = Mathf.Pow(Balance, 2) - (((float)NumberButtonIsPressed / (float)Data.NumberPressButton) * 10) * (Mathf.Pow(Balance, 2) / 10);
+                BalanceGaugeManagerRef.SetBalanceCursor(function);
+            }
+            else if (Balance < 0)
+            {
+                //Change of sign
+                float function = -Mathf.Pow(Balance, 2) + (((float)NumberButtonIsPressed / (float)Data.NumberPressButton) * 10) * (Mathf.Pow(Balance, 2) / 10);
+                BalanceGaugeManagerRef.SetBalanceCursor(function);
+            }
         }
 
         /// <summary>
