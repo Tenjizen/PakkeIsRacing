@@ -1981,11 +1981,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _BalanceGaugeUI: {fileID: 9041261449522701783}
   _cursor: {fileID: 4080940748295268558}
-  _cursorAngleMultiplier: 4
+  _cursorAngleMultiplier: 0.5
   _LT: {fileID: 1630484835332424134}
   _RT: {fileID: 8778226217617458269}
-  GaugeLeft: {fileID: 0}
-  GaugeRight: {fileID: 0}
+  GaugeLeft: {fileID: 6227666449047617463}
+  GaugeRight: {fileID: 1814854340970939}
 --- !u!1 &1632394492975044395
 GameObject:
   m_ObjectHideFlags: 0
@@ -4648,6 +4648,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Compass
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033140580219790014, guid: 1e2bff9f270520f4bbdddf4745f79770,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1033140580959995950, guid: 1e2bff9f270520f4bbdddf4745f79770,
         type: 3}
