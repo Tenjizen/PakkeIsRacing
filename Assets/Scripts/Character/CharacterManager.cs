@@ -44,8 +44,8 @@ namespace Character
         public float TimerUnbalanced = 0;
         [Tooltip("The number of times the button has been pressed"), ReadOnly]
         public int NumberButtonIsPressed = 0;
-        [ReadOnly]
-        public Weapon CurrentWeapon;
+        [FormerlySerializedAs("CurrentWeapon")] [ReadOnly]
+        public Projectile CurrentProjectile;
 
         protected override void Awake()
         {

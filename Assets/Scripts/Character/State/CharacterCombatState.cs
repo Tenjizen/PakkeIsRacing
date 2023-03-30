@@ -9,7 +9,6 @@ namespace Character.State
 {
     public class CharacterCombatState : CharacterStateBase
     {
-        private Weapon _weapon;
         private bool _isAiming;
 
         private Projectile _weaponPrefab;
@@ -23,17 +22,8 @@ namespace Character.State
         {
             CharacterManagerRef.WeaponUIManagerProperty.SetPaddleDownImage(true);
             
-            _weapon = CharacterManagerRef.CurrentWeapon;
-            switch (_weapon)
-            {
-                case Weapon.Harpoon:
-                    _weaponPrefab = CharacterManagerRef.Data.HarpoonPrefab;
-                    break;
-                case Weapon.Net:
-                    _weaponPrefab = CharacterManagerRef.Data.NetPrefab;
-                    break;
-            }
-            
+            _weaponPrefab = CharacterManagerRef.CurrentProjectile;
+
             //_currentWeaponCooldown = _weaponPrefab.Data.Cooldown;
         }
 

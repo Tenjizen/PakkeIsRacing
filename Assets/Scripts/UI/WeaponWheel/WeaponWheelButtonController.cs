@@ -2,6 +2,7 @@ using System;
 using Character;
 using Character.Camera.State;
 using Character.State;
+using Fight;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -13,7 +14,7 @@ namespace UI.WeaponWheel
     {
         [SerializeField] private Animator _animator;
         [SerializeField] private Button _button;
-        [SerializeField] private Weapon _weapon;
+        [SerializeField] private Projectile _projectile;
     
         public UnityEvent OnSelected = new UnityEvent();
         
@@ -47,10 +48,10 @@ namespace UI.WeaponWheel
 
         public void Select()
         {
-            Debug.Log($"select {_weapon}");
+            Debug.Log($"select {_projectile.name}");
         
             OnSelected.Invoke();
-            _characterManager.CurrentWeapon = _weapon;
+            _characterManager.CurrentProjectile = _projectile;
 
             CharacterCombatState characterCombatState = new CharacterCombatState();
             _characterManager.SwitchState(characterCombatState);
