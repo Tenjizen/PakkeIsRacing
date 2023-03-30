@@ -394,6 +394,11 @@ namespace WaterAndFloating
         private void SpawnParticle(Vector3 position)
         {
             GameObject particle = _waveParticlePool.GetPooledObject();
+            if (particle == null)
+            {
+                return;
+            }
+            
             particle.gameObject.SetActive(true);
             particle.transform.position = position;
             particle.GetComponent<ParticleSystem>().Play();
