@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -7,8 +8,11 @@ namespace UI
     {
         [SerializeField] private GameObject _BalanceGaugeUI;
         [SerializeField] private Transform _cursor;
+        public Transform Cursor => _cursor;
         [SerializeField] private float _cursorAngleMultiplier = 4;
         [SerializeField] private GameObject _LT, _RT;
+
+        [SerializeField] private Image GaugeLeft, GaugeRight;
 
         private float _currentAngle;
 
@@ -36,5 +40,22 @@ namespace UI
             _LT.SetActive(showLT);
             _RT.SetActive(showRT);
         }
+
+        public void ReduceGauge(float timer)
+        {
+            GaugeLeft.fillAmount = 0.25f- timer;
+            GaugeRight.fillAmount = 0.25f - timer;
+        }
+        public void ResetGauge()
+        {
+            GaugeLeft.fillAmount = 0.25f;
+            GaugeRight.fillAmount = 0.25f;
+        }
+
+        public float PercentGauge()
+        {
+            return GaugeLeft.fillAmount / .25f;
+        }
+
     }
 }
