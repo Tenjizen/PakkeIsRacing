@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameTools;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -20,7 +21,7 @@ namespace WaterAndFloating
         
         [SerializeField] private Octave _octave;
 
-        [Header("VFX"), SerializeField] private ParticleSystem _waveBurstParticlePrefab;
+        [Header("VFX"), SerializeField] private ObjectPool _waveParticlePool;
 
         //mesh
         private MeshFilter _meshFilter;
@@ -303,9 +304,10 @@ namespace WaterAndFloating
                     int index = FindIndexOfVerticeAt(new Vector2(point.x,point.z), true);
                     SetupVerticesAmplitudeDictionary(new Vector2(_vertices[index].x,_vertices[index].z), amplitude);
 
-                    if (j % 3 == 0 && _waveBurstParticlePrefab != null)
+                    if (j % 3 == 0 && _waveParticlePool != null)
                     {
-                        Instantiate(_waveBurstParticlePrefab, point+new Vector3(0,amplitude-1,0), Quaternion.identity);
+                        Vector3 position = point + new Vector3(0, amplitude - 1, 0);
+                        SpawnParticle(position);
                     }
                 }
             }
@@ -362,9 +364,10 @@ namespace WaterAndFloating
                     int index = FindIndexOfVerticeAt(vector2Point, true);
                     SetupVerticesAmplitudeDictionary(new Vector2(_vertices[index].x,_vertices[index].z), amplitude);
 
-                    if (j % 3 == 0 && _waveBurstParticlePrefab != null)
+                    if (j % 3 == 0 && _waveParticlePool != null)
                     {
-                        Instantiate(_waveBurstParticlePrefab,new Vector3(vector2Point.x,amplitude-1,vector2Point.y), Quaternion.identity);
+                        Vector3 position = new Vector3(vector2Point.x,amplitude-1,vector2Point.y);
+                        SpawnParticle(position);
                     }
                 }
             }
@@ -386,6 +389,18 @@ namespace WaterAndFloating
 
         #endregion
 
+        #region VFX
+
+        private void SpawnParticle(Vector3 position)
+        {
+            GameObject particle = _waveParticlePool.GetPooledObject();
+            particle.gameObject.SetActive(true);
+            particle.transform.position = position;
+            particle.GetComponent<ParticleSystem>().Play();
+        }
+
+        #endregion
+        
         #region Amplitude
     
         private Dictionary<Vector2, float> _verticesAmplitudeGrowingDictionary = new Dictionary<Vector2, float>();
