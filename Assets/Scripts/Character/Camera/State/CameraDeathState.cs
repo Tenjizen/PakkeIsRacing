@@ -34,9 +34,9 @@ namespace Character.Camera.State
         private void Isdead()
         {
 
-            CamManager.VirtualCameraCombat.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance += CamManager.Data.ValueAddForDistanceWhenDeath;
+            CamManager.VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance += CamManager.Data.ValueAddForDistanceWhenDeath;
 
-            if (CamManager.VirtualCameraCombat.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance > CamManager.Data.MaxValueDistanceToStartDeath)
+            if (CamManager.VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance > CamManager.Data.MaxValueDistanceToStartDeath)
             {
                 CamManager.StartDeath = true;
             }
