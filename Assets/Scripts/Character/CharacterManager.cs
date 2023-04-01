@@ -44,8 +44,12 @@ namespace Character
         public float TimerUnbalanced = 0;
         [Tooltip("The number of times the button has been pressed"), ReadOnly]
         public int NumberButtonIsPressed = 0;
-        [FormerlySerializedAs("CurrentWeapon")] [ReadOnly]
+        [ReadOnly]
         public Projectile CurrentProjectile;
+        
+        [HideInInspector] public float WeaponCooldown;
+        [HideInInspector] public float WeaponCooldownBase;
+        [HideInInspector] public bool ProjectileIsInAir;
 
         protected override void Awake()
         {
@@ -71,6 +75,7 @@ namespace Character
             if (CurrentStateBaseProperty.IsDead == false)
             {
                 BalanceManagement();
+                ManageWeaponCooldown();
             }
         }
         private void FixedUpdate()
@@ -130,23 +135,38 @@ namespace Character
         {
             AddBalanceValueToCurrentSide((float)value);
         }
-
-        #region GUI
-
-        private void OnGUI()
-        {
-            GUI.skin.label.fontSize = 50;
-
-            GUI.color = Color.white;
-            GUI.Label(new Rect(10, 10, 500, 100), "Balance : " + Math.Round(Balance, 1));
-        }
-
-        #endregion
-
+        
+        /// <summary>
+        /// Switch to the death state of the character
+        /// </summary>
         public void SwitchToDeathState()
         {
             CharacterDeathState characterDeathState = new CharacterDeathState();
             SwitchState(characterDeathState);
         }
+
+        private void ManageWeaponCooldown()
+        {
+            if (ProjectileIsInAir == false && WeaponCooldown > 0)
+            {
+                WeaponCooldown -= Time.deltaTime;
+                float value = WeaponCooldown / WeaponCooldownBase;
+                WeaponUIManagerProperty.SetCooldownUI(value);
+            }
+        }
+
+        #region GUI
+
+        private void OnGUI()
+        {
+            #if UNITY_EDITOR
+            GUI.skin.label.fontSize = 50;
+
+            GUI.color = Color.white;
+            GUI.Label(new Rect(10, 10, 500, 100), "Balance : " + Math.Round(Balance, 1));
+            #endif
+        }
+
+        #endregion
     }
 }

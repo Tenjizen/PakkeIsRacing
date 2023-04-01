@@ -1,20 +1,13 @@
-﻿using System;
-using Character.Camera;
-using Character.Camera.State;
+﻿using Character.Camera.State;
 using Fight;
-using UI.WeaponWheel;
 using UnityEngine;
 
 namespace Character.State
 {
     public class CharacterCombatState : CharacterStateBase
     {
-        private bool _isAiming;
-
         private Projectile _weaponPrefab;
-        private float _currentWeaponCooldown;
-
-        private bool _projectileInShoot;
+        private bool _isAiming;
 
         #region Base methods
 
@@ -23,26 +16,10 @@ namespace Character.State
             CharacterManagerRef.WeaponUIManagerProperty.SetPaddleDownImage(true);
             
             _weaponPrefab = CharacterManagerRef.CurrentProjectile;
-
-            //_currentWeaponCooldown = _weaponPrefab.Data.Cooldown;
         }
 
         public override void UpdateState(CharacterManager character)
         {
-            if (CharacterManagerRef.InputManagementProperty.Inputs.DeselectWeapon)
-            {
-                CameraNavigationState cameraNavigationState = new CameraNavigationState();
-                CameraManagerRef.SwitchState(cameraNavigationState);
-                
-                CharacterNavigationState characterNavigationState = new CharacterNavigationState();
-                CharacterManagerRef.SwitchState(characterNavigationState);
-
-                CharacterManagerRef.WeaponUIManagerProperty.SetPaddleDownImage(false);
-                CharacterManagerRef.WeaponUIManagerProperty.SetCursor(false);
-                CharacterManagerRef.WeaponUIManagerProperty.SetCooldownUI(0);
-            }
-            
-            ManageCooldown();
             HandleAim();
             HandleShoot();
         }
@@ -64,16 +41,6 @@ namespace Character.State
 
         #region Methods
 
-        private void ManageCooldown()
-        {
-            if (_projectileInShoot == false)
-            {
-                _currentWeaponCooldown -= Time.deltaTime;
-                float value = _currentWeaponCooldown / _weaponPrefab.Data.Cooldown;
-                CharacterManagerRef.WeaponUIManagerProperty.SetCooldownUI(value);
-            }
-        }
-        
         private void HandleAim()
         {
             bool aimingState = _isAiming;
@@ -98,12 +65,12 @@ namespace Character.State
 
         private void HandleShoot()
         {
-            if (CharacterManagerRef.InputManagementProperty.Inputs.Shoot && _currentWeaponCooldown <= 0 && _weaponPrefab != null)
+            if (CharacterManagerRef.InputManagementProperty.Inputs.Shoot && CharacterManagerRef.WeaponCooldown <= 0 && _weaponPrefab != null)
             {
-                _currentWeaponCooldown = _weaponPrefab.Data.Cooldown;
-                _projectileInShoot = true;
+                CharacterManagerRef.WeaponCooldown = _weaponPrefab.Data.Cooldown;
+                CharacterManagerRef.ProjectileIsInAir = true;
                 
-                Projectile projectile = GameObject.Instantiate(_weaponPrefab, CharacterManagerRef.transform.position, Quaternion.identity);
+                Projectile projectile = Object.Instantiate(_weaponPrefab, CharacterManagerRef.transform.position, Quaternion.identity);
                 
                 GameObject owner = CharacterManagerRef.gameObject;
                 projectile.SetOwner(owner);
@@ -115,12 +82,28 @@ namespace Character.State
                 projectile.Launch(MathTools.GetDirectionToPointCameraLooking(CharacterManagerRef.transform, pointDistance));
                 
                 projectile.OnProjectileDie.AddListener(ProjectileHit);
+                
+                LaunchNavigationState();
             }
         }
 
         private void ProjectileHit()
         {
-            _projectileInShoot = false;
+            CharacterManagerRef.WeaponCooldownBase = _weaponPrefab.Data.Cooldown;
+            CharacterManagerRef.ProjectileIsInAir = false;
+        }
+
+        private void LaunchNavigationState()
+        {
+            CameraNavigationState cameraNavigationState = new CameraNavigationState();
+            CameraManagerRef.SwitchState(cameraNavigationState);
+                
+            CharacterNavigationState characterNavigationState = new CharacterNavigationState();
+            CharacterManagerRef.SwitchState(characterNavigationState);
+
+            CharacterManagerRef.WeaponUIManagerProperty.SetPaddleDownImage(false);
+            CharacterManagerRef.WeaponUIManagerProperty.SetCursor(false);
+            CharacterManagerRef.WeaponUIManagerProperty.SetCooldownUI(0);
         }
 
         #endregion
