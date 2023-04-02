@@ -1,5 +1,6 @@
 ﻿using System;
 using DG.Tweening;
+using Fight.Data;
 using GPEs.WaterFlowGPE;
 using UnityEngine;
 using UnityEngine.Events;
@@ -71,7 +72,7 @@ namespace Fight
             Die();
         }
         
-        public virtual void Launch(Vector3 direction) { }
+        public virtual void Launch(Vector3 direction, float power) { }
 
         protected virtual void Die()
         {

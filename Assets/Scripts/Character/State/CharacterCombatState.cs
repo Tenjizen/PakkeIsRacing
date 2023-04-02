@@ -9,6 +9,7 @@ namespace Character.State
         private Projectile _weaponPrefab;
 
         private bool _isHoldingShoot;
+        private float _holdingTime;
 
         #region Base methods
 
@@ -59,8 +60,13 @@ namespace Character.State
             {
                 _isHoldingShoot = true;
                 
-                //zoom
-                CameraManagerRef.VirtualCameraCombat.m_Lens.FieldOfView -= 1f;
+                //holding vfx
+                _holdingTime += Time.deltaTime;
+                const float startTime = 0.3f;
+                if (_holdingTime > startTime && CharacterManagerRef.WeaponChargedParticleSystem.isPlaying == false)
+                {
+                    CharacterManagerRef.WeaponChargedParticleSystem.Play();
+                }
             }
 
             if (_isHoldingShoot && CharacterManagerRef.InputManagementProperty.Inputs.Shoot == false)
@@ -78,10 +84,13 @@ namespace Character.State
                     projectile.Data.ForbiddenColliders.Add(owner);
                     projectile.Data.ForbiddenColliders.Add(CharacterManagerRef.KayakControllerProperty.gameObject);
 
-                    const float pointDistance = 30f;
-                    projectile.Launch(MathTools.GetDirectionToPointCameraLooking(CharacterManagerRef.transform, pointDistance));
+                    float power = Mathf.Clamp(_holdingTime, 0.5f, 1f);
+                    float pointDistance = 30f * power;
+                    projectile.Launch(MathTools.GetDirectionToPointCameraLooking(CharacterManagerRef.transform, pointDistance), power);
                 
                     projectile.OnProjectileDie.AddListener(ProjectileHit);
+                    
+                    CharacterManagerRef.WeaponChargedParticleSystem.Stop();
                 
                     LaunchNavigationState();
                 }

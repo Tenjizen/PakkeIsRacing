@@ -76,7 +76,7 @@ namespace Character.Data
         public float CombatFov = 40f;
         public float CombatZoomFov = 20f;
         [Range(0,1)] public float CombatZoomFovLerp = 0.1f;
-        public Vector2 HeightClamp = new Vector2(-30, 30);
         [Range(0,1)] public float CombatZoomAimSpeedMultiplier = 0.5f;
+        public Vector2 HeightClamp = new Vector2(-30, 30);
     }
 }

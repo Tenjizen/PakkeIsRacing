@@ -33,16 +33,16 @@ namespace Fight
             Destroy(gameObject);
         }
         
-        public override void Launch(Vector3 direction)
+        public override void Launch(Vector3 direction, float power)
         {
-            base.Launch(direction);
+            base.Launch(direction, power);
             
             _rigidbody = GetComponent<Rigidbody>();
 
             _rigidbody.isKinematic = false;
             _rigidbody.useGravity = true;
             
-            _rigidbody.AddForce(direction * Data.LaunchForce);
+            _rigidbody.AddForce(direction * (Data.LaunchForce * power));
             
             CharacterManager.Instance.SoundManagerProperty.PlaySound(_launchSound);
         }

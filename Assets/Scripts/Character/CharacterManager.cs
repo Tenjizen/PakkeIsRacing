@@ -46,6 +46,8 @@ namespace Character
         public int NumberButtonIsPressed = 0;
         [ReadOnly]
         public Projectile CurrentProjectile;
+        [Header("VFX")] 
+        public ParticleSystem WeaponChargedParticleSystem;
         
         [HideInInspector] public float WeaponCooldown;
         [HideInInspector] public float WeaponCooldownBase;
