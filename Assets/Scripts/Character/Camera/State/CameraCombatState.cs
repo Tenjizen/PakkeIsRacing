@@ -35,14 +35,17 @@ namespace Character.Camera.State
             if (CharacterManager.Instance.InputManagementProperty.Inputs.Shoot && CharacterManager.Instance.WeaponCooldown <= 0)
             {
                 _targetFOV = Mathf.Lerp(_targetFOV,CamManager.Data.CombatZoomFov, CamManager.Data.CombatZoomFovLerp);
+                FreeAimMultiplier = Mathf.Lerp(FreeAimMultiplier, CamManager.Data.CombatZoomAimSpeedMultiplier, CamManager.Data.CombatZoomFovLerp);
             }
             else
             {
                 _targetFOV = CamManager.Data.CombatFov;
+                FreeAimMultiplier = 1f;
             }
             CamManager.CurrentStateBase.SetFOV(CamManager.VirtualCameraCombat, _currentFov);
             _currentFov = Mathf.Lerp(_currentFov, _targetFOV, fovLerp);
 
+            //offset
             const float offsetLerp = 0.05f;
             _currentOffset = Vector3.Lerp(_currentOffset, _targetOffset, offsetLerp);
             CamManager.CinemachineCombat3RdPersonFollow.ShoulderOffset = _currentOffset;

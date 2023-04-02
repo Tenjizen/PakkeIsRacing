@@ -12,6 +12,7 @@ namespace Character.Camera.State
         }
 
         protected bool CanResetShoulderOffset = true;
+        protected float FreeAimMultiplier = 1f;
 
         protected CameraManager CamManager { get; private set; }
 
@@ -58,18 +59,18 @@ namespace Character.Camera.State
                 {
                     case CameraMode.Navigation:
                         aim = CamManager.Input.Inputs.RotateCamera;
-                        CamManager.CinemachineTargetPitch += CamManager.Data.JoystickFreeRotationY.Evaluate(aim.y);
+                        CamManager.CinemachineTargetPitch += CamManager.Data.JoystickFreeRotationY.Evaluate(aim.y) * FreeAimMultiplier;
                         break;
 
                     case CameraMode.Combat:
-                        aim = CamManager.Input.Inputs.MovingAim;
+                        aim = CamManager.Input.Inputs.MovingAim; 
                         aim = new Vector2(aim.x, aim.y * -1);
-                        CamManager.CinemachineTargetPitch += CamManager.Data.JoystickFreeRotationY.Evaluate(aim.y);
+                        CamManager.CinemachineTargetPitch += CamManager.Data.JoystickFreeRotationY.Evaluate(aim.y) * FreeAimMultiplier;
                         break;
                 }
 
                 //Controller
-                CamManager.CinemachineTargetYaw += CamManager.Data.JoystickFreeRotationX.Evaluate(aim.x);
+                CamManager.CinemachineTargetYaw += CamManager.Data.JoystickFreeRotationX.Evaluate(aim.x) * FreeAimMultiplier;
                 //CameraManagerRef.CinemachineTargetPitch = CameraManagerRef.JoystickFreeRotationY.Evaluate(aim.y); (jsp pk ici ça fait de la merde)
 
                 #region clavier souris
