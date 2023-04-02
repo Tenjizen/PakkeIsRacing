@@ -192,7 +192,13 @@ public class SharkCombatState : SharkBaseState
 
         if (_waveStartJump == false)
         {
-            sharkManager.StartJumpCircularWaveData.Center = sharkManager.transform.position;
+            Vector2 center = sharkManager.StartJumpCircularWaveData.Center;
+
+            center.x = sharkManager.transform.position.x;
+            center.y = sharkManager.transform.position.z;
+
+            sharkManager.StartJumpCircularWaveData.Center = center;
+
             sharkManager.WavesData.LaunchCircularWave(sharkManager.StartJumpCircularWaveData);
             _waveStartJump = true;
         }
@@ -221,7 +227,12 @@ public class SharkCombatState : SharkBaseState
 
         if (_timeAnimationCurve >= _lastKey.time - sharkManager.EndJumpCircularWaveTime && _waveEndJump == false)
         {
-            sharkManager.StartJumpCircularWaveData.Center = sharkManager.transform.position;
+            Vector2 center = sharkManager.StartJumpCircularWaveData.Center;
+
+            center.x = sharkManager.transform.position.x;
+            center.y = sharkManager.transform.position.z;
+
+            sharkManager.StartJumpCircularWaveData.Center = center;
             sharkManager.WavesData.LaunchCircularWave(sharkManager.StartJumpCircularWaveData);
             _waveEndJump = true;
         }
