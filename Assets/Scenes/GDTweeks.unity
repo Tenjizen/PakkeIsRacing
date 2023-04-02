@@ -141,7 +141,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-283660
+  m_Name: pb_Mesh-484610
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -519,7 +519,7 @@ MonoBehaviour:
   _dimension: 100
   _UVScale: 2
   _waterPlacing: {fileID: 1383893021}
-  _renderDistance: 20
+  _renderDistance: 50
   _playerTransform: {fileID: 1280143116}
   _octave:
     Speed: {x: 0, y: 0}
@@ -562,7 +562,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-283778
+  m_Name: pb_Mesh-484728
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -867,12 +867,12 @@ PrefabInstance:
     - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
         type: 3}
       propertyPath: EndJumpCircularWaveData.Distance
-      value: 3.24
+      value: 14.48
       objectReference: {fileID: 0}
     - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
         type: 3}
       propertyPath: EndJumpCircularWaveData.Duration
-      value: 4.65
+      value: 24.27
       objectReference: {fileID: 0}
     - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
         type: 3}
@@ -882,22 +882,22 @@ PrefabInstance:
     - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
         type: 3}
       propertyPath: EndJumpCircularWaveData.Amplitude
-      value: 3.31
+      value: 15.68
       objectReference: {fileID: 0}
     - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
         type: 3}
       propertyPath: StartJumpCircularWaveData.Distance
-      value: 1.9
+      value: 11.31
       objectReference: {fileID: 0}
     - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
         type: 3}
       propertyPath: StartJumpCircularWaveData.Duration
-      value: 1.2
+      value: 8.51
       objectReference: {fileID: 0}
     - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
         type: 3}
       propertyPath: StartJumpCircularWaveData.Amplitude
-      value: 1.56
+      value: 13.27
       objectReference: {fileID: 0}
     - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
         type: 3}
@@ -1045,7 +1045,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-283694
+  m_Name: pb_Mesh-484644
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1284,7 +1284,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-283790
+  m_Name: pb_Mesh-484740
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1517,7 +1517,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-283682
+  m_Name: pb_Mesh-484632
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1681,7 +1681,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-283598
+  m_Name: pb_Mesh-484548
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2223,7 +2223,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-283476
+  m_Name: pb_Mesh-484426
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2499,7 +2499,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-283716
+  m_Name: pb_Mesh-484666
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2826,26 +2826,51 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 812421683781049912, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: m_ChildCameras.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2610664554247681292, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: _waves
+      value: 
+      objectReference: {fileID: 419315132}
+    - target: {fileID: 2610664554247681292, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2610664554634946431, guid: 36e32e7372e41e346abb29f843dd75b3,
         type: 3}
       propertyPath: _waves
       value: 
       objectReference: {fileID: 419315132}
     - target: {fileID: 2610664554634946431, guid: 36e32e7372e41e346abb29f843dd75b3,
         type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2610664555456840929, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
       propertyPath: _waves
       value: 
       objectReference: {fileID: 419315132}
     - target: {fileID: 2610664555456840929, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2610664556231849538, guid: 36e32e7372e41e346abb29f843dd75b3,
         type: 3}
       propertyPath: _waves
       value: 
       objectReference: {fileID: 419315132}
     - target: {fileID: 2610664556231849538, guid: 36e32e7372e41e346abb29f843dd75b3,
         type: 3}
-      propertyPath: _waves
-      value: 
-      objectReference: {fileID: 419315132}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3387405727807608120, guid: 36e32e7372e41e346abb29f843dd75b3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2996,6 +3021,11 @@ PrefabInstance:
       propertyPath: _waves
       value: 
       objectReference: {fileID: 419315132}
+    - target: {fileID: 7609300824562711772, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 7611706348771366613, guid: 36e32e7372e41e346abb29f843dd75b3,
         type: 3}
       propertyPath: <Waves>k__BackingField
@@ -3017,6 +3047,11 @@ PrefabInstance:
       objectReference: {fileID: 419315132}
     - target: {fileID: 4143733214911551369, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
         type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143733214911551369, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
+        type: 3}
       propertyPath: _playerTransform
       value: 
       objectReference: {fileID: 242003445}
@@ -3025,6 +3060,11 @@ PrefabInstance:
       propertyPath: _waves
       value: 
       objectReference: {fileID: 419315132}
+    - target: {fileID: 4143733214921477655, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
+        type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4143733214921477655, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
         type: 3}
       propertyPath: _playerTransform
@@ -3035,6 +3075,11 @@ PrefabInstance:
       propertyPath: _waves
       value: 
       objectReference: {fileID: 419315132}
+    - target: {fileID: 4143733215394534600, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
+        type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4143733215394534600, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
         type: 3}
       propertyPath: _playerTransform
@@ -3045,6 +3090,11 @@ PrefabInstance:
       propertyPath: _waves
       value: 
       objectReference: {fileID: 419315132}
+    - target: {fileID: 4143733215434229456, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
+        type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4143733215434229456, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
         type: 3}
       propertyPath: _playerTransform
@@ -3055,6 +3105,11 @@ PrefabInstance:
       propertyPath: _waves
       value: 
       objectReference: {fileID: 419315132}
+    - target: {fileID: 4143733215511627451, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
+        type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4143733215511627451, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
         type: 3}
       propertyPath: _playerTransform
@@ -3065,6 +3120,11 @@ PrefabInstance:
       propertyPath: _waves
       value: 
       objectReference: {fileID: 419315132}
+    - target: {fileID: 4143733215551231139, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
+        type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4143733215551231139, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
         type: 3}
       propertyPath: _playerTransform
@@ -3075,6 +3135,11 @@ PrefabInstance:
       propertyPath: _waves
       value: 
       objectReference: {fileID: 419315132}
+    - target: {fileID: 4143733215680128298, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
+        type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4143733215680128298, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
         type: 3}
       propertyPath: _playerTransform
@@ -3085,6 +3150,11 @@ PrefabInstance:
       propertyPath: _waves
       value: 
       objectReference: {fileID: 419315132}
+    - target: {fileID: 4143733215690128564, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
+        type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4143733215690128564, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
         type: 3}
       propertyPath: _playerTransform
@@ -3095,6 +3165,11 @@ PrefabInstance:
       propertyPath: _waves
       value: 
       objectReference: {fileID: 419315132}
+    - target: {fileID: 4143733215884658165, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
+        type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4143733215884658165, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
         type: 3}
       propertyPath: _playerTransform
@@ -3105,6 +3180,11 @@ PrefabInstance:
       propertyPath: _waves
       value: 
       objectReference: {fileID: 419315132}
+    - target: {fileID: 4143733215983507437, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
+        type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4143733215983507437, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
         type: 3}
       propertyPath: _playerTransform
@@ -3115,6 +3195,11 @@ PrefabInstance:
       propertyPath: _waves
       value: 
       objectReference: {fileID: 419315132}
+    - target: {fileID: 4143733216479485738, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
+        type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4143733216479485738, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
         type: 3}
       propertyPath: _playerTransform
@@ -3125,6 +3210,11 @@ PrefabInstance:
       propertyPath: _waves
       value: 
       objectReference: {fileID: 419315132}
+    - target: {fileID: 4143733216501860020, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
+        type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4143733216501860020, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
         type: 3}
       propertyPath: _playerTransform
@@ -3135,6 +3225,11 @@ PrefabInstance:
       propertyPath: _waves
       value: 
       objectReference: {fileID: 419315132}
+    - target: {fileID: 4143733216618894535, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
+        type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4143733216618894535, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
         type: 3}
       propertyPath: _playerTransform
@@ -3145,6 +3240,11 @@ PrefabInstance:
       propertyPath: _waves
       value: 
       objectReference: {fileID: 419315132}
+    - target: {fileID: 4143733216628821337, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
+        type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4143733216628821337, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
         type: 3}
       propertyPath: _playerTransform
@@ -3155,6 +3255,11 @@ PrefabInstance:
       propertyPath: _waves
       value: 
       objectReference: {fileID: 419315132}
+    - target: {fileID: 4143733216720287574, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
+        type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4143733216720287574, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
         type: 3}
       propertyPath: _playerTransform
@@ -3165,6 +3270,11 @@ PrefabInstance:
       propertyPath: _waves
       value: 
       objectReference: {fileID: 419315132}
+    - target: {fileID: 4143733216760341838, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
+        type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4143733216760341838, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
         type: 3}
       propertyPath: _playerTransform
@@ -3252,6 +3362,11 @@ PrefabInstance:
       objectReference: {fileID: 419315132}
     - target: {fileID: 8759867610747288910, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
         type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8759867610747288910, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
+        type: 3}
       propertyPath: _playerTransform
       value: 
       objectReference: {fileID: 242003445}
@@ -3292,6 +3407,11 @@ PrefabInstance:
       objectReference: {fileID: 419315132}
     - target: {fileID: 8759867611167092541, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
         type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8759867611167092541, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
+        type: 3}
       propertyPath: _playerTransform
       value: 
       objectReference: {fileID: 242003445}
@@ -3300,6 +3420,11 @@ PrefabInstance:
       propertyPath: _waves
       value: 
       objectReference: {fileID: 419315132}
+    - target: {fileID: 8759867611272211571, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
+        type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8759867611272211571, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
         type: 3}
       propertyPath: _playerTransform
@@ -3395,6 +3520,11 @@ PrefabInstance:
       propertyPath: _waves
       value: 
       objectReference: {fileID: 419315132}
+    - target: {fileID: 8759867612106055376, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
+        type: 3}
+      propertyPath: _renderDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8759867612106055376, guid: bfb00ed5945bfd741a3efbcb4bdc6096,
         type: 3}
       propertyPath: _playerTransform
