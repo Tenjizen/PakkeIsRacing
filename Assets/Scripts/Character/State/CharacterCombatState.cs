@@ -7,7 +7,8 @@ namespace Character.State
     public class CharacterCombatState : CharacterStateBase
     {
         private Projectile _weaponPrefab;
-        private bool _isAiming;
+
+        private bool _isHoldingShoot;
 
         #region Base methods
 
@@ -16,6 +17,8 @@ namespace Character.State
             CharacterManagerRef.WeaponUIManagerProperty.SetPaddleDownImage(true);
             
             _weaponPrefab = CharacterManagerRef.CurrentProjectile;
+            
+            CharacterManagerRef.WeaponUIManagerProperty.SetCursor(true);
         }
 
         public override void UpdateState(CharacterManager character)
@@ -34,7 +37,6 @@ namespace Character.State
 
         public override void ExitState(CharacterManager character)
         {
-            
         }
 
         #endregion
@@ -43,18 +45,6 @@ namespace Character.State
 
         private void HandleAim()
         {
-            bool aimingState = _isAiming;
-            _isAiming = CharacterManagerRef.InputManagementProperty.Inputs.Aim;
-            
-            //aim directly
-            _isAiming = true;
-
-            //cursor
-            if (aimingState != _isAiming)
-            {
-                CharacterManagerRef.WeaponUIManagerProperty.SetCursor(_isAiming);
-            }
-
             //kayak rotation
             Quaternion kayakTransformRotation = CharacterManagerRef.KayakControllerProperty.transform.rotation;
             float targetAngle = CharacterManagerRef.CameraManagerProperty.CinemachineCameraFollowCombat.transform.rotation.eulerAngles.y;
@@ -65,26 +55,40 @@ namespace Character.State
 
         private void HandleShoot()
         {
-            if (CharacterManagerRef.InputManagementProperty.Inputs.Shoot && CharacterManagerRef.WeaponCooldown <= 0 && _weaponPrefab != null)
+            if (CharacterManagerRef.InputManagementProperty.Inputs.Shoot && CharacterManagerRef.WeaponCooldown <= 0)
             {
-                CharacterManagerRef.WeaponCooldown = _weaponPrefab.Data.Cooldown;
-                CharacterManagerRef.ProjectileIsInAir = true;
+                _isHoldingShoot = true;
                 
-                Projectile projectile = Object.Instantiate(_weaponPrefab, CharacterManagerRef.transform.position, Quaternion.identity);
-                
-                GameObject owner = CharacterManagerRef.gameObject;
-                projectile.SetOwner(owner);
-                
-                projectile.Data.ForbiddenColliders.Add(owner);
-                projectile.Data.ForbiddenColliders.Add(CharacterManagerRef.KayakControllerProperty.gameObject);
-
-                const float pointDistance = 30f;
-                projectile.Launch(MathTools.GetDirectionToPointCameraLooking(CharacterManagerRef.transform, pointDistance));
-                
-                projectile.OnProjectileDie.AddListener(ProjectileHit);
-                
-                LaunchNavigationState();
+                //zoom
+                CameraManagerRef.VirtualCameraCombat.m_Lens.FieldOfView -= 1f;
             }
+
+            if (_isHoldingShoot && CharacterManagerRef.InputManagementProperty.Inputs.Shoot == false)
+            {
+                if (CharacterManagerRef.WeaponCooldown <= 0 && _weaponPrefab != null)
+                {
+                    CharacterManagerRef.WeaponCooldown = _weaponPrefab.Data.Cooldown;
+                    CharacterManagerRef.ProjectileIsInAir = true;
+                
+                    Projectile projectile = Object.Instantiate(_weaponPrefab, CharacterManagerRef.transform.position, Quaternion.identity);
+                
+                    GameObject owner = CharacterManagerRef.gameObject;
+                    projectile.SetOwner(owner);
+                
+                    projectile.Data.ForbiddenColliders.Add(owner);
+                    projectile.Data.ForbiddenColliders.Add(CharacterManagerRef.KayakControllerProperty.gameObject);
+
+                    const float pointDistance = 30f;
+                    projectile.Launch(MathTools.GetDirectionToPointCameraLooking(CharacterManagerRef.transform, pointDistance));
+                
+                    projectile.OnProjectileDie.AddListener(ProjectileHit);
+                
+                    LaunchNavigationState();
+                }
+
+                _isHoldingShoot = false;
+            }
+            
         }
 
         private void ProjectileHit()

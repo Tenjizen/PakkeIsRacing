@@ -74,6 +74,8 @@ namespace Character.Data
         [Header("Combat")]
         public Vector3 CombatOffset = new Vector3(-1, -1, 0);
         public float CombatFov = 40f;
+        public float CombatZoomFov = 20f;
+        [Range(0,1)] public float CombatZoomFovLerp = 0.1f;
         public Vector2 HeightClamp = new Vector2(-30, 30);
     }
 }

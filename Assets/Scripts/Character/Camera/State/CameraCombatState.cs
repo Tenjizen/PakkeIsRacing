@@ -9,6 +9,7 @@ namespace Character.Camera.State
         private float _baseFov = 55f;
         private Vector3 _targetOffset;
         private Vector3 _currentOffset;
+        private float _targetFOV;
 
         public override void EnterState(CameraManager camera)
         {
@@ -29,9 +30,18 @@ namespace Character.Camera.State
 
             ClampRotationCameraValue(CamManager.Data.HeightClamp.x, CamManager.Data.HeightClamp.y);
 
+            //fov
             const float fovLerp = 0.05f;
-            _currentFov = Mathf.Lerp(_currentFov, CamManager.Data.CombatFov, fovLerp);
+            if (CharacterManager.Instance.InputManagementProperty.Inputs.Shoot && CharacterManager.Instance.WeaponCooldown <= 0)
+            {
+                _targetFOV = Mathf.Lerp(_targetFOV,CamManager.Data.CombatZoomFov, CamManager.Data.CombatZoomFovLerp);
+            }
+            else
+            {
+                _targetFOV = CamManager.Data.CombatFov;
+            }
             CamManager.CurrentStateBase.SetFOV(CamManager.VirtualCameraCombat, _currentFov);
+            _currentFov = Mathf.Lerp(_currentFov, _targetFOV, fovLerp);
 
             const float offsetLerp = 0.05f;
             _currentOffset = Vector3.Lerp(_currentOffset, _targetOffset, offsetLerp);

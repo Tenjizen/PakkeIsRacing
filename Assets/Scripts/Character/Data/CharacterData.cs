@@ -35,7 +35,7 @@ namespace Character.Data
         public float ReductionForce;
 
         [Header("Weapon Mode")]
-        [Range(0, 0.1f), Tooltip("The lerp applied to the boat following camera direction when aiming")]
+        [Range(0, 1f), Tooltip("The lerp applied to the boat following camera direction when aiming")]
         public float BoatFollowAimLerp = 0.05f;
         [field:SerializeField] public Projectile HarpoonPrefab { get; set; }
         [field:SerializeField] public Projectile NetPrefab { get; set; }
