@@ -60,25 +60,29 @@ namespace Enemies.Shark
         [Tooltip("The speed at which the circle will grow (Ex : 1 / ShadowDivideGrowSpeed)")]
         public float ShadowDivideGrowSpeed = 2;
         [ReadOnly] public Vector3 PositionOffset;
-        [ReadOnly] public float Angle;
+        /*[ReadOnly]*/ public float Angle;
 
         [Header("Waves")]
         public Waves WavesData;
         public CircularWave StartJumpCircularWaveData;
         public CircularWave EndJumpCircularWaveData;
         [Space(5)] public float EndJumpCircularWaveTime = 1;
-        
+        [field: SerializeField] public GameObject VisualShark { get; private set; }
         public KayakController KayakControllerProperty { get; set; }
 
+        [ReadOnly] public bool Flip = false;
+        public GameObject TargetLerp;
+        public GameObject PointTarget;
 
+        public float pierre = 5;
         private void Awake()
         {
             //ColliderShadow.enabled = false;
-            SharkCombatState sharkCombatState = new SharkCombatState();
-            CurrentStateBase = sharkCombatState;
+            //SharkCombatState sharkCombatState = new SharkCombatState();
+            //CurrentStateBase = sharkCombatState;
 
-            //EnemyFreeRoamState enemyFreeRoamState = new EnemyFreeRoamState();
-            //CurrentStateBase = enemyFreeRoamState;
+            SharkFreeRoamState sharkFreeRoamState = new SharkFreeRoamState();
+            CurrentStateBase = sharkFreeRoamState;
         }
 
         private void Start()
@@ -104,9 +108,9 @@ namespace Enemies.Shark
         {
             if (TargetTransform == null)
             {
+                TargetTransform = GetComponent<PlayerTriggerManager>().PropKayakController.gameObject.GetComponent<Transform>();
                 SharkCombatState sharkCombatState = new SharkCombatState();
                 SwitchState(sharkCombatState);
-                TargetTransform = GetComponent<PlayerTriggerManager>().PropKayakController.gameObject.GetComponent<Transform>();
             }
         }
 
