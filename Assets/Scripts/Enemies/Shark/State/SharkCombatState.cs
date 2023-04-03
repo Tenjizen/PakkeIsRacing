@@ -49,7 +49,6 @@ public class SharkCombatState : SharkBaseState
 
 
 
-
             switch (_state)
             {
                 #region BeforeJump
@@ -89,10 +88,39 @@ public class SharkCombatState : SharkBaseState
                     {
                         goToTarget(sharkManager);
                         sharkManager.PointTarget.transform.position = sharkManager.TargetTransform.position;
-                        sharkManager.PointTarget.transform.rotation = sharkManager.TargetTransform.rotation;
+                        var test = sharkManager.TargetTransform.transform.eulerAngles;
+                        test.y += 90;
+                        sharkManager.PointTarget.transform.eulerAngles = test;
                     }
                     else
                     {
+                        Vector2 thisTransform = new Vector2(sharkManager.transform.position.x, sharkManager.transform.position.z);
+                        Vector2 kayakForward = new Vector2(sharkManager.TargetTransform.forward.x, sharkManager.TargetTransform.forward.z);
+                        Vector2 kayakPos = new Vector2(sharkManager.TargetTransform.position.x, sharkManager.TargetTransform.position.z);
+                        Vector2 forward = new Vector2(sharkManager.transform.forward.x, sharkManager.transform.forward.z);
+                        Vector2 pointForward = new Vector2(sharkManager.PointTarget.transform.forward.x, sharkManager.PointTarget.transform.forward.z);
+
+
+
+                        //Vector2 targetPos = new Vector2(sharkManager.TargetTransform.position.x, sharkManager.TargetTransform.position.z);
+                        //Vector2 sharkPos = new Vector2(sharkManager.transform.position.x, sharkManager.transform.position.z);
+
+                        //float angle = Vector2.SignedAngle(targetPos - sharkPos, forward);
+                        sharkManager.Angle = Vector2.SignedAngle(pointForward, thisTransform) * (Mathf.PI / 180);
+                        //sharkManager.Angle = Vector2.SignedAngle(targetPos - kayakPos, forward) * (Mathf.PI / 180);
+                        //sharkManager.Angle = Vector2.SignedAngle(kayakPos - thisTransform, forward) * (Mathf.PI / 180);
+                        //sharkManager.Angle = (Vector2.SignedAngle(targetPos - sharkPos, forward)+90) * (Mathf.PI / 180);
+
+
+
+                        Debug.Log(Vector2.SignedAngle(kayakPos - thisTransform, kayakForward)+ " 1");
+                        Debug.Log(Vector2.SignedAngle(kayakPos - thisTransform, forward) + " 2");
+                        Debug.Log(Vector2.SignedAngle(thisTransform - kayakPos, kayakForward) + " 3");
+                        Debug.Log(Vector2.SignedAngle(thisTransform - kayakPos, forward) + " 4");
+                        Debug.Log(Vector2.SignedAngle(kayakPos - thisTransform, pointForward) + " 5");
+                        Debug.Log(Vector2.SignedAngle(pointForward, forward) + " 6");
+                        Debug.Log(Vector2.SignedAngle(pointForward, thisTransform) + " 7");
+                        //Debug.Log(Vector2.SignedAngle(kayakPos - thisTransform, forward) + " 5");
                         _state = CombatState.RotatePoint;
                     }
                     break;
@@ -186,15 +214,18 @@ public class SharkCombatState : SharkBaseState
 
     private void RotateAroundPoint(SharkManager sharkManager)
     {
-        //sharkManager.Angle = 0;
+
+
+        //Debug.Log(sharkManager.Angle);
+
 
         sharkManager.PositionOffset.Set(Mathf.Cos(sharkManager.Angle) * _radius,
            sharkManager.ElevationOffset,
            Mathf.Sin(sharkManager.Angle) * _radius);
 
-        float angleZ = (Mathf.Sin(sharkManager.Angle) * 180) / Mathf.PI;
-        Debug.Log(angleZ + " Z");
-        Debug.Log(Mathf.Sin(sharkManager.Angle) + " Z rad");
+        //float angleZ = (Mathf.Sin(sharkManager.Angle) * 180) / Mathf.PI;
+        //Debug.Log(angleZ + " Z");
+        //Debug.Log(Mathf.Sin(sharkManager.Angle) + " Z rad");
 
         var pos = sharkManager.transform.position;
 
