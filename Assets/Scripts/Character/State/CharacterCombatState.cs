@@ -90,14 +90,16 @@ namespace Character.State
                 
                     projectile.OnProjectileDie.AddListener(ProjectileHit);
                     
-                    CharacterManagerRef.WeaponChargedParticleSystem.Stop();
-                
                     LaunchNavigationState();
                 }
 
                 _isHoldingShoot = false;
             }
-            
+
+            if (CharacterManagerRef.InputManagementProperty.Inputs.DeselectWeapon)
+            {
+                LaunchNavigationState();
+            }
         }
 
         private void ProjectileHit()
@@ -108,6 +110,8 @@ namespace Character.State
 
         private void LaunchNavigationState()
         {
+            CharacterManagerRef.WeaponChargedParticleSystem.Stop();
+
             CameraNavigationState cameraNavigationState = new CameraNavigationState();
             CameraManagerRef.SwitchState(cameraNavigationState);
                 

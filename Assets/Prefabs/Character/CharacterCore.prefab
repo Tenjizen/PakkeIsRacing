@@ -5119,7 +5119,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3014273842563118509}
   m_LocalRotation: {x: 0.130805, y: 0.0053463127, z: -0.00070539623, w: 0.99139345}
-  m_LocalPosition: {x: -1.3265305, y: 3.5162826, z: 1.2501512}
+  m_LocalPosition: {x: -1.3265305, y: 3.5162826, z: 1.2501503}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5271,7 +5271,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3858187113969445702}
   m_LocalRotation: {x: 0.12158245, y: -0, z: -0, w: 0.99258137}
-  m_LocalPosition: {x: 0, y: 4.883527, z: -7.291047}
+  m_LocalPosition: {x: 0, y: 4.883527, z: -7.291048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5777,6 +5777,7 @@ GameObject:
   - component: {fileID: 7217796708653836310}
   - component: {fileID: 7217796708653836311}
   - component: {fileID: 7611706348771366613}
+  - component: {fileID: 2892348467265544919}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -5855,6 +5856,7 @@ MonoBehaviour:
   <SoundManagerProperty>k__BackingField: {fileID: 0}
   <CheckpointManagerProperty>k__BackingField: {fileID: 0}
   <CharacterMonoBehaviour>k__BackingField: {fileID: 7217796708653836310}
+  <ExperienceManagerProperty>k__BackingField: {fileID: 2892348467265544919}
   Data: {fileID: 11400000, guid: 9383b9325ce5e464e84beb6010a91e0a, type: 2}
   LerpBalanceTo0: 1
   Balance: 0
@@ -5912,6 +5914,26 @@ MonoBehaviour:
   StartDeath: 0
   WaterFlow: 0
   CombatBaseShoulderOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &2892348467265544919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7217796708653836314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92a4bbe6cdfc4a958072b11822d3c1a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ExperienceUIManagerProperty>k__BackingField: {fileID: 0}
+  Data: {fileID: 11400000, guid: c4ae46c88829eb949bb5976d53827898, type: 2}
+  _currentLevelData:
+    ExperienceNeededToComplete: 0
+    CombatExperienceGained: 0
+    NavigationExperienceGained: 0
+  _currentLevel: 0
+  _currentExperience: 0
 --- !u!1 &8337715506076774778
 GameObject:
   m_ObjectHideFlags: 0
