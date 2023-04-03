@@ -11,6 +11,8 @@ namespace Character.Camera.State
         private Vector3 _currentOffset;
         private float _targetFOV;
 
+        private CinemachineBasicMultiChannelPerlin _cameraNoise;
+
         public override void EnterState(CameraManager camera)
         {
             CamManager.CameraAnimator.Play("Combat");
@@ -19,6 +21,9 @@ namespace Character.Camera.State
             _currentFov = _baseFov;
 
             _targetOffset = CamManager.CombatBaseShoulderOffset + CamManager.Data.CombatOffset;
+
+            _cameraNoise = CamManager.VirtualCameraCombat.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            _cameraNoise.m_AmplitudeGain = 1f;
         }
         
         public override void UpdateState(CameraManager camera)
@@ -26,16 +31,19 @@ namespace Character.Camera.State
             CamManager.CurrentStateBase.ManageFreeCameraMove(CameraMode.Combat);
             CamManager.ApplyRotationCameraInCombat();
 
-            CamManager.CinemachineTargetPitch = ClampAngle(CamManager.CinemachineTargetPitch, CamManager.Data.HeightClamp.x, CamManager.Data.HeightClamp.y);
+            CamManager.CinemachineTargetPitch = ClampAngle(CamManager.CinemachineTargetPitch, CamManager.Data.CombatHeightClamp.x, CamManager.Data.CombatHeightClamp.y);
+            CamManager.CinemachineTargetYaw = ClampAngle(CamManager.CinemachineTargetYaw, CamManager.Data.CombatLengthClamp.x, CamManager.Data.CombatLengthClamp.y);
 
-            ClampRotationCameraValue(CamManager.Data.HeightClamp.x, CamManager.Data.HeightClamp.y);
+            ClampRotationCameraValue(CamManager.Data.CombatHeightClamp, CamManager.Data.CombatLengthClamp);  
 
             //fov
             const float fovLerp = 0.05f;
             if (CharacterManager.Instance.InputManagementProperty.Inputs.Shoot && CharacterManager.Instance.WeaponCooldown <= 0)
             {
-                _targetFOV = Mathf.Lerp(_targetFOV,CamManager.Data.CombatZoomFov, CamManager.Data.CombatZoomFovLerp);
-                FreeAimMultiplier = Mathf.Lerp(FreeAimMultiplier, CamManager.Data.CombatZoomAimSpeedMultiplier, CamManager.Data.CombatZoomFovLerp);
+                float lerp = CamManager.Data.CombatZoomFovLerp;
+                _targetFOV = Mathf.Lerp(_targetFOV,CamManager.Data.CombatZoomFov, lerp);
+                FreeAimMultiplier = Mathf.Lerp(FreeAimMultiplier, CamManager.Data.CombatZoomAimSpeedMultiplier, lerp);
+                _cameraNoise.m_AmplitudeGain = Mathf.Lerp(_cameraNoise.m_AmplitudeGain, 0, lerp);
             }
             else
             {

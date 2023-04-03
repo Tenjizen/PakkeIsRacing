@@ -47,11 +47,11 @@ namespace Character.State
         private void HandleAim()
         {
             //kayak rotation
-            Quaternion kayakTransformRotation = CharacterManagerRef.KayakControllerProperty.transform.rotation;
-            float targetAngle = CharacterManagerRef.CameraManagerProperty.CinemachineCameraFollowCombat.transform.rotation.eulerAngles.y;
-            Quaternion targetRotation = Quaternion.Euler(new Vector3(kayakTransformRotation.eulerAngles.x, targetAngle, kayakTransformRotation.eulerAngles.z));
-            Quaternion rotation = Quaternion.Lerp(kayakTransformRotation,targetRotation,CharacterManagerRef.Data.BoatFollowAimLerp);
-            CharacterManagerRef.KayakControllerProperty.transform.rotation = rotation;
+            // Quaternion kayakTransformRotation = CharacterManagerRef.KayakControllerProperty.transform.rotation;
+            // float targetAngle = CharacterManagerRef.CameraManagerProperty.CinemachineCameraFollowCombat.transform.rotation.eulerAngles.y;
+            // Quaternion targetRotation = Quaternion.Euler(new Vector3(kayakTransformRotation.eulerAngles.x, targetAngle, kayakTransformRotation.eulerAngles.z));
+            // Quaternion rotation = Quaternion.Lerp(kayakTransformRotation,targetRotation,CharacterManagerRef.Data.BoatFollowAimLerp);
+            // CharacterManagerRef.KayakControllerProperty.transform.rotation = rotation;
         }
 
         private void HandleShoot()
@@ -90,14 +90,16 @@ namespace Character.State
                 
                     projectile.OnProjectileDie.AddListener(ProjectileHit);
                     
-                    CharacterManagerRef.WeaponChargedParticleSystem.Stop();
-                
                     LaunchNavigationState();
                 }
 
                 _isHoldingShoot = false;
             }
-            
+
+            if (CharacterManagerRef.InputManagementProperty.Inputs.DeselectWeapon)
+            {
+                LaunchNavigationState();
+            }
         }
 
         private void ProjectileHit()
@@ -108,6 +110,8 @@ namespace Character.State
 
         private void LaunchNavigationState()
         {
+            CharacterManagerRef.WeaponChargedParticleSystem.Stop();
+
             CameraNavigationState cameraNavigationState = new CameraNavigationState();
             CameraManagerRef.SwitchState(cameraNavigationState);
                 

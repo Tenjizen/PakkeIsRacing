@@ -31,6 +31,7 @@ namespace Character
         [field: SerializeField] public SoundManager SoundManagerProperty { get; private set; }
         [field: SerializeField] public CheckpointManager CheckpointManagerProperty { get; private set; }
         [field: SerializeField] public MonoBehaviour CharacterMonoBehaviour { get; private set; }
+        [field: SerializeField] public ExperienceManager ExperienceManagerProperty { get; private set; }
 
         #endregion
 

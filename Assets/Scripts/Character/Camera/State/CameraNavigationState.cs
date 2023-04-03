@@ -28,7 +28,7 @@ namespace Character.Camera.State
 
             MoveCamera();
 
-            ClampRotationCameraValue(CamManager.Data.BottomClamp, CamManager.Data.TopClamp);
+            ClampRotationCameraValue(CamManager.Data.BottomClamp, CamManager.Data.TopClamp, float.MinValue, float.MaxValue);
 
             CamManager.ApplyRotationCamera();
 
