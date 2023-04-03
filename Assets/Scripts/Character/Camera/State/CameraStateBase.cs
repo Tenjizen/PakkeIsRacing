@@ -37,11 +37,17 @@ namespace Character.Camera.State
 
         public abstract void SwitchState(CameraManager camera);
 
-        protected void ClampRotationCameraValue(float min, float max)
+        protected void ClampRotationCameraValue(float pitchMin, float pitchMax, float yawMin, float yawMax)
         {
             CamManager.CinemachineTargetYaw = ClampAngle(CamManager.CinemachineTargetYaw, float.MinValue, float.MaxValue);
-            CamManager.CinemachineTargetPitch = ClampAngle(CamManager.CinemachineTargetPitch, min, max);
+            CamManager.CinemachineTargetPitch = ClampAngle(CamManager.CinemachineTargetPitch, pitchMin, pitchMax);
         }
+
+        protected void ClampRotationCameraValue(Vector2 pitch, Vector2 yaw)
+        {
+            ClampRotationCameraValue(pitch.x,pitch.y,yaw.x,yaw.y);
+        }
+        
         public float ClampAngle(float lfAngle, float lfMin, float lfMax)
         {
             if (lfAngle < -360f) lfAngle += 360f;
