@@ -6283,6 +6283,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 94466381276944568}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &3067333773969579778 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3161183327041963962, guid: e7e12af05b510e84a853a95766b42a98,
+    type: 3}
+  m_PrefabInstance: {fileID: 94466381276944568}
+  m_PrefabAsset: {fileID: 0}
 --- !u!198 &3972387942190074206 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3922456489766310374, guid: e7e12af05b510e84a853a95766b42a98,
@@ -6298,6 +6304,12 @@ ParticleSystem:
 --- !u!95 &6793741366818239509 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 6847630234928901293, guid: e7e12af05b510e84a853a95766b42a98,
+    type: 3}
+  m_PrefabInstance: {fileID: 94466381276944568}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7291271243992024869 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7232869222602301341, guid: e7e12af05b510e84a853a95766b42a98,
     type: 3}
   m_PrefabInstance: {fileID: 94466381276944568}
   m_PrefabAsset: {fileID: 0}
@@ -6596,6 +6608,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7217796708653836313}
     m_Modifications:
+    - target: {fileID: -8280348964403163148, guid: f7a2c9668d214464492174d18f720dc9,
+        type: 3}
+      propertyPath: lookObj
+      value: 
+      objectReference: {fileID: 889234006}
+    - target: {fileID: -8280348964403163148, guid: f7a2c9668d214464492174d18f720dc9,
+        type: 3}
+      propertyPath: ikActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8280348964403163148, guid: f7a2c9668d214464492174d18f720dc9,
+        type: 3}
+      propertyPath: leftHandObj
+      value: 
+      objectReference: {fileID: 7291271243992024869}
+    - target: {fileID: -8280348964403163148, guid: f7a2c9668d214464492174d18f720dc9,
+        type: 3}
+      propertyPath: rightHandObj
+      value: 
+      objectReference: {fileID: 3067333773969579778}
     - target: {fileID: 8470585229232446049, guid: f7a2c9668d214464492174d18f720dc9,
         type: 3}
       propertyPath: m_Name
