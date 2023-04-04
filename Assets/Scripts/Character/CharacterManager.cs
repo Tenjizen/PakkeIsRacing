@@ -69,6 +69,7 @@ namespace Character
             CurrentStateBaseProperty.EnterState(this);
 
             BalanceGaugeManagerRef.SetBalanceGaugeActive(false);
+            ExperienceManagerProperty.ExperienceUIManagerProperty.SetActive(false);
             BalanceGaugeManagerRef.ShowTrigger(false, false);
         }
         private void Update()

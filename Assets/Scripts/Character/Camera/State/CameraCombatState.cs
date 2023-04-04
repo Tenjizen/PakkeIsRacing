@@ -25,12 +25,12 @@ namespace Character.Camera.State
 
             _cameraNoise = CamManager.VirtualCameraCombat.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
             _cameraNoise.m_AmplitudeGain = 1f;
-
-            _baseYaw = CamManager.CharacterManager.KayakControllerProperty.transform.rotation.eulerAngles.y;
         }
         
         public override void UpdateState(CameraManager camera)
         {
+            _baseYaw = CamManager.CharacterManager.KayakControllerProperty.transform.rotation.eulerAngles.y;
+            
             CamManager.CurrentStateBase.ManageFreeCameraMove(CameraMode.Combat);
             CamManager.ApplyRotationCameraInCombat();
 

@@ -8,7 +8,6 @@ namespace Character
     public class ExperienceManager : MonoBehaviour
     {
         [field:SerializeField] public ExperienceUIManager ExperienceUIManagerProperty { get; private set; }
-        
         public ExperienceData Data;
 
         [ReadOnly, SerializeField] private Level _currentLevelData;

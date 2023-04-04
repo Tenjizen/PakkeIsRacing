@@ -1,4 +1,5 @@
 using System;
+using Character;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -15,10 +16,24 @@ namespace UI
             Navigation
         }
         
+        [SerializeField] private GameObject _uIGameObject;
         [SerializeField] private Image _experienceGauge, _combatGauge, _navigationGauge;
         [SerializeField] private TMP_Text _levelText;
 
         private int _level;
+
+        private void Update()
+        {
+            InputManagement inputManagement = CharacterManager.Instance.InputManagementProperty;
+            if (inputManagement.Inputs.OpenWeaponMenu && CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterOpenWeapons)
+            {
+                SetActive(true);
+            }
+            else
+            {
+                SetActive(false);
+            }
+        }
 
         public void SetGauge(Gauge gauge, float value, float maxValue)
         {
@@ -43,6 +58,11 @@ namespace UI
         {
             _level++;
             _levelText.text = _level.ToString();
+        }
+        
+        public void SetActive(bool isActive)
+        {
+            _uIGameObject.SetActive(isActive);
         }
     }
 }
