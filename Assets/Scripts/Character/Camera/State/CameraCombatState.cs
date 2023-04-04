@@ -10,6 +10,7 @@ namespace Character.Camera.State
         private Vector3 _targetOffset;
         private Vector3 _currentOffset;
         private float _targetFOV;
+        private float _baseYaw;
 
         private CinemachineBasicMultiChannelPerlin _cameraNoise;
 
@@ -24,6 +25,8 @@ namespace Character.Camera.State
 
             _cameraNoise = CamManager.VirtualCameraCombat.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
             _cameraNoise.m_AmplitudeGain = 1f;
+
+            _baseYaw = CamManager.CharacterManager.KayakControllerProperty.transform.rotation.eulerAngles.y;
         }
         
         public override void UpdateState(CameraManager camera)
@@ -32,7 +35,7 @@ namespace Character.Camera.State
             CamManager.ApplyRotationCameraInCombat();
 
             CamManager.CinemachineTargetPitch = ClampAngle(CamManager.CinemachineTargetPitch, CamManager.Data.CombatHeightClamp.x, CamManager.Data.CombatHeightClamp.y);
-            CamManager.CinemachineTargetYaw = ClampAngle(CamManager.CinemachineTargetYaw, CamManager.Data.CombatLengthClamp.x, CamManager.Data.CombatLengthClamp.y);
+            CamManager.CinemachineTargetYaw = ClampAngle(CamManager.CinemachineTargetYaw, _baseYaw + CamManager.Data.CombatLengthClamp.x, _baseYaw + CamManager.Data.CombatLengthClamp.y);
 
             ClampRotationCameraValue(CamManager.Data.CombatHeightClamp, CamManager.Data.CombatLengthClamp);  
 
