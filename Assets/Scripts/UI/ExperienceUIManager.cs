@@ -16,12 +16,22 @@ namespace UI
             Navigation
         }
         
-        [SerializeField] private GameObject _uIGameObject;
+        [Header("Big"),SerializeField] private GameObject _uIGameObjectBig;
         [SerializeField] private Image _experienceGauge, _combatGauge, _navigationGauge;
         [SerializeField] private TMP_Text _levelText;
+        [Header("Small"), SerializeField] private GameObject _uIGameObjectSmall;
+        [SerializeField] private Image _experienceGaugeSmall;
 
         private int _level;
+        private int _maxLevel;
+        private float _percentageToSetAfterLevelUp;
+        private float _cooldownUntilHideSmallUI;
 
+        public void SetMaxLevel(int level)
+        {
+            _maxLevel = level;
+        }
+        
         private void Update()
         {
             InputManagement inputManagement = CharacterManager.Instance.InputManagementProperty;
@@ -33,6 +43,8 @@ namespace UI
             {
                 SetActive(false);
             }
+
+            ManageSmallUI();
         }
 
         public void SetGauge(Gauge gauge, float value, float maxValue)
@@ -43,7 +55,19 @@ namespace UI
             switch(gauge)
             {
                 case Gauge.Experience:
-                    _experienceGauge.DOFillAmount(percentage, time);
+                    if (percentage < 1 || (percentage >= 1 && _level < _maxLevel))
+                    {
+                        _experienceGauge.DOFillAmount(percentage, time);
+                        _experienceGaugeSmall.DOFillAmount(percentage, time);
+                    }
+                    else
+                    {
+                        _percentageToSetAfterLevelUp = percentage - 1;
+                        _experienceGauge.DOFillAmount(1, time).OnComplete(SetExperienceGaugeAfterLevelUp);
+                        _experienceGaugeSmall.DOFillAmount(1, time).OnComplete(SetExperienceGaugeAfterLevelUp);
+                    }
+                    _cooldownUntilHideSmallUI = 2f;
+                    _uIGameObjectSmall.SetActive(true);
                     break;
                 case Gauge.Combat:
                     _combatGauge.DOFillAmount(percentage, time);
@@ -54,7 +78,16 @@ namespace UI
             }
         }
 
-        public void SetLevelUp()
+        private void SetExperienceGaugeAfterLevelUp()
+        {
+            SetLevelUp();
+            _uIGameObjectSmall.transform.DOPunchScale(Vector3.one * 0.1f, 0.2f);
+            _experienceGaugeSmall.fillAmount = 0;
+            _experienceGauge.fillAmount = 0;
+            SetGauge(Gauge.Experience,_percentageToSetAfterLevelUp,1f);
+        }
+
+        private void SetLevelUp()
         {
             _level++;
             _levelText.text = _level.ToString();
@@ -62,7 +95,21 @@ namespace UI
         
         public void SetActive(bool isActive)
         {
-            _uIGameObject.SetActive(isActive);
+            _uIGameObjectBig.SetActive(isActive);
+            
+            if (_uIGameObjectSmall.activeInHierarchy && isActive)
+            {
+                _uIGameObjectSmall.SetActive(false);
+            }
+        }
+
+        private void ManageSmallUI()
+        {
+            _cooldownUntilHideSmallUI -= Time.deltaTime;
+            if (_cooldownUntilHideSmallUI < 0 && _uIGameObjectSmall.activeInHierarchy)
+            {
+                _uIGameObjectSmall.SetActive(false);
+            }
         }
     }
 }

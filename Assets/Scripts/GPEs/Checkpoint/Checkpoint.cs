@@ -19,10 +19,13 @@ namespace GPEs.Checkpoint
         private void Start()
         {
             OnPlayerEntered.AddListener(SetCheckPoint);
+            OnPlayerEntered.AddListener(SetPlayerExperience);
+            
         }
         private void OnDestroy()
         {
             OnPlayerEntered.RemoveListener(SetCheckPoint);
+            OnPlayerEntered.RemoveListener(SetPlayerExperience);
         }
 
         public void SetCheckPoint()
@@ -41,6 +44,12 @@ namespace GPEs.Checkpoint
         public Transform GetTargetRespawnTransform()
         {
             return _targetRespawnTransform;
+        }
+
+        private void SetPlayerExperience()
+        {
+            float value = CharacterManager.Instance.ExperienceManagerProperty.Data.ExperienceGainedAtCheckpoint;
+            CharacterManager.Instance.ExperienceManagerProperty.AddExperience(value);
         }
 
 #if UNITY_EDITOR

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56f4a2825e3249919de0e89ad5c05a9c, type: 3}
   m_Name: ExperienceData
   m_EditorClassIdentifier: 
-  ExperienceGainedAtCheckpoint: 50
+  ExperienceGainedAtCheckpoint: 60
   ExperienceGainedAtColletible: 50
   ExperienceGainedAtEnemy: 100
   MaxLevel: 10
@@ -26,3 +26,5 @@ MonoBehaviour:
   - ExperienceNeededToComplete: 100
     CombatExperienceGained: 10
     NavigationExperienceGained: 10
+  CombatGaugeMax: 100
+  NavigationGaugeMax: 100

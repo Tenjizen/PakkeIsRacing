@@ -15,6 +15,11 @@ namespace Character.Data
         [Header("Experience levels")] 
         public int MaxLevel;
         public List<Level> Levels;
+        
+        [Header("Combar & Navigation")]
+        public float CombatGaugeMax;
+        public float NavigationGaugeMax;
+
     }
 
     [Serializable]
