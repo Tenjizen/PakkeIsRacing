@@ -27,11 +27,12 @@ namespace UI
         private float _percentageToSetAfterLevelUp;
         private float _cooldownUntilHideSmallUI;
 
-        public void SetMaxLevel(int level)
+        private void Start()
         {
-            _maxLevel = level;
+            _levelText.text = _level.ToString();
+            _uIGameObjectSmall.SetActive(false);
         }
-        
+
         private void Update()
         {
             InputManagement inputManagement = CharacterManager.Instance.InputManagementProperty;
@@ -46,6 +47,11 @@ namespace UI
 
             ManageSmallUI();
         }
+        
+        public void SetMaxLevel(int level)
+        {
+            _maxLevel = level;
+        }
 
         public void SetGauge(Gauge gauge, float value, float maxValue)
         {
@@ -55,7 +61,7 @@ namespace UI
             switch(gauge)
             {
                 case Gauge.Experience:
-                    if (percentage < 1 || (percentage >= 1 && _level < _maxLevel))
+                    if (percentage < 1 || (percentage >= 1 && _level >= _maxLevel))
                     {
                         _experienceGauge.DOFillAmount(percentage, time);
                         _experienceGaugeSmall.DOFillAmount(percentage, time);
@@ -63,6 +69,7 @@ namespace UI
                     else
                     {
                         _percentageToSetAfterLevelUp = percentage - 1;
+                        _level++;
                         _experienceGauge.DOFillAmount(1, time).OnComplete(SetExperienceGaugeAfterLevelUp);
                         _experienceGaugeSmall.DOFillAmount(1, time).OnComplete(SetExperienceGaugeAfterLevelUp);
                     }
@@ -80,19 +87,13 @@ namespace UI
 
         private void SetExperienceGaugeAfterLevelUp()
         {
-            SetLevelUp();
-            _uIGameObjectSmall.transform.DOPunchScale(Vector3.one * 0.1f, 0.2f);
+            _levelText.text = _level.ToString();
+            _uIGameObjectSmall.transform.DOPunchScale(Vector3.one * 0.05f, 0.2f);
             _experienceGaugeSmall.fillAmount = 0;
             _experienceGauge.fillAmount = 0;
             SetGauge(Gauge.Experience,_percentageToSetAfterLevelUp,1f);
         }
 
-        private void SetLevelUp()
-        {
-            _level++;
-            _levelText.text = _level.ToString();
-        }
-        
         public void SetActive(bool isActive)
         {
             _uIGameObjectBig.SetActive(isActive);

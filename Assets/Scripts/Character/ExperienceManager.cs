@@ -50,7 +50,6 @@ namespace Character
                 
             _currentLevel++;
             _currentLevelData = Data.Levels[_currentLevel];
-            
         }
     }
 }
