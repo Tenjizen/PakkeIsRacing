@@ -11,5 +11,10 @@ namespace Fight.Data
         public float Cooldown;
         public float Lifetime = 4f;
         public List<GameObject> ForbiddenColliders;
+
+        public WeaponData()
+        {
+            ForbiddenColliders = new List<GameObject>();
+        }
     }
 }

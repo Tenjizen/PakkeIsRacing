@@ -31,8 +31,8 @@ namespace Fight
 
         private void OnTriggerEnter(Collider other)
         {
-            if (Data.ForbiddenColliders.Contains(other.gameObject) ||
-                Data.ForbiddenColliders.Contains(other.gameObject.transform.parent.gameObject) ||
+            if (Data.ForbiddenColliders.Contains(other.gameObject) || 
+                (other.gameObject.transform.parent != null && Data.ForbiddenColliders.Contains(other.gameObject.transform.parent.gameObject)) ||
                 other.gameObject.GetComponent<WaterFlowBlock>() != null)
             {
                 return;
