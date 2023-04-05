@@ -27,10 +27,8 @@ namespace Enemies.Shark
         [Header("Rotation")]
         [Tooltip("The speed of rotation")]
         public float RotationSpeed = 1;
-        [Tooltip("The minimum distance between the player and the shark")]
-        public float RadiusRotateAroundTargetMin = 1;
-        [Tooltip("The maximum distance between the player and the shark")]
-        public float RadiusRotateAroundTargetMax = 1;
+
+
         [Tooltip("The Y position in relation to the target, the lower the value (ex : -1) the more visible the shark will be when rotating around the player")]
         public float ElevationOffset = 0;
         
@@ -60,21 +58,33 @@ namespace Enemies.Shark
         [Tooltip("The speed at which the circle will grow (Ex : 1 / ShadowDivideGrowSpeed)")]
         public float ShadowDivideGrowSpeed = 2;
         [ReadOnly] public Vector3 PositionOffset;
-        /*[ReadOnly]*/ public float Angle;
 
         [Header("Waves")]
         public Waves WavesData;
         public CircularWave StartJumpCircularWaveData;
         public CircularWave EndJumpCircularWaveData;
         [Space(5)] public float EndJumpCircularWaveTime = 1;
-        [field: SerializeField] public GameObject VisualShark { get; private set; }
         public KayakController KayakControllerProperty { get; set; }
 
-        [ReadOnly] public bool Flip = false;
-        public GameObject TargetLerp;
         public GameObject PointTarget;
 
-        public float pierre = 5;
+        public float RotationStaticSpeed = 100.0f;
+        public float RotationStaticSpeedFreeRoam = 70.0f;
+        public float RotationStaticSpeedCombat = 70.0f;
+
+        public float SpeedToMoveToTarget = 10.0f;
+
+        public float SpeedRotationFreeRoam = 10.0f;
+        public float SpeedRotationCombat = 20.0f;
+
+        public float MaxDistanceBetweenTarget = 30.0f;
+
+        public float MinDistanceBetweenPoint = 5.0f;
+        public float MaxDistanceBetweenPoint = 15.0f;
+        public float MaxDistanceBetweenPointInCombat = 30.0f;
+
+
+
         private void Awake()
         {
             //ColliderShadow.enabled = false;
@@ -135,6 +145,34 @@ namespace Enemies.Shark
                 Destroy(ParentGameObject.gameObject);
         }
 
+        public void MoveToTarget(SharkManager sharkManager)
+        {
+            Vector2 targetPos = new Vector2(sharkManager.PointTarget.transform.position.x, sharkManager.PointTarget.transform.position.z);
+            Vector2 forward = new Vector2(sharkManager.transform.forward.x, sharkManager.transform.forward.z);
+            Vector2 sharkPos = new Vector2(sharkManager.transform.position.x, sharkManager.transform.position.z);
 
+            float angle = Vector2.SignedAngle(targetPos - sharkPos, forward);
+            if (angle < 0)
+                angle += 360;
+
+            Vector3 rota = sharkManager.transform.localEulerAngles;
+            if (angle >= 0 && angle <= 180)
+            {
+                rota.y += Time.deltaTime * RotationStaticSpeed;
+            }
+            else if (angle < 360 && angle > 180)
+            {
+                rota.y -= Time.deltaTime * RotationStaticSpeed;
+            }
+
+            sharkManager.transform.localEulerAngles = rota;
+
+            var pos = sharkManager.transform.position;
+            pos.y = sharkManager.ElevationOffset;
+            sharkManager.transform.position = pos;
+
+
+            sharkManager.transform.Translate(Vector3.forward * SpeedToMoveToTarget * Time.deltaTime, Space.Self);
+        }
     }
 }
