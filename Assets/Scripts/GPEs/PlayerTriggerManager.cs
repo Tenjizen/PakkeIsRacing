@@ -39,7 +39,7 @@ namespace GPEs
             }
             if (_triggerType == TriggerType.SphereTrigger)
             {
-                hits = Physics.SphereCastAll(transform.position + _triggerOffsetPosition, _triggerSphereSize, Vector3.forward);
+                hits = Physics.SphereCastAll(transform.position + _triggerOffsetPosition, _triggerSphereSize, Vector3.forward, 0f);
             }
             foreach (RaycastHit hit in hits)
             {
