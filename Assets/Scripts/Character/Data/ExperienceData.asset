@@ -15,8 +15,28 @@ MonoBehaviour:
   ExperienceGainedAtCheckpoint: 70
   ExperienceGainedAtColletible: 50
   ExperienceGainedAtEnemy: 100
-  MaxLevel: 10
   Levels:
+  - ExperienceNeededToComplete: 100
+    CombatExperienceGained: 20
+    NavigationExperienceGained: 10
+  - ExperienceNeededToComplete: 100
+    CombatExperienceGained: 10
+    NavigationExperienceGained: 10
+  - ExperienceNeededToComplete: 100
+    CombatExperienceGained: 10
+    NavigationExperienceGained: 10
+  - ExperienceNeededToComplete: 100
+    CombatExperienceGained: 10
+    NavigationExperienceGained: 10
+  - ExperienceNeededToComplete: 100
+    CombatExperienceGained: 10
+    NavigationExperienceGained: 10
+  - ExperienceNeededToComplete: 100
+    CombatExperienceGained: 10
+    NavigationExperienceGained: 10
+  - ExperienceNeededToComplete: 100
+    CombatExperienceGained: 10
+    NavigationExperienceGained: 10
   - ExperienceNeededToComplete: 100
     CombatExperienceGained: 10
     NavigationExperienceGained: 10
@@ -28,3 +48,138 @@ MonoBehaviour:
     NavigationExperienceGained: 10
   CombatGaugeMax: 100
   NavigationGaugeMax: 100
+  BreakingDistanceMultiplier:
+    ValueType: 0
+    MaxValue: 3
+    IncreaseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  MaximumDistanceMultiplier:
+    ValueType: 0
+    MaxValue: 3
+    IncreaseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  RotatingSpeedMultiplier:
+    ValueType: 0
+    MaxValue: 3
+    IncreaseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  BalanceLimitMultiplier:
+    ValueType: 0
+    MaxValue: 3
+    IncreaseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  ProjectileSpeedMultiplier:
+    ValueType: 1
+    MaxValue: 3
+    IncreaseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4

@@ -72,7 +72,7 @@ namespace Character.State
             PaddleCooldownManagement();
             
             //check balanced -> unbalanced
-            if (Mathf.Abs(CharacterManagerRef.Balance) >= CharacterManagerRef.Data.BalanceLimit)
+            if (Mathf.Abs(CharacterManagerRef.Balance) >= CharacterManagerRef.Data.BalanceLimit * CharacterManagerRef.ExperienceManagerProperty.BalanceLimitMultiplier)
             {
                 CameraManagerRef.CanMoveCameraManually = false;
                 _kayakController.CanReduceDrag = false;
@@ -195,7 +195,7 @@ namespace Character.State
             _staticInputTimer = _kayakValues.StaticRotationCooldownAfterPaddle;
             
             //rotation
-            float rotation = _kayakValues.PaddleSideRotationForce;
+            float rotation = _kayakValues.PaddleSideRotationForce * CharacterManagerRef.ExperienceManagerProperty.RotatingSpeedMultiplier;
             RotationPaddleForceY += direction == Direction.Right ? -rotation : rotation;
             
             //balance
@@ -313,9 +313,9 @@ namespace Character.State
         private void DecelerationAndRotate(Direction direction)
         {
             Vector3 targetVelocity = new Vector3(0, _kayakRigidbody.velocity.y, 0);
-            
-            _kayakRigidbody.velocity = Vector3.Lerp(_kayakRigidbody.velocity, targetVelocity,
-                _kayakValues.VelocityDecelerationLerp);
+
+            float lerp = _kayakValues.VelocityDecelerationLerp * CharacterManagerRef.ExperienceManagerProperty.BreakingDistanceMultiplier;
+            _kayakRigidbody.velocity = Vector3.Lerp(_kayakRigidbody.velocity, targetVelocity, lerp);
             
             float force = _kayakValues.VelocityDecelerationRotationForce;
             

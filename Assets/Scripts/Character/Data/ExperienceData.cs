@@ -13,13 +13,20 @@ namespace Character.Data
         public float ExperienceGainedAtEnemy;
 
         [Header("Experience levels")] 
-        public int MaxLevel;
         public List<Level> Levels;
         
-        [Header("Combar & Navigation")]
+        [Header("Combat & Navigation")]
         public float CombatGaugeMax;
         public float NavigationGaugeMax;
-
+        
+        [Header("Character Values multipliers")]
+        //navigation
+        public Value BreakingDistanceMultiplier;
+        public Value MaximumDistanceMultiplier;
+        public Value RotatingSpeedMultiplier;
+        public Value BalanceLimitMultiplier;
+        //combat
+        public Value ProjectileSpeedMultiplier;
     }
 
     [Serializable]
@@ -28,5 +35,19 @@ namespace Character.Data
         public float ExperienceNeededToComplete;
         public int CombatExperienceGained;
         public int NavigationExperienceGained;
+    }
+
+    [Serializable]
+    public struct Value
+    {
+        public enum Type
+        {
+            Navigation = 0,
+            Combat = 1
+        }
+
+        public Type ValueType;
+        public float MaxValue;
+        public AnimationCurve IncreaseCurve;
     }
 }

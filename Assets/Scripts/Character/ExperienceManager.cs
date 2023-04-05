@@ -10,19 +10,28 @@ namespace Character
         [field:SerializeField] public ExperienceUIManager ExperienceUIManagerProperty { get; private set; }
         public ExperienceData Data;
 
-        [ReadOnly, SerializeField] private Level _currentLevelData;
+        [Header("Levels"),ReadOnly, SerializeField] private Level _currentLevelData;
         [ReadOnly, SerializeField] private int _currentLevel;
         [ReadOnly, SerializeField] private float _currentExperience;
         [ReadOnly, SerializeField] private float _currentCombatExperience;
         [ReadOnly, SerializeField] private float _currentNavigationExperience;
 
+        [Header("Character Values multiplier")]
+        //navigation
+        [ReadOnly] public float BreakingDistanceMultiplier = 1;
+        [ReadOnly] public float MaximumDistanceMultiplier = 1;
+        [ReadOnly] public float RotatingSpeedMultiplier = 1;
+        [ReadOnly] public float BalanceLimitMultiplier = 1;
+        //combat
+        [ReadOnly] public float ProjectileSpeedMultiplier = 1;
+        
         private void Start()
         {
             _currentLevel = 0;
             _currentExperience = 0f;
             _currentLevelData = Data.Levels[_currentLevel];
 
-            ExperienceUIManagerProperty.SetMaxLevel(Data.MaxLevel);
+            ExperienceUIManagerProperty.SetMaxLevel(Data.Levels.Count);
             ExperienceUIManagerProperty.SetGauge(ExperienceUIManager.Gauge.Combat,_currentExperience,_currentLevelData.ExperienceNeededToComplete);
             ExperienceUIManagerProperty.SetGauge(ExperienceUIManager.Gauge.Navigation,_currentExperience,_currentLevelData.ExperienceNeededToComplete);
             ExperienceUIManagerProperty.SetGauge(ExperienceUIManager.Gauge.Experience,_currentExperience,_currentLevelData.ExperienceNeededToComplete);
@@ -33,7 +42,7 @@ namespace Character
             _currentExperience += value;
             ExperienceUIManagerProperty.SetGauge(ExperienceUIManager.Gauge.Experience, _currentExperience, _currentLevelData.ExperienceNeededToComplete);
             
-            if (_currentExperience >= _currentLevelData.ExperienceNeededToComplete && _currentLevel <= Data.MaxLevel)
+            if (_currentExperience >= _currentLevelData.ExperienceNeededToComplete && _currentLevel <= Data.Levels.Count)
             {
                 LevelUp();
             }
@@ -50,6 +59,28 @@ namespace Character
                 
             _currentLevel++;
             _currentLevelData = Data.Levels[_currentLevel];
+            
+            //values
+            BreakingDistanceMultiplier = SetMultiplierFromPercentageAndValue(Data.BreakingDistanceMultiplier);
+            MaximumDistanceMultiplier = SetMultiplierFromPercentageAndValue(Data.MaximumDistanceMultiplier);
+            RotatingSpeedMultiplier = SetMultiplierFromPercentageAndValue(Data.RotatingSpeedMultiplier);
+            BalanceLimitMultiplier = SetMultiplierFromPercentageAndValue(Data.BalanceLimitMultiplier);
+            ProjectileSpeedMultiplier = SetMultiplierFromPercentageAndValue(Data.ProjectileSpeedMultiplier);
+        }
+
+        private float SetMultiplierFromPercentageAndValue(Value value)
+        {
+            float percentage = 0;
+            switch (value.ValueType)
+            {
+                case Value.Type.Navigation:
+                    percentage = _currentNavigationExperience / Data.NavigationGaugeMax;
+                    break;
+                case Value.Type.Combat:
+                    percentage = _currentCombatExperience / Data.CombatGaugeMax;
+                    break;
+            }
+            return 1 + value.MaxValue * value.IncreaseCurve.Evaluate(percentage);
         }
     }
 }
