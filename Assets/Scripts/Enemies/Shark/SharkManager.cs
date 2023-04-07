@@ -10,9 +10,9 @@ namespace Enemies.Shark
 {
     public class SharkManager : MonoBehaviour, IHittable
     {
-        [field:SerializeField] public SharkBaseState CurrentStateBase { get; private set; }
-        [field:SerializeField, ReadOnly] public Transform TargetTransform { get; private set; }
-        [field:SerializeField] public GameObject ParentGameObject { get; private set; }
+        [field: SerializeField] public SharkBaseState CurrentStateBase { get; private set; }
+        [field: SerializeField, ReadOnly] public Transform TargetTransform { get; private set; }
+        [field: SerializeField] public GameObject ParentGameObject { get; private set; }
 
         //TODO to scriptable object
         [Header("Life")] public float Life = 3;
@@ -20,8 +20,8 @@ namespace Enemies.Shark
         public float TimeStartHittable = 1;
         public float TimeEndHittable = 4;
 
-        [field:SerializeField, Header("VFX")] public ParticleSystem HitParticles { get; private set; }
-        [field:SerializeField, Header("Sound")] public AudioClip HitSound { get; private set; }
+        [field: SerializeField, Header("VFX")] public ParticleSystem HitParticles { get; private set; }
+        [field: SerializeField, Header("Sound")] public AudioClip HitSound { get; private set; }
 
         //TODO to scriptable object
         [Header("Rotation")]
@@ -31,7 +31,7 @@ namespace Enemies.Shark
 
         [Tooltip("The Y position in relation to the target, the lower the value (ex : -1) the more visible the shark will be when rotating around the player")]
         public float ElevationOffset = 0;
-        
+
         [Header("Timer")]
         [Tooltip("The time it will take the shark to dive")]
         public float TimerToPassUnderPlayer = 2;
@@ -73,6 +73,8 @@ namespace Enemies.Shark
         public float RotationStaticSpeedCombat = 70.0f;
 
         public float SpeedToMoveToTarget = 10.0f;
+
+        public float SpeedRush = 20.0f;
 
         public float SpeedRotationFreeRoam = 10.0f;
         public float SpeedRotationCombat = 20.0f;
@@ -136,9 +138,11 @@ namespace Enemies.Shark
 
             Life -= 1;
             //Life -= projectile.Data.Damage
-
-            HitParticles.transform.parent = null;
-            HitParticles.Play();
+            if (HitParticles != null)
+            {
+                HitParticles.transform.parent = null;
+                HitParticles.Play();
+            }
             CharacterManager.Instance.SoundManagerProperty.PlaySound(HitSound);
 
             if (Life <= 0)
@@ -171,8 +175,40 @@ namespace Enemies.Shark
             pos.y = sharkManager.ElevationOffset;
             sharkManager.transform.position = pos;
 
+            SwitchSpeed(SpeedToMoveToTarget);
 
-            sharkManager.transform.Translate(Vector3.forward * SpeedToMoveToTarget * Time.deltaTime, Space.Self);
+            sharkManager.transform.Translate(Vector3.forward * CurrentSpeed * Time.deltaTime, Space.Self);
+        }
+
+        public void SwitchSpeed(float speed)
+        {
+            if (RandTimer >= 5)
+            {
+                CurrentSpeed = Mathf.Lerp(CurrentSpeed, SpeedRush, 0.05f);
+                if (RandTimer >= 7)
+                    RandTimer = 0;
+            }
+            else
+            {
+                CurrentSpeed = Mathf.Lerp(CurrentSpeed, speed, 0.05f);
+            }
+        }
+        public void SwitchRush(float speed)
+        {
+            CurrentSpeed = Mathf.Lerp(CurrentSpeed, speed, 0.05f);
+        }
+        public float RandTimer = 0;
+        public float CurrentSpeed;
+        public bool IsCollided;
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.GetComponent<KayakController>() == true && IsCollided == false)
+            {
+                IsCollided = true;
+                CharacterManager.Instance.AddBalanceValueToCurrentSide(8.5f);
+                SharkCollider.enabled = false;
+                Debug.Log("collision");
+            }
         }
     }
 }
