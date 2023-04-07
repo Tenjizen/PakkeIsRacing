@@ -42,7 +42,7 @@ namespace Character.State
             }
 
             //Switch camera
-            if (Mathf.Abs(CharacterManagerRef.Balance) > 60 && _cameraSwitchState == false)
+            if (Mathf.Abs(CharacterManagerRef.Balance) >= 60 && _cameraSwitchState == false)
             {
                 _cameraSwitchState = true;
                 CameraDeathState cameraDeathState = new CameraDeathState();

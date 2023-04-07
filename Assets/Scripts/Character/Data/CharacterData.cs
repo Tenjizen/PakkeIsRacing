@@ -29,7 +29,7 @@ namespace Character.Data
         [Header("Unbalanced")]
         [Tooltip("The number of times to press the button")]
         public int NumberPressButton;
-        [Tooltip("Conversion of a 'balance' unit to time")]
+        [Range(0.75f,4f),Tooltip("Conversion of a 'balance' unit to time")]
         public float UnitBalanceToTimer;
         [Tooltip("The more balance you have the less time you have (formula: (unitbalance * balance) - ((balance - balanceLimit) * ReductionForce))")]
         public float ReductionForce;

@@ -44,8 +44,17 @@ namespace Character.State
 
             CharacterManagerRef.NumberButtonIsPressed = 0;
             _timerUnbalanced = 0;
-            CharacterManagerRef.TimerUnbalanced = (CharacterManagerRef.Data.UnitBalanceToTimer * Mathf.Abs(CharacterManagerRef.Balance)) -
-                                                    ((Mathf.Abs(CharacterManagerRef.Balance) - CharacterManagerRef.Data.BalanceLimit) * CharacterManagerRef.Data.ReductionForce);
+
+
+            if (Mathf.Abs(CharacterManagerRef.Balance) > 12)
+            {
+                CharacterManagerRef.TimerUnbalanced = 1;
+            }
+            else
+            {
+                CharacterManagerRef.TimerUnbalanced = Mathf.Abs(Mathf.Abs((CharacterManagerRef.Data.UnitBalanceToTimer * Mathf.Abs(CharacterManagerRef.Balance))) -
+                                                        ((Mathf.Abs(CharacterManagerRef.Balance) - CharacterManagerRef.Data.BalanceLimit) * CharacterManagerRef.Data.ReductionForce));
+            }
 
             //balance
             if (Mathf.Abs(CharacterManagerRef.Balance) >
@@ -64,8 +73,8 @@ namespace Character.State
         {
             Timer();
             ClickSpam();
-            CharacterManagerRef.BalanceGaugeManagerRef.ReduceGauge((_timerUnbalanced / DIVIDE_TIMER_PERCENT) / CharacterManagerRef.TimerUnbalanced);
 
+            CharacterManagerRef.BalanceGaugeManagerRef.ReduceGauge(Mathf.Abs((_timerUnbalanced / DIVIDE_TIMER_PERCENT) / CharacterManagerRef.TimerUnbalanced));
             float percentGauge = CharacterManagerRef.BalanceGaugeManagerRef.PercentGauge();
             float angle = 0;
 
@@ -113,7 +122,7 @@ namespace Character.State
         {
             _timerUnbalanced += Time.deltaTime;
 
-            if (CharacterManagerRef.NumberButtonIsPressed >= CharacterManagerRef.Data.NumberPressButton && _timerUnbalanced <= CharacterManagerRef.TimerUnbalanced)
+            if (CharacterManagerRef.NumberButtonIsPressed >= CharacterManagerRef.Data.NumberPressButton && _timerUnbalanced <= Mathf.Abs(CharacterManagerRef.TimerUnbalanced))
             {
                 _kayakController.CanReduceDrag = true;
                 CameraManagerRef.CanMoveCameraManually = true;
