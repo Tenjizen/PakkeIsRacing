@@ -50,12 +50,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0.6
-  _balanceValue: 0.15
-  _balanceValueRandomMultiplierRange: {x: 1.5, y: 2}
+  _balanceValue: 0.12
+  _balanceValueRandomMultiplierRange: {x: 1, y: 1.4}
   _speedNotFacingMultiplier: 0.5
-  _rotationLerpWhenInDirection: 0.1
-  _rotationLerpWhenNotInDirection: 0.02
-  _rotationLerpWhenMoving: 0.02
+  _rotationLerpWhenInDirection: 0.0002
+  _rotationLerpWhenNotInDirection: 0.0057
+  _rotationLerpWhenMoving: 0.0057
   _particlesList:
   - {fileID: 1923397359820716286}
   - {fileID: 2194639012756001884}
