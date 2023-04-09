@@ -15,11 +15,39 @@ MonoBehaviour:
   Path: FMOD_project/Pakke_Is/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638166384435474483
+  lastModified: 638166492217018294
   FileSizes:
   - Name: Desktop
-    Value: 1036
+    Value: 1486
   Exists: 1
+--- !u!114 &-1612053340526644219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambience/AmbienceTest
+  m_EditorClassIdentifier: 
+  Path: event:/Ambience/AmbienceTest
+  Guid:
+    Data1: 920865563
+    Data2: 1146934380
+    Data3: -456946294
+    Data4: 289933084
+  Banks:
+  - {fileID: 6918480860476981872}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 110780540683121638}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1560096
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37,14 +65,64 @@ MonoBehaviour:
   - {fileID: 6918480860476981872}
   - {fileID: -8127459704306106220}
   - {fileID: 1426460621515787707}
-  EditorEvents: []
+  EditorEvents:
+  - {fileID: 1858434606946778931}
+  - {fileID: -1612053340526644219}
   EditorParameters: []
   MasterBanks:
   - {fileID: -8127459704306106220}
   StringsBanks:
   - {fileID: 5488868156226981610}
-  cacheTime: 638166384435806137
+  cacheTime: 638166492217028300
   cacheVersion: 131601
+--- !u!114 &83555140158494301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTest/music_intensity
+  m_EditorClassIdentifier: 
+  Name: music_intensity
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3855078132
+    data2: 574355803
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &110780540683121638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/AmbienceTest/ambience_intensity
+  m_EditorClassIdentifier: 
+  Name: ambience_intensity
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2791387025
+    data2: 630549474
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &1426460621515787707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,6 +143,34 @@ MonoBehaviour:
   - Name: Desktop
     Value: 494
   Exists: 1
+--- !u!114 &1858434606946778931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/MainMusicTest
+  m_EditorClassIdentifier: 
+  Path: event:/Music/MainMusicTest
+  Guid:
+    Data1: 382647813
+    Data2: 1327055764
+    Data3: -1770697324
+    Data4: -679893626
+  Banks:
+  - {fileID: 6918480860476981872}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 83555140158494301}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 105168
 --- !u!114 &5488868156226981610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,10 +186,10 @@ MonoBehaviour:
   Path: FMOD_project/Pakke_Is/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638166384435724710
+  lastModified: 638166492217028300
   FileSizes:
   - Name: Desktop
-    Value: 794
+    Value: 1142
   Exists: 1
 --- !u!114 &6918480860476981872
 MonoBehaviour:
@@ -100,8 +206,8 @@ MonoBehaviour:
   Path: FMOD_project/Pakke_Is/Build/Desktop/Level1.bank
   Name: Level1
   StudioPath: bank:/Level1
-  lastModified: 638166384435806137
+  lastModified: 638166490586665158
   FileSizes:
   - Name: Desktop
-    Value: 494
+    Value: 21758048
   Exists: 1
