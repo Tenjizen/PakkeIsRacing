@@ -205,7 +205,7 @@ namespace Character.State
             MonoBehaviourRef.StartCoroutine(PaddleForceCurve());
             
             //audio
-            CharacterManager.Instance.SoundManagerProperty.PlaySound(_kayakController.Data.PaddlingAudioClip);
+            //CharacterManager.Instance.SoundManagerProperty.PlaySound(_kayakController.Data.PaddlingAudioClip);
             
             //animation & particles
             CharacterManagerRef.PaddleAnimatorProperty.SetTrigger(direction == Direction.Left ? "PaddleLeft" : "PaddleRight");

@@ -36,7 +36,7 @@ namespace GPEs.Checkpoint
                 _hasBeenUsed = true;
             
                 _activationParticles.Play();
-                CharacterManager.Instance.SoundManagerProperty.PlaySound(_activationClip);
+                //CharacterManager.Instance.SoundManagerProperty.PlaySound(_activationClip);
                 _zoneManager.ShowZone(_zoneName);
             }
         }
