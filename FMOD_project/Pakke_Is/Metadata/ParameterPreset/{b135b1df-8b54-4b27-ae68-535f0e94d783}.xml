@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{b135b1df-8b54-4b27-ae68-535f0e94d783}">
+		<property name="name">
+			<value>ambience_intensity</value>
+		</property>
+		<relationship name="folder">
+			<destination>{e489e1da-938d-42d9-ae22-290f671eb64f}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{56a62ad9-ea27-4016-a93f-71d6cb8672be}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{56a62ad9-ea27-4016-a93f-71d6cb8672be}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeed">
+			<value>0.50999999046325684</value>
+		</property>
+	</object>
+</objects>
