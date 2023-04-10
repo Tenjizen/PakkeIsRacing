@@ -29,7 +29,7 @@ namespace Fight
         {
             base.Die();
             
-            CharacterManager.Instance.SoundManagerProperty.PlaySound(_dieSound);
+            //CharacterManager.Instance.SoundManagerProperty.PlaySound(_dieSound);
             
             _dieParticles.transform.parent = null;
             _dieParticles.Play();
@@ -48,7 +48,7 @@ namespace Fight
 
             _rigidbody.AddForce(direction * (Data.LaunchForce * power));
             
-            CharacterManager.Instance.SoundManagerProperty.PlaySound(_launchSound);
+            //CharacterManager.Instance.SoundManagerProperty.PlaySound(_launchSound);
         }
     }
 }

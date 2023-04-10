@@ -51,7 +51,7 @@ namespace Kayak
             float value = collision.relativeVelocity.magnitude / Data.KayakValues.CollisionToBalanceMagnitudeDivider;
             Debug.Log($"collision V.M. :{Math.Round(collision.relativeVelocity.magnitude)} -> {Math.Round(value,2)}");
             characterManager.AddBalanceValueToCurrentSide(value);
-            characterManager.SoundManagerProperty.PlaySound(Data.CollisionAudioClip);
+            //characterManager.SoundManagerProperty.PlaySound(Data.CollisionAudioClip);
         }
 
         /// <summary>
