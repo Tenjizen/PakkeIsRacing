@@ -139,6 +139,15 @@
                     "processors": "",
                     "interactions": "Press",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "DisplayControlScreen",
+                    "type": "Button",
+                    "id": "e412642b-f162-4c33-9f57-0efea12c64c4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -447,6 +456,17 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "UnbalancedLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3b8fdf28-c343-4bca-b5d3-32eceed31fd4",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "DisplayControlScreen",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

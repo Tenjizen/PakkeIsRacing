@@ -161,6 +161,15 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DisplayControlScreen"",
+                    ""type"": ""Button"",
+                    ""id"": ""e412642b-f162-4c33-9f57-0efea12c64c4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -471,6 +480,17 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""action"": ""UnbalancedLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3b8fdf28-c343-4bca-b5d3-32eceed31fd4"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""DisplayControlScreen"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -505,6 +525,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         m_Boat_Shoot = m_Boat.FindAction("Shoot", throwIfNotFound: true);
         m_Boat_UnbalancedRight = m_Boat.FindAction("UnbalancedRight", throwIfNotFound: true);
         m_Boat_UnbalancedLeft = m_Boat.FindAction("UnbalancedLeft", throwIfNotFound: true);
+        m_Boat_DisplayControlScreen = m_Boat.FindAction("DisplayControlScreen", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -579,6 +600,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Boat_Shoot;
     private readonly InputAction m_Boat_UnbalancedRight;
     private readonly InputAction m_Boat_UnbalancedLeft;
+    private readonly InputAction m_Boat_DisplayControlScreen;
     public struct BoatActions
     {
         private @GameplayInputs m_Wrapper;
@@ -598,6 +620,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Boat_Shoot;
         public InputAction @UnbalancedRight => m_Wrapper.m_Boat_UnbalancedRight;
         public InputAction @UnbalancedLeft => m_Wrapper.m_Boat_UnbalancedLeft;
+        public InputAction @DisplayControlScreen => m_Wrapper.m_Boat_DisplayControlScreen;
         public InputActionMap Get() { return m_Wrapper.m_Boat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -652,6 +675,9 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @UnbalancedLeft.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnUnbalancedLeft;
                 @UnbalancedLeft.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnUnbalancedLeft;
                 @UnbalancedLeft.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnUnbalancedLeft;
+                @DisplayControlScreen.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnDisplayControlScreen;
+                @DisplayControlScreen.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnDisplayControlScreen;
+                @DisplayControlScreen.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnDisplayControlScreen;
             }
             m_Wrapper.m_BoatActionsCallbackInterface = instance;
             if (instance != null)
@@ -701,6 +727,9 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @UnbalancedLeft.started += instance.OnUnbalancedLeft;
                 @UnbalancedLeft.performed += instance.OnUnbalancedLeft;
                 @UnbalancedLeft.canceled += instance.OnUnbalancedLeft;
+                @DisplayControlScreen.started += instance.OnDisplayControlScreen;
+                @DisplayControlScreen.performed += instance.OnDisplayControlScreen;
+                @DisplayControlScreen.canceled += instance.OnDisplayControlScreen;
             }
         }
     }
@@ -740,5 +769,6 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnUnbalancedRight(InputAction.CallbackContext context);
         void OnUnbalancedLeft(InputAction.CallbackContext context);
+        void OnDisplayControlScreen(InputAction.CallbackContext context);
     }
 }
