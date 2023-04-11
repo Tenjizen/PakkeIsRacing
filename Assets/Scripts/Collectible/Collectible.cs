@@ -13,7 +13,18 @@ namespace Collectible
 
         public void SetCollected()
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+
+            CollectibleJsonFileManager instance = CollectibleJsonFileManager.Instance;
+            if (instance != null)
+            {
+                instance.SetCollectibleCollected(this);
+            }
+        }
+
+        public void SetCollectedAtStart()
+        {
+            gameObject.SetActive(false);
         }
     }
 }
