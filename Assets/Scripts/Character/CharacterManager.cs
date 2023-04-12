@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Character.Camera;
 using Character.Data;
 using Character.State;
@@ -52,7 +53,7 @@ namespace Character
         [HideInInspector] public float WeaponCooldown;
         [HideInInspector] public float WeaponCooldownBase;
         [HideInInspector] public bool ProjectileIsInAir;
-
+        
         protected override void Awake()
         {
             base.Awake();
