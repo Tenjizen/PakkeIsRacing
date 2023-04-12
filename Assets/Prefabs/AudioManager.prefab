@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5502001551537134340}
-  - component: {fileID: 5502001551537134343}
+  - component: {fileID: 2371585169252742742}
   m_Layer: 0
   m_Name: FMODEvents
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 5502001552580124135}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5502001551537134343
+--- !u!114 &2371585169252742742
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,14 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1922be9917199c74cab48c37e53ae1c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ambience>k__BackingField:
+  isPersistant: 0
+  <Ambience>k__BackingField:
     Guid:
       Data1: 920865563
       Data2: 1146934380
       Data3: -456946294
       Data4: 289933084
     Path: event:/Ambience/AmbienceTest
-  <music>k__BackingField:
+  <Music>k__BackingField:
     Guid:
       Data1: 382647813
       Data2: 1327055764
@@ -103,7 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a421f634769b7c4bb20d0d477b97baf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterVolume: 1
-  musicVolume: 1
-  ambienceVolume: 1
-  SFXVolume: 1
+  isPersistant: 0
+  MasterVolume: 1
+  MusicVolume: 1
+  AmbienceVolume: 1
+  SfxVolume: 1

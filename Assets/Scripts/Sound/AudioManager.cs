@@ -24,6 +24,8 @@ namespace Sound
     
         protected override void Awake()
         {
+            base.Awake();
+
             _eventInstances = new List<EventInstance>();
             _eventEmitters = new List<StudioEventEmitter>();
             _masterBus = RuntimeManager.GetBus("bus:/");
@@ -33,8 +35,8 @@ namespace Sound
         }
         private void Start()
         {
-            InitializeAmbience(FmodEvents.Instance.Ambience);
-            InitializeMusic(FmodEvents.Instance.Music);
+            InitializeAmbience(FMODEvents.Instance.Ambience);
+            InitializeMusic(FMODEvents.Instance.Music);
         }
         private void Update()
         {
