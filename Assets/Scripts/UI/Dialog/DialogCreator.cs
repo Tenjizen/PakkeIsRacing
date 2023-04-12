@@ -4,13 +4,14 @@ using Character;
 using Character.Camera;
 using DG.Tweening;
 using Dialog;
+using GPEs;
 using Sound;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace UI.Dialog
 {
-    public class DialogCreator : MonoBehaviour
+    public class DialogCreator : PlayerTriggerManager
     {
         #region Enums
 
@@ -47,20 +48,20 @@ namespace UI.Dialog
         public UnityEvent OnDialogLaunch = new UnityEvent();
         public UnityEvent OnDialogEnd = new UnityEvent();
 
-        [Space(20), Header("References"), SerializeField] 
-        private CharacterManager _characterManager;
-        [SerializeField] 
-        private CameraManager _cameraManager;
-        
-        [Header("Debug"), SerializeField, ReadOnly] 
-        private DialogState _currentDialogState = DialogState.NotLaunched;
+        [Header("Debug"), SerializeField, ReadOnly] private DialogState _currentDialogState = DialogState.NotLaunched;
+       
         private int _dialogIndex;
         private float _currentDialogCooldown; 
         private GameplayInputs _gameplayInputs;
+        private CharacterManager _characterManager;
+        private CameraManager _cameraManager;
 
         private void Start()
         {
-            //OnPlayerDetected.AddListener(StartTrigger);
+            OnPlayerEntered.AddListener(StartTrigger);
+
+            _characterManager = CharacterManager.Instance;
+            _cameraManager = CharacterManager.Instance.CameraManagerProperty;
             
             _gameplayInputs = new GameplayInputs();
             _gameplayInputs.Enable();
@@ -69,12 +70,12 @@ namespace UI.Dialog
 
         private void OnDestroy()
         {
-            //OnPlayerDetected.RemoveListener(StartTrigger);
+            OnPlayerEntered.RemoveListener(StartTrigger);
         }
 
-        protected void Update()
+        public override void Update()
         {
-            //base.Update();
+            base.Update();
             if (_currentDialogState == DialogState.NotLaunched)
             {
                 return;
@@ -83,8 +84,9 @@ namespace UI.Dialog
             CoolDownManagement();
         }
 
-        public void StartTrigger()
+        private void StartTrigger()
         {
+            Debug.Log("oui");
             if (_launchType == LaunchType.TriggerZone && _currentDialogState == DialogState.NotLaunched)
             {
                 if ((_hasEnded && _canBeReplayed) || (_hasEnded == false && _currentDialogState == DialogState.NotLaunched))

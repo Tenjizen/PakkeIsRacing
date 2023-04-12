@@ -34,18 +34,29 @@ namespace GPEs
             RaycastHit[] hits = new RaycastHit[] { };
             if (_triggerType == TriggerType.BoxTrigger)
             {
-                hits = Physics.BoxCastAll(transform.position + _triggerOffsetPosition, _triggerBoxSize / 2, Vector3.forward, Quaternion.identity, 0f, _playerLayerMask);
-                
+                hits = Physics.BoxCastAll(
+                    transform.position + _triggerOffsetPosition, 
+                    _triggerBoxSize / 2, 
+                    Vector3.forward,
+                    Quaternion.identity, 
+                    0f, 
+                    _playerLayerMask);
             }
             if (_triggerType == TriggerType.SphereTrigger)
             {
-                hits = Physics.SphereCastAll(transform.position + _triggerOffsetPosition, _triggerSphereSize, Vector3.forward, 0f);
+                hits = Physics.SphereCastAll(
+                    transform.position + _triggerOffsetPosition,
+                    _triggerSphereSize, 
+                    Vector3.forward, 
+                    0f);
             }
+            
             foreach (RaycastHit hit in hits)
             {
                 KayakController kayakController = hit.collider.gameObject.GetComponent<KayakController>();
                 if (kayakController != null)
                 {
+                    Debug.Log($"entered {gameObject.name}");
                     if (PropKayakController == null)
                     {
                         PropKayakController = kayakController;
