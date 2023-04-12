@@ -10,6 +10,7 @@ namespace FMODUnity
 
         private void OnGUI()
         {
+            return;
             if (TargetRuntimeManager)
             {
                 TargetRuntimeManager.ExecuteOnGUI();

@@ -143,7 +143,7 @@ namespace Enemies.Shark
                 HitParticles.transform.parent = null;
                 HitParticles.Play();
             }
-            CharacterManager.Instance.SoundManagerProperty.PlaySound(HitSound);
+            //CharacterManager.Instance.SoundManagerProperty.PlaySound(HitSound);
 
             if (Life <= 0)
                 Destroy(ParentGameObject.gameObject);

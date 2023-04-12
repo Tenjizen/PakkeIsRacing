@@ -1,21 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using FMODUnity;
+using Tools.SingletonClassBase;
+using UnityEngine;
 
-public class FMODEvents : MonoBehaviour
+namespace Sound
 {
-    [field: Header("Ambience")]
-    [field: SerializeField] public EventReference ambience { get; private set; }
-    [field: Header("Music")]
-    [field: SerializeField] public EventReference music { get; private set; }
-    public static FMODEvents instance { get; private set; }
-    private void Awake()
+    public class FmodEvents : Singleton<FmodEvents>
     {
-        if (instance != null)
-        {
-            Debug.LogError("Found more than one FMOD Events script.");
-        }
-        instance = this;
+        [field: SerializeField, Header("Ambience")] public EventReference Ambience { get; private set; }
+        [field: SerializeField, Header("Music")] public EventReference Music { get; private set; }
     }
 }

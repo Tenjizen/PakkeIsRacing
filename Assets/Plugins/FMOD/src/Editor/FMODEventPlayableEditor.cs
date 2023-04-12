@@ -161,6 +161,8 @@ namespace FMODUnity
 
         public override void OnInspectorGUI()
         {
+            return;
+            
             serializedObject.Update();
 
             RefreshEventRef();

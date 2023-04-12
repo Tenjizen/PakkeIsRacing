@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class AmbienceChangeTrigger : MonoBehaviour
+namespace Sound
 {
-    [Header("Parameter Change")]
-    [SerializeField] private string parameterName;
-    [SerializeField] private float parameterValue;
-
-    private void OnTriggerEnter(Collider collision)
+    public class AmbienceChangeTrigger : MonoBehaviour
     {
-        if (GetComponent<BoxCollider>().tag.Equals("Player"))
+        [Header("Parameter Change"), SerializeField] private string _parameterName;
+        [SerializeField] private float _parameterValue;
+
+        private void OnTriggerEnter(Collider collision)
         {
-            AudioManager.instance.SetAmbienceParameter(parameterName, parameterValue);
+            if (GetComponent<BoxCollider>().tag.Equals("Player"))
+            {
+                AudioManager.Instance.SetAmbienceParameter(_parameterName, _parameterValue);
+            }
         }
     }
 }

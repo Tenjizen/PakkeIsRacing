@@ -28,6 +28,7 @@ namespace FMODUnity
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
+            return;
             SerializedProperty volumeProperty = property.FindPropertyRelative("volume");
 
             EditorGUI.PropertyField(position, volumeProperty);

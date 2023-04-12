@@ -28,7 +28,6 @@ namespace Character
         [field: SerializeField] public TransitionManager TransitionManagerProperty { get; private set; }
         [field: SerializeField] public WeaponUIManager WeaponUIManagerProperty { get; private set; }
         [field: SerializeField] public BalanceGaugeManager BalanceGaugeManagerRef { get; private set; }
-        [field: SerializeField] public SoundManager SoundManagerProperty { get; private set; }
         [field: SerializeField] public CheckpointManager CheckpointManagerProperty { get; private set; }
         [field: SerializeField] public MonoBehaviour CharacterMonoBehaviour { get; private set; }
         [field: SerializeField] public ExperienceManager ExperienceManagerProperty { get; private set; }
