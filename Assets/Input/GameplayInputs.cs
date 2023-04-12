@@ -164,12 +164,12 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""DisplayControlScreen"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""e412642b-f162-4c33-9f57-0efea12c64c4"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -488,6 +488,17 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""GamePad"",
+                    ""action"": ""DisplayControlScreen"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""61722d3b-ca01-4c19-a1d2-ce562465d3e7"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
                     ""action"": ""DisplayControlScreen"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

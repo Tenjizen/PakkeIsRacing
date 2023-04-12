@@ -43,8 +43,8 @@ namespace Character
             inputsEnum.Aim = _gameplayInputs.Boat.Aim.ReadValue<float>() > 0.5f;
             inputsEnum.Shoot = _gameplayInputs.Boat.Shoot.ReadValue<float>() > 0.5f;
             inputsEnum.MovingAim = _gameplayInputs.Boat.MoveAim.ReadValue<Vector2>();
-
-            //inputsEnum.Unbalanced = _gameplayInputs.Boat.Unbalanced.ReadValue<float>() > 0.8f;
+            
+            inputsEnum.DisplayControlScreen = _gameplayInputs.Boat.DisplayControlScreen.ReadValue<float>() > 0.5f;;
 
             inputsEnum.Deadzone = 0.3f;
             
@@ -74,5 +74,7 @@ namespace Character
         public Vector2 MovingAim;
 
         public bool Unbalanced;
+
+        public bool DisplayControlScreen;
     }
 }
