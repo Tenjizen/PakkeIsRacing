@@ -205,7 +205,7 @@ namespace Enemies.Shark
             {
                 IsCollided = true;
                 CharacterManager.Instance.AddBalanceValueToCurrentSide(8.5f);
-                SharkCollider.enabled = false;
+                //SharkCollider.enabled = false;
                 Debug.Log("collision");
             }
         }

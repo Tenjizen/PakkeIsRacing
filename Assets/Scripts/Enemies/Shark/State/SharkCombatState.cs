@@ -110,7 +110,7 @@ public class SharkCombatState : SharkBaseState
             if (_currentOffSet >= _elevationOffsetBase - 0.05f)
             {
                 Debug.Log("remove comms after");
-                sharkManager.SharkCollider.enabled = false;
+                //sharkManager.SharkCollider.enabled = false;
             }
 
             switch (_state)
