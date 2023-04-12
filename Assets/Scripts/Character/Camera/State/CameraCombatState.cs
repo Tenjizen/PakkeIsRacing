@@ -34,8 +34,12 @@ namespace Character.Camera.State
             CamManager.CurrentStateBase.ManageFreeCameraMove(CameraMode.Combat);
             CamManager.ApplyRotationCameraInCombat();
 
+            var min = (_baseYaw + CamManager.Data.CombatLengthClamp.x > 180) ? ((_baseYaw + CamManager.Data.CombatLengthClamp.x) - 360) : (_baseYaw + CamManager.Data.CombatLengthClamp.x);
+            var max = ((_baseYaw + CamManager.Data.CombatLengthClamp.y) % 360);
+
             CamManager.CinemachineTargetPitch = ClampAngle(CamManager.CinemachineTargetPitch, CamManager.Data.CombatHeightClamp.x, CamManager.Data.CombatHeightClamp.y);
-            CamManager.CinemachineTargetYaw = ClampAngle(CamManager.CinemachineTargetYaw, _baseYaw + CamManager.Data.CombatLengthClamp.x, _baseYaw + CamManager.Data.CombatLengthClamp.y);
+
+            CamManager.CinemachineTargetYaw = ClampAngle(CamManager.CinemachineTargetYaw, min, max);
 
             ClampRotationCameraValue(CamManager.Data.CombatHeightClamp, CamManager.Data.CombatLengthClamp);  
 
