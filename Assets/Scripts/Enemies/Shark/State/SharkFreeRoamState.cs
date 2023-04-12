@@ -17,10 +17,13 @@ public class SharkFreeRoamState : SharkBaseState
 
     float _randTimer;
     float _timer;
+
+
     public override void EnterState(SharkManager sharkManager)
     {
         Debug.Log("free");
         _state = CombatState.RotateToMoveTarget;
+        sharkManager.SharkCollider.enabled = true;
     }
 
     public override void UpdateState(SharkManager sharkManager)
@@ -67,8 +70,8 @@ public class SharkFreeRoamState : SharkBaseState
     private void RotateFreeRoam(SharkManager sharkManager)
     {
         Vector2 targetPos = new Vector2(sharkManager.PointTarget.transform.position.x, sharkManager.PointTarget.transform.position.z);
-        Vector2 sharkForward = new Vector2(sharkManager.transform.forward.x, sharkManager.transform.forward.z);
-        Vector2 sharkPos = new Vector2(sharkManager.transform.position.x, sharkManager.transform.position.z);
+        Vector2 sharkForward = new Vector2(sharkManager.Forward.transform.forward.x, sharkManager.Forward.transform.forward.z);
+        Vector2 sharkPos = new Vector2(sharkManager.Forward.transform.position.x, sharkManager.Forward.transform.position.z);
 
         float angle = Vector2.SignedAngle(sharkForward, targetPos - sharkPos);
         if (angle < 0)
@@ -76,7 +79,7 @@ public class SharkFreeRoamState : SharkBaseState
 
         _timerDelay += Time.deltaTime;
 
-        Vector3 rotation = sharkManager.transform.localEulerAngles;
+        Vector3 rotation = sharkManager.Forward.transform.localEulerAngles;
 
         if (_timerDelay >= _delay)
         {
@@ -94,19 +97,17 @@ public class SharkFreeRoamState : SharkBaseState
             }
         }
 
-        sharkManager.transform.localEulerAngles = rotation;
+        sharkManager.Forward.transform.localEulerAngles = rotation;
 
-        sharkManager.transform.Translate(Vector3.forward * sharkManager.SpeedRotationFreeRoam * Time.deltaTime, Space.Self);
+        sharkManager.Forward.transform.Translate(Vector3.forward * sharkManager.SpeedRotationFreeRoam * Time.deltaTime, Space.Self);
 
-        
+
         _timer += Time.deltaTime;
-        
+
         if (_timer >= _randTimer)
         {
             _state = CombatState.RotateToMoveTarget;
             _timer = 0;
         }
     }
-
-
 }

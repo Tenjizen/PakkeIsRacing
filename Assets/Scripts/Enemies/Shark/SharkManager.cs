@@ -13,6 +13,8 @@ namespace Enemies.Shark
         [field: SerializeField] public SharkBaseState CurrentStateBase { get; private set; }
         [field: SerializeField, ReadOnly] public Transform TargetTransform { get; private set; }
         [field: SerializeField] public GameObject ParentGameObject { get; private set; }
+        [field: SerializeField] public GameObject Forward { get; private set; }
+
 
         //TODO to scriptable object
         [Header("Life")] public float Life = 3;
@@ -86,13 +88,12 @@ namespace Enemies.Shark
         public float MaxDistanceBetweenPointInCombat = 30.0f;
 
 
+        public float RandTimer = 0;
+        [ReadOnly] public float CurrentSpeed;
+        [ReadOnly] public bool IsCollided;
 
         private void Awake()
         {
-            //ColliderShadow.enabled = false;
-            //SharkCombatState sharkCombatState = new SharkCombatState();
-            //CurrentStateBase = sharkCombatState;
-
             SharkFreeRoamState sharkFreeRoamState = new SharkFreeRoamState();
             CurrentStateBase = sharkFreeRoamState;
         }
@@ -151,15 +152,16 @@ namespace Enemies.Shark
 
         public void MoveToTarget(SharkManager sharkManager)
         {
+            
             Vector2 targetPos = new Vector2(sharkManager.PointTarget.transform.position.x, sharkManager.PointTarget.transform.position.z);
-            Vector2 forward = new Vector2(sharkManager.transform.forward.x, sharkManager.transform.forward.z);
-            Vector2 sharkPos = new Vector2(sharkManager.transform.position.x, sharkManager.transform.position.z);
+            Vector2 forward = new Vector2(sharkManager.Forward.transform.forward.x, sharkManager.Forward.transform.forward.z);
+            Vector2 sharkPos = new Vector2(sharkManager.Forward.transform.position.x, sharkManager.Forward.transform.position.z);
 
             float angle = Vector2.SignedAngle(targetPos - sharkPos, forward);
             if (angle < 0)
                 angle += 360;
 
-            Vector3 rota = sharkManager.transform.localEulerAngles;
+            Vector3 rota = sharkManager.Forward.transform.localEulerAngles;
             if (angle >= 0 && angle <= 180)
             {
                 rota.y += Time.deltaTime * RotationStaticSpeed;
@@ -169,15 +171,15 @@ namespace Enemies.Shark
                 rota.y -= Time.deltaTime * RotationStaticSpeed;
             }
 
-            sharkManager.transform.localEulerAngles = rota;
+            sharkManager.Forward.transform.localEulerAngles = rota;
 
-            var pos = sharkManager.transform.position;
+            var pos = sharkManager.Forward.transform.position;
             pos.y = sharkManager.ElevationOffset;
-            sharkManager.transform.position = pos;
+            sharkManager.Forward.transform.position = pos;
 
             SwitchSpeed(SpeedToMoveToTarget);
 
-            sharkManager.transform.Translate(Vector3.forward * CurrentSpeed * Time.deltaTime, Space.Self);
+            sharkManager.Forward.transform.Translate(Vector3.forward * CurrentSpeed * Time.deltaTime, Space.Self);
         }
 
         public void SwitchSpeed(float speed)
@@ -197,9 +199,6 @@ namespace Enemies.Shark
         {
             CurrentSpeed = Mathf.Lerp(CurrentSpeed, speed, 0.05f);
         }
-        public float RandTimer = 0;
-        public float CurrentSpeed;
-        public bool IsCollided;
         private void OnTriggerEnter(Collider other)
         {
             if (other.GetComponent<KayakController>() == true && IsCollided == false)
