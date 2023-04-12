@@ -576,6 +576,7 @@ retry:
 
         internal void ExecuteOnGUI()
         {
+            return;
             if (studioSystem.isValid() && isOverlayEnabled)
             {
                 windowRect = GUI.Window(GetInstanceID(), windowRect, DrawDebugOverlay, "FMOD Studio Debug");

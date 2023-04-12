@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4415997587140153627}
   - component: {fileID: 4415997587140153624}
-  - component: {fileID: 1746983849}
   m_Layer: 0
   m_Name: DialogCreatorExample
   m_TagString: Untagged
@@ -45,6 +44,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962c15179fceaa24e904cf8c8f0a8a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _triggerType: 0
+  _showTriggerGizmos: 1
+  _triggerBoxSize: {x: 17.06, y: 6.45, z: 1}
+  _triggerSphereSize: 1
+  _triggerOffsetPosition: {x: 0, y: 0, z: 0}
+  _playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  OnPlayerEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayerStay:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayerExited:
+    m_PersistentCalls:
+      m_Calls: []
   _launchType: 0
   _dialog:
   - Text: Attention une baleine !
@@ -57,7 +73,7 @@ MonoBehaviour:
     SizeEffect: 1
     SequencingTypeNext: 0
     Clip: {fileID: 0}
-  _canBeReplayed: 1
+  _canBeReplayed: 0
   _hasEnded: 0
   _blockPlayerMovement: 0
   _blockCameraMovement: 0
@@ -67,38 +83,4 @@ MonoBehaviour:
   OnDialogEnd:
     m_PersistentCalls:
       m_Calls: []
-  _characterManager: {fileID: 0}
-  _cameraManager: {fileID: 0}
   _currentDialogState: 0
---- !u!114 &1746983849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4415997587140153625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e5bcccd9b12b00408e41f15d5a7eb27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _triggerSize: {x: 10, y: 10, z: 10}
-  _triggerOffsetPosition: {x: 0, y: 0, z: 0}
-  _playerLayerMask:
-    serializedVersion: 2
-    m_Bits: 2147483647
-  OnPlayerDetected:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4415997587140153624}
-        m_TargetAssemblyTypeName: UI.Dialog.DialogCreator, Assembly-CSharp
-        m_MethodName: StartTrigger
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2

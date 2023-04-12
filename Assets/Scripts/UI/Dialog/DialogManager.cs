@@ -1,10 +1,9 @@
-﻿using System;
-using TMPro;
+﻿using Dialog;
 using Tools.SingletonClassBase;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Dialog
+namespace UI.Dialog
 {
     public class DialogManager : Singleton<DialogManager>
     {
