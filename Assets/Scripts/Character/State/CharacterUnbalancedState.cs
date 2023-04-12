@@ -46,15 +46,15 @@ namespace Character.State
             _timerUnbalanced = 0;
 
 
-            if (Mathf.Abs(CharacterManagerRef.Balance) > 12)
-            {
-                CharacterManagerRef.TimerUnbalanced = 1;
-            }
+            var balanceTimer = (CharacterManagerRef.Data.UnitBalanceToTimer * Mathf.Abs(CharacterManagerRef.Balance));
+            var collisionForce = (Mathf.Abs(CharacterManagerRef.Balance) - CharacterManagerRef.Data.BalanceLimit) * CharacterManagerRef.Data.ReductionForce;
+
+            if (balanceTimer - collisionForce < CharacterManagerRef.Data.MinimumTimeUnbalanced)
+                CharacterManagerRef.TimerUnbalanced = CharacterManagerRef.Data.MinimumTimeUnbalanced;
             else
-            {
-                CharacterManagerRef.TimerUnbalanced = Mathf.Abs(Mathf.Abs((CharacterManagerRef.Data.UnitBalanceToTimer * Mathf.Abs(CharacterManagerRef.Balance))) -
-                                                        ((Mathf.Abs(CharacterManagerRef.Balance) - CharacterManagerRef.Data.BalanceLimit) * CharacterManagerRef.Data.ReductionForce));
-            }
+                CharacterManagerRef.TimerUnbalanced = balanceTimer - collisionForce;
+
+            Debug.Log(CharacterManagerRef.TimerUnbalanced + " timer");
 
             //balance
             if (Mathf.Abs(CharacterManagerRef.Balance) >
