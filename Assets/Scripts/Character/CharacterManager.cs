@@ -163,9 +163,8 @@ namespace Character
 
         private void OnGUI()
         {
-            return;
             #if UNITY_EDITOR
-            GUI.skin.label.fontSize = 50;
+            GUI.skin.label.fontSize = 30;
 
             GUI.color = Color.white;
             GUI.Label(new Rect(10, 10, 500, 100), "Balance : " + Math.Round(Balance, 1));

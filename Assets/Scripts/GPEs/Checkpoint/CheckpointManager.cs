@@ -1,3 +1,4 @@
+using System;
 using Character;
 using UnityEngine;
 
@@ -7,12 +8,18 @@ namespace GPEs.Checkpoint
     {
         [field:SerializeField] public Checkpoint CurrentCheckpoint { get; private set; }
 
+        private Transform _baseTransform;
+
+        private void Start()
+        {
+            _baseTransform = CharacterManager.Instance.transform;
+        }
+
         public Transform GetRespawnPoint()
         {
             if (CurrentCheckpoint == null)
             {
-                Debug.LogError("No checkPoint Set");
-                return CharacterManager.Instance.transform;
+                return _baseTransform;
             }
 
             return CurrentCheckpoint.GetTargetRespawnTransform();
