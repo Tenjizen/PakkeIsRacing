@@ -43,6 +43,7 @@ namespace Enemies.Shark
         [Header("Jump")]
         [Tooltip("The jump curve")]
         public AnimationCurve JumpCurve;
+        public AnimationCurve VisualCurve;
         [Tooltip("I'm not sure if it stays but it's for the shark to turn around in the areas")]
         public float ValueBeforeLastKeyFrameInCurve = 2;
 
@@ -65,7 +66,8 @@ namespace Enemies.Shark
         public Waves WavesData;
         public CircularWave StartJumpCircularWaveData;
         public CircularWave EndJumpCircularWaveData;
-        [Space(5)] public float EndJumpCircularWaveTime = 1;
+        [Space(5)] public float StartJumpCircularWaveTime = 1;
+        public float EndJumpCircularWaveTime = 1;
         public KayakController KayakControllerProperty { get; set; }
 
         public GameObject PointTarget;
