@@ -7,26 +7,48 @@ namespace Character.Data
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/ExperienceData", order = 1)]
     public class ExperienceData : ScriptableObject
     {
-        [Header("Experience gained")]
-        public float ExperienceGainedAtCheckpoint;
-        public float ExperienceGainedAtColletible;
-        public float ExperienceGainedAtEnemy;
+        [field:SerializeField, Header("Experience gained")]
+        public float ExperienceGainedAtCheckpoint { get; private set; } 
+        
+        
+        [field:SerializeField]
+        public float ExperienceGainedAtColletible { get; private set; } 
+        
+        
+        [field:SerializeField]
+        public float ExperienceGainedAtEnemy { get; private set; } 
 
-        [Header("Experience levels")] 
-        public List<Level> Levels;
         
-        [Header("Combat & Navigation")]
-        public float CombatGaugeMax;
-        public float NavigationGaugeMax;
+        [field:SerializeField, Header("Experience levels")] 
+        public List<Level> Levels { get; private set; } 
         
-        [Header("Character Values multipliers")]
-        //navigation
-        public Value BreakingDistanceMultiplier;
-        public Value MaximumDistanceMultiplier;
-        public Value RotatingSpeedMultiplier;
-        public Value BalanceLimitMultiplier;
-        //combat
-        public Value ProjectileSpeedMultiplier;
+        
+        [field:SerializeField, Header("Combat & Navigation")]
+        public float CombatGaugeMax { get; private set; } 
+        
+        
+        [field:SerializeField]
+        public float NavigationGaugeMax { get; private set; } 
+        
+        
+        [field:SerializeField, Header("Character Values multipliers")]
+        public Value BreakingDistanceMultiplier { get; private set; } 
+        
+        
+        [field:SerializeField]
+        public Value MaximumDistanceMultiplier { get; private set; } 
+        
+        
+        [field:SerializeField]
+        public Value RotatingSpeedMultiplier { get; private set; } 
+        
+        
+        [field:SerializeField]
+        public Value BalanceLimitMultiplier { get; private set; } 
+
+
+        [field:SerializeField]
+        public Value ProjectileSpeedMultiplier { get; private set; } 
     }
 
     [Serializable]

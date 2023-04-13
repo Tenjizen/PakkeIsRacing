@@ -12,173 +12,101 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21bf88a1d751446188ac90787430182b, type: 3}
   m_Name: CameraData
   m_EditorClassIdentifier: 
-  TopClamp: 28
-  BottomClamp: -18
-  BalanceRotationMultiplier: 0
-  BalanceRotationZLerp: 0.01
-  MultiplierValueRotation: 0.5
-  LerpLocalRotationMove: 0.01
-  MultiplierValuePosition: 0.5
-  LerpLocalPositionMove: 0.01
-  MultiplierFovCamera: 1
-  LerpTimeX: 0.035
-  LerpTimeY: 0.035
-  TimerCameraReturnBehindBoat: 2
-  JoystickFreeRotationX:
+  <TopClamp>k__BackingField: 28
+  <BottomClamp>k__BackingField: -18
+  <BalanceRotationMultiplier>k__BackingField: 0
+  <BalanceRotationZLerp>k__BackingField: 0.01
+  <MultiplierValueRotation>k__BackingField: 0.5
+  <LerpLocalRotationMove>k__BackingField: 0.01
+  <MultiplierValuePosition>k__BackingField: 0.5
+  <LerpLocalPositionMove>k__BackingField: 0.01
+  <MultiplierFovCamera>k__BackingField: 1
+  <LerpTimeX>k__BackingField: 0.035
+  <LerpTimeY>k__BackingField: 0.035
+  <TimerCameraReturnBehindBoat>k__BackingField: 2
+  <JoystickFreeRotationX>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -1.0005085
-      value: -0.9997541
-      inSlope: 1.6429578
-      outSlope: 1.6429578
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.14086258
+      outWeight: 0
     - serializedVersion: 3
-      time: -0.6609083
-      value: -0.488298
-      inSlope: 0.0046682134
-      outSlope: 0.0046682134
+      time: 0.49640942
+      value: 0.500536
+      inSlope: 0.009765279
+      outSlope: 0.009765279
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.8963536
-    - serializedVersion: 3
-      time: -0.50042343
-      value: -0.19523749
-      inSlope: 0.0052380096
-      outSlope: 0.0052380096
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.7681763
-    - serializedVersion: 3
-      time: 0.00005506538
-      value: -0.000013513694
-      inSlope: -0.008547281
-      outSlope: -0.008547281
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.59614134
-      outWeight: 0.011789803
-    - serializedVersion: 3
-      time: 0.49936578
-      value: 0.19551098
-      inSlope: -0.0017066888
-      outSlope: -0.0017066888
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.65013206
-    - serializedVersion: 3
-      time: 0.6541217
-      value: 0.50634855
-      inSlope: -0.0012129338
-      outSlope: -0.0012129338
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.99097776
+      inWeight: 0.59710675
+      outWeight: 0.61601835
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1.4651144
-      outSlope: 1.4651144
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.09702311
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  JoystickFreeRotationY:
+  <JoystickFreeRotationY>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -1.0005085
-      value: -0.9997541
-      inSlope: 1.6429578
-      outSlope: 1.6429578
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.14086258
+      outWeight: 0
     - serializedVersion: 3
-      time: -0.6609083
-      value: -0.488298
-      inSlope: 0.0046682134
-      outSlope: 0.0046682134
+      time: 0.49640942
+      value: 0.500536
+      inSlope: 0.009765279
+      outSlope: 0.009765279
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.8963536
-    - serializedVersion: 3
-      time: -0.50042343
-      value: -0.19523749
-      inSlope: 0.0052380096
-      outSlope: 0.0052380096
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.7681763
-    - serializedVersion: 3
-      time: 0.00005506538
-      value: -0.000013513694
-      inSlope: -0.008547281
-      outSlope: -0.008547281
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.59614134
-      outWeight: 0.011789803
-    - serializedVersion: 3
-      time: 0.49936578
-      value: 0.19551098
-      inSlope: -0.0017066888
-      outSlope: -0.0017066888
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.65013206
-    - serializedVersion: 3
-      time: 0.6541217
-      value: 0.50634855
-      inSlope: -0.0012129338
-      outSlope: -0.0012129338
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.99097776
+      inWeight: 0.59710675
+      outWeight: 0.61601835
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1.4651144
-      outSlope: 1.4651144
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.09702311
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  LerpFOV: 0.01
-  LerpLocalPositionNotMoving: 0.003
-  LerpLocalRotationNotMoving: 0.003
-  ValueAddForTopDownWhenDeath: 0.1
-  ValueAddForDistanceWhenDeath: 0.05
-  MaxValueDistanceToStartDeath: 10
-  CameraDistanceRespawn: 25
-  MultiplyTimeForDistanceWhenRespawn: 5
-  CameraAngleTopDownRespawn: 28
-  MultiplyTimeForTopDownWhenRespawn: 6
-  AmplitudeShakeWhenUnbalanced: 0.5
-  AmplitudeShakeWhenWaterFlow: 0.2
-  AmplitudeShakeWhenWaterWave: 0.2
-  CombatOffset: {x: 0, y: 0, z: 0}
-  CombatFov: 39.3
-  CombatZoomFov: 30
-  CombatZoomFovLerp: 0.1
-  CombatZoomAimSpeedMultiplier: 0.3
-  CombatHeightClamp: {x: -30, y: 15}
-  CombatLengthClamp: {x: -30, y: 30}
+  <LerpFOV>k__BackingField: 0.01
+  <LerpLocalPositionNotMoving>k__BackingField: 0.003
+  <LerpLocalRotationNotMoving>k__BackingField: 0.003
+  <ValueAddForTopDownWhenDeath>k__BackingField: 0.1
+  <ValueAddForDistanceWhenDeath>k__BackingField: 0.05
+  <MaxValueDistanceToStartDeath>k__BackingField: 10
+  <CameraDistanceRespawn>k__BackingField: 25
+  <MultiplyTimeForDistanceWhenRespawn>k__BackingField: 5
+  <CameraAngleTopDownRespawn>k__BackingField: 28
+  <MultiplyTimeForTopDownWhenRespawn>k__BackingField: 6
+  <AmplitudeShakeWhenUnbalanced>k__BackingField: 0.5
+  <AmplitudeShakeWhenWaterFlow>k__BackingField: 0.2
+  <AmplitudeShakeWhenWaterWave>k__BackingField: 0.2
+  <CombatOffset>k__BackingField: {x: 0, y: 0, z: 0}
+  <CombatFov>k__BackingField: 29.3
+  <CombatZoomFov>k__BackingField: 30
+  <CombatZoomFovLerp>k__BackingField: 0.1
+  <CombatZoomAimSpeedMultiplier>k__BackingField: 0.3
+  <CombatHeightClamp>k__BackingField: {x: -30, y: 15}
+  <CombatLengthClamp>k__BackingField: {x: -30, y: 30}
