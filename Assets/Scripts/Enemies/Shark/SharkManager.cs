@@ -71,6 +71,7 @@ namespace Enemies.Shark
         public KayakController KayakControllerProperty { get; set; }
 
         public GameObject PointTarget;
+        public GameObject PointTargetAttack;
 
         public float RotationStaticSpeed = 100.0f;
         public float RotationStaticSpeedFreeRoam = 70.0f;
@@ -88,6 +89,8 @@ namespace Enemies.Shark
         public float MinDistanceBetweenPoint = 5.0f;
         public float MaxDistanceBetweenPoint = 15.0f;
         public float MaxDistanceBetweenPointInCombat = 30.0f;
+
+        public float MinDistanceBetweenTargetWhenRotate = 30.0f;
 
 
         public float RandTimer = 0;
@@ -118,7 +121,6 @@ namespace Enemies.Shark
             CurrentStateBase = stateBaseCharacter;
             stateBaseCharacter.EnterState(this);
         }
-
         public void OnEnter()
         {
             if (TargetTransform == null)
@@ -135,6 +137,7 @@ namespace Enemies.Shark
             SwitchState(sharkFreeRoamState);
             TargetTransform = null;
         }
+
 
         public void Hit(Projectile projectile, GameObject owner)
         {
@@ -154,7 +157,6 @@ namespace Enemies.Shark
 
         public void MoveToTarget(SharkManager sharkManager)
         {
-            
             Vector2 targetPos = new Vector2(sharkManager.PointTarget.transform.position.x, sharkManager.PointTarget.transform.position.z);
             Vector2 forward = new Vector2(sharkManager.Forward.transform.forward.x, sharkManager.Forward.transform.forward.z);
             Vector2 sharkPos = new Vector2(sharkManager.Forward.transform.position.x, sharkManager.Forward.transform.position.z);
@@ -163,6 +165,7 @@ namespace Enemies.Shark
             if (angle < 0)
                 angle += 360;
 
+            //rotate to angle 0 to target
             Vector3 rota = sharkManager.Forward.transform.localEulerAngles;
             if (angle >= 0 && angle <= 180)
             {
@@ -173,7 +176,9 @@ namespace Enemies.Shark
                 rota.y -= Time.deltaTime * RotationStaticSpeed;
             }
 
+            //apply rota
             sharkManager.Forward.transform.localEulerAngles = rota;
+
 
             var pos = sharkManager.Forward.transform.position;
             pos.y = sharkManager.ElevationOffset;
@@ -183,6 +188,8 @@ namespace Enemies.Shark
 
             sharkManager.Forward.transform.Translate(Vector3.forward * CurrentSpeed * Time.deltaTime, Space.Self);
         }
+
+
 
         public void SwitchSpeed(float speed)
         {
@@ -197,10 +204,12 @@ namespace Enemies.Shark
                 CurrentSpeed = Mathf.Lerp(CurrentSpeed, speed, 0.05f);
             }
         }
-        public void SwitchRush(float speed)
+
+        public void SwitchSpeedRush(float speed)
         {
             CurrentSpeed = Mathf.Lerp(CurrentSpeed, speed, 0.05f);
         }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.GetComponent<KayakController>() == true && IsCollided == false)
