@@ -60,23 +60,24 @@ namespace Character.Camera.State
             //rotate freely with inputs
             if (CamManager.CanMoveCameraManually)
             {
+                const float timeMultiplier = 100f;
                 Vector2 aim = Vector2.zero;
                 switch (cameraMode)
                 {
                     case CameraMode.Navigation:
                         aim = CamManager.Input.Inputs.RotateCamera;
-                        CamManager.CinemachineTargetPitch += CamManager.Data.JoystickFreeRotationY.Evaluate(aim.y) * FreeAimMultiplier;
+                        CamManager.CinemachineTargetPitch += CamManager.Data.JoystickFreeRotationY.Evaluate(aim.y) * FreeAimMultiplier * Time.deltaTime * timeMultiplier;
                         break;
 
                     case CameraMode.Combat:
                         aim = CamManager.Input.Inputs.MovingAim; 
                         aim = new Vector2(aim.x, aim.y * -1);
-                        CamManager.CinemachineTargetPitch += CamManager.Data.JoystickFreeRotationY.Evaluate(aim.y) * FreeAimMultiplier;
+                        CamManager.CinemachineTargetPitch += CamManager.Data.JoystickFreeRotationY.Evaluate(aim.y) * FreeAimMultiplier * Time.deltaTime *timeMultiplier;
                         break;
                 }
 
                 //Controller
-                CamManager.CinemachineTargetYaw += CamManager.Data.JoystickFreeRotationX.Evaluate(aim.x) * FreeAimMultiplier;
+                CamManager.CinemachineTargetYaw += CamManager.Data.JoystickFreeRotationX.Evaluate(aim.x) * FreeAimMultiplier * Time.deltaTime * timeMultiplier;
                 //CameraManagerRef.CinemachineTargetPitch = CameraManagerRef.JoystickFreeRotationY.Evaluate(aim.y); (jsp pk ici ça fait de la merde)
 
                 #region clavier souris

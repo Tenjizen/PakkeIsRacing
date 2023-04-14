@@ -178,15 +178,10 @@ namespace WaterAndFloating
         /// <param name="x">the x position of vertex</param>
         /// <param name="z">the z position of vertex</param>
         /// <returns>return the index of the position in the Mesh.triangles int[] array</returns>
-        private int Index(int x, int z)
-        {
-            int index = x * (_dimension + 1) + z;
-            return index;
-        }
-
         private int Index(float x, float z)
         {
-            return Index((int)x, (int)z);
+            int index = (int)x * (_dimension + 1) + (int)z;
+            return index;
         }
 
         #endregion
