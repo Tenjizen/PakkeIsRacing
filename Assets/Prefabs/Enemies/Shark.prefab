@@ -4996,16 +4996,13 @@ MonoBehaviour:
   <TargetTransform>k__BackingField: {fileID: 0}
   <ParentGameObject>k__BackingField: {fileID: 4724983407470673250}
   <Forward>k__BackingField: {fileID: 3481916426435834060}
+  PointTarget: {fileID: 6898630833835794956}
+  PointTargetAttack: {fileID: 859354950711925518}
   Life: 3
   SharkCollider: {fileID: 2028570932275907467}
-  TimeStartHittable: 0.5
-  TimeEndHittable: 4
   <HitParticles>k__BackingField: {fileID: 0}
   <HitSound>k__BackingField: {fileID: 0}
-  RotationSpeed: 0.5
   ElevationOffset: -2.83
-  TimerToPassUnderPlayer: 6
-  TimerTargetFollow: 1
   JumpCurve:
     serializedVersion: 2
     m_Curve:
@@ -5126,28 +5123,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  ValueBeforeLastKeyFrameInCurve: 1.4
-  DiveDistance: 20
-  DiveSpeed: 0.2
-  Shadow: {fileID: 4724983409132137046}
-  ShadowMaxSizeForJump: 2.5
-  ShadowDivideGrowSpeed: 2
-  PositionOffset: {x: 0, y: 0, z: 0}
   WavesData: {fileID: 0}
-  StartJumpCircularWaveData:
-    Duration: 5
-    Amplitude: 5
-    Distance: 40
-    NumberOfPoints: 120
-  EndJumpCircularWaveData:
-    Duration: 7
-    Amplitude: 6
-    Distance: 70
-    NumberOfPoints: 120
-  StartJumpCircularWaveTime: 5.9
-  EndJumpCircularWaveTime: 4
-  PointTarget: {fileID: 6898630833835794956}
-  PointTargetAttack: {fileID: 859354950711925518}
+  StartFirstCircularWave: 6
+  StartFirstCircularWaveData:
+    Duration: 3
+    Amplitude: 30
+    Distance: 20
+    NumberOfPoints: 100
+  StartSecondCircularWaveTime: 4.4
+  StartSecondCircularWaveData:
+    Duration: 3
+    Amplitude: 30
+    Distance: 20
+    NumberOfPoints: 100
   RotationStaticSpeed: 100
   RotationStaticSpeedFreeRoam: 70
   RotationStaticSpeedCombat: 70
@@ -5160,7 +5148,10 @@ MonoBehaviour:
   MaxDistanceBetweenPoint: 70
   MaxDistanceBetweenPointInCombat: 80
   MinDistanceBetweenTargetWhenRotate: 50
-  RandTimer: 0
+  DistSharkTargetPointStopMoving: 20
+  SpeedRotationOnItself: 500
+  NumberJumpWhenCrazy: 3
+  TimerForAttack: 10
   CurrentSpeed: 0
   IsCollided: 0
 --- !u!114 &4724983407922079715
