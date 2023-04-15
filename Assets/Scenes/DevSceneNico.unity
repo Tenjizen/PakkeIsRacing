@@ -1456,37 +1456,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1109801708}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1558692704
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1558692705}
-  m_Layer: 0
-  m_Name: PointTarget
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1558692705
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1558692704}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4724983408681253551}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1588302223 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1158828331, guid: c65dbc6e6a13448468e3141d768ce52b,
@@ -2724,6 +2693,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1572955983011780759, guid: c7d2cd18491bcd1479516ab5e5d28a54,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3507624354624242869, guid: c7d2cd18491bcd1479516ab5e5d28a54,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2804,61 +2778,5 @@ PrefabInstance:
       propertyPath: WavesData
       value: 
       objectReference: {fileID: 2093896270}
-    - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
-        type: 3}
-      propertyPath: PointTargetAttack
-      value: 
-      objectReference: {fileID: 1558692704}
-    - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
-        type: 3}
-      propertyPath: SpeedRotationCombat
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
-        type: 3}
-      propertyPath: SpeedToMoveToTarget
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
-        type: 3}
-      propertyPath: SpeedRotationFreeRoam
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
-        type: 3}
-      propertyPath: MaxDistanceBetweenPoint
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
-        type: 3}
-      propertyPath: MaxDistanceBetweenTarget
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
-        type: 3}
-      propertyPath: MaxDistanceBetweenPointInCombat
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
-        type: 3}
-      propertyPath: MinDistanceBetweenTargetWhenRotate
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
-        type: 3}
-      propertyPath: EndJumpCircularWaveData.NumberOfPoints
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
-        type: 3}
-      propertyPath: StartJumpCircularWaveData.NumberOfPoints
-      value: 120
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7d2cd18491bcd1479516ab5e5d28a54, type: 3}
---- !u!4 &4724983408681253551 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4724983407470673251, guid: c7d2cd18491bcd1479516ab5e5d28a54,
-    type: 3}
-  m_PrefabInstance: {fileID: 4724983408681253550}
-  m_PrefabAsset: {fileID: 0}
