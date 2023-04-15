@@ -45,7 +45,7 @@ public class SharkFreeRoamState : SharkBaseState
                 }
                 else
                 {
-                    sharkManager.MoveToTarget(sharkManager);
+                    MoveToTarget(sharkManager);
                 }
 
                 break;
@@ -85,21 +85,21 @@ public class SharkFreeRoamState : SharkBaseState
         {
             if (angle > 90 && angle < 180)
             {
-                rotation.y -= Time.deltaTime * sharkManager.RotationStaticSpeedFreeRoam;
+                rotation.y -= Time.deltaTime * sharkManager.SpeedFreeRoamRotationStatic;
             }
             else if (angle > 270 && angle < 360)
             {
-                rotation.y -= Time.deltaTime * sharkManager.RotationStaticSpeedFreeRoam;
+                rotation.y -= Time.deltaTime * sharkManager.SpeedFreeRoamRotationStatic;
             }
             else
             {
-                rotation.y += Time.deltaTime * sharkManager.RotationStaticSpeedFreeRoam;
+                rotation.y += Time.deltaTime * sharkManager.SpeedFreeRoamRotationStatic;
             }
         }
 
         sharkManager.Forward.transform.localEulerAngles = rotation;
 
-        sharkManager.Forward.transform.Translate(Vector3.forward * sharkManager.SpeedRotationFreeRoam * Time.deltaTime, Space.Self);
+        sharkManager.Forward.transform.Translate(Vector3.forward * sharkManager.SpeedFreeRoamRotationAroundPoint * Time.deltaTime, Space.Self);
 
 
         _timer += Time.deltaTime;
@@ -109,5 +109,38 @@ public class SharkFreeRoamState : SharkBaseState
             _state = CombatState.RotateToMoveTarget;
             _timer = 0;
         }
+    }
+    public void MoveToTarget(SharkManager sharkManager)
+    {
+        Vector2 targetPos = new Vector2(sharkManager.PointTarget.transform.position.x, sharkManager.PointTarget.transform.position.z);
+        Vector2 forward = new Vector2(sharkManager.Forward.transform.forward.x, sharkManager.Forward.transform.forward.z);
+        Vector2 sharkPos = new Vector2(sharkManager.Forward.transform.position.x, sharkManager.Forward.transform.position.z);
+
+        float angle = Vector2.SignedAngle(targetPos - sharkPos, forward);
+        if (angle < 0)
+            angle += 360;
+
+        //rotate to angle 0 to target
+        Vector3 rota = sharkManager.Forward.transform.localEulerAngles;
+        if (angle >= 0 && angle <= 180)
+        {
+            rota.y += Time.deltaTime * sharkManager.SpeedFreeRoamRotationStatic;
+        }
+        else if (angle < 360 && angle > 180)
+        {
+            rota.y -= Time.deltaTime * sharkManager.SpeedFreeRoamRotationStatic;
+        }
+
+        //apply rota
+        sharkManager.Forward.transform.localEulerAngles = rota;
+
+
+        var pos = sharkManager.Forward.transform.position;
+        pos.y = sharkManager.ElevationOffset;
+        sharkManager.Forward.transform.position = pos;
+
+        sharkManager.SwitchSpeed(sharkManager.SpeedToMoveToTarget);
+
+        sharkManager.Forward.transform.Translate(Vector3.forward * sharkManager.CurrentSpeed * Time.deltaTime, Space.Self);
     }
 }

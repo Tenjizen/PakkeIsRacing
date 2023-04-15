@@ -15,85 +15,81 @@ namespace Enemies.Shark
         [field: SerializeField] public GameObject ParentGameObject { get; private set; }
         [field: SerializeField] public GameObject Forward { get; private set; }
 
+        public GameObject PointTarget;
+        public GameObject PointTargetAttack;
 
         //TODO to scriptable object
         [Header("Life")] public float Life = 3;
         [Header("Hit")] public Collider SharkCollider;
-        public float TimeStartHittable = 1;
-        public float TimeEndHittable = 4;
+        //public float TimeStartHittable = 1;
+        //public float TimeEndHittable = 4;
 
         [field: SerializeField, Header("VFX")] public ParticleSystem HitParticles { get; private set; }
         [field: SerializeField, Header("Sound")] public AudioClip HitSound { get; private set; }
+        public KayakController KayakControllerProperty { get; set; }
+
 
         //TODO to scriptable object
-        [Header("Rotation")]
-        [Tooltip("The speed of rotation")]
-        public float RotationSpeed = 1;
-
-
         [Tooltip("The Y position in relation to the target, the lower the value (ex : -1) the more visible the shark will be when rotating around the player")]
         public float ElevationOffset = 0;
-
-        [Header("Timer")]
-        [Tooltip("The time it will take the shark to dive")]
-        public float TimerToPassUnderPlayer = 2;
-        [Tooltip("The time the shark targets the player")]
-        public float TimerTargetFollow = 3;
 
         [Header("Jump")]
         [Tooltip("The jump curve")]
         public AnimationCurve JumpCurve;
+        [Tooltip("The visual curve to do according to the jump curve")]
         public AnimationCurve VisualCurve;
-        [Tooltip("I'm not sure if it stays but it's for the shark to turn around in the areas")]
-        public float ValueBeforeLastKeyFrameInCurve = 2;
-
-        [Header("Dive")]
-        [Tooltip("the distance the shark dives before the shadow appears")]
-        public float DiveDistance = 20;
-        [Tooltip("The speed at which the shark dives/rises")]
-        public float DiveSpeed = 0.2f;
-
-        [Header("Shadow")]
-        [Tooltip("The GameObject of the shadow")]
-        public GameObject Shadow;
-        [Tooltip("The maximum size that the shadow takes before the shark jumps")]
-        public float ShadowMaxSizeForJump = 3;
-        [Tooltip("The speed at which the circle will grow (Ex : 1 / ShadowDivideGrowSpeed)")]
-        public float ShadowDivideGrowSpeed = 2;
-        [ReadOnly] public Vector3 PositionOffset;
-
+        
         [Header("Waves")]
         public Waves WavesData;
-        public CircularWave StartJumpCircularWaveData;
-        public CircularWave EndJumpCircularWaveData;
-        [Space(5)] public float StartJumpCircularWaveTime = 1;
-        public float EndJumpCircularWaveTime = 1;
-        public KayakController KayakControllerProperty { get; set; }
+        [Tooltip("The time before the last key fram before launching the first wave")]
+        public float StartFirstCircularWave = 1;
+        [Tooltip("Information for the first wave")]
+        public CircularWave StartFirstCircularWaveData;
+        [Tooltip("The time before the last key fram before launching the second wave")]
+        [Space(15)]public float StartSecondCircularWaveTime = 1;
+        [Tooltip("Information for the second wave")]
+        public CircularWave StartSecondCircularWaveData;
 
-        public GameObject PointTarget;
-        public GameObject PointTargetAttack;
+        [Header("Speed")]
+        //public float RotationStaticSpeed = 100.0f;
+        [Tooltip("the speed of static rotation when free roam")]
+        public float SpeedFreeRoamRotationStatic = 70.0f;
+        [Tooltip("the speed of static rotation when fighting")]
+        public float SpeedCombatRotationStatic = 100.0f;
 
-        public float RotationStaticSpeed = 100.0f;
-        public float RotationStaticSpeedFreeRoam = 70.0f;
-        public float RotationStaticSpeedCombat = 70.0f;
-
-        public float SpeedToMoveToTarget = 10.0f;
-
-        public float SpeedRush = 20.0f;
-
-        public float SpeedRotationFreeRoam = 10.0f;
-        public float SpeedRotationCombat = 20.0f;
-
-        public float MaxDistanceBetweenTarget = 30.0f;
-
-        public float MinDistanceBetweenPoint = 5.0f;
-        public float MaxDistanceBetweenPoint = 15.0f;
-        public float MaxDistanceBetweenPointInCombat = 30.0f;
-
-        public float MinDistanceBetweenTargetWhenRotate = 30.0f;
+        [Tooltip("the speed of rotation when moving around target in free roam")]
+        public float SpeedFreeRoamRotationAroundPoint = 10.0f;
+        [Tooltip("the speed of rotation when moving around target in fighting")]
+        public float SpeedCombatRotationAroundPoint = 20.0f;
+        [Tooltip("the speed when moving to the target")]
+        public float SpeedToMoveToTarget = 20.0f;
 
 
-        public float RandTimer = 0;
+        [Header("Distance")]
+        [Tooltip("the distance maximun between the shark and the target")]
+        public float MaxDistanceBetweenTarget = 80.0f;
+        [Tooltip("the maximum distance between the shark and the target when rotate around before the shark returns to the target")]
+        public float MaxDistanceBetweenPointInCombat = 80.0f;
+        [Tooltip("the minimum distance between the shark and the target when rotate around")]
+        public float MinDistanceBetweenTargetWhenRotate = 50.0f;
+        [Tooltip("the distance has to trigger the atq of the jump in front of the player")]
+        public float MaxDistanceTriggerBetweenPointAndShark = 15.0f;
+        [Tooltip("the distance between the shark and the target before the shark stops focusing precisely on the target ")]
+        public float DistSharkTargetPointStopMoving = 20.0f;
+
+
+        [Header("Attack")]
+        [Tooltip("Timer between end attack and start attacks")]
+        public float TimerForAttack = 10.0f;
+        [Tooltip("When jump attack rotate speed on itself")]
+        public float SpeedRotationOnItself = 500.0f;
+        [Tooltip("Number of jump before returning rotate around target")]
+        public int NumberJumpWhenCrazy = 3;
+        [Tooltip("Speed when rush the target")]
+        public float SpeedCombatRush = 20.0f;
+
+
+        //public float RandTimer = 0;
         [ReadOnly] public float CurrentSpeed;
         [ReadOnly] public bool IsCollided;
 
@@ -155,60 +151,60 @@ namespace Enemies.Shark
                 Destroy(ParentGameObject.gameObject);
         }
 
-        public void MoveToTarget(SharkManager sharkManager)
-        {
-            Vector2 targetPos = new Vector2(sharkManager.PointTarget.transform.position.x, sharkManager.PointTarget.transform.position.z);
-            Vector2 forward = new Vector2(sharkManager.Forward.transform.forward.x, sharkManager.Forward.transform.forward.z);
-            Vector2 sharkPos = new Vector2(sharkManager.Forward.transform.position.x, sharkManager.Forward.transform.position.z);
+        //public void MoveToTarget(SharkManager sharkManager)
+        //{
+        //    Vector2 targetPos = new Vector2(sharkManager.PointTarget.transform.position.x, sharkManager.PointTarget.transform.position.z);
+        //    Vector2 forward = new Vector2(sharkManager.Forward.transform.forward.x, sharkManager.Forward.transform.forward.z);
+        //    Vector2 sharkPos = new Vector2(sharkManager.Forward.transform.position.x, sharkManager.Forward.transform.position.z);
 
-            float angle = Vector2.SignedAngle(targetPos - sharkPos, forward);
-            if (angle < 0)
-                angle += 360;
+        //    float angle = Vector2.SignedAngle(targetPos - sharkPos, forward);
+        //    if (angle < 0)
+        //        angle += 360;
 
-            //rotate to angle 0 to target
-            Vector3 rota = sharkManager.Forward.transform.localEulerAngles;
-            if (angle >= 0 && angle <= 180)
-            {
-                rota.y += Time.deltaTime * RotationStaticSpeed;
-            }
-            else if (angle < 360 && angle > 180)
-            {
-                rota.y -= Time.deltaTime * RotationStaticSpeed;
-            }
+        //    //rotate to angle 0 to target
+        //    Vector3 rota = sharkManager.Forward.transform.localEulerAngles;
+        //    if (angle >= 0 && angle <= 180)
+        //    {
+        //        rota.y += Time.deltaTime * RotationStaticSpeed;
+        //    }
+        //    else if (angle < 360 && angle > 180)
+        //    {
+        //        rota.y -= Time.deltaTime * RotationStaticSpeed;
+        //    }
 
-            //apply rota
-            sharkManager.Forward.transform.localEulerAngles = rota;
+        //    //apply rota
+        //    sharkManager.Forward.transform.localEulerAngles = rota;
 
 
-            var pos = sharkManager.Forward.transform.position;
-            pos.y = sharkManager.ElevationOffset;
-            sharkManager.Forward.transform.position = pos;
+        //    var pos = sharkManager.Forward.transform.position;
+        //    pos.y = sharkManager.ElevationOffset;
+        //    sharkManager.Forward.transform.position = pos;
 
-            SwitchSpeed(SpeedToMoveToTarget);
+        //    SwitchSpeed(SpeedToMoveToTarget);
 
-            sharkManager.Forward.transform.Translate(Vector3.forward * CurrentSpeed * Time.deltaTime, Space.Self);
-        }
+        //    sharkManager.Forward.transform.Translate(Vector3.forward * CurrentSpeed * Time.deltaTime, Space.Self);
+        //}
 
 
 
         public void SwitchSpeed(float speed)
         {
-            if (RandTimer >= 5)
-            {
-                CurrentSpeed = Mathf.Lerp(CurrentSpeed, SpeedRush, 0.05f);
-                if (RandTimer >= 7)
-                    RandTimer = 0;
-            }
-            else
-            {
+            //if (RandTimer >= 5)
+            //{
+            //    CurrentSpeed = Mathf.Lerp(CurrentSpeed, SpeedRush, 0.05f);
+            //    if (RandTimer >= 7)
+            //        RandTimer = 0;
+            //}
+            //else
+            //{
                 CurrentSpeed = Mathf.Lerp(CurrentSpeed, speed, 0.05f);
-            }
+            //}
         }
 
-        public void SwitchSpeedRush(float speed)
-        {
-            CurrentSpeed = Mathf.Lerp(CurrentSpeed, speed, 0.05f);
-        }
+        //public void SwitchSpeedRush(float speed)
+        //{
+        //    CurrentSpeed = Mathf.Lerp(CurrentSpeed, speed, 0.05f);
+        //}
 
         private void OnTriggerEnter(Collider other)
         {
