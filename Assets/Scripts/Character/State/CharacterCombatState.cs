@@ -26,6 +26,7 @@ namespace Character.State
         {
             HandleAim();
             HandleShoot();
+            CheckBalance();
         }
 
         public override void FixedUpdate(CharacterManager character)

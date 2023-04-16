@@ -26,6 +26,8 @@ namespace Character.State
         {
             _kayakController = CharacterManagerRef.KayakControllerProperty;
             _inputs = CharacterManagerRef.InputManagementProperty;
+            CanBeMoved = false;
+            CanCharacterOpenWeapons = false;
         }
 
         #endregion
@@ -113,6 +115,9 @@ namespace Character.State
         {
             CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeActive(false);
             CharacterManagerRef.BalanceGaugeManagerRef.ShowTrigger(false, false);
+
+            CanBeMoved = true;
+            CanCharacterOpenWeapons = true;
         }
 
         #endregion

@@ -25,6 +25,8 @@ namespace Character.Camera.State
 
             _cameraNoise = CamManager.VirtualCameraCombat.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
             _cameraNoise.m_AmplitudeGain = 1f;
+
+            CombatSensitivityMultiplier = CamManager.Data.CameraCombatSensibility;
         }
         
         public override void UpdateState(CameraManager camera)
@@ -71,7 +73,7 @@ namespace Character.Camera.State
         }
         public override void SwitchState(CameraManager camera)
         {
-
+    
         }
     }
 }

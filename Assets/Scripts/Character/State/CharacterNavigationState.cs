@@ -70,21 +70,9 @@ namespace Character.State
         public override void UpdateState(CharacterManager character)
         {
             PaddleCooldownManagement();
-            
-            //check balanced -> unbalanced
-            if (Mathf.Abs(CharacterManagerRef.Balance) >= CharacterManagerRef.Data.BalanceLimit * CharacterManagerRef.ExperienceManagerProperty.BalanceLimitMultiplier)
-            {
-                CameraManagerRef.CanMoveCameraManually = false;
-                _kayakController.CanReduceDrag = false;
-                
-                //switch states
-                CharacterUnbalancedState characterUnbalancedState = new CharacterUnbalancedState();
-                CharacterManagerRef.SwitchState(characterUnbalancedState);
 
-                CameraUnbalancedState cameraUnbalancedState = new CameraUnbalancedState();
-                CameraManagerRef.SwitchState(cameraUnbalancedState);
-            }
-            
+            CheckBalance();
+
             MakeBoatRotationWithBalance(_kayakController.transform, 1);
         }
 

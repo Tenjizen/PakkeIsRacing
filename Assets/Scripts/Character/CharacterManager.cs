@@ -98,6 +98,11 @@ namespace Character
         /// </summary>
         private void BalanceManagement()
         {
+            if (CurrentStateBaseProperty.IsDead)
+            {
+                return;
+            }
+            
             if (LerpBalanceTo0)
             {
                 Balance = Mathf.Lerp(Balance, 0, Data.BalanceLerpTo0Value);
@@ -138,15 +143,6 @@ namespace Character
         public void AddBalanceValueToCurrentSide(double value)
         {
             AddBalanceValueToCurrentSide((float)value);
-        }
-        
-        /// <summary>
-        /// Switch to the death state of the character
-        /// </summary>
-        public void SwitchToDeathState()
-        {
-            CharacterDeathState characterDeathState = new CharacterDeathState();
-            SwitchState(characterDeathState);
         }
 
         private void ManageWeaponCooldown()

@@ -16,19 +16,20 @@ namespace Collectible
     public class CollectibleJsonFileManager : Singleton<CollectibleJsonFileManager>
     {
         [field:SerializeField, Header("Collectibles")] public List<CollectedItemData> CollectedItems { get; set; }
-        [SerializeField] private bool SetCollectiblesFromJsonFileAtStart = false;
-
+        [SerializeField] private bool _setCollectiblesFromJsonFileAtStart = false;
+        [SerializeField] private string _JsonFileID;
+        
         private JsonFileManager<CollectedItemData> _fileManager;
 
         protected override void Awake()
         {
             base.Awake();
-            _fileManager = new JsonFileManager<CollectedItemData>();
+            _fileManager = new JsonFileManager<CollectedItemData>(_JsonFileID);
         }
 
         private void Start()
         {
-            if (SetCollectiblesFromJsonFileAtStart)
+            if (_setCollectiblesFromJsonFileAtStart)
             {
                 CollectedItems = _fileManager.GetDataList();
                 foreach (CollectedItemData item in CollectedItems)

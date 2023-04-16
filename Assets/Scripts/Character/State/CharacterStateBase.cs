@@ -1,4 +1,5 @@
 using Character.Camera;
+using Character.Camera.State;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
@@ -76,6 +77,23 @@ namespace Character.State
             Vector2 newVelocity = oldVelocityMagnitude * new Vector2(forward.x,forward.z).normalized;
 
             CharacterManagerRef.KayakControllerProperty.Rigidbody.velocity = new Vector3(newVelocity.x, oldVelocity.y, newVelocity.y);
+        }
+
+        protected void CheckBalance()
+        {
+            //check balanced -> unbalanced
+            if (Mathf.Abs(CharacterManagerRef.Balance) >= CharacterManagerRef.Data.BalanceLimit * CharacterManagerRef.ExperienceManagerProperty.BalanceLimitMultiplier)
+            {
+                CameraManagerRef.CanMoveCameraManually = false;
+                CharacterManagerRef.KayakControllerProperty.CanReduceDrag = false;
+                
+                //switch states
+                CharacterUnbalancedState characterUnbalancedState = new CharacterUnbalancedState();
+                CharacterManagerRef.SwitchState(characterUnbalancedState);
+
+                CameraUnbalancedState cameraUnbalancedState = new CameraUnbalancedState();
+                CameraManagerRef.SwitchState(cameraUnbalancedState);
+            }
         }
     }
 }

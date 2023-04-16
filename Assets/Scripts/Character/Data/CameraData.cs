@@ -143,5 +143,7 @@ namespace Character.Data
         
         [field:SerializeField]
         public Vector2 CombatLengthClamp { get; private set; } = new Vector2(-60, 60);
+
+        [field: SerializeField] public float CameraCombatSensibility { get; private set; } = 1f;
     }
 }

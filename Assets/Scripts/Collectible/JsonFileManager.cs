@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Collectible
 {
@@ -18,15 +19,17 @@ namespace Collectible
     public class JsonFileManager<T>
     {
         public JsonWrapper<T> Wrapper;
+        private string _id;
 
-        public JsonFileManager()
+        public JsonFileManager(string id)
         {
             Wrapper = new JsonWrapper<T>();
+            _id = id;
         }
 
         public List<T> GetDataList()
         {
-            string filePath = Application.dataPath + $"/{typeof(T)}.json";
+            string filePath = Application.dataPath + $"/{typeof(T)}{_id}.json";
             string json = System.IO.File.ReadAllText(filePath);
             return JsonUtility.FromJson<JsonWrapper<T>>(json).DataList;
         }
@@ -39,7 +42,7 @@ namespace Collectible
         public void SaveToJsonFile()
         {
             string json = JsonUtility.ToJson(Wrapper, true);
-            string filePath = Application.dataPath + $"/{typeof(T)}.json";
+            string filePath = Application.dataPath + $"/{typeof(T)}{_id}.json";
             System.IO.File.WriteAllText(filePath, json);
             Debug.Log("Data saved to: " + filePath);
         }

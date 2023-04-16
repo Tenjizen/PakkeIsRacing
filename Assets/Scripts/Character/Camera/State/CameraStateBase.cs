@@ -13,6 +13,7 @@ namespace Character.Camera.State
 
         protected bool CanResetShoulderOffset = true;
         protected float FreeAimMultiplier = 1f;
+        protected float CombatSensitivityMultiplier = 1f;
 
         protected CameraManager CamManager { get; private set; }
 
@@ -62,23 +63,25 @@ namespace Character.Camera.State
             {
                 const float timeMultiplier = 100f;
                 Vector2 aim = Vector2.zero;
+                float multiplier = FreeAimMultiplier * CombatSensitivityMultiplier * Time.deltaTime * timeMultiplier;
+                
                 switch (cameraMode)
                 {
                     case CameraMode.Navigation:
                         aim = CamManager.Input.Inputs.RotateCamera;
-                        CamManager.CinemachineTargetPitch += CamManager.Data.JoystickFreeRotationY.Evaluate(aim.y) * FreeAimMultiplier * Time.deltaTime * timeMultiplier;
+                        CamManager.CinemachineTargetPitch += CamManager.Data.JoystickFreeRotationY.Evaluate(aim.y) * multiplier;
                         break;
 
                     case CameraMode.Combat:
                         aim = CamManager.Input.Inputs.MovingAim; 
                         aim = new Vector2(aim.x, aim.y * -1);
-                        CamManager.CinemachineTargetPitch += CamManager.Data.JoystickFreeRotationY.Evaluate(aim.y) * FreeAimMultiplier * Time.deltaTime *timeMultiplier;
+                        CamManager.CinemachineTargetPitch += CamManager.Data.JoystickFreeRotationY.Evaluate(aim.y) * multiplier;
                         break;
                 }
-
+                
                 //Controller
-                CamManager.CinemachineTargetYaw += CamManager.Data.JoystickFreeRotationX.Evaluate(aim.x) * FreeAimMultiplier * Time.deltaTime * timeMultiplier;
-                //CameraManagerRef.CinemachineTargetPitch = CameraManagerRef.JoystickFreeRotationY.Evaluate(aim.y); (jsp pk ici ça fait de la merde)
+                CamManager.CinemachineTargetYaw += CamManager.Data.JoystickFreeRotationX.Evaluate(aim.x) * multiplier;
+                //CameraManagerRef.CinemachineTargetPitch = CameraManagerRef.JoystickFreeRotationY.Evaluate(aim.y); (bug with this here !)
 
                 #region clavier souris
                 //KBM
