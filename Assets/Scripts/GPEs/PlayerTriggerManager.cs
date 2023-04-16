@@ -56,7 +56,6 @@ namespace GPEs
                 KayakController kayakController = hit.collider.gameObject.GetComponent<KayakController>();
                 if (kayakController != null)
                 {
-                    Debug.Log($"entered {gameObject.name}");
                     if (PropKayakController == null)
                     {
                         PropKayakController = kayakController;

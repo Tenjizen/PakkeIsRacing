@@ -141,12 +141,30 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DisplayControlScreen",
-                    "type": "Value",
+                    "name": "ShowPauseMenus",
+                    "type": "Button",
                     "id": "e412642b-f162-4c33-9f57-0efea12c64c4",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "PauseMenuPrevious",
+                    "type": "Button",
+                    "id": "32572d08-52fc-40bf-aae4-ec14ab9564d6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "PauseMenuNext",
+                    "type": "Button",
+                    "id": "d0d92bef-1600-401f-9ba7-e7beb25a860e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": true
                 }
             ],
@@ -465,8 +483,8 @@
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
-                    "groups": "GamePad",
-                    "action": "DisplayControlScreen",
+                    "groups": "",
+                    "action": "ShowPauseMenus",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -476,8 +494,52 @@
                     "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KeyboardMouse",
-                    "action": "DisplayControlScreen",
+                    "groups": "",
+                    "action": "ShowPauseMenus",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "70f8d796-3b28-4082-baaa-e4a5ad02c3b0",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PauseMenuPrevious",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f65ae569-0a24-40fe-a54c-486e34ce0cc7",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PauseMenuPrevious",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "93e532f7-e741-40fd-beaa-4d93972f630b",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PauseMenuNext",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7bfaa056-ae4f-4713-856c-1e7712383560",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PauseMenuNext",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

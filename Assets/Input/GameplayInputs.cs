@@ -163,12 +163,30 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""DisplayControlScreen"",
-                    ""type"": ""Value"",
+                    ""name"": ""ShowPauseMenus"",
+                    ""type"": ""Button"",
                     ""id"": ""e412642b-f162-4c33-9f57-0efea12c64c4"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PauseMenuPrevious"",
+                    ""type"": ""Button"",
+                    ""id"": ""32572d08-52fc-40bf-aae4-ec14ab9564d6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PauseMenuNext"",
+                    ""type"": ""Button"",
+                    ""id"": ""d0d92bef-1600-401f-9ba7-e7beb25a860e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
                     ""initialStateCheck"": true
                 }
             ],
@@ -487,8 +505,8 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""GamePad"",
-                    ""action"": ""DisplayControlScreen"",
+                    ""groups"": """",
+                    ""action"": ""ShowPauseMenus"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -498,8 +516,52 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""KeyboardMouse"",
-                    ""action"": ""DisplayControlScreen"",
+                    ""groups"": """",
+                    ""action"": ""ShowPauseMenus"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""70f8d796-3b28-4082-baaa-e4a5ad02c3b0"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseMenuPrevious"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f65ae569-0a24-40fe-a54c-486e34ce0cc7"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseMenuPrevious"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""93e532f7-e741-40fd-beaa-4d93972f630b"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseMenuNext"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7bfaa056-ae4f-4713-856c-1e7712383560"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseMenuNext"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -536,7 +598,9 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         m_Boat_Shoot = m_Boat.FindAction("Shoot", throwIfNotFound: true);
         m_Boat_UnbalancedRight = m_Boat.FindAction("UnbalancedRight", throwIfNotFound: true);
         m_Boat_UnbalancedLeft = m_Boat.FindAction("UnbalancedLeft", throwIfNotFound: true);
-        m_Boat_DisplayControlScreen = m_Boat.FindAction("DisplayControlScreen", throwIfNotFound: true);
+        m_Boat_ShowPauseMenus = m_Boat.FindAction("ShowPauseMenus", throwIfNotFound: true);
+        m_Boat_PauseMenuPrevious = m_Boat.FindAction("PauseMenuPrevious", throwIfNotFound: true);
+        m_Boat_PauseMenuNext = m_Boat.FindAction("PauseMenuNext", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -611,7 +675,9 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Boat_Shoot;
     private readonly InputAction m_Boat_UnbalancedRight;
     private readonly InputAction m_Boat_UnbalancedLeft;
-    private readonly InputAction m_Boat_DisplayControlScreen;
+    private readonly InputAction m_Boat_ShowPauseMenus;
+    private readonly InputAction m_Boat_PauseMenuPrevious;
+    private readonly InputAction m_Boat_PauseMenuNext;
     public struct BoatActions
     {
         private @GameplayInputs m_Wrapper;
@@ -631,7 +697,9 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Boat_Shoot;
         public InputAction @UnbalancedRight => m_Wrapper.m_Boat_UnbalancedRight;
         public InputAction @UnbalancedLeft => m_Wrapper.m_Boat_UnbalancedLeft;
-        public InputAction @DisplayControlScreen => m_Wrapper.m_Boat_DisplayControlScreen;
+        public InputAction @ShowPauseMenus => m_Wrapper.m_Boat_ShowPauseMenus;
+        public InputAction @PauseMenuPrevious => m_Wrapper.m_Boat_PauseMenuPrevious;
+        public InputAction @PauseMenuNext => m_Wrapper.m_Boat_PauseMenuNext;
         public InputActionMap Get() { return m_Wrapper.m_Boat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -686,9 +754,15 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @UnbalancedLeft.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnUnbalancedLeft;
                 @UnbalancedLeft.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnUnbalancedLeft;
                 @UnbalancedLeft.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnUnbalancedLeft;
-                @DisplayControlScreen.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnDisplayControlScreen;
-                @DisplayControlScreen.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnDisplayControlScreen;
-                @DisplayControlScreen.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnDisplayControlScreen;
+                @ShowPauseMenus.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnShowPauseMenus;
+                @ShowPauseMenus.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnShowPauseMenus;
+                @ShowPauseMenus.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnShowPauseMenus;
+                @PauseMenuPrevious.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnPauseMenuPrevious;
+                @PauseMenuPrevious.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnPauseMenuPrevious;
+                @PauseMenuPrevious.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnPauseMenuPrevious;
+                @PauseMenuNext.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnPauseMenuNext;
+                @PauseMenuNext.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnPauseMenuNext;
+                @PauseMenuNext.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnPauseMenuNext;
             }
             m_Wrapper.m_BoatActionsCallbackInterface = instance;
             if (instance != null)
@@ -738,9 +812,15 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @UnbalancedLeft.started += instance.OnUnbalancedLeft;
                 @UnbalancedLeft.performed += instance.OnUnbalancedLeft;
                 @UnbalancedLeft.canceled += instance.OnUnbalancedLeft;
-                @DisplayControlScreen.started += instance.OnDisplayControlScreen;
-                @DisplayControlScreen.performed += instance.OnDisplayControlScreen;
-                @DisplayControlScreen.canceled += instance.OnDisplayControlScreen;
+                @ShowPauseMenus.started += instance.OnShowPauseMenus;
+                @ShowPauseMenus.performed += instance.OnShowPauseMenus;
+                @ShowPauseMenus.canceled += instance.OnShowPauseMenus;
+                @PauseMenuPrevious.started += instance.OnPauseMenuPrevious;
+                @PauseMenuPrevious.performed += instance.OnPauseMenuPrevious;
+                @PauseMenuPrevious.canceled += instance.OnPauseMenuPrevious;
+                @PauseMenuNext.started += instance.OnPauseMenuNext;
+                @PauseMenuNext.performed += instance.OnPauseMenuNext;
+                @PauseMenuNext.canceled += instance.OnPauseMenuNext;
             }
         }
     }
@@ -780,6 +860,8 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnUnbalancedRight(InputAction.CallbackContext context);
         void OnUnbalancedLeft(InputAction.CallbackContext context);
-        void OnDisplayControlScreen(InputAction.CallbackContext context);
+        void OnShowPauseMenus(InputAction.CallbackContext context);
+        void OnPauseMenuPrevious(InputAction.CallbackContext context);
+        void OnPauseMenuNext(InputAction.CallbackContext context);
     }
 }

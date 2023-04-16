@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 namespace Character
@@ -7,8 +8,8 @@ namespace Character
     public class InputManagement : MonoBehaviour
     {
         private GameplayInputs _gameplayInputs;
-        public GameplayInputs GameplayInputs { get { return _gameplayInputs; } private set { } }
-        public InputsEnum Inputs { get; private set; }
+        public GameplayInputs GameplayInputs { get { return _gameplayInputs; } private set { _gameplayInputs = value; } }
+        [field:SerializeField] public InputsEnum Inputs { get; private set; }
 
         private void Awake()
         {
@@ -43,15 +44,14 @@ namespace Character
             inputsEnum.Aim = _gameplayInputs.Boat.Aim.ReadValue<float>() > 0.5f;
             inputsEnum.Shoot = _gameplayInputs.Boat.Shoot.ReadValue<float>() > 0.5f;
             inputsEnum.MovingAim = _gameplayInputs.Boat.MoveAim.ReadValue<Vector2>();
-            
-            inputsEnum.DisplayControlScreen = _gameplayInputs.Boat.DisplayControlScreen.ReadValue<float>() > 0.5f;;
 
             inputsEnum.Deadzone = 0.3f;
             
             Inputs = inputsEnum;
         }
     }
-    
+
+    [Serializable]
     public struct InputsEnum
     {
         public bool PaddleLeft;
@@ -74,7 +74,5 @@ namespace Character
         public Vector2 MovingAim;
 
         public bool Unbalanced;
-
-        public bool DisplayControlScreen;
     }
 }
