@@ -6,17 +6,6 @@ using UnityEngine;
 namespace Collectible
 {
     [System.Serializable]
-    public class Wrapper
-    {
-        public List<CollectedItemData> DataList;
-
-        public Wrapper()
-        {
-            DataList = new List<CollectedItemData>();
-        }
-    }
-    
-    [System.Serializable]
     public class CollectedItemData
     {
         public string ItemName;
@@ -27,39 +16,47 @@ namespace Collectible
     public class CollectibleJsonFileManager : Singleton<CollectibleJsonFileManager>
     {
         [field:SerializeField, Header("Collectibles")] public List<CollectedItemData> CollectedItems { get; set; }
-
         [SerializeField] private bool SetCollectiblesFromJsonFileAtStart = false;
-        
+
+        private JsonFileManager<CollectedItemData> _fileManager;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            _fileManager = new JsonFileManager<CollectedItemData>();
+        }
+
         private void Start()
         {
             if (SetCollectiblesFromJsonFileAtStart)
             {
-                CollectedItems = GetCollectibles();
+                CollectedItems = _fileManager.GetDataList();
                 foreach (CollectedItemData item in CollectedItems)
                 {
                     item.CollectibleGameObject.SetCollectedAtStart();
+                    item.IsCollected = true;
                 }
             }
+            
             WriteJsonFile();
         }
 
         private void WriteJsonFile()
         {
-            Wrapper wrapper = new Wrapper();
+            _fileManager.ClearDataList();
+            
             foreach (CollectedItemData item in CollectedItems)
             {
-                wrapper.DataList.Add(item);
+                _fileManager.AddToDataList(item);
             }
 
-            string json = JsonUtility.ToJson(wrapper, true);
-            string filePath = Application.dataPath + "/collectedItemsData.json";
-            System.IO.File.WriteAllText(filePath, json);
-            Debug.Log("Collected Items Data saved to: " + filePath);
+            _fileManager.SaveToJsonFile();
         }
 
         public void SetCollectibleCollected(Collectible collectible)
         {
-            CollectedItems = GetCollectibles();
+            CollectedItems = _fileManager.GetDataList();
+            
             for (int i = 0; i < CollectedItems.Count; i++)
             {
                 if (CollectedItems[i].CollectibleGameObject == collectible)
@@ -67,14 +64,8 @@ namespace Collectible
                     CollectedItems[i].IsCollected = true;
                 }
             }
+            
             WriteJsonFile();
-        }
-
-        private List<CollectedItemData> GetCollectibles()
-        {
-            string filePath = Application.dataPath + "/collectedItemsData.json";
-            string json = System.IO.File.ReadAllText(filePath);
-            return JsonUtility.FromJson<Wrapper>(json).DataList;
         }
     }
 }
