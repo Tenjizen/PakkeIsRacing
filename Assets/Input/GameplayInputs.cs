@@ -172,7 +172,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""PauseMenuPrevious"",
+                    ""name"": ""MenuUp"",
                     ""type"": ""Button"",
                     ""id"": ""32572d08-52fc-40bf-aae4-ec14ab9564d6"",
                     ""expectedControlType"": ""Button"",
@@ -181,9 +181,27 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""PauseMenuNext"",
+                    ""name"": ""MenuDown"",
                     ""type"": ""Button"",
                     ""id"": ""d0d92bef-1600-401f-9ba7-e7beb25a860e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MenuLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""97b135d6-f8df-431f-93a3-31745bd76226"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MenuRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""7cb7aa46-ea7d-4221-8288-a0d70a7d9623"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -528,7 +546,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PauseMenuPrevious"",
+                    ""action"": ""MenuUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -539,7 +557,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PauseMenuPrevious"",
+                    ""action"": ""MenuUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -550,7 +568,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PauseMenuNext"",
+                    ""action"": ""MenuDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -561,7 +579,51 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PauseMenuNext"",
+                    ""action"": ""MenuDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b705fbb6-4778-4196-a983-c8e7f4a1d29c"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MenuLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""80776b60-1483-46a1-bf90-19d949d1b942"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MenuLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aa3bbf62-0d3d-4d0d-8816-b87ba48287f9"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MenuRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""54e25fb1-583f-4a41-92f5-4c5de01119a8"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MenuRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -599,8 +661,10 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         m_Boat_UnbalancedRight = m_Boat.FindAction("UnbalancedRight", throwIfNotFound: true);
         m_Boat_UnbalancedLeft = m_Boat.FindAction("UnbalancedLeft", throwIfNotFound: true);
         m_Boat_ShowPauseMenus = m_Boat.FindAction("ShowPauseMenus", throwIfNotFound: true);
-        m_Boat_PauseMenuPrevious = m_Boat.FindAction("PauseMenuPrevious", throwIfNotFound: true);
-        m_Boat_PauseMenuNext = m_Boat.FindAction("PauseMenuNext", throwIfNotFound: true);
+        m_Boat_MenuUp = m_Boat.FindAction("MenuUp", throwIfNotFound: true);
+        m_Boat_MenuDown = m_Boat.FindAction("MenuDown", throwIfNotFound: true);
+        m_Boat_MenuLeft = m_Boat.FindAction("MenuLeft", throwIfNotFound: true);
+        m_Boat_MenuRight = m_Boat.FindAction("MenuRight", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -676,8 +740,10 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Boat_UnbalancedRight;
     private readonly InputAction m_Boat_UnbalancedLeft;
     private readonly InputAction m_Boat_ShowPauseMenus;
-    private readonly InputAction m_Boat_PauseMenuPrevious;
-    private readonly InputAction m_Boat_PauseMenuNext;
+    private readonly InputAction m_Boat_MenuUp;
+    private readonly InputAction m_Boat_MenuDown;
+    private readonly InputAction m_Boat_MenuLeft;
+    private readonly InputAction m_Boat_MenuRight;
     public struct BoatActions
     {
         private @GameplayInputs m_Wrapper;
@@ -698,8 +764,10 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         public InputAction @UnbalancedRight => m_Wrapper.m_Boat_UnbalancedRight;
         public InputAction @UnbalancedLeft => m_Wrapper.m_Boat_UnbalancedLeft;
         public InputAction @ShowPauseMenus => m_Wrapper.m_Boat_ShowPauseMenus;
-        public InputAction @PauseMenuPrevious => m_Wrapper.m_Boat_PauseMenuPrevious;
-        public InputAction @PauseMenuNext => m_Wrapper.m_Boat_PauseMenuNext;
+        public InputAction @MenuUp => m_Wrapper.m_Boat_MenuUp;
+        public InputAction @MenuDown => m_Wrapper.m_Boat_MenuDown;
+        public InputAction @MenuLeft => m_Wrapper.m_Boat_MenuLeft;
+        public InputAction @MenuRight => m_Wrapper.m_Boat_MenuRight;
         public InputActionMap Get() { return m_Wrapper.m_Boat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -757,12 +825,18 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @ShowPauseMenus.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnShowPauseMenus;
                 @ShowPauseMenus.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnShowPauseMenus;
                 @ShowPauseMenus.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnShowPauseMenus;
-                @PauseMenuPrevious.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnPauseMenuPrevious;
-                @PauseMenuPrevious.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnPauseMenuPrevious;
-                @PauseMenuPrevious.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnPauseMenuPrevious;
-                @PauseMenuNext.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnPauseMenuNext;
-                @PauseMenuNext.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnPauseMenuNext;
-                @PauseMenuNext.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnPauseMenuNext;
+                @MenuUp.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuUp;
+                @MenuUp.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuUp;
+                @MenuUp.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuUp;
+                @MenuDown.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuDown;
+                @MenuDown.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuDown;
+                @MenuDown.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuDown;
+                @MenuLeft.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuLeft;
+                @MenuLeft.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuLeft;
+                @MenuLeft.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuLeft;
+                @MenuRight.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuRight;
+                @MenuRight.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuRight;
+                @MenuRight.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuRight;
             }
             m_Wrapper.m_BoatActionsCallbackInterface = instance;
             if (instance != null)
@@ -815,12 +889,18 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @ShowPauseMenus.started += instance.OnShowPauseMenus;
                 @ShowPauseMenus.performed += instance.OnShowPauseMenus;
                 @ShowPauseMenus.canceled += instance.OnShowPauseMenus;
-                @PauseMenuPrevious.started += instance.OnPauseMenuPrevious;
-                @PauseMenuPrevious.performed += instance.OnPauseMenuPrevious;
-                @PauseMenuPrevious.canceled += instance.OnPauseMenuPrevious;
-                @PauseMenuNext.started += instance.OnPauseMenuNext;
-                @PauseMenuNext.performed += instance.OnPauseMenuNext;
-                @PauseMenuNext.canceled += instance.OnPauseMenuNext;
+                @MenuUp.started += instance.OnMenuUp;
+                @MenuUp.performed += instance.OnMenuUp;
+                @MenuUp.canceled += instance.OnMenuUp;
+                @MenuDown.started += instance.OnMenuDown;
+                @MenuDown.performed += instance.OnMenuDown;
+                @MenuDown.canceled += instance.OnMenuDown;
+                @MenuLeft.started += instance.OnMenuLeft;
+                @MenuLeft.performed += instance.OnMenuLeft;
+                @MenuLeft.canceled += instance.OnMenuLeft;
+                @MenuRight.started += instance.OnMenuRight;
+                @MenuRight.performed += instance.OnMenuRight;
+                @MenuRight.canceled += instance.OnMenuRight;
             }
         }
     }
@@ -861,7 +941,9 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         void OnUnbalancedRight(InputAction.CallbackContext context);
         void OnUnbalancedLeft(InputAction.CallbackContext context);
         void OnShowPauseMenus(InputAction.CallbackContext context);
-        void OnPauseMenuPrevious(InputAction.CallbackContext context);
-        void OnPauseMenuNext(InputAction.CallbackContext context);
+        void OnMenuUp(InputAction.CallbackContext context);
+        void OnMenuDown(InputAction.CallbackContext context);
+        void OnMenuLeft(InputAction.CallbackContext context);
+        void OnMenuRight(InputAction.CallbackContext context);
     }
 }

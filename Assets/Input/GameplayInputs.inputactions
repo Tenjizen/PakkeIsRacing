@@ -150,7 +150,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "PauseMenuPrevious",
+                    "name": "MenuUp",
                     "type": "Button",
                     "id": "32572d08-52fc-40bf-aae4-ec14ab9564d6",
                     "expectedControlType": "Button",
@@ -159,9 +159,27 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "PauseMenuNext",
+                    "name": "MenuDown",
                     "type": "Button",
                     "id": "d0d92bef-1600-401f-9ba7-e7beb25a860e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "MenuLeft",
+                    "type": "Button",
+                    "id": "97b135d6-f8df-431f-93a3-31745bd76226",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "MenuRight",
+                    "type": "Button",
+                    "id": "7cb7aa46-ea7d-4221-8288-a0d70a7d9623",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -506,7 +524,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PauseMenuPrevious",
+                    "action": "MenuUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -517,7 +535,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PauseMenuPrevious",
+                    "action": "MenuUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -528,7 +546,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PauseMenuNext",
+                    "action": "MenuDown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -539,7 +557,51 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PauseMenuNext",
+                    "action": "MenuDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b705fbb6-4778-4196-a983-c8e7f4a1d29c",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MenuLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "80776b60-1483-46a1-bf90-19d949d1b942",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MenuLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aa3bbf62-0d3d-4d0d-8816-b87ba48287f9",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MenuRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "54e25fb1-583f-4a41-92f5-4c5de01119a8",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MenuRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

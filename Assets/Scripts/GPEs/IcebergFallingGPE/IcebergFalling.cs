@@ -54,8 +54,13 @@ namespace IcebergFallingGPE
             if (_timeToHitWater <= 0)
             {
                 _circularWaveData.Center = new Vector2(transform.position.x, transform.position.z);
-                _particleWhenHitWater.gameObject.transform.position = transform.position;
-                _particleWhenHitWater.Play();
+                
+                if (_particleWhenHitWater != null)
+                {
+                    _particleWhenHitWater.gameObject.transform.position = transform.position;
+                    _particleWhenHitWater.Play();
+                }
+                
                 WavesManager.LaunchCircularWave(_circularWaveData);
             }
         }

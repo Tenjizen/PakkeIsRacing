@@ -24,8 +24,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6829306437002386996}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.13036175, y: 0, z: 0, w: 0.9914665}
+  m_LocalPosition: {x: 0, y: -1.2785299, z: 0.9972949}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 7982456587029522066}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 14.981, y: 0, z: 0}
 --- !u!114 &6829306437002386994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,17 +47,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e5bcccd9b12b00408e41f15d5a7eb27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerType: 0
+  _triggerType: 1
   _showTriggerGizmos: 1
   _triggerBoxSize: {x: 1, y: 1, z: 1}
-  _triggerSphereSize: 1
+  _triggerSphereSize: 24.95
   _triggerOffsetPosition: {x: -0.7, y: -2.95, z: 10.33}
   _playerLayerMask:
     serializedVersion: 2
     m_Bits: 2147483647
   OnPlayerEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6829306435168865602}
+        m_TargetAssemblyTypeName: IcebergFallingGPE.IcebergFalling, Assembly-CSharp
+        m_MethodName: SetFall
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnPlayerStay:
     m_PersistentCalls:
       m_Calls: []
@@ -99,22 +111,22 @@ PrefabInstance:
     - target: {fileID: 4519318627688101346, guid: 32c1a7c4dce4d974b881cd99a3fb81d6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.440365
+      value: -11.041388
       objectReference: {fileID: 0}
     - target: {fileID: 4519318627688101346, guid: 32c1a7c4dce4d974b881cd99a3fb81d6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.84293
+      value: -3.1818593
       objectReference: {fileID: 0}
     - target: {fileID: 4519318627688101346, guid: 32c1a7c4dce4d974b881cd99a3fb81d6,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.60880595
       objectReference: {fileID: 0}
     - target: {fileID: 4519318627688101346, guid: 32c1a7c4dce4d974b881cd99a3fb81d6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: -0.7933192
       objectReference: {fileID: 0}
     - target: {fileID: 4519318627688101346, guid: 32c1a7c4dce4d974b881cd99a3fb81d6,
         type: 3}
@@ -129,7 +141,7 @@ PrefabInstance:
     - target: {fileID: 4519318627688101346, guid: 32c1a7c4dce4d974b881cd99a3fb81d6,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -104.994
       objectReference: {fileID: 0}
     - target: {fileID: 4519318627688101346, guid: 32c1a7c4dce4d974b881cd99a3fb81d6,
         type: 3}
@@ -237,12 +249,12 @@ PrefabInstance:
     - target: {fileID: 2453446874202040146, guid: 81bd7ce35f9b3c4419b0fb054e23afbb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.46
+      value: -1.3
       objectReference: {fileID: 0}
     - target: {fileID: 2453446874202040146, guid: 81bd7ce35f9b3c4419b0fb054e23afbb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.9
+      value: -1.35
       objectReference: {fileID: 0}
     - target: {fileID: 2453446874202040146, guid: 81bd7ce35f9b3c4419b0fb054e23afbb,
         type: 3}
@@ -326,6 +338,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81bd7ce35f9b3c4419b0fb054e23afbb, type: 3}
+--- !u!114 &6829306435168865602 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2453446874202040153, guid: 81bd7ce35f9b3c4419b0fb054e23afbb,
+    type: 3}
+  m_PrefabInstance: {fileID: 8992271099045440027}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f945c15673834c82b71434b7d74d4964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6829306435168865609 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2453446874202040146, guid: 81bd7ce35f9b3c4419b0fb054e23afbb,
