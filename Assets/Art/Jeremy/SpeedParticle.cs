@@ -6,7 +6,8 @@ using Character;
 public class SpeedParticle : MonoBehaviour
 {
     [SerializeField] Rigidbody _rigidbody;
-    [SerializeField] ParticleSystem _particleSystem;
+    [SerializeField] ParticleSystem _particleSystem1;
+    [SerializeField] ParticleSystem _particleSystem2;
     [SerializeField] float _emissionMin = 0f;
     [SerializeField] float _emissionMax = 15f;
 
@@ -23,7 +24,8 @@ public class SpeedParticle : MonoBehaviour
         
         var vel = _rigidbody.velocity.magnitude;
 
-        var emission = _particleSystem.emission;
+        var emission = _particleSystem1.emission;
+        var emission2 = _particleSystem2.emission;
         emission.rateOverDistance = Mathf.Lerp(_emissionMin, _emissionMax, vel/ _maxSpeed);
 
     }
