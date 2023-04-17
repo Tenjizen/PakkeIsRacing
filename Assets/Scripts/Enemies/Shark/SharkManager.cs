@@ -20,6 +20,7 @@ namespace Enemies.Shark
 
         //TODO to scriptable object
         [Header("Life")] public float Life = 3;
+        [ReadOnly] public float CurrentLife;
         [Header("Hit")] public Collider SharkCollider;
         //public float TimeStartHittable = 1;
         //public float TimeEndHittable = 4;
@@ -38,7 +39,7 @@ namespace Enemies.Shark
         public AnimationCurve JumpCurve;
         [Tooltip("The visual curve to do according to the jump curve")]
         public AnimationCurve VisualCurve;
-        
+
         [Header("Waves")]
         public Waves WavesData;
         [Tooltip("The time before the last key fram before launching the first wave")]
@@ -46,7 +47,7 @@ namespace Enemies.Shark
         [Tooltip("Information for the first wave")]
         public CircularWave StartFirstCircularWaveData;
         [Tooltip("The time before the last key fram before launching the second wave")]
-        [Space(15)]public float StartSecondCircularWaveTime = 1;
+        [Space(15)] public float StartSecondCircularWaveTime = 1;
         [Tooltip("Information for the second wave")]
         public CircularWave StartSecondCircularWaveData;
 
@@ -63,6 +64,8 @@ namespace Enemies.Shark
         public float SpeedCombatRotationAroundPoint = 20.0f;
         [Tooltip("the speed when moving to the target")]
         public float SpeedToMoveToTarget = 20.0f;
+        [Tooltip("the speed when moving to the target")]
+        public float SpeedWhenOutOfRange = 30.0f;
 
 
         [Header("Distance")]
@@ -77,6 +80,9 @@ namespace Enemies.Shark
         [Tooltip("the distance between the shark and the target before the shark stops focusing precisely on the target ")]
         public float DistSharkTargetPointStopMoving = 20.0f;
 
+        [Tooltip("When moving the distance between the player and target")]
+        public float MutliplySpeed = 1.0f;
+
 
         [Header("Attack")]
         [Tooltip("Timer between end attack and start attacks")]
@@ -87,9 +93,12 @@ namespace Enemies.Shark
         public int NumberJumpWhenCrazy = 3;
         [Tooltip("Speed when rush the target")]
         public float SpeedCombatRush = 20.0f;
+        [Tooltip("Speed when jump in front of the target")]
+        public float SpeedCombatJumpInFront = 15.0f;
+        [Tooltip("Speed when rush for trigger the jump in front")]
+        public float SpeedCombatToTriggerJumpInFront = 35.0f;
 
 
-        //public float RandTimer = 0;
         [ReadOnly] public float CurrentSpeed;
         [ReadOnly] public bool IsCollided;
 
@@ -97,6 +106,8 @@ namespace Enemies.Shark
         {
             SharkFreeRoamState sharkFreeRoamState = new SharkFreeRoamState();
             CurrentStateBase = sharkFreeRoamState;
+
+            CurrentLife = Life;
         }
 
         private void Start()
@@ -138,8 +149,9 @@ namespace Enemies.Shark
         public void Hit(Projectile projectile, GameObject owner)
         {
 
-            Life -= 1;
+            CurrentLife -= 1;
             //Life -= projectile.Data.Damage
+
             if (HitParticles != null)
             {
                 HitParticles.transform.parent = null;
@@ -147,64 +159,18 @@ namespace Enemies.Shark
             }
             //CharacterManager.Instance.SoundManagerProperty.PlaySound(HitSound);
 
-            if (Life <= 0)
+            if (CurrentLife <= 0)
                 Destroy(ParentGameObject.gameObject);
         }
 
-        //public void MoveToTarget(SharkManager sharkManager)
-        //{
-        //    Vector2 targetPos = new Vector2(sharkManager.PointTarget.transform.position.x, sharkManager.PointTarget.transform.position.z);
-        //    Vector2 forward = new Vector2(sharkManager.Forward.transform.forward.x, sharkManager.Forward.transform.forward.z);
-        //    Vector2 sharkPos = new Vector2(sharkManager.Forward.transform.position.x, sharkManager.Forward.transform.position.z);
 
-        //    float angle = Vector2.SignedAngle(targetPos - sharkPos, forward);
-        //    if (angle < 0)
-        //        angle += 360;
-
-        //    //rotate to angle 0 to target
-        //    Vector3 rota = sharkManager.Forward.transform.localEulerAngles;
-        //    if (angle >= 0 && angle <= 180)
-        //    {
-        //        rota.y += Time.deltaTime * RotationStaticSpeed;
-        //    }
-        //    else if (angle < 360 && angle > 180)
-        //    {
-        //        rota.y -= Time.deltaTime * RotationStaticSpeed;
-        //    }
-
-        //    //apply rota
-        //    sharkManager.Forward.transform.localEulerAngles = rota;
-
-
-        //    var pos = sharkManager.Forward.transform.position;
-        //    pos.y = sharkManager.ElevationOffset;
-        //    sharkManager.Forward.transform.position = pos;
-
-        //    SwitchSpeed(SpeedToMoveToTarget);
-
-        //    sharkManager.Forward.transform.Translate(Vector3.forward * CurrentSpeed * Time.deltaTime, Space.Self);
-        //}
 
 
 
         public void SwitchSpeed(float speed)
         {
-            //if (RandTimer >= 5)
-            //{
-            //    CurrentSpeed = Mathf.Lerp(CurrentSpeed, SpeedRush, 0.05f);
-            //    if (RandTimer >= 7)
-            //        RandTimer = 0;
-            //}
-            //else
-            //{
-                CurrentSpeed = Mathf.Lerp(CurrentSpeed, speed, 0.05f);
-            //}
+            CurrentSpeed = Mathf.Lerp(CurrentSpeed, speed, 0.05f);
         }
-
-        //public void SwitchSpeedRush(float speed)
-        //{
-        //    CurrentSpeed = Mathf.Lerp(CurrentSpeed, speed, 0.05f);
-        //}
 
         private void OnTriggerEnter(Collider other)
         {

@@ -4998,7 +4998,8 @@ MonoBehaviour:
   <Forward>k__BackingField: {fileID: 3481916426435834060}
   PointTarget: {fileID: 6898630833835794956}
   PointTargetAttack: {fileID: 859354950711925518}
-  Life: 3
+  Life: 5
+  CurrentLife: 0
   SharkCollider: {fileID: 2028570932275907467}
   <HitParticles>k__BackingField: {fileID: 0}
   <HitSound>k__BackingField: {fileID: 0}
@@ -5136,22 +5137,24 @@ MonoBehaviour:
     Amplitude: 30
     Distance: 20
     NumberOfPoints: 100
-  RotationStaticSpeed: 100
-  RotationStaticSpeedFreeRoam: 70
-  RotationStaticSpeedCombat: 70
-  SpeedToMoveToTarget: 20
-  SpeedRush: 20
-  SpeedRotationFreeRoam: 10
-  SpeedRotationCombat: 20
+  SpeedFreeRoamRotationStatic: 70
+  SpeedCombatRotationStatic: 100
+  SpeedFreeRoamRotationAroundPoint: 10
+  SpeedCombatRotationAroundPoint: 15
+  SpeedToMoveToTarget: 15
+  SpeedWhenOutOfRange: 30
   MaxDistanceBetweenTarget: 80
-  MinDistanceBetweenPoint: 5
-  MaxDistanceBetweenPoint: 70
   MaxDistanceBetweenPointInCombat: 80
   MinDistanceBetweenTargetWhenRotate: 50
+  MaxDistanceTriggerBetweenPointAndShark: 15
   DistSharkTargetPointStopMoving: 20
+  MutliplySpeed: 1
+  TimerForAttack: 10
   SpeedRotationOnItself: 500
   NumberJumpWhenCrazy: 3
-  TimerForAttack: 10
+  SpeedCombatRush: 25
+  SpeedCombatJumpInFront: 15
+  SpeedCombatToTriggerJumpInFront: 35
   CurrentSpeed: 0
   IsCollided: 0
 --- !u!114 &4724983407922079715
