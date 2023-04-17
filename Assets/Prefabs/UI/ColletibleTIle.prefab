@@ -86,7 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3706829769839671036}
   - component: {fileID: 4131612146094877529}
-  - component: {fileID: 1256386214353632702}
+  - component: {fileID: 3907560064451907296}
   m_Layer: 0
   m_Name: ColletibleTIle
   m_TagString: Untagged
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &1256386214353632702
+--- !u!114 &3907560064451907296
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,11 +146,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4041093498335852974}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa4f8c16129d4439958ce4f75dedd7c5, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c6a3305c23b47369ef04fb7666f85b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _overlayImage: {fileID: 8970101482164101212}
-  _iconImage: {fileID: 7303471148833802013}
+  OverlayImage: {fileID: 8970101482164101212}
+  IconImage: {fileID: 7303471148833802013}
+  Data: {fileID: 0}
 --- !u!1 &4792828903060276073
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,7 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

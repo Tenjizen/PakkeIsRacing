@@ -2,6 +2,7 @@
 using System.Linq;
 using Tools.SingletonClassBase;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Collectible
 {
@@ -20,6 +21,8 @@ namespace Collectible
         [SerializeField] private string _JsonFileID;
         
         private JsonFileManager<CollectedItemData> _fileManager;
+
+        public UnityEvent OnNewCollectibleGet = new UnityEvent(); 
 
         protected override void Awake()
         {
@@ -67,6 +70,8 @@ namespace Collectible
             }
             
             WriteJsonFile();
+            
+            OnNewCollectibleGet.Invoke();
         }
     }
 }

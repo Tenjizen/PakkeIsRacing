@@ -6,17 +6,28 @@ namespace UI.Menu
 {
     public class MenuUIObject : MonoBehaviour
     {
-        [SerializeField] private Image _overlayImage;
-        [SerializeField] private Image _iconImage;
+        [SerializeField] protected Image OverlayImage;
+        [SerializeField] protected Image IconImage;
 
         public void Initialize(Sprite image)
         {
-            _iconImage.sprite = image;
+            IconImage.sprite = image;
         }
         
         public virtual void Set(bool isActive)
         {
-            _overlayImage.DOFade(isActive ? 1f : 0f, 0.1f);
+            OverlayImage.DOKill();
+            OverlayImage.DOFade(isActive ? 1f : 0f, 0.1f);
+        }
+
+        public virtual string GetName()
+        {
+            return string.Empty;
+        }
+
+        public virtual string GetDescription()
+        {
+            return string.Empty;
         }
     }
 }

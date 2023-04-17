@@ -69,7 +69,6 @@ namespace UI.Menu
 
         public virtual void Set(bool isActive, bool isUsable)
         {
-            Debug.Log($"set {gameObject.name} (act:{isActive}, usa:{isUsable})");
             IsActive = isActive;
             IsUsable = isUsable;
             MenuGameObject.gameObject.SetActive(isActive);

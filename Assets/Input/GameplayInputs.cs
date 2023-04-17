@@ -206,6 +206,24 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MenuTopLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""812d2664-a5e6-46cb-a2bb-110f327173d5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MenuTopRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""c967f5ea-3c02-4d98-bf19-51d86d2a89b4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -626,6 +644,50 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""action"": ""MenuRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a4bbbc98-9eaa-4836-8c7e-50b86738d4af"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MenuTopLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""60ee1704-d819-4b0f-9471-d72ed70e8f52"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MenuTopLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2a2a0128-529b-4689-a9e2-6e3305987a31"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MenuTopRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4f3e40a0-3827-42f4-9632-c0a127353ee8"",
+                    ""path"": ""<Keyboard>/rightShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MenuTopRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -665,6 +727,8 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         m_Boat_MenuDown = m_Boat.FindAction("MenuDown", throwIfNotFound: true);
         m_Boat_MenuLeft = m_Boat.FindAction("MenuLeft", throwIfNotFound: true);
         m_Boat_MenuRight = m_Boat.FindAction("MenuRight", throwIfNotFound: true);
+        m_Boat_MenuTopLeft = m_Boat.FindAction("MenuTopLeft", throwIfNotFound: true);
+        m_Boat_MenuTopRight = m_Boat.FindAction("MenuTopRight", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -744,6 +808,8 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Boat_MenuDown;
     private readonly InputAction m_Boat_MenuLeft;
     private readonly InputAction m_Boat_MenuRight;
+    private readonly InputAction m_Boat_MenuTopLeft;
+    private readonly InputAction m_Boat_MenuTopRight;
     public struct BoatActions
     {
         private @GameplayInputs m_Wrapper;
@@ -768,6 +834,8 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         public InputAction @MenuDown => m_Wrapper.m_Boat_MenuDown;
         public InputAction @MenuLeft => m_Wrapper.m_Boat_MenuLeft;
         public InputAction @MenuRight => m_Wrapper.m_Boat_MenuRight;
+        public InputAction @MenuTopLeft => m_Wrapper.m_Boat_MenuTopLeft;
+        public InputAction @MenuTopRight => m_Wrapper.m_Boat_MenuTopRight;
         public InputActionMap Get() { return m_Wrapper.m_Boat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -837,6 +905,12 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @MenuRight.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuRight;
                 @MenuRight.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuRight;
                 @MenuRight.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuRight;
+                @MenuTopLeft.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuTopLeft;
+                @MenuTopLeft.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuTopLeft;
+                @MenuTopLeft.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuTopLeft;
+                @MenuTopRight.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuTopRight;
+                @MenuTopRight.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuTopRight;
+                @MenuTopRight.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuTopRight;
             }
             m_Wrapper.m_BoatActionsCallbackInterface = instance;
             if (instance != null)
@@ -901,6 +975,12 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @MenuRight.started += instance.OnMenuRight;
                 @MenuRight.performed += instance.OnMenuRight;
                 @MenuRight.canceled += instance.OnMenuRight;
+                @MenuTopLeft.started += instance.OnMenuTopLeft;
+                @MenuTopLeft.performed += instance.OnMenuTopLeft;
+                @MenuTopLeft.canceled += instance.OnMenuTopLeft;
+                @MenuTopRight.started += instance.OnMenuTopRight;
+                @MenuTopRight.performed += instance.OnMenuTopRight;
+                @MenuTopRight.canceled += instance.OnMenuTopRight;
             }
         }
     }
@@ -945,5 +1025,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         void OnMenuDown(InputAction.CallbackContext context);
         void OnMenuLeft(InputAction.CallbackContext context);
         void OnMenuRight(InputAction.CallbackContext context);
+        void OnMenuTopLeft(InputAction.CallbackContext context);
+        void OnMenuTopRight(InputAction.CallbackContext context);
     }
 }
