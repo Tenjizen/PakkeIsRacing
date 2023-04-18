@@ -84,7 +84,7 @@ namespace Character.Camera.State
                 #endregion
 
                 #region variable
-                
+
                 //get target rotation
                 Quaternion localRotation = CamManager.CinemachineCameraTarget.transform.localRotation;
                 Quaternion targetQuaternion = Quaternion.Euler(new Vector3(0,
@@ -96,7 +96,7 @@ namespace Character.Camera.State
                 const float rotationThreshold = 0.15f;
                 float rotationStaticY = CamManager.CharacterManager.CurrentStateBaseProperty.RotationStaticForceY;
                 float rotationPaddleY = CamManager.CharacterManager.CurrentStateBaseProperty.RotationPaddleForceY;
-                
+
                 #endregion
 
                 //calculate camera rotation & position
@@ -104,15 +104,16 @@ namespace Character.Camera.State
                     Mathf.Abs(rotationPaddleY) > rotationThreshold) //if kayak moving
                 {
                     //rotation
-                    CamManager.CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, targetQuaternion, CamManager.Data.LerpLocalRotationMove);
 
                     //position
                     if (Mathf.Abs(rotationStaticY) > rotationThreshold / 2)// if kayak is rotating
                     {
-                        cameraTargetLocalPosition.x = Mathf.Lerp(cameraTargetLocalPosition.x, 0, CamManager.Data.LerpLocalPositionNotMoving);
+                        cameraTargetLocalPosition.x = Mathf.Lerp(cameraTargetLocalPosition.x, 0, CamManager.Data.LerpLocalPositionWhenRotating);
+                        CamManager.CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, targetQuaternion, CamManager.Data.LerpLocalRotationWhenRotating);
                     }
                     else if (Mathf.Abs(rotationPaddleY) > rotationThreshold / 2)// if kayak is moving
                     {
+                        CamManager.CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, targetQuaternion, CamManager.Data.LerpLocalRotationMove);
                         cameraTargetLocalPosition.x = Mathf.Lerp(cameraTargetLocalPosition.x,
                             (rotationStaticY + rotationPaddleY) * CamManager.Data.MultiplierValuePosition, //value
                             CamManager.Data.LerpLocalPositionMove); //time lerp

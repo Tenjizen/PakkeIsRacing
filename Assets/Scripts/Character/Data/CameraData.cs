@@ -31,6 +31,9 @@ namespace Character.Data
         
         [field:SerializeField, Range(0, 0.1f), Tooltip("The lerp value applied to the rotation of the camera when the player moves")] 
         public float LerpLocalRotationMove { get; private set; } = 0.005f;
+        [field:SerializeField, Range(0, 0.1f), Tooltip("The lerp value applied to the rotation of the camera when the player rotating")] 
+        public float LerpLocalRotationWhenRotating { get; private set; } = 0.005f;
+        
         
         
         [field:SerializeField, Range(0, 10)] 
@@ -40,6 +43,8 @@ namespace Character.Data
         [field:SerializeField, Range(0, 0.1f), Tooltip("The lerp value applied to the position of the camera when the player moves")] 
         public float LerpLocalPositionMove { get; private set; } = .005f;
         
+        [field:SerializeField, Range(0, 0.1f), Tooltip("The lerp value applied to the position of the camera when the player rotating")] 
+        public float LerpLocalPositionWhenRotating { get; private set; } = 0.005f;
         
         [field:SerializeField, Range(0, 5)] 
         public float MultiplierFovCamera { get; private set; } = 1;
