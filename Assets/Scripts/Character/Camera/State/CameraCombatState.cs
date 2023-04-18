@@ -18,6 +18,13 @@ namespace Character.Camera.State
         {
             CamManager.CameraAnimator.Play("Combat");
 
+            _baseYaw = CamManager.CharacterManager.KayakControllerProperty.transform.rotation.eulerAngles.y;
+
+            if (camera.CinemachineTargetYaw > 180)
+            {
+                camera.CinemachineTargetYaw -= 360;
+            }
+
             _baseFov = CamManager.VirtualCameraCombat.m_Lens.FieldOfView;
             _currentFov = _baseFov;
 
@@ -27,12 +34,13 @@ namespace Character.Camera.State
             _cameraNoise.m_AmplitudeGain = 1f;
 
             CombatSensitivityMultiplier = CamManager.Data.CameraCombatSensibility;
+
+
         }
-        
+
         public override void UpdateState(CameraManager camera)
         {
-            _baseYaw = CamManager.CharacterManager.KayakControllerProperty.transform.rotation.eulerAngles.y;
-            
+
             CamManager.CurrentStateBase.ManageFreeCameraMove(CameraMode.Combat);
             CamManager.ApplyRotationCameraInCombat();
 
@@ -43,14 +51,14 @@ namespace Character.Camera.State
 
             CamManager.CinemachineTargetYaw = ClampAngle(CamManager.CinemachineTargetYaw, min, max);
 
-            ClampRotationCameraValue(CamManager.Data.CombatHeightClamp, CamManager.Data.CombatLengthClamp);  
+            ClampRotationCameraValue(CamManager.Data.CombatHeightClamp, CamManager.Data.CombatLengthClamp);
 
             //fov
             const float fovLerp = 0.05f;
             if (CharacterManager.Instance.InputManagementProperty.Inputs.Shoot && CharacterManager.Instance.WeaponCooldown <= 0)
             {
                 float lerp = CamManager.Data.CombatZoomFovLerp;
-                _targetFOV = Mathf.Lerp(_targetFOV,CamManager.Data.CombatZoomFov, lerp);
+                _targetFOV = Mathf.Lerp(_targetFOV, CamManager.Data.CombatZoomFov, lerp);
                 FreeAimMultiplier = Mathf.Lerp(FreeAimMultiplier, CamManager.Data.CombatZoomAimSpeedMultiplier, lerp);
                 _cameraNoise.m_AmplitudeGain = Mathf.Lerp(_cameraNoise.m_AmplitudeGain, 0, lerp);
             }
@@ -73,7 +81,7 @@ namespace Character.Camera.State
         }
         public override void SwitchState(CameraManager camera)
         {
-    
+
         }
     }
 }

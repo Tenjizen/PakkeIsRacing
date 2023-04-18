@@ -21,7 +21,7 @@ namespace Character.Camera.State
         {
             Initialize();
         }
-        
+
         public void Initialize()
         {
             if (CharacterManager.Instance != null)
@@ -46,9 +46,9 @@ namespace Character.Camera.State
 
         protected void ClampRotationCameraValue(Vector2 pitch, Vector2 yaw)
         {
-            ClampRotationCameraValue(pitch.x,pitch.y,yaw.x,yaw.y);
+            ClampRotationCameraValue(pitch.x, pitch.y, yaw.x, yaw.y);
         }
-        
+
         public float ClampAngle(float lfAngle, float lfMin, float lfMax)
         {
             if (lfAngle < -360f) lfAngle += 360f;
@@ -64,22 +64,21 @@ namespace Character.Camera.State
                 const float timeMultiplier = 100f;
                 Vector2 aim = Vector2.zero;
                 float multiplier = FreeAimMultiplier * CombatSensitivityMultiplier * Time.deltaTime * timeMultiplier;
-                
+
                 switch (cameraMode)
                 {
                     case CameraMode.Navigation:
                         aim = CamManager.Input.Inputs.RotateCamera;
-                        CamManager.CinemachineTargetPitch += CamManager.Data.JoystickFreeRotationY.Evaluate(aim.y) * multiplier;
                         break;
 
                     case CameraMode.Combat:
-                        aim = CamManager.Input.Inputs.MovingAim; 
+                        aim = CamManager.Input.Inputs.MovingAim;
                         aim = new Vector2(aim.x, aim.y * -1);
-                        CamManager.CinemachineTargetPitch += CamManager.Data.JoystickFreeRotationY.Evaluate(aim.y) * multiplier;
                         break;
                 }
-                
+
                 //Controller
+                CamManager.CinemachineTargetPitch += CamManager.Data.JoystickFreeRotationY.Evaluate(aim.y) * multiplier;
                 CamManager.CinemachineTargetYaw += CamManager.Data.JoystickFreeRotationX.Evaluate(aim.x) * multiplier;
                 //CameraManagerRef.CinemachineTargetPitch = CameraManagerRef.JoystickFreeRotationY.Evaluate(aim.y); (bug with this here !)
 
@@ -103,7 +102,7 @@ namespace Character.Camera.State
             ManageFreeCameraMove(ref _uselessFloatForRef, cameraMode);
         }
 
-        public void SetFOV(CinemachineVirtualCamera virtualCamera ,float value)
+        public void SetFOV(CinemachineVirtualCamera virtualCamera, float value)
         {
             virtualCamera.m_Lens.FieldOfView = value;
         }
