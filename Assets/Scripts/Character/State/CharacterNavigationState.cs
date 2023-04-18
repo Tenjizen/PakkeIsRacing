@@ -85,14 +85,14 @@ namespace Character.State
                 StopCharacter();
                 return;
             }
-            
-            if (_inputs.Inputs.PaddleLeft || _inputs.Inputs.PaddleRight)
-            {
-                HandlePaddleMovement();
-            }
             if ((_inputs.Inputs.RotateLeft != 0 || _inputs.Inputs.RotateRight != 0) && _staticInputTimer <= 0)
             {
                 HandleStaticRotation();
+            }
+            
+            else if (_inputs.Inputs.PaddleLeft || _inputs.Inputs.PaddleRight)
+            {
+                HandlePaddleMovement();
             }
 
             KayakRotationManager(RotationType.Paddle);
