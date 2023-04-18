@@ -11,6 +11,7 @@ namespace Character
 
         public GameplayInputs GameplayInputs { get { return _gameplayInputs; } private set { _gameplayInputs = value; } }
         [SerializeField] float DeadzoneJoystick = 0.3f;
+        [SerializeField] float DeadzoneJoystickTrigger = 0.3f;
         [field:SerializeField] public InputsEnum Inputs { get; private set; }
 
         private void Awake()
@@ -29,8 +30,8 @@ namespace Character
         {
             InputsEnum inputsEnum = Inputs;
             
-            inputsEnum.PaddleLeft = _gameplayInputs.Boat.PaddleLeft.ReadValue<float>() > 0;
-            inputsEnum.PaddleRight = _gameplayInputs.Boat.PaddleRight.ReadValue<float>() > 0;
+            inputsEnum.PaddleLeft = _gameplayInputs.Boat.PaddleLeft.ReadValue<float>() > DeadzoneJoystickTrigger;
+            inputsEnum.PaddleRight = _gameplayInputs.Boat.PaddleRight.ReadValue<float>() > DeadzoneJoystickTrigger;
 
             inputsEnum.RotateLeft = _gameplayInputs.Boat.StaticRotateLeft.ReadValue<float>();
             inputsEnum.RotateRight = _gameplayInputs.Boat.StaticRotateRight.ReadValue<float>();
@@ -43,8 +44,8 @@ namespace Character
             inputsEnum.SelectWeaponMenu = _gameplayInputs.Boat.SelectOnWheel.ReadValue<float>();
             inputsEnum.DeselectWeapon = _gameplayInputs.Boat.DeselectWeapon.triggered;
 
-            inputsEnum.Aim = _gameplayInputs.Boat.Aim.ReadValue<float>() > 0.5f;
-            inputsEnum.Shoot = _gameplayInputs.Boat.Shoot.ReadValue<float>() > 0.5f;
+            inputsEnum.Aim = _gameplayInputs.Boat.Aim.ReadValue<float>() > DeadzoneJoystickTrigger;
+            inputsEnum.Shoot = _gameplayInputs.Boat.Shoot.ReadValue<float>() > DeadzoneJoystickTrigger;
             inputsEnum.MovingAim = _gameplayInputs.Boat.MoveAim.ReadValue<Vector2>();
 
             inputsEnum.Deadzone = DeadzoneJoystick;
