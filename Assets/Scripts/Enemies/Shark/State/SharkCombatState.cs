@@ -84,12 +84,11 @@ public class SharkCombatState : SharkBaseState
 
             //timer Attack
             percentLife = (sharkManager.CurrentLife * 100) / sharkManager.Life;
+
             if (_attack >= sharkManager.TimerForAttack && _attackState == AttackState.None)
             {
                 sharkManager.IsCollided = false;
 
-
-                Debug.Log(percentLife);
 
                 if (percentLife > 75)
                 {
@@ -108,7 +107,7 @@ public class SharkCombatState : SharkBaseState
             }
 
 
-            RotateCombat(sharkManager);
+            //RotateCombat(sharkManager);
 
 
             //rush
@@ -435,7 +434,12 @@ public class SharkCombatState : SharkBaseState
             _waveStartJump = false;
             _waveEndJump = false;
 
-            _state = CombatState.RotateAroundPoint;
+            if (_atqNumber <= 0)
+            {
+                _state = CombatState.RotateAroundPoint;
+            }
+
+
             //var rand = Random.Range(0, 360);
             //sharkManager.PointTarget.transform.position = MathTools.GetPointFromAngleAndDistance(sharkManager.TargetTransform.position, rand, DIST_POINT);
             sharkManager.PointTarget.transform.position = MathTools.GetPointFromAngleAndDistance(sharkManager.TargetTransform.position, 0, 0);
@@ -448,10 +452,10 @@ public class SharkCombatState : SharkBaseState
 
         sharkManager.transform.eulerAngles = rotation;
 
-
-
     }
-    
+
+
+
     private void animationCurveInFront(SharkManager sharkManager)
     {
         _timeAnimationCurve += Time.deltaTime;
@@ -482,7 +486,7 @@ public class SharkCombatState : SharkBaseState
         rotation.x = sharkManager.VisualCurve.Evaluate(_timeAnimationCurve) * 100;
 
 
-            rotation.z += Time.deltaTime * sharkManager.SpeedRotationOnItself;
+        rotation.z += Time.deltaTime * sharkManager.SpeedRotationOnItself;
 
 
         if (_timeAnimationCurve >= _lastKey.time - sharkManager.StartSecondCircularWaveTimePhaseThree && _waveEndJump == false)
@@ -556,8 +560,8 @@ public class SharkCombatState : SharkBaseState
 
         sharkManager.Forward.transform.localEulerAngles = rotation;
 
-      
-            animationCurve(sharkManager);
+
+        animationCurve(sharkManager);
 
         if (_atqNumber <= 0)
         {
@@ -631,7 +635,6 @@ public class SharkCombatState : SharkBaseState
         float angle = Vector2.SignedAngle(targetPos - sharkPos, forward);
         if (angle < 0)
             angle += 360;
-
 
         Vector3 rota = sharkManager.Forward.transform.localEulerAngles;
         if (angle >= 0 && angle <= 180)
