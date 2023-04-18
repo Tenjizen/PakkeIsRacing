@@ -33,6 +33,8 @@ namespace Enemies.Shark
         //TODO to scriptable object
         [Tooltip("The Y position in relation to the target, the lower the value (ex : -1) the more visible the shark will be when rotating around the player")]
         public float ElevationOffset = 0;
+        [Tooltip("The Y position in relation to the target when rushing to the target")]
+        public float ElevationOffsetWhenRush = 0;
 
         [Header("Jump")]
         [Tooltip("The jump curve")]
@@ -123,6 +125,8 @@ namespace Enemies.Shark
         {
             CurrentStateBase.FixedUpdate(this);
         }
+
+
         public void SwitchState(SharkBaseState stateBaseCharacter)
         {
             CurrentStateBase = stateBaseCharacter;

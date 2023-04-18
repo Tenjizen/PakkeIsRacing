@@ -537,9 +537,10 @@ public class SharkCombatState : SharkBaseState
 
         if (angle < 3 || angle > 357)
         {
-            _currentOffSet = Mathf.Lerp(_currentOffSet, _elevationOffsetBase + 2, 0.05f);
+            _currentOffSet = Mathf.Lerp(_currentOffSet,sharkManager.ElevationOffsetWhenRush, 0.05f);
 
             sharkManager.SwitchSpeed(sharkManager.SpeedCombatRush);
+
             var pos = sharkManager.Forward.transform.position;
             pos.y = _currentOffSet;
             sharkManager.Forward.transform.position = pos;
