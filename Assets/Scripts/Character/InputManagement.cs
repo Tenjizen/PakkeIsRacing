@@ -8,7 +8,9 @@ namespace Character
     public class InputManagement : MonoBehaviour
     {
         private GameplayInputs _gameplayInputs;
+
         public GameplayInputs GameplayInputs { get { return _gameplayInputs; } private set { _gameplayInputs = value; } }
+        [SerializeField] float DeadzoneJoystick = 0.3f;
         [field:SerializeField] public InputsEnum Inputs { get; private set; }
 
         private void Awake()
@@ -45,7 +47,7 @@ namespace Character
             inputsEnum.Shoot = _gameplayInputs.Boat.Shoot.ReadValue<float>() > 0.5f;
             inputsEnum.MovingAim = _gameplayInputs.Boat.MoveAim.ReadValue<Vector2>();
 
-            inputsEnum.Deadzone = 0.3f;
+            inputsEnum.Deadzone = DeadzoneJoystick;
             
             Inputs = inputsEnum;
         }
