@@ -37,21 +37,41 @@ namespace Enemies.Shark
         public float ElevationOffsetWhenRush = 0;
 
         [Header("Jump")]
+        [Header("Attack one")]
         [Tooltip("The jump curve")]
         public AnimationCurve JumpCurve;
         [Tooltip("The visual curve to do according to the jump curve")]
         public AnimationCurve VisualCurve;
 
+        [Header("Attack three")]
+        [Tooltip("The jump curve")]
+        public AnimationCurve JumpCurvePhaseThree;
+        [Tooltip("The visual curve to do according to the jump curve")]
+        public AnimationCurve VisualCurvePhaseThree;
+
         [Header("Waves")]
         public Waves WavesData;
+
+        [Header("Waves Attack one")]
         [Tooltip("The time before the last key fram before launching the first wave")]
         public float StartFirstCircularWave = 1;
         [Tooltip("Information for the first wave")]
         public CircularWave StartFirstCircularWaveData;
         [Tooltip("The time before the last key fram before launching the second wave")]
-        [Space(15)] public float StartSecondCircularWaveTime = 1;
+        [Space(5)] public float StartSecondCircularWaveTime = 1;
         [Tooltip("Information for the second wave")]
         public CircularWave StartSecondCircularWaveData;
+
+
+        [Header("Waves Attack three")]
+        [Tooltip("The time before the last key fram before launching the first wave")]
+        public float StartFirstCircularWavePhaseThree = 1;
+        [Tooltip("Information for the first wave")]
+        public CircularWave StartFirstCircularWaveDataPhaseThree;
+        [Tooltip("The time before the last key fram before launching the second wave")]
+        [Space(5)] public float StartSecondCircularWaveTimePhaseThree = 1;
+        [Tooltip("Information for the second wave")]
+        public CircularWave StartSecondCircularWaveDataPhaseThree;
 
         [Header("Speed")]
         //public float RotationStaticSpeed = 100.0f;
@@ -68,22 +88,36 @@ namespace Enemies.Shark
         public float SpeedToMoveToTarget = 20.0f;
         [Tooltip("the speed when moving to the target")]
         public float SpeedWhenOutOfRange = 30.0f;
+        [Tooltip("When moving the distance between the player and target")]
+        public float MutliplySpeed = 1.0f;
 
 
         [Header("Distance")]
         [Tooltip("the distance maximun between the shark and the target")]
         public float MaxDistanceBetweenTarget = 80.0f;
-        [Tooltip("the maximum distance between the shark and the target when rotate around before the shark returns to the target")]
-        public float MaxDistanceBetweenPointInCombat = 80.0f;
-        [Tooltip("the minimum distance between the shark and the target when rotate around")]
-        public float MinDistanceBetweenTargetWhenRotate = 50.0f;
         [Tooltip("the distance has to trigger the atq of the jump in front of the player")]
         public float MaxDistanceTriggerBetweenPointAndShark = 15.0f;
         [Tooltip("the distance between the shark and the target before the shark stops focusing precisely on the target ")]
         public float DistSharkTargetPointStopMoving = 20.0f;
 
-        [Tooltip("When moving the distance between the player and target")]
-        public float MutliplySpeed = 1.0f;
+        [Header("Distance Attack one")]
+        [Tooltip("the maximum distance between the shark and the target when rotate around before the shark returns to the target")]
+        public float MaxDistanceBetweenPointInCombatPhaseOne = 80.0f;
+        [Tooltip("the minimum distance between the shark and the target when rotate around")]
+        public float MinDistanceBetweenTargetWhenRotatePhaseOne = 50.0f;
+
+        [Header("Distance Attack two")]
+        [Tooltip("the maximum distance between the shark and the target when rotate around before the shark returns to the target")]
+        public float MaxDistanceBetweenPointInCombatPhaseTwo = 80.0f;
+        [Tooltip("the minimum distance between the shark and the target when rotate around")]
+        public float MinDistanceBetweenTargetWhenRotatePhaseTwo = 50.0f;
+
+        [Header("Distance Attack three")]
+        [Tooltip("the maximum distance between the shark and the target when rotate around before the shark returns to the target")]
+        public float MaxDistanceBetweenPointInCombatPhaseThree = 80.0f;
+        [Tooltip("the minimum distance between the shark and the target when rotate around")]
+        public float MinDistanceBetweenTargetWhenRotatePhaseThree = 50.0f;
+
 
 
         [Header("Attack")]

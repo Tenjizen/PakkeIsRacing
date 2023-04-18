@@ -5123,6 +5123,126 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  JumpCurvePhaseThree:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: -2.8
+      inSlope: 0.012852123
+      outSlope: 0.012852123
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.7645729
+    - serializedVersion: 3
+      time: 2.563356
+      value: -10
+      inSlope: 15.388218
+      outSlope: 15.388218
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.19813512
+    - serializedVersion: 3
+      time: 4.0129833
+      value: 10
+      inSlope: -0.09564559
+      outSlope: -0.09564559
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 5.691931
+      value: -10
+      inSlope: -11.611963
+      outSlope: -11.611963
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.07219614
+      outWeight: 0.07945307
+    - serializedVersion: 3
+      time: 8.957146
+      value: -2.8
+      inSlope: 0.16779964
+      outSlope: 0.16779964
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.54774326
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  VisualCurvePhaseThree:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: -0.5953026
+      outSlope: 0.00036341397
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.9987435
+      value: 0.3
+      inSlope: -0.0007976297
+      outSlope: -0.0007976297
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.43591902
+    - serializedVersion: 3
+      time: 2.563356
+      value: -0.51058364
+      inSlope: 0.0032749325
+      outSlope: 0.0032749325
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.65292907
+      outWeight: 0.18160613
+    - serializedVersion: 3
+      time: 4.1306453
+      value: 0
+      inSlope: 0.48354727
+      outSlope: 0.48354727
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 5.691931
+      value: 0.5
+      inSlope: 0.00062214624
+      outSlope: 0.00062214624
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.32584876
+      outWeight: 0
+    - serializedVersion: 3
+      time: 8.001256
+      value: -0.3
+      inSlope: -0.012801921
+      outSlope: -0.012801921
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 1
+    - serializedVersion: 3
+      time: 9
+      value: 0
+      inSlope: -0.00044362567
+      outSlope: -0.26156142
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.87869
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   WavesData: {fileID: 0}
   StartFirstCircularWave: 6
   StartFirstCircularWaveData:
@@ -5136,6 +5256,18 @@ MonoBehaviour:
     Amplitude: 30
     Distance: 20
     NumberOfPoints: 100
+  StartFirstCircularWavePhaseThree: 6
+  StartFirstCircularWaveDataPhaseThree:
+    Duration: 3
+    Amplitude: 30
+    Distance: 20
+    NumberOfPoints: 100
+  StartSecondCircularWaveTimePhaseThree: 4.4
+  StartSecondCircularWaveDataPhaseThree:
+    Duration: 3
+    Amplitude: 30
+    Distance: 20
+    NumberOfPoints: 100
   SpeedFreeRoamRotationStatic: 70
   SpeedCombatRotationStatic: 100
   SpeedFreeRoamRotationAroundPoint: 10
@@ -5143,10 +5275,14 @@ MonoBehaviour:
   SpeedToMoveToTarget: 15
   SpeedWhenOutOfRange: 30
   MaxDistanceBetweenTarget: 80
-  MaxDistanceBetweenPointInCombat: 80
-  MinDistanceBetweenTargetWhenRotate: 50
   MaxDistanceTriggerBetweenPointAndShark: 15
   DistSharkTargetPointStopMoving: 20
+  MaxDistanceBetweenPointInCombatPhaseOne: 80
+  MinDistanceBetweenTargetWhenRotatePhaseOne: 50
+  MaxDistanceBetweenPointInCombatPhaseTwo: 80
+  MinDistanceBetweenTargetWhenRotatePhaseTwo: 50
+  MaxDistanceBetweenPointInCombatPhaseThree: 80
+  MinDistanceBetweenTargetWhenRotatePhaseThree: 50
   MutliplySpeed: 1
   TimerForAttack: 10
   SpeedRotationOnItself: 500
