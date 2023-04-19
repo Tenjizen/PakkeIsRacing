@@ -123,7 +123,7 @@ namespace Character.Data
         
         
         [field:SerializeField, Header("Combat")]
-        public Vector3 CombatOffset { get; private set; } = new Vector3(-1, -1, 0);
+        public Vector3 CombatPosition { get; private set; }
         
         
         [field:SerializeField]
