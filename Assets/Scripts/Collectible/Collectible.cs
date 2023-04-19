@@ -1,5 +1,6 @@
 using Collectible.Data;
 using Fight;
+using Json;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -21,7 +22,7 @@ namespace Collectible
             gameObject.SetActive(false);
             OnCollected.Invoke();
             
-            CollectibleJsonFileManager instance = CollectibleJsonFileManager.Instance;
+            CollectibleJsonFileManager instance = JsonFilesManagerSingleton.Instance.CollectibleJsonFileManagerProperty;
             if (instance != null)
             {
                 instance.SetCollectibleCollected(this);

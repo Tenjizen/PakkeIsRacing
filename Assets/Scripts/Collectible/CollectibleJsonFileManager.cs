@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Json;
 using Tools.SingletonClassBase;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,7 +15,7 @@ namespace Collectible
         public Collectible CollectibleGameObject;
     }
 
-    public class CollectibleJsonFileManager : Singleton<CollectibleJsonFileManager>
+    public class CollectibleJsonFileManager : MonoBehaviour
     {
         [field:SerializeField, Header("Collectibles")] public List<CollectedItemData> CollectedItems { get; set; }
         [SerializeField] private bool _setCollectiblesFromJsonFileAtStart = false;
@@ -24,9 +25,8 @@ namespace Collectible
 
         public UnityEvent OnNewCollectibleGet = new UnityEvent(); 
 
-        protected override void Awake()
+        protected void Awake()
         {
-            base.Awake();
             _fileManager = new JsonFileManager<CollectedItemData>(_JsonFileID);
         }
 

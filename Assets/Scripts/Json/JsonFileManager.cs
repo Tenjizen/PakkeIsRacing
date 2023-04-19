@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-namespace Collectible
+namespace Json
 {
     [System.Serializable]
     public class JsonWrapper<T>

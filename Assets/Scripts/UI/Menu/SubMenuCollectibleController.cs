@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Character;
 using Collectible;
+using Json;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -22,7 +23,7 @@ namespace UI.Menu
         protected override void Start()
         {
             base.Start();
-            CollectibleJsonFileManager.Instance.OnNewCollectibleGet.AddListener(SetTilesData);
+            JsonFilesManagerSingleton.Instance.CollectibleJsonFileManagerProperty.OnNewCollectibleGet.AddListener(SetTilesData);
             if (_defaultCollectibleMesh != null)
             {
                 _defaultCollectibleMesh.SetActive(false);
@@ -152,13 +153,13 @@ namespace UI.Menu
                 CollectibleUIObject collectibleUIObject = _objectsList[i].GetComponent<CollectibleUIObject>();
                 
                 if (collectibleUIObject == null ||
-                    i >= CollectibleJsonFileManager.Instance.CollectedItems.Count || 
-                    CollectibleJsonFileManager.Instance.CollectedItems[i] == null)
+                    i >= JsonFilesManagerSingleton.Instance.CollectibleJsonFileManagerProperty.CollectedItems.Count || 
+                    JsonFilesManagerSingleton.Instance.CollectibleJsonFileManagerProperty.CollectedItems[i] == null)
                 {
                     continue;
                 }
                 
-                collectibleUIObject.Data = CollectibleJsonFileManager.Instance.CollectedItems[i].CollectibleGameObject.Data;
+                collectibleUIObject.Data = JsonFilesManagerSingleton.Instance.CollectibleJsonFileManagerProperty.CollectedItems[i].CollectibleGameObject.Data;
             }
         }
 
