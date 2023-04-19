@@ -28,7 +28,6 @@ namespace Character.Camera.State
             _baseFov = CamManager.VirtualCameraCombat.m_Lens.FieldOfView;
             _currentFov = _baseFov;
 
-            _targetOffset = CamManager.CombatBaseShoulderOffset + CamManager.Data.CombatOffset;
 
             _cameraNoise = CamManager.VirtualCameraCombat.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
             _cameraNoise.m_AmplitudeGain = 1f;

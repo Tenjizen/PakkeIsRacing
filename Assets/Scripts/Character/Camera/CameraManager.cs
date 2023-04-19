@@ -48,6 +48,8 @@ namespace Character.Camera
 
         private void Awake()
         {
+            CinemachineCameraFollowCombat.transform.localPosition = Data.CombatPosition;
+
             CinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             CameraTargetBasePos = CinemachineCameraTarget.transform.localPosition;
             CameraBaseFov = VirtualCameraFreeLook.m_Lens.FieldOfView;
