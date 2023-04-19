@@ -91,7 +91,6 @@ namespace Character.State
                     {
                         Vector3 hitPosition = hit.point;
                         direction = MathTools.GetDirectionToPointCameraLooking(character.transform, Vector3.Distance(playerPosition,hitPosition));
-                        Debug.Log("Hit Position: " + hitPosition);
                     }
                     
                     projectile.Launch(direction, power);

@@ -60,14 +60,9 @@ namespace Collectible
         public void SetCollectibleCollected(Collectible collectible)
         {
             CollectedItems = _fileManager.GetDataList();
-            
-            for (int i = 0; i < CollectedItems.Count; i++)
-            {
-                if (CollectedItems[i].CollectibleGameObject == collectible)
-                {
-                    CollectedItems[i].IsCollected = true;
-                }
-            }
+
+            CollectedItems.Find(item => item.CollectibleGameObject == collectible).IsCollected = true;
+            //CollectedItems.Add(new CollectedItemData(){CollectibleGameObject = collectible, IsCollected = true, ItemName = collectible.Data.Name});
             
             WriteJsonFile();
             

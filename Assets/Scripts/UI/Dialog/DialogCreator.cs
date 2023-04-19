@@ -36,7 +36,7 @@ namespace UI.Dialog
         [Header("Parameters"), SerializeField] 
         private LaunchType _launchType;
         [SerializeField] 
-        private List<DialogStruct> _dialog;
+        private List<DialogData> _dialog;
         [SerializeField] 
         private bool _canBeReplayed;
         [SerializeField, ReadOnly] 

@@ -120,7 +120,7 @@ namespace UI.Menu
             {
                 CollectibleUIObject collectibleUIObject = _objectsList[i].GetComponent<CollectibleUIObject>();
                 
-                if (collectibleUIObject == null || 
+                if (collectibleUIObject == null ||
                     i >= CollectibleJsonFileManager.Instance.CollectedItems.Count || 
                     CollectibleJsonFileManager.Instance.CollectedItems[i] == null)
                 {

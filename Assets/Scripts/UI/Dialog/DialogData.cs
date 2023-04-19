@@ -10,8 +10,8 @@ namespace Dialog
         PressButton = 1
     }
 
-    [Serializable]
-    public struct DialogStruct
+    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/DialogData", order = 1)]
+    public class DialogData : ScriptableObject
     {
         [TextArea] public string Text;
         public float TextShowTime;
