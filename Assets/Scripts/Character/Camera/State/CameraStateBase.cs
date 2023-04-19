@@ -58,6 +58,11 @@ namespace Character.Camera.State
 
         public void ManageFreeCameraMove(ref float timerCameraReturnBehindBoat, CameraMode cameraMode)
         {
+            if (CamManager.CanRotateCamera == false)
+            {
+                return;
+            }
+            
             //rotate freely with inputs
             if (CamManager.CanMoveCameraManually)
             {

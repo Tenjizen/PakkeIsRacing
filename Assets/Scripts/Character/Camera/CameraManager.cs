@@ -28,6 +28,8 @@ namespace Character.Camera
         public InputManagement Input { get; private set; }
         public Cinemachine3rdPersonFollow CinemachineCombat3RdPersonFollow { get; private set; }
 
+        [ReadOnly] public bool CanRotateCamera = true;
+
         //camera
         [HideInInspector] public float CameraAngleOverride = 0.0f;
         [HideInInspector] public float CameraBaseFov;

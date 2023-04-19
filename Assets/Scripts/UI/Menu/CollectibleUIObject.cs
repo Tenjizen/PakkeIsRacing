@@ -1,4 +1,5 @@
-﻿using Collectible.Data;
+﻿using System;
+using Collectible.Data;
 using UnityEngine;
 
 namespace UI.Menu
@@ -6,6 +7,15 @@ namespace UI.Menu
     public class CollectibleUIObject : MenuUIObject
     {
         public CollectibleData Data;
+        public GameObject CollectibleMesh;
+
+        private void Awake()
+        {
+            if (CollectibleMesh != null)
+            {
+                CollectibleMesh.SetActive(false);
+            }
+        }
 
         public override void Set(bool isActive)
         {

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Character;
 using Collectible;
 using TMPro;
 using UnityEngine;
@@ -12,13 +14,29 @@ namespace UI.Menu
         [Header("Sub Menu"), SerializeField] private List<MenuUIObject> _objectsList = new List<MenuUIObject>();
         [SerializeField] private MenuController _topSelectionMenu;
         [SerializeField] private TMP_Text _nameText, _descriptionText;
+        [SerializeField] private GameObject _defaultCollectibleMesh;
 
         private int _index;
+        private GameObject _currentDisplayedMesh;
 
         protected override void Start()
         {
             base.Start();
             CollectibleJsonFileManager.Instance.OnNewCollectibleGet.AddListener(SetTilesData);
+            if (_defaultCollectibleMesh != null)
+            {
+                _defaultCollectibleMesh.SetActive(false);
+            }
+        }
+
+        private void Update()
+        {
+            if (IsUsable == false || _currentDisplayedMesh == null)
+            {
+                return;
+            }
+            
+            RotateGameObjectFromSticks(_currentDisplayedMesh.transform);
         }
 
         public override void Set(bool isActive, bool isUsable)
@@ -112,6 +130,19 @@ namespace UI.Menu
             CollectibleUIObject collectibleUIObject = _objectsList[_index].GetComponent<CollectibleUIObject>();
             _nameText.text = collectibleUIObject == null ? _objectsList[_index].GetName() : collectibleUIObject.GetName();
             _descriptionText.text = collectibleUIObject == null ? _objectsList[_index].GetDescription() : collectibleUIObject.GetDescription();
+            
+            //mesh
+            if (_currentDisplayedMesh != null)
+            {
+                _currentDisplayedMesh.SetActive(false);
+            }
+            GameObject mesh = _defaultCollectibleMesh;
+            if (collectibleUIObject != null && collectibleUIObject.CollectibleMesh != null && collectibleUIObject.Data != null)
+            {
+                mesh = collectibleUIObject.CollectibleMesh;
+            }
+            mesh.SetActive(true);
+            _currentDisplayedMesh = mesh;
         }
 
         private void SetTilesData()
@@ -129,6 +160,14 @@ namespace UI.Menu
                 
                 collectibleUIObject.Data = CollectibleJsonFileManager.Instance.CollectedItems[i].CollectibleGameObject.Data;
             }
+        }
+
+        private void RotateGameObjectFromSticks(Transform transform)
+        {
+            Vector3 sticksInputs = CharacterManager.Instance.InputManagementProperty.Inputs.RotateCamera;
+
+            const float rotationSpeed = 3f;
+            transform.Rotate(sticksInputs.x * -rotationSpeed, sticksInputs.y * -rotationSpeed, 0);
         }
     }
 }
