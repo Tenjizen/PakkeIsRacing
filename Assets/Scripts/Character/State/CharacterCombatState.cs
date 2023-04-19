@@ -57,39 +57,48 @@ namespace Character.State
 
         private void HandleShoot()
         {
-            if (CharacterManagerRef.InputManagementProperty.Inputs.Shoot && CharacterManagerRef.WeaponCooldown <= 0)
+            CharacterManager character = CharacterManagerRef;
+            
+            if (character.InputManagementProperty.Inputs.Shoot && character.WeaponCooldown <= 0)
             {
                 _isHoldingShoot = true;
                 
                 //holding vfx
                 _holdingTime += Time.deltaTime;
                 const float startTime = 0.3f;
-                if (_holdingTime > startTime && CharacterManagerRef.WeaponChargedParticleSystem.isPlaying == false)
+                if (_holdingTime > startTime && character.WeaponChargedParticleSystem.isPlaying == false)
                 {
-                    CharacterManagerRef.WeaponChargedParticleSystem.Play();
+                    character.WeaponChargedParticleSystem.Play();
                 }
             }
 
-            if (_isHoldingShoot && CharacterManagerRef.InputManagementProperty.Inputs.Shoot == false)
+            if (_isHoldingShoot && character.InputManagementProperty.Inputs.Shoot == false)
             {
-                if (CharacterManagerRef.WeaponCooldown <= 0 && _weaponPrefab != null)
+                if (character.WeaponCooldown <= 0 && _weaponPrefab != null)
                 {
-                    CharacterManagerRef.WeaponCooldown = _weaponPrefab.Data.Cooldown;
-                    CharacterManagerRef.ProjectileIsInAir = true;
-                
-                    Projectile projectile = Object.Instantiate(_weaponPrefab, CharacterManagerRef.transform.position, Quaternion.identity);
-                
-                    GameObject owner = CharacterManagerRef.gameObject;
+                    Vector3 playerPosition = character.transform.position;
+                    Projectile projectile = Object.Instantiate(_weaponPrefab, playerPosition, Quaternion.identity);
+                   
+                    GameObject owner = character.gameObject;
                     projectile.SetOwner(owner);
-                
+                    
                     projectile.Data.ForbiddenColliders.Add(owner);
-                    projectile.Data.ForbiddenColliders.Add(CharacterManagerRef.KayakControllerProperty.gameObject);
+                    projectile.Data.ForbiddenColliders.Add(character.KayakControllerProperty.gameObject);
 
                     float power = Mathf.Clamp(_holdingTime, 0.5f, 1f);
-                    float pointDistance = 30f * power;
-                    projectile.Launch(MathTools.GetDirectionToPointCameraLooking(CharacterManagerRef.transform, pointDistance), power);
-                
+                    Vector3 direction = MathTools.GetDirectionToPointCameraLooking(character.transform, 30f);
+                    if (Physics.Raycast(playerPosition, direction, out var hit))
+                    {
+                        Vector3 hitPosition = hit.point;
+                        direction = MathTools.GetDirectionToPointCameraLooking(character.transform, Vector3.Distance(playerPosition,hitPosition));
+                        Debug.Log("Hit Position: " + hitPosition);
+                    }
+                    
+                    projectile.Launch(direction, power);
                     projectile.OnProjectileDie.AddListener(ProjectileHit);
+                    
+                    character.WeaponCooldown = _weaponPrefab.Data.Cooldown;
+                    character.ProjectileIsInAir = true;
                     
                     LaunchNavigationState();
                 }
@@ -97,7 +106,7 @@ namespace Character.State
                 _isHoldingShoot = false;
             }
 
-            if (CharacterManagerRef.InputManagementProperty.Inputs.DeselectWeapon)
+            if (character.InputManagementProperty.Inputs.DeselectWeapon)
             {
                 LaunchNavigationState();
             }
