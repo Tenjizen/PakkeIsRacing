@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Dialog
@@ -12,6 +13,12 @@ namespace Dialog
 
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/DialogData", order = 1)]
     public class DialogData : ScriptableObject
+    {
+        public List<DialogStruct> DialogList = new List<DialogStruct>();
+    }
+    
+    [Serializable]
+    public struct DialogStruct
     {
         [TextArea] public string Text;
         public float TextShowTime;

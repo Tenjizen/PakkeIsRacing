@@ -36,7 +36,7 @@ namespace UI.Dialog
         [Header("Parameters"), SerializeField] 
         private LaunchType _launchType;
         [SerializeField] 
-        private List<DialogData> _dialog;
+        private DialogData _dialog;
         [SerializeField] 
         private bool _canBeReplayed;
         [SerializeField, ReadOnly] 
@@ -110,15 +110,15 @@ namespace UI.Dialog
             {
                 case DialogState.Showing:
                     _currentDialogState = DialogState.Holding;
-                    _currentDialogCooldown = _dialog[_dialogIndex].TextHoldTime;
+                    _currentDialogCooldown = _dialog.DialogList[_dialogIndex].TextHoldTime;
                     break;
             
                 case DialogState.Holding:
-                    if (_dialog[_dialogIndex].SequencingTypeNext == SequencingType.Automatic)
+                    if (_dialog.DialogList[_dialogIndex].SequencingTypeNext == SequencingType.Automatic)
                     {
                         _dialogIndex++;
                         CheckForDialogEnd();
-                        if (_dialogIndex < _dialog.Count)
+                        if (_dialogIndex < _dialog.DialogList.Count)
                         {
                             ShowDialog(_dialogIndex);
                         }
@@ -136,7 +136,7 @@ namespace UI.Dialog
                         _dialogIndex++;
                         CheckForDialogEnd();
 
-                        if (_dialogIndex < _dialog.Count)
+                        if (_dialogIndex < _dialog.DialogList.Count)
                         {
                             ShowDialog(_dialogIndex);
                         }
@@ -174,22 +174,22 @@ namespace UI.Dialog
         private void ShowDialog(int index)
         {
             _currentDialogState = DialogState.Showing;
-            _currentDialogCooldown = _dialog[index].TextShowTime;
+            _currentDialogCooldown = _dialog.DialogList[index].TextShowTime;
 
-            if (_dialog[index].ShowLetterByLetter)
+            if (_dialog.DialogList[index].ShowLetterByLetter)
             {
-                DialogManager.Instance.TypeWriterText.FullText = _dialog[index].Text;
-                DialogManager.Instance.TypeWriterText.DisplayText.color = _dialog[index].TextColor;
-                DialogManager.Instance.TypeWriterText.Delay =  _dialog[index].TextShowTime / _dialog[index].Text.Length;
+                DialogManager.Instance.TypeWriterText.FullText = _dialog.DialogList[index].Text;
+                DialogManager.Instance.TypeWriterText.DisplayText.color = _dialog.DialogList[index].TextColor;
+                DialogManager.Instance.TypeWriterText.Delay =  _dialog.DialogList[index].TextShowTime / _dialog.DialogList[index].Text.Length;
                 StartCoroutine(DialogManager.Instance.TypeWriterText.ShowText());
             }
             else
             {
-                DialogManager.Instance.TypeWriterText.DisplayText.text = _dialog[index].Text;
+                DialogManager.Instance.TypeWriterText.DisplayText.text = _dialog.DialogList[index].Text;
             }
 
             //visual
-            DialogManager.Instance.TypeWriterText.transform.DOPunchScale(Vector3.one * _dialog[index].SizeEffect, 0.3f, 10, 0);
+            DialogManager.Instance.TypeWriterText.transform.DOPunchScale(Vector3.one * _dialog.DialogList[index].SizeEffect, 0.3f, 10, 0);
             DialogManager.Instance.PressButtonImage.DOFade(0, 0.1f);
         
             //audio
@@ -213,7 +213,7 @@ namespace UI.Dialog
 
         private void CheckForDialogEnd()
         {
-            if (_dialogIndex >= _dialog.Count)
+            if (_dialogIndex >= _dialog.DialogList.Count)
             {
                 EndDialog();
             }

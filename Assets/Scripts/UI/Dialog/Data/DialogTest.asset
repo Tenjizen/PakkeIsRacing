@@ -12,13 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e97d26dbb3b886f42ac1a8b0c3c3167d, type: 3}
   m_Name: DialogTest
   m_EditorClassIdentifier: 
-  Text: This is a test dialog !
-  TextShowTime: 1
-  ShowLetterByLetter: 1
-  TextHoldTime: 1
-  TextColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  SizeEffect: 0
-  SequencingTypeNext: 0
-  Clip: {fileID: 0}
+  DialogList:
+  - Text: This is the first test dialog !
+    TextShowTime: 0.5
+    ShowLetterByLetter: 1
+    TextHoldTime: 1
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294967295
+    SizeEffect: 0
+    SequencingTypeNext: 0
+    Clip: {fileID: 0}
+  - Text: And this is the second !
+    TextShowTime: 0.2
+    ShowLetterByLetter: 0
+    TextHoldTime: 1
+    TextColor:
+      serializedVersion: 2
+      rgba: 0
+    SizeEffect: 0.2
+    SequencingTypeNext: 1
+    Clip: {fileID: 0}
