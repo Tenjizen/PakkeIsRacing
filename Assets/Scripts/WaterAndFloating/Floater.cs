@@ -15,17 +15,26 @@ namespace WaterAndFloating
 
           [Header("Physic Render Update"), SerializeField] private Transform _playerTransform;
           [SerializeField] private float _renderDistance;
+          [ReadOnly, SerializeField] private bool _isSimulated;
 
           private void FixedUpdate()
           {
                if (Vector3.Distance(transform.position, _playerTransform.position) > _renderDistance)
                {
+                    _isSimulated = false;
                     return;
                }
+
+               _isSimulated = true;
+               ManageFloater();
+          }
+
+          private void ManageFloater()
+          {
+               Vector3 position = transform.position;
+               _rigidbody.AddForceAtPosition(Physics.gravity / _floaterCount, position, ForceMode.Acceleration);
           
-               _rigidbody.AddForceAtPosition(Physics.gravity / _floaterCount, transform.position, ForceMode.Acceleration);
-          
-               float waveHeight = _waves.GetHeight(transform.position);
+               float waveHeight = _waves.GetHeight(position);
                if (transform.position.y < waveHeight)
                {
                     //get displacement multiplier (how far is the floater from water surface)
@@ -33,7 +42,7 @@ namespace WaterAndFloating
                     //force at position
                     _rigidbody.AddForceAtPosition(
                          new Vector3(0, Mathf.Abs(Physics.gravity.y) * displacementMultiplier, 0), 
-                         transform.position, 
+                         position, 
                          ForceMode.Acceleration);
                     //velocity * waterDrag
                     _rigidbody.AddForce(

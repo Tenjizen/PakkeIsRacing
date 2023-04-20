@@ -174,6 +174,11 @@ namespace UI.Dialog
 
         private void ShowDialog(int index)
         {
+            if (Dialog == null)
+            {
+                return;
+            }
+            
             _currentDialogState = DialogState.Showing;
             _currentDialogCooldown = Dialog.DialogList[index].TextShowTime;
 
