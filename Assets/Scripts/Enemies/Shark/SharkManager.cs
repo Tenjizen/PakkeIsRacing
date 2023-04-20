@@ -67,7 +67,7 @@ namespace Enemies.Shark
         {
             if (TargetTransform == null && IsPossessed == true)
             {
-                TargetTransform = GetComponent<PlayerTriggerManager>().PropKayakController.gameObject.GetComponent<Transform>();
+                TargetTransform = GetComponentInParent<PlayerTriggerManager>().PropKayakController.gameObject.GetComponent<Transform>();
                 SharkCombatState sharkCombatState = new SharkCombatState();
                 SwitchState(sharkCombatState);
             }
