@@ -55,6 +55,8 @@ namespace Character.Camera.State
         {
 
         }
+        bool lastInputJoystickCam = false;
+        float timerTest = 0;
         public override void LateUpdate(CameraManager camera)
         {
             //rotate freely with inputs
@@ -65,6 +67,7 @@ namespace Character.Camera.State
             _timerCameraReturnBehindBoat += Time.deltaTime;
             if (rotateInput && CamManager.CanMoveCameraManually /*&& rotateCamClick*/)
             {
+                lastInputJoystickCam = true;
                 //ManageFreeCameraMove(ref _timerCameraReturnBehindBoat, CameraMode.Navigation);
             }
 
@@ -110,6 +113,7 @@ namespace Character.Camera.State
 
                         //rotation
                         CamManager.CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, targetQuaternion, CamManager.Data.LerpLocalRotationWhenRotating * Time.deltaTime * 100);
+                        //CamManager.CinemachineCameraTarget.transform.localRotation = targetQuaternion;
                     }
                     else if (Mathf.Abs(rotationPaddleY) > rotationThreshold / 2)// if kayak is moving
                     {
@@ -132,20 +136,30 @@ namespace Character.Camera.State
                 CamManager.CinemachineTargetEulerAnglesToRotation(cameraTargetLocalPosition);
 
 
-                //if (lastInputJoystickCam == false)
-                //{
-                //    //camera target to kayak rotation and position
-                //    CamManager.MakeTargetFollowRotationWithKayak();
-                //}
+                if (lastInputJoystickCam == false)
+                {
+                    //camera target to kayak rotation and position
+                    CamManager.MakeTargetFollowRotationWithKayak();
+                }
 
-                //else
-                //{
-                Vector3 rotation = CamManager.CinemachineCameraTargetFollow.transform.rotation.eulerAngles;
-                Vector3 kayakRotation = CamManager.RigidbodyKayak.gameObject.transform.rotation.eulerAngles;
-                Quaternion target = Quaternion.Euler(new Vector3(rotation.x, kayakRotation.y, rotation.z));
-                CamManager.CinemachineCameraTargetFollow.transform.rotation = Quaternion.Slerp(CamManager.CinemachineCameraTargetFollow.transform.rotation, target, 0.1f * Time.deltaTime * 100);
-                //}
+                else
+                {
+                    Vector3 rotation = CamManager.CinemachineCameraTargetFollow.transform.rotation.eulerAngles;
+                    Vector3 kayakRotation = CamManager.RigidbodyKayak.gameObject.transform.rotation.eulerAngles;
+                    Quaternion target = Quaternion.Euler(new Vector3(rotation.x, kayakRotation.y, rotation.z));
+                    CamManager.CinemachineCameraTargetFollow.transform.rotation = Quaternion.Slerp(CamManager.CinemachineCameraTargetFollow.transform.rotation, target, 0.1f * Time.deltaTime * 100);
+                }
+
+                if (lastInputJoystickCam == true)
+                {
+                    timerTest += Time.deltaTime;
+                    if (timerTest > 0.5f)
+                    {
+                        lastInputJoystickCam = false;
+                    }
+                }
             }
+
         }
 
 
@@ -205,6 +219,8 @@ namespace Character.Camera.State
             {
                 CamManager.LastInputValue();
             }
+
+
         }
         private void ResetCameraBehindBoat()
         {
