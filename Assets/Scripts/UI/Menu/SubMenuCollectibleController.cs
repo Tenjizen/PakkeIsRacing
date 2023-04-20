@@ -167,8 +167,11 @@ namespace UI.Menu
         {
             Vector3 sticksInputs = CharacterManager.Instance.InputManagementProperty.Inputs.RotateCamera;
 
-            const float rotationSpeed = 3f;
-            transform.Rotate(sticksInputs.x * -rotationSpeed, sticksInputs.y * -rotationSpeed, 0);
+            float rotationAmountX = -sticksInputs.x * 2f;
+            float rotationAmountY = -sticksInputs.y * 2f;
+
+            transform.Rotate(Vector3.up, rotationAmountX, Space.World);
+            transform.Rotate(Vector3.right, rotationAmountY, Space.World);
         }
     }
 }
