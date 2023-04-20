@@ -86,13 +86,14 @@ namespace UI.Dialog
 
         private void StartTrigger()
         {
-            Debug.Log("oui");
-            if (_launchType == LaunchType.TriggerZone && _currentDialogState == DialogState.NotLaunched)
+            if (_launchType != LaunchType.TriggerZone || _currentDialogState != DialogState.NotLaunched)
             {
-                if ((_hasEnded && _canBeReplayed) || (_hasEnded == false && _currentDialogState == DialogState.NotLaunched))
-                {
-                    LaunchDialog();
-                }
+                return;
+            }
+            
+            if ((_hasEnded && _canBeReplayed) || (_hasEnded == false && _currentDialogState == DialogState.NotLaunched))
+            {
+                LaunchDialog();
             }
         }
 
