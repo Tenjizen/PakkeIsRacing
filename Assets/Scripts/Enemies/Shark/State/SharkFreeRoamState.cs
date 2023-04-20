@@ -5,12 +5,11 @@ using UnityEngine;
 public class SharkFreeRoamState : SharkBaseState
 {
 
-    public enum CombatState { RotateBeforeJump = 0, Wait = 1, Jump = 2, RotateAfterJump = 3, MoveToTarget = 4, RotatePoint = 5, GoToRotate = 6, RotateToMoveTarget = 7 };
-    private CombatState _state;
+    public enum FreeRoamState { RotateBeforeJump = 0, Wait = 1, Jump = 2, RotateAfterJump = 3, MoveToTarget = 4, RotatePoint = 5, GoToRotate = 6, RotateToMoveTarget = 7 };
+    private FreeRoamState _state;
 
 
     private float _timerDelay;
-    private float _delay;
 
 
     float _distSharkPointTarget;
@@ -22,7 +21,7 @@ public class SharkFreeRoamState : SharkBaseState
     public override void EnterState(SharkManager sharkManager)
     {
         Debug.Log("free");
-        _state = CombatState.RotateToMoveTarget;
+        _state = FreeRoamState.RotateToMoveTarget;
         sharkManager.SharkCollider.enabled = true;
     }
 
@@ -34,14 +33,12 @@ public class SharkFreeRoamState : SharkBaseState
         switch (_state)
         {
 
-            case CombatState.RotateToMoveTarget:
+            case FreeRoamState.RotateToMoveTarget:
 
                 if (_distSharkPointTarget <= 5)
                 {
-                    _delay = Random.Range(1, 3);
-                    _timerDelay = 0;
                     _randTimer = Random.Range(7, 10);
-                    _state = CombatState.GoToRotate;
+                    _state = FreeRoamState.GoToRotate;
                 }
                 else
                 {
@@ -49,7 +46,7 @@ public class SharkFreeRoamState : SharkBaseState
                 }
 
                 break;
-            case CombatState.GoToRotate:
+            case FreeRoamState.GoToRotate:
                     RotateFreeRoam(sharkManager);
                 break;
 
@@ -81,32 +78,32 @@ public class SharkFreeRoamState : SharkBaseState
 
         Vector3 rotation = sharkManager.Forward.transform.localEulerAngles;
 
-        if (_timerDelay >= _delay)
+        if (_distSharkPointTarget > sharkManager.Data.MinDistanceBetweenPointFreeRoam)
         {
             if (angle > 90 && angle < 180)
             {
-                rotation.y -= Time.deltaTime * sharkManager.SpeedFreeRoamRotationStatic;
+                rotation.y -= Time.deltaTime * sharkManager.Data.SpeedFreeRoamRotationStatic;
             }
             else if (angle > 270 && angle < 360)
             {
-                rotation.y -= Time.deltaTime * sharkManager.SpeedFreeRoamRotationStatic;
+                rotation.y -= Time.deltaTime * sharkManager.Data.SpeedFreeRoamRotationStatic;
             }
             else
             {
-                rotation.y += Time.deltaTime * sharkManager.SpeedFreeRoamRotationStatic;
+                rotation.y += Time.deltaTime * sharkManager.Data.SpeedFreeRoamRotationStatic;
             }
         }
 
         sharkManager.Forward.transform.localEulerAngles = rotation;
 
-        sharkManager.Forward.transform.Translate(Vector3.forward * sharkManager.SpeedFreeRoamRotationAroundPoint * Time.deltaTime, Space.Self);
+        sharkManager.Forward.transform.Translate(Vector3.forward * sharkManager.Data.SpeedFreeRoamRotationAroundPoint * Time.deltaTime, Space.Self);
 
 
         _timer += Time.deltaTime;
 
         if (_timer >= _randTimer)
         {
-            _state = CombatState.RotateToMoveTarget;
+            _state = FreeRoamState.RotateToMoveTarget;
             _timer = 0;
         }
     }
@@ -124,11 +121,11 @@ public class SharkFreeRoamState : SharkBaseState
         Vector3 rota = sharkManager.Forward.transform.localEulerAngles;
         if (angle >= 0 && angle <= 180)
         {
-            rota.y += Time.deltaTime * sharkManager.SpeedFreeRoamRotationStatic;
+            rota.y += Time.deltaTime * sharkManager.Data.SpeedFreeRoamRotationStatic;
         }
         else if (angle < 360 && angle > 180)
         {
-            rota.y -= Time.deltaTime * sharkManager.SpeedFreeRoamRotationStatic;
+            rota.y -= Time.deltaTime * sharkManager.Data.SpeedFreeRoamRotationStatic;
         }
 
         //apply rota
@@ -136,10 +133,10 @@ public class SharkFreeRoamState : SharkBaseState
 
 
         var pos = sharkManager.Forward.transform.position;
-        pos.y = sharkManager.ElevationOffset;
+        pos.y = sharkManager.Data.ElevationOffset;
         sharkManager.Forward.transform.position = pos;
 
-        sharkManager.SwitchSpeed(sharkManager.SpeedToMoveToTarget);
+        sharkManager.SwitchSpeed(sharkManager.Data.SpeedToMoveToTarget);
 
         sharkManager.Forward.transform.Translate(Vector3.forward * sharkManager.CurrentSpeed * Time.deltaTime, Space.Self);
     }
