@@ -38,6 +38,12 @@ namespace Character.State
         private KayakParameters _kayakValues;
         private Rigidbody _kayakRigidbody;
         private Floaters _floaters;
+        
+        //priority
+        private RotationType _lastInputType;
+        private float _staticTime;
+        private float _paddleTime;
+        private bool _paddleWasReleased, _staticWasReleased;
 
         #region Constructor
 
@@ -47,6 +53,8 @@ namespace Character.State
             _kayakRigidbody = CharacterManagerRef.KayakControllerProperty.Rigidbody;
             _kayakValues = CharacterManagerRef.KayakControllerProperty.Data.KayakValues;
             _inputs = CharacterManagerRef.InputManagementProperty;
+
+            _lastInputType = RotationType.Static;
         }
 
         #endregion
@@ -85,15 +93,8 @@ namespace Character.State
                 StopCharacter();
                 return;
             }
-            if ((_inputs.Inputs.RotateLeft != 0 || _inputs.Inputs.RotateRight != 0) && _staticInputTimer <= 0)
-            {
-                HandleStaticRotation();
-            }
-            
-            else if (_inputs.Inputs.PaddleLeft || _inputs.Inputs.PaddleRight)
-            {
-                HandlePaddleMovement();
-            }
+
+            ManageKayakMovementInputs();
 
             KayakRotationManager(RotationType.Paddle);
             KayakRotationManager(RotationType.Static);
@@ -167,6 +168,58 @@ namespace Character.State
         {
             CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeLeft", false);
             CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeRight", false);
+        }
+        
+        /// <summary>
+        /// Manage the kayak static/paddle movement method choice
+        /// </summary>
+        private void ManageKayakMovementInputs()
+        {
+            const float timeToSetLastInput = 1.5f;
+            bool staticInput = _inputs.Inputs.RotateLeft != 0 || _inputs.Inputs.RotateRight != 0;
+            bool paddleInput = _inputs.Inputs.PaddleLeft || _inputs.Inputs.PaddleRight;
+
+            if (((paddleInput == false) || 
+                 (_lastInputType == RotationType.Paddle) || 
+                 (_paddleWasReleased) == false && _lastInputType == RotationType.Paddle) &&
+                _staticInputTimer <= 0 && staticInput)
+            {
+                HandleStaticRotation();
+
+                _staticTime += Time.deltaTime;
+                if (_staticTime >= timeToSetLastInput)
+                {
+                    _paddleTime = 0f;
+                    _lastInputType = RotationType.Static;
+                }
+            }
+
+            if ((( staticInput == false) ||
+                (_lastInputType == RotationType.Static)) &&
+                paddleInput)
+            {
+                HandlePaddleMovement();
+
+                _paddleTime += Time.deltaTime;
+                if (_paddleTime >= timeToSetLastInput)
+                {
+                    _staticTime = 0f;
+                    _paddleWasReleased = false;
+                    if (staticInput == false)
+                    {
+                        _lastInputType = RotationType.Paddle;
+                    }
+                }
+            }
+
+            if (paddleInput == false)
+            {
+                _paddleWasReleased = true;
+                if (_paddleTime >= timeToSetLastInput)
+                {
+                    _lastInputType = RotationType.Paddle;
+                }
+            }
         }
 
         #endregion
