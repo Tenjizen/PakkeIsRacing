@@ -30,7 +30,11 @@ namespace Character.Camera.State
         {
 
         }
-        
+        public override void LateUpdate(CameraManager camera)
+        {
+
+        }
+
         public override void SwitchState(CameraManager camera)
         {
 

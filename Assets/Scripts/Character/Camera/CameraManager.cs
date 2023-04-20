@@ -48,6 +48,7 @@ namespace Character.Camera
         //combat values
         [HideInInspector] public Vector3 CombatBaseShoulderOffset;
 
+
         private void Awake()
         {
             CinemachineCameraFollowCombat.transform.localPosition = Data.CombatPosition;
@@ -83,6 +84,12 @@ namespace Character.Camera
         {
             CurrentStateBase.FixedUpdate(this);
         }
+
+        private void LateUpdate()
+        {
+            CurrentStateBase.LateUpdate(this);
+        }
+
         public void SwitchState(CameraStateBase stateBaseCharacter)
         {
             CurrentStateBase = stateBaseCharacter;

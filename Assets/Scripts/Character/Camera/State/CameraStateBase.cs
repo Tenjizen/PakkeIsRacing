@@ -36,7 +36,11 @@ namespace Character.Camera.State
 
         public abstract void FixedUpdate(CameraManager camera);
 
+        public abstract void LateUpdate(CameraManager camera);
+
         public abstract void SwitchState(CameraManager camera);
+
+
 
         protected void ClampRotationCameraValue(float pitchMin, float pitchMax, float yawMin, float yawMax)
         {
