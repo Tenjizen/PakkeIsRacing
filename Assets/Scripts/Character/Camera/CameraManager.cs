@@ -53,6 +53,12 @@ namespace Character.Camera
         {
             CinemachineCameraFollowCombat.transform.localPosition = Data.CombatPosition;
 
+            CinemachineCameraTarget.transform.localPosition = Data.NavigationPosition;
+            VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = Data.NavigationCamDistance;
+            VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().ShoulderOffset = Data.NavigationCamShoulderOffset;
+
+            //CinemachineCameraTarget.transform.localRotation = Data.NavigationRotation;
+
             CinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             CameraTargetBasePos = CinemachineCameraTarget.transform.localPosition;
             CameraBaseFov = VirtualCameraFreeLook.m_Lens.FieldOfView;
