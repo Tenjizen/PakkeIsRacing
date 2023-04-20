@@ -1,7 +1,9 @@
 using System;
+using Character;
 using Kayak;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace GPEs
 {
@@ -17,7 +19,7 @@ namespace GPEs
         [Header("Trigger"), SerializeField] private TriggerType _triggerType;
         [SerializeField] private bool _showTriggerGizmos = true;
         [SerializeField] private Vector3 _triggerBoxSize = Vector3.one;
-        [SerializeField] private float _triggerSphereSize = 1;
+        [FormerlySerializedAs("_triggerSphereSize")] [SerializeField] private float _triggerSphereSizeRadius = 1;
         [SerializeField] private Vector3 _triggerOffsetPosition = Vector3.zero;
         [SerializeField] private LayerMask _playerLayerMask;
         
@@ -26,51 +28,57 @@ namespace GPEs
         public UnityEvent OnPlayerExited = new UnityEvent();
 
         public KayakController PropKayakController { get; private set; }
+        
+        private RaycastHit[] _hits = new RaycastHit[20];
 
         public virtual void Update()
         {
-            bool kayak = false;
-            
-            RaycastHit[] hits = new RaycastHit[] { };
-            if (_triggerType == TriggerType.BoxTrigger)
+            CheckForPlayerInTrigger();
+        }
+
+        private void CheckForPlayerInTrigger()
+        {
+            bool isKayakInTrigger = false;
+
+            switch (_triggerType)
             {
-                hits = Physics.BoxCastAll(
-                    transform.position + _triggerOffsetPosition, 
-                    _triggerBoxSize / 2, 
-                    Vector3.forward,
-                    Quaternion.identity, 
-                    0f, 
-                    _playerLayerMask);
-            }
-            if (_triggerType == TriggerType.SphereTrigger)
-            {
-                hits = Physics.SphereCastAll(
-                    transform.position + _triggerOffsetPosition,
-                    _triggerSphereSize, 
-                    Vector3.forward, 
-                    0f);
-            }
-            
-            foreach (RaycastHit hit in hits)
-            {
-                KayakController kayakController = hit.collider.gameObject.GetComponent<KayakController>();
-                if (kayakController != null)
+                case TriggerType.BoxTrigger:
                 {
-                    if (PropKayakController == null)
-                    {
-                        PropKayakController = kayakController;
-                        OnPlayerEntered.Invoke();
-                    }
-                    OnPlayerStay.Invoke();
-                    kayak = true;
+                    int numHits = Physics.BoxCastNonAlloc(transform.position + _triggerOffsetPosition, new Vector3(_triggerBoxSize.x / 2, _triggerBoxSize.y / 2, _triggerBoxSize.z / 2), Vector3.forward, _hits, Quaternion.identity, 0f);
+                    break;
+                }
+                case TriggerType.SphereTrigger:
+                {
+                    int numHits = Physics.SphereCastNonAlloc(transform.position + _triggerOffsetPosition,_triggerSphereSizeRadius, Vector3.forward,_hits, 0f);
+                    break;
                 }
             }
 
-            if (PropKayakController != null && kayak == false)
+            KayakController kayakManager = CharacterManager.Instance.KayakControllerProperty;
+            for (int i = 0; i < _hits.Length; i++)
             {
-                PropKayakController = null;
-                OnPlayerExited.Invoke();
+                if (_hits[i].collider == null || _hits[i].collider.gameObject != kayakManager.gameObject)
+                {
+                    continue;
+                }
+
+                if (PropKayakController == null)
+                {
+                    PropKayakController = kayakManager;
+                    OnPlayerEntered.Invoke();
+                }
+
+                OnPlayerStay.Invoke();
+                isKayakInTrigger = true;
             }
+
+            if (PropKayakController == null || isKayakInTrigger)
+            {
+                return;
+            }
+            
+            PropKayakController = null;
+            OnPlayerExited.Invoke();
         }
 
 #if UNITY_EDITOR
@@ -86,7 +94,7 @@ namespace GPEs
                 }
                 if (_triggerType == TriggerType.SphereTrigger)
                 {
-                    Gizmos.DrawWireSphere(transform.position + _triggerOffsetPosition, _triggerSphereSize);
+                    Gizmos.DrawWireSphere(transform.position + _triggerOffsetPosition, _triggerSphereSizeRadius);
                 }
             }
         }

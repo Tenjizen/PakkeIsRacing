@@ -74,9 +74,9 @@ namespace GPEs.WaterFlowGPE
         /// <param name="collider"> The collider to check </param>
         private void CheckForKayak(Collider collider)
         {
-            KayakController kayakController = collider.GetComponent<KayakController>();
+            KayakController kayakController = CharacterManager.Instance.KayakControllerProperty;
             
-            if (kayakController == null || WaterFlowManager == null ||
+            if (kayakController.gameObject != collider.gameObject || WaterFlowManager == null ||
                 CharacterManager.Instance.CurrentStateBaseProperty.CanBeMoved == false)
             {
                 return;
