@@ -68,7 +68,6 @@ namespace Character.Camera.State
                 //ManageFreeCameraMove(ref _timerCameraReturnBehindBoat, CameraMode.Navigation);
             }
 
-
             //manage rotate to stay behind boat
             else if (Mathf.Abs(CamManager.RigidbodyKayak.velocity.x + CamManager.RigidbodyKayak.velocity.z) > minimumVelocityToReplaceCamera && _timerCameraReturnBehindBoat > CamManager.Data.TimerCameraReturnBehindBoat ||
                      (Mathf.Abs(CamManager.CharacterManager.CurrentStateBaseProperty.RotationStaticForceY) > minimumVelocityToReplaceCamera) && _timerCameraReturnBehindBoat > CamManager.Data.TimerCameraReturnBehindBoat)
@@ -87,7 +86,7 @@ namespace Character.Camera.State
                 //get target rotation
                 Quaternion localRotation = CamManager.CinemachineCameraTarget.transform.localRotation;
                 Quaternion targetQuaternion = Quaternion.Euler(new Vector3(0,
-                    (-(CamManager.CharacterManager.CurrentStateBaseProperty.RotationStaticForceY + CamManager.CharacterManager.CurrentStateBaseProperty.RotationPaddleForceY) * CamManager.Data.MultiplierValueRotation) * 50,
+                    (-(CamManager.CharacterManager.CurrentStateBaseProperty.RotationStaticForceY + CamManager.CharacterManager.CurrentStateBaseProperty.RotationPaddleForceY) * CamManager.Data.MultiplierValueRotation) * 20,
                     localRotation.z));
                 //get camera local position
                 Vector3 cameraTargetLocalPosition = CamManager.CinemachineCameraTarget.transform.localPosition;
@@ -199,23 +198,8 @@ namespace Character.Camera.State
 
                 #endregion
 
-                //calculate camera rotation & position
-                if (Mathf.Abs(rotationStaticY) > rotationThreshold || // if kayak is rotating
-                    Mathf.Abs(rotationPaddleY) > rotationThreshold) //if kayak moving
-                {
-
-
-                }
-                else //if kayak not moving or rotating
-                {
-
-                }
-
                 //apply camera rotation & position
                 CamManager.CinemachineTargetEulerAnglesToRotation(cameraTargetLocalPosition);
-
-                //camera target to kayak rotation and position
-                //CamManager.MakeTargetFollowRotationWithKayak();
             }
             else
             {
