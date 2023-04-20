@@ -72,9 +72,12 @@ namespace WaterAndFloating
 
         public float GetHeight(Vector3 position)
         {
+            Transform waveTransform = transform;
+            Vector3 lossyScale = waveTransform.lossyScale;
+            
             //scale factor and position in local space
-            Vector3 scale = new Vector3(1 / transform.lossyScale.x, 0, 1 / transform.lossyScale.z);
-            Vector3 localPos = Vector3.Scale((position - transform.position), scale);
+            Vector3 scale = new Vector3(1 / lossyScale.x, 0, 1 / lossyScale.z);
+            Vector3 localPos = Vector3.Scale((position - waveTransform.position), scale);
 
             //get edge points
             Vector3 p1 = new Vector3(Mathf.Floor(localPos.x), 0, Mathf.Floor(localPos.z));
@@ -99,16 +102,15 @@ namespace WaterAndFloating
                          + (max - Vector3.Distance(p2, localPos))
                          + (max - Vector3.Distance(p3, localPos))
                          + (max - Vector3.Distance(p4, localPos) + Mathf.Epsilon);
+            
             //weighted sum
-
-
             float height = _vertices[Index(p1.x, p1.z)].y * (max - Vector3.Distance(p1, localPos))
                            + _vertices[Index(p2.x, p2.z)].y * (max - Vector3.Distance(p2, localPos))
                            + _vertices[Index(p3.x, p3.z)].y * (max - Vector3.Distance(p3, localPos))
                            + _vertices[Index(p4.x, p4.z)].y * (max - Vector3.Distance(p4, localPos));
 
             //scale
-            return height * transform.lossyScale.y / dist;
+            return height * lossyScale.y / dist;
         }
 
         #region Mesh Generation
@@ -205,20 +207,22 @@ namespace WaterAndFloating
             int yStart = (int)renderCenter.z - _renderDistance;
             int yEnd = (int)renderCenter.z + _renderDistance;
 
+            int count = _vertices.Count;
+            Vector3 vector = new Vector3();
             for (int x = xStart; x <= xEnd; x++)
             {
                 for (int z = yStart; z <= yEnd; z++)
                 {
                     float y = 0f;
 
-                    if (Index(x, z) <=0 || Index(x,z) >= _vertices.Count)
+                    if ((int)x * (_dimension + 1) + (int)z <=0 || (int)x * (_dimension + 1) + (int)z >= count)
                     {
                         continue;
                     }
 
                     if (octave.Height == 0)
                     {
-                        _vertices[Index(x,z)] = new Vector3(x, y, z);
+                        _vertices[(int)x * (_dimension + 1) + (int)z] = new Vector3(x, y, z);
                         continue;
                     }
                 
@@ -229,7 +233,10 @@ namespace WaterAndFloating
                 
                     y += perlinNoiseValue * octaveHeight;
 
-                    _vertices[Index(x,z)] = new Vector3(x, y, z);
+                    vector.x = x;
+                    vector.y = y;
+                    vector.z = z;
+                    _vertices[(int)x * (_dimension + 1) + (int)z] = vector;
                 }
             }
         
