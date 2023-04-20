@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1718235402296483015}
   - component: {fileID: 6216655898524224866}
   - component: {fileID: 1718235402296483012}
+  - component: {fileID: 2897948754134862664}
   m_Layer: 0
   m_Name: JsonFilesManager
   m_TagString: Untagged
@@ -47,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPersistant: 1
   <CollectibleJsonFileManagerProperty>k__BackingField: {fileID: 1718235402296483012}
+  <DialogsJsonFileManagerProperty>k__BackingField: {fileID: 2897948754134862664}
 --- !u!114 &1718235402296483012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,7 +66,24 @@ MonoBehaviour:
     IsCollected: 0
     CollectibleGameObject: {fileID: 0}
   _setCollectiblesFromJsonFileAtStart: 0
-  _JsonFileID: DEVSCENEMATT
+  _JsonFileID: DEVSCENE_X
   OnNewCollectibleGet:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &2897948754134862664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718235402296483013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a723e4095b41b1bac66a0eb873046b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <CollectedDialogs>k__BackingField: []
+  _JsonFileID: DEVSCENE_X
+  OnNewDialogGet:
     m_PersistentCalls:
       m_Calls: []

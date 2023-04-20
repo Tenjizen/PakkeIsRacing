@@ -15,6 +15,8 @@ namespace Dialog
     public class DialogData : ScriptableObject
     {
         public List<DialogStruct> DialogList = new List<DialogStruct>();
+        [Space(10), Header("Dialog Summary")] public string Title;
+        [TextArea] public string Summary;
     }
     
     [Serializable]

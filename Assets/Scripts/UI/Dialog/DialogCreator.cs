@@ -5,6 +5,7 @@ using Character.Camera;
 using DG.Tweening;
 using Dialog;
 using GPEs;
+using Json;
 using Sound;
 using UnityEngine;
 using UnityEngine.Events;
@@ -33,10 +34,10 @@ namespace UI.Dialog
 
         #endregion
 
-        [Header("Parameters"), SerializeField] 
+        [Header("Parameters")]
+        public DialogData Dialog;
+        [SerializeField]
         private LaunchType _launchType;
-        [SerializeField] 
-        private DialogData _dialog;
         [SerializeField] 
         private bool _canBeReplayed;
         [SerializeField, ReadOnly] 
@@ -110,15 +111,15 @@ namespace UI.Dialog
             {
                 case DialogState.Showing:
                     _currentDialogState = DialogState.Holding;
-                    _currentDialogCooldown = _dialog.DialogList[_dialogIndex].TextHoldTime;
+                    _currentDialogCooldown = Dialog.DialogList[_dialogIndex].TextHoldTime;
                     break;
             
                 case DialogState.Holding:
-                    if (_dialog.DialogList[_dialogIndex].SequencingTypeNext == SequencingType.Automatic)
+                    if (Dialog.DialogList[_dialogIndex].SequencingTypeNext == SequencingType.Automatic)
                     {
                         _dialogIndex++;
                         CheckForDialogEnd();
-                        if (_dialogIndex < _dialog.DialogList.Count)
+                        if (_dialogIndex < Dialog.DialogList.Count)
                         {
                             ShowDialog(_dialogIndex);
                         }
@@ -136,7 +137,7 @@ namespace UI.Dialog
                         _dialogIndex++;
                         CheckForDialogEnd();
 
-                        if (_dialogIndex < _dialog.DialogList.Count)
+                        if (_dialogIndex < Dialog.DialogList.Count)
                         {
                             ShowDialog(_dialogIndex);
                         }
@@ -174,22 +175,22 @@ namespace UI.Dialog
         private void ShowDialog(int index)
         {
             _currentDialogState = DialogState.Showing;
-            _currentDialogCooldown = _dialog.DialogList[index].TextShowTime;
+            _currentDialogCooldown = Dialog.DialogList[index].TextShowTime;
 
-            if (_dialog.DialogList[index].ShowLetterByLetter)
+            if (Dialog.DialogList[index].ShowLetterByLetter)
             {
-                DialogManager.Instance.TypeWriterText.FullText = _dialog.DialogList[index].Text;
-                DialogManager.Instance.TypeWriterText.DisplayText.color = _dialog.DialogList[index].TextColor;
-                DialogManager.Instance.TypeWriterText.Delay =  _dialog.DialogList[index].TextShowTime / _dialog.DialogList[index].Text.Length;
+                DialogManager.Instance.TypeWriterText.FullText = Dialog.DialogList[index].Text;
+                DialogManager.Instance.TypeWriterText.DisplayText.color = Dialog.DialogList[index].TextColor;
+                DialogManager.Instance.TypeWriterText.Delay =  Dialog.DialogList[index].TextShowTime / Dialog.DialogList[index].Text.Length;
                 StartCoroutine(DialogManager.Instance.TypeWriterText.ShowText());
             }
             else
             {
-                DialogManager.Instance.TypeWriterText.DisplayText.text = _dialog.DialogList[index].Text;
+                DialogManager.Instance.TypeWriterText.DisplayText.text = Dialog.DialogList[index].Text;
             }
 
             //visual
-            DialogManager.Instance.TypeWriterText.transform.DOPunchScale(Vector3.one * _dialog.DialogList[index].SizeEffect, 0.3f, 10, 0);
+            DialogManager.Instance.TypeWriterText.transform.DOPunchScale(Vector3.one * Dialog.DialogList[index].SizeEffect, 0.3f, 10, 0);
             DialogManager.Instance.PressButtonImage.DOFade(0, 0.1f);
         
             //audio
@@ -209,11 +210,14 @@ namespace UI.Dialog
             //booleans
             _characterManager.CurrentStateBaseProperty.CanCharacterMove = true;
             _cameraManager.CanMoveCameraManually = true;
+            
+            //json
+            JsonFilesManagerSingleton.Instance.DialogsJsonFileManagerProperty.SetDialogCollected(this);
         }
 
         private void CheckForDialogEnd()
         {
-            if (_dialogIndex >= _dialog.DialogList.Count)
+            if (_dialogIndex >= Dialog.DialogList.Count)
             {
                 EndDialog();
             }

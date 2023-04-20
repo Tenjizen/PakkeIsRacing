@@ -13,7 +13,6 @@ namespace UI.Menu
     public class SubMenuCollectibleController : MenuController
     {
         [Header("Sub Menu"), SerializeField] private List<MenuUIObject> _objectsList = new List<MenuUIObject>();
-        [SerializeField] private MenuController _topSelectionMenu;
         [SerializeField] private TMP_Text _nameText, _descriptionText;
         [SerializeField] private GameObject _defaultCollectibleMesh;
 

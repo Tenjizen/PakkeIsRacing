@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e97d26dbb3b886f42ac1a8b0c3c3167d, type: 3}
-  m_Name: DialogTest
+  m_Name: DialogTest2
   m_EditorClassIdentifier: 
   DialogList:
-  - Text: This is the first test dialog !
+  - Text: This is the second test dialog !
     TextShowTime: 0.5
     ShowLetterByLetter: 1
     TextHoldTime: 1
@@ -23,15 +23,5 @@ MonoBehaviour:
     SizeEffect: 0
     SequencingTypeNext: 0
     Clip: {fileID: 0}
-  - Text: And this is the second !
-    TextShowTime: 0.2
-    ShowLetterByLetter: 0
-    TextHoldTime: 1
-    TextColor:
-      serializedVersion: 2
-      rgba: 0
-    SizeEffect: 0.2
-    SequencingTypeNext: 1
-    Clip: {fileID: 0}
-  Title: Meeting with Sedna
-  Summary: Sedna asked you to seek for the moutain.
+  Title: Second mission
+  Summary: This is the second mission Sedna gave you

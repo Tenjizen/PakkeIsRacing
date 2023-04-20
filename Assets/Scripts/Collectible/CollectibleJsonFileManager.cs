@@ -62,7 +62,7 @@ namespace Collectible
             CollectedItems = _fileManager.GetDataList();
 
             CollectedItems.Find(item => item.CollectibleGameObject == collectible).IsCollected = true;
-            //CollectedItems.Add(new CollectedItemData(){CollectibleGameObject = collectible, IsCollected = true, ItemName = collectible.Data.Name});
+            //CollectedDialogs.Add(new CollectedItemData(){CollectibleGameObject = collectible, IsCollected = true, ItemName = collectible.Data.Name});
             
             WriteJsonFile();
             

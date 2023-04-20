@@ -1,5 +1,6 @@
 ﻿using Collectible;
 using Tools.SingletonClassBase;
+using UI.Dialog;
 using UnityEngine;
 
 namespace Json
@@ -8,5 +9,8 @@ namespace Json
     {
         [field:SerializeField]
         public CollectibleJsonFileManager CollectibleJsonFileManagerProperty { get; private set; }
+        
+        [field:SerializeField]
+        public DialogsJsonFileManager DialogsJsonFileManagerProperty { get; private set; }
     }
 }
