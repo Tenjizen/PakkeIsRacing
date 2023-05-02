@@ -97,14 +97,26 @@ MonoBehaviour:
   _triggerType: 0
   _showTriggerGizmos: 1
   _triggerBoxSize: {x: 1, y: 1, z: 1}
-  _triggerSphereSize: 1
+  _triggerSphereSizeRadius: 1
   _triggerOffsetPosition: {x: 0, y: 0.43, z: 0}
   _playerLayerMask:
     serializedVersion: 2
     m_Bits: 2147483647
   OnPlayerEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1158828331}
+        m_TargetAssemblyTypeName: GPEs.Checkpoint.Checkpoint, Assembly-CSharp
+        m_MethodName: SetCheckPoint
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnPlayerStay:
     m_PersistentCalls:
       m_Calls: []
