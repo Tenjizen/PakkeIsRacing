@@ -12,27 +12,86 @@ namespace Character.Camera.State
         private float _targetFOV;
         private float _baseYaw;
 
+        private float _min, _max;
+
         private CinemachineBasicMultiChannelPerlin _cameraNoise;
 
         public override void EnterState(CameraManager camera)
         {
             CamManager.CameraAnimator.Play("Combat");
 
+            //Debug.Log(camera.CinemachineTargetYaw + " entrer");
+
             _baseYaw = CamManager.CharacterManager.KayakControllerProperty.transform.rotation.eulerAngles.y;
 
-            if (camera.CinemachineTargetYaw > 180)
+            //if (_baseYaw > 180)
+            //{
+            //    _baseYaw -= 360;
+            //}
+            //else if (_baseYaw < -180)
+            //{
+            //    _baseYaw += 360;
+            //}
+
+            if (_baseYaw + CamManager.Data.CombatLengthClamp.x < -360)
             {
-                camera.CinemachineTargetYaw -= 360;
+                _min = (_baseYaw + CamManager.Data.CombatLengthClamp.x) + 360;
+                _max += 360;
+            }
+            else
+            {
+                _min = (_baseYaw + CamManager.Data.CombatLengthClamp.x);
+            }
+            if (_baseYaw + CamManager.Data.CombatLengthClamp.y > 360)
+            {
+                _max = (_baseYaw + CamManager.Data.CombatLengthClamp.y) - 360;
+                _min -= 360;
+            }
+            else
+            {
+                _max = (_baseYaw + CamManager.Data.CombatLengthClamp.y);
+            }
+
+
+            if (camera.CinemachineTargetYaw > 0 && _min < 0 && _max < 0)
+            {
+                _min += 360;
+                _max += 360;
+            }
+            else if (camera.CinemachineTargetYaw < 0 && _min > 0 && _max > 0)
+            {
+                _min -= 360;
+                _max -= 360;
             }
 
             _baseFov = CamManager.VirtualCameraCombat.m_Lens.FieldOfView;
             _currentFov = _baseFov;
 
+            if (camera.CinemachineTargetYaw > 180 && _max < 180 && _min < 0)
+            {
+                camera.CinemachineTargetYaw -= 360;
+            }
+            else if (camera.CinemachineTargetYaw < -180 && _max > -180 && _min > 0)
+            {
+                camera.CinemachineTargetYaw += 360;
+            }
 
             _cameraNoise = CamManager.VirtualCameraCombat.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
             _cameraNoise.m_AmplitudeGain = 1f;
 
             CombatSensitivityMultiplier = CamManager.Data.CameraCombatSensibility;
+
+            //Debug.Log(_min + " min");
+            //Debug.Log(_max + " max");
+            //Debug.Log(_baseYaw + " base");
+
+
+
+            //if yaw > max ou yaw < a min
+
+                //if Yaw plus proche de max partir vers max
+
+                //else if yaw plus proche de min partir vers min
 
 
         }
@@ -40,15 +99,18 @@ namespace Character.Camera.State
         public override void UpdateState(CameraManager camera)
         {
 
+            Debug.Log(camera.CinemachineTargetYaw);
             CamManager.CurrentStateBase.ManageFreeCameraMove(CameraMode.Combat);
-            CamManager.ApplyRotationCameraInCombat();
 
-            var min = (_baseYaw + CamManager.Data.CombatLengthClamp.x > 180) ? ((_baseYaw + CamManager.Data.CombatLengthClamp.x) - 360) : (_baseYaw + CamManager.Data.CombatLengthClamp.x);
-            var max = ((_baseYaw + CamManager.Data.CombatLengthClamp.y) % 360);
+            //var min = _baseYaw + CamManager.Data.CombatLengthClamp.x;
+            //var min = (_baseYaw + CamManager.Data.CombatLengthClamp.x > 180) ? ((_baseYaw + CamManager.Data.CombatLengthClamp.x) - 360) : (_baseYaw + CamManager.Data.CombatLengthClamp.x);
+            //var max = _baseYaw + CamManager.Data.CombatLengthClamp.y;
+            //var max = ((_baseYaw + CamManager.Data.CombatLengthClamp.y) % 360);
+
 
             CamManager.CinemachineTargetPitch = ClampAngle(CamManager.CinemachineTargetPitch, CamManager.Data.CombatHeightClamp.x, CamManager.Data.CombatHeightClamp.y);
 
-            CamManager.CinemachineTargetYaw = ClampAngle(CamManager.CinemachineTargetYaw, min, max);
+            CamManager.CinemachineTargetYaw = ClampAngle(CamManager.CinemachineTargetYaw, _min, _max);
 
             ClampRotationCameraValue(CamManager.Data.CombatHeightClamp, CamManager.Data.CombatLengthClamp);
 
@@ -80,7 +142,7 @@ namespace Character.Camera.State
         }
         public override void LateUpdate(CameraManager camera)
         {
-
+            CamManager.ApplyRotationCameraInCombat();
         }
         public override void SwitchState(CameraManager camera)
         {
