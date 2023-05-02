@@ -1,14 +1,24 @@
+using System;
+using Enemies.Data;
+using Fight;
 using GPEs;
 using UnityEngine;
 using WaterFlowGPE.Bezier;
 
 namespace Enemies.Seal
 {
-    public class SealController : MonoBehaviour
+    public enum MovingDirection
+    {
+        Forward = 0,
+        Backward = 1
+    }
+    
+    public class SealController : MonoBehaviour, IHittable
     {
         [Header("Player detection"), SerializeField] private PlayerTriggerManager _frontPlayerTrigger;
         [SerializeField] private PlayerTriggerManager _backPlayerTrigger;
         [Header("Path"), SerializeField] private BezierSpline _splinePath;
+        [Header("Data"), SerializeField] private SealData _data;
 
         private float _currentSplinePosition;
 
@@ -40,6 +50,11 @@ namespace Enemies.Seal
             transform.position = new Vector3(splinePosition.x, transform.position.y, splinePosition.z);
         }
 
+        private void Update()
+        {
+            ManageMovement();
+        }
+
         #region Player Detection Methods
 
         private void SetPlayerAtFrontTrue()
@@ -65,8 +80,40 @@ namespace Enemies.Seal
 
         #region Seal Controller
 
+        private void ManageMovement()
+        {
+            if (_playerIsAtBack)
+            {
+                Move(MovingDirection.Forward);
+            }
+
+            if (_playerIsAtFront)
+            {
+                Move(MovingDirection.Backward);
+            }
+
+            Transform t = transform;
+            
+            Vector3 position = Vector3.Lerp(t.position, _splinePath.GetPoint(_currentSplinePosition), _data.SealSpeedLerpToMovingValue);
+            t.position = position;
+
+            Vector3 rotation = t.rotation.eulerAngles;
+            //TODO convert direction to rotation z
+            Debug.Log(_splinePath.GetDirection(_currentSplinePosition));
+            t.rotation = Quaternion.Euler(rotation.x,_splinePath.GetDirection(_currentSplinePosition).y, rotation.z);
+        }
         
+        private void Move(MovingDirection direction)
+        {
+            float value = direction == MovingDirection.Forward ? 1 : -1;
+            _currentSplinePosition += value * _data.MovingValueAtPlayerDetected;
+        }
 
         #endregion
+
+        public void Hit(Projectile projectile, GameObject owner)
+        {
+            
+        }
     }
 }
