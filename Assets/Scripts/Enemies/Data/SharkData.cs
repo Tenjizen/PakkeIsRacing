@@ -7,8 +7,8 @@ namespace Shark.Data
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/SharkData", order = 1)]
     public class SharkData : ScriptableObject
     {
-        [field: SerializeField, Header("Life")] public float Life = 3;
-
+        [field: SerializeField, Header("Life")] 
+        public float Life = 3;
         [field: SerializeField, Header("Elevation"), Tooltip("The Y position in relation to the target, the lower the value (ex : -1) the more visible the shark will be when rotating around the player")]
         public float ElevationOffset { get; private set; } = 0;
         [field: SerializeField, Tooltip("The Y position in relation to the target when rushing to the target")]
