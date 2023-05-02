@@ -1,32 +1,33 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Tools.HideIfAttribute
+namespace Tools.HideIf
 {
     [CustomPropertyDrawer(typeof(HideIfAttribute))]
     internal class HideIfDrawer : PropertyDrawer
     {
-        private bool hidden;
+        private bool _hidden;
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            HideIfAttribute attr = attribute as HideIfAttribute;
-            hidden = true;
+            HideIfAttribute hideIfAttribute = attribute as HideIfAttribute;
+            _hidden = true;
 
-            string varName = attr.FieldName;
-            if (!string.IsNullOrEmpty(varName))
+            string attributeFieldName = hideIfAttribute.FieldName;
+            if (string.IsNullOrEmpty(attributeFieldName) == false)
             {
-                SerializedProperty serializedProperty = property.serializedObject.FindProperty(attr.FieldName);
-                hidden = serializedProperty.propertyType switch
+                SerializedProperty serializedProperty = property.serializedObject.FindProperty(hideIfAttribute.FieldName);
+                
+                _hidden = serializedProperty.propertyType switch
                 {
                     SerializedPropertyType.Boolean => serializedProperty.boolValue,
-                    SerializedPropertyType.Enum => serializedProperty.enumValueIndex == attr.EnumValue,
+                    SerializedPropertyType.Enum => serializedProperty.enumValueIndex == hideIfAttribute.FieldValue,
                     SerializedPropertyType.ObjectReference => serializedProperty.objectReferenceValue != null,
                     _ => true,
                 };
             }
 
-            if (!hidden)
+            if (_hidden == false)
             {
                 return base.GetPropertyHeight(property, label);
             }
@@ -36,7 +37,7 @@ namespace Tools.HideIfAttribute
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            if (!hidden)
+            if (_hidden == false)
             {
                 EditorGUI.PropertyField(position, property, label);
             }

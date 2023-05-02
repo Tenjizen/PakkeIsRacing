@@ -1,6 +1,7 @@
 using System;
 using Character;
 using Kayak;
+using Tools.HideIf;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -18,8 +19,8 @@ namespace GPEs
 
         [Header("Trigger"), SerializeField] private TriggerType _triggerType;
         [SerializeField] private bool _showTriggerGizmos = true;
-        [SerializeField] private Vector3 _triggerBoxSize = Vector3.one;
-        [FormerlySerializedAs("_triggerSphereSize")] [SerializeField] private float _triggerSphereSizeRadius = 1;
+        [SerializeField, HideIf("_triggerType", TriggerType.SphereTrigger)] private Vector3 _triggerBoxSize = Vector3.one;
+        [SerializeField, HideIf("_triggerType", TriggerType.BoxTrigger)] private float _triggerSphereSizeRadius = 1;
         [SerializeField] private Vector3 _triggerOffsetPosition = Vector3.zero;
         [SerializeField] private LayerMask _playerLayerMask;
         
