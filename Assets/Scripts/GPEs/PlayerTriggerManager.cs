@@ -40,6 +40,7 @@ namespace GPEs
         private void CheckForPlayerInTrigger()
         {
             bool isKayakInTrigger = false;
+            Array.Clear(_hits,0,_hits.Length);
 
             switch (_triggerType)
             {
@@ -68,10 +69,12 @@ namespace GPEs
                     PropKayakController = kayakManager;
                     OnPlayerEntered.Invoke();
                 }
-
+                
                 OnPlayerStay.Invoke();
                 isKayakInTrigger = true;
             }
+            
+            Debug.Log($"kayak in : {isKayakInTrigger}");
 
             if (PropKayakController == null || isKayakInTrigger)
             {
