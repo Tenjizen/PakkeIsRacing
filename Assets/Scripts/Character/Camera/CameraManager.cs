@@ -55,10 +55,12 @@ namespace Character.Camera
 
             CinemachineCameraTarget.transform.localPosition = Data.NavigationPosition;
             VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = Data.NavigationCamDistance;
+
             VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().ShoulderOffset = Data.NavigationCamShoulderOffset;
 
             //CinemachineCameraTarget.transform.localRotation = Data.NavigationRotation;
 
+            CinemachineTargetPitch = Data.NavigationRotation.x;
             CinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             CameraTargetBasePos = CinemachineCameraTarget.transform.localPosition;
             CameraBaseFov = VirtualCameraFreeLook.m_Lens.FieldOfView;
@@ -140,8 +142,7 @@ namespace Character.Camera
 
         public void ResetNavigationValue()
         {
-            const float cameraDistance = 7;
-            VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = cameraDistance;
+            VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = Data.NavigationCamDistance;
             StartDeath = false;
         }
 

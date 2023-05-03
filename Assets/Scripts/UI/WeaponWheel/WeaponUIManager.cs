@@ -17,6 +17,7 @@ namespace UI.WeaponWheel
         
         [SerializeField] private Image _paddleArrowDownImage;
         [SerializeField] private Image _cursor;
+        [SerializeField] private Transform _cursorPivot;
         [SerializeField] private Image _cooldown;
 
         private Vector3 _vignetteBaseScale;
@@ -84,7 +85,7 @@ namespace UI.WeaponWheel
         private void WeaponChoice()
         {
             const float DEADZONE = 0.5f;
-            switch (_inputManagement.Inputs.SelectWeaponMenu)
+            switch (_inputManagement.Inputs.SelectWeaponMenuX)
             {
                 case < -DEADZONE:
                     _harpoonButton.Hover();
@@ -99,6 +100,17 @@ namespace UI.WeaponWheel
                     _harpoonButton.Exit();
                     break;
             }
+            
+            //cursor
+            Vector3 rotation = _cursorPivot.rotation.eulerAngles;
+            Vector2 joystickInput = new Vector2(_inputManagement.Inputs.SelectWeaponMenuX, _inputManagement.Inputs.SelectWeaponMenuY);
+            float angle = Mathf.Atan2(joystickInput.y, joystickInput.x);
+            float angleDegrees = angle * Mathf.Rad2Deg - 90;
+            if (angleDegrees < 0f)
+            {
+                angleDegrees += 360f;
+            }
+            _cursorPivot.rotation = Quaternion.Euler(new Vector3(rotation.x, rotation.y, angleDegrees));
         }
 
         public void ResetSelection()
