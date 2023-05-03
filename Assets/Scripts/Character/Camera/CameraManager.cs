@@ -59,6 +59,7 @@ namespace Character.Camera
 
             //CinemachineCameraTarget.transform.localRotation = Data.NavigationRotation;
 
+            CinemachineTargetPitch = Data.NavigationRotation.x;
             CinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             CameraTargetBasePos = CinemachineCameraTarget.transform.localPosition;
             CameraBaseFov = VirtualCameraFreeLook.m_Lens.FieldOfView;
