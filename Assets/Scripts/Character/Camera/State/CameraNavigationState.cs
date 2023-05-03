@@ -28,15 +28,17 @@ namespace Character.Camera.State
 
             MoveCamera();
 
+            camera.MakeTargetFollowRotationWithKayak();
+
             ClampRotationCameraValue(CamManager.Data.BottomClamp, CamManager.Data.TopClamp, float.MinValue, float.MaxValue);
 
-            CamManager.ApplyRotationCamera();
+            //CamManager.ApplyRotationCamera();
 
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                CameraTrackState cameraTrackState = new CameraTrackState("VCam TrackDolly");
-                CamManager.SwitchState(cameraTrackState);
-            }
+            //if (Input.GetKeyDown(KeyCode.K))
+            //{
+            //    CameraTrackState cameraTrackState = new CameraTrackState("VCam TrackDolly");
+            //    CamManager.SwitchState(cameraTrackState);
+            //}
 
             if (CamManager.Waves.CircularWavesDurationList.Count > 0)
             {
@@ -55,10 +57,11 @@ namespace Character.Camera.State
         {
 
         }
-        bool lastInputJoystickCam = false;
-        float timerTest = 0;
+
         public override void LateUpdate(CameraManager camera)
         {
+            CamManager.ApplyRotationCamera();
+
             //rotate freely with inputs
             bool rotateInput = Mathf.Abs(CamManager.Input.Inputs.RotateCamera.x) + Mathf.Abs(CamManager.Input.Inputs.RotateCamera.y) >= CamManager.Input.Inputs.Deadzone; //0.5f;
             const float minimumVelocityToReplaceCamera = 0.01f;
@@ -67,7 +70,6 @@ namespace Character.Camera.State
             _timerCameraReturnBehindBoat += Time.deltaTime;
             if (rotateInput && CamManager.CanMoveCameraManually /*&& rotateCamClick*/)
             {
-                lastInputJoystickCam = true;
                 //ManageFreeCameraMove(ref _timerCameraReturnBehindBoat, CameraMode.Navigation);
             }
 
@@ -135,29 +137,6 @@ namespace Character.Camera.State
                 //apply camera rotation & position
                 CamManager.CinemachineTargetEulerAnglesToRotation(cameraTargetLocalPosition);
 
-
-                if (lastInputJoystickCam == false)
-                {
-                    //camera target to kayak rotation and position
-                    CamManager.MakeTargetFollowRotationWithKayak();
-                }
-
-                else
-                {
-                    Vector3 rotation = CamManager.CinemachineCameraTargetFollow.transform.rotation.eulerAngles;
-                    Vector3 kayakRotation = CamManager.RigidbodyKayak.gameObject.transform.rotation.eulerAngles;
-                    Quaternion target = Quaternion.Euler(new Vector3(rotation.x, kayakRotation.y, rotation.z));
-                    CamManager.CinemachineCameraTargetFollow.transform.rotation = Quaternion.Slerp(CamManager.CinemachineCameraTargetFollow.transform.rotation, target, 0.1f * Time.deltaTime * 100);
-                }
-
-                if (lastInputJoystickCam == true)
-                {
-                    timerTest += Time.deltaTime;
-                    if (timerTest > 0.5f)
-                    {
-                        lastInputJoystickCam = false;
-                    }
-                }
             }
 
         }
@@ -180,12 +159,11 @@ namespace Character.Camera.State
 
             if (rotateInput && CamManager.CanMoveCameraManually /*&& rotateCamClick*/)
             {
-                //lastInputJoystickCam = true;
                 ManageFreeCameraMove(ref _timerCameraReturnBehindBoat, CameraMode.Navigation);
             }
             //manage rotate to stay behind boat
             else if (Mathf.Abs(CamManager.RigidbodyKayak.velocity.x + CamManager.RigidbodyKayak.velocity.z) > minimumVelocityToReplaceCamera && _timerCameraReturnBehindBoat > CamManager.Data.TimerCameraReturnBehindBoat ||
-                     (Mathf.Abs(CamManager.CharacterManager.CurrentStateBaseProperty.RotationStaticForceY) > minimumVelocityToReplaceCamera / 20) && _timerCameraReturnBehindBoat > CamManager.Data.TimerCameraReturnBehindBoat)
+                     (Mathf.Abs(CamManager.CharacterManager.CurrentStateBaseProperty.RotationStaticForceY) > minimumVelocityToReplaceCamera / 20) /*&& _timerCameraReturnBehindBoat > CamManager.Data.TimerCameraReturnBehindBoat*/)
             {
                 #region clavier souris
                 //avoid last input to be 0
@@ -221,11 +199,14 @@ namespace Character.Camera.State
             }
 
 
+
+   
+
         }
         private void ResetCameraBehindBoat()
         {
             //Start
-            CamManager.MakeTargetFollowRotationWithKayak();
+            //CamManager.MakeTargetFollowRotationWithKayak();
 
             //Middle
             Quaternion localRotation = CamManager.CinemachineCameraTarget.transform.localRotation;

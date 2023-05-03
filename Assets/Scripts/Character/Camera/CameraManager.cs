@@ -137,20 +137,12 @@ namespace Character.Camera
         {
             RotationZ = Mathf.Lerp(RotationZ, 0, 0.01f);
         }
+
         public void ResetNavigationValue()
         {
             const float cameraDistance = 7;
             VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = cameraDistance;
             StartDeath = false;
-        }
-
-        public void ResetCameraLocalPos()
-        {
-            Vector3 localPos = CinemachineCameraTarget.transform.localPosition;
-            localPos.x = CameraTargetBasePos.x;
-            localPos.y = CameraTargetBasePos.y;
-            localPos.z = CameraTargetBasePos.z;
-            CinemachineCameraTarget.transform.localPosition = localPos;
         }
 
 
@@ -184,15 +176,7 @@ namespace Character.Camera
             cameraTargetLocalPosition.x = Mathf.Lerp(cameraTargetLocalPosition.x, 0, Data.LerpLocalPositionNotMoving);
             CinemachineTargetEulerAnglesToRotation(cameraTargetLocalPosition);
         }
-        public void ResetCameraBehindBoat()
-        {
-            Quaternion localRotation = CinemachineCameraTarget.transform.localRotation;
-            Vector3 cameraTargetLocalPosition = CinemachineCameraTarget.transform.localPosition;
 
-            CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, Quaternion.Euler(new Vector3(0, 0, localRotation.z)), 1f);
-            cameraTargetLocalPosition.x = Mathf.Lerp(cameraTargetLocalPosition.x, 0, Data.LerpLocalPositionNotMoving);
-            CinemachineTargetEulerAnglesToRotation(cameraTargetLocalPosition);
-        }
         public void CinemachineTargetEulerAnglesToRotation(Vector3 targetLocalPosition)
         {
             CinemachineCameraTarget.transform.localPosition = targetLocalPosition;
@@ -207,10 +191,30 @@ namespace Character.Camera
                 CinemachineTargetPitch = CinemachineCameraTarget.transform.rotation.eulerAngles.x;
             }
         }
+
         public void ShakeCamera(float intensity)
         {
             CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = VirtualCameraFreeLook.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
             cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
+        }
+
+        public void ResetCameraLocalPos()
+        {
+            Vector3 localPos = CinemachineCameraTarget.transform.localPosition;
+            localPos.x = CameraTargetBasePos.x;
+            localPos.y = CameraTargetBasePos.y;
+            localPos.z = CameraTargetBasePos.z;
+            CinemachineCameraTarget.transform.localPosition = localPos;
+        }
+
+        public void ResetCameraBehindBoat()
+        {
+            Quaternion localRotation = CinemachineCameraTarget.transform.localRotation;
+            Vector3 cameraTargetLocalPosition = CinemachineCameraTarget.transform.localPosition;
+
+            CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, Quaternion.Euler(new Vector3(0, 0, localRotation.z)), 1f);
+            cameraTargetLocalPosition.x = Mathf.Lerp(cameraTargetLocalPosition.x, 0, Data.LerpLocalPositionNotMoving);
+            CinemachineTargetEulerAnglesToRotation(cameraTargetLocalPosition);
         }
         #endregion
     }
