@@ -12,16 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21bf88a1d751446188ac90787430182b, type: 3}
   m_Name: CameraData 1
   m_EditorClassIdentifier: 
+  <NavigationPosition>k__BackingField: {x: 0, y: 4, z: 0}
+  <NavigationCamDistance>k__BackingField: 0
+  <NavigationCamShoulderOffset>k__BackingField: {x: 0, y: 0, z: 0}
+  <NavigationRotation>k__BackingField: {x: 10, y: 0, z: 0}
   <TopClamp>k__BackingField: 28
   <BottomClamp>k__BackingField: -18
   <BalanceRotationMultiplier>k__BackingField: 0
   <BalanceRotationZLerp>k__BackingField: 0.01
   <MultiplierValueRotation>k__BackingField: 0.5
-  <LerpLocalRotationMove>k__BackingField: 0.01
-  <LerpLocalRotationWhenRotating>k__BackingField: 0.1
+  <LerpLocalRotationMove>k__BackingField: 0.0244
+  <LerpLocalRotationWhenRotating>k__BackingField: 0.0324
   <MultiplierValuePosition>k__BackingField: 0.5
-  <LerpLocalPositionMove>k__BackingField: 0.01
-  <LerpLocalPositionWhenRotating>k__BackingField: 0.1
+  <LerpLocalPositionMove>k__BackingField: 0.0245
+  <LerpLocalPositionWhenRotating>k__BackingField: 0.0324
   <MultiplierFovCamera>k__BackingField: 1
   <LerpTimeX>k__BackingField: 0.035
   <LerpTimeY>k__BackingField: 0.035
@@ -105,11 +109,11 @@ MonoBehaviour:
   <AmplitudeShakeWhenUnbalanced>k__BackingField: 0.5
   <AmplitudeShakeWhenWaterFlow>k__BackingField: 0.2
   <AmplitudeShakeWhenWaterWave>k__BackingField: 0.2
-  <CombatOffset>k__BackingField: {x: 0, y: 0, z: 0}
-  <CombatFov>k__BackingField: 52
+  <CombatPosition>k__BackingField: {x: 0.071, y: 1.892, z: 0.59}
+  <CombatFov>k__BackingField: 60
   <CombatZoomFov>k__BackingField: 30
   <CombatZoomFovLerp>k__BackingField: 0.071
   <CombatZoomAimSpeedMultiplier>k__BackingField: 0.533
   <CombatHeightClamp>k__BackingField: {x: -30, y: 20}
-  <CombatLengthClamp>k__BackingField: {x: -70, y: 80}
+  <CombatLengthClamp>k__BackingField: {x: -100, y: 100}
   <CameraCombatSensibility>k__BackingField: 1
