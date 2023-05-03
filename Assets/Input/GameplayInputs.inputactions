@@ -78,9 +78,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "SelectOnWheel",
+                    "name": "SelectOnWheelX",
                     "type": "Value",
                     "id": "41104c3d-e5eb-4b95-9d70-09869384b221",
+                    "expectedControlType": "Analog",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "SelectOnWheelY",
+                    "type": "Value",
+                    "id": "4cf84e59-5e02-4d3a-88d7-3f4822ef8b4f",
                     "expectedControlType": "Analog",
                     "processors": "",
                     "interactions": "",
@@ -377,7 +386,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "GamePad",
-                    "action": "SelectOnWheel",
+                    "action": "SelectOnWheelX",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -664,6 +673,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MenuTopRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "06e60e77-78f9-47c8-b653-2c2dfcf16f99",
+                    "path": "<Gamepad>/rightStick/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "SelectOnWheelY",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
