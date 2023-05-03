@@ -97,16 +97,20 @@ namespace Enemies.Seal
             Vector3 position = Vector3.Lerp(t.position, _splinePath.GetPoint(_currentSplinePosition), _data.SealSpeedLerpToMovingValue);
             t.position = position;
 
+            //rotation
             Vector3 rotation = t.rotation.eulerAngles;
-            //TODO convert direction to rotation z
-            //Debug.Log(_splinePath.GetDirection(_currentSplinePosition));
-            t.rotation = Quaternion.Euler(rotation.x,_splinePath.GetDirection(_currentSplinePosition).y, rotation.z);
+            Vector3 direction = _splinePath.GetDirection(_currentSplinePosition);
+            float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
+            Debug.Log(direction);
+            Debug.Log(angle);
+            t.rotation = Quaternion.Euler(rotation.x,angle, rotation.z);
         }
         
         private void Move(MovingDirection direction)
         {
             float value = direction == MovingDirection.Forward ? 1 : -1;
             _currentSplinePosition += value * _data.MovingValueAtPlayerDetected;
+            _currentSplinePosition = Mathf.Clamp01(_currentSplinePosition);
         }
 
         #endregion

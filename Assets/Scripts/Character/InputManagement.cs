@@ -41,7 +41,8 @@ namespace Character
             inputsEnum.RotateCamera = _gameplayInputs.Boat.RotateCamera.ReadValue<Vector2>();
 
             inputsEnum.OpenWeaponMenu = _gameplayInputs.Boat.OpenWheelMenu.ReadValue<float>() > 0.5f;
-            inputsEnum.SelectWeaponMenu = _gameplayInputs.Boat.SelectOnWheel.ReadValue<float>();
+            inputsEnum.SelectWeaponMenuX = _gameplayInputs.Boat.SelectOnWheelX.ReadValue<float>();
+            inputsEnum.SelectWeaponMenuY = _gameplayInputs.Boat.SelectOnWheelY.ReadValue<float>();
             inputsEnum.DeselectWeapon = _gameplayInputs.Boat.DeselectWeapon.triggered;
 
             inputsEnum.Aim = _gameplayInputs.Boat.Aim.ReadValue<float>() > DeadzoneJoystickTrigger;
@@ -69,7 +70,7 @@ namespace Character
         public float Deadzone;
         
         public bool OpenWeaponMenu;
-        public float SelectWeaponMenu;
+        public float SelectWeaponMenuX, SelectWeaponMenuY;
         public bool DeselectWeapon;
         
         public bool Aim;

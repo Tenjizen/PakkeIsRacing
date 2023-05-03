@@ -100,9 +100,18 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""SelectOnWheel"",
+                    ""name"": ""SelectOnWheelX"",
                     ""type"": ""Value"",
                     ""id"": ""41104c3d-e5eb-4b95-9d70-09869384b221"",
+                    ""expectedControlType"": ""Analog"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SelectOnWheelY"",
+                    ""type"": ""Value"",
+                    ""id"": ""4cf84e59-5e02-4d3a-88d7-3f4822ef8b4f"",
                     ""expectedControlType"": ""Analog"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -399,7 +408,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""GamePad"",
-                    ""action"": ""SelectOnWheel"",
+                    ""action"": ""SelectOnWheelX"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -688,6 +697,17 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""action"": ""MenuTopRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06e60e77-78f9-47c8-b653-2c2dfcf16f99"",
+                    ""path"": ""<Gamepad>/rightStick/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""SelectOnWheelY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -715,7 +735,8 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         m_Boat_RotateCamera = m_Boat.FindAction("RotateCamera", throwIfNotFound: true);
         m_Boat_DialogSkip = m_Boat.FindAction("DialogSkip", throwIfNotFound: true);
         m_Boat_OpenWheelMenu = m_Boat.FindAction("OpenWheelMenu", throwIfNotFound: true);
-        m_Boat_SelectOnWheel = m_Boat.FindAction("SelectOnWheel", throwIfNotFound: true);
+        m_Boat_SelectOnWheelX = m_Boat.FindAction("SelectOnWheelX", throwIfNotFound: true);
+        m_Boat_SelectOnWheelY = m_Boat.FindAction("SelectOnWheelY", throwIfNotFound: true);
         m_Boat_DeselectWeapon = m_Boat.FindAction("DeselectWeapon", throwIfNotFound: true);
         m_Boat_Aim = m_Boat.FindAction("Aim", throwIfNotFound: true);
         m_Boat_MoveAim = m_Boat.FindAction("MoveAim", throwIfNotFound: true);
@@ -796,7 +817,8 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Boat_RotateCamera;
     private readonly InputAction m_Boat_DialogSkip;
     private readonly InputAction m_Boat_OpenWheelMenu;
-    private readonly InputAction m_Boat_SelectOnWheel;
+    private readonly InputAction m_Boat_SelectOnWheelX;
+    private readonly InputAction m_Boat_SelectOnWheelY;
     private readonly InputAction m_Boat_DeselectWeapon;
     private readonly InputAction m_Boat_Aim;
     private readonly InputAction m_Boat_MoveAim;
@@ -822,7 +844,8 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         public InputAction @RotateCamera => m_Wrapper.m_Boat_RotateCamera;
         public InputAction @DialogSkip => m_Wrapper.m_Boat_DialogSkip;
         public InputAction @OpenWheelMenu => m_Wrapper.m_Boat_OpenWheelMenu;
-        public InputAction @SelectOnWheel => m_Wrapper.m_Boat_SelectOnWheel;
+        public InputAction @SelectOnWheelX => m_Wrapper.m_Boat_SelectOnWheelX;
+        public InputAction @SelectOnWheelY => m_Wrapper.m_Boat_SelectOnWheelY;
         public InputAction @DeselectWeapon => m_Wrapper.m_Boat_DeselectWeapon;
         public InputAction @Aim => m_Wrapper.m_Boat_Aim;
         public InputAction @MoveAim => m_Wrapper.m_Boat_MoveAim;
@@ -869,9 +892,12 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @OpenWheelMenu.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnOpenWheelMenu;
                 @OpenWheelMenu.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnOpenWheelMenu;
                 @OpenWheelMenu.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnOpenWheelMenu;
-                @SelectOnWheel.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnSelectOnWheel;
-                @SelectOnWheel.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnSelectOnWheel;
-                @SelectOnWheel.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnSelectOnWheel;
+                @SelectOnWheelX.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnSelectOnWheelX;
+                @SelectOnWheelX.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnSelectOnWheelX;
+                @SelectOnWheelX.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnSelectOnWheelX;
+                @SelectOnWheelY.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnSelectOnWheelY;
+                @SelectOnWheelY.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnSelectOnWheelY;
+                @SelectOnWheelY.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnSelectOnWheelY;
                 @DeselectWeapon.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnDeselectWeapon;
                 @DeselectWeapon.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnDeselectWeapon;
                 @DeselectWeapon.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnDeselectWeapon;
@@ -939,9 +965,12 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @OpenWheelMenu.started += instance.OnOpenWheelMenu;
                 @OpenWheelMenu.performed += instance.OnOpenWheelMenu;
                 @OpenWheelMenu.canceled += instance.OnOpenWheelMenu;
-                @SelectOnWheel.started += instance.OnSelectOnWheel;
-                @SelectOnWheel.performed += instance.OnSelectOnWheel;
-                @SelectOnWheel.canceled += instance.OnSelectOnWheel;
+                @SelectOnWheelX.started += instance.OnSelectOnWheelX;
+                @SelectOnWheelX.performed += instance.OnSelectOnWheelX;
+                @SelectOnWheelX.canceled += instance.OnSelectOnWheelX;
+                @SelectOnWheelY.started += instance.OnSelectOnWheelY;
+                @SelectOnWheelY.performed += instance.OnSelectOnWheelY;
+                @SelectOnWheelY.canceled += instance.OnSelectOnWheelY;
                 @DeselectWeapon.started += instance.OnDeselectWeapon;
                 @DeselectWeapon.performed += instance.OnDeselectWeapon;
                 @DeselectWeapon.canceled += instance.OnDeselectWeapon;
@@ -1013,7 +1042,8 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         void OnRotateCamera(InputAction.CallbackContext context);
         void OnDialogSkip(InputAction.CallbackContext context);
         void OnOpenWheelMenu(InputAction.CallbackContext context);
-        void OnSelectOnWheel(InputAction.CallbackContext context);
+        void OnSelectOnWheelX(InputAction.CallbackContext context);
+        void OnSelectOnWheelY(InputAction.CallbackContext context);
         void OnDeselectWeapon(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnMoveAim(InputAction.CallbackContext context);
