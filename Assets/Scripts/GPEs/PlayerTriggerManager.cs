@@ -74,8 +74,6 @@ namespace GPEs
                 isKayakInTrigger = true;
             }
             
-            Debug.Log($"kayak in : {isKayakInTrigger}");
-
             if (PropKayakController == null || isKayakInTrigger)
             {
                 return;

@@ -99,7 +99,7 @@ namespace Enemies.Seal
 
             Vector3 rotation = t.rotation.eulerAngles;
             //TODO convert direction to rotation z
-            Debug.Log(_splinePath.GetDirection(_currentSplinePosition));
+            //Debug.Log(_splinePath.GetDirection(_currentSplinePosition));
             t.rotation = Quaternion.Euler(rotation.x,_splinePath.GetDirection(_currentSplinePosition).y, rotation.z);
         }
         

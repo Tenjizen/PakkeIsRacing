@@ -4,6 +4,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using WaterFlowGPE.Bezier;
 
 namespace UI
 {
@@ -19,8 +20,11 @@ namespace UI
         [Header("Big"),SerializeField] private GameObject _uIGameObjectBig;
         [SerializeField] private Image _experienceGauge, _combatGauge, _navigationGauge;
         [SerializeField] private TMP_Text _levelText;
+        [SerializeField] private Transform _combatGaugeIcon, _navigationGaugeIcon;
+        [SerializeField] private BezierSpline _combatIconSpline, _navigationIconSpline;
         [Header("Small"), SerializeField] private GameObject _uIGameObjectSmall;
         [SerializeField] private Image _experienceGaugeSmall;
+        [SerializeField] private TMP_Text _smallLevelText;
 
         private int _level;
         private int _maxLevel;
@@ -30,6 +34,7 @@ namespace UI
         private void Start()
         {
             _levelText.text = _level.ToString();
+            _smallLevelText.text = _level.ToString();
             _uIGameObjectSmall.SetActive(false);
         }
 
@@ -78,9 +83,11 @@ namespace UI
                     break;
                 case Gauge.Combat:
                     _combatGauge.DOFillAmount(percentage, time);
+                    _combatGaugeIcon.position = _combatIconSpline.GetPoint(percentage);
                     break;
                 case Gauge.Navigation:
                     _navigationGauge.DOFillAmount(percentage, time);
+                    _navigationGaugeIcon.position = _navigationIconSpline.GetPoint(percentage);
                     break;
             }
         }
@@ -88,6 +95,8 @@ namespace UI
         private void SetExperienceGaugeAfterLevelUp()
         {
             _levelText.text = _level.ToString();
+            _smallLevelText.text = _level.ToString();
+            
             _uIGameObjectSmall.transform.DOPunchScale(Vector3.one * 0.05f, 0.2f);
             _experienceGaugeSmall.fillAmount = 0;
             _experienceGauge.fillAmount = 0;
