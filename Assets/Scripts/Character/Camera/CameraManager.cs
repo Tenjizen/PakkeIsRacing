@@ -172,7 +172,7 @@ namespace Character.Camera
             Quaternion localRotation = CinemachineCameraTarget.transform.localRotation;
             Vector3 cameraTargetLocalPosition = CinemachineCameraTarget.transform.localPosition;
 
-            CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, Quaternion.Euler(new Vector3(0, 0, localRotation.z)), Data.LerpLocalRotationNotMoving);
+            CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, Quaternion.Euler(new Vector3(Data.NavigationRotation.x, Data.NavigationRotation.y, localRotation.z)), Data.LerpLocalRotationNotMoving);
             cameraTargetLocalPosition.x = Mathf.Lerp(cameraTargetLocalPosition.x, 0, Data.LerpLocalPositionNotMoving);
             CinemachineTargetEulerAnglesToRotation(cameraTargetLocalPosition);
         }
@@ -212,7 +212,7 @@ namespace Character.Camera
             Quaternion localRotation = CinemachineCameraTarget.transform.localRotation;
             Vector3 cameraTargetLocalPosition = CinemachineCameraTarget.transform.localPosition;
 
-            CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, Quaternion.Euler(new Vector3(0, 0, localRotation.z)), 1f);
+            CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, Quaternion.Euler(new Vector3(Data.NavigationRotation.x, 0, localRotation.z)), 1f);
             cameraTargetLocalPosition.x = Mathf.Lerp(cameraTargetLocalPosition.x, 0, Data.LerpLocalPositionNotMoving);
             CinemachineTargetEulerAnglesToRotation(cameraTargetLocalPosition);
         }

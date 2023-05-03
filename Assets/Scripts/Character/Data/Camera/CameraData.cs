@@ -17,8 +17,9 @@ namespace Character.Data
 
         [field: SerializeField]
         public Vector3 NavigationCamShoulderOffset { get; private set; }
-        //[field: SerializeField]
-        //public Quaternion NavigationRotation { get; private set; }
+
+        [field: SerializeField]
+        public Vector3 NavigationRotation { get; private set; }
 
         [field: SerializeField, Header("Clamp"), Tooltip("How far in degrees can you move the camera up")]
         public float TopClamp { get; private set; } = 70.0f;

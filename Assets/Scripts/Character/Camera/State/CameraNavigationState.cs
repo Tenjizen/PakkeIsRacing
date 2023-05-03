@@ -60,7 +60,6 @@ namespace Character.Camera.State
 
         public override void LateUpdate(CameraManager camera)
         {
-            CamManager.ApplyRotationCamera();
 
             //rotate freely with inputs
             bool rotateInput = Mathf.Abs(CamManager.Input.Inputs.RotateCamera.x) + Mathf.Abs(CamManager.Input.Inputs.RotateCamera.y) >= CamManager.Input.Inputs.Deadzone; //0.5f;
@@ -90,10 +89,11 @@ namespace Character.Camera.State
 
                 //get target rotation
                 Quaternion localRotation = CamManager.CinemachineCameraTarget.transform.localRotation;
-                Quaternion targetQuaternion = Quaternion.Euler(new Vector3(0,
+
+                Quaternion targetQuaternion = Quaternion.Euler(new Vector3(CamManager.Data.NavigationRotation.x,
                     (-(CamManager.CharacterManager.CurrentStateBaseProperty.RotationStaticForceY + CamManager.CharacterManager.CurrentStateBaseProperty.RotationPaddleForceY) * CamManager.Data.MultiplierValueRotation) * 20,
                     localRotation.z));
-                //get camera local position
+
                 Vector3 cameraTargetLocalPosition = CamManager.CinemachineCameraTarget.transform.localPosition;
 
                 //const float rotationThreshold = 0.15f;
@@ -130,7 +130,7 @@ namespace Character.Camera.State
                 }
                 else //if kayak not moving or rotating
                 {
-                    CamManager.CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, Quaternion.Euler(new Vector3(0, 0, localRotation.z)), CamManager.Data.LerpLocalRotationNotMoving * Time.deltaTime * 100);
+                    CamManager.CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, Quaternion.Euler(new Vector3(CamManager.Data.NavigationRotation.x, CamManager.Data.NavigationRotation.y, localRotation.z)), CamManager.Data.LerpLocalRotationNotMoving * Time.deltaTime * 100);
                     cameraTargetLocalPosition.x = Mathf.Lerp(cameraTargetLocalPosition.x, 0, CamManager.Data.LerpLocalPositionNotMoving * Time.deltaTime * 100);
                 }
 
@@ -138,6 +138,7 @@ namespace Character.Camera.State
                 CamManager.CinemachineTargetEulerAnglesToRotation(cameraTargetLocalPosition);
 
             }
+            CamManager.ApplyRotationCamera();
 
         }
 
@@ -177,10 +178,10 @@ namespace Character.Camera.State
                 #region variable
 
                 //get target rotation
-                Quaternion localRotation = CamManager.CinemachineCameraTarget.transform.localRotation;
-                Quaternion targetQuaternion = Quaternion.Euler(new Vector3(0,
-                    -(CamManager.CharacterManager.CurrentStateBaseProperty.RotationStaticForceY + CamManager.CharacterManager.CurrentStateBaseProperty.RotationPaddleForceY) * CamManager.Data.MultiplierValueRotation,
-                    localRotation.z));
+                //Quaternion localRotation = CamManager.CinemachineCameraTarget.transform.localRotation;
+                //Quaternion targetQuaternion = Quaternion.Euler(new Vector3(0,
+                //    -(CamManager.CharacterManager.CurrentStateBaseProperty.RotationStaticForceY + CamManager.CharacterManager.CurrentStateBaseProperty.RotationPaddleForceY) * CamManager.Data.MultiplierValueRotation,
+                //    localRotation.z));
                 //get camera local position
                 Vector3 cameraTargetLocalPosition = CamManager.CinemachineCameraTarget.transform.localPosition;
 
@@ -203,21 +204,21 @@ namespace Character.Camera.State
    
 
         }
-        private void ResetCameraBehindBoat()
-        {
-            //Start
-            //CamManager.MakeTargetFollowRotationWithKayak();
+        //private void ResetCameraBehindBoat()
+        //{
+        //    //Start
+        //    //CamManager.MakeTargetFollowRotationWithKayak();
 
-            //Middle
-            Quaternion localRotation = CamManager.CinemachineCameraTarget.transform.localRotation;
-            Vector3 cameraTargetLocalPosition = CamManager.CinemachineCameraTarget.transform.localPosition;
+        //    //Middle
+        //    Quaternion localRotation = CamManager.CinemachineCameraTarget.transform.localRotation;
+        //    Vector3 cameraTargetLocalPosition = CamManager.CinemachineCameraTarget.transform.localPosition;
 
-            CamManager.CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, Quaternion.Euler(new Vector3(0, 0, localRotation.z)), 1f);
-            cameraTargetLocalPosition.x = Mathf.Lerp(cameraTargetLocalPosition.x, 0, 1f);
-            CamManager.CinemachineTargetEulerAnglesToRotation(cameraTargetLocalPosition);
+        //    CamManager.CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, Quaternion.Euler(new Vector3(0, 0, localRotation.z)), 1f);
+        //    cameraTargetLocalPosition.x = Mathf.Lerp(cameraTargetLocalPosition.x, 0, 1f);
+        //    CamManager.CinemachineTargetEulerAnglesToRotation(cameraTargetLocalPosition);
 
-            //End
-            CamManager.ApplyRotationCamera();
-        }
+        //    //End
+        //    CamManager.ApplyRotationCamera();
+        //}
     }
 }
