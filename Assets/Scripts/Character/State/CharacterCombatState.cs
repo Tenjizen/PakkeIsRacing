@@ -1,6 +1,7 @@
 ﻿using Character.Camera.State;
 using Fight;
 using UnityEngine;
+using Debug = FMOD.Debug;
 
 namespace Character.State
 {
@@ -86,14 +87,14 @@ namespace Character.State
                     projectile.Data.ForbiddenColliders.Add(character.KayakControllerProperty.gameObject);
 
                     float power = Mathf.Clamp(_holdingTime, 0.5f, 1f);
-                    Vector3 direction = MathTools.GetDirectionToPointCameraLooking(character.transform, 30f);
-                    if (Physics.Raycast(playerPosition, direction, out var hit))
+                    
+                    Vector3 direction = MathTools.GetDirectionFromTransformToPointCameraLooking(character.transform, 30f);
+                    if (Physics.Raycast(playerPosition, direction, out var hit)) //TODO from cam direction cam.transform.forward
                     {
-                        Vector3 hitPosition = hit.point;
-                        direction = MathTools.GetDirectionToPointCameraLooking(character.transform, Vector3.Distance(playerPosition,hitPosition));
+                        direction = hit.point - character.transform.position;
                     }
                     
-                    projectile.Launch(direction, power);
+                    projectile.Launch(direction.normalized, power);
                     projectile.OnProjectileDie.AddListener(ProjectileHit);
                     
                     character.WeaponCooldown = _weaponPrefab.Data.Cooldown;

@@ -99,7 +99,6 @@ namespace Character.Camera.State
         public override void UpdateState(CameraManager camera)
         {
 
-            Debug.Log(camera.CinemachineTargetYaw);
             CamManager.CurrentStateBase.ManageFreeCameraMove(CameraMode.Combat);
 
             //var min = _baseYaw + CamManager.Data.CombatLengthClamp.x;

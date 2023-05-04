@@ -50,7 +50,7 @@ MonoBehaviour:
   _triggerType: 1
   _showTriggerGizmos: 1
   _triggerBoxSize: {x: 1, y: 1, z: 1}
-  _triggerSphereSize: 24.95
+  _triggerSphereSizeRadius: 1
   _triggerOffsetPosition: {x: -0.7, y: -2.95, z: 10.33}
   _playerLayerMask:
     serializedVersion: 2
@@ -180,6 +180,18 @@ PrefabInstance:
     - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 8.565787
+      objectReference: {fileID: 0}
+    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 8.565787
+      objectReference: {fileID: 0}
+    - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 8.565787
       objectReference: {fileID: 0}
     - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
       propertyPath: m_LocalPosition.x

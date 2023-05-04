@@ -101,8 +101,6 @@ namespace Enemies.Seal
             Vector3 rotation = t.rotation.eulerAngles;
             Vector3 direction = _splinePath.GetDirection(_currentSplinePosition);
             float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
-            Debug.Log(direction);
-            Debug.Log(angle);
             t.rotation = Quaternion.Euler(rotation.x,angle, rotation.z);
         }
         

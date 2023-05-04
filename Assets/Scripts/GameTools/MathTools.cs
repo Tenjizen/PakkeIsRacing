@@ -39,7 +39,7 @@ public class MathTools
         return rotatedPoint;
     }
     
-    public static Vector3 GetDirectionToPointCameraLooking(Transform transformOrigin, float distanceFromCamera)
+    public static Vector3 GetDirectionFromTransformToPointCameraLooking(Transform transformOrigin, float distanceFromCamera)
     {
         // Get the position of the player
         Vector3 playerPos = transformOrigin.position;
