@@ -3,9 +3,13 @@ using UnityEngine;
 
 namespace Tools.HideIf
 {
+#if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(HideIfAttribute))]
     internal class HideIfDrawer : PropertyDrawer
     {
+        
+        
+        
         private bool _hidden;
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
@@ -42,5 +46,8 @@ namespace Tools.HideIf
                 EditorGUI.PropertyField(position, property, label);
             }
         }
+        
+       
     }
+#endif
 }
