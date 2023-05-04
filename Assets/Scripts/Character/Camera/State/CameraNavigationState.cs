@@ -119,12 +119,34 @@ namespace Character.Camera.State
                     }
                     else if (Mathf.Abs(rotationPaddleY) > rotationThreshold / 2)// if kayak is moving
                     {
+
                         //rotation
+                        targetQuaternion = Quaternion.Euler(
+                            new Vector3(CamManager.RigidbodyKayak.velocity.magnitude * 0.2f < CamManager.Data.NavigationRotation.x - CamManager.Data.ClampValueRotationX ?
+                            CamManager.Data.NavigationRotation.x - CamManager.RigidbodyKayak.velocity.magnitude * 0.2f
+                            : CamManager.Data.NavigationRotation.x - (CamManager.Data.NavigationRotation.x - CamManager.Data.ClampValueRotationX),
+                    (-(CamManager.CharacterManager.CurrentStateBaseProperty.RotationStaticForceY + CamManager.CharacterManager.CurrentStateBaseProperty.RotationPaddleForceY) * CamManager.Data.MultiplierValueRotation) * 20,
+                    localRotation.z));
+
                         CamManager.CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, targetQuaternion, CamManager.Data.LerpLocalRotationMove * Time.deltaTime * 100);
+
                         //position
                         cameraTargetLocalPosition.x = Mathf.Lerp(cameraTargetLocalPosition.x,
                             (rotationStaticY + rotationPaddleY) * CamManager.Data.MultiplierValuePosition, //value
                             CamManager.Data.LerpLocalPositionMove * Time.deltaTime * 100); //time lerp
+
+                        if (CamManager.RigidbodyKayak.velocity.magnitude * 0.1f < CamManager.Data.NavigationPosition.y - CamManager.Data.ClampValuePositionY)
+                        {
+                            cameraTargetLocalPosition.y = Mathf.Lerp(cameraTargetLocalPosition.y,
+                               CamManager.Data.NavigationPosition.y - CamManager.RigidbodyKayak.velocity.magnitude * 0.1f, //value
+                                CamManager.Data.LerpLocalPositionMove * Time.deltaTime * 100); //time lerp
+                        }
+                        else
+                        {
+                            cameraTargetLocalPosition.y = Mathf.Lerp(cameraTargetLocalPosition.y,
+                                                           CamManager.Data.NavigationPosition.y - (CamManager.Data.NavigationPosition.y - CamManager.Data.ClampValuePositionY), //value
+                                                            CamManager.Data.LerpLocalPositionMove * Time.deltaTime * 100); //time lerp
+                        }
                         cameraTargetLocalPosition.z = 0;
                     }
                 }
@@ -201,7 +223,7 @@ namespace Character.Camera.State
 
 
 
-   
+
 
         }
         //private void ResetCameraBehindBoat()
