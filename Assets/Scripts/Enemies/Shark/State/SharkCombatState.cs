@@ -9,9 +9,9 @@ public class SharkCombatState : SharkBaseState
     private const float DIST_POINT = 5.0f;
     private const float MIN_DIST = 8.0f;
 
-    public enum CombatState { RushToTarget = 0, JumpCrazy = 1, MoveToTarget = 2, RotateAroundPoint = 3, Jump = 4 };
+    public enum CombatState { RushToTarget = 0, JumpAround = 1, MoveToTarget = 2, RotateAroundPoint = 3, JumpToTarget = 4 };
     private CombatState _state;
-    public enum AttackState { None = 0, Rush = 1, JumpInFront = 2, Crazy = 3, Wait = 4 }
+    public enum AttackState { None = 0, Rush = 1, JumpToTarget = 2, JumpAround = 3, Wait = 4 }
     private AttackState _attackState;
 
     float _timeAnimationCurve = 0;
@@ -92,7 +92,7 @@ public class SharkCombatState : SharkBaseState
 
                 if (percentLife > 75)
                 {
-                    _attackState = AttackState.Crazy;
+                    _attackState = AttackState.JumpAround;
                 }
                 else if (percentLife <= 75 && percentLife > 25)
                 {
@@ -100,9 +100,9 @@ public class SharkCombatState : SharkBaseState
                 }
                 else if (percentLife <= 25)
                 {
-                    var dist = (sharkManager.Data.MinDistanceBetweenTargetWhenRotatePhaseThree + sharkManager.Data.MaxDistanceBetweenTarget) / 2;
-                    sharkManager.PointTargetAttack.transform.position = GetPointInFrontAndDistance(sharkManager.TargetTransform.position, sharkManager.TargetTransform, dist);
-                    _attackState = AttackState.JumpInFront;
+                    //var dist = (sharkManager.Data.MinDistanceBetweenTargetWhenRotatePhaseThree + sharkManager.Data.MaxDistanceBetweenTarget) / 2;
+                    //sharkManager.PointTargetAttack.transform.position = GetPointInFrontAndDistance(sharkManager.TargetTransform.position, sharkManager.TargetTransform, dist);
+                    _attackState = AttackState.JumpToTarget;
                 }
             }
 
@@ -122,26 +122,25 @@ public class SharkCombatState : SharkBaseState
             }
 
             //attack in front target point
-            if (_attackState == AttackState.JumpInFront)
+            if (_attackState == AttackState.JumpToTarget)
             {
-                //rework
-                if (_distSharkPointTargetAttack > 20)
-                {
-                    var dist = (sharkManager.Data.MinDistanceBetweenTargetWhenRotatePhaseThree + sharkManager.Data.MaxDistanceBetweenTarget) / 2;
-                    sharkManager.PointTargetAttack.transform.position = GetPointInFrontAndDistance(sharkManager.TargetTransform.position, sharkManager.TargetTransform, dist);
-                }
-                //point stop moving
-                else
-                {
-                    _state = CombatState.Jump;
-                }
+                //if (_distSharkPointTargetAttack > 20)
+                //{
+                //    var dist = (sharkManager.Data.MinDistanceBetweenTargetWhenRotatePhaseThree + sharkManager.Data.MaxDistanceBetweenTarget) / 2;
+                //    sharkManager.PointTargetAttack.transform.position = GetPointInFrontAndDistance(sharkManager.TargetTransform.position, sharkManager.TargetTransform, dist);
+                //}
+                ////point stop moving
+                //else
+                //{
+                _state = CombatState.JumpToTarget;
+                //}
             }
 
 
             //jump around target
-            if (_attackState == AttackState.Crazy)
+            if (_attackState == AttackState.JumpAround)
             {
-                _state = CombatState.JumpCrazy;
+                _state = CombatState.JumpAround;
             }
 
             switch (_state)
@@ -224,7 +223,7 @@ public class SharkCombatState : SharkBaseState
                     break;
 
                 #region Jump
-                case CombatState.JumpCrazy:
+                case CombatState.JumpAround:
 
                     #region standby
                     //_timerHittable += Time.deltaTime;
@@ -241,7 +240,7 @@ public class SharkCombatState : SharkBaseState
                     JumpCrazy(sharkManager);
 
                     break;
-                case CombatState.Jump:
+                case CombatState.JumpToTarget:
 
                     #region standby
                     //_timerHittable += Time.deltaTime;
@@ -318,7 +317,7 @@ public class SharkCombatState : SharkBaseState
             }
         }
 
-        if (_attackState != AttackState.JumpInFront)
+        if (_attackState != AttackState.JumpToTarget)
         {
             sharkManager.SwitchSpeed(sharkManager.Data.SpeedCombatRotationAroundPoint);
         }
@@ -429,7 +428,7 @@ public class SharkCombatState : SharkBaseState
         rotation.x = sharkManager.Data.VisualCurve.Evaluate(_timeAnimationCurve) * 100;
 
 
-        if (_attackState == AttackState.JumpInFront)
+        if (_attackState == AttackState.JumpToTarget)
         {
             rotation.z += Time.deltaTime * sharkManager.Data.SpeedRotationOnItself;
         }
@@ -485,7 +484,7 @@ public class SharkCombatState : SharkBaseState
     {
         _timeAnimationCurve += Time.deltaTime;
 
-        _lastKey = sharkManager.Data.JumpCurve[sharkManager.Data.JumpCurve.length - 1];
+        _lastKey = sharkManager.Data.JumpCurvePhaseThree[sharkManager.Data.JumpCurvePhaseThree.length - 1];
 
         if (sharkManager.Forward.transform.position.y < sharkManager.ShowCircleProfondeur && _waveStartJump == false)
         {
@@ -515,14 +514,14 @@ public class SharkCombatState : SharkBaseState
         }
 
         Vector3 pos = sharkManager.Forward.transform.position;
-        pos.y = sharkManager.Data.JumpCurve.Evaluate(_timeAnimationCurve);
+        pos.y = sharkManager.Data.JumpCurvePhaseThree.Evaluate(_timeAnimationCurve);
         sharkManager.Forward.transform.position = pos;
 
         sharkManager.Forward.transform.Translate(Vector3.forward * sharkManager.CurrentSpeed * Time.deltaTime, Space.Self);
 
         Vector3 rotation = sharkManager.transform.eulerAngles;
 
-        rotation.x = sharkManager.Data.VisualCurve.Evaluate(_timeAnimationCurve) * 100;
+        rotation.x = sharkManager.Data.VisualCurvePhaseThree.Evaluate(_timeAnimationCurve) * 100;
 
 
         rotation.z += Time.deltaTime * sharkManager.Data.SpeedRotationOnItself;
@@ -547,7 +546,7 @@ public class SharkCombatState : SharkBaseState
             _waveEndJump = false;
 
 
-            if (_attackState == AttackState.JumpInFront)
+            if (_attackState == AttackState.JumpToTarget)
             {
                 rotation.z = 0;
             }
@@ -786,7 +785,7 @@ public class SharkCombatState : SharkBaseState
         pos.y = sharkManager.Data.ElevationOffset;
         sharkManager.Forward.transform.position = pos;
 
-        if (_attackState != AttackState.JumpInFront)
+        if (_attackState != AttackState.JumpToTarget)
             sharkManager.SwitchSpeed(sharkManager.Data.SpeedToMoveToTarget);
 
         sharkManager.Forward.transform.Translate(Vector3.forward * sharkManager.CurrentSpeed * Time.deltaTime, Space.Self);
