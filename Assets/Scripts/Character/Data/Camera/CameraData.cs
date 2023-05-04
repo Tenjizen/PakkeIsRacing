@@ -40,6 +40,15 @@ namespace Character.Data
         [field: SerializeField, Header("Camera"), Range(0, 10)]
         public float MultiplierValueRotation { get; private set; } = 20.0f;
 
+        [field: SerializeField]
+        public float MultiplierValueRotationY { get; private set; } = 0.2f;
+        [field: SerializeField]
+        public float ClampValueRotationX { get; private set; } = 18f;
+        [field: SerializeField]
+        public float MultiplierValuePositionY { get; private set; } = 0.1f;
+         [field: SerializeField]
+        public float ClampValuePositionY { get; private set; } = 3f;
+
 
         [field: SerializeField, Range(0, 0.1f), Tooltip("The lerp value applied to the rotation of the camera when the player moves")]
         public float LerpLocalRotationMove { get; private set; } = 0.005f;
