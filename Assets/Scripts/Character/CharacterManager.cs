@@ -168,5 +168,26 @@ namespace Character
         }
 
         #endregion
+
+        #if UNITY_EDITOR
+
+        private void OnDrawGizmos()
+        {
+            UnityEngine.Camera mainCamera = UnityEngine.Camera.main;
+
+            Vector3 screenCenter = new Vector3(0.5f, 0.5f, 0f);
+            Vector3 rayDirection = mainCamera.ViewportPointToRay(screenCenter).direction;
+
+            Ray ray = new Ray(mainCamera.transform.position, rayDirection);
+
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                Gizmos.color = new Color(1f, 0.36f, 0.24f);
+                Gizmos.DrawLine(CameraManagerProperty.VirtualCameraCombat.transform.position, hit.point);
+                Gizmos.DrawSphere(hit.point, 1f);
+            }
+        }
+
+#endif
     }
 }

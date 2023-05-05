@@ -87,13 +87,19 @@ namespace Character.State
                     projectile.Data.ForbiddenColliders.Add(character.KayakControllerProperty.gameObject);
 
                     float power = Mathf.Clamp(_holdingTime, 0.5f, 1f);
-                    
-                    Vector3 direction = MathTools.GetDirectionFromTransformToPointCameraLooking(character.transform, 30f);
-                    if (Physics.Raycast(playerPosition, direction, out var hit)) //TODO from cam direction cam.transform.forward
+
+                    Vector3 direction = MathTools.GetDirectionFromTransformToPointCameraLooking(CharacterManagerRef.transform, 30f);
+
+                    UnityEngine.Camera mainCamera = UnityEngine.Camera.main;
+                    Vector3 screenCenter = new Vector3(0.5f, 0.5f, 0f);
+                    Vector3 rayDirection = mainCamera.ViewportPointToRay(screenCenter).direction;
+                    Ray ray = new Ray(mainCamera.transform.position, rayDirection);
+
+                    if (Physics.Raycast(ray, out RaycastHit hit))
                     {
-                        direction = hit.point - character.transform.position;
+                        direction = hit.point - CharacterManagerRef.transform.position;
                     }
-                    
+
                     projectile.Launch(direction.normalized, power);
                     projectile.OnProjectileDie.AddListener(ProjectileHit);
                     

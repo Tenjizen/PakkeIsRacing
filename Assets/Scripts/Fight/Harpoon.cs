@@ -1,6 +1,7 @@
 using System;
 using Character;
 using Sound;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Fight
