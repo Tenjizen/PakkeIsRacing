@@ -63,6 +63,8 @@ namespace UI.Menu
         {
             base.Set(isActive, isUsable);
             _text.text = MenuList[HorizontalIndex].Name;
+            
+            MenuList.ForEach(x => x.Menu.Set(false,false));
             MenuList[HorizontalIndex].Menu.Set(isActive,isUsable);
         }
     }
