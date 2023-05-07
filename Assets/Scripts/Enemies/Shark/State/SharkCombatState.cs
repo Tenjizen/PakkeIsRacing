@@ -3,6 +3,7 @@ using Character.State;
 using Enemies.Shark;
 using Kayak;
 using UnityEngine;
+using Character;
 
 public class SharkCombatState : SharkBaseState
 {
@@ -53,6 +54,15 @@ public class SharkCombatState : SharkBaseState
     public override void UpdateState(SharkManager sharkManager)
     {
 
+        if (CharacterManager.Instance.CameraManagerProperty.StartDeath == true)
+        {
+            sharkManager.FreeRoamState();
+        }
+        if (sharkManager.IsPossessed == false && _attackState == AttackState.None)
+        {
+            sharkManager.FreeRoamState();
+        }
+
 
         if (sharkManager.TargetTransform != null)
         {
@@ -60,9 +70,6 @@ public class SharkCombatState : SharkBaseState
             _distSharkTarget = Vector3.Distance(sharkManager.TargetTransform.position, sharkManager.transform.position);
             _distSharkPointTarget = Vector3.Distance(sharkManager.PointTarget.transform.position, sharkManager.transform.position);
             _distSharkPointTargetAttack = Vector3.Distance(sharkManager.PointTargetAttack.transform.position, sharkManager.transform.position);
-
-            Debug.Log(_state);
-            Debug.Log(_attackState);
 
             var rbKayak = CharacterManager.Instance.KayakControllerProperty.Rigidbody.velocity;
             rbKayak.y = 0;
@@ -287,9 +294,9 @@ public class SharkCombatState : SharkBaseState
     {
         _currentOffSet = Mathf.Lerp(_currentOffSet, _elevationOffsetBase, 0.005f);
 
-        var pos = sharkManager.Forward.transform.position;
+        var pos = sharkManager.transform.position;
         pos.y = _currentOffSet;
-        sharkManager.Forward.transform.position = pos;
+        sharkManager.transform.position = pos;
 
 
 
@@ -417,9 +424,12 @@ public class SharkCombatState : SharkBaseState
             sharkManager.Circle.SetActive(false);
         }
 
-        Vector3 pos = sharkManager.Forward.transform.position;
+        //Vector3 pos = sharkManager.Forward.transform.position;
+        //pos.y = sharkManager.Data.JumpCurve.Evaluate(_timeAnimationCurve);
+        //sharkManager.Forward.transform.position = pos;
+         Vector3 pos = sharkManager.transform.position;
         pos.y = sharkManager.Data.JumpCurve.Evaluate(_timeAnimationCurve);
-        sharkManager.Forward.transform.position = pos;
+        sharkManager.transform.position = pos;
 
         sharkManager.Forward.transform.Translate(Vector3.forward * sharkManager.CurrentSpeed * Time.deltaTime, Space.Self);
 
@@ -513,9 +523,12 @@ public class SharkCombatState : SharkBaseState
 
         }
 
-        Vector3 pos = sharkManager.Forward.transform.position;
+        //Vector3 pos = sharkManager.Forward.transform.position;
+        //pos.y = sharkManager.Data.JumpCurvePhaseThree.Evaluate(_timeAnimationCurve);
+        //sharkManager.Forward.transform.position = pos;
+        Vector3 pos = sharkManager.transform.position;
         pos.y = sharkManager.Data.JumpCurvePhaseThree.Evaluate(_timeAnimationCurve);
-        sharkManager.Forward.transform.position = pos;
+        sharkManager.transform.position = pos;
 
         sharkManager.Forward.transform.Translate(Vector3.forward * sharkManager.CurrentSpeed * Time.deltaTime, Space.Self);
 
@@ -695,9 +708,9 @@ public class SharkCombatState : SharkBaseState
 
             sharkManager.SwitchSpeed(sharkManager.Data.SpeedCombatRush);
 
-            var pos = sharkManager.Forward.transform.position;
+            var pos = sharkManager.transform.position;
             pos.y = _currentOffSet;
-            sharkManager.Forward.transform.position = pos;
+            sharkManager.transform.position = pos;
         }
 
         sharkManager.Forward.transform.Translate(Vector3.forward * sharkManager.CurrentSpeed * Time.deltaTime, Space.Self);
@@ -731,9 +744,9 @@ public class SharkCombatState : SharkBaseState
 
         _currentOffSet = Mathf.Lerp(_currentOffSet, _elevationOffsetBase, 0.005f);
 
-        var pos = sharkManager.Forward.transform.position;
+        var pos = sharkManager.transform.position;
         pos.y = _currentOffSet;
-        sharkManager.Forward.transform.position = pos;
+        sharkManager.transform.position = pos;
         //SetOffSet(sharkManager, sharkManager.ElevationOffset);
 
         sharkManager.SwitchSpeed(sharkManager.Data.SpeedToMoveToTarget);
@@ -781,9 +794,9 @@ public class SharkCombatState : SharkBaseState
         sharkManager.Forward.transform.localEulerAngles = rota;
 
 
-        var pos = sharkManager.Forward.transform.position;
+        var pos = sharkManager.transform.position;
         pos.y = sharkManager.Data.ElevationOffset;
-        sharkManager.Forward.transform.position = pos;
+        sharkManager.transform.position = pos;
 
         if (_attackState != AttackState.JumpToTarget)
             sharkManager.SwitchSpeed(sharkManager.Data.SpeedToMoveToTarget);

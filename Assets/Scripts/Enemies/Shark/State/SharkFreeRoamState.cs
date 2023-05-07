@@ -23,10 +23,21 @@ public class SharkFreeRoamState : SharkBaseState
         Debug.Log("free");
         _state = FreeRoamState.RotateToMoveTarget;
         sharkManager.SharkCollider.enabled = true;
+
+        var rota = sharkManager.transform.rotation;
+        rota.x = 0;
+        sharkManager.transform.rotation = rota;
     }
 
     public override void UpdateState(SharkManager sharkManager)
     {
+        if(sharkManager.transform.position.y > sharkManager.Data.ElevationOffset || sharkManager.transform.position.y < sharkManager.Data.ElevationOffset)
+        {
+            var pos = sharkManager.Forward.transform.position;
+            pos.y = Mathf.Lerp(pos.y ,sharkManager.Data.ElevationOffset, 0.01f);
+            sharkManager.transform.position = pos;
+        }
+
 
         _distSharkPointTarget = Vector3.Distance(sharkManager.PointTarget.transform.position, sharkManager.transform.position);
 
