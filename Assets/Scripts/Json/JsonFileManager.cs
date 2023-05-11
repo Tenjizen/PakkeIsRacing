@@ -28,7 +28,7 @@ namespace Json
 
         public List<T> GetDataList()
         {
-            string filePath = Application.dataPath + $"/{typeof(T)}{_id}.json";
+            string filePath = Application.dataPath + $"/JsonFiles/{typeof(T)}{_id}.json";
             string json = System.IO.File.ReadAllText(filePath);
             return JsonUtility.FromJson<JsonWrapper<T>>(json).DataList;
         }
@@ -41,7 +41,7 @@ namespace Json
         public void SaveToJsonFile()
         {
             string json = JsonUtility.ToJson(Wrapper, true);
-            string filePath = Application.dataPath + $"/{typeof(T)}{_id}.json";
+            string filePath = Application.dataPath + $"/JsonFiles/{typeof(T)}{_id}.json";
             System.IO.File.WriteAllText(filePath, json);
             Debug.Log("Data saved to: " + filePath);
         }

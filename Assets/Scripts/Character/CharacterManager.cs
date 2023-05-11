@@ -157,6 +157,11 @@ namespace Character
             }
         }
 
+        public void SendDebugMessage(string message)
+        {
+            Debug.Log(message);
+        }
+
         #region GUI
 
         private void OnGUI()

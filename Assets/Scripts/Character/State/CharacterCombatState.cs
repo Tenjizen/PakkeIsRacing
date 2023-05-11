@@ -120,6 +120,8 @@ namespace Character.State
 
         private void CheckAutoAim()
         {
+            CharacterManagerRef.SendDebugMessage("checkAutoAim");
+            
             //raycast
             RaycastHit[] hits = new RaycastHit[100];
             float radius = CharacterManagerRef.Data.AutoAimSize; 
@@ -137,6 +139,7 @@ namespace Character.State
                 {
                     continue;
                 }
+                CharacterManagerRef.SendDebugMessage($"found hittable {hittable.Transform.gameObject.name}");
                 hasFoundAHittable = true;
                 _hittable = hittable;
                 break;
