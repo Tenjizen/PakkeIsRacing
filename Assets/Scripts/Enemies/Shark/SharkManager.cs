@@ -6,7 +6,7 @@ using Shark.Data;
 using Sound;
 using UnityEngine;
 using WaterAndFloating;
-
+using Character.Camera;
 namespace Enemies.Shark
 {
     public class SharkManager : Enemy
@@ -68,54 +68,12 @@ namespace Enemies.Shark
             CurrentStateBase.UpdateState(this);
 
 
-            //avoid iceberg
-            Ray ray = new Ray(Forward.transform.position, Forward.transform.forward);
-            //Ray ray = new Ray(this.transform.position, transform.forward);
-            RaycastHit hit;
-            //if(Physics.Raycast(ray, out hit, 200))
-            if (Physics.Raycast(ray, out hit, 15))
-            {
-                if (hit.collider.gameObject.GetComponent<KayakController>() == false)
-                {
-                    collision = hit.point;
-
-                    Vector2 targetHitPos = new Vector2(hit.transform.position.x, hit.transform.position.z);
-
-                    Vector2 targetPos = new Vector2(PointTarget.transform.position.x, PointTarget.transform.position.z);
-
-                    Vector2 sharkForward = new Vector2(Forward.transform.forward.x, Forward.transform.forward.z);
-                    Vector2 sharkPos = new Vector2(Forward.transform.position.x, Forward.transform.position.z);
-
-                    float angleTarget = Vector2.SignedAngle(sharkForward, targetPos - sharkPos);
-                    if (angleTarget < 0)
-                        angleTarget += 360;
-
-                    Vector3 rotation = Forward.transform.localEulerAngles;
 
 
-                    float angleHit = Vector2.SignedAngle(sharkForward, targetHitPos - sharkPos);
-                    if (angleHit < 0)
-                        angleHit += 360;
 
-                    ////var lastRota = rotation.y 
+            AvoidObstacle();
 
-                    if (angleHit <= 90 || angleHit >= 360-90)
-                    {
-                        if (angleTarget >= 0 && angleTarget < 180)
-                        {
-                            //rotation.y -= Time.deltaTime * Data.SpeedCombatRotationStatic;
-                            rotation.y -= Time.deltaTime * 150;
-                        }
-                        else if (angleTarget >= 180 && angleTarget <= 360)
-                        {
-                            //rotation.y -= Time.deltaTime * Data.SpeedCombatRotationStatic;
-                            rotation.y += Time.deltaTime * 150;
-                        }
-                    }
-                    //apply rota
-                    Forward.transform.localEulerAngles = rotation;
-                }
-            }
+
         }
         private void FixedUpdate()
         {
@@ -178,7 +136,6 @@ namespace Enemies.Shark
         {
             CurrentSpeed = Mathf.Lerp(CurrentSpeed, speed, 0.05f);
         }
-
         private void OnTriggerEnter(Collider other)
         {
             if (other.GetComponent<KayakController>() == true && IsCollided == false && IsPossessed == true)
@@ -201,5 +158,83 @@ namespace Enemies.Shark
 
             }
         }
+
+        private void AvoidObstacle()
+        {
+            //avoid iceberg
+            Ray ray = new Ray(Forward.transform.position, Forward.transform.forward);
+            //Ray ray = new Ray(this.transform.position, transform.forward);
+            RaycastHit hit;
+            //if(Physics.Raycast(ray, out hit, 200))
+            if (Physics.Raycast(ray, out hit, 15))
+            {
+                if (hit.collider.gameObject.GetComponent<KayakController>() == false)
+                {
+                    collision = hit.point;
+
+                    Vector2 targetHitPos = new Vector2(hit.transform.position.x, hit.transform.position.z);
+
+                    Vector2 targetPos = new Vector2(PointTarget.transform.position.x, PointTarget.transform.position.z);
+
+                    Vector2 sharkForward = new Vector2(Forward.transform.forward.x, Forward.transform.forward.z);
+                    Vector2 sharkPos = new Vector2(Forward.transform.position.x, Forward.transform.position.z);
+
+                    float angleTarget = Vector2.SignedAngle(sharkForward, targetPos - sharkPos);
+                    if (angleTarget < 0)
+                        angleTarget += 360;
+
+                    Vector3 rotation = Forward.transform.localEulerAngles;
+
+
+                    float angleHit = Vector2.SignedAngle(sharkForward, targetHitPos - sharkPos);
+                    if (angleHit < 0)
+                        angleHit += 360;
+
+                    ////var lastRota = rotation.y 
+
+                    if (angleHit <= 90 || angleHit >= 360 - 90)
+                    {
+                        if (angleTarget >= 0 && angleTarget < 180)
+                        {
+                            //rotation.y -= Time.deltaTime * Data.SpeedCombatRotationStatic;
+                            rotation.y -= Time.deltaTime * 150;
+                        }
+                        else if (angleTarget >= 180 && angleTarget <= 360)
+                        {
+                            //rotation.y -= Time.deltaTime * Data.SpeedCombatRotationStatic;
+                            rotation.y += Time.deltaTime * 150;
+                        }
+                    }
+                    //apply rota
+                    Forward.transform.localEulerAngles = rotation;
+                }
+            }
+        }
+
+
+        #region CutScene
+        public void CutSceneFirstWave()
+        {
+            Vector2 center = Data.StartFirstCircularWaveDataPhaseThree.Center;
+
+            center.x = Forward.transform.position.x;
+            center.y = Forward.transform.position.z;
+
+            Data.StartFirstCircularWaveDataPhaseThree.Center = center;
+
+            WavesData.LaunchCircularWave(Data.StartFirstCircularWaveDataPhaseThree);
+        }
+        public void CutSceneSecondWave()
+        {
+            Vector2 center = Data.StartSecondCircularWaveDataPhaseThree.Center;
+
+            center.x = Forward.transform.position.x;
+            center.y = Forward.transform.position.z;
+
+            Data.StartFirstCircularWaveDataPhaseThree.Center = center;
+
+            WavesData.LaunchCircularWave(Data.StartSecondCircularWaveDataPhaseThree);
+        }
+        #endregion
     }
 }

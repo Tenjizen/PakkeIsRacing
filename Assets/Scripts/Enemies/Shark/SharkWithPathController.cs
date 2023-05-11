@@ -61,9 +61,10 @@ public class SharkWithPathController : MonoBehaviour
         t.position = position;
 
         //rotation
-        Vector3 rotation = t.rotation.eulerAngles;
+        Vector3 rotation = t.localEulerAngles;
         Vector3 direction = _splinePath.GetDirection(_currentSplinePosition);
+
         float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
-        t.rotation = Quaternion.Euler(rotation.x, angle, rotation.z);
+        t.localRotation = Quaternion.Euler(rotation.x, angle, rotation.z);
     }
 }
