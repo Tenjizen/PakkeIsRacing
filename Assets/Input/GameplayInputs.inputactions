@@ -211,6 +211,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ParameterMenuPressButton",
+                    "type": "Button",
+                    "id": "c51ba526-eb6c-4664-a10d-a7ef60efa205",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ClosePauseMenu",
+                    "type": "Button",
+                    "id": "f48ba92a-5447-4450-a90e-df13a3299c44",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -684,6 +702,50 @@
                     "processors": "",
                     "groups": "GamePad",
                     "action": "SelectOnWheelY",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8a788e16-c3c3-4f2d-8f3b-0b641fd7c728",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "ParameterMenuPressButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "700ff9aa-49ba-4225-9969-223b9d322881",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "ParameterMenuPressButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2f4b7ad8-800c-4c04-87da-2b3dd3799b34",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "ClosePauseMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b68a0eb7-af81-45d6-9b19-835631d26b93",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "ClosePauseMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
