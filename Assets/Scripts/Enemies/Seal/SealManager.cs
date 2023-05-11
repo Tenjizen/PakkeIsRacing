@@ -13,7 +13,7 @@ namespace Enemies.Seal
         Backward = 1
     }
     
-    public class SealController : MonoBehaviour, IHittable
+    public class SealManager : Enemy
     {
         [Header("Player detection"), SerializeField] private PlayerTriggerManager _frontPlayerTrigger;
         [SerializeField] private PlayerTriggerManager _backPlayerTrigger;
@@ -111,7 +111,7 @@ namespace Enemies.Seal
 
         #endregion
 
-        public void Hit(Projectile projectile, GameObject owner)
+        public virtual void Hit(Projectile projectile, GameObject owner)
         {
             
         }

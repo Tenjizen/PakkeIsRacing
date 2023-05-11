@@ -12,6 +12,8 @@ namespace Character.State
         private bool _isHoldingShoot;
         private float _holdingTime;
 
+        private IHittable hittable;
+
         #region Base methods
 
         public override void EnterState(CharacterManager character)
@@ -25,7 +27,7 @@ namespace Character.State
 
         public override void UpdateState(CharacterManager character)
         {
-            HandleAim();
+            CheckAutoAim();
             HandleShoot();
             CheckBalance();
         }
@@ -45,16 +47,6 @@ namespace Character.State
         #endregion
 
         #region Methods
-
-        private void HandleAim()
-        {
-            //kayak rotation
-            // Quaternion kayakTransformRotation = CharacterManagerRef.KayakControllerProperty.transform.rotation;
-            // float targetAngle = CharacterManagerRef.CameraManagerProperty.CinemachineCameraFollowCombat.transform.rotation.eulerAngles.y;
-            // Quaternion targetRotation = Quaternion.Euler(new Vector3(kayakTransformRotation.eulerAngles.x, targetAngle, kayakTransformRotation.eulerAngles.z));
-            // Quaternion rotation = Quaternion.Lerp(kayakTransformRotation,targetRotation,CharacterManagerRef.Data.BoatFollowAimLerp);
-            // CharacterManagerRef.KayakControllerProperty.transform.rotation = rotation;
-        }
 
         private void HandleShoot()
         {
@@ -116,6 +108,11 @@ namespace Character.State
             {
                 LaunchNavigationState();
             }
+        }
+
+        private void CheckAutoAim()
+        {
+            
         }
 
         private void ProjectileHit()

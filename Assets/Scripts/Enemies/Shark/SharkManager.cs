@@ -9,7 +9,7 @@ using WaterAndFloating;
 
 namespace Enemies.Shark
 {
-    public class SharkManager : MonoBehaviour, IHittable
+    public class SharkManager : Enemy
     {
         [field: SerializeField] public SharkBaseState CurrentStateBase { get; private set; }
         [field: SerializeField, ReadOnly] public Transform TargetTransform { get; private set; }
@@ -151,7 +151,7 @@ namespace Enemies.Shark
         }
 
 
-        public void Hit(Projectile projectile, GameObject owner)
+        public override void Hit(Projectile projectile, GameObject owner)
         {
 
             CurrentLife -= 1;
