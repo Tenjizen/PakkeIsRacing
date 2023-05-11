@@ -274,14 +274,14 @@ namespace Character.State
             {
                 _leftPaddleCooldown = _kayakValues.PaddleCooldown;
                 _rightPaddleCooldown = _kayakValues.PaddleCooldown / 2;
-                Paddle(Direction.Left);
+                Paddle(CharacterManagerRef.Parameters.InversedControls ? Direction.Right : Direction.Left);
             }
             
             if (_inputs.Inputs.PaddleRight && _rightPaddleCooldown <= 0 && _inputs.Inputs.PaddleLeft == false)
             {
                 _rightPaddleCooldown = _kayakValues.PaddleCooldown;
                 _leftPaddleCooldown = _kayakValues.PaddleCooldown / 2;
-                Paddle(Direction.Right);
+                Paddle(CharacterManagerRef.Parameters.InversedControls ? Direction.Left : Direction.Right);
             }
         }
 

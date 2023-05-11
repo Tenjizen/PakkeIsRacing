@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using Fight;
-using UI.WeaponWheel;
+﻿using Fight;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Character.Data
+namespace Character.Data.Character
 {
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/CharacterData", order = 1)]
     public class CharacterData : ScriptableObject

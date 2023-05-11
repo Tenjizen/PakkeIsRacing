@@ -67,12 +67,10 @@ namespace Enemies.Seal
         }
         private void SetPlayerAtFrontFalse()
         {
-            Debug.Log("front exited");
             _playerIsAtFront = false;
         }
         private void SetPlayerAtBackFalse()
         {
-            Debug.Log("back exited");
             _playerIsAtBack = false;
         }
 

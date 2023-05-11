@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Character.Camera;
 using Character.Data;
+using Character.Data.Character;
 using Character.State;
 using Fight;
 using GPEs.Checkpoint;
@@ -32,6 +33,7 @@ namespace Character
         [field: SerializeField] public CheckpointManager CheckpointManagerProperty { get; private set; }
         [field: SerializeField] public MonoBehaviour CharacterMonoBehaviour { get; private set; }
         [field: SerializeField] public ExperienceManager ExperienceManagerProperty { get; private set; }
+        [field: SerializeField] public PlayerParameters Parameters { get; set; }
 
         #endregion
 
@@ -189,5 +191,12 @@ namespace Character
         }
 
 #endif
+    }
+
+    [Serializable]
+    public struct PlayerParameters
+    {
+        public bool AutoAim;
+        public bool InversedControls;
     }
 }
