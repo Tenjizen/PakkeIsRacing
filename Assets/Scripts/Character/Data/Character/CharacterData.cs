@@ -56,5 +56,12 @@ namespace Character.Data.Character
         
         [field:SerializeField] 
         public Projectile NetPrefab { get; private set; }
+        
+        
+        [field:SerializeField, Header("Auto-Aim"), Tooltip("The width of the circle in within the auto aim detect an enemy")]
+        public float AutoAimSize { get; private set; }
+        
+        [field:SerializeField, Tooltip("The time needed in the inner circle of auto-aim to activate auto-aim at launch")]
+        public float TimeToAutoAim { get; private set; }
     }
 }

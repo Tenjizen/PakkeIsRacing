@@ -20,6 +20,8 @@ namespace UI.WeaponWheel
         [SerializeField] private Transform _cursorPivot;
         [SerializeField] private Image _cooldown;
 
+        [field:SerializeField, Header("AutoAim")] public AutoAimUIController AutoAimController { get; private set; }
+
         private Vector3 _vignetteBaseScale;
         private bool _isMenuOpen;
         

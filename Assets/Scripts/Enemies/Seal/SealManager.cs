@@ -111,7 +111,7 @@ namespace Enemies.Seal
 
         #endregion
 
-        public virtual void Hit(Projectile projectile, GameObject owner)
+        public override void Hit(Projectile projectile, GameObject owner)
         {
             
         }

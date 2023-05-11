@@ -10,14 +10,20 @@ namespace Collectible
     {
         public UnityEvent OnCollected = new UnityEvent();
         public CollectibleData Data;
-        
+
+        public Transform Transform
+        {
+            get { return transform; }
+            set { }
+        }
+
         public void Hit(Projectile projectile, GameObject owner)
         {
             Debug.Log("hit");
             SetCollected();
         }
 
-        public void SetCollected()
+        private void SetCollected()
         {
             gameObject.SetActive(false);
             OnCollected.Invoke();
