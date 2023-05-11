@@ -8,7 +8,6 @@ namespace UI.Menu
     public class SubMenuParametersController : MenuController
     {
         [Header("Sub Menu"), SerializeField] private List<MenuUIObject> _objectsList = new List<MenuUIObject>();
-        [SerializeField] private Transform _dialogsUIObjectLayout;
 
         private int _index;
         
@@ -61,6 +60,7 @@ namespace UI.Menu
             for (int i = 0; i < _objectsList.Count; i++)
             {
                 _objectsList[i].Set(i == _index);
+                _objectsList[i].IsSelected = i == _index;
             }
         }
     }

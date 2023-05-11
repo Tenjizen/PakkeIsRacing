@@ -168,7 +168,12 @@ namespace UI.Menu
 
             float rotationAmountX = -sticksInputs.x * 2f;
             float rotationAmountY = -sticksInputs.y * 2f;
-
+            if (rotationAmountX == 0)
+            {
+                const float rotationSpeed = 0.1f;
+                rotationAmountX = rotationSpeed;
+            }
+            
             transform.Rotate(Vector3.up, rotationAmountX, Space.World);
             transform.Rotate(Vector3.right, rotationAmountY, Space.World);
         }

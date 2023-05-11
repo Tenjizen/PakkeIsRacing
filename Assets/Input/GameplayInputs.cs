@@ -233,6 +233,24 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ParameterMenuPressButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""c51ba526-eb6c-4664-a10d-a7ef60efa205"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ClosePauseMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""f48ba92a-5447-4450-a90e-df13a3299c44"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -708,6 +726,50 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""action"": ""SelectOnWheelY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a788e16-c3c3-4f2d-8f3b-0b641fd7c728"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""ParameterMenuPressButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""700ff9aa-49ba-4225-9969-223b9d322881"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""ParameterMenuPressButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f4b7ad8-800c-4c04-87da-2b3dd3799b34"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""ClosePauseMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b68a0eb7-af81-45d6-9b19-835631d26b93"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""ClosePauseMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -750,6 +812,8 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         m_Boat_MenuRight = m_Boat.FindAction("MenuRight", throwIfNotFound: true);
         m_Boat_MenuTopLeft = m_Boat.FindAction("MenuTopLeft", throwIfNotFound: true);
         m_Boat_MenuTopRight = m_Boat.FindAction("MenuTopRight", throwIfNotFound: true);
+        m_Boat_ParameterMenuPressButton = m_Boat.FindAction("ParameterMenuPressButton", throwIfNotFound: true);
+        m_Boat_ClosePauseMenu = m_Boat.FindAction("ClosePauseMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -832,6 +896,8 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Boat_MenuRight;
     private readonly InputAction m_Boat_MenuTopLeft;
     private readonly InputAction m_Boat_MenuTopRight;
+    private readonly InputAction m_Boat_ParameterMenuPressButton;
+    private readonly InputAction m_Boat_ClosePauseMenu;
     public struct BoatActions
     {
         private @GameplayInputs m_Wrapper;
@@ -859,6 +925,8 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         public InputAction @MenuRight => m_Wrapper.m_Boat_MenuRight;
         public InputAction @MenuTopLeft => m_Wrapper.m_Boat_MenuTopLeft;
         public InputAction @MenuTopRight => m_Wrapper.m_Boat_MenuTopRight;
+        public InputAction @ParameterMenuPressButton => m_Wrapper.m_Boat_ParameterMenuPressButton;
+        public InputAction @ClosePauseMenu => m_Wrapper.m_Boat_ClosePauseMenu;
         public InputActionMap Get() { return m_Wrapper.m_Boat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -937,6 +1005,12 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @MenuTopRight.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuTopRight;
                 @MenuTopRight.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuTopRight;
                 @MenuTopRight.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnMenuTopRight;
+                @ParameterMenuPressButton.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnParameterMenuPressButton;
+                @ParameterMenuPressButton.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnParameterMenuPressButton;
+                @ParameterMenuPressButton.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnParameterMenuPressButton;
+                @ClosePauseMenu.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnClosePauseMenu;
+                @ClosePauseMenu.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnClosePauseMenu;
+                @ClosePauseMenu.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnClosePauseMenu;
             }
             m_Wrapper.m_BoatActionsCallbackInterface = instance;
             if (instance != null)
@@ -1010,6 +1084,12 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @MenuTopRight.started += instance.OnMenuTopRight;
                 @MenuTopRight.performed += instance.OnMenuTopRight;
                 @MenuTopRight.canceled += instance.OnMenuTopRight;
+                @ParameterMenuPressButton.started += instance.OnParameterMenuPressButton;
+                @ParameterMenuPressButton.performed += instance.OnParameterMenuPressButton;
+                @ParameterMenuPressButton.canceled += instance.OnParameterMenuPressButton;
+                @ClosePauseMenu.started += instance.OnClosePauseMenu;
+                @ClosePauseMenu.performed += instance.OnClosePauseMenu;
+                @ClosePauseMenu.canceled += instance.OnClosePauseMenu;
             }
         }
     }
@@ -1057,5 +1137,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         void OnMenuRight(InputAction.CallbackContext context);
         void OnMenuTopLeft(InputAction.CallbackContext context);
         void OnMenuTopRight(InputAction.CallbackContext context);
+        void OnParameterMenuPressButton(InputAction.CallbackContext context);
+        void OnClosePauseMenu(InputAction.CallbackContext context);
     }
 }
