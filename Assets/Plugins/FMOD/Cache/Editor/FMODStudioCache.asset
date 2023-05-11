@@ -15,11 +15,92 @@ MonoBehaviour:
   Path: FMOD_project/Pakke_Is/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638167397496424568
+  lastModified: 638168969869718602
   FileSizes:
   - Name: Desktop
     Value: 1486
   Exists: 1
+--- !u!114 &-6131030461716715721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/HarpoonHit
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/HarpoonHit
+  Guid:
+    Data1: -99046192
+    Data2: 1215293262
+    Data3: 1238210730
+    Data4: -1651047736
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5691456081078588229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/HarpoonEquip
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/HarpoonEquip
+  Guid:
+    Data1: 423010563
+    Data2: 1087191672
+    Data3: 456072347
+    Data4: 326855228
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3627521547562923946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambience/CaveAmbience
+  m_EditorClassIdentifier: 
+  Path: event:/Ambience/CaveAmbience
+  Guid:
+    Data1: 682853496
+    Data2: 1267999258
+    Data3: 204724393
+    Data4: -123668149
+  Banks:
+  - {fileID: 6918480860476981872}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 93500
 --- !u!114 &-1612053340526644219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,12 +176,23 @@ MonoBehaviour:
   EditorEvents:
   - {fileID: 1858434606946778931}
   - {fileID: -1612053340526644219}
+  - {fileID: -3627521547562923946}
+  - {fileID: 5284119263960265901}
+  - {fileID: -5691456081078588229}
+  - {fileID: 9082981890551064965}
+  - {fileID: 5642638132054646883}
+  - {fileID: 771401803854705725}
+  - {fileID: 6358965872720031612}
+  - {fileID: 2511334109197630455}
+  - {fileID: 1498317809489932887}
+  - {fileID: -6131030461716715721}
+  - {fileID: 6208503652608605623}
   EditorParameters: []
   MasterBanks:
   - {fileID: -8127459704306106220}
   StringsBanks:
   - {fileID: 5488868156226981610}
-  cacheTime: 638174068222334051
+  cacheTime: 638194026445775643
   cacheVersion: 131601
 --- !u!114 &83555140158494301
 MonoBehaviour:
@@ -150,6 +242,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &771401803854705725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/NetHit
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/NetHit
+  Guid:
+    Data1: 33749068
+    Data2: 1319943297
+    Data3: -1249522514
+    Data4: 1785326610
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &1426460621515787707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,11 +284,38 @@ MonoBehaviour:
   Path: FMOD_project/Pakke_Is/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638167397496444568
+  lastModified: 638194026445775643
   FileSizes:
   - Name: Desktop
-    Value: 494
+    Value: 455456
   Exists: 1
+--- !u!114 &1498317809489932887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/NetThrow
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/NetThrow
+  Guid:
+    Data1: -1462410319
+    Data2: 1167868647
+    Data3: 2109704612
+    Data4: -1214402756
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &1858434606946778931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,6 +345,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 105168
+--- !u!114 &2511334109197630455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/NetEquip
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/NetEquip
+  Guid:
+    Data1: 393588346
+    Data2: 1332366025
+    Data3: -201657433
+    Data4: -968413216
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5284119263960265901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambience/MainAmbience
+  m_EditorClassIdentifier: 
+  Path: event:/Ambience/MainAmbience
+  Guid:
+    Data1: 597313203
+    Data2: 1135804260
+    Data3: 174042028
+    Data4: -1498086651
+  Banks:
+  - {fileID: 6918480860476981872}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 108250
 --- !u!114 &5488868156226981610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,11 +414,92 @@ MonoBehaviour:
   Path: FMOD_project/Pakke_Is/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638174068222334051
+  lastModified: 638194026445755639
   FileSizes:
   - Name: Desktop
-    Value: 1180
+    Value: 1668
   Exists: 1
+--- !u!114 &5642638132054646883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Checkpoint
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Checkpoint
+  Guid:
+    Data1: -467036606
+    Data2: 1187406234
+    Data3: 868130216
+    Data4: 15149958
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &6208503652608605623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/PaddleRowing
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/PaddleRowing
+  Guid:
+    Data1: -998421798
+    Data2: 1134824769
+    Data3: 1569665921
+    Data4: -1439370651
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &6358965872720031612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/WaterSplashes
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/WaterSplashes
+  Guid:
+    Data1: -582695322
+    Data2: 1209411196
+    Data3: 676230539
+    Data4: -673587192
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &6918480860476981872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,8 +515,35 @@ MonoBehaviour:
   Path: FMOD_project/Pakke_Is/Build/Desktop/Level1.bank
   Name: Level1
   StudioPath: bank:/Level1
-  lastModified: 638174068222324048
+  lastModified: 638194026445735639
   FileSizes:
   - Name: Desktop
-    Value: 21759680
+    Value: 26381184
   Exists: 1
+--- !u!114 &9082981890551064965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/HarpoonThrow
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/HarpoonThrow
+  Guid:
+    Data1: -483999685
+    Data2: 1108596737
+    Data3: -1930236012
+    Data4: -1777385923
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
