@@ -12,6 +12,7 @@ using Sound;
 using Tools.SingletonClassBase;
 using UI;
 using UI.WeaponWheel;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -184,14 +185,16 @@ namespace Character
 
             Vector3 screenCenter = new Vector3(0.5f, 0.5f, 0f);
             Vector3 rayDirection = mainCamera.ViewportPointToRay(screenCenter).direction;
-
             Ray ray = new Ray(mainCamera.transform.position, rayDirection);
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                Gizmos.color = new Color(1f, 0.36f, 0.24f);
+                Color gizmoColor = new Color(1f, 0.36f, 0.24f);
+                Gizmos.color = gizmoColor;
+                
                 Gizmos.DrawLine(CameraManagerProperty.VirtualCameraCombat.transform.position, hit.point);
                 Gizmos.DrawSphere(hit.point, 1f);
+                Gizmos.DrawWireSphere(hit.point, Data.AutoAimSize);
             }
         }
 

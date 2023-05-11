@@ -24,6 +24,8 @@ namespace Character.State
             _weaponPrefab = CharacterManagerRef.CurrentProjectile;
             
             CharacterManagerRef.WeaponUIManagerProperty.SetCursor(true);
+            
+            CharacterManagerRef.WeaponUIManagerProperty.AutoAimController.ShowAutoAimCircle(CharacterManagerRef.Parameters.AutoAim);
         }
 
         public override void UpdateState(CharacterManager character)
@@ -120,18 +122,14 @@ namespace Character.State
 
         private void CheckAutoAim()
         {
-            CharacterManagerRef.SendDebugMessage("checkAutoAim");
-            
             //raycast
             RaycastHit[] hits = new RaycastHit[100];
-            float radius = CharacterManagerRef.Data.AutoAimSize; 
-            float height = 200f; 
-            Transform camera = CharacterManagerRef.CameraManagerProperty.VirtualCameraCombat.transform;
-            Vector3 origin = camera.position; 
-            Vector3 direction = camera.forward; 
+            float radius = CharacterManagerRef.Data.AutoAimSize;
+            Transform camera = CameraManagerRef.VirtualCameraCombat.transform;
+            int hitCount = Physics.SphereCastNonAlloc(camera.position, radius, camera.forward, hits, 200f);
 
-            int hitCount = Physics.CapsuleCastNonAlloc(origin, origin + direction * height, radius, direction, hits, 0f);
             bool hasFoundAHittable = false;
+            
             for (int i = 0; i < hitCount; i++)
             {
                 IHittable hittable = hits[i].collider.GetComponent<IHittable>();
@@ -139,7 +137,6 @@ namespace Character.State
                 {
                     continue;
                 }
-                CharacterManagerRef.SendDebugMessage($"found hittable {hittable.Transform.gameObject.name}");
                 hasFoundAHittable = true;
                 _hittable = hittable;
                 break;
@@ -199,6 +196,8 @@ namespace Character.State
             CharacterManagerRef.WeaponUIManagerProperty.SetPaddleDownImage(false);
             CharacterManagerRef.WeaponUIManagerProperty.SetCursor(false);
             CharacterManagerRef.WeaponUIManagerProperty.SetCooldownUI(0);
+            
+            CharacterManagerRef.WeaponUIManagerProperty.AutoAimController.ShowAutoAimCircle(false);
         }
 
         #endregion
