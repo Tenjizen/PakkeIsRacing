@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 4285338905635752385}
   - component: {fileID: 2201067951344081947}
   - component: {fileID: 1158828331}
+  - component: {fileID: 5223573444733396227}
   m_Layer: 0
   m_Name: Checkpoint
   m_TagString: Untagged
@@ -94,20 +95,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80ac52b023f917488fcc26e5862f92d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerType: 0
+  _triggerType: 1
   _showTriggerGizmos: 1
   _triggerBoxSize: {x: 1, y: 1, z: 1}
-  _triggerSphereSizeRadius: 1
-  _triggerOffsetPosition: {x: 0, y: 0.43, z: 0}
+  _triggerSphereSizeRadius: 28.34
+  _triggerOffsetPosition: {x: 24.95, y: 0.43, z: -14.18}
   _playerLayerMask:
     serializedVersion: 2
     m_Bits: 2147483647
   OnPlayerEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1158828331}
-        m_TargetAssemblyTypeName: GPEs.Checkpoint.Checkpoint, Assembly-CSharp
-        m_MethodName: SetCheckPoint
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -123,11 +124,41 @@ MonoBehaviour:
   OnPlayerExited:
     m_PersistentCalls:
       m_Calls: []
-  _zoneName: "Entr\xE9e de la grotte"
+  _zoneName: "Aucun r\xE9pit"
   _zoneManager: {fileID: 0}
   _targetRespawnTransform: {fileID: 5824427334280982204}
   _activationParticles: {fileID: 5389502103451266307}
   _activationClip: {fileID: 8300000, guid: 6e310188983e697438ee8a2c57dd70f5, type: 3}
+--- !u!114 &5223573444733396227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4285338905635752386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -467036606
+      Data2: 1187406234
+      Data3: 868130216
+      Data4: 15149958
+    Path: event:/SFX/Checkpoint
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &5169849621225320633
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,9 +2,11 @@ using Character;
 using Sound;
 using UI;
 using UnityEngine;
+using FMODUnity;
 
 namespace GPEs.Checkpoint
 {
+    [RequireComponent(typeof(StudioEventEmitter))]
     public class Checkpoint : PlayerTriggerManager
     {
         [SerializeField] private string _zoneName;
@@ -13,7 +15,9 @@ namespace GPEs.Checkpoint
         [SerializeField] private Transform _targetRespawnTransform;
         [SerializeField] private ParticleSystem _activationParticles;
         [SerializeField] private AudioClip _activationClip;
-    
+
+        private StudioEventEmitter emitter;
+
         private bool _hasBeenUsed;
 
         private void Start()
@@ -38,6 +42,8 @@ namespace GPEs.Checkpoint
                 _activationParticles.Play();
                 //CharacterManager.Instance.SoundManagerProperty.PlaySound(_activationClip);
                 _zoneManager.ShowZone(_zoneName);
+
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.checkpointActivated, this.transform.position);
             }
         }
 

@@ -432,6 +432,7 @@ GameObject:
   - component: {fileID: 4447602596650765181}
   - component: {fileID: 4447602596650765182}
   - component: {fileID: 4447602596650765180}
+  - component: {fileID: 9071339497725653765}
   m_Layer: 0
   m_Name: Harpoon
   m_TagString: Untagged
@@ -512,6 +513,36 @@ MonoBehaviour:
   _dieParticles: {fileID: 8734386948639349553}
   _launchSound: {fileID: 8300000, guid: 9dc32e7fa53cf4940acc7f48483736f1, type: 3}
   _dieSound: {fileID: 8300000, guid: afd6d421b02d4aa448f871f0cad96c78, type: 3}
+--- !u!114 &9071339497725653765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4447602596650765176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -99046192
+      Data2: 1215293262
+      Data3: 1238210730
+      Data4: -1651047736
+    Path: event:/SFX/HarpoonHit
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &4837605132821695927
 GameObject:
   m_ObjectHideFlags: 0

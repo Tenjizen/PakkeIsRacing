@@ -21,7 +21,7 @@ namespace Sound
         private List<StudioEventEmitter> _eventEmitters;
         private EventInstance _ambienceEventInstance;
         private EventInstance _musicEventInstance;
-    
+        public static AudioManager instance { get; private set; }
         protected override void Awake()
         {
             base.Awake();

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{be6e4c85-3103-453e-a9e7-6d748d53d20f}">
+		<property name="name">
+			<value>intensity_swells</value>
+		</property>
+		<relationship name="folder">
+			<destination>{e489e1da-938d-42d9-ae22-290f671eb64f}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{4836fb53-93f7-466f-aebd-2829bda555bc}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{4836fb53-93f7-466f-aebd-2829bda555bc}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeed">
+			<value>0.23999999463558197</value>
+		</property>
+	</object>
+</objects>

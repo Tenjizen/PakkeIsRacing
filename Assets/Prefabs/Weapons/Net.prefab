@@ -432,6 +432,7 @@ GameObject:
   - component: {fileID: 5967924889601430571}
   - component: {fileID: 5967924889601430573}
   - component: {fileID: 5818197527617267939}
+  - component: {fileID: 220479010615329660}
   m_Layer: 0
   m_Name: Net
   m_TagString: Untagged
@@ -513,6 +514,36 @@ MonoBehaviour:
   _launchSound: {fileID: 8300000, guid: 9dc32e7fa53cf4940acc7f48483736f1, type: 3}
   _dieSound: {fileID: 8300000, guid: afd6d421b02d4aa448f871f0cad96c78, type: 3}
   _rotationSpeed: 10
+--- !u!114 &220479010615329660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5967924889601430570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 33749068
+      Data2: 1319943297
+      Data3: -1249522514
+      Data4: 1785326610
+    Path: event:/SFX/NetHit
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &5967924890082433169
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,9 +2,12 @@ using System;
 using Character;
 using Sound;
 using UnityEngine;
+using FMODUnity;
+
 
 namespace Fight
 {
+    [RequireComponent(typeof(StudioEventEmitter))]
     public class Net : Projectile
     {
         [Header("VFX"), SerializeField] private ParticleSystem _dieParticles;
@@ -14,6 +17,8 @@ namespace Fight
         [Header("Parameters"), SerializeField, Range(0,30)] private float _rotationSpeed = 0.01f;
         
         private Rigidbody _rigidbody;
+
+        private StudioEventEmitter emitter;
 
         protected override void Update()
         {
@@ -31,6 +36,8 @@ namespace Fight
             _dieParticles.Play();
             
             Destroy(gameObject);
+
+            //AudioManager.instance.PlayOneShot(FMODEvents.instance.netHit, this.transform.position);
         }
         
         public override void Launch(Vector3 direction, float power)
@@ -43,7 +50,9 @@ namespace Fight
             _rigidbody.useGravity = true;
             
             _rigidbody.AddForce(direction * (Data.LaunchForce * power));
-            
+
+            //AudioManager.instance.PlayOneShot(FMODEvents.instance.netThrow, this.transform.position);
+
             //CharacterManager.Instance.SoundManagerProperty.PlaySound(_launchSound);
         }
     }

@@ -3,16 +3,21 @@ using Character;
 using Sound;
 using Unity.Mathematics;
 using UnityEngine;
+using FMODUnity;
 
 namespace Fight
 {
+    [RequireComponent(typeof(StudioEventEmitter))]
     public class Harpoon : Projectile
     {
+
         [Header("VFX"), SerializeField] private ParticleSystem _dieParticles;
         [Header("Sound"), SerializeField] private AudioClip _launchSound;
         [SerializeField] private AudioClip _dieSound;
         
         private Rigidbody _rigidbody;
+
+        private StudioEventEmitter emitter;
 
         private void FixedUpdate()
         {
@@ -36,6 +41,8 @@ namespace Fight
             _dieParticles.Play();
             
             Destroy(gameObject);
+
+            //AudioManager.instance.PlayOneShot(FMODEvents.instance.harpoonHit, this.transform.position);
         }
         
         public override void Launch(Vector3 direction, float power)
@@ -48,7 +55,9 @@ namespace Fight
             _rigidbody.useGravity = true;
 
             _rigidbody.AddForce(direction * (Data.LaunchForce * power));
-            
+
+            //AudioManager.instance.PlayOneShot(FMODEvents.instance.harpoonThrow, this.transform.position);
+
             //CharacterManager.Instance.SoundManagerProperty.PlaySound(_launchSound);
         }
     }
