@@ -16,6 +16,6 @@ namespace Sound
         [field: SerializeField, Header("SFX")] public EventReference netHit { get; set; }
         [field: SerializeField, Header("SFX")] public EventReference netEquiped { get; set; }
 
-        public static FMODEvents instance { get; private set; }
+        //public static FMODEvents Instance { get; private set; }
     }
 }

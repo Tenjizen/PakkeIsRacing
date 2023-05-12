@@ -9,7 +9,7 @@ namespace Sound
     public class AudioManager : Singleton<AudioManager>
     {
         [Header("Volume"), Range(0, 1)] public float MasterVolume = 1;
-        [Range(0, 1)] public float MusicVolume = 1;
+        [Range(0, 10)] public float MusicVolume = 5;
         [Range(0, 1)] public float AmbienceVolume = 1;
         [Range(0, 1)] public float SfxVolume = 1;
 
@@ -21,7 +21,7 @@ namespace Sound
         private List<StudioEventEmitter> _eventEmitters;
         private EventInstance _ambienceEventInstance;
         private EventInstance _musicEventInstance;
-        public static AudioManager instance { get; private set; }
+        //public static AudioManager Instance { get; private set; }
         protected override void Awake()
         {
             base.Awake();

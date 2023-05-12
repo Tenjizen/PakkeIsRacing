@@ -43,7 +43,7 @@ namespace GPEs.Checkpoint
                 //CharacterManager.Instance.SoundManagerProperty.PlaySound(_activationClip);
                 _zoneManager.ShowZone(_zoneName);
 
-                AudioManager.instance.PlayOneShot(FMODEvents.instance.checkpointActivated, this.transform.position);
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.checkpointActivated, this.transform.position);
             }
         }
 
