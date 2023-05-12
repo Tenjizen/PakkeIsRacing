@@ -38,6 +38,7 @@ namespace Character.State
 
         public override void FixedUpdate(CharacterManager character)
         {
+            CheckRigidbodyFloatersBalance();
         }
 
         public override void SwitchState(CharacterManager character)
@@ -46,6 +47,14 @@ namespace Character.State
 
         public override void ExitState(CharacterManager character)
         {
+            CharacterManagerRef.WeaponChargedParticleSystem.Stop();
+
+            CharacterManagerRef.WeaponUIManagerProperty.SetPaddleDownImage(false);
+            CharacterManagerRef.WeaponUIManagerProperty.SetCursor(false);
+            CharacterManagerRef.WeaponUIManagerProperty.SetCooldownUI(0);
+
+            CharacterManagerRef.WeaponUIManagerProperty.AutoAimController.ShowAutoAimCircle(false);
+            CharacterManagerRef.WeaponUIManagerProperty.AutoAimController.ShowAutoAimUI(false);
         }
 
         #endregion

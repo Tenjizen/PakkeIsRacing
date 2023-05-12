@@ -1,6 +1,7 @@
 using Character.Camera;
 using Character.Camera.State;
 using DG.Tweening;
+using Kayak.Data;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,7 +21,9 @@ namespace Character.State
 
         public float RotationStaticForceY = 0f;
         public float RotationPaddleForceY = 0f;
-        
+
+        [ReadOnly] public Floaters Floaters;
+
         //events
         public UnityEvent OnPaddleLeft = new UnityEvent();
         public UnityEvent OnPaddleRight = new UnityEvent();
@@ -40,6 +43,8 @@ namespace Character.State
             CharacterManagerRef = CharacterManager.Instance;
             CameraManagerRef = CharacterManager.Instance.CameraManagerProperty;
             MonoBehaviourRef = CharacterManager.Instance.CharacterMonoBehaviour;
+
+            Floaters = CharacterManagerRef.KayakControllerProperty.FloatersRef;
         }
 
         public abstract void EnterState(CharacterManager character);
@@ -95,5 +100,33 @@ namespace Character.State
                 CameraManagerRef.SwitchState(cameraUnbalancedState);
             }
         }
+
+        #region Wave/Floaters and Balance management
+
+        /// <summary>
+        /// Check the floater's level to see if the boat is unbalanced
+        /// </summary>
+        protected void CheckRigidbodyFloatersBalance()
+        {
+            float frontLeftY = Floaters.FrontLeft.transform.position.y;
+            float frontRightY = Floaters.FrontRight.transform.position.y;
+            float backLeftY = Floaters.BackLeft.transform.position.y;
+            float backRightY = Floaters.BackRight.transform.position.y;
+
+            float frontLevel = (frontLeftY + frontRightY) / 2;
+            float backLevel = (backLeftY + backRightY) / 2;
+            float leftLevel = (frontLeftY + backLeftY) / 2;
+            float rightLevel = (frontRightY + backRightY) / 2;
+
+            float multiplier = CharacterManagerRef.Data.FloatersLevelDifferenceToBalanceMultiplier;
+            float frontBackDifference = Mathf.Abs(frontLevel - backLevel) * multiplier;
+            float leftRightDifference = Mathf.Abs(leftLevel - rightLevel) * multiplier;
+
+            CharacterManagerRef.AddBalanceValueToCurrentSide(frontBackDifference);
+            CharacterManagerRef.Balance += leftRightDifference;
+        }
+
+        #endregion
+
     }
 }
