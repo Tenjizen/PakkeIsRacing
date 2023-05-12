@@ -8,6 +8,7 @@ namespace UI.WeaponWheel
     public class AutoAimUIController : MonoBehaviour
     {
         [SerializeField] private Image _autoAimImage, _autoAimCircle;
+        [SerializeField] private RectTransform _canvas;
         [SerializeField] private float _baseRotationSpeed;
         [SerializeField] private float _lockedRotationSpeed;
         [SerializeField] private Color _baseColor, _endColor, _lockedColor;
@@ -32,6 +33,13 @@ namespace UI.WeaponWheel
         public void SetAutoAimUI(float percentage, Vector3 aimPosition)
         {
             transform.Rotate(new Vector3(0, 0, 1), percentage >= 1 ? _lockedRotationSpeed : _baseRotationSpeed);
+
+            Vector3 viewportPosition = Camera.main.WorldToViewportPoint(aimPosition);
+            Vector2 canvasPosition = new Vector2(
+                (viewportPosition.x - 0.5f) * _canvas.sizeDelta.x,
+                (viewportPosition.y - 0.5f) * _canvas.sizeDelta.y
+            );
+            _autoAimImage.rectTransform.anchoredPosition = canvasPosition;
 
             if (percentage >= 1)
             {

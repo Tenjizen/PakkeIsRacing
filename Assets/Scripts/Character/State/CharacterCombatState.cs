@@ -1,4 +1,5 @@
 ﻿using Character.Camera.State;
+using Character.Data.Character;
 using Fight;
 using UnityEngine;
 using Debug = FMOD.Debug;
@@ -124,23 +125,39 @@ namespace Character.State
         {
             //raycast
             RaycastHit[] hits = new RaycastHit[100];
-            float radius = CharacterManagerRef.Data.AutoAimSize;
-            Transform camera = CameraManagerRef.VirtualCameraCombat.transform;
-            int hitCount = Physics.SphereCastNonAlloc(camera.position, radius, camera.forward, hits, 200f);
-
+            Transform camera = UnityEngine.Camera.main.transform;
+            CharacterData data = CharacterManagerRef.Data;
             bool hasFoundAHittable = false;
-            
-            for (int i = 0; i < hitCount; i++)
+
+            for (int i = 0; i < data.AutoAimNumberOfCastStep; i++)
             {
-                IHittable hittable = hits[i].collider.GetComponent<IHittable>();
-                if (hittable == null)
+                float positionMultiplier = Mathf.Clamp( (data.AutoAimDistanceBetweenEachStep * i), 1, 10000);
+                Vector3 newPosition = camera.position + camera.forward * positionMultiplier;
+                
+                float radiusMultiplier = Mathf.Clamp( Vector3.Distance(camera.position, newPosition)/5,1,10000);
+                float radius = data.AutoAimSize * radiusMultiplier;
+                
+                int hitCount = Physics.SphereCastNonAlloc(newPosition, radius, camera.forward, hits, data.AutoAimDistanceToSweepEachStep);
+                
+                for (int j = 0; j < hitCount; j++)
                 {
-                    continue;
+                    if (hits[i].collider == null)
+                    {
+                        continue;
+                    }
+                    
+                    IHittable hittable = hits[i].collider.GetComponent<IHittable>();
+                    if (hittable == null)
+                    {
+                        continue;
+                    }
+                    
+                    hasFoundAHittable = true;
+                    _hittable = hittable;
+                    break;
                 }
-                hasFoundAHittable = true;
-                _hittable = hittable;
-                break;
             }
+            
             if (hasFoundAHittable == false)
             {
                 _hittable = null;
@@ -198,6 +215,7 @@ namespace Character.State
             CharacterManagerRef.WeaponUIManagerProperty.SetCooldownUI(0);
             
             CharacterManagerRef.WeaponUIManagerProperty.AutoAimController.ShowAutoAimCircle(false);
+            CharacterManagerRef.WeaponUIManagerProperty.AutoAimController.ShowAutoAimUI(false);
         }
 
         #endregion

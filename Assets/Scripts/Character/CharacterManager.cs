@@ -187,14 +187,24 @@ namespace Character
             Vector3 rayDirection = mainCamera.ViewportPointToRay(screenCenter).direction;
             Ray ray = new Ray(mainCamera.transform.position, rayDirection);
 
+            Color gizmoColor = new Color(1f, 0.36f, 0.24f);
+            
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                Color gizmoColor = new Color(1f, 0.36f, 0.24f);
                 Gizmos.color = gizmoColor;
                 
                 Gizmos.DrawLine(CameraManagerProperty.VirtualCameraCombat.transform.position, hit.point);
                 Gizmos.DrawSphere(hit.point, 1f);
-                Gizmos.DrawWireSphere(hit.point, Data.AutoAimSize);
+            }
+            
+            Transform camera = UnityEngine.Camera.main.transform;
+            for (int i = 0; i < Data.AutoAimNumberOfCastStep; i++)
+            {
+                float positionMultiplier = Mathf.Clamp( (Data.AutoAimDistanceBetweenEachStep * i), 1, 10000);
+                Vector3 newPosition = camera.position + camera.forward * positionMultiplier;
+                float radiusMultiplier = Mathf.Clamp( Vector3.Distance(camera.position, newPosition)/5,1,10000);
+                float radius = Data.AutoAimSize * radiusMultiplier;
+                Gizmos.DrawWireSphere(newPosition, radius);
             }
         }
 

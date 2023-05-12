@@ -63,5 +63,14 @@ namespace Character.Data.Character
         
         [field:SerializeField, Tooltip("The time needed in the inner circle of auto-aim to activate auto-aim at launch")]
         public float TimeToAutoAim { get; private set; }
+        
+        [field:SerializeField]
+        public int AutoAimNumberOfCastStep { get; private set; }
+        
+        [field:SerializeField]
+        public float AutoAimDistanceToSweepEachStep { get; private set; }
+        
+        [field:SerializeField]
+        public float AutoAimDistanceBetweenEachStep { get; private set; }
     }
 }
