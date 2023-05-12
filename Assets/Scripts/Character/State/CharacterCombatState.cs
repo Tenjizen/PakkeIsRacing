@@ -26,7 +26,7 @@ namespace Character.State
             
             CharacterManagerRef.WeaponUIManagerProperty.SetCursor(true);
             
-            CharacterManagerRef.WeaponUIManagerProperty.AutoAimController.ShowAutoAimCircle(CharacterManagerRef.Parameters.AutoAim);
+            CharacterManagerRef.WeaponUIManagerProperty.AutoAimController.ShowAutoAimCircle(true);
         }
 
         public override void UpdateState(CharacterManager character)
@@ -163,10 +163,10 @@ namespace Character.State
                     
                     hasFoundAHittable = true;
                     _hittable = hittable;
-                    break;
+                    goto LoopEnd;
                 }
             }
-            
+            LoopEnd:
             if (hasFoundAHittable == false)
             {
                 _hittable = null;

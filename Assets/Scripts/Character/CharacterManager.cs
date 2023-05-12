@@ -200,6 +200,7 @@ namespace Character
             Transform camera = UnityEngine.Camera.main.transform;
             for (int i = 0; i < Data.AutoAimNumberOfCastStep; i++)
             {
+                break;
                 float positionMultiplier = Mathf.Clamp( (Data.AutoAimDistanceBetweenEachStep * i), 1, 10000);
                 Vector3 newPosition = camera.position + camera.forward * positionMultiplier;
                 float radiusMultiplier = Mathf.Clamp( Vector3.Distance(camera.position, newPosition)/5,1,10000);

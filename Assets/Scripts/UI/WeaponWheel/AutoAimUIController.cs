@@ -1,4 +1,5 @@
 ﻿using System;
+using Character;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,16 +23,29 @@ namespace UI.WeaponWheel
 
         public void ShowAutoAimUI(bool show)
         {
+            if (CharacterManager.Instance.Parameters.AutoAim == false)
+            {
+                show = false;
+            }
             _autoAimImage.DOFade(show ? 1f : 0f, 0.2f);
         }
 
         public void ShowAutoAimCircle(bool show)
         {
-            _autoAimCircle.DOFade(show ? 1f : 0f, 0.2f);
+            if (CharacterManager.Instance.Parameters.AutoAim == false)
+            {
+                show = false;
+            }
+            _autoAimCircle.DOFade(show ? 0.15f : 0f, 0.2f);
         }
         
         public void SetAutoAimUI(float percentage, Vector3 aimPosition)
         {
+            if (CharacterManager.Instance.Parameters.AutoAim == false)
+            {
+                return;
+            }
+            
             transform.Rotate(new Vector3(0, 0, 1), percentage >= 1 ? _lockedRotationSpeed : _baseRotationSpeed);
 
             Vector3 viewportPosition = Camera.main.WorldToViewportPoint(aimPosition);
