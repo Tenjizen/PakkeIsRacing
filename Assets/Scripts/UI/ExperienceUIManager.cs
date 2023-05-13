@@ -40,16 +40,6 @@ namespace UI
 
         private void Update()
         {
-            InputManagement inputManagement = CharacterManager.Instance.InputManagementProperty;
-            if (inputManagement.Inputs.OpenWeaponMenu && CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterOpenWeapons)
-            {
-                SetActive(true);
-            }
-            else
-            {
-                SetActive(false);
-            }
-
             ManageSmallUI();
         }
         

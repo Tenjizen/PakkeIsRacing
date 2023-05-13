@@ -209,24 +209,6 @@ namespace Character.State
             CharacterManagerRef.ProjectileIsInAir = false;
         }
 
-        private void LaunchNavigationState()
-        {
-            CharacterManagerRef.WeaponChargedParticleSystem.Stop();
-
-            CameraNavigationState cameraNavigationState = new CameraNavigationState();
-            CameraManagerRef.SwitchState(cameraNavigationState);
-                
-            CharacterNavigationState characterNavigationState = new CharacterNavigationState();
-            CharacterManagerRef.SwitchState(characterNavigationState);
-
-            CharacterManagerRef.WeaponUIManagerProperty.SetPaddleDownImage(false);
-            CharacterManagerRef.WeaponUIManagerProperty.SetCursor(false);
-            CharacterManagerRef.WeaponUIManagerProperty.SetCooldownUI(0);
-            
-            CharacterManagerRef.WeaponUIManagerProperty.AutoAimController.ShowAutoAimCircle(false);
-            CharacterManagerRef.WeaponUIManagerProperty.AutoAimController.ShowAutoAimUI(false);
-        }
-
         #endregion
         
     }

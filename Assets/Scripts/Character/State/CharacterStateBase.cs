@@ -100,6 +100,25 @@ namespace Character.State
                 CameraManagerRef.SwitchState(cameraUnbalancedState);
             }
         }
+        
+        public void LaunchNavigationState()
+        {
+            CharacterManager character = CharacterManager.Instance;
+            character.WeaponChargedParticleSystem.Stop();
+
+            CameraNavigationState cameraNavigationState = new CameraNavigationState();
+            character.CameraManagerProperty.SwitchState(cameraNavigationState);
+                
+            CharacterNavigationState characterNavigationState = new CharacterNavigationState();
+            character.SwitchState(characterNavigationState);
+
+            character.WeaponUIManagerProperty.SetPaddleDownImage(false);
+            character.WeaponUIManagerProperty.SetCursor(false);
+            character.WeaponUIManagerProperty.SetCooldownUI(0);
+            
+            character.WeaponUIManagerProperty.AutoAimController.ShowAutoAimCircle(false);
+            character.WeaponUIManagerProperty.AutoAimController.ShowAutoAimUI(false);
+        }
 
         #region Wave/Floaters and Balance management
 

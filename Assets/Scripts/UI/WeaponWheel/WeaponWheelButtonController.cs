@@ -15,7 +15,9 @@ namespace UI.WeaponWheel
         [SerializeField] private Animator _animator;
         [SerializeField] private Button _button;
         [SerializeField] private Projectile _projectile;
-    
+
+        public bool IsPaddle;
+        [ReadOnly] public bool IsSelected;
         public UnityEvent OnSelected = new UnityEvent();
         
         private CharacterManager _characterManager;
@@ -32,6 +34,7 @@ namespace UI.WeaponWheel
 
         public void Hover()
         {
+            IsSelected = true;
             _animator.SetBool("Hover",true);
             _button.Select();
         }
@@ -43,13 +46,22 @@ namespace UI.WeaponWheel
 
         public void Exit()
         {
+            if (IsSelected == false)
+            {
+                return;
+            }
+            IsSelected = false;
             _animator.SetBool("Hover",false);
         }
 
         public void Select()
         {
-            Debug.Log($"select {_projectile.name}");
-        
+            if (_projectile == null)
+            {
+                Debug.Log($"null ref projectile : {transform.gameObject.name}");
+                return;
+            }
+
             OnSelected.Invoke();
             _characterManager.CurrentProjectile = _projectile;
 

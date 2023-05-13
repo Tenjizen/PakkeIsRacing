@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Character;
 using Character.Camera;
 using DG.Tweening;
@@ -11,50 +14,103 @@ namespace UI.WeaponWheel
     {
         [SerializeField] private GameObject _weaponUI;
         [SerializeField] private Transform _vignette;
-        
-        [SerializeField] private WeaponWheelButtonController _harpoonButton;
-        [SerializeField] private WeaponWheelButtonController _netButton;
-        
+
+        [SerializeField] private List<WheelButton> Buttons;
+
         [SerializeField] private Image _paddleArrowDownImage;
         [SerializeField] private Image _cursor;
         [SerializeField] private Transform _cursorPivot;
         [SerializeField] private Image _cooldown;
+        [SerializeField] private float _pressTimeToOpenMenu;
 
-        [field:SerializeField, Header("AutoAim")] public AutoAimUIController AutoAimController { get; private set; }
+        [field: SerializeField, Header("AutoAim")]
+        public AutoAimUIController AutoAimController { get; private set; }
 
         private Vector3 _vignetteBaseScale;
         private bool _isMenuOpen;
-        
+
         private InputManagement _inputManagement;
         private CharacterManager _characterManager;
         private CameraManager _cameraManager;
+
+        private float _currentPressTime;
+        private WeaponWheelButtonController _lastSelectedButton, _lastWeaponButtonSelected;
 
         private void Start()
         {
             _characterManager = CharacterManager.Instance;
             _inputManagement = _characterManager.InputManagementProperty;
             _cameraManager = _characterManager.CameraManagerProperty;
-            
+
             _vignetteBaseScale = _vignette.localScale;
             _weaponUI.SetActive(_isMenuOpen);
-            
+
             SetCursor(false);
             SetCooldownUI(0);
             SetPaddleDownImage(false);
+
+            _lastWeaponButtonSelected = Buttons.OrderBy(x => x.ButtonController.IsPaddle).FirstOrDefault().ButtonController;
+            _lastSelectedButton = Buttons.Find(x => x.ButtonController.IsPaddle).ButtonController;
         }
 
         private void Update()
         {
-            if (((_inputManagement.Inputs.OpenWeaponMenu && _isMenuOpen == false) || 
-                (_inputManagement.Inputs.OpenWeaponMenu == false && _isMenuOpen)) &&
-                _characterManager.CurrentStateBaseProperty.CanCharacterOpenWeapons)
+            if (_characterManager.CurrentStateBaseProperty.CanCharacterOpenWeapons == false)
             {
-                PressMenu();
+                return;
             }
 
+            //menu is open
             if (_isMenuOpen)
             {
                 WeaponChoice();
+                if (_inputManagement.Inputs.OpenWeaponMenu == false)
+                {
+                    PressMenu();
+                }
+
+                _currentPressTime = 0;
+                return;
+            }
+
+            //menu is closed && open menu touch is pressed
+            if (_inputManagement.Inputs.OpenWeaponMenu)
+            {
+                _currentPressTime += Time.deltaTime;
+                if (_currentPressTime > _pressTimeToOpenMenu)
+                {
+                    PressMenu();
+                }
+
+                return;
+            }
+
+            //menu is closed && open menu touch isn't pressed anymore
+            if (_inputManagement.Inputs.OpenWeaponMenu == false && _currentPressTime > 0f)
+            {
+                FastWeaponChange();
+                _currentPressTime = 0;
+            }
+        }
+
+        private void FastWeaponChange()
+        {
+            if (_lastSelectedButton.IsPaddle)
+            {
+                _lastWeaponButtonSelected.Select();
+                _lastSelectedButton = _lastWeaponButtonSelected;
+            }
+            else
+            {
+                foreach (WheelButton button in Buttons)
+                {
+                    if (button.ButtonController.IsPaddle == false)
+                    {
+                        continue;
+                    }
+                    _lastSelectedButton = button.ButtonController;
+                }
+                CharacterManager.Instance.CurrentStateBaseProperty.LaunchNavigationState();
             }
         }
 
@@ -63,20 +119,29 @@ namespace UI.WeaponWheel
             _characterManager.CurrentStateBaseProperty.CanCharacterMove = _isMenuOpen;
             _characterManager.CurrentStateBaseProperty.CanCharacterMakeActions = _isMenuOpen;
             _cameraManager.CanMoveCameraManually = _isMenuOpen;
-            
+
             if (_isMenuOpen && EventSystem.current.currentSelectedGameObject != null)
             {
                 WeaponWheelButtonController button = EventSystem.current.currentSelectedGameObject.GetComponent<WeaponWheelButtonController>();
                 if (button != null)
                 {
+                    _lastSelectedButton = button;
+                    if (button.IsPaddle)
+                    {
+                        goto IfEnd;
+                    }
                     button.Select();
+                    _lastWeaponButtonSelected = button;
                 }
             }
+
+            IfEnd:
+
             _isMenuOpen = _isMenuOpen == false;
             ResetSelection();
-            
+
             _weaponUI.SetActive(_isMenuOpen);
-            Time.timeScale = _isMenuOpen ? 1f : 1f;
+            CharacterManager.Instance.ExperienceManagerProperty.ExperienceUIManagerProperty.SetActive(_isMenuOpen);
 
             if (_isMenuOpen)
             {
@@ -86,33 +151,37 @@ namespace UI.WeaponWheel
 
         private void WeaponChoice()
         {
-            const float DEADZONE = 0.5f;
-            switch (_inputManagement.Inputs.SelectWeaponMenuX)
+            //angle
+            const float DEADZONE = 0.25f;
+            float angleRad = Mathf.Atan2(_inputManagement.Inputs.SelectWeaponMenu.y,
+                _inputManagement.Inputs.SelectWeaponMenu.x);
+            float angleDeg = angleRad * Mathf.Rad2Deg - 90;
+            if (angleDeg < 0)
             {
-                case < -DEADZONE:
-                    _harpoonButton.Hover();
-                    _netButton.Exit();
-                    break;
-                case > DEADZONE:
-                    _netButton.Hover();
-                    _harpoonButton.Exit();
-                    break;
-                default:
-                    _netButton.Exit();
-                    _harpoonButton.Exit();
-                    break;
+                angleDeg += 360f;
             }
-            
+
+            if (_inputManagement.Inputs.SelectWeaponMenu.magnitude <= DEADZONE)
+            {
+                return;
+            }
+
+            //button choice
+            for (int i = 0; i < Buttons.Count; i++)
+            {
+                WheelButton button = Buttons[i];
+                if (angleDeg < button.Angle.y && angleDeg >= button.Angle.x)
+                {
+                    button.ButtonController.Hover();
+                    continue;
+                }
+
+                button.ButtonController.Exit();
+            }
+
             //cursor
             Vector3 rotation = _cursorPivot.rotation.eulerAngles;
-            Vector2 joystickInput = new Vector2(_inputManagement.Inputs.SelectWeaponMenuX, _inputManagement.Inputs.SelectWeaponMenuY);
-            float angle = Mathf.Atan2(joystickInput.y, joystickInput.x);
-            float angleDegrees = angle * Mathf.Rad2Deg - 90;
-            if (angleDegrees < 0f)
-            {
-                angleDegrees += 360f;
-            }
-            _cursorPivot.rotation = Quaternion.Euler(new Vector3(rotation.x, rotation.y, angleDegrees));
+            _cursorPivot.rotation = Quaternion.Euler(new Vector3(rotation.x, rotation.y, angleDeg));
         }
 
         public void ResetSelection()
@@ -154,5 +223,13 @@ namespace UI.WeaponWheel
         }
 
         #endregion
+    }
+
+
+    [Serializable]
+    public struct WheelButton
+    {
+        public WeaponWheelButtonController ButtonController;
+        public Vector2 Angle;
     }
 }

@@ -411,7 +411,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d7fa617b-1ea1-4ae8-831d-a0f69de7ae94"",
-                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""GamePad"",
@@ -422,7 +422,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2f65d129-1c19-4806-aa4d-dc91c9bd8998"",
-                    ""path"": ""<Gamepad>/rightStick/x"",
+                    ""path"": ""<Gamepad>/leftStick/x"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""GamePad"",
@@ -719,7 +719,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""06e60e77-78f9-47c8-b653-2c2dfcf16f99"",
-                    ""path"": ""<Gamepad>/rightStick/y"",
+                    ""path"": ""<Gamepad>/leftStick/y"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""GamePad"",
