@@ -2,6 +2,7 @@ using System;
 using Character;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace UI.Menu
@@ -12,6 +13,7 @@ namespace UI.Menu
         [SerializeField, ReadOnly] protected bool IsUsable = false;
         [SerializeField] protected int Height, Length;
         [SerializeField] protected GameObject MenuGameObject;
+        [Header("Events")] public UnityEvent OnSelected;
         
         protected int VerticalIndex, HorizontalIndex;
 
@@ -72,6 +74,7 @@ namespace UI.Menu
             IsActive = isActive;
             IsUsable = isUsable;
             MenuGameObject.gameObject.SetActive(isActive);
+            OnSelected.Invoke();
         }
     }
     

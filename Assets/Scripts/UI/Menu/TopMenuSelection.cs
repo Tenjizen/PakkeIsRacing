@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Character;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ namespace UI.Menu
         [Header("Top Menu Controller")] public List<MenuStruct> MenuList = new List<MenuStruct>();
         [Header("Sub Menu"), SerializeField] private List<Image> _pointsList = new List<Image>();
         [SerializeField] private TMP_Text _text;
+        [Header("Events")] public UnityEvent OnMenuChanged;
 
         protected override void Start()
         {
@@ -50,6 +52,8 @@ namespace UI.Menu
 
         private void SetMenuActiveFromOldIndex(int oldMenuIndex)
         {
+            OnMenuChanged.Invoke();
+            
             MenuList[oldMenuIndex].Menu.Set(false, false);
             MenuList[HorizontalIndex].Menu.Set(true,true);
             

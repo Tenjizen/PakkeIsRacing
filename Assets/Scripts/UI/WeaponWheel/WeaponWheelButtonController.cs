@@ -61,7 +61,7 @@ namespace UI.WeaponWheel
         {
             if (_projectile == null)
             {
-                Debug.Log($"null ref projectile : {transform.gameObject.name}");
+                Debug.LogError($"null ref projectile : {transform.gameObject.name}");
                 return;
             }
 

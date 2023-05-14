@@ -2,6 +2,7 @@
 using Character;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ namespace UI.Menu
         [ReadOnly] public bool IsSelected;
         [SerializeField] protected Image OverlayImage;
         [SerializeField] protected Image IconImage;
+        public UnityEvent OnActivated;
 
         private void Start()
         {
@@ -41,6 +43,7 @@ namespace UI.Menu
 
         protected virtual void Activate(InputAction.CallbackContext context)
         {
+            OnActivated.Invoke();
         }
     }
 }
