@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 using WaterAndFloating;
 
@@ -25,6 +26,10 @@ namespace IcebergFallingGPE
 
         private float _timer;
         private Vector3 _beginPosition, _targetPosition;
+
+        [Header("Events")] 
+        public UnityEvent OnWaterCollision;
+        public UnityEvent OnFallStarted;
 
         private void Start()
         {
@@ -62,6 +67,7 @@ namespace IcebergFallingGPE
                 }
                 
                 WavesManager.LaunchCircularWave(_circularWaveData);
+                OnWaterCollision.Invoke();
             }
         }
 
@@ -75,6 +81,7 @@ namespace IcebergFallingGPE
                 Fall = true;
                 HasFallen = true;
                 _timer = 0;
+                OnFallStarted.Invoke();
             }
         }
 

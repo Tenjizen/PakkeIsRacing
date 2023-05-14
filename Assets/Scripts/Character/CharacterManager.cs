@@ -14,6 +14,7 @@ using UI;
 using UI.WeaponWheel;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
@@ -52,7 +53,7 @@ namespace Character
         public Projectile CurrentProjectile;
         [Header("VFX")] 
         public ParticleSystem WeaponChargedParticleSystem;
-        
+
         [HideInInspector] public float WeaponCooldown;
         [HideInInspector] public float WeaponCooldownBase;
         [HideInInspector] public bool ProjectileIsInAir;

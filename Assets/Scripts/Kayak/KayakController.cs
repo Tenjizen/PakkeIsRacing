@@ -5,6 +5,7 @@ using Character.State;
 using Kayak.Data;
 using Sound;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 using WaterAndFloating;
 
@@ -21,10 +22,11 @@ namespace Kayak
         [ReadOnly, Tooltip("= is the drag reducing method activated ?")] public bool CanReduceDrag = true;
         [SerializeField, Tooltip("The floaters associated to the kayak's rigidbody")] public Floaters FloatersRef;
        
-        [Header("VFX"), SerializeField]
-        public ParticleSystem LeftPaddleParticle;
-        [SerializeField] 
-        public ParticleSystem RightPaddleParticle;
+        [Header("VFX"), SerializeField] public ParticleSystem LeftPaddleParticle;
+        [SerializeField] public ParticleSystem RightPaddleParticle;
+        
+        [Header("Events")] 
+        public UnityEvent OnKayakCollision;
         
         //privates
         private float _particleTimer = -1;
@@ -51,7 +53,7 @@ namespace Kayak
             float value = collision.relativeVelocity.magnitude / Data.KayakValues.CollisionToBalanceMagnitudeDivider;
             Debug.Log($"collision V.M. :{Math.Round(collision.relativeVelocity.magnitude)} -> {Math.Round(value,2)}");
             characterManager.AddBalanceValueToCurrentSide(value);
-            //characterManager.SoundManagerProperty.PlaySound(Data.CollisionAudioClip);
+            OnKayakCollision.Invoke();
         }
 
         /// <summary>

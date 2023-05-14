@@ -392,10 +392,10 @@ public class SharkCombatState : SharkBaseState
 
         _lastKey = sharkManager.Data.JumpCurve[sharkManager.Data.JumpCurve.length - 1];
 
-        if (sharkManager.Forward.transform.position.y < sharkManager.ShowCircleProfondeur && _waveStartJump == false)
+        if (sharkManager.Forward.transform.position.y < sharkManager.ShowCircleDepth && _waveStartJump == false)
         {
             Vector3 localPosCircle = sharkManager.Forward.transform.localPosition;
-            Vector3 offsetCircle = sharkManager.Forward.transform.forward * sharkManager.CircleDistanceMulptiply;
+            Vector3 offsetCircle = sharkManager.Forward.transform.forward * sharkManager.CircleDistanceMultiply;
             Vector3 positionCircle = localPosCircle + offsetCircle;
             Vector3 worldPosCircle = sharkManager.ParentGameObject.transform.TransformPoint(positionCircle);
             worldPosCircle.y = 0;
@@ -496,10 +496,10 @@ public class SharkCombatState : SharkBaseState
 
         _lastKey = sharkManager.Data.JumpCurvePhaseThree[sharkManager.Data.JumpCurvePhaseThree.length - 1];
 
-        if (sharkManager.Forward.transform.position.y < sharkManager.ShowCircleProfondeur && _waveStartJump == false)
+        if (sharkManager.Forward.transform.position.y < sharkManager.ShowCircleDepth && _waveStartJump == false)
         {
             Vector3 localPosCircle = sharkManager.Forward.transform.localPosition;
-            Vector3 offsetCircle = sharkManager.Forward.transform.forward * sharkManager.CircleDistanceMulptiply;
+            Vector3 offsetCircle = sharkManager.Forward.transform.forward * sharkManager.CircleDistanceMultiply;
             Vector3 positionCircle = localPosCircle + offsetCircle;
             Vector3 worldPosCircle = sharkManager.ParentGameObject.transform.TransformPoint(positionCircle);
             worldPosCircle.y = 0;

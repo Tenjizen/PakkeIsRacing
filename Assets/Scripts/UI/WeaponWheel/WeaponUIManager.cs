@@ -5,6 +5,7 @@ using Character;
 using Character.Camera;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -26,6 +27,10 @@ namespace UI.WeaponWheel
         [field: SerializeField, Header("AutoAim")]
         public AutoAimUIController AutoAimController { get; private set; }
 
+        [Header("Events")] public UnityEvent OnWheelOpened;
+        public UnityEvent OnWheelClosed;
+        public UnityEvent OnWheelSelectionChanged;
+
         private Vector3 _vignetteBaseScale;
         private bool _isMenuOpen;
 
@@ -34,7 +39,7 @@ namespace UI.WeaponWheel
         private CameraManager _cameraManager;
 
         private float _currentPressTime;
-        private WeaponWheelButtonController _lastSelectedButton, _lastWeaponButtonSelected;
+        private WeaponWheelButtonController _lastSelectedButton, _lastWeaponButtonSelected, _lastButtonCursorWasOn;
 
         private void Start()
         {
@@ -51,6 +56,7 @@ namespace UI.WeaponWheel
 
             _lastWeaponButtonSelected = Buttons.OrderBy(x => x.ButtonController.IsPaddle).FirstOrDefault().ButtonController;
             _lastSelectedButton = Buttons.Find(x => x.ButtonController.IsPaddle).ButtonController;
+            _lastButtonCursorWasOn = _lastWeaponButtonSelected;
         }
 
         private void Update()
@@ -146,7 +152,10 @@ namespace UI.WeaponWheel
             if (_isMenuOpen)
             {
                 VignetteZoom();
+                OnWheelOpened.Invoke();
+                return;
             }
+            OnWheelClosed.Invoke();
         }
 
         private void WeaponChoice()
@@ -172,7 +181,13 @@ namespace UI.WeaponWheel
                 WheelButton button = Buttons[i];
                 if (angleDeg < button.Angle.y && angleDeg >= button.Angle.x)
                 {
-                    button.ButtonController.Hover();
+                    WeaponWheelButtonController controller = button.ButtonController;
+                    if (controller != _lastButtonCursorWasOn)
+                    {
+                        OnWheelSelectionChanged.Invoke();
+                    }
+                    _lastButtonCursorWasOn = controller;
+                    controller.Hover();
                     continue;
                 }
 

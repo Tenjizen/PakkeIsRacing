@@ -29,24 +29,17 @@ namespace Enemies.Shark
         [field: SerializeField, Header("VFX")] public ParticleSystem HitParticles { get; private set; }
         [field: SerializeField, Header("Sound")] public AudioClip HitSound { get; private set; }
         public KayakController KayakControllerProperty { get; set; }
+        
         [Header("Hit")] public Collider SharkCollider;
 
-        [Header("Waves")]
-        public Waves WavesData;
+        [Header("Waves")] public Waves WavesData;
 
-
-
-        [Header("feedback tempo")]
-        //a modif
-        [Tooltip("profondeur a laquelle le cercle pop")]
-        public float ShowCircleProfondeur = -14f;
-        //a modif
-        [Tooltip("distance a laquelle le cercle est du requin")]
-        public float CircleDistanceMulptiply = 14f;
-
-
+        [Header("feedback tempo"), Tooltip("depth at which the feedback circle pop")] //TODO modify
+        public float ShowCircleDepth = -14f;
+        [Tooltip("distance at which the circle is from the shark")] //TODO modify
+        public float CircleDistanceMultiply = 14f;
+        
         [Space(5), Header("Shark Data")] public SharkData Data;
-
 
         private void Awake()
         {

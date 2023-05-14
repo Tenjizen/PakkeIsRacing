@@ -1,6 +1,7 @@
 ﻿using Fight;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Enemies
 {
@@ -11,7 +12,12 @@ namespace Enemies
             get { return transform;}
             set {}
         }
-        
-        public virtual void Hit(Projectile projectile, GameObject owner) { }
+
+        [field:SerializeField] public UnityEvent OnHit { get; set; }
+
+        public virtual void Hit(Projectile projectile, GameObject owner)
+        {
+            OnHit.Invoke();
+        }
     }
 }

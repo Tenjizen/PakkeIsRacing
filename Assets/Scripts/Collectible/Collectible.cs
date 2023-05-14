@@ -17,8 +17,11 @@ namespace Collectible
             set { }
         }
 
+        [field:SerializeField] public UnityEvent OnHit { get; set; }
+
         public void Hit(Projectile projectile, GameObject owner)
         {
+            OnHit.Invoke();
             Debug.Log("hit");
             SetCollected();
         }

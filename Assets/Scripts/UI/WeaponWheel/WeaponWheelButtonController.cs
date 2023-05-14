@@ -15,10 +15,13 @@ namespace UI.WeaponWheel
         [SerializeField] private Animator _animator;
         [SerializeField] private Button _button;
         [SerializeField] private Projectile _projectile;
-
+        
         public bool IsPaddle;
+        
         [ReadOnly] public bool IsSelected;
-        public UnityEvent OnSelected = new UnityEvent();
+        
+        [Header("Events")] public UnityEvent OnSelected = new UnityEvent();
+        
         
         private CharacterManager _characterManager;
 
