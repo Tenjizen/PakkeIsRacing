@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8826597756334195347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/UI/UI_button
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/UI/UI_button
+  Guid:
+    Data1: 1741907874
+    Data2: 1137378262
+    Data3: -780664424
+    Data4: 636253921
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-8127459704306106220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,12 +42,36 @@ MonoBehaviour:
   Path: FMOD_project/Pakke_Is/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638168969869718602
+  lastModified: 638195149481263402
   FileSizes:
   - Name: Desktop
-    Value: 1486
+    Value: 1592
   Exists: 1
---- !u!114 &-6131030461716715721
+--- !u!114 &-8115524520277416470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTest/intensity_trumpets
+  m_EditorClassIdentifier: 
+  Name: intensity_trumpets
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 629182808
+    data2: 1258126821
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-8106638597962662670
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -30,14 +81,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/HarpoonHit
+  m_Name: event:/SFX/Iceberg fall/FX_falling_iceberg_start
   m_EditorClassIdentifier: 
-  Path: event:/SFX/HarpoonHit
+  Path: event:/SFX/Iceberg fall/FX_falling_iceberg_start
   Guid:
-    Data1: -99046192
-    Data2: 1215293262
-    Data3: 1238210730
-    Data4: -1651047736
+    Data1: -680995077
+    Data2: 1121680068
+    Data3: 1723462552
+    Data4: -81351706
   Banks:
   - {fileID: 1426460621515787707}
   IsStream: 0
@@ -47,7 +98,103 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-5691456081078588229
+--- !u!114 &-8054126807199237119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/intensity_frame_drum
+  m_EditorClassIdentifier: 
+  Name: intensity_frame_drum
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1659232653
+    data2: 3954115170
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-8007551415454294027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTest/intensity_kidi
+  m_EditorClassIdentifier: 
+  Name: intensity_kidi
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3963940857
+    data2: 545914430
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-7634147862354245224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTest/intensity_frame_drum
+  m_EditorClassIdentifier: 
+  Name: intensity_frame_drum
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1659232653
+    data2: 3954115170
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-7517831694760413080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTest/intensity_glock
+  m_EditorClassIdentifier: 
+  Name: intensity_glock
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 193400301
+    data2: 3497466712
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-7440880626131763104
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,14 +204,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/HarpoonEquip
+  m_Name: event:/SFX/Fx_collision_ice
   m_EditorClassIdentifier: 
-  Path: event:/SFX/HarpoonEquip
+  Path: event:/SFX/Fx_collision_ice
   Guid:
-    Data1: 423010563
-    Data2: 1087191672
-    Data3: 456072347
-    Data4: 326855228
+    Data1: -638765913
+    Data2: 1217947207
+    Data3: -1165830249
+    Data4: 1794829881
   Banks:
   - {fileID: 1426460621515787707}
   IsStream: 0
@@ -74,6 +221,255 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-7419148758087563103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Kayak/FX_row_wood_creak
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Kayak/FX_row_wood_creak
+  Guid:
+    Data1: -814018528
+    Data2: 1161881238
+    Data3: 1938484134
+    Data4: 281189100
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7369873097376065127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/intensity_brass1
+  m_EditorClassIdentifier: 
+  Name: intensity_brass1
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3763940618
+    data2: 4258212167
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-6892960770553835343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/intensity_tenuto_swarm
+  m_EditorClassIdentifier: 
+  Name: intensity_tenuto_swarm
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1042852579
+    data2: 1997420304
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-6030285073211698375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/intensity_trumpets
+  m_EditorClassIdentifier: 
+  Name: intensity_trumpets
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 629182808
+    data2: 1258126821
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-5884536707051133849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Weapons/NetThrow
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Weapons/NetThrow
+  Guid:
+    Data1: -1462410319
+    Data2: 1167868647
+    Data3: 2109704612
+    Data4: -1214402756
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5614477484700226961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTest/intensity_solo_string_pizz
+  m_EditorClassIdentifier: 
+  Name: intensity_solo_string_pizz
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1108253017
+    data2: 3707819176
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-5198560725786473575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/intensity_pad1
+  m_EditorClassIdentifier: 
+  Name: intensity_pad1
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1046414045
+    data2: 3197995323
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-4939731710965553019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Weapons/HarpoonThrow
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Weapons/HarpoonThrow
+  Guid:
+    Data1: -483999685
+    Data2: 1108596737
+    Data3: -1930236012
+    Data4: -1777385923
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-4788994925846963447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/intensity_solo_string_pizz
+  m_EditorClassIdentifier: 
+  Name: intensity_solo_string_pizz
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1108253017
+    data2: 3707819176
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-3634535620589868402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTest/intensity_shakers
+  m_EditorClassIdentifier: 
+  Name: intensity_shakers
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3484652067
+    data2: 2483905118
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-3627521547562923946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,11 +492,161 @@ MonoBehaviour:
   - {fileID: 6918480860476981872}
   IsStream: 1
   Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 74500
+--- !u!114 &-3267814769884708777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTest/intensity_piano
+  m_EditorClassIdentifier: 
+  Name: intensity_piano
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3861050571
+    data2: 1823799795
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-3149250311917260996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTest/intensity_orch_string_pizz
+  m_EditorClassIdentifier: 
+  Name: intensity_orch_string_pizz
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1629539163
+    data2: 2877274048
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-2636593972452029065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/intensity_cymbals
+  m_EditorClassIdentifier: 
+  Name: intensity_cymbals
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 363781581
+    data2: 375575299
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-2393801258766490926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Iceberg fall/FX_falling_iceberg_middle
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Iceberg fall/FX_falling_iceberg_middle
+  Guid:
+    Data1: 752043568
+    Data2: 1213366550
+    Data3: -772106099
+    Data4: -1009432149
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 93500
+  Length: 0
+--- !u!114 &-2379976041374017172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/Tension
+  m_EditorClassIdentifier: 
+  Name: Tension
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 1872520944
+    data2: 3330258721
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Faible
+  - Moderee
+  - Forte
+  Exists: 1
+--- !u!114 &-1671642401122719872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/intensity_shakers
+  m_EditorClassIdentifier: 
+  Name: intensity_shakers
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3484652067
+    data2: 2483905118
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-1612053340526644219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +675,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1560096
---- !u!114 &-367754284105284599
+--- !u!114 &-1255636800913875402
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,23 +685,173 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/Tension
+  m_Name: parameter:/MainMusicTest/intensity_brass2
   m_EditorClassIdentifier: 
-  Name: Tension
+  Name: intensity_brass2
   StudioPath: 
   Min: 0
-  Max: 2
+  Max: 1
   Default: 0
   ID:
-    data1: 2646223873
-    data2: 4288006465
-  Type: 2
+    data1: 409998793
+    data2: 3454063584
+  Type: 0
   IsGlobal: 0
-  Labels:
-  - 0
-  - 1
-  - 2
+  Labels: []
   Exists: 1
+--- !u!114 &-1135201899716228384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Iceberg fall/FX_falling_iceberg_end
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Iceberg fall/FX_falling_iceberg_end
+  Guid:
+    Data1: 857766020
+    Data2: 1202988455
+    Data3: -246427468
+    Data4: -2121182709
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-584072779942876311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/intensity_flutter_brass
+  m_EditorClassIdentifier: 
+  Name: intensity_flutter_brass
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3289149710
+    data2: 1048447083
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-550135062737501803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/UI/UI_pickup_collectible
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/UI/UI_pickup_collectible
+  Guid:
+    Data1: 255443127
+    Data2: 1293990853
+    Data3: 793904282
+    Data4: -1256724100
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-389220560867112033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/intensity_woods_swarm
+  m_EditorClassIdentifier: 
+  Name: intensity_woods_swarm
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2055708567
+    data2: 96884666
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-375481654354069467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/intensity_harp_gliss
+  m_EditorClassIdentifier: 
+  Name: intensity_harp_gliss
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2770673587
+    data2: 716064457
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-270601740379383295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Kayak/FX_row_splash
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Kayak/FX_row_splash
+  Guid:
+    Data1: 888916169
+    Data2: 1075140327
+    Data3: 1412003234
+    Data4: -881118055
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,23 +874,38 @@ MonoBehaviour:
   - {fileID: -1612053340526644219}
   - {fileID: -3627521547562923946}
   - {fileID: 5284119263960265901}
-  - {fileID: -5691456081078588229}
-  - {fileID: 9082981890551064965}
   - {fileID: 5642638132054646883}
-  - {fileID: 771401803854705725}
   - {fileID: 6358965872720031612}
-  - {fileID: 2511334109197630455}
-  - {fileID: 1498317809489932887}
-  - {fileID: -6131030461716715721}
   - {fileID: 6208503652608605623}
+  - {fileID: 8480141535483542930}
+  - {fileID: 627889415753084467}
+  - {fileID: 4761901831473531842}
+  - {fileID: -7419148758087563103}
+  - {fileID: 3451997953383857144}
+  - {fileID: -2393801258766490926}
+  - {fileID: -4939731710965553019}
+  - {fileID: 7006998516226058581}
+  - {fileID: 2985048897244937063}
+  - {fileID: 1070116119931371479}
+  - {fileID: 545948353087136277}
+  - {fileID: -1135201899716228384}
+  - {fileID: -8826597756334195347}
+  - {fileID: -7440880626131763104}
+  - {fileID: 5271755733966257720}
+  - {fileID: -5884536707051133849}
+  - {fileID: -550135062737501803}
+  - {fileID: 441728550790902365}
+  - {fileID: -270601740379383295}
+  - {fileID: 4483775934921858890}
+  - {fileID: -8106638597962662670}
   EditorParameters: []
   MasterBanks:
   - {fileID: -8127459704306106220}
   StringsBanks:
   - {fileID: 5488868156226981610}
-  cacheTime: 638194026445775643
+  cacheTime: 638197020463996014
   cacheVersion: 131601
---- !u!114 &83555140158494301
+--- !u!114 &64533529364263432
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,16 +915,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/music_intensity
+  m_Name: parameter:/MainMusicTest/intensity_cymbals
   m_EditorClassIdentifier: 
-  Name: music_intensity
+  Name: intensity_cymbals
   StudioPath: 
   Min: 0
   Max: 1
   Default: 0
   ID:
-    data1: 3855078132
-    data2: 574355803
+    data1: 363781581
+    data2: 375575299
   Type: 0
   IsGlobal: 0
   Labels: []
@@ -242,7 +953,31 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &771401803854705725
+--- !u!114 &342604738641305004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTest/intensity_drum2
+  m_EditorClassIdentifier: 
+  Name: intensity_drum2
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1250810925
+    data2: 1850432416
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &441728550790902365
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -252,14 +987,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/NetHit
+  m_Name: event:/SFX/Kayak/FX_row_hull_water
   m_EditorClassIdentifier: 
-  Path: event:/SFX/NetHit
+  Path: event:/SFX/Kayak/FX_row_hull_water
   Guid:
-    Data1: 33749068
-    Data2: 1319943297
-    Data3: -1249522514
-    Data4: 1785326610
+    Data1: 1652478141
+    Data2: 1323385497
+    Data3: -1755269492
+    Data4: 1587637557
   Banks:
   - {fileID: 1426460621515787707}
   IsStream: 0
@@ -269,6 +1004,111 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &545948353087136277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Weapons/NetEquip
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Weapons/NetEquip
+  Guid:
+    Data1: 393588346
+    Data2: 1332366025
+    Data3: -201657433
+    Data4: -968413216
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &627889415753084467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Weapons/HarpoonEquip
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Weapons/HarpoonEquip
+  Guid:
+    Data1: 423010563
+    Data2: 1087191672
+    Data3: 456072347
+    Data4: 326855228
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &1070116119931371479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/UI/UI_weapon_wheel
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/UI/UI_weapon_wheel
+  Guid:
+    Data1: 705838196
+    Data2: 1137336667
+    Data3: -1815093116
+    Data4: 462090280
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &1353323135402013006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTest/intensity_horns_legato
+  m_EditorClassIdentifier: 
+  Name: intensity_horns_legato
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2976962206
+    data2: 1319648170
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &1426460621515787707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,12 +1124,12 @@ MonoBehaviour:
   Path: FMOD_project/Pakke_Is/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638194026445775643
+  lastModified: 638195149481419640
   FileSizes:
   - Name: Desktop
-    Value: 455456
+    Value: 1238432
   Exists: 1
---- !u!114 &1498317809489932887
+--- !u!114 &1602451460587601111
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -298,24 +1138,45 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/NetThrow
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTest/intensity_pad1
   m_EditorClassIdentifier: 
-  Path: event:/SFX/NetThrow
-  Guid:
-    Data1: -1462410319
-    Data2: 1167868647
-    Data3: 2109704612
-    Data4: -1214402756
-  Banks:
-  - {fileID: 1426460621515787707}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
+  Name: intensity_pad1
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1046414045
+    data2: 3197995323
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &1658556533639624094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/intensity_kidi
+  m_EditorClassIdentifier: 
+  Name: intensity_kidi
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3963940857
+    data2: 545914430
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &1858434606946778931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,12 +1201,128 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 83555140158494301}
-  - {fileID: -367754284105284599}
+  - {fileID: -5614477484700226961}
+  - {fileID: 2741512343280734753}
+  - {fileID: 1602451460587601111}
+  - {fileID: 64533529364263432}
+  - {fileID: -3267814769884708777}
+  - {fileID: 342604738641305004}
+  - {fileID: -8115524520277416470}
+  - {fileID: 6572773889361809643}
+  - {fileID: -1255636800913875402}
+  - {fileID: 6831260496675595034}
+  - {fileID: -7517831694760413080}
+  - {fileID: 1353323135402013006}
+  - {fileID: -7634147862354245224}
+  - {fileID: 7696806884734119485}
+  - {fileID: -3634535620589868402}
+  - {fileID: 4628761393387073806}
+  - {fileID: 3709585130350507448}
+  - {fileID: 8341484623658458870}
+  - {fileID: -8007551415454294027}
+  - {fileID: -3149250311917260996}
+  - {fileID: 6488053458503417860}
+  - {fileID: 2458321401463030125}
   MinDistance: 1
   MaxDistance: 20
-  Length: 105168
---- !u!114 &2511334109197630455
+  Length: 246517
+--- !u!114 &2166972605160012502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/intensity_glock
+  m_EditorClassIdentifier: 
+  Name: intensity_glock
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 193400301
+    data2: 3497466712
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &2273581076086332326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/intensity_orch_string_pizz
+  m_EditorClassIdentifier: 
+  Name: intensity_orch_string_pizz
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1629539163
+    data2: 2877274048
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &2458321401463030125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTest/intensity_harp_gliss
+  m_EditorClassIdentifier: 
+  Name: intensity_harp_gliss
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2770673587
+    data2: 716064457
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &2741512343280734753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTest/intensity_woods_swarm
+  m_EditorClassIdentifier: 
+  Name: intensity_woods_swarm
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2055708567
+    data2: 96884666
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &2985048897244937063
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -355,14 +1332,266 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/NetEquip
+  m_Name: event:/SFX/Iceberg crackling/Iceberg_rumble
   m_EditorClassIdentifier: 
-  Path: event:/SFX/NetEquip
+  Path: event:/SFX/Iceberg crackling/Iceberg_rumble
   Guid:
-    Data1: 393588346
-    Data2: 1332366025
-    Data3: -201657433
-    Data4: -968413216
+    Data1: -1230517663
+    Data2: 1281603318
+    Data3: 411710867
+    Data4: 1747968179
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &3270594240399821382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/intensity_harp_normale
+  m_EditorClassIdentifier: 
+  Name: intensity_harp_normale
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3787922598
+    data2: 2532601393
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &3451997953383857144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Iceberg crackling/Iceberg_transient
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Iceberg crackling/Iceberg_transient
+  Guid:
+    Data1: -1864625628
+    Data2: 1171526244
+    Data3: 533686922
+    Data4: 1855959306
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &3709585130350507448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTest/intensity_mid_drum
+  m_EditorClassIdentifier: 
+  Name: intensity_mid_drum
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1881363038
+    data2: 3473163329
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &4249822744354664947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/intensity_brass2
+  m_EditorClassIdentifier: 
+  Name: intensity_brass2
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 409998793
+    data2: 3454063584
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &4483775934921858890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Weapons/HarpoonHit
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Weapons/HarpoonHit
+  Guid:
+    Data1: -99046192
+    Data2: 1215293262
+    Data3: 1238210730
+    Data4: -1651047736
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &4628761393387073806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTest/intensity_flutter_brass
+  m_EditorClassIdentifier: 
+  Name: intensity_flutter_brass
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3289149710
+    data2: 1048447083
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &4761901831473531842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Iceberg crackling/Iceberg_crackles
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Iceberg crackling/Iceberg_crackles
+  Guid:
+    Data1: 1385039113
+    Data2: 1090401554
+    Data3: 1576250551
+    Data4: 1300255228
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &4858930378849368107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/intensity_swells
+  m_EditorClassIdentifier: 
+  Name: intensity_swells
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 4155196205
+    data2: 3144685467
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &4882163901382611720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/intensity_pad2
+  m_EditorClassIdentifier: 
+  Name: intensity_pad2
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1674631981
+    data2: 4221457999
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &5271755733966257720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Kayak/FX_row_water_drip
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Kayak/FX_row_water_drip
+  Guid:
+    Data1: -423552855
+    Data2: 1112180397
+    Data3: -2106125138
+    Data4: -958195840
   Banks:
   - {fileID: 1426460621515787707}
   IsStream: 0
@@ -394,11 +1623,11 @@ MonoBehaviour:
   - {fileID: 6918480860476981872}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 108250
+  Length: 108768
 --- !u!114 &5488868156226981610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,10 +1643,10 @@ MonoBehaviour:
   Path: FMOD_project/Pakke_Is/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638194026445755639
+  lastModified: 638197020463996014
   FileSizes:
   - Name: Desktop
-    Value: 1668
+    Value: 3372
   Exists: 1
 --- !u!114 &5642638132054646883
 MonoBehaviour:
@@ -500,6 +1729,78 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &6488053458503417860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTest/intensity_brass1
+  m_EditorClassIdentifier: 
+  Name: intensity_brass1
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3763940618
+    data2: 4258212167
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &6572773889361809643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTest/intensity_harp_normale
+  m_EditorClassIdentifier: 
+  Name: intensity_harp_normale
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3787922598
+    data2: 2532601393
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &6831260496675595034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTest/intensity_swells
+  m_EditorClassIdentifier: 
+  Name: intensity_swells
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 4155196205
+    data2: 3144685467
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &6918480860476981872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,12 +1816,12 @@ MonoBehaviour:
   Path: FMOD_project/Pakke_Is/Build/Desktop/Level1.bank
   Name: Level1
   StudioPath: bank:/Level1
-  lastModified: 638194026445735639
+  lastModified: 638197020463956107
   FileSizes:
   - Name: Desktop
-    Value: 26381184
+    Value: 46567872
   Exists: 1
---- !u!114 &9082981890551064965
+--- !u!114 &7006998516226058581
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -530,14 +1831,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/HarpoonThrow
+  m_Name: event:/SFX/Weapons/NetHit
   m_EditorClassIdentifier: 
-  Path: event:/SFX/HarpoonThrow
+  Path: event:/SFX/Weapons/NetHit
   Guid:
-    Data1: -483999685
-    Data2: 1108596737
-    Data3: -1930236012
-    Data4: -1777385923
+    Data1: 33749068
+    Data2: 1319943297
+    Data3: -1249522514
+    Data4: 1785326610
   Banks:
   - {fileID: 1426460621515787707}
   IsStream: 0
@@ -547,3 +1848,197 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &7543726949379773991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/intensity_mid_drum
+  m_EditorClassIdentifier: 
+  Name: intensity_mid_drum
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1881363038
+    data2: 3473163329
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &7696806884734119485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTest/intensity_pad2
+  m_EditorClassIdentifier: 
+  Name: intensity_pad2
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1674631981
+    data2: 4221457999
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &8341484623658458870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTest/intensity_tenuto_swarm
+  m_EditorClassIdentifier: 
+  Name: intensity_tenuto_swarm
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1042852579
+    data2: 1997420304
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &8382128767183710432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/intensity_drum2
+  m_EditorClassIdentifier: 
+  Name: intensity_drum2
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1250810925
+    data2: 1850432416
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &8480141535483542930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/MainMusicTensionTest
+  m_EditorClassIdentifier: 
+  Path: event:/Music/MainMusicTensionTest
+  Guid:
+    Data1: 70954765
+    Data2: 1213128647
+    Data3: -1218210172
+    Data4: -1647460076
+  Banks:
+  - {fileID: 6918480860476981872}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -4788994925846963447}
+  - {fileID: -389220560867112033}
+  - {fileID: -5198560725786473575}
+  - {fileID: -2636593972452029065}
+  - {fileID: 9077340552352407937}
+  - {fileID: 8382128767183710432}
+  - {fileID: -6030285073211698375}
+  - {fileID: -2379976041374017172}
+  - {fileID: 3270594240399821382}
+  - {fileID: 4249822744354664947}
+  - {fileID: 4858930378849368107}
+  - {fileID: 2166972605160012502}
+  - {fileID: 9030411709947784341}
+  - {fileID: -8054126807199237119}
+  - {fileID: -1671642401122719872}
+  - {fileID: 4882163901382611720}
+  - {fileID: -584072779942876311}
+  - {fileID: 7543726949379773991}
+  - {fileID: -6892960770553835343}
+  - {fileID: 1658556533639624094}
+  - {fileID: -375481654354069467}
+  - {fileID: 2273581076086332326}
+  - {fileID: -7369873097376065127}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &9030411709947784341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/intensity_horns_legato
+  m_EditorClassIdentifier: 
+  Name: intensity_horns_legato
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2976962206
+    data2: 1319648170
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &9077340552352407937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/intensity_piano
+  m_EditorClassIdentifier: 
+  Name: intensity_piano
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3861050571
+    data2: 1823799795
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
