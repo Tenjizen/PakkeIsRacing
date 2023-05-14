@@ -7,6 +7,8 @@ using Sound;
 using UnityEngine;
 using WaterAndFloating;
 using Character.Camera;
+using UnityEngine.Events;
+
 namespace Enemies.Shark
 {
     public class SharkManager : Enemy
@@ -29,7 +31,7 @@ namespace Enemies.Shark
         [field: SerializeField, Header("VFX")] public ParticleSystem HitParticles { get; private set; }
         [field: SerializeField, Header("Sound")] public AudioClip HitSound { get; private set; }
         public KayakController KayakControllerProperty { get; set; }
-        
+
         [Header("Hit")] public Collider SharkCollider;
 
         [Header("Waves")] public Waves WavesData;
@@ -38,8 +40,11 @@ namespace Enemies.Shark
         public float ShowCircleDepth = -14f;
         [Tooltip("distance at which the circle is from the shark")] //TODO modify
         public float CircleDistanceMultiply = 14f;
-        
+
         [Space(5), Header("Shark Data")] public SharkData Data;
+
+        [Header("Events")] public UnityEvent StartJump;
+        public UnityEvent EndJump;
 
         private void Awake()
         {
