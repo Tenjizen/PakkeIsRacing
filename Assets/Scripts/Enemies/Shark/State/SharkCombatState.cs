@@ -369,40 +369,101 @@ public class SharkCombatState : SharkBaseState
         float angle = Vector2.SignedAngle(sharkForward, targetPos - sharkPos);
         if (angle < 0)
             angle += 360;
-        if (angle > 90 && angle < 180)
+
+
+        if (angle > 90 && angle < 180 || angle > 270 && angle < 360)
         {
             rotation.y -= Time.deltaTime * sharkManager.Data.SpeedCombatRotationStatic;
+            if (angle > 90 && angle < 180)
+            {
+                left = true;
+            }
+            else if (angle > 270 && angle < 360)
+            {
+                left = false;
+            }
         }
-        else if (angle > 270 && angle < 360)
-        {
-            rotation.y -= Time.deltaTime * sharkManager.Data.SpeedCombatRotationStatic;
-        }
-        else
+        else/* if( angle < 265 && angle > 185 || angle > 0 && angle < 85 )*/
         {
             rotation.y += Time.deltaTime * sharkManager.Data.SpeedCombatRotationStatic;
         }
+
         //apply rota
         sharkManager.Forward.transform.localEulerAngles = rotation;
     }
 
-
+    bool left = false;
     private void animationCurve(SharkManager sharkManager)
     {
         _timeAnimationCurve += Time.deltaTime;
 
         _lastKey = sharkManager.Data.JumpCurve[sharkManager.Data.JumpCurve.length - 1];
 
-        if (sharkManager.Forward.transform.position.y < sharkManager.ShowCircleDepth && _waveStartJump == false)
+        if (sharkManager.transform.position.y < sharkManager.ShowCircleDepth && _waveStartJump == false)
         {
-            Vector3 localPosCircle = sharkManager.Forward.transform.localPosition;
-            Vector3 offsetCircle = sharkManager.Forward.transform.forward * sharkManager.CircleDistanceMultiply;
-            Vector3 positionCircle = localPosCircle + offsetCircle;
-            Vector3 worldPosCircle = sharkManager.ParentGameObject.transform.TransformPoint(positionCircle);
-            worldPosCircle.y = 0;
+            Debug.Log(left);
 
-            sharkManager.Circle.transform.position = worldPosCircle;
-            sharkManager.Circle.SetActive(true);
         }
+
+        Vector3 localPosCircle = sharkManager.Forward.transform.localPosition;
+        Vector3 offsetCircle = sharkManager.Forward.transform.forward * sharkManager.DistanceInFrontOfShark + sharkManager.Forward.transform.right * sharkManager.DistanceSideOfShark;
+        if (left == true)
+        {
+            offsetCircle = sharkManager.Forward.transform.forward * sharkManager.DistanceInFrontOfShark - sharkManager.Forward.transform.right * sharkManager.DistanceSideOfShark;
+        }
+        else
+        {
+            offsetCircle = sharkManager.Forward.transform.forward * sharkManager.DistanceInFrontOfShark + sharkManager.Forward.transform.right * sharkManager.DistanceSideOfShark;
+        }
+        Vector3 positionCircle = localPosCircle + offsetCircle;
+        Vector3 worldPosCircle = sharkManager.ParentGameObject.transform.TransformPoint(positionCircle);
+        worldPosCircle.y = 0;
+
+
+
+        //float distanceInFrontOfShark = 5f;
+        //float futureRotationTime = 5f;
+
+        // Obtenir la direction dans laquelle le requin se déplace
+        //Vector3 sharkDirection = sharkManager.Forward.transform.forward;
+        //Transform playerTransform = sharkManager.PointTarget.transform;
+
+        // Obtenir la position et la rotation actuelles du requin
+        //Vector3 sharkPosition = sharkManager.Forward.transform.position;
+        //Quaternion sharkRotation = sharkManager.Forward.transform.rotation;
+
+        // Calculer la position et la rotation futures du requin
+        //Vector3 futureSharkPosition = sharkPosition + sharkDirection * distanceInFrontOfShark;
+        //Vector3 targetPosition = new Vector3(playerTransform.position.x, sharkManager.Forward.transform.position.y, playerTransform.position.z);
+        //rotate(sharkManager, targetPosition/*, ref sharkRotation*/);
+        //Quaternion futureSharkRotation = sharkManager.Forward.transform.rotation;
+        //Vector3 objectPosition = sharkManager.Forward.transform.forward;
+        //if (left == true)
+        //{
+        //    objectPosition = sharkManager.Forward.transform.forward * sharkManager.DistanceInFrontOfShark - sharkManager.Forward.transform.right * sharkManager.DistanceSideOfShark;
+        //    //futureSharkRotation.y += sharkManager.Data.SpeedCombatRotationStatic * 0.01f;
+        //}
+        //else
+        //{
+        //    objectPosition = sharkManager.Forward.transform.forward * sharkManager.DistanceInFrontOfShark + sharkManager.Forward.transform.right * sharkManager.DistanceSideOfShark;
+        //    //futureSharkRotation.y -= sharkManager.Data.SpeedCombatRotationStatic * 0.01f;
+        //}
+
+        // Interpoler entre la position et la rotation actuelles et futures du requin
+        //float interpolationFactor = Mathf.Clamp01(Time.deltaTime / futureRotationTime);
+        //Vector3 interpolatedSharkPosition = Vector3.Lerp(sharkPosition, futureSharkPosition, interpolationFactor);
+        //Quaternion interpolatedSharkRotation = Quaternion.Lerp(sharkRotation, futureSharkRotation, interpolationFactor);
+
+        // Obtenir la position de l'objet en avant du requin
+        //objectPosition.y = 0;
+
+
+
+        sharkManager.Circle.transform.position = worldPosCircle;
+        //sharkManager.Circle.transform.position = offsetPosition;
+        //sharkManager.Circle.transform.position = objectPosition;
+        sharkManager.Circle.SetActive(true);
+
 
 
         if (_timeAnimationCurve >= _lastKey.time - sharkManager.Data.StartFirstCircularWave && _waveStartJump == false)
@@ -422,13 +483,13 @@ public class SharkCombatState : SharkBaseState
             sharkManager.WavesData.LaunchCircularWave(sharkManager.Data.StartFirstCircularWaveData);
             sharkManager.StartJump.Invoke();
             _waveStartJump = true;
-            sharkManager.Circle.SetActive(false);
+            //sharkManager.Circle.SetActive(false);
         }
 
         //Vector3 pos = sharkManager.Forward.transform.position;
         //pos.y = sharkManager.Data.JumpCurve.Evaluate(_timeAnimationCurve);
         //sharkManager.Forward.transform.position = pos;
-         Vector3 pos = sharkManager.transform.position;
+        Vector3 pos = sharkManager.transform.position;
         pos.y = sharkManager.Data.JumpCurve.Evaluate(_timeAnimationCurve);
         sharkManager.transform.position = pos;
 
@@ -499,15 +560,15 @@ public class SharkCombatState : SharkBaseState
 
         _lastKey = sharkManager.Data.JumpCurvePhaseThree[sharkManager.Data.JumpCurvePhaseThree.length - 1];
 
-        if (sharkManager.Forward.transform.position.y < sharkManager.ShowCircleDepth && _waveStartJump == false)
+        if (sharkManager.transform.position.y < sharkManager.ShowCircleDepth && _waveStartJump == false)
         {
             Vector3 localPosCircle = sharkManager.Forward.transform.localPosition;
-            Vector3 offsetCircle = sharkManager.Forward.transform.forward * sharkManager.CircleDistanceMultiply;
-            Vector3 positionCircle = localPosCircle + offsetCircle;
-            Vector3 worldPosCircle = sharkManager.ParentGameObject.transform.TransformPoint(positionCircle);
-            worldPosCircle.y = 0;
+            //Vector3 offsetCircle = sharkManager.Forward.transform.forward * sharkManager.CircleDistanceMultiply;
+            //Vector3 positionCircle = localPosCircle + offsetCircle;
+            //Vector3 worldPosCircle = sharkManager.ParentGameObject.transform.TransformPoint(positionCircle);
+            //worldPosCircle.y = 0;
 
-            sharkManager.Circle.transform.position = worldPosCircle;
+            //sharkManager.Circle.transform.position = worldPosCircle;
             sharkManager.Circle.SetActive(true);
         }
 
@@ -581,6 +642,8 @@ public class SharkCombatState : SharkBaseState
     }
     private void JumpCrazy(SharkManager sharkManager)
     {
+        Vector3 rotation = sharkManager.Forward.transform.localEulerAngles;
+
 
         if (_startJump == false)
         {
@@ -589,34 +652,7 @@ public class SharkCombatState : SharkBaseState
             _startJump = true;
         }
 
-        Vector2 targetPos = new Vector2(sharkManager.PointTarget.transform.position.x, sharkManager.PointTarget.transform.position.z);
-        Vector2 forward = new Vector2(sharkManager.Forward.transform.forward.x, sharkManager.Forward.transform.forward.z);
-        Vector2 sharkPos = new Vector2(sharkManager.Forward.transform.position.x, sharkManager.Forward.transform.position.z);
-
-        float angle = Vector2.SignedAngle(forward, targetPos - sharkPos);
-        if (angle < 0)
-            angle += 360;
-
-
-
-
-        Vector3 rotation = sharkManager.Forward.transform.localEulerAngles;
-
-        if (angle > 90 && angle < 180)
-        {
-            rotation.y -= Time.deltaTime * sharkManager.Data.SpeedCombatRotationStatic;
-        }
-        else if (angle > 270 && angle < 360)
-        {
-            rotation.y -= Time.deltaTime * sharkManager.Data.SpeedCombatRotationStatic;
-        }
-        else
-        {
-            rotation.y += Time.deltaTime * sharkManager.Data.SpeedCombatRotationStatic;
-        }
-
-        sharkManager.Forward.transform.localEulerAngles = rotation;
-
+        rotate(sharkManager, rotation);
 
         animationCurve(sharkManager);
 

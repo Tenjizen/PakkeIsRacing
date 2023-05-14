@@ -39,9 +39,13 @@ namespace Enemies.Shark
         [Header("feedback tempo"), Tooltip("depth at which the feedback circle pop")] //TODO modify
         public float ShowCircleDepth = -14f;
         [Tooltip("distance at which the circle is from the shark")] //TODO modify
-        public float CircleDistanceMultiply = 14f;
+        public float DistanceInFrontOfShark = 5;
 
+        public float DistanceSideOfShark = 1;
+        
         [Space(5), Header("Shark Data")] public SharkData Data;
+
+
 
         [Header("Events")] public UnityEvent StartJump;
         public UnityEvent EndJump;
