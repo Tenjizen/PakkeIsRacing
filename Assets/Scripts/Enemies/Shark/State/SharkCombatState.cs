@@ -420,6 +420,7 @@ public class SharkCombatState : SharkBaseState
 
 
             sharkManager.WavesData.LaunchCircularWave(sharkManager.Data.StartFirstCircularWaveData);
+            sharkManager.StartJump.Invoke();
             _waveStartJump = true;
             sharkManager.Circle.SetActive(false);
         }
@@ -458,6 +459,8 @@ public class SharkCombatState : SharkBaseState
 
 
             sharkManager.Data.StartSecondCircularWaveData.Center = center;
+
+            sharkManager.EndJump.Invoke();
             sharkManager.WavesData.LaunchCircularWave(sharkManager.Data.StartSecondCircularWaveData);
             _waveEndJump = true;
         }
