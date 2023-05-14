@@ -59,6 +59,10 @@ namespace Sound
         {
             _ambienceEventInstance.setParameterByName(parameterName, parameterValue);
         }
+        public void SetMusicArea(MusicArea area)
+        {
+            _musicEventInstance.setParameterByName("Tension", (float)area);
+        }
         public void PlayOneShot(EventReference sound, Vector3 worldPos)
         {
             RuntimeManager.PlayOneShot(sound, worldPos);
