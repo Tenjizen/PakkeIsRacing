@@ -357,10 +357,10 @@ namespace Character.State
                     CharacterManagerRef.PaddleAnimatorProperty.SetTrigger("BrakeRight");
                     _isHoldingRight = true;
                 }
-                else
-                {
-                    _isHoldingRight = false;
-                }
+            }
+            else
+            {
+                _isHoldingRight = false;
             }
         }
 
