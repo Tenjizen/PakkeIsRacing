@@ -165,8 +165,8 @@ namespace Character.State
         /// </summary>
         private void SetBrakeAnimationToFalse()
         {
-            CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeLeft", false);
-            CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeRight", false);
+            // CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeLeft", false);
+            // CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeRight", false);
         }
         
         /// <summary>
@@ -315,6 +315,7 @@ namespace Character.State
 
         #region Rotate Movement
 
+        private bool _isHoldingLeft, _isHoldingRight;
         /// <summary>
         ///detect static rotation input and apply static rotation by adding rotation force & setting animator booleans
         /// </summary>
@@ -330,8 +331,16 @@ namespace Character.State
                     DecelerationAndRotate(Direction.Right);
                 }
                 RotationStaticForceY += _kayakValues.StaticRotationForce;
-                
-                CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeLeft", true);
+
+                if (_isHoldingLeft == false)
+                {
+                    CharacterManagerRef.PaddleAnimatorProperty.SetTrigger("BrakeLeft");
+                    _isHoldingLeft = true;
+                }
+            }
+            else
+            {
+                _isHoldingLeft = false;
             }
             
             //right
@@ -343,7 +352,15 @@ namespace Character.State
                 }
                 RotationStaticForceY -= _kayakValues.StaticRotationForce;
                 
-                CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeRight", true);
+                if (_isHoldingRight == false)
+                {
+                    CharacterManagerRef.PaddleAnimatorProperty.SetTrigger("BrakeRight");
+                    _isHoldingRight = true;
+                }
+                else
+                {
+                    _isHoldingRight = false;
+                }
             }
         }
 
