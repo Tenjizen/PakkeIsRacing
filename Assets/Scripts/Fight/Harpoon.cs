@@ -28,6 +28,14 @@ namespace Fight
                 {
                     transform.LookAt(transform.position + directionOfMotion);
                 }
+
+                if (AutoAimHittable == null)
+                {
+                    return;
+                }
+                Vector3 direction = (AutoAimHittable.Transform.position - transform.position).normalized;
+                Vector3 desiredVelocity = direction * _rigidbody.velocity.magnitude;
+                _rigidbody.velocity = desiredVelocity;
             }
         }
 

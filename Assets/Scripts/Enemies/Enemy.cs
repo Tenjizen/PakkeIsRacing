@@ -24,8 +24,13 @@ namespace Enemies
             CurrentLife -= 1;
             if (CurrentLife <= 0)
             {
-                OnDie.Invoke();
+                Die();
             }
+        }
+
+        protected virtual void Die()
+        {
+            OnDie.Invoke();
         }
     }
 }
