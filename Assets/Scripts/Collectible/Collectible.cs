@@ -1,4 +1,6 @@
+using System;
 using Collectible.Data;
+using DG.Tweening;
 using Fight;
 using Json;
 using UnityEngine;
@@ -11,6 +13,11 @@ namespace Collectible
         public UnityEvent OnCollected = new UnityEvent();
         public CollectibleData Data;
 
+        [SerializeField, Header("Parameters")] private float _levitationHeight;
+        [SerializeField] private float _levitationSpeed;
+        [SerializeField] private float _rotationSpeed;
+        [SerializeField] private Ease _easeType;
+
         public Transform Transform
         {
             get { return transform; }
@@ -18,6 +25,16 @@ namespace Collectible
         }
 
         [field:SerializeField] public UnityEvent OnHit { get; set; }
+
+        private void Start()
+        {
+            StartLevitateUp();
+        }
+
+        private void Update()
+        {
+            transform.Rotate(Vector3.up, _rotationSpeed);
+        }
 
         public void Hit(Projectile projectile, GameObject owner)
         {
@@ -42,5 +59,21 @@ namespace Collectible
         {
             gameObject.SetActive(false);
         }
+
+        #region Levitation
+
+        private void StartLevitateUp()
+        {
+            Vector3 position = transform.position;
+            transform.DOMoveY(position.y + _levitationHeight, _levitationSpeed).SetEase(_easeType).OnComplete(StartLevitateDown);
+        }
+
+        private void StartLevitateDown()
+        {
+            Vector3 position = transform.position;
+            transform.DOMoveY(position.y - _levitationHeight, _levitationSpeed).SetEase(_easeType).OnComplete(StartLevitateUp);
+        }
+
+        #endregion
     }
 }

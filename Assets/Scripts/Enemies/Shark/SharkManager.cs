@@ -25,12 +25,8 @@ namespace Enemies.Shark
         public GameObject PointTargetAttack;
         public GameObject VisualPossessed;
         [ReadOnly] public bool IsPossessed = true;
-        [ReadOnly] public float CurrentLife;
         [ReadOnly] public float CurrentSpeed;
         [ReadOnly] public bool IsCollided;
-
-
-
 
         [field: SerializeField, Header("VFX")] public ParticleSystem HitParticles { get; private set; }
         [field: SerializeField] public GameObject PosParticles { get; private set; }
@@ -54,8 +50,7 @@ namespace Enemies.Shark
 
         [Space(5), Header("Shark Data")] public SharkData Data;
 
-
-
+        
         [Header("Events")] public UnityEvent StartJump;
         public UnityEvent EndJump;
 
@@ -131,8 +126,7 @@ namespace Enemies.Shark
 
         public override void Hit(Projectile projectile, GameObject owner)
         {
-
-            CurrentLife -= 1;
+            base.Hit(projectile,owner);
             //Life -= projectile.Data.Damage
 
             if (HitParticles != null)

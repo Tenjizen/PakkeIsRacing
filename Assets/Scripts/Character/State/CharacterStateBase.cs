@@ -112,8 +112,7 @@ namespace Character.State
             CharacterNavigationState characterNavigationState = new CharacterNavigationState();
             character.SwitchState(characterNavigationState);
 
-            character.WeaponUIManagerProperty.SetPaddleDownImage(false);
-            character.WeaponUIManagerProperty.SetCursor(false);
+            character.WeaponUIManagerProperty.SetCombatWeaponUI(false);
             character.WeaponUIManagerProperty.SetCooldownUI(0);
             
             character.WeaponUIManagerProperty.AutoAimController.ShowAutoAimCircle(false);

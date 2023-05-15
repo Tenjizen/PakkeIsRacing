@@ -20,11 +20,9 @@ namespace Character.State
 
         public override void EnterState(CharacterManager character)
         {
-            CharacterManagerRef.WeaponUIManagerProperty.SetPaddleDownImage(true);
+            CharacterManagerRef.WeaponUIManagerProperty.SetCombatWeaponUI(true);
             
             _weaponPrefab = CharacterManagerRef.CurrentProjectile;
-            
-            CharacterManagerRef.WeaponUIManagerProperty.SetCursor(true);
             
             CharacterManagerRef.WeaponUIManagerProperty.AutoAimController.ShowAutoAimCircle(true);
         }
@@ -49,8 +47,7 @@ namespace Character.State
         {
             CharacterManagerRef.WeaponChargedParticleSystem.Stop();
 
-            CharacterManagerRef.WeaponUIManagerProperty.SetPaddleDownImage(false);
-            CharacterManagerRef.WeaponUIManagerProperty.SetCursor(false);
+            CharacterManagerRef.WeaponUIManagerProperty.SetCombatWeaponUI(false);
             CharacterManagerRef.WeaponUIManagerProperty.SetCooldownUI(0);
 
             CharacterManagerRef.WeaponUIManagerProperty.AutoAimController.ShowAutoAimCircle(false);

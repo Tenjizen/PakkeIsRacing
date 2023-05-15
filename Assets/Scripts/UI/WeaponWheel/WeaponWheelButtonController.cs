@@ -2,6 +2,7 @@ using System;
 using Character;
 using Character.Camera.State;
 using Character.State;
+using DG.Tweening;
 using Fight;
 using UnityEngine;
 using UnityEngine.Events;
@@ -15,6 +16,7 @@ namespace UI.WeaponWheel
         [SerializeField] private Animator _animator;
         [SerializeField] private Button _button;
         [SerializeField] private Projectile _projectile;
+        [SerializeField] private Sprite _weaponIcon;
         
         public bool IsPaddle;
         
@@ -57,11 +59,14 @@ namespace UI.WeaponWheel
             _animator.SetBool("Hover",false);
         }
 
-        public void Select()
+        public void Select(Image weaponIcon)
         {
+  
+            weaponIcon.sprite = _weaponIcon == null ? weaponIcon.sprite : _weaponIcon;
+            weaponIcon.DOFade(_weaponIcon == null ? 0 : 1, 0.2f);
+
             if (_projectile == null)
             {
-                Debug.LogError($"null ref projectile : {transform.gameObject.name}");
                 return;
             }
 

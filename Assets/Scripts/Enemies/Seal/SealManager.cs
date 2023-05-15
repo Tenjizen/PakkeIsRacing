@@ -64,6 +64,8 @@ namespace Enemies.Seal
 
             Vector3 splinePosition = _splinePath.GetPoint(_currentSplinePosition);
             transform.position = new Vector3(splinePosition.x, transform.position.y, splinePosition.z);
+
+            CurrentLife = _data.Life;
         }
 
         private void Update()
@@ -150,7 +152,12 @@ namespace Enemies.Seal
 
         public override void Hit(Projectile projectile, GameObject owner)
         {
+            base.Hit(projectile,owner);
             
+            if (CurrentLife <= 0)
+            {
+                //DIE
+            }
         }
         
         #if UNITY_EDITOR

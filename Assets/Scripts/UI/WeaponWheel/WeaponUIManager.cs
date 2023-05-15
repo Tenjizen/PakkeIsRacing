@@ -20,6 +20,7 @@ namespace UI.WeaponWheel
 
         [SerializeField] private Image _paddleArrowDownImage;
         [SerializeField] private Image _cursor;
+        [SerializeField] private Image _weaponIconInGame;
         [SerializeField] private Transform _cursorPivot;
         [SerializeField] private Image _cooldown;
         [SerializeField] private float _pressTimeToOpenMenu;
@@ -50,9 +51,8 @@ namespace UI.WeaponWheel
             _vignetteBaseScale = _vignette.localScale;
             _weaponUI.SetActive(_isMenuOpen);
 
-            SetCursor(false);
             SetCooldownUI(0);
-            SetPaddleDownImage(false);
+            SetCombatWeaponUI(false);
 
             _lastWeaponButtonSelected = Buttons.OrderBy(x => x.ButtonController.IsPaddle).FirstOrDefault().ButtonController;
             _lastSelectedButton = Buttons.Find(x => x.ButtonController.IsPaddle).ButtonController;
@@ -103,7 +103,7 @@ namespace UI.WeaponWheel
         {
             if (_lastSelectedButton.IsPaddle)
             {
-                _lastWeaponButtonSelected.Select();
+                _lastWeaponButtonSelected.Select(_weaponIconInGame);
                 _lastSelectedButton = _lastWeaponButtonSelected;
             }
             else
@@ -115,6 +115,7 @@ namespace UI.WeaponWheel
                         continue;
                     }
                     _lastSelectedButton = button.ButtonController;
+                    _lastSelectedButton.Select(_weaponIconInGame);
                 }
                 CharacterManager.Instance.CurrentStateBaseProperty.LaunchNavigationState();
             }
@@ -132,17 +133,14 @@ namespace UI.WeaponWheel
                 if (button != null)
                 {
                     _lastSelectedButton = button;
-                    if (button.IsPaddle)
+                    if (button.IsPaddle == false)
                     {
-                        goto IfEnd;
+                        _lastWeaponButtonSelected = button;
                     }
-                    button.Select();
-                    _lastWeaponButtonSelected = button;
+                    button.Select(_weaponIconInGame);
                 }
             }
-
-            IfEnd:
-
+            
             _isMenuOpen = _isMenuOpen == false;
             ResetSelection();
 
@@ -212,16 +210,13 @@ namespace UI.WeaponWheel
 
         #region Set images
 
-        public void SetPaddleDownImage(bool show)
+        public void SetCombatWeaponUI(bool show)
         {
             _paddleArrowDownImage.DOFade(show ? 1 : 0, 0.4f);
-        }
-
-        public void SetCursor(bool show)
-        {
+            _weaponIconInGame.DOFade(show ? 1 : 0, 0.2f);
             _cursor.DOFade(show ? 1 : 0, 0.2f);
         }
-
+        
         public void SetCooldownUI(float value)
         {
             value = Mathf.Clamp01(value);
