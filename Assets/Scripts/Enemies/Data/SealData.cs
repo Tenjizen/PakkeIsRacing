@@ -10,5 +10,14 @@ namespace Enemies.Data
         
         [field: SerializeField, Range(0, 6)]
         public int Life { get; private set; } = 3;
+
+        [field: SerializeField] 
+        public float StopMovementRadius { get; private set; } = 3;
+        
+        [field: SerializeField] 
+        public AnimationCurve UpAndDownMovements { get; private set; }
+        
+        [field: SerializeField] 
+        public float UpAndDownMultiplier { get; private set; } = 3;
     }
 }
