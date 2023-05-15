@@ -1,77 +1,143 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Enemies.Data;
 using Fight;
 using GPEs;
+using Tools.HideIf;
+using UnityEditor;
 using UnityEngine;
 using WaterFlowGPE.Bezier;
 
 namespace Enemies.Seal
 {
+    [Serializable]
+    public enum PointType
+    {
+        Speed = 0,
+        Stop = 1
+    }
+    
+    [Serializable]
+    public struct ControlPoint
+    {
+        [Range(0, 1)] public float Position;
+        public PointType Type;
+
+        [Range(0.25f, 4f)] public float SpeedMultiplier;
+        [Range(0, 30f)] public float StopTime;
+    }
+    
     public class SealManager : Enemy
     {
         [Header("Player detection"), SerializeField] private PlayerTriggerManager _playerTrigger;
         [Header("Path"), SerializeField] private BezierSpline _splinePath;
-        [SerializeField, Range(0,1)] private List<float> _sealCheckpoints;
+        [SerializeField] private List<ControlPoint> _sealCheckpoints;
         [Header("Data"), SerializeField] private SealData _data;
 
         private float _currentSplinePosition;
         private int _checkpointsIndex;
+        private bool _isMoving;
+        private float _currentStopTimer;
+        private float _currentSpeedMultiplier;
         
         private void Start()
         {
             _currentSplinePosition = 0;
             _checkpointsIndex = 0;
+            _currentSpeedMultiplier = 1;
 
             if (_playerTrigger == null)
             {
                 return;
             }
             
-            _playerTrigger.OnPlayerEntered.AddListener(MoveToNextCheckpoint);
+            _playerTrigger.OnPlayerEntered.AddListener(LaunchMovement);
 
             if (_splinePath == null)
             {
                 return;
             }
 
-            _sealCheckpoints.Add(0);
-            _sealCheckpoints.Sort();
-            
+            List<ControlPoint> controlPoints = _sealCheckpoints.OrderBy(x => x.Position).ToList();
+            _sealCheckpoints = controlPoints;
+
             Vector3 splinePosition = _splinePath.GetPoint(_currentSplinePosition);
             transform.position = new Vector3(splinePosition.x, transform.position.y, splinePosition.z);
         }
 
         private void Update()
         {
-            HandleMovement();
+            if (_isMoving == false)
+            {
+                return;
+            }
+
+            CheckForCheckPoint();
+            
+            if (_currentStopTimer > 0)
+            {
+                HandleStop();
+                return;
+            }
+
+            if (_currentSplinePosition <= 1 - _data.MovingSpeed * _currentSpeedMultiplier)
+            {
+                HandleMovement();
+                return;
+            }
         }
 
         #region Seal Controller
 
-        private void MoveToNextCheckpoint()
+        private void LaunchMovement()
+        {
+            _isMoving = true;
+        }
+
+        private void CheckForCheckPoint()
         {
             if (_checkpointsIndex >= _sealCheckpoints.Count - 1)
             {
                 return;
             }
-            _checkpointsIndex++;
-        }
-
-        private void HandleMovement()
-        {
-            if (_currentSplinePosition >= _sealCheckpoints[_checkpointsIndex])
+            
+            ControlPoint controlPoint = _sealCheckpoints[_checkpointsIndex];
+            if (_currentSplinePosition < controlPoint.Position)
             {
                 return;
             }
 
-            _currentSplinePosition += _data.MovingSpeed;
+            switch (controlPoint.Type)
+            {
+                case PointType.Speed:
+                    _currentSpeedMultiplier = controlPoint.SpeedMultiplier;
+                    break;
+                case PointType.Stop:
+                    _currentStopTimer = controlPoint.StopTime;
+                    break;
+            }
+
+            _checkpointsIndex++;
+        }
+        
+        private void HandleStop()
+        {
+            _currentStopTimer -= Time.deltaTime;
+            
+            //stop behavior
+            transform.Rotate(Vector3.up,1f);
+        }
+
+        private void HandleMovement()
+        {
+            _currentSplinePosition += _data.MovingSpeed * _currentSpeedMultiplier;
             
             Transform t = transform;
 
             //position
             Vector3 point = _splinePath.GetPoint(_currentSplinePosition);
-            t.position = Vector3.Lerp(t.position, new Vector3(point.x, t.position.y,point.z), _data.SealSpeedLerpToMovingValue);
+            t.position = point;
 
             //rotation
             Vector3 rotation = t.rotation.eulerAngles;
@@ -91,10 +157,13 @@ namespace Enemies.Seal
 
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.green;
             for (int i = 0; i < _sealCheckpoints.Count; i++)
             {
-                Gizmos.DrawCube(_splinePath.GetPoint(_sealCheckpoints[i]), Vector3.one);
+                Vector3 position = _splinePath.GetPoint(_sealCheckpoints[i].Position);
+                Gizmos.color = _sealCheckpoints[i].Type == PointType.Speed ? new Color(0.53f, 1f, 0.37f) : new Color(0.69f, 0.33f, 0.28f);
+                Gizmos.DrawCube(position, Vector3.one);
+                Handles.Label(position + Vector3.up * 2,
+                    _sealCheckpoints[i].Type == PointType.Speed ? $"{_sealCheckpoints[i].SpeedMultiplier}" : $"{_sealCheckpoints[i].StopTime}");
             }
         }
 
