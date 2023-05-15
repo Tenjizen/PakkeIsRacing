@@ -6,8 +6,9 @@ namespace Character.Camera.State
     {
         public override void EnterState(CameraManager camera)
         {
+            CamManager.CameraAnimator.Play("FreeLook");
         }
-        
+
         public override void UpdateState(CameraManager camera)
         {
             CamManager.MakeSmoothCameraBehindBoat();
@@ -20,12 +21,12 @@ namespace Character.Camera.State
             {
                 CamManager.SmoothResetRotateZ();
             }
- 
+
             CamManager.ApplyRotationCamera();
-            
+
             CamManager.ShakeCamera(CamManager.Data.AmplitudeShakeWhenUnbalanced);
         }
-        
+
         public override void FixedUpdate(CameraManager camera)
         {
 
@@ -39,7 +40,7 @@ namespace Character.Camera.State
         {
 
         }
-        
+
         private void RotateCameraInZ()
         {
             if (CamManager.CharacterManager.Balance > 0)
