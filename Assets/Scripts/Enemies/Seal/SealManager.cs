@@ -7,6 +7,7 @@ using GPEs;
 using Tools.HideIf;
 using UnityEditor;
 using UnityEngine;
+using WaterAndFloating;
 using WaterFlowGPE.Bezier;
 
 namespace Enemies.Seal
@@ -30,6 +31,7 @@ namespace Enemies.Seal
     
     public class SealManager : Enemy
     {
+        [Header("References"), SerializeField] private Waves _waves;
         [Header("Player detection"), SerializeField] private PlayerTriggerManager _playerTrigger;
         [Header("Path"), SerializeField] private BezierSpline _splinePath;
         [SerializeField] private List<ControlPoint> _sealCheckpoints;
@@ -138,14 +140,14 @@ namespace Enemies.Seal
             Transform t = transform;
 
             //position
-            Vector3 point = _splinePath.GetPoint(_currentSplinePosition);
-            t.position = point;
+            Vector3 pointA = _splinePath.GetPoint(_currentSplinePosition);
+            t.position = new Vector3(pointA.x, 
+                _waves.GetHeight(t.position) + _data.UpAndDownMovements.Evaluate(_currentSplinePosition) * _data.UpAndDownMultiplier,
+                pointA.z);
 
             //rotation
-            Vector3 rotation = t.rotation.eulerAngles;
-            Vector3 direction = _splinePath.GetDirection(_currentSplinePosition);
-            float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
-            t.rotation = Quaternion.Euler(rotation.x,angle, rotation.z);
+            Vector3 pointB = _splinePath.GetPoint(Mathf.Clamp01(_currentSplinePosition+0.01f));
+            t.LookAt(pointB);
         }
         
         #endregion
@@ -153,14 +155,14 @@ namespace Enemies.Seal
         public override void Hit(Projectile projectile, GameObject owner)
         {
             base.Hit(projectile,owner);
-            
-            if (CurrentLife <= 0)
-            {
-                //DIE
-            }
         }
-        
-        #if UNITY_EDITOR
+
+        protected override void Die()
+        {
+            base.Die();
+        }
+
+#if UNITY_EDITOR
 
         private void OnDrawGizmos()
         {

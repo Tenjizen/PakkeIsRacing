@@ -57,4 +57,15 @@ public class MathTools
 
         return direction;
     }
+    
+    public static float GetVerticalAngle(Vector3 pointA, Vector3 pointB)
+    {
+        Vector3 direction = pointB - pointA;
+        
+        float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
+        if (angle < 360) angle += 360;
+        if (angle > 360) angle -= 360;
+
+        return angle;
+    }
 }
