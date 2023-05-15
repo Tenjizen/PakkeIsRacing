@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 using WaterAndFloating;
+using Random = System.Random;
 
 namespace Kayak
 {
@@ -27,8 +28,12 @@ namespace Kayak
         
         [Header("Events")] 
         public UnityEvent OnKayakCollision;
+        public UnityEvent OnKayakSpeedHigh;
+        [SerializeField] private float _magnitudeToLaunchEventSpeed;
+        [SerializeField] private Vector2 _speedEventRecurrenceRandomBetween;
         
         //privates
+        private float _speedEventCountDown;
         private float _particleTimer = -1;
         private CharacterNavigationState.Direction _particleSide;
         
@@ -40,6 +45,7 @@ namespace Kayak
         {
             ClampVelocity();
             ManageParticlePaddle();
+            ManageHighSpeedEvent();
         }
 
         private void FixedUpdate()
@@ -129,6 +135,18 @@ namespace Kayak
                     }
                 }
             }
+        }
+
+        private void ManageHighSpeedEvent()
+        {
+            _speedEventCountDown -= Time.deltaTime;
+            if (_speedEventCountDown > 0 || Rigidbody.velocity.magnitude < _magnitudeToLaunchEventSpeed)
+            {
+                return;
+            }
+
+            OnKayakSpeedHigh.Invoke();
+            _speedEventCountDown = UnityEngine.Random.Range(_speedEventRecurrenceRandomBetween.x, _speedEventRecurrenceRandomBetween.y);
         }
     }
 }

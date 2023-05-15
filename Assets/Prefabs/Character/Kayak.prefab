@@ -54,6 +54,7 @@ MonoBehaviour:
   _waterAngularDrag: 15
   _playerTransform: {fileID: 333907971529626016}
   _renderDistance: 50
+  _isSimulated: 0
 --- !u!1 &333907970277157174
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,6 +109,7 @@ MonoBehaviour:
   _waterAngularDrag: 15
   _playerTransform: {fileID: 333907971529626016}
   _renderDistance: 50
+  _isSimulated: 0
 --- !u!1 &333907970869196803
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,6 +164,7 @@ MonoBehaviour:
   _waterAngularDrag: 15
   _playerTransform: {fileID: 333907971529626016}
   _renderDistance: 50
+  _isSimulated: 0
 --- !u!1 &333907971254692468
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,6 +219,7 @@ MonoBehaviour:
   _waterAngularDrag: 15
   _playerTransform: {fileID: 333907971529626016}
   _renderDistance: 50
+  _isSimulated: 0
 --- !u!1 &333907971529626045
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,9 +297,16 @@ MonoBehaviour:
     FrontRight: {fileID: 333907970277157176}
     BackLeft: {fileID: 333907971254692470}
     BackRight: {fileID: 333907970869196805}
-  TimeToPlayParticlesAfterPaddle: 0
   LeftPaddleParticle: {fileID: 0}
   RightPaddleParticle: {fileID: 0}
+  OnKayakCollision:
+    m_PersistentCalls:
+      m_Calls: []
+  OnKayakSpeedHigh:
+    m_PersistentCalls:
+      m_Calls: []
+  _magnitudeToLaunchEventSpeed: 0
+  _speedEventRecurrenceRandomBetween: {x: 0.2, y: 1}
 --- !u!136 &4595948853936165718
 CapsuleCollider:
   m_ObjectHideFlags: 0

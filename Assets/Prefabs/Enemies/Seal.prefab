@@ -100,7 +100,6 @@ GameObject:
   - component: {fileID: 7298108421367402729}
   - component: {fileID: 5499713024557008787}
   - component: {fileID: 8286607144140807126}
-  - component: {fileID: 4667220206333925658}
   m_Layer: 0
   m_Name: SealEnemy
   m_TagString: Untagged
@@ -164,12 +163,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4403061b9bfa70b4d93318f75cd081e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _frontPlayerTrigger: {fileID: 4667220206333925658}
-  _backPlayerTrigger: {fileID: 8286607144140807126}
+  <OnHit>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  _playerTrigger: {fileID: 8286607144140807126}
   _splinePath: {fileID: 6256173706567633387}
+  _sealCheckpoints: []
   _data: {fileID: 11400000, guid: d84400737f199d849b1105273d1df559, type: 2}
-  _playerIsAtBack: 0
-  _playerIsAtFront: 0
 --- !u!114 &8286607144140807126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,37 +185,8 @@ MonoBehaviour:
   _triggerType: 1
   _showTriggerGizmos: 1
   _triggerBoxSize: {x: 1, y: 1, z: 1}
-  _triggerSphereSizeRadius: 9.58
-  _triggerOffsetPosition: {x: 0, y: 0, z: -9.6}
-  _playerLayerMask:
-    serializedVersion: 2
-    m_Bits: 2147483647
-  OnPlayerEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPlayerStay:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPlayerExited:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &4667220206333925658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8676301159743235538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e5bcccd9b12b00408e41f15d5a7eb27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _triggerType: 1
-  _showTriggerGizmos: 1
-  _triggerBoxSize: {x: 1, y: 1, z: 1}
-  _triggerSphereSizeRadius: 9.58
-  _triggerOffsetPosition: {x: 0, y: 0, z: 9.3}
+  _triggerSphereSizeRadius: 14.47
+  _triggerOffsetPosition: {x: 0, y: 0, z: 0}
   _playerLayerMask:
     serializedVersion: 2
     m_Bits: 2147483647

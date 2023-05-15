@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Enemies.Data;
 using Fight;
 using GPEs;
@@ -7,93 +8,70 @@ using WaterFlowGPE.Bezier;
 
 namespace Enemies.Seal
 {
-    public enum MovingDirection
-    {
-        Forward = 0,
-        Backward = 1
-    }
-    
     public class SealManager : Enemy
     {
-        [Header("Player detection"), SerializeField] private PlayerTriggerManager _frontPlayerTrigger;
-        [SerializeField] private PlayerTriggerManager _backPlayerTrigger;
+        [Header("Player detection"), SerializeField] private PlayerTriggerManager _playerTrigger;
         [Header("Path"), SerializeField] private BezierSpline _splinePath;
+        [SerializeField, Range(0,1)] private List<float> _sealCheckpoints;
         [Header("Data"), SerializeField] private SealData _data;
 
         private float _currentSplinePosition;
-
-        [Header("Debug"), SerializeField, ReadOnly] private bool _playerIsAtBack;
-        [SerializeField, ReadOnly] private bool _playerIsAtFront;
-
+        private int _checkpointsIndex;
+        
         private void Start()
         {
             _currentSplinePosition = 0;
-            _playerIsAtFront = false;
-            _playerIsAtBack = false;
+            _checkpointsIndex = 0;
 
-            if (_frontPlayerTrigger == null || _backPlayerTrigger == null)
+            if (_playerTrigger == null)
             {
                 return;
             }
             
-            _frontPlayerTrigger.OnPlayerEntered.AddListener(SetPlayerAtFrontTrue);
-            _backPlayerTrigger.OnPlayerEntered.AddListener(SetPlayerAtBackTrue);
-            _frontPlayerTrigger.OnPlayerExited.AddListener(SetPlayerAtFrontFalse);
-            _backPlayerTrigger.OnPlayerExited.AddListener(SetPlayerAtBackFalse);
+            _playerTrigger.OnPlayerEntered.AddListener(MoveToNextCheckpoint);
 
             if (_splinePath == null)
             {
                 return;
             }
 
+            _sealCheckpoints.Add(0);
+            _sealCheckpoints.Sort();
+            
             Vector3 splinePosition = _splinePath.GetPoint(_currentSplinePosition);
             transform.position = new Vector3(splinePosition.x, transform.position.y, splinePosition.z);
         }
 
         private void Update()
         {
-            ManageMovement();
+            HandleMovement();
         }
-
-        #region Player Detection Methods
-
-        private void SetPlayerAtFrontTrue()
-        {
-            _playerIsAtFront = true;
-        }
-        private void SetPlayerAtBackTrue()
-        {
-            _playerIsAtBack = true;
-        }
-        private void SetPlayerAtFrontFalse()
-        {
-            _playerIsAtFront = false;
-        }
-        private void SetPlayerAtBackFalse()
-        {
-            _playerIsAtBack = false;
-        }
-
-        #endregion
 
         #region Seal Controller
 
-        private void ManageMovement()
+        private void MoveToNextCheckpoint()
         {
-            if (_playerIsAtBack)
+            if (_checkpointsIndex >= _sealCheckpoints.Count - 1)
             {
-                Move(MovingDirection.Forward);
+                return;
+            }
+            _checkpointsIndex++;
+        }
+
+        private void HandleMovement()
+        {
+            if (_currentSplinePosition >= _sealCheckpoints[_checkpointsIndex])
+            {
+                return;
             }
 
-            if (_playerIsAtFront)
-            {
-                Move(MovingDirection.Backward);
-            }
-
-            Transform t = transform;
+            _currentSplinePosition += _data.MovingSpeed;
             
-            Vector3 position = Vector3.Lerp(t.position, _splinePath.GetPoint(_currentSplinePosition), _data.SealSpeedLerpToMovingValue);
-            t.position = position;
+            Transform t = transform;
+
+            //position
+            Vector3 point = _splinePath.GetPoint(_currentSplinePosition);
+            t.position = Vector3.Lerp(t.position, new Vector3(point.x, t.position.y,point.z), _data.SealSpeedLerpToMovingValue);
 
             //rotation
             Vector3 rotation = t.rotation.eulerAngles;
@@ -102,18 +80,24 @@ namespace Enemies.Seal
             t.rotation = Quaternion.Euler(rotation.x,angle, rotation.z);
         }
         
-        private void Move(MovingDirection direction)
-        {
-            float value = direction == MovingDirection.Forward ? 1 : -1;
-            _currentSplinePosition += value * _data.MovingValueAtPlayerDetected;
-            _currentSplinePosition = Mathf.Clamp01(_currentSplinePosition);
-        }
-
         #endregion
 
         public override void Hit(Projectile projectile, GameObject owner)
         {
             
         }
+        
+        #if UNITY_EDITOR
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.green;
+            for (int i = 0; i < _sealCheckpoints.Count; i++)
+            {
+                Gizmos.DrawCube(_splinePath.GetPoint(_sealCheckpoints[i]), Vector3.one);
+            }
+        }
+
+#endif
     }
 }

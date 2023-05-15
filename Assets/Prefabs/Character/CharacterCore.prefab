@@ -5851,8 +5851,7 @@ MonoBehaviour:
     RotateCamera: {x: 0, y: 0}
     Deadzone: 0
     OpenWeaponMenu: 0
-    SelectWeaponMenuX: 0
-    SelectWeaponMenuY: 0
+    SelectWeaponMenu: {x: 0, y: 0}
     DeselectWeapon: 0
     Aim: 0
     Shoot: 0
@@ -7184,6 +7183,11 @@ PrefabInstance:
       propertyPath: RightPaddleParticle
       value: 
       objectReference: {fileID: 3972387942190074206}
+    - target: {fileID: 4950148468892883501, guid: bc06d1e844ba3694bbdecce4a99ba863,
+        type: 3}
+      propertyPath: _magnitudeToLaunchEventSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7711553517519023611, guid: bc06d1e844ba3694bbdecce4a99ba863,
         type: 3}
       propertyPath: EmissionModule.rateOverDistance.scalar
