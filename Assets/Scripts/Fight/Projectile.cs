@@ -18,6 +18,7 @@ namespace Fight
         public UnityEvent OnProjectileDie = new UnityEvent();
 
         private float _lifetime;
+        protected IHittable AutoAimHittable;
 
         private void Start()
         {
@@ -84,6 +85,11 @@ namespace Fight
             sedna.transform.DOMove(player.position, Data.Cooldown);
 
             Data.ForbiddenColliders.Clear();
+        }
+
+        public void SetHittableAutoAim(IHittable hittable)
+        {
+            AutoAimHittable = hittable;
         }
     }
 }

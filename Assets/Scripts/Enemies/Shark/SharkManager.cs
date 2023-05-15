@@ -7,13 +7,14 @@ using Sound;
 using UnityEngine;
 using WaterAndFloating;
 using Character.Camera;
+using Enemies.Shark.State;
+using UI;
 using UnityEngine.Events;
 
 namespace Enemies.Shark
 {
     public class SharkManager : Enemy
     {
-        [field:SerializeField] public UIEnemy UIEnemyManager { get; private set; }
         [field: SerializeField] public SharkBaseState CurrentStateBase { get; private set; }
         [field: SerializeField, ReadOnly] public Transform TargetTransform { get; private set; }
         [field: SerializeField] public PlayerTriggerManager PlayerTriggerManager { get; private set; }
@@ -32,19 +33,18 @@ namespace Enemies.Shark
         [field: SerializeField] public GameObject PosParticles { get; private set; }
 
         [field: SerializeField, Header("Sound")] public AudioClip HitSound { get; private set; }
-        public KayakController KayakControllerProperty { get; set; }
 
         [Header("Hit")] public Collider SharkCollider;
 
         [Header("Waves")] public Waves WavesData;
 
-        [Header("feedback tempo"), Tooltip("depth at which the feedback circle pop")] //TODO modify
+        [Header("feedback tempo"), Tooltip("depth at which the feedback circle pop")] 
         public float ShowCircleDepth = -14f;
-        [Tooltip("distance at which the circle is from the shark in phase one")] //TODO modify
+        [Tooltip("distance at which the circle is from the shark in phase one")]
         public float DistanceInFrontOfShark = 5;
-        [Tooltip("distance at which the circle is from the shark in side in phase one")] //TODO modify
+        [Tooltip("distance at which the circle is from the shark in side in phase one")] 
         public float DistanceSideOfShark = 1;
-        [Tooltip("distance at which the circle is from the shark in phase three")] //TODO modify
+        [Tooltip("distance at which the circle is from the shark in phase three")] 
         public float DistanceInFrontOfSharkPhaseThree = 5;
 
 
@@ -53,6 +53,10 @@ namespace Enemies.Shark
         
         [Header("Events")] public UnityEvent StartJump;
         public UnityEvent EndJump;
+
+        Vector3 collision = Vector3.zero;
+        public LayerMask LayerMask;
+        [field:SerializeField ,ReadOnly] public KayakController KayakControllerRef { get; set; }
 
         private void Awake()
         {
@@ -63,56 +67,45 @@ namespace Enemies.Shark
 
         private void Start()
         {
-            KayakControllerProperty = CharacterManager.Instance.KayakControllerProperty;
             CurrentStateBase.EnterState(this);
-            //UIEnemyManager.SetGauge(CurrentLife, Data.Life);
         }
-        Vector3 collision = Vector3.zero;
-        public LayerMask LayerMask;
+        
         private void Update()
         {
             CurrentStateBase.UpdateState(this);
 
             if (PosParticles != null)
             {
-                //if (PosParticles.isPlaying == false)
-                //{
-                //PosParticles.transform.parent = null;
-                var posPartic = transform.position;
-                posPartic.y = WavesData.GetHeight(transform.position);
-                PosParticles.transform.position = posPartic;
-                //PosParticles.Play();
-                //}
+                Vector3 particlePosition = transform.position;
+                particlePosition.y = WavesData.GetHeight(transform.position);
+                PosParticles.transform.position = particlePosition;
             }
 
             AvoidObstacle();
-            CircleUI();
+            ManagerCircleUI();
 
         }
         private void FixedUpdate()
         {
             CurrentStateBase.FixedUpdate(this);
-
-        }
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(collision, 2f);
         }
 
-        public void SwitchState(SharkBaseState stateBaseCharacter)
+        private void SwitchState(SharkBaseState stateBaseCharacter)
         {
             CurrentStateBase = stateBaseCharacter;
             stateBaseCharacter.EnterState(this);
         }
+        
         public void OnEnter()
         {
-            if (TargetTransform == null && IsPossessed == true)
+            if (TargetTransform != null || IsPossessed == false)
             {
-                TargetTransform = GetComponentInParent<PlayerTriggerManager>().PropKayakController.gameObject.GetComponent<Transform>();
-                SharkCombatState sharkCombatState = new SharkCombatState();
-                SwitchState(sharkCombatState);
+                return;
             }
+            
+            TargetTransform = GetComponentInParent<PlayerTriggerManager>().PropKayakController.gameObject.GetComponent<Transform>();
+            SharkCombatState sharkCombatState = new SharkCombatState();
+            SwitchState(sharkCombatState);
         }
 
         public void FreeRoamState()
@@ -122,36 +115,34 @@ namespace Enemies.Shark
             SwitchState(sharkFreeRoamState);
             TargetTransform = null;
         }
-
-
+        
         public override void Hit(Projectile projectile, GameObject owner)
         {
             base.Hit(projectile,owner);
-            //Life -= projectile.Data.Damage
 
             if (HitParticles != null)
             {
                 HitParticles.transform.parent = null;
                 HitParticles.Play();
-
             }
-
-            UIEnemyManager.SetGauge(CurrentLife, Data.Life);
-
-            //CharacterManager.Instance.SoundManagerProperty.PlaySound(HitSound);
-
-            if (CurrentLife <= 0)
-            {
-                VisualPossessed.SetActive(false);
-                PlayerTriggerManager.enabled = false;
-                IsPossessed = false;
-                PointTarget.transform.localPosition = new Vector3(0, 0, 0);
-            }
-        }
-        
-        public void CircleUI()
-        {
             
+            CharacterManager.Instance.EnemyUIManager.SetGauge(CurrentLife, Data.Life);
+        }
+
+        protected override void Die()
+        {
+            base.Die();
+            
+            VisualPossessed.SetActive(false);
+            PlayerTriggerManager.enabled = false;
+            IsPossessed = false;
+            PointTarget.transform.localPosition = new Vector3(0, 0, 0);
+            CharacterManager.Instance.EnemyUIManager.DisableEnemyUI();
+            
+        }
+
+        private void ManagerCircleUI()
+        {
             if (Circle.activeInHierarchy)
             {
                 Circle.transform.localScale += Vector3.one * 0.2f;
@@ -166,89 +157,89 @@ namespace Enemies.Shark
         {
             CurrentSpeed = Mathf.Lerp(CurrentSpeed, speed, 0.05f);
         }
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider col)
         {
-            if (other.GetComponent<KayakController>() == true && IsCollided == false && IsPossessed == true)
+            if (col.GetComponent<KayakController>() == null || IsCollided || IsPossessed != true)
             {
-                IsCollided = true;
-                CharacterManager.Instance.AddBalanceValueToCurrentSide(8.5f);
-                //SharkCollider.enabled = false;
-                Debug.Log("collision");
-
+                return;
             }
+            
+            IsCollided = true;
+            CharacterManager.Instance.AddBalanceValueToCurrentSide(8.5f);
         }
-        private void OnCollisionEnter(Collision collision)
+        private void OnCollisionEnter(Collision col)
         {
-            if (collision.gameObject.GetComponent<KayakController>() == true && IsCollided == false && IsPossessed == true)
+            if (col.gameObject.GetComponent<KayakController>() == null || IsCollided || IsPossessed != true)
             {
-                IsCollided = true;
-                CharacterManager.Instance.AddBalanceValueToCurrentSide(8.5f);
-                //SharkCollider.enabled = false;
-                Debug.Log("collision");
-
+                return;
             }
+            
+            IsCollided = true;
+            CharacterManager.Instance.AddBalanceValueToCurrentSide(8.5f);
         }
 
         private void AvoidObstacle()
         {
-            //avoid iceberg
             Ray ray = new Ray(Forward.transform.position, Forward.transform.forward);
-            //Ray ray = new Ray(this.transform.position, transform.forward);
             RaycastHit hit;
-            //if(Physics.Raycast(ray, out hit, 200))
-            if (Physics.Raycast(ray, out hit, 15))
+            if (Physics.Raycast(ray, out hit, 15) == false)
             {
-                if (hit.collider.gameObject.GetComponent<KayakController>() == false)
+                return;
+            }
+
+            if (hit.collider.gameObject.GetComponent<KayakController>() != null)
+            {
+                return;
+            }
+            
+            collision = hit.point;
+            Vector3 rotation = Forward.transform.localEulerAngles;
+                
+            Vector3 hitPosition = hit.transform.position;
+            Vector3 targetPosition = PointTarget.transform.position;
+            Vector3 forwardForward = Forward.transform.forward;
+            Vector3 forwardPosition = Forward.transform.position;
+                
+            Vector2 targetHitPos = new Vector2(hitPosition.x, hitPosition.z);
+            Vector2 targetPos = new Vector2(targetPosition.x, targetPosition.z);
+            Vector2 sharkForward = new Vector2(forwardForward.x, forwardForward.z);
+            Vector2 sharkPos = new Vector2(forwardPosition.x, forwardPosition.z);
+            
+            float angleTarget = Vector2.SignedAngle(sharkForward, targetPos - sharkPos);
+            if (angleTarget < 0)
+            {
+                angleTarget += 360;
+            }
+
+            float angleHit = Vector2.SignedAngle(sharkForward, targetHitPos - sharkPos);
+            if (angleHit < 0)
+            {
+                angleHit += 360;
+            }
+                    
+            if (angleHit <= 90 || angleHit >= 270)
+            {
+                switch (angleTarget)
                 {
-                    collision = hit.point;
-
-                    Vector2 targetHitPos = new Vector2(hit.transform.position.x, hit.transform.position.z);
-
-                    Vector2 targetPos = new Vector2(PointTarget.transform.position.x, PointTarget.transform.position.z);
-
-                    Vector2 sharkForward = new Vector2(Forward.transform.forward.x, Forward.transform.forward.z);
-                    Vector2 sharkPos = new Vector2(Forward.transform.position.x, Forward.transform.position.z);
-
-                    float angleTarget = Vector2.SignedAngle(sharkForward, targetPos - sharkPos);
-                    if (angleTarget < 0)
-                        angleTarget += 360;
-
-                    Vector3 rotation = Forward.transform.localEulerAngles;
-
-
-                    float angleHit = Vector2.SignedAngle(sharkForward, targetHitPos - sharkPos);
-                    if (angleHit < 0)
-                        angleHit += 360;
-
-                    ////var lastRota = rotation.y 
-
-                    if (angleHit <= 90 || angleHit >= 360 - 90)
-                    {
-                        if (angleTarget >= 0 && angleTarget < 180)
-                        {
-                            //rotation.y -= Time.deltaTime * Data.SpeedCombatRotationStatic;
-                            rotation.y -= Time.deltaTime * 150;
-                        }
-                        else if (angleTarget >= 180 && angleTarget <= 360)
-                        {
-                            //rotation.y -= Time.deltaTime * Data.SpeedCombatRotationStatic;
-                            rotation.y += Time.deltaTime * 150;
-                        }
-                    }
-                    //apply rota
-                    Forward.transform.localEulerAngles = rotation;
+                    case >= 0 and < 180:
+                        rotation.y -= Time.deltaTime * 150;
+                        break;
+                    case >= 180 and <= 360:
+                        rotation.y += Time.deltaTime * 150;
+                        break;
                 }
             }
+            Forward.transform.localEulerAngles = rotation;
         }
-
 
         #region CutScene
         public void CutSceneFirstWave()
         {
             Vector2 center = Data.StartFirstCircularWaveDataPhaseThree.Center;
 
-            center.x = Forward.transform.position.x;
-            center.y = Forward.transform.position.z;
+            Vector3 position = Forward.transform.position;
+            center.x = position.x;
+            center.y = position.z;
 
             Data.StartFirstCircularWaveDataPhaseThree.Center = center;
 
@@ -258,13 +249,24 @@ namespace Enemies.Shark
         {
             Vector2 center = Data.StartSecondCircularWaveDataPhaseThree.Center;
 
-            center.x = Forward.transform.position.x;
-            center.y = Forward.transform.position.z;
+            Vector3 position = Forward.transform.position;
+            center.x = position.x;
+            center.y = position.z;
 
             Data.StartFirstCircularWaveDataPhaseThree.Center = center;
 
             WavesData.LaunchCircularWave(Data.StartSecondCircularWaveDataPhaseThree);
         }
         #endregion
+        
+        #if UNITY_EDITOR
+        
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(collision, 2f);
+        }
+        
+        #endif
     }
 }

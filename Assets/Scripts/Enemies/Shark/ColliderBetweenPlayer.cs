@@ -1,3 +1,5 @@
+using System;
+using Character;
 using Kayak;
 using UnityEngine;
 
@@ -5,14 +7,14 @@ namespace Enemies.Shark
 {
     public class ColliderBetweenPlayer : MonoBehaviour
     {
-        [field:SerializeField] public SharkManager ManagerRef { get; private set; }
-        
+        private SharkManager _sharkManager;
+
         private void OnTriggerEnter(Collider other)
         {
             KayakController kayakController = other.gameObject.GetComponent<KayakController>();
             if (kayakController != null)
             {
-                ManagerRef.KayakControllerProperty = kayakController;
+                _sharkManager.KayakControllerRef = kayakController;
             }
         
         }
@@ -23,7 +25,7 @@ namespace Enemies.Shark
 
             if (kayakController != null)
             {
-                ManagerRef.KayakControllerProperty = null;
+                _sharkManager.KayakControllerRef = null;
             }
         }
     }

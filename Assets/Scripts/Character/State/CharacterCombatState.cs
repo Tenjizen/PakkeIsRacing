@@ -114,6 +114,11 @@ namespace Character.State
                     
                     character.WeaponCooldown = _weaponPrefab.Data.Cooldown;
                     character.ProjectileIsInAir = true;
+
+                    if (_hittable != null)
+                    {
+                        projectile.SetHittableAutoAim(_hittable);
+                    }
                     
                     LaunchNavigationState();
                 }
