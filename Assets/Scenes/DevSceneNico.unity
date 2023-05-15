@@ -8151,6 +8151,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1051006898977071281, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1228857047242111264, guid: 36e32e7372e41e346abb29f843dd75b3,
         type: 3}
       propertyPath: m_Layer
@@ -8861,6 +8866,16 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 3446390163178314128, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: m_Name
+      value: Cadre Life
+      objectReference: {fileID: 0}
+    - target: {fileID: 3446390163178314128, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3501931489345354503, guid: 36e32e7372e41e346abb29f843dd75b3,
         type: 3}
       propertyPath: m_IsActive
@@ -9336,6 +9351,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4428229805434605834, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 187.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 4428229805434605834, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -88.19
+      objectReference: {fileID: 0}
     - target: {fileID: 4438205968835135871, guid: 36e32e7372e41e346abb29f843dd75b3,
         type: 3}
       propertyPath: m_Layer
@@ -9345,6 +9370,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4503016000558676183, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -61.100006
       objectReference: {fileID: 0}
     - target: {fileID: 4550048605649472625, guid: 36e32e7372e41e346abb29f843dd75b3,
         type: 3}
@@ -9901,6 +9931,11 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.0048013167
       objectReference: {fileID: 0}
+    - target: {fileID: 5981554953876019725, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6020170035865724882, guid: 36e32e7372e41e346abb29f843dd75b3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10180,6 +10215,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 1.2501503
+      objectReference: {fileID: 0}
+    - target: {fileID: 6823117903412326857, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6864646539587018836, guid: 36e32e7372e41e346abb29f843dd75b3,
         type: 3}
@@ -13085,6 +13125,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2047277324}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1324973207 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2389172945433338097, guid: 36e32e7372e41e346abb29f843dd75b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1109801708}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4026c2b6951f14a4c8bb029efd8b91fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1330468654
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14977,6 +15029,18 @@ PrefabInstance:
       value: 14.47
       objectReference: {fileID: 0}
     - target: {fileID: 1158828331, guid: c65dbc6e6a13448468e3141d768ce52b, type: 3}
+      propertyPath: _triggerOffsetPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1158828331, guid: c65dbc6e6a13448468e3141d768ce52b, type: 3}
+      propertyPath: _triggerOffsetPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1158828331, guid: c65dbc6e6a13448468e3141d768ce52b, type: 3}
+      propertyPath: _triggerOffsetPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1158828331, guid: c65dbc6e6a13448468e3141d768ce52b, type: 3}
       propertyPath: _triggerSphereSizeRadius
       value: 14.47
       objectReference: {fileID: 0}
@@ -15071,7 +15135,7 @@ PrefabInstance:
     - target: {fileID: 4285338905635752386, guid: c65dbc6e6a13448468e3141d768ce52b,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5824427334280982204, guid: c65dbc6e6a13448468e3141d768ce52b,
         type: 3}
@@ -15507,7 +15571,7 @@ PrefabInstance:
     - target: {fileID: 4285338905635752386, guid: c65dbc6e6a13448468e3141d768ce52b,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5223573444733396227, guid: c65dbc6e6a13448468e3141d768ce52b,
         type: 3}
@@ -21317,6 +21381,21 @@ PrefabInstance:
       propertyPath: _triggerSphereSizeRadius
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 1286071281248309136, guid: c7d2cd18491bcd1479516ab5e5d28a54,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1286071281248309136, guid: c7d2cd18491bcd1479516ab5e5d28a54,
+        type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1286071281248309136, guid: c7d2cd18491bcd1479516ab5e5d28a54,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 1572955983011780759, guid: c7d2cd18491bcd1479516ab5e5d28a54,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -21489,6 +21568,21 @@ PrefabInstance:
       propertyPath: m_ExposedReferences.m_References.Array.data[8].second
       value: 
       objectReference: {fileID: 1316362075}
+    - target: {fileID: 3185636025459255267, guid: c7d2cd18491bcd1479516ab5e5d28a54,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3185636025459255267, guid: c7d2cd18491bcd1479516ab5e5d28a54,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3185636025459255267, guid: c7d2cd18491bcd1479516ab5e5d28a54,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 3481916426435834060, guid: c7d2cd18491bcd1479516ab5e5d28a54,
         type: 3}
       propertyPath: m_IsActive
@@ -21626,24 +21720,14 @@ PrefabInstance:
       objectReference: {fileID: 2093896270}
     - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
         type: 3}
-      propertyPath: LayerMask.m_Bits
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
-        type: 3}
-      propertyPath: DistanceSideOfShark
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
-        type: 3}
-      propertyPath: DistanceInFrontOfShark
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
-        type: 3}
       propertyPath: CircleDistanceMulptiply
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
+        type: 3}
+      propertyPath: <UIEnemyManager>k__BackingField
+      value: 
+      objectReference: {fileID: 1324973207}
     - target: {fileID: 4724983407922079717, guid: c7d2cd18491bcd1479516ab5e5d28a54,
         type: 3}
       propertyPath: MaxDistanceBetweenPointInCombatPhaseOne

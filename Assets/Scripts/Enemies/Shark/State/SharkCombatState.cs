@@ -26,16 +26,23 @@ public class SharkCombatState : SharkBaseState
 
     float _distSharkTarget;
     float _distSharkPointTarget;
-    float _distSharkPointTargetAttack;
+    //float _distSharkPointTargetAttack;
 
     private float _attack;
     private int _atqNumber = 0;
     bool _startJump = false;
     bool _startAtq = false;
+    float _percentLife;
+    bool _left = false;
+    bool _movePointTarget = false;
 
     public override void EnterState(SharkManager sharkManager)
     {
         Debug.Log("combat state");
+
+        sharkManager.UIEnemyManager.ActiveGameObject();
+        sharkManager.UIEnemyManager.SetGauge(sharkManager.CurrentLife, sharkManager.Data.Life);
+
 
         _elevationOffsetBase = sharkManager.Data.ElevationOffset;
         _currentOffSet = sharkManager.Data.ElevationOffset;
@@ -48,9 +55,7 @@ public class SharkCombatState : SharkBaseState
             //sharkManager.PointTarget.transform.position = MathTools.GetPointFromAngleAndDistance(sharkManager.TargetTransform.position, rand, DIST_POINT);
             sharkManager.PointTarget.transform.position = MathTools.GetPointFromAngleAndDistance(sharkManager.TargetTransform.position, 0, 0);
         }
-
     }
-    float percentLife;
     public override void UpdateState(SharkManager sharkManager)
     {
 
@@ -69,7 +74,7 @@ public class SharkCombatState : SharkBaseState
 
             _distSharkTarget = Vector3.Distance(sharkManager.TargetTransform.position, sharkManager.transform.position);
             _distSharkPointTarget = Vector3.Distance(sharkManager.PointTarget.transform.position, sharkManager.transform.position);
-            _distSharkPointTargetAttack = Vector3.Distance(sharkManager.PointTargetAttack.transform.position, sharkManager.transform.position);
+            //_distSharkPointTargetAttack = Vector3.Distance(sharkManager.PointTargetAttack.transform.position, sharkManager.transform.position);
 
             var rbKayak = CharacterManager.Instance.KayakControllerProperty.Rigidbody.velocity;
             rbKayak.y = 0;
@@ -79,7 +84,7 @@ public class SharkCombatState : SharkBaseState
                     sharkManager.TargetTransform,
                     rbKayak.magnitude * sharkManager.Data.MutliplySpeed);
             }
-            else if (_distSharkTarget > sharkManager.Data.DistSharkTargetPointStopMoving)
+            else if (_attackState == AttackState.JumpToTarget && _distSharkTarget > sharkManager.Data.DistSharkTargetPointStopMoving)
             {
                 sharkManager.PointTarget.transform.position = MathTools.GetPointFromAngleAndDistance(sharkManager.TargetTransform.position, 0, 0);
             }
@@ -90,22 +95,22 @@ public class SharkCombatState : SharkBaseState
             }
 
             //timer Attack
-            percentLife = (sharkManager.CurrentLife * 100) / sharkManager.Data.Life;
+            _percentLife = (sharkManager.CurrentLife * 100) / sharkManager.Data.Life;
 
             if (_attack >= sharkManager.Data.TimerForAttack && _attackState == AttackState.None)
             {
                 sharkManager.IsCollided = false;
 
 
-                if (percentLife > 75)
+                if (_percentLife > 75)
                 {
                     _attackState = AttackState.JumpAround;
                 }
-                else if (percentLife <= 75 && percentLife > 25)
+                else if (_percentLife <= 75 && _percentLife > 25)
                 {
                     _attackState = AttackState.Rush;
                 }
-                else if (percentLife <= 25)
+                else if (_percentLife <= 25)
                 {
                     //var dist = (sharkManager.Data.MinDistanceBetweenTargetWhenRotatePhaseThree + sharkManager.Data.MaxDistanceBetweenTarget) / 2;
                     //sharkManager.PointTargetAttack.transform.position = GetPointInFrontAndDistance(sharkManager.TargetTransform.position, sharkManager.TargetTransform, dist);
@@ -153,7 +158,7 @@ public class SharkCombatState : SharkBaseState
             switch (_state)
             {
                 case CombatState.MoveToTarget:
-                    if (percentLife > 75)
+                    if (_percentLife > 75)
                     {
                         if (_distSharkPointTarget >= sharkManager.Data.MaxDistanceBetweenPointInCombatPhaseOne)
                         {
@@ -162,13 +167,13 @@ public class SharkCombatState : SharkBaseState
                         }
                         else
                         {
-                            sharkManager.PointTarget.transform.position = MathTools.GetPointFromAngleAndDistance(sharkManager.TargetTransform.position, 0, 0);
+                            //sharkManager.PointTarget.transform.position = MathTools.GetPointFromAngleAndDistance(sharkManager.TargetTransform.position, 0, 0);
                             _state = CombatState.RotateAroundPoint;
                         }
                     }
-                    else if (percentLife <= 75 && percentLife > 25)
+                    else if (_percentLife <= 75 && _percentLife > 25)
                     {
-                        if (_distSharkPointTarget >= sharkManager.Data.MaxDistanceBetweenPointInCombatPhaseTwo)
+                        if (_distSharkPointTarget >= sharkManager.Data.MaxDistanceBetweenPointInCombatPhaseTwo /*&& _attackState != AttackState.None*/)
                         {
                             sharkManager.SwitchSpeed(sharkManager.Data.SpeedWhenOutOfRange);
                             MoveToTarget(sharkManager);
@@ -179,7 +184,7 @@ public class SharkCombatState : SharkBaseState
                             _state = CombatState.RotateAroundPoint;
                         }
                     }
-                    else if (percentLife <= 25)
+                    else if (_percentLife <= 25)
                     {
                         if (_distSharkPointTarget >= sharkManager.Data.MaxDistanceBetweenPointInCombatPhaseThree)
                         {
@@ -302,21 +307,21 @@ public class SharkCombatState : SharkBaseState
 
         //rotate to angle 90 to target
         Vector3 rotation = sharkManager.Forward.transform.localEulerAngles;
-        if (percentLife > 75)
+        if (_percentLife > 75)
         {
             if (_distSharkTarget > sharkManager.Data.MinDistanceBetweenTargetWhenRotatePhaseOne)
             {
                 rotate(sharkManager, rotation);
             }
         }
-        else if (percentLife <= 75 && percentLife > 25)
+        else if (_percentLife <= 75 && _percentLife > 25)
         {
             if (_distSharkTarget > sharkManager.Data.MinDistanceBetweenTargetWhenRotatePhaseTwo)
             {
                 rotate(sharkManager, rotation);
             }
         }
-        else if (percentLife <= 25)
+        else if (_percentLife <= 25)
         {
             if (_distSharkTarget > sharkManager.Data.MinDistanceBetweenTargetWhenRotatePhaseThree)
             {
@@ -324,33 +329,33 @@ public class SharkCombatState : SharkBaseState
             }
         }
 
-        if (_attackState != AttackState.JumpToTarget)
-        {
-            sharkManager.SwitchSpeed(sharkManager.Data.SpeedCombatRotationAroundPoint);
-        }
-        else
-        {
-            sharkManager.SwitchSpeed(sharkManager.Data.SpeedCombatToTriggerJumpInFront);
-            sharkManager.PointTarget.transform.position = MathTools.GetPointFromAngleAndDistance(sharkManager.TargetTransform.position, 0, 0);
-        }
+        //if (sharkManager.CurrentSpeed != sharkManager.Data.SpeedCombatRotationAroundPoint)
+        //{
+        sharkManager.SwitchSpeed(sharkManager.Data.SpeedCombatRotationAroundPoint);
+        //}
+        //else
+        //{
+        //    sharkManager.SwitchSpeed(sharkManager.Data.SpeedCombatToTriggerJumpInFront);
+        //    sharkManager.PointTarget.transform.position = MathTools.GetPointFromAngleAndDistance(sharkManager.TargetTransform.position, 0, 0);
+        //}
 
         sharkManager.Forward.transform.Translate(Vector3.forward * sharkManager.CurrentSpeed * Time.deltaTime, Space.Self);
 
-        if (percentLife > 75)
+        if (_percentLife > 75)
         {
             if (_distSharkPointTarget >= sharkManager.Data.MaxDistanceBetweenPointInCombatPhaseOne)
             {
                 _state = CombatState.MoveToTarget;
             }
         }
-        else if (percentLife <= 75 && percentLife > 25)
+        else if (_percentLife <= 75 && _percentLife > 25)
         {
             if (_distSharkPointTarget >= sharkManager.Data.MaxDistanceBetweenPointInCombatPhaseTwo)
             {
                 _state = CombatState.MoveToTarget;
             }
         }
-        else if (percentLife <= 25)
+        else if (_percentLife <= 25)
         {
             if (_distSharkPointTarget >= sharkManager.Data.MaxDistanceBetweenPointInCombatPhaseThree)
             {
@@ -376,11 +381,11 @@ public class SharkCombatState : SharkBaseState
             rotation.y -= Time.deltaTime * sharkManager.Data.SpeedCombatRotationStatic;
             if (angle > 90 && angle < 180)
             {
-                left = true;
+                _left = true;
             }
             else if (angle > 270 && angle < 360)
             {
-                left = false;
+                _left = false;
             }
         }
         else/* if( angle < 265 && angle > 185 || angle > 0 && angle < 85 )*/
@@ -392,79 +397,37 @@ public class SharkCombatState : SharkBaseState
         sharkManager.Forward.transform.localEulerAngles = rotation;
     }
 
-    bool left = false;
     private void animationCurve(SharkManager sharkManager)
     {
         _timeAnimationCurve += Time.deltaTime;
+
+        if (_waveStartJump == false)
+        {
+            _movePointTarget = false;
+        }
 
         _lastKey = sharkManager.Data.JumpCurve[sharkManager.Data.JumpCurve.length - 1];
 
         if (sharkManager.transform.position.y < sharkManager.ShowCircleDepth && _waveStartJump == false)
         {
-            Debug.Log(left);
+            Vector3 localPosCircle = sharkManager.Forward.transform.localPosition;
 
+            Vector3 offsetCircle = sharkManager.Forward.transform.forward * sharkManager.DistanceInFrontOfShark + sharkManager.Forward.transform.right * sharkManager.DistanceSideOfShark;
+            if (_left == true)
+            {
+                offsetCircle = sharkManager.Forward.transform.forward * sharkManager.DistanceInFrontOfShark - sharkManager.Forward.transform.right * sharkManager.DistanceSideOfShark;
+            }
+            else
+            {
+                offsetCircle = sharkManager.Forward.transform.forward * sharkManager.DistanceInFrontOfShark + sharkManager.Forward.transform.right * sharkManager.DistanceSideOfShark;
+            }
+            Vector3 positionCircle = localPosCircle + offsetCircle;
+            Vector3 worldPosCircle = sharkManager.ParentGameObject.transform.TransformPoint(positionCircle);
+            worldPosCircle.y = 0;
+
+            sharkManager.Circle.transform.position = worldPosCircle;
+            sharkManager.Circle.SetActive(true);
         }
-
-        Vector3 localPosCircle = sharkManager.Forward.transform.localPosition;
-        Vector3 offsetCircle = sharkManager.Forward.transform.forward * sharkManager.DistanceInFrontOfShark + sharkManager.Forward.transform.right * sharkManager.DistanceSideOfShark;
-        if (left == true)
-        {
-            offsetCircle = sharkManager.Forward.transform.forward * sharkManager.DistanceInFrontOfShark - sharkManager.Forward.transform.right * sharkManager.DistanceSideOfShark;
-        }
-        else
-        {
-            offsetCircle = sharkManager.Forward.transform.forward * sharkManager.DistanceInFrontOfShark + sharkManager.Forward.transform.right * sharkManager.DistanceSideOfShark;
-        }
-        Vector3 positionCircle = localPosCircle + offsetCircle;
-        Vector3 worldPosCircle = sharkManager.ParentGameObject.transform.TransformPoint(positionCircle);
-        worldPosCircle.y = 0;
-
-
-
-        //float distanceInFrontOfShark = 5f;
-        //float futureRotationTime = 5f;
-
-        // Obtenir la direction dans laquelle le requin se déplace
-        //Vector3 sharkDirection = sharkManager.Forward.transform.forward;
-        //Transform playerTransform = sharkManager.PointTarget.transform;
-
-        // Obtenir la position et la rotation actuelles du requin
-        //Vector3 sharkPosition = sharkManager.Forward.transform.position;
-        //Quaternion sharkRotation = sharkManager.Forward.transform.rotation;
-
-        // Calculer la position et la rotation futures du requin
-        //Vector3 futureSharkPosition = sharkPosition + sharkDirection * distanceInFrontOfShark;
-        //Vector3 targetPosition = new Vector3(playerTransform.position.x, sharkManager.Forward.transform.position.y, playerTransform.position.z);
-        //rotate(sharkManager, targetPosition/*, ref sharkRotation*/);
-        //Quaternion futureSharkRotation = sharkManager.Forward.transform.rotation;
-        //Vector3 objectPosition = sharkManager.Forward.transform.forward;
-        //if (left == true)
-        //{
-        //    objectPosition = sharkManager.Forward.transform.forward * sharkManager.DistanceInFrontOfShark - sharkManager.Forward.transform.right * sharkManager.DistanceSideOfShark;
-        //    //futureSharkRotation.y += sharkManager.Data.SpeedCombatRotationStatic * 0.01f;
-        //}
-        //else
-        //{
-        //    objectPosition = sharkManager.Forward.transform.forward * sharkManager.DistanceInFrontOfShark + sharkManager.Forward.transform.right * sharkManager.DistanceSideOfShark;
-        //    //futureSharkRotation.y -= sharkManager.Data.SpeedCombatRotationStatic * 0.01f;
-        //}
-
-        // Interpoler entre la position et la rotation actuelles et futures du requin
-        //float interpolationFactor = Mathf.Clamp01(Time.deltaTime / futureRotationTime);
-        //Vector3 interpolatedSharkPosition = Vector3.Lerp(sharkPosition, futureSharkPosition, interpolationFactor);
-        //Quaternion interpolatedSharkRotation = Quaternion.Lerp(sharkRotation, futureSharkRotation, interpolationFactor);
-
-        // Obtenir la position de l'objet en avant du requin
-        //objectPosition.y = 0;
-
-
-
-        sharkManager.Circle.transform.position = worldPosCircle;
-        //sharkManager.Circle.transform.position = offsetPosition;
-        //sharkManager.Circle.transform.position = objectPosition;
-        sharkManager.Circle.SetActive(true);
-
-
 
         if (_timeAnimationCurve >= _lastKey.time - sharkManager.Data.StartFirstCircularWave && _waveStartJump == false)
         {
@@ -482,13 +445,12 @@ public class SharkCombatState : SharkBaseState
 
             sharkManager.WavesData.LaunchCircularWave(sharkManager.Data.StartFirstCircularWaveData);
             sharkManager.StartJump.Invoke();
+            sharkManager.PosParticles.SetActive(false);
             _waveStartJump = true;
-            //sharkManager.Circle.SetActive(false);
+            _movePointTarget = true;
+            sharkManager.Circle.SetActive(false);
         }
 
-        //Vector3 pos = sharkManager.Forward.transform.position;
-        //pos.y = sharkManager.Data.JumpCurve.Evaluate(_timeAnimationCurve);
-        //sharkManager.Forward.transform.position = pos;
         Vector3 pos = sharkManager.transform.position;
         pos.y = sharkManager.Data.JumpCurve.Evaluate(_timeAnimationCurve);
         sharkManager.transform.position = pos;
@@ -498,13 +460,6 @@ public class SharkCombatState : SharkBaseState
         Vector3 rotation = sharkManager.transform.eulerAngles;
 
         rotation.x = sharkManager.Data.VisualCurve.Evaluate(_timeAnimationCurve) * 100;
-
-
-        if (_attackState == AttackState.JumpToTarget)
-        {
-            rotation.z += Time.deltaTime * sharkManager.Data.SpeedRotationOnItself;
-        }
-
 
         if (_timeAnimationCurve >= _lastKey.time - sharkManager.Data.StartSecondCircularWaveTime && _waveEndJump == false)
         {
@@ -518,12 +473,12 @@ public class SharkCombatState : SharkBaseState
             center.x = worldPos.x;
             center.y = worldPos.z;
 
-
             sharkManager.Data.StartSecondCircularWaveData.Center = center;
 
             sharkManager.EndJump.Invoke();
             sharkManager.WavesData.LaunchCircularWave(sharkManager.Data.StartSecondCircularWaveData);
             _waveEndJump = true;
+            sharkManager.PosParticles.SetActive(true);
         }
 
         if (_timeAnimationCurve >= _lastKey.time && _attackState != AttackState.None)
@@ -537,19 +492,11 @@ public class SharkCombatState : SharkBaseState
                 _state = CombatState.RotateAroundPoint;
             }
 
-
-            //var rand = Random.Range(0, 360);
-            //sharkManager.PointTarget.transform.position = MathTools.GetPointFromAngleAndDistance(sharkManager.TargetTransform.position, rand, DIST_POINT);
-            sharkManager.PointTarget.transform.position = MathTools.GetPointFromAngleAndDistance(sharkManager.TargetTransform.position, 0, 0);
             _startAtq = false;
-
             _atqNumber -= 1;
         }
 
-
-
         sharkManager.transform.eulerAngles = rotation;
-
     }
 
 
@@ -563,12 +510,14 @@ public class SharkCombatState : SharkBaseState
         if (sharkManager.transform.position.y < sharkManager.ShowCircleDepth && _waveStartJump == false)
         {
             Vector3 localPosCircle = sharkManager.Forward.transform.localPosition;
-            //Vector3 offsetCircle = sharkManager.Forward.transform.forward * sharkManager.CircleDistanceMultiply;
-            //Vector3 positionCircle = localPosCircle + offsetCircle;
-            //Vector3 worldPosCircle = sharkManager.ParentGameObject.transform.TransformPoint(positionCircle);
-            //worldPosCircle.y = 0;
 
-            //sharkManager.Circle.transform.position = worldPosCircle;
+            Vector3 offsetCircle = sharkManager.Forward.transform.forward * sharkManager.DistanceInFrontOfSharkPhaseThree;
+
+            Vector3 positionCircle = localPosCircle + offsetCircle;
+            Vector3 worldPosCircle = sharkManager.ParentGameObject.transform.TransformPoint(positionCircle);
+            worldPosCircle.y = 0;
+
+            sharkManager.Circle.transform.position = worldPosCircle;
             sharkManager.Circle.SetActive(true);
         }
 
@@ -582,14 +531,12 @@ public class SharkCombatState : SharkBaseState
             sharkManager.Data.StartFirstCircularWaveDataPhaseThree.Center = center;
 
             sharkManager.WavesData.LaunchCircularWave(sharkManager.Data.StartFirstCircularWaveDataPhaseThree);
+            sharkManager.StartJump.Invoke();
             _waveStartJump = true;
             sharkManager.Circle.SetActive(false);
 
         }
 
-        //Vector3 pos = sharkManager.Forward.transform.position;
-        //pos.y = sharkManager.Data.JumpCurvePhaseThree.Evaluate(_timeAnimationCurve);
-        //sharkManager.Forward.transform.position = pos;
         Vector3 pos = sharkManager.transform.position;
         pos.y = sharkManager.Data.JumpCurvePhaseThree.Evaluate(_timeAnimationCurve);
         sharkManager.transform.position = pos;
@@ -599,8 +546,6 @@ public class SharkCombatState : SharkBaseState
         Vector3 rotation = sharkManager.transform.eulerAngles;
 
         rotation.x = sharkManager.Data.VisualCurvePhaseThree.Evaluate(_timeAnimationCurve) * 100;
-
-
         rotation.z += Time.deltaTime * sharkManager.Data.SpeedRotationOnItself;
 
 
@@ -608,12 +553,19 @@ public class SharkCombatState : SharkBaseState
         {
             Vector2 center = sharkManager.Data.StartSecondCircularWaveDataPhaseThree.Center;
 
-            center.x = sharkManager.transform.position.x;
-            center.y = sharkManager.transform.position.z;
+            Vector3 localPos = sharkManager.Forward.transform.localPosition;
+            Vector3 offset = sharkManager.Forward.transform.forward * 2;
+            Vector3 position = localPos + offset;
+            Vector3 worldPos = sharkManager.ParentGameObject.transform.TransformPoint(position);
+
+            center.x = worldPos.x;
+            center.y = worldPos.z;
 
             sharkManager.Data.StartSecondCircularWaveDataPhaseThree.Center = center;
+            sharkManager.EndJump.Invoke();
             sharkManager.WavesData.LaunchCircularWave(sharkManager.Data.StartSecondCircularWaveDataPhaseThree);
             _waveEndJump = true;
+            sharkManager.PosParticles.SetActive(true);
         }
 
         if (_timeAnimationCurve >= _lastKey.time && _attackState != AttackState.None)
@@ -621,30 +573,18 @@ public class SharkCombatState : SharkBaseState
             _timeAnimationCurve = 0;
             _waveStartJump = false;
             _waveEndJump = false;
-
-
-            if (_attackState == AttackState.JumpToTarget)
-            {
-                rotation.z = 0;
-            }
+            rotation.z = 0;
 
             _state = CombatState.RotateAroundPoint;
-            //var rand = Random.Range(0, 360);
-            //sharkManager.PointTarget.transform.position = MathTools.GetPointFromAngleAndDistance(sharkManager.TargetTransform.position, rand, DIST_POINT);
-            sharkManager.PointTarget.transform.position = MathTools.GetPointFromAngleAndDistance(sharkManager.TargetTransform.position, 0, 0);
-            _startAtq = false;
 
+            _startAtq = false;
             _atqNumber -= 1;
         }
-
 
         sharkManager.transform.eulerAngles = rotation;
     }
     private void JumpCrazy(SharkManager sharkManager)
     {
-        Vector3 rotation = sharkManager.Forward.transform.localEulerAngles;
-
-
         if (_startJump == false)
         {
             //number of attack
@@ -652,7 +592,24 @@ public class SharkCombatState : SharkBaseState
             _startJump = true;
         }
 
+        Vector3 rotation = sharkManager.Forward.transform.localEulerAngles;
         rotate(sharkManager, rotation);
+
+        if (_movePointTarget == true)
+        {
+            var rbKayak = CharacterManager.Instance.KayakControllerProperty.Rigidbody.velocity;
+            rbKayak.y = 0;
+            if (rbKayak.magnitude > 1f /*&& _timeAnimationCurve >= 1.0f*/)
+            {
+                sharkManager.PointTarget.transform.position = GetPointInFrontAndDistance(sharkManager.TargetTransform.position,
+                    sharkManager.TargetTransform,
+                    rbKayak.magnitude * sharkManager.Data.MutliplySpeed);
+            }
+            else
+            {
+                sharkManager.PointTarget.transform.position = MathTools.GetPointFromAngleAndDistance(sharkManager.TargetTransform.position, 0, 0);
+            }
+        }
 
         animationCurve(sharkManager);
 
@@ -664,7 +621,6 @@ public class SharkCombatState : SharkBaseState
             _startJump = false;
         }
     }
-
 
     void JumpInFront(SharkManager sharkManager)
     {
@@ -700,7 +656,6 @@ public class SharkCombatState : SharkBaseState
             sharkManager.Forward.transform.localEulerAngles = rota;
 
             sharkManager.Forward.transform.Translate(Vector3.forward * sharkManager.CurrentSpeed * Time.deltaTime, Space.Self);
-
         }
 
         //dist target
@@ -753,7 +708,6 @@ public class SharkCombatState : SharkBaseState
         }
 
         sharkManager.Forward.transform.Translate(Vector3.forward * sharkManager.CurrentSpeed * Time.deltaTime, Space.Self);
-
     }
 
     #endregion

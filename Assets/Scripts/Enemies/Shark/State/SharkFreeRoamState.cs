@@ -22,11 +22,15 @@ public class SharkFreeRoamState : SharkBaseState
     {
         Debug.Log("free");
         _state = FreeRoamState.RotateToMoveTarget;
+        sharkManager.UIEnemyManager.DisableGameObject();
+
         sharkManager.SharkCollider.enabled = true;
 
-        var rota = sharkManager.transform.rotation;
+        var rota = sharkManager.transform.localEulerAngles;
         rota.x = 0;
-        sharkManager.transform.rotation = rota;
+        rota.y = 0;
+        rota.z = 0;
+        sharkManager.transform.localEulerAngles = rota;
     }
 
     public override void UpdateState(SharkManager sharkManager)

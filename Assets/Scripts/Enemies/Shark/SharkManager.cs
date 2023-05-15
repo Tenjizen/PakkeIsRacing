@@ -13,6 +13,7 @@ namespace Enemies.Shark
 {
     public class SharkManager : Enemy
     {
+        [field:SerializeField] public UIEnemy UIEnemyManager { get; private set; }
         [field: SerializeField] public SharkBaseState CurrentStateBase { get; private set; }
         [field: SerializeField, ReadOnly] public Transform TargetTransform { get; private set; }
         [field: SerializeField] public PlayerTriggerManager PlayerTriggerManager { get; private set; }
@@ -28,7 +29,12 @@ namespace Enemies.Shark
         [ReadOnly] public float CurrentSpeed;
         [ReadOnly] public bool IsCollided;
 
+
+
+
         [field: SerializeField, Header("VFX")] public ParticleSystem HitParticles { get; private set; }
+        [field: SerializeField] public GameObject PosParticles { get; private set; }
+
         [field: SerializeField, Header("Sound")] public AudioClip HitSound { get; private set; }
         public KayakController KayakControllerProperty { get; set; }
 
@@ -38,11 +44,14 @@ namespace Enemies.Shark
 
         [Header("feedback tempo"), Tooltip("depth at which the feedback circle pop")] //TODO modify
         public float ShowCircleDepth = -14f;
-        [Tooltip("distance at which the circle is from the shark")] //TODO modify
+        [Tooltip("distance at which the circle is from the shark in phase one")] //TODO modify
         public float DistanceInFrontOfShark = 5;
-
+        [Tooltip("distance at which the circle is from the shark in side in phase one")] //TODO modify
         public float DistanceSideOfShark = 1;
-        
+        [Tooltip("distance at which the circle is from the shark in phase three")] //TODO modify
+        public float DistanceInFrontOfSharkPhaseThree = 5;
+
+
         [Space(5), Header("Shark Data")] public SharkData Data;
 
 
@@ -54,7 +63,6 @@ namespace Enemies.Shark
         {
             SharkFreeRoamState sharkFreeRoamState = new SharkFreeRoamState();
             CurrentStateBase = sharkFreeRoamState;
-
             CurrentLife = Data.Life;
         }
 
@@ -62,6 +70,7 @@ namespace Enemies.Shark
         {
             KayakControllerProperty = CharacterManager.Instance.KayakControllerProperty;
             CurrentStateBase.EnterState(this);
+            //UIEnemyManager.SetGauge(CurrentLife, Data.Life);
         }
         Vector3 collision = Vector3.zero;
         public LayerMask LayerMask;
@@ -69,17 +78,26 @@ namespace Enemies.Shark
         {
             CurrentStateBase.UpdateState(this);
 
-
-
-
+            if (PosParticles != null)
+            {
+                //if (PosParticles.isPlaying == false)
+                //{
+                //PosParticles.transform.parent = null;
+                var posPartic = transform.position;
+                posPartic.y = WavesData.GetHeight(transform.position);
+                PosParticles.transform.position = posPartic;
+                //PosParticles.Play();
+                //}
+            }
 
             AvoidObstacle();
-
+            CircleUI();
 
         }
         private void FixedUpdate()
         {
             CurrentStateBase.FixedUpdate(this);
+
         }
         private void OnDrawGizmos()
         {
@@ -121,7 +139,10 @@ namespace Enemies.Shark
             {
                 HitParticles.transform.parent = null;
                 HitParticles.Play();
+
             }
+
+            UIEnemyManager.SetGauge(CurrentLife, Data.Life);
 
             //CharacterManager.Instance.SoundManagerProperty.PlaySound(HitSound);
 
@@ -131,6 +152,19 @@ namespace Enemies.Shark
                 PlayerTriggerManager.enabled = false;
                 IsPossessed = false;
                 PointTarget.transform.localPosition = new Vector3(0, 0, 0);
+            }
+        }
+        
+        public void CircleUI()
+        {
+            
+            if (Circle.activeInHierarchy)
+            {
+                Circle.transform.localScale += Vector3.one * 0.2f;
+            }
+            else
+            {
+                Circle.transform.localScale = Vector3.one * 30;
             }
         }
 
