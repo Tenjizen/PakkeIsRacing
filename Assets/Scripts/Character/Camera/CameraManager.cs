@@ -65,8 +65,10 @@ namespace Character.Camera
             CameraTargetBasePos = CinemachineCameraTarget.transform.localPosition;
             CameraBaseFov = VirtualCameraFreeLook.m_Lens.FieldOfView;
 
-            CameraNavigationState navigationState = new CameraNavigationState();
-            CurrentStateBase = navigationState;
+            //CameraNavigationState navigationState = new CameraNavigationState();
+            //CurrentStateBase = navigationState;
+            CameraStartGameState startGameState = new CameraStartGameState();
+            CurrentStateBase = startGameState;
 
             CinemachineCombat3RdPersonFollow = VirtualCameraCombat.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
             CombatBaseShoulderOffset = CinemachineCombat3RdPersonFollow.ShoulderOffset;

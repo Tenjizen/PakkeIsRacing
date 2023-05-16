@@ -49,7 +49,9 @@ namespace Character
             inputsEnum.MovingAim = _gameplayInputs.Boat.MoveAim.ReadValue<Vector2>();
 
             inputsEnum.Deadzone = DeadzoneJoystick;
-            
+
+            inputsEnum.AnyButton = _gameplayInputs.Boat.AnyButton.ReadValue<float>() > 0.3f;
+
             Inputs = inputsEnum;
         }
     }
@@ -77,5 +79,7 @@ namespace Character
         public Vector2 MovingAim;
 
         public bool Unbalanced;
+
+        public bool AnyButton;
     }
 }

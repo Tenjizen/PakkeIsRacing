@@ -52,13 +52,13 @@ namespace Character
         public int NumberButtonIsPressed = 0;
         [ReadOnly]
         public Projectile CurrentProjectile;
-        [Header("VFX")] 
+        [Header("VFX")]
         public ParticleSystem WeaponChargedParticleSystem;
 
         [HideInInspector] public float WeaponCooldown;
         [HideInInspector] public float WeaponCooldownBase;
         [HideInInspector] public bool ProjectileIsInAir;
-        
+
         protected override void Awake()
         {
             base.Awake();
@@ -107,7 +107,7 @@ namespace Character
             {
                 return;
             }
-            
+
             if (LerpBalanceTo0)
             {
                 Balance = Mathf.Lerp(Balance, 0, Data.BalanceLerpTo0Value);
@@ -165,21 +165,23 @@ namespace Character
             Debug.Log(message);
         }
 
+
+
         #region GUI
 
         private void OnGUI()
         {
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             GUI.skin.label.fontSize = 30;
 
             GUI.color = Color.white;
             GUI.Label(new Rect(10, 10, 500, 100), "Balance : " + Math.Round(Balance, 1));
-            #endif
+#endif
         }
 
         #endregion
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
 
         private void OnDrawGizmos()
         {
@@ -190,22 +192,22 @@ namespace Character
             Ray ray = new Ray(mainCamera.transform.position, rayDirection);
 
             Color gizmoColor = new Color(1f, 0.36f, 0.24f);
-            
+
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 Gizmos.color = gizmoColor;
-                
+
                 Gizmos.DrawLine(CameraManagerProperty.VirtualCameraCombat.transform.position, hit.point);
                 Gizmos.DrawSphere(hit.point, 1f);
             }
-            
+
             Transform camera = UnityEngine.Camera.main.transform;
             for (int i = 0; i < Data.AutoAimNumberOfCastStep; i++)
             {
                 break;
-                float positionMultiplier = Mathf.Clamp( (Data.AutoAimDistanceBetweenEachStep * i), 1, 10000);
+                float positionMultiplier = Mathf.Clamp((Data.AutoAimDistanceBetweenEachStep * i), 1, 10000);
                 Vector3 newPosition = camera.position + camera.forward * positionMultiplier;
-                float radiusMultiplier = Mathf.Clamp( Vector3.Distance(camera.position, newPosition)/5,1,10000);
+                float radiusMultiplier = Mathf.Clamp(Vector3.Distance(camera.position, newPosition) / 5, 1, 10000);
                 float radius = Data.AutoAimSize * radiusMultiplier;
                 Gizmos.DrawWireSphere(newPosition, radius);
             }
