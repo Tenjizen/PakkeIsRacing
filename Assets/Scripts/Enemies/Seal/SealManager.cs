@@ -41,13 +41,16 @@ namespace Enemies.Seal
         private int _checkpointsIndex;
         private bool _isMoving;
         private float _currentStopTimer;
+        private float _speedMultiplier;
         private float _currentSpeedMultiplier;
+        private Quaternion _targetRotation;
         
         private void Start()
         {
             _currentSplinePosition = 0;
             _checkpointsIndex = 0;
             _currentSpeedMultiplier = 1;
+            _speedMultiplier = 1;
 
             if (_playerTrigger == null)
             {
@@ -81,6 +84,7 @@ namespace Enemies.Seal
             }
 
             CheckForCheckPoint();
+            _speedMultiplier = Mathf.Lerp(_currentSpeedMultiplier, _speedMultiplier, 0.1f);
             
             if (_currentStopTimer > 0)
             {
@@ -120,7 +124,7 @@ namespace Enemies.Seal
             switch (controlPoint.Type)
             {
                 case PointType.Speed:
-                    _currentSpeedMultiplier = controlPoint.SpeedMultiplier;
+                    _speedMultiplier = controlPoint.SpeedMultiplier;
                     break;
                 case PointType.Stop:
                     _currentStopTimer = controlPoint.StopTime;
@@ -144,7 +148,7 @@ namespace Enemies.Seal
                 transform.position.y,
                 center.z + Mathf.Cos(angle) * _data.StopMovementRadius
             );
-            transform.position = Vector3.Lerp(transform.position, targetPosition, 0.5f);
+            transform.position = Vector3.Lerp(transform.position, targetPosition, 0.05f);
             
             float angleNext = (Time.time + 0.01f) * 1000 * _data.MovingSpeed * _currentSpeedMultiplier;
             Vector3 targetPositionNext = new Vector3(
@@ -152,10 +156,12 @@ namespace Enemies.Seal
                 transform.position.y,
                 center.z + Mathf.Cos(angleNext) * _data.StopMovementRadius
             );
+            
             //rotation
             Vector3 rotation = transform.rotation.eulerAngles;
             transform.LookAt(targetPositionNext);
-            transform.rotation = Quaternion.Euler(new Vector3(rotation.x,transform.rotation.eulerAngles.y,rotation.z));
+            _targetRotation = Quaternion.Euler(new Vector3(rotation.x,transform.rotation.eulerAngles.y,rotation.z));
+            transform.rotation = Quaternion.Lerp(transform.rotation,_targetRotation,0.1f);
         }
 
         private void HandleMovement()
@@ -169,13 +175,13 @@ namespace Enemies.Seal
             Vector3 positionTarget = new Vector3(pointA.x, 
                 _waves.GetHeight(t.position) + _data.UpAndDownMovements.Evaluate(_currentSplinePosition) * _data.UpAndDownMultiplier,
                 pointA.z);
-            transform.position = Vector3.Lerp(transform.position,positionTarget,0.5f);
+            transform.position = Vector3.Lerp(transform.position,positionTarget,0.05f);
 
             //rotation
             Vector3 pointB = _splinePath.GetPoint(Mathf.Clamp01(_currentSplinePosition+0.01f));
             Vector3 rotation = t.transform.rotation.eulerAngles;
             t.LookAt(pointB);
-            t.transform.rotation = Quaternion.Euler(new Vector3(rotation.x,t.rotation.eulerAngles.y,rotation.z));
+            t.rotation = Quaternion.Euler(new Vector3(rotation.x,Mathf.Lerp(rotation.y,t.rotation.eulerAngles.y,0.1f),rotation.z));
         }
         
         #endregion
