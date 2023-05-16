@@ -260,6 +260,15 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShowLeaveMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""6002375a-62e0-4484-8344-9e95513a061c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -999,6 +1008,28 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""action"": ""AnyButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6d4f3d27-641e-4225-8414-3b71eafb6814"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShowLeaveMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""59d4a217-f89e-41f0-a155-8a34ab73b324"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""ShowLeaveMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1044,6 +1075,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         m_Boat_ParameterMenuPressButton = m_Boat.FindAction("ParameterMenuPressButton", throwIfNotFound: true);
         m_Boat_ClosePauseMenu = m_Boat.FindAction("ClosePauseMenu", throwIfNotFound: true);
         m_Boat_AnyButton = m_Boat.FindAction("AnyButton", throwIfNotFound: true);
+        m_Boat_ShowLeaveMenu = m_Boat.FindAction("ShowLeaveMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1129,6 +1161,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Boat_ParameterMenuPressButton;
     private readonly InputAction m_Boat_ClosePauseMenu;
     private readonly InputAction m_Boat_AnyButton;
+    private readonly InputAction m_Boat_ShowLeaveMenu;
     public struct BoatActions
     {
         private @GameplayInputs m_Wrapper;
@@ -1159,6 +1192,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         public InputAction @ParameterMenuPressButton => m_Wrapper.m_Boat_ParameterMenuPressButton;
         public InputAction @ClosePauseMenu => m_Wrapper.m_Boat_ClosePauseMenu;
         public InputAction @AnyButton => m_Wrapper.m_Boat_AnyButton;
+        public InputAction @ShowLeaveMenu => m_Wrapper.m_Boat_ShowLeaveMenu;
         public InputActionMap Get() { return m_Wrapper.m_Boat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1246,6 +1280,9 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @AnyButton.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnAnyButton;
                 @AnyButton.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnAnyButton;
                 @AnyButton.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnAnyButton;
+                @ShowLeaveMenu.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnShowLeaveMenu;
+                @ShowLeaveMenu.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnShowLeaveMenu;
+                @ShowLeaveMenu.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnShowLeaveMenu;
             }
             m_Wrapper.m_BoatActionsCallbackInterface = instance;
             if (instance != null)
@@ -1328,6 +1365,9 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @AnyButton.started += instance.OnAnyButton;
                 @AnyButton.performed += instance.OnAnyButton;
                 @AnyButton.canceled += instance.OnAnyButton;
+                @ShowLeaveMenu.started += instance.OnShowLeaveMenu;
+                @ShowLeaveMenu.performed += instance.OnShowLeaveMenu;
+                @ShowLeaveMenu.canceled += instance.OnShowLeaveMenu;
             }
         }
     }
@@ -1378,5 +1418,6 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         void OnParameterMenuPressButton(InputAction.CallbackContext context);
         void OnClosePauseMenu(InputAction.CallbackContext context);
         void OnAnyButton(InputAction.CallbackContext context);
+        void OnShowLeaveMenu(InputAction.CallbackContext context);
     }
 }

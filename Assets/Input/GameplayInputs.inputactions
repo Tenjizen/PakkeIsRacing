@@ -238,6 +238,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ShowLeaveMenu",
+                    "type": "Button",
+                    "id": "6002375a-62e0-4484-8344-9e95513a061c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -975,6 +984,28 @@
                     "processors": "",
                     "groups": "GamePad",
                     "action": "AnyButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6d4f3d27-641e-4225-8414-3b71eafb6814",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShowLeaveMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "59d4a217-f89e-41f0-a155-8a34ab73b324",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "ShowLeaveMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
