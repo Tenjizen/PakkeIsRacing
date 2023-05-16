@@ -167,6 +167,8 @@ namespace Character.State
         {
             CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeLeft", false);
             CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeRight", false);
+            CharacterManagerRef.CharacterAnimatorProperty.SetBool("BrakeLeft", false);
+            CharacterManagerRef.CharacterAnimatorProperty.SetBool("BrakeRight", false);
         }
         
         /// <summary>
@@ -249,6 +251,7 @@ namespace Character.State
             
             //animation & particles
             CharacterManagerRef.PaddleAnimatorProperty.SetTrigger(direction == Direction.Left ? "PaddleLeft" : "PaddleRight");
+            CharacterManagerRef.CharacterAnimatorProperty.SetTrigger(direction == Direction.Left ? "PaddleLeft" : "PaddleRight");
             _kayakController.PlayPaddleParticle(direction);
 
             //events
@@ -332,10 +335,12 @@ namespace Character.State
                 RotationStaticForceY += _kayakValues.StaticRotationForce;
                 
                 CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeLeft",true);
+                CharacterManagerRef.CharacterAnimatorProperty.SetBool("BrakeLeft",true);
             }
             else
             {
                 CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeLeft",false);
+                CharacterManagerRef.CharacterAnimatorProperty.SetBool("BrakeLeft",false);
             }
             
             //right
@@ -348,10 +353,12 @@ namespace Character.State
                 RotationStaticForceY -= _kayakValues.StaticRotationForce;
                 
                 CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeRight",true);
+                CharacterManagerRef.CharacterAnimatorProperty.SetBool("BrakeRight",true);
             }
             else
             {
                 CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeRight",false);
+                CharacterManagerRef.CharacterAnimatorProperty.SetBool("BrakeRight",false);
             }
         }
 

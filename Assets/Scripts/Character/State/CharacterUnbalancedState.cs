@@ -69,6 +69,10 @@ namespace Character.State
             CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeActive(true);
             float balance = CharacterManagerRef.Balance;
             CharacterManagerRef.BalanceGaugeManagerRef.ShowTrigger(balance < 0, balance > 0);
+            
+            //anim
+            CharacterManagerRef.PaddleAnimatorProperty.SetBool("Unbalanced", true);
+            CharacterManagerRef.CharacterAnimatorProperty.SetBool("Unbalanced", true);
         }
 
         public override void UpdateState(CharacterManager character)

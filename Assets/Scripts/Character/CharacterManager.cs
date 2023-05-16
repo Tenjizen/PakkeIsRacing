@@ -29,6 +29,7 @@ namespace Character
         [field: SerializeField] public KayakController KayakControllerProperty { get; private set; }
         [field: SerializeField] public InputManagement InputManagementProperty { get; private set; }
         [field: SerializeField] public Animator PaddleAnimatorProperty { get; private set; }
+        [field: SerializeField] public Animator CharacterAnimatorProperty { get; private set; }
         [field: SerializeField] public TransitionManager TransitionManagerProperty { get; private set; }
         [field: SerializeField] public WeaponUIManager WeaponUIManagerProperty { get; private set; }
         [field: SerializeField] public UIEnemyManager EnemyUIManager { get; private set; }
