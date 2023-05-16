@@ -69,6 +69,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMapWater:
+        m_Texture: {fileID: 2800000, guid: de6d9dc661bca874a914910c6ee0772c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -95,15 +103,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Vector1_2E11270D: 1.76
+    - Vector1_2E11270D: 0.35
     - Vector1_39D35881: 0.664
     - Vector1_3B48FD24: -0.02
-    - Vector1_5AE4170F: 0.1
-    - Vector1_80CAEB23: 0.15
-    - Vector1_8E5091B8: 0.29
+    - Vector1_5AE4170F: -0.03
+    - Vector1_80CAEB23: 0.03
+    - Vector1_8E5091B8: 0.66
     - Vector1_981A3A67: 0.215
     - Vector1_C1C7D298: 0.353
-    - Vector1_ECB3F2B8: 0.959
+    - Vector1_ECB3F2B8: 0.958
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -124,32 +132,37 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Hardness_Transition_Foam: 2.85
+    - _Hardness_Transition_Foam: 1.29
+    - _Layer_1_Tiling: 1
+    - _Layer_2_Tiling: 2
     - _Metallic: 0
     - _NoiseDistortion: -0.33
     - _Noise_Distort_Scale: 0.3
-    - _Noise_Foam_Intensity: 0.4
+    - _Noise_Foam_Intensity: -0.69
     - _Noise_Scroll_Speed: 0.15
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Range_Height_Foam: 1.39
+    - _Range_Height_Foam: 1.97
     - _ReceiveShadows: 1
     - _Refraction_Distortion: 0.03
     - _Ripple_Cutoff: 0.4
-    - _Scale_Nosie: 4.68
+    - _Scale_Nosie: 5.8
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
+    - _Wave_Speed_X: 0.05
+    - _Wave_Speed_Y: 0.05
     - _WorkflowMode: 1
     - _ZWrite: 1
+    - __Main_Normal: 0.25
     m_Colors:
-    - Color_27D4D743: {r: 0.051041294, g: 0.27455276, b: 0.3490566, a: 1}
+    - Color_27D4D743: {r: 0.06314526, g: 0.3200316, b: 0.4056604, a: 1}
     - Color_51A4B6EC: {r: 0, g: 0.7215686, b: 1, a: 0}
-    - Color_C347D0B: {r: 0.020692414, g: 0.11793533, b: 0.14150941, a: 1}
+    - Color_C347D0B: {r: 0.016776435, g: 0.10215146, b: 0.122641504, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0, g: 0, b: 0, a: 0}
     - _Color_1: {r: 1, g: 1, b: 1, a: 1}
@@ -159,6 +172,9 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Main_Tint: {r: 0.27358484, g: 0.8226658, b: 1, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _Tiling_and_offset_water: {r: 1, g: 1, b: 0, a: 0}
+    - _Tiling_and_offset_water_2: {r: 2, g: 2, b: 0, a: 0}
+    - _Wave_Speed: {r: 0.05, g: 0.05, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &3853261734412531540
 MonoBehaviour:
