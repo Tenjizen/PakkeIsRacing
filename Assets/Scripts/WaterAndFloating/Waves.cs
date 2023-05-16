@@ -61,6 +61,8 @@ namespace WaterAndFloating
             LinearWavesDurationList = new List<float>();
             
             WaveGeneration();
+            
+            _mesh.RecalculateNormals();
         }
 
         private void Update()
