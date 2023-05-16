@@ -5144,9 +5144,9 @@ MonoBehaviour:
   m_LayerIndex: 0
   m_ShowDebugText: 0
   m_ChildCameras:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4192299973026284776}
+  - {fileID: 6638202092221173266}
+  - {fileID: 2091088283570573891}
   m_Instructions:
   - m_FullHash: -1195735313
     m_VirtualCamera: {fileID: 4192299973026284776}
@@ -5444,8 +5444,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3858187113969445702}
-  m_LocalRotation: {x: 0.12158245, y: -0, z: -0, w: 0.99258137}
-  m_LocalPosition: {x: 0, y: 4.883527, z: -7.291048}
+  m_LocalRotation: {x: 0.053479154, y: 0.04771767, z: -0.0025584893, w: 0.99742496}
+  m_LocalPosition: {x: -3.8953812, y: 4.7072444, z: -10.895796}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6049,6 +6049,7 @@ MonoBehaviour:
   <KayakControllerProperty>k__BackingField: {fileID: 7217796708516857175}
   <InputManagementProperty>k__BackingField: {fileID: 5885439514833416252}
   <PaddleAnimatorProperty>k__BackingField: {fileID: 6793741366818239509}
+  <CharacterAnimatorProperty>k__BackingField: {fileID: 1998663084029954629}
   <TransitionManagerProperty>k__BackingField: {fileID: 0}
   <WeaponUIManagerProperty>k__BackingField: {fileID: 7505718252749942973}
   <EnemyUIManager>k__BackingField: {fileID: 2749849978099324265}
@@ -6094,6 +6095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d49cd67baff6c54aa5d47073fe1fc45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TimerBeforeCanMovingAtStart: 1.5
   <CinemachineCameraTarget>k__BackingField: {fileID: 5773740044235661809}
   <CinemachineCameraTargetFollow>k__BackingField: {fileID: 3814212815698604900}
   <CinemachineCameraFollowCombat>k__BackingField: {fileID: 1094441883}
@@ -6888,6 +6890,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90e5008432bdbda4ab6dd8c7ef373dab, type: 3}
+--- !u!95 &1998663084029954629 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 781710356100632020, guid: 90e5008432bdbda4ab6dd8c7ef373dab,
+    type: 3}
+  m_PrefabInstance: {fileID: 1253579668420134801}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5574473000691372095 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6645375409223538606, guid: 90e5008432bdbda4ab6dd8c7ef373dab,
