@@ -14,6 +14,7 @@ namespace UI.Menu
         [SerializeField] protected MenuController PauseMenuTopSelection;
         [SerializeField] protected GameObject PauseMenuGameObject;
         [SerializeField, ReadOnly] protected bool IsActive = false;
+        [SerializeField, ReadOnly] public bool CanBeOpened = true;
 
         private Dictionary<Image,float> _imagesDictionary = new Dictionary<Image,float>();
         private Dictionary<TMP_Text,float> _textsDictionary = new Dictionary<TMP_Text,float>();
@@ -37,6 +38,11 @@ namespace UI.Menu
 
         private void Set(InputAction.CallbackContext context)
         {
+            if (CanBeOpened == false)
+            {
+                return;
+            }
+            
             CharacterManager characterManager = CharacterManager.Instance;
             characterManager.CurrentStateBaseProperty.CanCharacterMove = IsActive;
             characterManager.CurrentStateBaseProperty.CanCharacterMakeActions = IsActive;
