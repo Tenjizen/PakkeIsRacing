@@ -11,7 +11,6 @@ namespace Character.Camera.State
         {
             CamManager.CameraAnimator.Play("StartGame");
             CamManager.ShakeCamera(0);
-
         }
         public override void UpdateState(CameraManager camera)
         {
@@ -32,12 +31,12 @@ namespace Character.Camera.State
                 _startTimer = true;
                 CamManager.CameraAnimator.Play("FreeLook");
 
-                if (_timer >= camera.TimerBeforeCanMovingAtStart)
-                {
-                    CameraNavigationState cameraNavigationState = new CameraNavigationState();
-                    this.SwitchState(camera);
-                    CamManager.SwitchState(cameraNavigationState);
-                }
+            }
+            if (_timer >= camera.TimerBeforeCanMovingAtStart)
+            {
+                this.SwitchState(camera);
+                CameraNavigationState cameraNavigationState = new CameraNavigationState();
+                CamManager.SwitchState(cameraNavigationState);
             }
         }
         public override void FixedUpdate(CameraManager camera)

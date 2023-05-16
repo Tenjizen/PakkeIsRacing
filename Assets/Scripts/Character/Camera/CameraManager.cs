@@ -56,11 +56,11 @@ namespace Character.Camera
             CinemachineCameraFollowCombat.transform.localPosition = Data.CombatPosition;
 
             CinemachineCameraTarget.transform.localPosition = Data.NavigationPosition;
+            CinemachineCameraTarget.transform.localEulerAngles = Data.NavigationRotation;
             VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = Data.NavigationCamDistance;
 
             VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().ShoulderOffset = Data.NavigationCamShoulderOffset;
 
-            //CinemachineCameraTarget.transform.localRotation = Data.NavigationRotation;
 
             CinemachineTargetPitch = Data.NavigationRotation.x;
             CinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
