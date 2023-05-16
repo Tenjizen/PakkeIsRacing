@@ -9,9 +9,11 @@ namespace Character.Camera
 {
     public class CameraManager : MonoBehaviour
     {
-    
-        [field:SerializeField, Header("Properties")] public CameraStateBase CurrentStateBase { get; private set; }
-        [field:SerializeField] public GameObject CinemachineCameraTarget { get; private set; }
+        [Header("Start Menu Game")] public float TimerBeforeCanMovingAtStart = 1.5f;
+
+        
+        [field:SerializeField] public CameraStateBase CurrentStateBase { get; private set; }
+        [field: SerializeField, Header("Properties"), Space(5)] public GameObject CinemachineCameraTarget { get; private set; }
         [field:SerializeField] public GameObject CinemachineCameraTargetFollow { get; private set; }
         [field:SerializeField] public GameObject CinemachineCameraFollowCombat { get; private set; }
         [field:SerializeField] public Animator CameraAnimator { get; private set; }

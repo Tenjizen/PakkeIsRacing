@@ -5,14 +5,22 @@ namespace Character.Camera.State
 {
     public class CameraStartGameState : CameraStateBase
     {
-
+        private bool _startTimer;
+        private float _timer;
         public override void EnterState(CameraManager camera)
         {
             CamManager.CameraAnimator.Play("StartGame");
+            CamManager.ShakeCamera(0);
 
         }
         public override void UpdateState(CameraManager camera)
         {
+
+            if (_startTimer == true)
+            {
+                _timer += Time.deltaTime;
+            }
+
             CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterMakeActions = false;
             CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterOpenWeapons = false;
             CharacterManager.Instance.CurrentStateBaseProperty.CanBeMoved = false;
@@ -21,9 +29,15 @@ namespace Character.Camera.State
 
             if (CharacterManager.Instance.InputManagementProperty.Inputs.AnyButton)
             {
-                CameraNavigationState cameraNavigationState = new CameraNavigationState();
-                CamManager.SwitchState(cameraNavigationState);
-                this.SwitchState(camera);
+                _startTimer = true;
+                CamManager.CameraAnimator.Play("FreeLook");
+
+                if (_timer >= camera.TimerBeforeCanMovingAtStart)
+                {
+                    CameraNavigationState cameraNavigationState = new CameraNavigationState();
+                    this.SwitchState(camera);
+                    CamManager.SwitchState(cameraNavigationState);
+                }
             }
         }
         public override void FixedUpdate(CameraManager camera)
