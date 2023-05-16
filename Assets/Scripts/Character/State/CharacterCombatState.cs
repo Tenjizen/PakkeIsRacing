@@ -82,7 +82,7 @@ namespace Character.State
                     Vector3 playerPosition = character.transform.position;
                     
                     //projectile creation
-                    Projectile projectile = Object.Instantiate(_weaponPrefab, playerPosition, Quaternion.identity);
+                    Projectile projectile = Object.Instantiate(_weaponPrefab, CharacterManagerRef.WeaponSpawnPosition.position, Quaternion.identity);
                     GameObject owner = character.gameObject;
                     projectile.SetOwner(owner);
                     projectile.Data.ForbiddenColliders.Add(owner);

@@ -1,22 +1,15 @@
 using System;
-using System.Collections.Generic;
 using Character.Camera;
-using Character.Data;
 using Character.Data.Character;
 using Character.State;
 using Fight;
 using GPEs.Checkpoint;
 using Kayak;
 using SceneTransition;
-using Sound;
 using Tools.SingletonClassBase;
 using UI;
 using UI.WeaponWheel;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace Character
 {
@@ -37,6 +30,7 @@ namespace Character
         [field: SerializeField] public CheckpointManager CheckpointManagerProperty { get; private set; }
         [field: SerializeField] public MonoBehaviour CharacterMonoBehaviour { get; private set; }
         [field: SerializeField] public ExperienceManager ExperienceManagerProperty { get; private set; }
+        [field: SerializeField] public Transform WeaponSpawnPosition { get; private set; }
         [field: SerializeField] public PlayerParameters Parameters { get; set; }
 
         #endregion
