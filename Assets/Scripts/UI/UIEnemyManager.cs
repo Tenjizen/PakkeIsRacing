@@ -9,6 +9,7 @@ namespace UI
     {
         [SerializeField] private List<Image> _uiImages;
         [SerializeField] private Image _lifeGauge;
+        [SerializeField] private Image _enemyIconImage;
     
         private void Start()
         {
@@ -21,9 +22,10 @@ namespace UI
             _lifeGauge.DOFillAmount(percent, 0.4f);
         }
 
-        public void ActiveEnemyUI()
+        public void ActiveEnemyUI(Sprite icon)
         {
             _uiImages.ForEach(x => x.DOFade(1,0.3f));
+            _enemyIconImage.sprite = icon;
 
         }
         public void DisableEnemyUI()

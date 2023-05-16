@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using WaterAndFloating;
 
 namespace Enemies.Data
 {
@@ -19,5 +20,11 @@ namespace Enemies.Data
         
         [field: SerializeField] 
         public float UpAndDownMultiplier { get; private set; } = 3;
+        
+        [field: SerializeField] 
+        public float WaveHeightOffset { get; private set; } = -2;
+        
+        [field: SerializeField] 
+        public CircularWave Wave { get; private set; }
     }
 }

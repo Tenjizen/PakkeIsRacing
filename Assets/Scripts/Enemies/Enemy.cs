@@ -18,6 +18,7 @@ namespace Enemies
         [field:SerializeField] public UnityEvent OnHit { get; set; }
         [field:SerializeField] public UnityEvent OnDie { get; set; }
         
+        [field:SerializeField] public Sprite EnemySprite { get; private set; }
         [field:SerializeField, ReadOnly] public float CurrentLife { get; set; }
         [field:SerializeField, ReadOnly] public float MaxLife { get; set; }
         [field:SerializeField, ReadOnly] public bool IsPossessed { get; set; }
@@ -50,7 +51,7 @@ namespace Enemies
         public virtual void SetUpStartEnemyUI()
         {
             UIEnemyManager enemyUI = CharacterManager.Instance.EnemyUIManager;
-            enemyUI.ActiveEnemyUI();
+            enemyUI.ActiveEnemyUI(EnemySprite);
             enemyUI.SetGauge(CurrentLife, MaxLife);
         }
 

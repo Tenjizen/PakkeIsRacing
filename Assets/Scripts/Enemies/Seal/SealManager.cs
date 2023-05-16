@@ -40,6 +40,7 @@ namespace Enemies.Seal
         private float _currentSplinePosition;
         private int _checkpointsIndex;
         private bool _isMoving;
+        private bool _launchedWave;
         private float _currentStopTimer;
         private float _speedMultiplier;
         private float _currentSpeedMultiplier;
@@ -80,6 +81,7 @@ namespace Enemies.Seal
         {
             if (_isMoving == false)
             {
+                RotateAroundPoint(_splinePath.GetPoint(_sealCheckpoints[0].Position));
                 return;
             }
 
@@ -97,6 +99,8 @@ namespace Enemies.Seal
                 HandleMovement();
                 return;
             }
+            
+            RotateAroundPoint(_splinePath.GetPoint(_sealCheckpoints[^1].Position));
         }
 
         #region Seal Controller
@@ -142,26 +146,7 @@ namespace Enemies.Seal
             _currentStopTimer -= Time.deltaTime;
             
             Vector3 center = _splinePath.GetPoint(_sealCheckpoints[_checkpointsIndex-1].Position);
-            float angle = Time.time * 1000 * _data.MovingSpeed * _currentSpeedMultiplier;
-            Vector3 targetPosition = new Vector3(
-                center.x + Mathf.Sin(angle) * _data.StopMovementRadius,
-                transform.position.y,
-                center.z + Mathf.Cos(angle) * _data.StopMovementRadius
-            );
-            transform.position = Vector3.Lerp(transform.position, targetPosition, 0.05f);
-            
-            float angleNext = (Time.time + 0.01f) * 1000 * _data.MovingSpeed * _currentSpeedMultiplier;
-            Vector3 targetPositionNext = new Vector3(
-                center.x + Mathf.Sin(angleNext) * _data.StopMovementRadius,
-                transform.position.y,
-                center.z + Mathf.Cos(angleNext) * _data.StopMovementRadius
-            );
-            
-            //rotation
-            Vector3 rotation = transform.rotation.eulerAngles;
-            transform.LookAt(targetPositionNext);
-            _targetRotation = Quaternion.Euler(new Vector3(rotation.x,transform.rotation.eulerAngles.y,rotation.z));
-            transform.rotation = Quaternion.Lerp(transform.rotation,_targetRotation,0.1f);
+            RotateAroundPoint(center);
         }
 
         private void HandleMovement()
@@ -171,9 +156,10 @@ namespace Enemies.Seal
             Transform t = transform;
 
             //position
+            float positionY = _data.UpAndDownMovements.Evaluate(_currentSplinePosition) + _data.WaveHeightOffset;
             Vector3 pointA = _splinePath.GetPoint(_currentSplinePosition);
             Vector3 positionTarget = new Vector3(pointA.x, 
-                _waves.GetHeight(t.position) + _data.UpAndDownMovements.Evaluate(_currentSplinePosition) * _data.UpAndDownMultiplier,
+                _waves.GetHeight(t.position) + positionY * _data.UpAndDownMultiplier,
                 pointA.z);
             transform.position = Vector3.Lerp(transform.position,positionTarget,0.05f);
 
@@ -182,6 +168,51 @@ namespace Enemies.Seal
             Vector3 rotation = t.transform.rotation.eulerAngles;
             t.LookAt(pointB);
             t.rotation = Quaternion.Euler(new Vector3(rotation.x,Mathf.Lerp(rotation.y,t.rotation.eulerAngles.y,0.1f),rotation.z));
+            
+            //wave
+            if (positionY < 0.1f && positionY > -0.1f)
+            {
+                if (_launchedWave)
+                {
+                    return;
+                }
+                CircularWave wave = _data.Wave;
+                wave.Center = new Vector2(t.position.x,t.position.z);
+                _waves.LaunchCircularWave(wave);
+                _launchedWave = true;
+                print("wave");
+            }
+            else
+            {
+                _launchedWave = false;
+            }
+        }
+
+        private void RotateAroundPoint(Vector3 point)
+        {
+            Vector3 position = transform.position;
+            
+            float angle = Time.time * 1000 * _data.MovingSpeed * _currentSpeedMultiplier;
+            Vector3 targetPosition = new Vector3(
+                point.x + Mathf.Sin(angle) * _data.StopMovementRadius,
+                _waves.GetHeight(transform.position) + _data.WaveHeightOffset,
+                point.z + Mathf.Cos(angle) * _data.StopMovementRadius
+            );
+            position = Vector3.Lerp(position, targetPosition, 0.05f);
+            transform.position = position;
+
+            float angleNext = (Time.time + 0.01f) * 1000 * _data.MovingSpeed * _currentSpeedMultiplier;
+            Vector3 targetPositionNext = new Vector3(
+                point.x + Mathf.Sin(angleNext) * _data.StopMovementRadius,
+                _waves.GetHeight(position) + _data.WaveHeightOffset,
+                point.z + Mathf.Cos(angleNext) * _data.StopMovementRadius
+            );
+            
+            //rotation
+            Vector3 rotation = transform.rotation.eulerAngles;
+            transform.LookAt(targetPositionNext);
+            _targetRotation = Quaternion.Euler(new Vector3(rotation.x,transform.rotation.eulerAngles.y,rotation.z));
+            transform.rotation = Quaternion.Lerp(transform.rotation,_targetRotation,0.1f);
         }
         
         #endregion
