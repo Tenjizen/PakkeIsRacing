@@ -39,7 +39,6 @@ namespace Collectible
         public void Hit(Projectile projectile, GameObject owner)
         {
             OnHit.Invoke();
-            Debug.Log("hit");
             SetCollected();
         }
 

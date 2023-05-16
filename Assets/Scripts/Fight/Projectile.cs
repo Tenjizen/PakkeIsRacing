@@ -19,6 +19,7 @@ namespace Fight
 
         private float _lifetime;
         protected IHittable AutoAimHittable;
+        protected bool HasTouched;
 
         private void Start()
         {
@@ -32,13 +33,20 @@ namespace Fight
 
         private void OnTriggerEnter(Collider other)
         {
+            if (HasTouched)
+            {
+                return;
+            }
+            
             if (Data.ForbiddenColliders.Contains(other.gameObject) || 
                 (other.gameObject.transform.parent != null && Data.ForbiddenColliders.Contains(other.gameObject.transform.parent.gameObject)) ||
                 other.gameObject.GetComponent<WaterFlowBlock>() != null)
             {
                 return;
             }
-            
+
+            HasTouched = true;           
+            Die();
             IHittable hittable = other.gameObject.GetComponent<IHittable>();
             if (hittable != null)
             {
@@ -60,12 +68,12 @@ namespace Fight
 
         protected virtual void HitHittable(Collider colliderHittable)
         {
-            Die();
+            
         }
 
         protected virtual void HitNonHittable(Collider colliderNonHittable)
         {
-            Die();
+           
         }
 
         protected virtual void EndLifetime()

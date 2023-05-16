@@ -62,6 +62,7 @@ namespace Enemies.Seal
             }
 
             _sealCheckpoints.Add(new ControlPoint(){Position = 1f, SpeedMultiplier = 1f, Type = PointType.Speed});
+            _sealCheckpoints.Add(new ControlPoint(){Position = 0f, SpeedMultiplier = 1f, Type = PointType.Speed});
             List<ControlPoint> controlPoints = _sealCheckpoints.OrderBy(x => x.Position).ToList();
             _sealCheckpoints = controlPoints;
 
@@ -69,6 +70,7 @@ namespace Enemies.Seal
             transform.position = new Vector3(splinePosition.x, transform.position.y, splinePosition.z);
 
             CurrentLife = _data.Life;
+            MaxLife = CurrentLife;
         }
 
         private void Update()
@@ -135,16 +137,25 @@ namespace Enemies.Seal
         {
             _currentStopTimer -= Time.deltaTime;
             
-            Vector3 center = _splinePath.GetPoint(_sealCheckpoints[_checkpointsIndex].Position);
-            float angle = Time.time * _data.MovingSpeed * _currentSpeedMultiplier * 500;
+            Vector3 center = _splinePath.GetPoint(_sealCheckpoints[_checkpointsIndex-1].Position);
+            float angle = Time.time * 1000 * _data.MovingSpeed * _currentSpeedMultiplier;
             Vector3 targetPosition = new Vector3(
                 center.x + Mathf.Sin(angle) * _data.StopMovementRadius,
                 transform.position.y,
                 center.z + Mathf.Cos(angle) * _data.StopMovementRadius
             );
-
-            transform.RotateAround(center, Vector3.up, _data.MovingSpeed * _currentSpeedMultiplier * Time.deltaTime);
-            transform.position = Vector3.Lerp(transform.position,targetPosition,0.2f);
+            transform.position = Vector3.Lerp(transform.position, targetPosition, 0.5f);
+            
+            float angleNext = (Time.time + 0.01f) * 1000 * _data.MovingSpeed * _currentSpeedMultiplier;
+            Vector3 targetPositionNext = new Vector3(
+                center.x + Mathf.Sin(angleNext) * _data.StopMovementRadius,
+                transform.position.y,
+                center.z + Mathf.Cos(angleNext) * _data.StopMovementRadius
+            );
+            //rotation
+            Vector3 rotation = transform.rotation.eulerAngles;
+            transform.LookAt(targetPositionNext);
+            transform.rotation = Quaternion.Euler(new Vector3(rotation.x,transform.rotation.eulerAngles.y,rotation.z));
         }
 
         private void HandleMovement()
@@ -158,7 +169,7 @@ namespace Enemies.Seal
             Vector3 positionTarget = new Vector3(pointA.x, 
                 _waves.GetHeight(t.position) + _data.UpAndDownMovements.Evaluate(_currentSplinePosition) * _data.UpAndDownMultiplier,
                 pointA.z);
-            transform.position = Vector3.Lerp(transform.position,positionTarget,0.2f);
+            transform.position = Vector3.Lerp(transform.position,positionTarget,0.5f);
 
             //rotation
             Vector3 pointB = _splinePath.GetPoint(Mathf.Clamp01(_currentSplinePosition+0.01f));
@@ -168,17 +179,6 @@ namespace Enemies.Seal
         }
         
         #endregion
-
-        public override void Hit(Projectile projectile, GameObject owner)
-        {
-            base.Hit(projectile,owner);
-            SetEnemyLifeUIGauge();
-        }
-
-        protected override void Die()
-        {
-            base.Die();
-        }
 
 #if UNITY_EDITOR
 

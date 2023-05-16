@@ -124,8 +124,6 @@ namespace Enemies.Shark
                 HitParticles.transform.parent = null;
                 HitParticles.Play();
             }
-
-            SetEnemyLifeUIGauge();
         }
 
         protected override void Die()
