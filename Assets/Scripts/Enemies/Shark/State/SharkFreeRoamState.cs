@@ -27,7 +27,7 @@ namespace Enemies.Shark.State
             _state = FreeRoamState.RotateToMoveTarget;
             CharacterManager.Instance.EnemyUIManager.DisableEnemyUI();
 
-            sharkManager.SharkCollider.enabled = true;
+            sharkManager.SharkCollider.enabled = false;
 
             Transform shark = sharkManager.transform;
             Vector3 rotation = shark.localEulerAngles;

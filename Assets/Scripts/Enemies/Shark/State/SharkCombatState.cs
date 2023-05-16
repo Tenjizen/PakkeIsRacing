@@ -53,8 +53,11 @@ namespace Enemies.Shark.State
             UIEnemyManager enemyUI = CharacterManager.Instance.EnemyUIManager;
             enemyUI.ActiveEnemyUI();
             enemyUI.SetGauge(sharkManager.CurrentLife, sharkManager.Data.Life);
-        
+
+            sharkManager.SharkCollider.enabled = true;
+
             _elevationOffsetBase = sharkManager.Data.ElevationOffset;
+
             _currentOffSet = sharkManager.Data.ElevationOffset;
             _state = CombatState.MoveToTarget;
             _attackState = AttackState.None;
