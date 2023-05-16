@@ -61,6 +61,7 @@ namespace Enemies.Seal
                 return;
             }
 
+            _sealCheckpoints.Add(new ControlPoint(){Position = 1f, SpeedMultiplier = 1f, Type = PointType.Speed});
             List<ControlPoint> controlPoints = _sealCheckpoints.OrderBy(x => x.Position).ToList();
             _sealCheckpoints = controlPoints;
 
@@ -97,16 +98,18 @@ namespace Enemies.Seal
         private void LaunchMovement()
         {
             _isMoving = true;
+            SetUpStartEnemyUI();
         }
 
         private void CheckForCheckPoint()
         {
-            if (_checkpointsIndex >= _sealCheckpoints.Count - 1)
+            if (_checkpointsIndex >= _sealCheckpoints.Count-1)
             {
                 return;
             }
             
             ControlPoint controlPoint = _sealCheckpoints[_checkpointsIndex];
+
             if (_currentSplinePosition < controlPoint.Position)
             {
                 return;
@@ -121,16 +124,27 @@ namespace Enemies.Seal
                     _currentStopTimer = controlPoint.StopTime;
                     break;
             }
-
-            _checkpointsIndex++;
+            
+            if (_checkpointsIndex < _sealCheckpoints.Count-1)
+            {
+                _checkpointsIndex++;
+            }
         }
         
         private void HandleStop()
         {
             _currentStopTimer -= Time.deltaTime;
             
-            //stop behavior
-            transform.Rotate(Vector3.up,1f);
+            Vector3 center = _splinePath.GetPoint(_sealCheckpoints[_checkpointsIndex].Position);
+            float angle = Time.time * _data.MovingSpeed * _currentSpeedMultiplier * 500;
+            Vector3 targetPosition = new Vector3(
+                center.x + Mathf.Sin(angle) * _data.StopMovementRadius,
+                transform.position.y,
+                center.z + Mathf.Cos(angle) * _data.StopMovementRadius
+            );
+
+            transform.RotateAround(center, Vector3.up, _data.MovingSpeed * _currentSpeedMultiplier * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position,targetPosition,0.2f);
         }
 
         private void HandleMovement()
@@ -141,13 +155,16 @@ namespace Enemies.Seal
 
             //position
             Vector3 pointA = _splinePath.GetPoint(_currentSplinePosition);
-            t.position = new Vector3(pointA.x, 
+            Vector3 positionTarget = new Vector3(pointA.x, 
                 _waves.GetHeight(t.position) + _data.UpAndDownMovements.Evaluate(_currentSplinePosition) * _data.UpAndDownMultiplier,
                 pointA.z);
+            transform.position = Vector3.Lerp(transform.position,positionTarget,0.2f);
 
             //rotation
             Vector3 pointB = _splinePath.GetPoint(Mathf.Clamp01(_currentSplinePosition+0.01f));
+            Vector3 rotation = t.transform.rotation.eulerAngles;
             t.LookAt(pointB);
+            t.transform.rotation = Quaternion.Euler(new Vector3(rotation.x,t.rotation.eulerAngles.y,rotation.z));
         }
         
         #endregion
@@ -155,6 +172,7 @@ namespace Enemies.Seal
         public override void Hit(Projectile projectile, GameObject owner)
         {
             base.Hit(projectile,owner);
+            SetEnemyLifeUIGauge();
         }
 
         protected override void Die()
@@ -173,6 +191,11 @@ namespace Enemies.Seal
                 Gizmos.DrawCube(position, Vector3.one);
                 Handles.Label(position + Vector3.up * 2,
                     _sealCheckpoints[i].Type == PointType.Speed ? $"{_sealCheckpoints[i].SpeedMultiplier}" : $"{_sealCheckpoints[i].StopTime}");
+                if (_sealCheckpoints[i].Type == PointType.Stop)
+                {
+                    Handles.color = new Color(0.69f, 0.33f, 0.28f, 0.43f);
+                    Handles.DrawSolidDisc(position,Vector3.up, _data.StopMovementRadius);
+                }
             }
         }
 

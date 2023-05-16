@@ -50,9 +50,7 @@ namespace Enemies.Shark.State
 
         public override void EnterState(SharkManager sharkManager)
         {
-            UIEnemyManager enemyUI = CharacterManager.Instance.EnemyUIManager;
-            enemyUI.ActiveEnemyUI();
-            enemyUI.SetGauge(sharkManager.CurrentLife, sharkManager.Data.Life);
+            sharkManager.SetUpStartEnemyUI();
 
             sharkManager.SharkCollider.enabled = true;
 

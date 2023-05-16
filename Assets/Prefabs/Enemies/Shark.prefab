@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7048969781791043229}
   m_Layer: 0
-  m_Name: Particles (1)
+  m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -617,7 +617,13 @@ MonoBehaviour:
   <OnHit>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
-  <UIEnemyManager>k__BackingField: {fileID: 0}
+  <OnDie>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  <CurrentLife>k__BackingField: 0
+  <MaxLife>k__BackingField: 0
+  <IsPossessed>k__BackingField: 0
+  <PossessedVisualGameObject>k__BackingField: {fileID: 7954776163074001654}
   <TargetTransform>k__BackingField: {fileID: 0}
   <PlayerTriggerManager>k__BackingField: {fileID: 6385060041424428043}
   <ParentGameObject>k__BackingField: {fileID: 4724983407470673250}
@@ -625,9 +631,6 @@ MonoBehaviour:
   <Circle>k__BackingField: {fileID: 8294695087083784925}
   PointTarget: {fileID: 6898630833835794956}
   PointTargetAttack: {fileID: 859354950711925518}
-  VisualPossessed: {fileID: 7954776163074001654}
-  IsPossessed: 1
-  CurrentLife: 0
   CurrentSpeed: 0
   IsCollided: 0
   <HitParticles>k__BackingField: {fileID: 1286071281248309136}
@@ -649,6 +652,7 @@ MonoBehaviour:
   LayerMask:
     serializedVersion: 2
     m_Bits: 1
+  <KayakControllerRef>k__BackingField: {fileID: 0}
 --- !u!136 &2028570932275907467
 CapsuleCollider:
   m_ObjectHideFlags: 0

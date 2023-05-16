@@ -24,8 +24,6 @@ namespace Enemies.Shark
 
         public GameObject PointTarget;
         public GameObject PointTargetAttack;
-        public GameObject VisualPossessed;
-        [ReadOnly] public bool IsPossessed = true;
         [ReadOnly] public float CurrentSpeed;
         [ReadOnly] public bool IsCollided;
 
@@ -63,6 +61,7 @@ namespace Enemies.Shark
             SharkFreeRoamState sharkFreeRoamState = new SharkFreeRoamState();
             CurrentStateBase = sharkFreeRoamState;
             CurrentLife = Data.Life;
+            MaxLife = Data.Life;
         }
 
         private void Start()
@@ -125,20 +124,16 @@ namespace Enemies.Shark
                 HitParticles.transform.parent = null;
                 HitParticles.Play();
             }
-            
-            CharacterManager.Instance.EnemyUIManager.SetGauge(CurrentLife, Data.Life);
+
+            SetEnemyLifeUIGauge();
         }
 
         protected override void Die()
         {
             base.Die();
             
-            VisualPossessed.SetActive(false);
             PlayerTriggerManager.enabled = false;
-            IsPossessed = false;
             PointTarget.transform.localPosition = new Vector3(0, 0, 0);
-            CharacterManager.Instance.EnemyUIManager.DisableEnemyUI();
-            
         }
 
         private void ManagerCircleUI()
