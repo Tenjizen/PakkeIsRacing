@@ -117,6 +117,8 @@ namespace Character.State
             
             character.WeaponUIManagerProperty.AutoAimController.ShowAutoAimCircle(false);
             character.WeaponUIManagerProperty.AutoAimController.ShowAutoAimUI(false);
+            
+            character.WeaponUIManagerProperty.SetLastSelectedPaddle();
         }
 
         #region Wave/Floaters and Balance management

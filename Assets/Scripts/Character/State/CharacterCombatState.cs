@@ -1,8 +1,6 @@
-﻿using Character.Camera.State;
-using Character.Data.Character;
+﻿using Character.Data.Character;
 using Fight;
 using UnityEngine;
-using Debug = FMOD.Debug;
 
 namespace Character.State
 {
