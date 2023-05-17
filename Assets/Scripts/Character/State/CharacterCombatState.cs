@@ -145,11 +145,11 @@ namespace Character.State
                     {
                         case WeaponType.Harpoon:
                             CharacterManagerRef.IKPlayerControl.SetHarpoon();
-                            CharacterManagerRef.HarpoonAnimator.SetBool("FireHarpoon",true);
+                            CharacterManagerRef.HarpoonAnimator.SetTrigger("FireHarpoon");
                             break;
                         case WeaponType.Net:
                             CharacterManagerRef.IKPlayerControl.SetNet();
-                            CharacterManagerRef.HarpoonAnimator.SetBool("FireNet",true);
+                            CharacterManagerRef.HarpoonAnimator.SetTrigger("FireNet");
                             break;
                     }
                     
