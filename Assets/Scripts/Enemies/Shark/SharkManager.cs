@@ -66,6 +66,7 @@ namespace Enemies.Shark
 
         private void Start()
         {
+            IsPossessed = true;
             CurrentStateBase.EnterState(this);
         }
         
