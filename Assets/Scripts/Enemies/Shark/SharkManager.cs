@@ -23,7 +23,6 @@ namespace Enemies.Shark
         [field: SerializeField] public GameObject Circle { get; private set; }
 
         public GameObject PointTarget;
-        public GameObject PointTargetAttack;
         [ReadOnly] public float CurrentSpeed;
         [ReadOnly] public bool IsCollided;
 

@@ -7,14 +7,8 @@ namespace Enemies.Shark.State
     {
         private enum FreeRoamState
         {
-            RotateBeforeJump = 0, 
-            Wait = 1, 
-            Jump = 2, 
-            RotateAfterJump = 3, 
-            MoveToTarget = 4, 
-            RotatePoint = 5, 
-            GoToRotate = 6, 
-            RotateToMoveTarget = 7
+            GoToRotate = 0, 
+            RotateToMoveTarget = 1
         };
    
         private FreeRoamState _state;
