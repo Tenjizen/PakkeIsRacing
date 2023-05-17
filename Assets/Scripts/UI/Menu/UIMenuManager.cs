@@ -13,7 +13,7 @@ namespace UI.Menu
     {
         [SerializeField] protected MenuController PauseMenuTopSelection;
         [SerializeField] protected GameObject PauseMenuGameObject;
-        [SerializeField, ReadOnly] protected bool IsActive = false;
+        [SerializeField, ReadOnly] public bool IsActive = false;
         [SerializeField, ReadOnly] public bool CanBeOpened = true;
 
         private Dictionary<Image,float> _imagesDictionary = new Dictionary<Image,float>();
@@ -42,7 +42,11 @@ namespace UI.Menu
             {
                 return;
             }
-            
+            SetMenu();
+        }
+
+        public void SetMenu()
+        {
             CharacterManager characterManager = CharacterManager.Instance;
             characterManager.CurrentStateBaseProperty.CanCharacterMove = IsActive;
             characterManager.CurrentStateBaseProperty.CanCharacterMakeActions = IsActive;
@@ -60,8 +64,8 @@ namespace UI.Menu
             {
                 pair.Key.DOFade(IsActive ? pair.Value : 0, fadeTime);
             }
-            
-            PauseMenuTopSelection.Set(IsActive,IsActive);
+
+            PauseMenuTopSelection.Set(IsActive, IsActive);
         }
 
         private void CloseMenu(InputAction.CallbackContext context)
@@ -73,5 +77,7 @@ namespace UI.Menu
             
             Set(context);
         }
+
+
     }
 }
