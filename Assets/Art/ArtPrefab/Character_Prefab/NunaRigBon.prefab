@@ -3203,7 +3203,7 @@ Transform:
   m_GameObject: {fileID: 6301324319852252436}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.57988, y: 0.669, z: -7.719127}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3715109, y: 1.371511, z: 1.3715109}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8679285504755421430}
@@ -3244,10 +3244,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65d960a9e867f04d99dd1d4ed543047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ikActive: 1
-  rightHandObj: {fileID: 0}
-  leftHandObj: {fileID: 0}
-  lookObj: {fileID: 0}
+  IkActive: 0
+  PaddleRightHandObj: {fileID: 0}
+  PaddleLeftHandObj: {fileID: 0}
+  PaddleGrabIK: {fileID: 0}
+  HarpoonRightHandObj: {fileID: 0}
+  HarpoonGrabIK: {fileID: 0}
+  NetRightHandObj: {fileID: 0}
+  NetLeftHandObj: {fileID: 0}
+  NetGrabIK: {fileID: 0}
+  LookObj: {fileID: 0}
 --- !u!1 &6434084518298015597
 GameObject:
   m_ObjectHideFlags: 0
