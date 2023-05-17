@@ -1975,7 +1975,7 @@ PrefabInstance:
         type: 3}
       propertyPath: <Waves>k__BackingField
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 771889902}
     - target: {fileID: 7659402856832070488, guid: 36e32e7372e41e346abb29f843dd75b3,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -14246,6 +14246,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!4 &1680904950 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7217796707971164476, guid: 36e32e7372e41e346abb29f843dd75b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 41504782}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1699903511
 Mesh:
   m_ObjectHideFlags: 0
@@ -16850,6 +16856,11 @@ PrefabInstance:
       propertyPath: _dimension
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 2039563051251762258, guid: 08da085c59a3187449a7aa5e115cd0ee,
+        type: 3}
+      propertyPath: _playerTransform
+      value: 
+      objectReference: {fileID: 1680904950}
     - target: {fileID: 3655193511122848909, guid: 08da085c59a3187449a7aa5e115cd0ee,
         type: 3}
       propertyPath: m_RootOrder
