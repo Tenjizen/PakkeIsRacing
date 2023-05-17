@@ -1,4 +1,5 @@
 using System;
+using Character;
 using Collectible.Data;
 using DG.Tweening;
 using Fight;
@@ -46,6 +47,7 @@ namespace Collectible
         {
             gameObject.SetActive(false);
             OnCollected.Invoke();
+            CharacterManager.Instance.ExperienceManagerProperty.AddExperience(CharacterManager.Instance.ExperienceManagerProperty.Data.ExperienceGainedAtColletible);
             
             CollectibleJsonFileManager instance = JsonFilesManagerSingleton.Instance.CollectibleJsonFileManagerProperty;
             if (instance != null)
