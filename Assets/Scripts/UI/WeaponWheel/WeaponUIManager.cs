@@ -137,6 +137,10 @@ namespace UI.WeaponWheel
                     {
                         _lastWeaponButtonSelected = button;
                     }
+                    else
+                    {
+                        CharacterManager.Instance.CurrentStateBaseProperty.LaunchNavigationState();
+                    }
                     button.Select(_weaponIconInGame);
                 }
             }

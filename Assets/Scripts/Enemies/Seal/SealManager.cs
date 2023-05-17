@@ -107,6 +107,11 @@ namespace Enemies.Seal
 
         private void LaunchMovement()
         {
+            if (_isMoving)
+            {
+                return;
+            }
+            
             _isMoving = true;
             SetUpStartEnemyUI();
         }

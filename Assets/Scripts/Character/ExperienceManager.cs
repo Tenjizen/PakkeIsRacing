@@ -32,15 +32,15 @@ namespace Character
             _currentLevelData = Data.Levels[_currentLevel];
 
             ExperienceUIManagerProperty.SetMaxLevel(Data.Levels.Count);
-            ExperienceUIManagerProperty.SetGauge(ExperienceUIManager.Gauge.Combat,_currentExperience,_currentLevelData.ExperienceNeededToComplete);
-            ExperienceUIManagerProperty.SetGauge(ExperienceUIManager.Gauge.Navigation,_currentExperience,_currentLevelData.ExperienceNeededToComplete);
-            ExperienceUIManagerProperty.SetGauge(ExperienceUIManager.Gauge.Experience,_currentExperience,_currentLevelData.ExperienceNeededToComplete);
+            ExperienceUIManagerProperty.SetGauge(ExperienceUIManager.Gauge.Combat,_currentExperience,_currentLevelData.ExperienceNeededToComplete, 0f);
+            ExperienceUIManagerProperty.SetGauge(ExperienceUIManager.Gauge.Navigation,_currentExperience,_currentLevelData.ExperienceNeededToComplete, 0f);
+            ExperienceUIManagerProperty.SetGauge(ExperienceUIManager.Gauge.Experience,_currentExperience,_currentLevelData.ExperienceNeededToComplete, 0f);
         }
 
         public void AddExperience(float value)
         {
             _currentExperience += value;
-            ExperienceUIManagerProperty.SetGauge(ExperienceUIManager.Gauge.Experience, _currentExperience, _currentLevelData.ExperienceNeededToComplete);
+            ExperienceUIManagerProperty.SetGauge(ExperienceUIManager.Gauge.Experience, _currentExperience, _currentLevelData.ExperienceNeededToComplete, 2f);
             
             if (_currentExperience >= _currentLevelData.ExperienceNeededToComplete && _currentLevel <= Data.Levels.Count)
             {
@@ -54,8 +54,8 @@ namespace Character
 
             _currentCombatExperience += _currentLevelData.CombatExperienceGained;
             _currentNavigationExperience += _currentLevelData.NavigationExperienceGained;
-            ExperienceUIManagerProperty.SetGauge(ExperienceUIManager.Gauge.Combat, _currentCombatExperience, Data.CombatGaugeMax);
-            ExperienceUIManagerProperty.SetGauge(ExperienceUIManager.Gauge.Navigation, _currentNavigationExperience, Data.NavigationGaugeMax);
+            ExperienceUIManagerProperty.SetGauge(ExperienceUIManager.Gauge.Combat, _currentCombatExperience, Data.CombatGaugeMax, 2f);
+            ExperienceUIManagerProperty.SetGauge(ExperienceUIManager.Gauge.Navigation, _currentNavigationExperience, Data.NavigationGaugeMax, 2f);
                 
             _currentLevel++;
             _currentLevelData = Data.Levels[_currentLevel];

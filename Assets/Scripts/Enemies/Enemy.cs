@@ -1,5 +1,6 @@
 ﻿using Character;
 using Fight;
+using Fight.Data;
 using UI;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -18,6 +19,7 @@ namespace Enemies
         [field:SerializeField] public UnityEvent OnHit { get; set; }
         [field:SerializeField] public UnityEvent OnDie { get; set; }
         
+        [field:SerializeField] public WeaponType WeaponThatCanHitEnemy { get; set; }
         [field:SerializeField] public Sprite EnemySprite { get; private set; }
         [field:SerializeField, ReadOnly] public float CurrentLife { get; set; }
         [field:SerializeField, ReadOnly] public float MaxLife { get; set; }

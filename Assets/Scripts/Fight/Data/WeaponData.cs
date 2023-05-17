@@ -3,10 +3,11 @@ using UnityEngine;
 
 namespace Fight.Data
 {
+    [System.Flags]
     public enum WeaponType
     {
-        Harpoon = 0,
-        Net = 1
+        Harpoon = 1 << 0,
+        Net = 1 << 1
     }
     
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/WeaponData", order = 1)]
