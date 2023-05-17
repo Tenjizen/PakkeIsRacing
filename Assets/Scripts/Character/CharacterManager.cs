@@ -1,4 +1,5 @@
 using System;
+using Art.Script;
 using Character.Camera;
 using Character.Data.Character;
 using Character.State;
@@ -31,6 +32,7 @@ namespace Character
         [field: SerializeField] public MonoBehaviour CharacterMonoBehaviour { get; private set; }
         [field: SerializeField] public ExperienceManager ExperienceManagerProperty { get; private set; }
         [field: SerializeField] public Transform WeaponSpawnPosition { get; private set; }
+        [field: SerializeField] public IKControl IKPlayerControl { get; private set; }
         [field: SerializeField] public PlayerParameters Parameters { get; set; }
 
         #endregion

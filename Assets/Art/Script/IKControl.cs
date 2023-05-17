@@ -1,71 +1,74 @@
 using UnityEngine;
-using System;
-using System.Collections;
 
-[RequireComponent(typeof(Animator))]
-
-public class IKControl : MonoBehaviour
+namespace Art.Script
 {
-
-    protected Animator animator;
-
-    public bool ikActive = false;
-    public Transform rightHandObj = null;
-    public Transform leftHandObj = null;
-    public Transform lookObj = null;
-
-
-    void Start()
+    [RequireComponent(typeof(Animator))]
+    public class IKControl : MonoBehaviour
     {
-        animator = GetComponent<Animator>();
-    }
+        private Animator _animator;
 
-    //a callback for calculating IK
-    void OnAnimatorIK()
-    {
-        if (animator)
+        public bool IkActive;
+        public Transform PaddleRightHandObj;
+        public Transform PaddleLeftHandObj;
+        public GameObject PaddleGrabIK;
+        public Transform HarpoonRightHandObj;
+        public GameObject HarpoonGrabIK;
+        public Transform NetRightHandObj;
+        public Transform NetLeftHandObj;
+        public GameObject NetGrabIK;
+        public Transform LookObj;
+
+        private void Start()
         {
+            _animator = GetComponent<Animator>();
+        }
 
-            //if the IK is active, set the position and rotation directly to the goal. 
-            if (ikActive)
+        public void OnAnimatorIK(int layerIndex)
+        {
+            if (_animator == null || IkActive == false)
             {
-
-                // Set the look target position, if one has been assigned
-                if (lookObj != null)
-                {
-                    animator.SetLookAtWeight(1);
-                    animator.SetLookAtPosition(lookObj.position);
-                }
-
-                // Set the right hand target position and rotation, if one has been assigned
-                if (rightHandObj != null)
-                {
-                    animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
-                    animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
-                    animator.SetIKPosition(AvatarIKGoal.RightHand, rightHandObj.position);
-                    animator.SetIKRotation(AvatarIKGoal.RightHand, rightHandObj.rotation);
-                }
-
-                if (leftHandObj != null)
-                {
-                    animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
-                    animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
-                    animator.SetIKPosition(AvatarIKGoal.LeftHand, leftHandObj.position);
-                    animator.SetIKRotation(AvatarIKGoal.LeftHand, leftHandObj.rotation);
-                }
-
+                return;
             }
 
-            //if the IK is not active, set the position and rotation of the hand and head back to the original position
-            else
+            if (LookObj != null)
             {
-                animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 0);
-                animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 0);
-                animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 0);
-                animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 0);
-                animator.SetLookAtWeight(0);
+                _animator.SetLookAtWeight(1);
+                _animator.SetLookAtPosition(LookObj.position);
+                return;
             }
+            
+            _animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 0);
+            _animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 0);
+            _animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 0);
+            _animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 0);
+            _animator.SetLookAtWeight(0);
+        }
+
+        public void SetNet()
+        {
+            PaddleGrabIK.SetActive(false);
+            HarpoonGrabIK.SetActive(false);
+            NetGrabIK.SetActive(true);
+            _animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
+            _animator.SetIKRotation(AvatarIKGoal.LeftHand, NetLeftHandObj.rotation);
+        }
+
+        public void SetHarpoon()
+        {
+            HarpoonGrabIK.SetActive(true);
+            PaddleGrabIK.SetActive(false);
+            NetGrabIK.SetActive(false);
+            _animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
+            _animator.SetIKPosition(AvatarIKGoal.RightHand, HarpoonRightHandObj.position);
+        }
+
+        public void SetPaddle()
+        {
+            PaddleGrabIK.SetActive(true);
+            HarpoonGrabIK.SetActive(false);
+            NetGrabIK.SetActive(false);
+            _animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
+            _animator.SetIKRotation(AvatarIKGoal.RightHand, PaddleRightHandObj.rotation);
         }
     }
 }
-

@@ -208,6 +208,11 @@ namespace UI.WeaponWheel
             _vignette.DOScale(_vignetteBaseScale, 0.3f);
         }
 
+        public void SetLastSelectedPaddle()
+        {
+            _lastSelectedButton = Buttons.Find(x => x.ButtonController.IsPaddle).ButtonController;
+        }
+
         #region Set images
 
         public void SetCombatWeaponUI(bool show)
