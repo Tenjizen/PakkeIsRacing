@@ -16,6 +16,7 @@ namespace Character.State
         private InputManagement _inputs;
 
         private float _timerUnbalanced = 0;
+        private float _timerReturnNavigationState;
 
 
         #endregion
@@ -69,7 +70,7 @@ namespace Character.State
             CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeActive(true);
             float balance = CharacterManagerRef.Balance;
             CharacterManagerRef.BalanceGaugeManagerRef.ShowTrigger(balance < 0, balance > 0);
-            
+
             //anim
             CharacterManagerRef.PaddleAnimatorProperty.SetBool("Unbalanced", true);
             CharacterManagerRef.CharacterAnimatorProperty.SetBool("Unbalanced", true);
@@ -80,7 +81,11 @@ namespace Character.State
             Timer();
             ClickSpam();
 
-            CharacterManagerRef.BalanceGaugeManagerRef.ReduceGauge(Mathf.Abs((_timerUnbalanced / DIVIDE_TIMER_PERCENT) / CharacterManagerRef.TimerUnbalanced));
+            if (CharacterManagerRef.NumberButtonIsPressed < CharacterManagerRef.Data.NumberPressButton)
+            {
+                CharacterManagerRef.BalanceGaugeManagerRef.ReduceGauge(Mathf.Abs((_timerUnbalanced / DIVIDE_TIMER_PERCENT) / CharacterManagerRef.TimerUnbalanced));
+            }
+
             float percentGauge = CharacterManagerRef.BalanceGaugeManagerRef.PercentGauge();
             float angle = 0;
 
@@ -92,11 +97,6 @@ namespace Character.State
 
 
             MakeBoatRotationWithBalance(_kayakController.transform, 2);
-
-            if (Mathf.Abs(CharacterManagerRef.Balance) < CharacterManagerRef.Data.RebalanceAngle)
-            {
-                this.SwitchState(character);
-            }
 
             if ((percentGauge * 100) + 2.5f < Mathf.Abs((angle / 90) * 100))
             {
@@ -133,16 +133,21 @@ namespace Character.State
 
             if (CharacterManagerRef.NumberButtonIsPressed >= CharacterManagerRef.Data.NumberPressButton && _timerUnbalanced <= Mathf.Abs(CharacterManagerRef.TimerUnbalanced))
             {
-                _kayakController.CanReduceDrag = true;
-                CameraManagerRef.CanMoveCameraManually = true;
-                CharacterManagerRef.SetBalanceValueToCurrentSide(0);
-                CanCharacterMakeActions = true;
+                _timerReturnNavigationState += Time.deltaTime;
 
-                CharacterNavigationState characterNavigationState = new CharacterNavigationState();
-                CharacterManagerRef.SwitchState(characterNavigationState);
+                if (_timerReturnNavigationState > 0.5f)
+                {
+                    _kayakController.CanReduceDrag = true;
+                    CameraManagerRef.CanMoveCameraManually = true;
+                    CharacterManagerRef.SetBalanceValueToCurrentSide(0);
+                    CanCharacterMakeActions = true;
 
-                CameraNavigationState cameraNavigationState = new CameraNavigationState();
-                CameraManagerRef.SwitchState(cameraNavigationState);
+                    CharacterNavigationState characterNavigationState = new CharacterNavigationState();
+                    CharacterManagerRef.SwitchState(characterNavigationState);
+
+                    CameraNavigationState cameraNavigationState = new CameraNavigationState();
+                    CameraManagerRef.SwitchState(cameraNavigationState);
+                }
             }
         }
 
