@@ -72,6 +72,9 @@ namespace Character.State
             CharacterManagerRef.LerpBalanceTo0 = true;
             CanBeMoved = true;
             CanCharacterMakeActions = true;
+            
+            //anim
+            CharacterManagerRef.IKPlayerControl.SetPaddle();
         }
 
         public override void UpdateState(CharacterManager character)

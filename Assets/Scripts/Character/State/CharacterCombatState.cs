@@ -1,6 +1,9 @@
-﻿using Character.Data.Character;
+﻿using System;
+using Character.Data.Character;
 using Fight;
+using Fight.Data;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Character.State
 {
@@ -23,6 +26,16 @@ namespace Character.State
             _weaponPrefab = CharacterManagerRef.CurrentProjectile;
             
             CharacterManagerRef.WeaponUIManagerProperty.AutoAimController.ShowAutoAimCircle(true);
+
+            switch (_weaponPrefab.Data.Type)
+            {
+                case WeaponType.Harpoon:
+                    CharacterManagerRef.IKPlayerControl.SetHarpoon();
+                    break;
+                case WeaponType.Net:
+                    CharacterManagerRef.IKPlayerControl.SetNet();
+                    break;
+            }
         }
 
         public override void UpdateState(CharacterManager character)
@@ -50,6 +63,8 @@ namespace Character.State
 
             CharacterManagerRef.WeaponUIManagerProperty.AutoAimController.ShowAutoAimCircle(false);
             CharacterManagerRef.WeaponUIManagerProperty.AutoAimController.ShowAutoAimUI(false);
+            
+            CharacterManagerRef.IKPlayerControl.SetPaddle();
         }
 
         #endregion
