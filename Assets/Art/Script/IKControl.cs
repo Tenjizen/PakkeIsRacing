@@ -10,8 +10,14 @@ public class IKControl : MonoBehaviour
     protected Animator animator;
 
     public bool ikActive = false;
-    public Transform rightHandObj = null;
-    public Transform leftHandObj = null;
+    public Transform PagaieRightHandObj = null;
+    public Transform PagaieLeftHandObj = null;
+    public GameObject PagaieGrabIK;
+    public Transform HarpoonRightHandObj = null;
+    public GameObject HarpoonGrabIK;
+    public Transform FiletRightHandObj = null;
+    public Transform FiletLeftHandObj = null;
+    public GameObject FiletGrabIK;
     public Transform lookObj = null;
 
 
@@ -38,20 +44,65 @@ public class IKControl : MonoBehaviour
                 }
 
                 // Set the right hand target position and rotation, if one has been assigned
-                if (rightHandObj != null)
+                if (PagaieRightHandObj != null)
                 {
+                    PagaieGrabIK.SetActive(true);
+                    HarpoonGrabIK.SetActive(false);
+                    FiletGrabIK.SetActive(false);
+                    FiletGrabIK.SetActive(false);
                     animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
                     animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
-                    animator.SetIKPosition(AvatarIKGoal.RightHand, rightHandObj.position);
-                    animator.SetIKRotation(AvatarIKGoal.RightHand, rightHandObj.rotation);
+                    animator.SetIKPosition(AvatarIKGoal.RightHand, PagaieRightHandObj.position);
+                    animator.SetIKRotation(AvatarIKGoal.RightHand, PagaieRightHandObj.rotation);
                 }
 
-                if (leftHandObj != null)
+                if (PagaieLeftHandObj != null)
                 {
+                    PagaieGrabIK.SetActive(true);
+                    HarpoonGrabIK.SetActive(false);
+                    FiletGrabIK.SetActive(false);
+                    FiletGrabIK.SetActive(false);
                     animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
                     animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
-                    animator.SetIKPosition(AvatarIKGoal.LeftHand, leftHandObj.position);
-                    animator.SetIKRotation(AvatarIKGoal.LeftHand, leftHandObj.rotation);
+                    animator.SetIKPosition(AvatarIKGoal.LeftHand, PagaieLeftHandObj.position);
+                    animator.SetIKRotation(AvatarIKGoal.LeftHand, PagaieLeftHandObj.rotation);
+                }
+
+                else if (HarpoonRightHandObj != null)
+                {
+                    HarpoonGrabIK.SetActive(true);
+                    PagaieGrabIK.SetActive(false);
+                    PagaieGrabIK.SetActive(false);
+                    FiletGrabIK.SetActive(false);
+                    FiletGrabIK.SetActive(false);
+                    animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
+                    animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
+                    animator.SetIKPosition(AvatarIKGoal.RightHand, HarpoonRightHandObj.position);
+                    animator.SetIKRotation(AvatarIKGoal.RightHand, HarpoonRightHandObj.rotation);
+                }
+
+                else if (FiletRightHandObj != null)
+                {
+                    PagaieGrabIK.SetActive(false);
+                    PagaieGrabIK.SetActive(false);
+                    HarpoonGrabIK.SetActive(false);
+                    FiletGrabIK.SetActive(true);
+                    animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
+                    animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
+                    animator.SetIKPosition(AvatarIKGoal.RightHand, FiletRightHandObj.position);
+                    animator.SetIKRotation(AvatarIKGoal.RightHand, FiletRightHandObj.rotation);
+                }
+
+                else if (FiletLeftHandObj != null)
+                {
+                    PagaieGrabIK.SetActive(false);
+                    PagaieGrabIK.SetActive(false);
+                    HarpoonGrabIK.SetActive(false);
+                    FiletGrabIK.SetActive(true);
+                    animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
+                    animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
+                    animator.SetIKPosition(AvatarIKGoal.LeftHand, FiletLeftHandObj.position);
+                    animator.SetIKRotation(AvatarIKGoal.LeftHand, FiletLeftHandObj.rotation);
                 }
 
             }
