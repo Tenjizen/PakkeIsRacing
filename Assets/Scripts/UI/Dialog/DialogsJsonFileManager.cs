@@ -52,7 +52,11 @@ namespace UI.Dialog
         {
             CollectedDialogs = _fileManager.GetDataList();
 
-            CollectedDialogs.Find(item => item.DialogCreatorGameObject == dialogCreator).IsCollected = true;
+            CollectedDialogsData dialog = CollectedDialogs.Find(item => item.DialogCreatorGameObject == dialogCreator);
+            if (dialog != null)
+            {
+                dialog.IsCollected = true;
+            }
             //CollectedDialogs.Add(new CollectedItemData(){CollectibleGameObject = collectible, IsCollected = true, ItemName = collectible.Data.Name});
             
             WriteJsonFile();

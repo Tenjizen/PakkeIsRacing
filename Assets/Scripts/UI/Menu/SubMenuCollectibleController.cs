@@ -157,8 +157,11 @@ namespace UI.Menu
                 {
                     continue;
                 }
-                
-                collectibleUIObject.Data = JsonFilesManagerSingleton.Instance.CollectibleJsonFileManagerProperty.CollectedItems[i].CollectibleGameObject.Data;
+
+                if (JsonFilesManagerSingleton.Instance.CollectibleJsonFileManagerProperty.CollectedItems[i].IsCollected)
+                {
+                    collectibleUIObject.Data = JsonFilesManagerSingleton.Instance.CollectibleJsonFileManagerProperty.CollectedItems[i].CollectibleGameObject.Data;
+                }
             }
         }
 
