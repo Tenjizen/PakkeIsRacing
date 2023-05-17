@@ -25,12 +25,14 @@ namespace Art.Script
         public GameObject NetGrabIK;
         public Transform LookObj;
         public IKType Type;
+        public IKType CurrentType;
 
         private void Start()
         {
             _animator = GetComponent<Animator>();
             SetPaddle();
             IkActive = true;
+            CurrentType = IKType.Paddle;
         }
 
         public void OnAnimatorIK()
@@ -100,16 +102,19 @@ namespace Art.Script
         public void SetNet()
         {
             Type = IKType.Net;    
+            CurrentType = IKType.Net;    
         }
 
         public void SetHarpoon()
         {
             Type = IKType.Harpoon;
+            CurrentType = IKType.Harpoon;
         }
 
         public void SetPaddle()
         {
             Type = IKType.Paddle;
+            CurrentType = IKType.Paddle;
         }
     }
 }

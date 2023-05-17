@@ -5325,7 +5325,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3014273842563118509}
   m_LocalRotation: {x: 0.130805, y: 0.0053463127, z: -0.00070539623, w: 0.99139345}
-  m_LocalPosition: {x: -1.3265307, y: 3.5162826, z: 1.2501502}
+  m_LocalPosition: {x: -1.3265305, y: 3.5162826, z: 1.2501503}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5476,7 +5476,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3858187113969445702}
-  m_LocalRotation: {x: 0.05347915, y: 0.047717668, z: -0.002558489, w: 0.9974249}
+  m_LocalRotation: {x: 0.053479154, y: 0.04771767, z: -0.0025584893, w: 0.99742496}
   m_LocalPosition: {x: -3.8953812, y: 4.7072444, z: -10.895796}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5723,7 +5723,7 @@ MonoBehaviour:
   m_PivotOffset: {x: 0, y: 0, z: 0}
   m_AmplitudeGain: 1
   m_FrequencyGain: 1
-  mNoiseOffsets: {x: 0, y: 0, z: 0}
+  mNoiseOffsets: {x: -116.28137, y: 83.03464, z: 672.265}
 --- !u!1 &5773740044235661809
 GameObject:
   m_ObjectHideFlags: 0
@@ -5780,7 +5780,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7023581499585263752}
   m_LocalRotation: {x: -0, y: -0.047786213, z: -0, w: 0.9988576}
-  m_LocalPosition: {x: -2.0116305, y: 0.20522964, z: 8.960205}
+  m_LocalPosition: {x: -2.0116303, y: 0.20522976, z: 8.960205}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6096,6 +6096,8 @@ MonoBehaviour:
   <Parameters>k__BackingField:
     AutoAim: 1
     InversedControls: 0
+  <HarpoonAnimator>k__BackingField: {fileID: 2084915637}
+  <NetAnimator>k__BackingField: {fileID: 0}
   Data: {fileID: 11400000, guid: 9383b9325ce5e464e84beb6010a91e0a, type: 2}
   LerpBalanceTo0: 1
   Balance: 0
@@ -6131,7 +6133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d49cd67baff6c54aa5d47073fe1fc45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimerBeforeCanMovingAtStart: 1.5
+  TimerBeforeCanMovingAtStart: 0.5
   <CinemachineCameraTarget>k__BackingField: {fileID: 5773740044235661809}
   <CinemachineCameraTargetFollow>k__BackingField: {fileID: 3814212815698604900}
   <CinemachineCameraFollowCombat>k__BackingField: {fileID: 1094441883}

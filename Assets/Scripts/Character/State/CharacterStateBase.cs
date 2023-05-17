@@ -1,3 +1,4 @@
+using Art.Script;
 using Character.Camera;
 using Character.Camera.State;
 using DG.Tweening;
@@ -29,6 +30,9 @@ namespace Character.State
         public UnityEvent OnPaddleRight = new UnityEvent();
         
         protected Transform PlayerPosition;
+        
+        //anim
+        public float TimeBeforeSettingPaddleAnimator;
         
         protected CharacterStateBase()
         {
@@ -119,6 +123,8 @@ namespace Character.State
             character.WeaponUIManagerProperty.AutoAimController.ShowAutoAimUI(false);
             
             character.WeaponUIManagerProperty.SetLastSelectedPaddle();
+            
+            CharacterManagerRef.IKPlayerControl.CurrentType = IKType.Paddle;
         }
 
         #region Wave/Floaters and Balance management

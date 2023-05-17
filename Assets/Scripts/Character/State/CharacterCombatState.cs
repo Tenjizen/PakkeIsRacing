@@ -1,4 +1,5 @@
 ﻿using System;
+using Art.Script;
 using Character.Data.Character;
 using Fight;
 using Fight.Data;
@@ -30,12 +31,17 @@ namespace Character.State
             switch (_weaponPrefab.Data.Type)
             {
                 case WeaponType.Harpoon:
+                    CharacterManagerRef.IKPlayerControl.CurrentType = IKType.Harpoon;
                     CharacterManagerRef.IKPlayerControl.SetHarpoon();
+                    CharacterManagerRef.HarpoonAnimator.SetBool("IdleHarpoon",true);
                     break;
                 case WeaponType.Net:
+                    CharacterManagerRef.IKPlayerControl.CurrentType = IKType.Net;
                     CharacterManagerRef.IKPlayerControl.SetNet();
+                    CharacterManagerRef.HarpoonAnimator.SetBool("IdleNet",true);
                     break;
             }
+
         }
 
         public override void UpdateState(CharacterManager character)
@@ -64,7 +70,8 @@ namespace Character.State
             CharacterManagerRef.WeaponUIManagerProperty.AutoAimController.ShowAutoAimCircle(false);
             CharacterManagerRef.WeaponUIManagerProperty.AutoAimController.ShowAutoAimUI(false);
             
-            CharacterManagerRef.IKPlayerControl.SetPaddle();
+            //CharacterManagerRef.IKPlayerControl.SetPaddle();
+            CharacterManagerRef.IKPlayerControl.CurrentType = IKType.Paddle;
         }
 
         #endregion
@@ -131,6 +138,19 @@ namespace Character.State
                     if (_hittable != null)
                     {
                         projectile.SetHittableAutoAim(_hittable);
+                    }
+                    
+                    //anim
+                    switch (_weaponPrefab.Data.Type)
+                    {
+                        case WeaponType.Harpoon:
+                            CharacterManagerRef.IKPlayerControl.SetHarpoon();
+                            CharacterManagerRef.HarpoonAnimator.SetBool("FireHarpoon",true);
+                            break;
+                        case WeaponType.Net:
+                            CharacterManagerRef.IKPlayerControl.SetNet();
+                            CharacterManagerRef.HarpoonAnimator.SetBool("FireNet",true);
+                            break;
                     }
                     
                     LaunchNavigationState();

@@ -28,6 +28,12 @@ namespace Enemies
 
         public virtual void Hit(Projectile projectile, GameObject owner)
         {
+            if (projectile.Data.Type != WeaponThatCanHitEnemy)
+            {
+                Debug.Log($"{projectile.Data.Type} can't hit {gameObject.name}");
+                return;
+            }
+            
             OnHit.Invoke();
             CurrentLife -= 1;
             Debug.Log($"hit, life : {CurrentLife}");

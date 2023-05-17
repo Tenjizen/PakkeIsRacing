@@ -15,7 +15,7 @@ namespace Character.Camera.State
         public override void UpdateState(CameraManager camera)
         {
 
-            if (_startTimer == true)
+            if (_startTimer)
             {
                 _timer += Time.deltaTime;
             }

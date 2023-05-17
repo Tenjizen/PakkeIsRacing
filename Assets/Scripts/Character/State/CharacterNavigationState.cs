@@ -74,7 +74,7 @@ namespace Character.State
             CanCharacterMakeActions = true;
             
             //anim
-            CharacterManagerRef.IKPlayerControl.SetPaddle();
+            TimeBeforeSettingPaddleAnimator = 1f;
         }
 
         public override void UpdateState(CharacterManager character)

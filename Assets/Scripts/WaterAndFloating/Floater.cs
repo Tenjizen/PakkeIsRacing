@@ -57,7 +57,7 @@ namespace WaterAndFloating
                {
                     float displacementMultiplier = Mathf.Clamp(Mathf.Abs(waveHeight - transform.position.y) * _displacementDownAmount,0,5);
                     _rigidbody.AddForce(
-                         new Vector3(0,-displacementMultiplier * _waterDrag * Time.fixedDeltaTime,0),
+                         new Vector3(0,-displacementMultiplier * _waterDrag * Time.fixedDeltaTime * 5,0),
                          ForceMode.VelocityChange);
                }
           }
