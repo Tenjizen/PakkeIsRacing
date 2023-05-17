@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &859354950711925518
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1572955983011780759}
-  m_Layer: 0
-  m_Name: Point Target
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1572955983011780759
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 859354950711925518}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.8, y: 0, z: 5.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4724983407470673251}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1624038269547538984
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,7 +303,7 @@ Transform:
   - {fileID: 2284930279663007353}
   - {fileID: 6830803021456478744}
   m_Father: {fileID: 4724983407470673251}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!320 &2294825601713551733
 PlayableDirector:
@@ -485,7 +454,6 @@ Transform:
   - {fileID: 7920329064344759495}
   - {fileID: 1335596567167755642}
   - {fileID: 3507624354624242869}
-  - {fileID: 1572955983011780759}
   - {fileID: 5247578107950392467}
   - {fileID: 3185636025459255267}
   - {fileID: 8430287755023305262}
@@ -598,7 +566,6 @@ MonoBehaviour:
   <Forward>k__BackingField: {fileID: 3481916426435834060}
   <Circle>k__BackingField: {fileID: 8294695087083784925}
   PointTarget: {fileID: 6898630833835794956}
-  PointTargetAttack: {fileID: 859354950711925518}
   CurrentSpeed: 0
   IsCollided: 0
   <HitParticles>k__BackingField: {fileID: 8982045671615852984}
@@ -696,7 +663,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4724983407470673251}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!212 &6290569592480294881
 SpriteRenderer:
@@ -1057,7 +1024,7 @@ PrefabInstance:
     - target: {fileID: 3325023540034928132, guid: 08055a73dd2115c4d8e170d893a9aded,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3325023540034928132, guid: 08055a73dd2115c4d8e170d893a9aded,
         type: 3}
