@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{28b38478-221a-4b94-a9d8-330c4bf9a0f8}">
 		<property name="name">
-			<value>CaveAmbience</value>
+			<value>CaveAmbienceTest</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -102,14 +102,23 @@
 	</object>
 	<object class="MixerBusPanner" id="{548321b6-9c2e-4999-aa8d-d0244cd10151}" />
 	<object class="SingleSound" id="{4b183af2-35cf-40b0-9638-f009250b510c}">
+		<property name="isAsync">
+			<value>true</value>
+		</property>
 		<property name="length">
-			<value>39</value>
+			<value>74.5</value>
+		</property>
+		<property name="looping">
+			<value>true</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{5d187b1d-2341-4e5c-b0fc-fce91bfc2bde}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{b660b311-5043-4dbd-89be-7c43734b2e78}">
+		<property name="volume">
+			<value>10</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -124,8 +133,14 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{3ee6b0da-f43f-44b7-9ae3-51ce4e50d2a5}">
+		<property name="isAsync">
+			<value>true</value>
+		</property>
 		<property name="length">
 			<value>74.5</value>
+		</property>
+		<property name="looping">
+			<value>true</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{87597d4b-1b4a-480c-894f-914d75754a66}</destination>
