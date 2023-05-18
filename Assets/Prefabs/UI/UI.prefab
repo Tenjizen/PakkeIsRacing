@@ -3297,7 +3297,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   CanBeOpened: 1
-  menuManager: {fileID: 8190976413022181645}
+  _menuManager: {fileID: 8190976413022181645}
+  _menuParameters: {fileID: 6111228719104536302}
   _objectsList:
   - {fileID: 2561367282952979385}
   - {fileID: 2824317587126174700}
@@ -5330,8 +5331,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7842850879718985561}
-        m_TargetAssemblyTypeName: MenuLeave, Assembly-CSharp
-        m_MethodName: Resume
+        m_TargetAssemblyTypeName: UI.Menu.MenuLeave, Assembly-CSharp
+        m_MethodName: OpenCloseMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9111,7 +9112,7 @@ MonoBehaviour:
   OnSelected:
     m_PersistentCalls:
       m_Calls: []
-  menuLeaveManager: {fileID: 7842850879718985561}
+  _menuLeaveManager: {fileID: 7842850879718985561}
   _objectsList:
   - {fileID: 1860172327294459753}
   - {fileID: 6389499207205499248}
