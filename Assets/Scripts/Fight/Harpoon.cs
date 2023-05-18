@@ -20,22 +20,24 @@ namespace Fight
 
         private void FixedUpdate()
         {
-            if (_rigidbody != null)
+            if (_rigidbody == null)
             {
-                Vector3 directionOfMotion = _rigidbody.velocity.normalized;
-                if (directionOfMotion != Vector3.zero)
-                {
-                    transform.LookAt(transform.position + directionOfMotion);
-                }
-
-                if (AutoAimHittable == null)
-                {
-                    return;
-                }
-                Vector3 direction = (AutoAimHittable.Transform.position - transform.position).normalized;
-                Vector3 desiredVelocity = direction * _rigidbody.velocity.magnitude;
-                _rigidbody.velocity = desiredVelocity;
+                return;
             }
+            
+            Vector3 directionOfMotion = _rigidbody.velocity.normalized;
+            if (directionOfMotion != Vector3.zero)
+            {
+                transform.LookAt(transform.position + directionOfMotion);
+            }
+
+            if (AutoAimHittable == null)
+            {
+                return;
+            }
+            Vector3 direction = (AutoAimHittable.Transform.position - transform.position).normalized;
+            Vector3 desiredVelocity = direction * _rigidbody.velocity.magnitude;
+            _rigidbody.velocity = desiredVelocity;
         }
 
         protected override void Die()

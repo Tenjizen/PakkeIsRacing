@@ -222,6 +222,12 @@ namespace Enemies.Seal
         
         #endregion
 
+        protected override void Die()
+        {
+            base.Die();
+            _isMoving = false;
+        }
+
 #if UNITY_EDITOR
 
         private void OnDrawGizmos()

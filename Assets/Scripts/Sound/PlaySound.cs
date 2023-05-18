@@ -9,9 +9,13 @@ namespace Sound
     public class PlaySound : MonoBehaviour
     {
         [SerializeField] private EventReference sound;
-        // Start is called before the first frame update
+        
         public void PlaySoundTrigger()
         {
+            if (sound.Path == null || AudioManager.Instance == null)
+            {
+                return;
+            }
             AudioManager.Instance.PlayOneShot(sound, this.transform.position);
         }
     }

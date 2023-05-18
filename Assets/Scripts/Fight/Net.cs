@@ -18,14 +18,25 @@ namespace Fight
         
         private Rigidbody _rigidbody;
 
-        private StudioEventEmitter emitter;
+        private StudioEventEmitter _emitter;
 
         protected override void Update()
         {
             base.Update();
             transform.Rotate(new Vector3(0,1,0), _rotationSpeed);
         }
-        
+
+        private void FixedUpdate()
+        {
+            if (AutoAimHittable == null)
+            {
+                return;
+            }
+            Vector3 direction = (AutoAimHittable.Transform.position - transform.position).normalized;
+            Vector3 desiredVelocity = direction * _rigidbody.velocity.magnitude;
+            _rigidbody.velocity = desiredVelocity;
+        }
+
         protected override void Die()
         {
             base.Die();
