@@ -9,7 +9,7 @@ namespace Sound
         public void SetMusic()
         {
             AudioManager.Instance.SetMusicArea(area);
-            Debug.Log("Tension de la musique mise à jour");
+            Debug.Log("Type de la musique mise à jour");
         }
     }
 }

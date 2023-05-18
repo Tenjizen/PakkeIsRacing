@@ -1,6 +1,6 @@
 public enum MusicArea
 {
-    WeakTension = 0,
-    ModerateTension = 1,
-    HighTension = 2
+    Exploration = 0,
+    Dialogue = 1,
+    Combat = 2
 }
