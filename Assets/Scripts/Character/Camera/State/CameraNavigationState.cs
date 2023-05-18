@@ -21,6 +21,10 @@ namespace Character.Camera.State
         }
         public override void UpdateState(CameraManager camera)
         {
+
+            camera.CameraDistance(camera.VirtualCameraFreeLook);
+
+
             if (Mathf.Abs(CamManager.RotationZ) > 0)
             {
                 CamManager.SmoothResetRotateZ();

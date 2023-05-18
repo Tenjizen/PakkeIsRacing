@@ -50,6 +50,7 @@ namespace Character.Data
         public float ClampValuePositionY { get; private set; } = 3f;
 
 
+
         [field: SerializeField, Range(0, 0.1f), Tooltip("The lerp value applied to the rotation of the camera when the player moves")]
         public float LerpLocalRotationMove { get; private set; } = 0.005f;
         [field: SerializeField, Range(0, 0.1f), Tooltip("The lerp value applied to the rotation of the camera when the player rotating")]
@@ -90,6 +91,10 @@ namespace Character.Data
         [field: SerializeField, Tooltip("The curve of force in function of the joystick position Y")]
         public AnimationCurve JoystickFreeRotationY { get; private set; }
 
+        [field: SerializeField, Header("Distance")]
+        public float MultiplierCameraGettingCloser { get; private set; } = 0.2f;
+        [field: SerializeField]
+        public float LerpCameraGettingCloser { get; private set; } = 0.1f;
 
         [field: SerializeField, Header("Lerp"), Range(0, 0.1f), Tooltip("The lerp value applied to the field of view of camera depending on the speed of the player")]
         public float LerpFOV { get; private set; } = .01f;

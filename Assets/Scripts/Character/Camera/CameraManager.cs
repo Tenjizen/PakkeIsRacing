@@ -114,8 +114,16 @@ namespace Character.Camera
             virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(virtualCamera.m_Lens.FieldOfView,
                 CameraBaseFov + (velocityXZ * Data.MultiplierFovCamera),
                 Data.LerpFOV);
-        }
+                    }
         
+        public void CameraDistance(CinemachineVirtualCamera virtualCamera)
+        {
+            float velocityXZ = Mathf.Abs(RigidbodyKayak.velocity.x) + Mathf.Abs(RigidbodyKayak.velocity.z);
+
+            var Dist = virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance;
+            virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = Mathf.Lerp(Dist, Data.NavigationCamDistance - (velocityXZ * Data.MultiplierCameraGettingCloser), Data.LerpCameraGettingCloser);
+        }
+
         #region Methods
         public void ApplyRotationCamera()
         {
