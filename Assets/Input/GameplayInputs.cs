@@ -626,6 +626,17 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""f9d56c93-7348-4084-bebe-01eb6f71b00d"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MenuUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""93e532f7-e741-40fd-beaa-4d93972f630b"",
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
@@ -639,6 +650,17 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""7bfaa056-ae4f-4713-856c-1e7712383560"",
                     ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MenuDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""496d96ef-2382-4037-a1b6-88e1dad9e1c9"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -670,6 +692,17 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""83e88186-8ec1-464b-966c-b62fbfa47c63"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MenuLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""aa3bbf62-0d3d-4d0d-8816-b87ba48287f9"",
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
@@ -683,6 +716,17 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""54e25fb1-583f-4a41-92f5-4c5de01119a8"",
                     ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MenuRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""94af1272-ce3e-4ec3-9e2f-80d67cd79add"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
