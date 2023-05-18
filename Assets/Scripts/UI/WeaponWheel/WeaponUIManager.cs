@@ -16,7 +16,7 @@ namespace UI.WeaponWheel
         [SerializeField] private GameObject _weaponUI;
         [SerializeField] private Transform _vignette;
 
-        [SerializeField] private List<WheelButton> Buttons;
+        public List<WheelButton> Buttons;
 
         [SerializeField] private Image _paddleArrowDownImage;
         [SerializeField] private Image _cursor;

@@ -14,35 +14,37 @@ namespace GPEs.Checkpoint
         [Header("References"), SerializeField] private ZoneManager _zoneManager;
         [SerializeField] private Transform _targetRespawnTransform;
         [SerializeField] private ParticleSystem _activationParticles;
-        [SerializeField] private AudioClip _activationClip;
 
-        private StudioEventEmitter emitter;
+        private StudioEventEmitter _emitter;
 
         private bool _hasBeenUsed;
 
         private void Start()
         {
             OnPlayerEntered.AddListener(SetCheckPoint);
-            OnPlayerEntered.AddListener(SetPlayerExperience);
             
         }
         private void OnDestroy()
         {
             OnPlayerEntered.RemoveListener(SetCheckPoint);
-            OnPlayerEntered.RemoveListener(SetPlayerExperience);
         }
 
         public void SetCheckPoint()
         {
-            if (_hasBeenUsed == false)
+            if (_hasBeenUsed)
             {
-                CharacterManager.Instance.CheckpointManagerProperty.SetCheckpoint(this);
-                _hasBeenUsed = true;
+                return;
+            }
             
-                _activationParticles.Play();
-                //CharacterManager.Instance.SoundManagerProperty.PlaySound(_activationClip);
-                _zoneManager.ShowZone(_zoneName);
+            CharacterManager.Instance.CheckpointManagerProperty.SetCheckpoint(this);
+            _hasBeenUsed = true;
+            
+            _activationParticles.Play();
+            _zoneManager.ShowZone(_zoneName);
+            SetPlayerExperience();
 
+            if (AudioManager.Instance != null)
+            {
                 AudioManager.Instance.PlayOneShot(FMODEvents.Instance.checkpointActivated, this.transform.position);
             }
         }

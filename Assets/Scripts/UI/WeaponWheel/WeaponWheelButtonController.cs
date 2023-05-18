@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using Character;
 using Character.Camera.State;
 using Character.State;
 using DG.Tweening;
 using Fight;
+using Fight.Data;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -17,9 +19,12 @@ namespace UI.WeaponWheel
         [SerializeField] private Button _button;
         [SerializeField] private Projectile _projectile;
         [SerializeField] private Sprite _weaponIcon;
+        [SerializeField] private List<GameObject> _weaponObjectToSet;
         
+        public WeaponType Type;
         public bool IsPaddle;
         
+        public bool IsUnlocked;
         [ReadOnly] public bool IsSelected;
         
         [Header("Events")] public UnityEvent OnSelected = new UnityEvent();
@@ -30,11 +35,23 @@ namespace UI.WeaponWheel
         private void Start()
         {
             _characterManager = CharacterManager.Instance;
+            _weaponObjectToSet.ForEach(x => x.SetActive(IsUnlocked));
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (IsUnlocked == false)
+            {
+                return;
+            }
+            
             Hover();
+        }
+
+        public void SetWeapon(bool isUnlocked)
+        {
+            _weaponObjectToSet.ForEach(x => x.SetActive(isUnlocked));
+            IsUnlocked = isUnlocked;
         }
 
         public void Hover()
@@ -61,6 +78,11 @@ namespace UI.WeaponWheel
 
         public void Select(Image weaponIcon)
         {
+            if (IsUnlocked == false)
+            {
+                CharacterManager.Instance.CurrentStateBaseProperty.LaunchNavigationState();
+                return;
+            }
   
             weaponIcon.sprite = _weaponIcon == null ? weaponIcon.sprite : _weaponIcon;
             weaponIcon.DOFade(_weaponIcon == null ? 0 : 1, 0.2f);

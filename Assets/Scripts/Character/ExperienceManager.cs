@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using Character.Data;
+using Character.Data.Experience;
+using Fight.Data;
 using UI;
+using UI.WeaponWheel;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Character
 {
@@ -24,6 +29,9 @@ namespace Character
         [ReadOnly] public float BalanceLimitMultiplier = 1;
         //combat
         [ReadOnly] public float ProjectileSpeedMultiplier = 1;
+
+        [Header("Events")] 
+        public List<UnityEvent> EventAtEachLevel = new List<UnityEvent>();
         
         private void Start()
         {
@@ -66,6 +74,24 @@ namespace Character
             RotatingSpeedMultiplier = SetMultiplierFromPercentageAndValue(Data.RotatingSpeedMultiplier);
             BalanceLimitMultiplier = SetMultiplierFromPercentageAndValue(Data.BalanceLimitMultiplier);
             ProjectileSpeedMultiplier = SetMultiplierFromPercentageAndValue(Data.ProjectileSpeedMultiplier);
+            
+            //events
+            if (_currentLevel < EventAtEachLevel.Count)
+            {
+                EventAtEachLevel[_currentLevel].Invoke();
+            }
+            
+            //weapons
+            for (int i = 0; i < Data.WeaponLevels.Count; i++)
+            {
+                if (Data.WeaponLevels[i].Level != _currentLevel)
+                {
+                    continue;
+                }
+
+                WheelButton button = CharacterManager.Instance.WeaponUIManagerProperty.Buttons.Find(x => x.ButtonController.Type == Data.WeaponLevels[i].Type);
+                button.ButtonController.SetWeapon(true);
+            }
         }
 
         private float SetMultiplierFromPercentageAndValue(Value value)
