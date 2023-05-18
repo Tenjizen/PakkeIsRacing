@@ -16,7 +16,7 @@ public class MenuLeaveUIObject : MenuUIObject
 
     protected override void Activate(InputAction.CallbackContext context)
     {
-        if (IsSelected == false)
+        if (IsSelected == false || _menuLeave.IsUsable == false)
         {
             return;
         }

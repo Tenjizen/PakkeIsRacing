@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Character;
 using DG.Tweening;
@@ -11,7 +12,8 @@ namespace UI.Menu
     public class MenuLeave : MenuController
     {
         [SerializeField, ReadOnly] public bool CanBeOpened = true;
-        [SerializeField] public UIMenuManager menuManager;
+        [SerializeField] private UIMenuManager _menuManager;
+        [SerializeField] private MenuParameters _menuParameters;
 
         [SerializeField] private List<MenuUIObject> _objectsList = new List<MenuUIObject>();
 
@@ -45,16 +47,17 @@ namespace UI.Menu
             CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.ShowLeaveMenu.started += AbleDisable;
             CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuDown.started += Down;
             CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuUp.started += Up;
+            CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.ClosePauseMenu.started += CloseMenu;
+
         }
 
         public override void Set(bool isActive, bool isUsable)
         {
-            base.Set(isActive, isUsable);
-
             if (isUsable == false)
             {
                 return;
             }
+            base.Set(isActive, isUsable);
 
             if (IsUsable)
             {
@@ -69,7 +72,7 @@ namespace UI.Menu
                 return;
             }
 
-            Resume();
+            OpenCloseMenu();
         }
 
 
@@ -107,7 +110,7 @@ namespace UI.Menu
 #endif
         }
 
-        public void Resume()
+        public void OpenCloseMenu()
         {
             CharacterManager characterManager = CharacterManager.Instance;
             characterManager.CurrentStateBaseProperty.CanCharacterMove = IsActive;
@@ -133,22 +136,33 @@ namespace UI.Menu
             {
                 SetTile();
                 Time.timeScale = 0.5f;
-                menuManager.CanBeOpened = false;
-                if (menuManager.IsActive == true)
+                _menuManager.CanBeOpened = false;
+                if (_menuManager.IsActive == true)
                 {
-                    menuManager.SetMenu();
+                    _menuManager.SetMenu();
                 }
             }
             else if (IsActive == false)
             {
                 Time.timeScale = 1;
-                menuManager.CanBeOpened = true;
+                _menuManager.CanBeOpened = true;
             }
+        }
+
+        private void CloseMenu(InputAction.CallbackContext context)
+        {
+            if (IsActive == false)
+            {
+                return;
+            }
+
+            OpenCloseMenu();
         }
 
         public void Parameters()
         {
-            Debug.Log("open parameters");
+            _menuParameters.AbleDisableParameters();
+            SetVariableFasle();
         }
 
         private void SetTile()
@@ -165,5 +179,28 @@ namespace UI.Menu
             }
         }
 
+
+        public void SetVariableFasle()
+        {
+            IsUsable = false;
+            CanBeOpened = false;
+            IsActive = false;
+        }
+        public void SetVariableTrue()
+        {
+            //IsUsable = true;
+            //CanBeOpened = true;
+            //IsActive = true;
+            StartCoroutine(enumerator(0.1f));
+        }
+        IEnumerator enumerator(float time)
+        {
+            if (IsActive == true) yield break;
+
+            yield return new WaitForSeconds(time);
+            IsUsable = true;
+            CanBeOpened = true;
+            IsActive = true;
+        }
     }
 }

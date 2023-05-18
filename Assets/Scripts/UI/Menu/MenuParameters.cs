@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 public class MenuParameters : MenuController
 {
-        [SerializeField] public MenuLeave menuLeaveManager;
+    [SerializeField] private MenuLeave _menuLeaveManager;
     [Header("Sub Menu"), SerializeField] private List<MenuUIObject> _objectsList = new List<MenuUIObject>();
 
     private Dictionary<Image, float> _imagesDictionary = new Dictionary<Image, float>();
@@ -34,9 +34,29 @@ public class MenuParameters : MenuController
             text.DOFade(0, 0);
         }
 
-        //CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.ShowLeaveMenu.started += AbleDisable;
         CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuDown.started += Down;
         CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuUp.started += Up;
+        CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.ClosePauseMenu.started += CloseMenu;
+    }
+
+    private void CloseMenu(InputAction.CallbackContext context)
+    {
+        if (IsActive == false)
+        {
+            return;
+        }
+
+        foreach (var item in _objectsList)
+        {
+            if (item.IsSelected == true)
+            {
+                item.IsSelected = false;
+            }
+        }
+
+        AbleDisableParameters();
+        _menuLeaveManager.SetVariableTrue();
+
     }
 
     public override void Set(bool isActive, bool isUsable)
@@ -54,18 +74,12 @@ public class MenuParameters : MenuController
         }
     }
 
-    private void AbleDisable(InputAction.CallbackContext context)
+    public void AbleDisableParameters()
     {
         if (CanBeOpened == false)
         {
             return;
         }
-
-        SetMenu();
-    }
-
-    public void SetMenu()
-    {
         CharacterManager characterManager = CharacterManager.Instance;
         characterManager.CurrentStateBaseProperty.CanCharacterMove = IsActive;
         characterManager.CurrentStateBaseProperty.CanCharacterMakeActions = IsActive;
@@ -77,10 +91,12 @@ public class MenuParameters : MenuController
         const float fadeTime = 0.1f;
         foreach (var pair in _imagesDictionary)
         {
+            pair.Key.DOKill();
             pair.Key.DOFade(IsActive ? pair.Value : 0, fadeTime);
         }
         foreach (var pair in _textsDictionary)
         {
+            pair.Key.DOKill();
             pair.Key.DOFade(IsActive ? pair.Value : 0, fadeTime);
         }
 
@@ -88,17 +104,7 @@ public class MenuParameters : MenuController
 
         if (IsActive == true)
         {
-
             SetTile();
-            Time.timeScale = 0.5f;
-            menuLeaveManager.CanBeOpened = false;
-            //menuLeaveManager.IsUsable = false;
-        }
-        else if (IsActive == false)
-        {
-            Time.timeScale = 1;
-            menuLeaveManager.CanBeOpened = true;
-            //menuLeaveManager.IsUsable = true;
         }
     }
 

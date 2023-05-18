@@ -9,8 +9,8 @@ namespace UI.Menu
 {
     public class MenuController : MonoBehaviour
     {
-        [SerializeField, ReadOnly] protected bool IsActive = false;
-        [SerializeField, ReadOnly] protected bool IsUsable = false;
+        [ReadOnly] public bool IsActive = false;
+        [ReadOnly] public bool IsUsable = false;
         [SerializeField] protected int Height, Length;
         [SerializeField] protected GameObject MenuGameObject;
         [Header("Events")] public UnityEvent OnSelected;
