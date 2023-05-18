@@ -432,6 +432,7 @@ GameObject:
   - component: {fileID: 5967924889601430571}
   - component: {fileID: 5967924889601430573}
   - component: {fileID: 5818197527617267939}
+  - component: {fileID: 2498438549114173914}
   - component: {fileID: 220479010615329660}
   m_Layer: 0
   m_Name: Net
@@ -509,12 +510,24 @@ MonoBehaviour:
     type: 3}
   OnProjectileDie:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2498438549114173914}
+        m_TargetAssemblyTypeName: Sound.PlaySound, Assembly-CSharp
+        m_MethodName: PlaySoundTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _dieParticles: {fileID: 8332679083994182374}
   _launchSound: {fileID: 8300000, guid: 9dc32e7fa53cf4940acc7f48483736f1, type: 3}
   _dieSound: {fileID: 8300000, guid: afd6d421b02d4aa448f871f0cad96c78, type: 3}
   _rotationSpeed: 10
---- !u!114 &220479010615329660
+--- !u!114 &2498438549114173914
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -522,6 +535,25 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5967924889601430570}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb12ca207c8fb8c41967292a1edca8fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+    Guid:
+      Data1: 33749068
+      Data2: 1319943297
+      Data3: -1249522514
+      Data4: 1785326610
+    Path: event:/SFX/Weapons/NetHit
+--- !u!114 &220479010615329660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5967924889601430570}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
   m_Name: 

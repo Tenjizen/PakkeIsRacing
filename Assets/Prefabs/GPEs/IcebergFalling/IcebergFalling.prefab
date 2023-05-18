@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 2453446874202040156}
   - component: {fileID: 2453446874202040157}
   - component: {fileID: 2453446874202040158}
+  - component: {fileID: -6403118241078154370}
+  - component: {fileID: 330139264749044154}
   m_Layer: 0
   m_Name: IcebergFalling
   m_TagString: Untagged
@@ -49,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Rigidbody>k__BackingField: {fileID: 2453446874202040158}
-  <ParticleSystem>k__BackingField: {fileID: 0}
+  <WavesManager>k__BackingField: {fileID: 0}
   Fall: 0
   HasFallen: 0
   _fallDuration: 1
@@ -79,7 +81,43 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _timeToPlayParticle: 0.7
+  _timeToHitWater: 0
+  _circularWaveData:
+    Duration: 0
+    Amplitude: 0
+    Distance: 0
+    NumberOfPoints: 0
+  _particleWhenHitWater: {fileID: 0}
+  OnWaterCollision:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -6403118241078154370}
+        m_TargetAssemblyTypeName: Sound.PlaySound, Assembly-CSharp
+        m_MethodName: PlaySoundTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnFallStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 330139264749044154}
+        m_TargetAssemblyTypeName: Sound.PlaySound, Assembly-CSharp
+        m_MethodName: PlaySoundTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!33 &2453446874202040159
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -159,3 +197,41 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-6403118241078154370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2453446874202040147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb12ca207c8fb8c41967292a1edca8fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+    Guid:
+      Data1: 857766020
+      Data2: 1202988455
+      Data3: -246427468
+      Data4: -2121182709
+    Path: event:/SFX/Iceberg fall/FX_falling_iceberg_end
+--- !u!114 &330139264749044154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2453446874202040147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb12ca207c8fb8c41967292a1edca8fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+    Guid:
+      Data1: -680995077
+      Data2: 1121680068
+      Data3: 1723462552
+      Data4: -81351706
+    Path: event:/SFX/Iceberg fall/FX_falling_iceberg_start
