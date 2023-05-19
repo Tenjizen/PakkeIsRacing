@@ -57,8 +57,6 @@ namespace Character.State
             else
                 CharacterManagerRef.TimerUnbalanced = balanceTimer - collisionForce;
 
-            Debug.Log(CharacterManagerRef.TimerUnbalanced + " timer");
-
             //balance
             if (Mathf.Abs(CharacterManagerRef.Balance) >
                 CharacterManagerRef.Data.BalanceDeathLimit - CharacterManagerRef.Data.MinimumTimeUnbalanced)
@@ -79,10 +77,10 @@ namespace Character.State
         public override void UpdateState(CharacterManager character)
         {
             Timer();
-            ClickSpam();
 
             if (CharacterManagerRef.NumberButtonIsPressed < CharacterManagerRef.Data.NumberPressButton)
             {
+                ClickSpam();
                 CharacterManagerRef.BalanceGaugeManagerRef.ReduceGauge(Mathf.Abs((_timerUnbalanced / DIVIDE_TIMER_PERCENT) / CharacterManagerRef.TimerUnbalanced));
             }
 
