@@ -132,6 +132,8 @@ namespace Enemies.Shark
             
             PlayerTriggerManager.enabled = false;
             PointTarget.transform.localPosition = new Vector3(0, 0, 0);
+            
+            SetPlayerExperience(CharacterManager.Instance.ExperienceManagerProperty.Data.ExperienceGainedAtEnemyShark);
         }
 
         private void ManagerCircleUI()

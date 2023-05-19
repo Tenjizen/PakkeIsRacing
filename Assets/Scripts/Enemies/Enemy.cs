@@ -36,8 +36,8 @@ namespace Enemies
             
             OnHit.Invoke();
             CurrentLife -= 1;
-            Debug.Log($"hit, life : {CurrentLife}");
             SetEnemyLifeUIGauge();
+            
             if (CurrentLife <= 0)
             {
                 Die();
@@ -47,6 +47,7 @@ namespace Enemies
         protected virtual void Die()
         {
             OnDie.Invoke();
+            
             CharacterManager.Instance.EnemyUIManager.DisableEnemyUI();
             IsPossessed = false;
 
@@ -63,9 +64,14 @@ namespace Enemies
             enemyUI.SetGauge(CurrentLife, MaxLife);
         }
 
-        public virtual void SetEnemyLifeUIGauge()
+        protected virtual void SetEnemyLifeUIGauge()
         {
             CharacterManager.Instance.EnemyUIManager.SetGauge(CurrentLife, MaxLife);
+        }
+
+        protected virtual void SetPlayerExperience(float value)
+        {
+            CharacterManager.Instance.ExperienceManagerProperty.AddExperience(value);
         }
     }
 }

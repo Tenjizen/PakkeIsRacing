@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Character;
 using Enemies.Data;
 using Fight;
 using GPEs;
@@ -81,7 +82,7 @@ namespace Enemies.Seal
         {
             if (_isMoving == false)
             {
-                RotateAroundPoint(_splinePath.GetPoint(_sealCheckpoints[0].Position));
+                RotateAroundPoint(_splinePath.GetPoint(_sealCheckpoints[CurrentLife > 0 ? 0 : ^1].Position));
                 return;
             }
 
@@ -107,7 +108,7 @@ namespace Enemies.Seal
 
         private void LaunchMovement()
         {
-            if (_isMoving)
+            if (_isMoving || CurrentLife <= 0)
             {
                 return;
             }
@@ -185,7 +186,6 @@ namespace Enemies.Seal
                 wave.Center = new Vector2(t.position.x,t.position.z);
                 _waves.LaunchCircularWave(wave);
                 _launchedWave = true;
-                print("wave");
             }
             else
             {
@@ -225,7 +225,10 @@ namespace Enemies.Seal
         protected override void Die()
         {
             base.Die();
+            
             _isMoving = false;
+            
+            SetPlayerExperience(CharacterManager.Instance.ExperienceManagerProperty.Data.ExperienceGainedAtEnemySeal);
         }
 
 #if UNITY_EDITOR

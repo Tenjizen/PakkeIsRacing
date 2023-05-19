@@ -24,12 +24,14 @@ namespace UI
 
         public void ActiveEnemyUI(Sprite icon)
         {
+            _uiImages.ForEach(x => x.DOKill());
             _uiImages.ForEach(x => x.DOFade(1,0.3f));
             _enemyIconImage.sprite = icon;
 
         }
         public void DisableEnemyUI()
         {
+            _uiImages.ForEach(x => x.DOKill());
             _uiImages.ForEach(x => x.DOFade(0,0.15f));
         }
     }
