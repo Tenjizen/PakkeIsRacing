@@ -175,7 +175,7 @@ namespace Enemies.Shark
         {
             Ray ray = new Ray(Forward.transform.position, Forward.transform.forward);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 15) == false)
+            if (Physics.Raycast(ray, out hit, 30) == false)
             {
                 return;
             }
