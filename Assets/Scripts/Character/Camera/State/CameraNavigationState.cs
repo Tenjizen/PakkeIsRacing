@@ -160,7 +160,6 @@ namespace Character.Camera.State
                 {
                     CamManager.CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, Quaternion.Euler(new Vector3(CamManager.Data.NavigationRotation.x, CamManager.Data.NavigationRotation.y, localRotation.z)), CamManager.Data.LerpLocalRotationNotMoving * Time.deltaTime * 100);
                     cameraTargetLocalPosition.x = Mathf.Lerp(cameraTargetLocalPosition.x, 0, CamManager.Data.LerpLocalPositionNotMoving * Time.deltaTime * 100);
-                    Debug.Log("ici?");
                 }
 
                 //apply camera rotation & position
@@ -168,7 +167,6 @@ namespace Character.Camera.State
 
             }
             CamManager.ApplyRotationCamera();
-            Debug.Log(_startMoving);
         }
 
 
