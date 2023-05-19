@@ -21,6 +21,10 @@ MonoBehaviour:
   <BalanceRotationMultiplier>k__BackingField: 0
   <BalanceRotationZLerp>k__BackingField: 0.01
   <MultiplierValueRotation>k__BackingField: 0.5
+  <MultiplierValueRotationY>k__BackingField: 0.2
+  <ClampValueRotationX>k__BackingField: 18
+  <MultiplierValuePositionY>k__BackingField: 0.1
+  <ClampValuePositionY>k__BackingField: 3
   <LerpLocalRotationMove>k__BackingField: 0.0244
   <LerpLocalRotationWhenRotating>k__BackingField: 0.0324
   <MultiplierValuePosition>k__BackingField: 0.28
@@ -96,11 +100,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  <MultiplierCameraGettingCloser>k__BackingField: 0.2
+  <LerpCameraGettingCloser>k__BackingField: 0.1
   <LerpFOV>k__BackingField: 0.01
   <LerpLocalPositionNotMoving>k__BackingField: 0.003
   <LerpLocalRotationNotMoving>k__BackingField: 0.003
-  <ValueAddForTopDownWhenDeath>k__BackingField: 0.1
-  <ValueAddForDistanceWhenDeath>k__BackingField: 0.05
+  <ValueAddForTopDownWhenDeath>k__BackingField: 5
+  <ValueAddForDistanceWhenDeath>k__BackingField: 6
   <MaxValueDistanceToStartDeath>k__BackingField: 10
   <CameraDistanceRespawn>k__BackingField: 25
   <MultiplyTimeForDistanceWhenRespawn>k__BackingField: 5
