@@ -25,7 +25,10 @@ namespace Character.Data.Experience
         
         
         [field:SerializeField]
-        public float ExperienceGainedAtEnemy { get; private set; } 
+        public float ExperienceGainedAtEnemySeal { get; private set; } 
+        
+        [field:SerializeField]
+        public float ExperienceGainedAtEnemyShark { get; private set; } 
 
         
         [field:SerializeField, Header("Experience levels")] 
