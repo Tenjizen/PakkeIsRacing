@@ -201,6 +201,7 @@ namespace Character.State
                     goto LoopEnd;
                 }
             }
+            
             LoopEnd:
             if (hasFoundAHittable == false)
             {

@@ -54,8 +54,8 @@ namespace UI.Menu
         {
             OnMenuChanged.Invoke();
             
-            MenuList[oldMenuIndex].Menu.Set(false, false);
-            MenuList[HorizontalIndex].Menu.Set(true,true);
+            MenuList[oldMenuIndex].Menu.SetMenu(false, false);
+            MenuList[HorizontalIndex].Menu.SetMenu(true,true);
             
             _text.text = MenuList[HorizontalIndex].Name;
             
@@ -63,13 +63,13 @@ namespace UI.Menu
             _pointsList[HorizontalIndex].color = Color.white;
         }
 
-        public override void Set(bool isActive, bool isUsable)
+        public override void SetMenu(bool isActive, bool isUsable)
         {
-            base.Set(isActive, isUsable);
+            base.SetMenu(isActive, isUsable);
             _text.text = MenuList[HorizontalIndex].Name;
             
-            MenuList.ForEach(x => x.Menu.Set(false,false));
-            MenuList[HorizontalIndex].Menu.Set(isActive,isUsable);
+            MenuList.ForEach(x => x.Menu.SetMenu(false,false));
+            MenuList[HorizontalIndex].Menu.SetMenu(isActive,isUsable);
         }
     }
 }

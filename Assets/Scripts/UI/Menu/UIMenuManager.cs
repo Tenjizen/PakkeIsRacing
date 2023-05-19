@@ -65,7 +65,7 @@ namespace UI.Menu
                 pair.Key.DOFade(IsActive ? pair.Value : 0, fadeTime);
             }
 
-            PauseMenuTopSelection.Set(IsActive, IsActive);
+            PauseMenuTopSelection.SetMenu(IsActive, IsActive);
         }
 
         private void CloseMenu(InputAction.CallbackContext context)

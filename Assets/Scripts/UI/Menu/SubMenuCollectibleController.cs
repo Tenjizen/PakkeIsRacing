@@ -39,9 +39,9 @@ namespace UI.Menu
             RotateGameObjectFromSticks(_currentDisplayedMesh.transform);
         }
 
-        public override void Set(bool isActive, bool isUsable)
+        public override void SetMenu(bool isActive, bool isUsable)
         {
-            base.Set(isActive, isUsable);
+            base.SetMenu(isActive, isUsable);
             
             if (isUsable == false)
             {

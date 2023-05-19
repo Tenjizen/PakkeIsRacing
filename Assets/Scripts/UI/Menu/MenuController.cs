@@ -69,7 +69,7 @@ namespace UI.Menu
         
         #endregion
 
-        public virtual void Set(bool isActive, bool isUsable)
+        public virtual void SetMenu(bool isActive, bool isUsable)
         {
             IsActive = isActive;
             IsUsable = isUsable;

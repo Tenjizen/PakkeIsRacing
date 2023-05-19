@@ -9,21 +9,20 @@ using UnityEngine.UI;
 
 namespace UI.Menu
 {
-    public class MenuLeave : MenuController
+    public class OptionMenuController : MenuController
     {
         [SerializeField, ReadOnly] public bool CanBeOpened = true;
         [SerializeField] private UIMenuManager _menuManager;
-        [SerializeField] private MenuParameters _menuParameters;
-
+        [SerializeField] private ParametersMenu _parametersMenu;
+        [SerializeField] private ControllerMenu _menuController;
         [SerializeField] private List<MenuUIObject> _objectsList = new List<MenuUIObject>();
-
-
+        [SerializeField] private TMP_Text _text;
+        
         private Dictionary<Image, float> _imagesDictionary = new Dictionary<Image, float>();
         private Dictionary<TMP_Text, float> _textsDictionary = new Dictionary<TMP_Text, float>();
 
         private int _index;
-
-        [SerializeField] TMP_Text _text;
+        
         private void Awake()
         {
             Color color = Color.white;
@@ -33,6 +32,7 @@ namespace UI.Menu
         protected override void Start()
         {
             _index = 0;
+            
             foreach (Image image in MenuGameObject.transform.GetComponentsInChildren<Image>())
             {
                 _imagesDictionary.Add(image, image.color.a);
@@ -48,16 +48,15 @@ namespace UI.Menu
             CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuDown.started += Down;
             CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuUp.started += Up;
             CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.ClosePauseMenu.started += CloseMenu;
-
         }
 
-        public override void Set(bool isActive, bool isUsable)
+        public override void SetMenu(bool isActive, bool isUsable)
         {
             if (isUsable == false)
             {
                 return;
             }
-            base.Set(isActive, isUsable);
+            base.SetMenu(isActive, isUsable);
 
             if (IsUsable)
             {
@@ -132,7 +131,7 @@ namespace UI.Menu
 
             IsUsable = IsActive;
 
-            if (IsActive == true)
+            if (IsActive)
             {
                 SetTile();
                 Time.timeScale = 0.5f;
@@ -159,12 +158,18 @@ namespace UI.Menu
             OpenCloseMenu();
         }
 
-        public void Parameters()
+        public void OpenParameters()
         {
-            _menuParameters.AbleDisableParameters();
-            SetVariableFasle();
+            _parametersMenu.SetMenu();
+            SetVariableFalse();
         }
 
+        public void OpenController()
+        {
+            _menuController.SetMenu();
+            SetVariableFalse();
+        }
+        
         private void SetTile()
         {
             if (_objectsList.Count <= 0)
@@ -179,23 +184,24 @@ namespace UI.Menu
             }
         }
 
-
-        public void SetVariableFasle()
+        private void SetVariableFalse()
         {
             IsUsable = false;
             CanBeOpened = false;
             IsActive = false;
         }
+        
         public void SetVariableTrue()
         {
-            //IsUsable = true;
-            //CanBeOpened = true;
-            //IsActive = true;
-            StartCoroutine(enumerator(0.1f));
+            StartCoroutine(SetFieldToTrueEnumerator(0.1f));
         }
-        IEnumerator enumerator(float time)
+        
+        IEnumerator SetFieldToTrueEnumerator(float time)
         {
-            if (IsActive == true) yield break;
+            if (IsActive)
+            {
+                yield break;
+            }
 
             yield return new WaitForSeconds(time);
             IsUsable = true;
