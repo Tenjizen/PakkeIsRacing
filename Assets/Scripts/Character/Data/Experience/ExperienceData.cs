@@ -21,7 +21,7 @@ namespace Character.Data.Experience
         
         
         [field:SerializeField]
-        public float ExperienceGainedAtColletible { get; private set; } 
+        public float ExperienceGainedAtCollectible { get; private set; } 
         
         
         [field:SerializeField]
