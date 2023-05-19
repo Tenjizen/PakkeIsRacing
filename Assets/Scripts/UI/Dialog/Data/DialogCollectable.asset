@@ -13,11 +13,22 @@ MonoBehaviour:
   m_Name: DialogCollectable
   m_EditorClassIdentifier: 
   DialogList:
-  - Text: "Bravo, tu as trouv\xE9 un objet perdu, nous sommes sur la bonne piste
-      !"
+  - Text: "Tu as trouv\xE9 un nouvel indice, ces petites statuettes t'en apprendront
+      d'avantage sur la banquise et ses habitants."
+    TextShowTime: 2
+    ShowLetterByLetter: 1
+    TextHoldTime: 6
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294967295
+    SizeEffect: 0
+    SequencingTypeNext: 0
+    Clip: {fileID: 0}
+  - Text: "Consulte \xE0 tout moment les statuettes que tu as trouv\xE9 dans le menu
+      des Options."
     TextShowTime: 1.5
     ShowLetterByLetter: 1
-    TextHoldTime: 5
+    TextHoldTime: 4
     TextColor:
       serializedVersion: 2
       rgba: 4294967295

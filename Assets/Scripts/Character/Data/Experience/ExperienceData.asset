@@ -14,20 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ExperienceGainedAtCheckpoint>k__BackingField: 10
   <ExperienceGainedAtColletible>k__BackingField: 5
-  <ExperienceGainedAtEnemy>k__BackingField: 50
+  <ExperienceGainedAtEnemy>k__BackingField: 75
   <Levels>k__BackingField:
   - ExperienceNeededToComplete: 100
-    CombatExperienceGained: 70
-    NavigationExperienceGained: 20
+    CombatExperienceGained: 8
+    NavigationExperienceGained: 8
   - ExperienceNeededToComplete: 100
-    CombatExperienceGained: 20
+    CombatExperienceGained: 9
+    NavigationExperienceGained: 9
+  - ExperienceNeededToComplete: 100
+    CombatExperienceGained: 10
     NavigationExperienceGained: 10
   - ExperienceNeededToComplete: 100
-    CombatExperienceGained: 20
-    NavigationExperienceGained: 10
-  - ExperienceNeededToComplete: 100
-    CombatExperienceGained: 20
-    NavigationExperienceGained: 10
+    CombatExperienceGained: 11
+    NavigationExperienceGained: 11
   - ExperienceNeededToComplete: 100
     CombatExperienceGained: 20
     NavigationExperienceGained: 10
@@ -55,25 +55,25 @@ MonoBehaviour:
   <NavigationGaugeMax>k__BackingField: 100
   <BreakingDistanceMultiplier>k__BackingField:
     ValueType: 0
-    MaxValue: 3
+    MaxValue: 1.5
     IncreaseCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -82,25 +82,25 @@ MonoBehaviour:
       m_RotationOrder: 4
   <MaximumDistanceMultiplier>k__BackingField:
     ValueType: 0
-    MaxValue: 3
+    MaxValue: 1.5
     IncreaseCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -109,25 +109,25 @@ MonoBehaviour:
       m_RotationOrder: 4
   <RotatingSpeedMultiplier>k__BackingField:
     ValueType: 0
-    MaxValue: 3
+    MaxValue: 1.5
     IncreaseCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -136,25 +136,25 @@ MonoBehaviour:
       m_RotationOrder: 4
   <BalanceLimitMultiplier>k__BackingField:
     ValueType: 0
-    MaxValue: 3
+    MaxValue: 1.5
     IncreaseCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -163,25 +163,25 @@ MonoBehaviour:
       m_RotationOrder: 4
   <ProjectileSpeedMultiplier>k__BackingField:
     ValueType: 1
-    MaxValue: 3
+    MaxValue: 2
     IncreaseCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
