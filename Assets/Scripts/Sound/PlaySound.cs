@@ -12,10 +12,10 @@ namespace Sound
         
         public void PlaySoundTrigger()
         {
-            if (sound.Path == null || AudioManager.Instance == null)
+            /*if (sound.Path == null || AudioManager.Instance == null)
             {
                 return;
-            }
+            }*/
             AudioManager.Instance.PlayOneShot(sound, this.transform.position);
         }
     }
