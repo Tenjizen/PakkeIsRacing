@@ -36,7 +36,8 @@ namespace Character
         [field: SerializeField] public PlayerParameters Parameters { get; set; }
         [field: SerializeField, Header("Animation")] public Animator HarpoonAnimator { get; private set; }
         [field: SerializeField] public Animator NetAnimator { get; private set; }
-
+        [field: SerializeField] public GameObject SednaGameObject { get; set; }
+        [field: SerializeField] public GameObject SednaTargetRespawnPlayer { get; set; }
         #endregion
 
         [Header("Character Data")]
