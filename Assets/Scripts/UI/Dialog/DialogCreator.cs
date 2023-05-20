@@ -182,10 +182,10 @@ namespace UI.Dialog
             _currentDialogState = DialogState.Showing;
             _currentDialogCooldown = Dialog.DialogList[index].TextShowTime;
 
+            DialogManager.Instance.TypeWriterText.DisplayText.color = Dialog.DialogList[index].TextColor;
             if (Dialog.DialogList[index].ShowLetterByLetter)
             {
                 DialogManager.Instance.TypeWriterText.FullText = Dialog.DialogList[index].Text;
-                DialogManager.Instance.TypeWriterText.DisplayText.color = Dialog.DialogList[index].TextColor;
                 DialogManager.Instance.TypeWriterText.Delay =  Dialog.DialogList[index].TextShowTime / Dialog.DialogList[index].Text.Length;
                 StartCoroutine(DialogManager.Instance.TypeWriterText.ShowText());
             }
