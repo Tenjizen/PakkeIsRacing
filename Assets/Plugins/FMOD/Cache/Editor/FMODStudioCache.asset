@@ -27,6 +27,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-8483078348184890706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTestCopie/intensity_drum2
+  m_EditorClassIdentifier: 
+  Name: intensity_drum2
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1250810925
+    data2: 1850432416
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-8127459704306106220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,34 +66,10 @@ MonoBehaviour:
   Path: FMOD_project/Pakke_Is/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638195149481263402
+  lastModified: 638197837529835180
   FileSizes:
   - Name: Desktop
     Value: 1592
-  Exists: 1
---- !u!114 &-8115524520277416470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/intensity_trumpets
-  m_EditorClassIdentifier: 
-  Name: intensity_trumpets
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 629182808
-    data2: 1258126821
-  Type: 0
-  IsGlobal: 0
-  Labels: []
   Exists: 1
 --- !u!114 &-8106638597962662670
 MonoBehaviour:
@@ -98,102 +98,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-8054126807199237119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTensionTest/intensity_frame_drum
-  m_EditorClassIdentifier: 
-  Name: intensity_frame_drum
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1659232653
-    data2: 3954115170
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &-8007551415454294027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/intensity_kidi
-  m_EditorClassIdentifier: 
-  Name: intensity_kidi
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 3963940857
-    data2: 545914430
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &-7634147862354245224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/intensity_frame_drum
-  m_EditorClassIdentifier: 
-  Name: intensity_frame_drum
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1659232653
-    data2: 3954115170
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &-7517831694760413080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/intensity_glock
-  m_EditorClassIdentifier: 
-  Name: intensity_glock
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 193400301
-    data2: 3497466712
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
 --- !u!114 &-7440880626131763104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,7 +152,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-7369873097376065127
+--- !u!114 &-7354223164105292940
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -258,7 +162,130 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTensionTest/intensity_brass1
+  m_Name: parameter:/MainMusicTensionTest/ModerateTension
+  m_EditorClassIdentifier: 
+  Name: ModerateTension
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2886853499
+    data2: 4146388600
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-7192134217552360916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainAmbience/ambience_intensity
+  m_EditorClassIdentifier: 
+  Name: ambience_intensity
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2791387025
+    data2: 630549474
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - MainAmbience
+  - CaveAmbience
+  Exists: 1
+--- !u!114 &-7172367276276127828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTensionTest/HighTension
+  m_EditorClassIdentifier: 
+  Name: HighTension
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 968325823
+    data2: 4209146333
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-7132158078516474941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/MainMusicTestCopie
+  m_EditorClassIdentifier: 
+  Path: event:/Music/MainMusicTestCopie
+  Guid:
+    Data1: 382647813
+    Data2: 1327055764
+    Data3: -1770697324
+    Data4: -679893626
+  Banks:
+  - {fileID: 6918480860476981872}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -3274265540144375741}
+  - {fileID: -3430817976208801051}
+  - {fileID: 3057923506134845447}
+  - {fileID: -509219272025024540}
+  - {fileID: 2607618840804678}
+  - {fileID: -8483078348184890706}
+  - {fileID: -1538607298010642401}
+  - {fileID: -4247611080953239937}
+  - {fileID: -5472993526329102664}
+  - {fileID: -4851324302308834498}
+  - {fileID: -4414826854104030396}
+  - {fileID: 7670097887496584317}
+  - {fileID: 9064641627249485030}
+  - {fileID: -3248479390991268749}
+  - {fileID: 753850593448763277}
+  - {fileID: 6342900069579969439}
+  - {fileID: 4368356016491531515}
+  - {fileID: 274593112515092762}
+  - {fileID: 6621548463498615425}
+  - {fileID: -5240591884540694064}
+  - {fileID: -6770596726864142554}
+  - {fileID: -1640790359992916080}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 246517
+--- !u!114 &-6770596726864142554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTestCopie/intensity_brass1
   m_EditorClassIdentifier: 
   Name: intensity_brass1
   StudioPath: 
@@ -268,54 +295,6 @@ MonoBehaviour:
   ID:
     data1: 3763940618
     data2: 4258212167
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &-6892960770553835343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTensionTest/intensity_tenuto_swarm
-  m_EditorClassIdentifier: 
-  Name: intensity_tenuto_swarm
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1042852579
-    data2: 1997420304
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &-6030285073211698375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTensionTest/intensity_trumpets
-  m_EditorClassIdentifier: 
-  Name: intensity_trumpets
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 629182808
-    data2: 1258126821
   Type: 0
   IsGlobal: 0
   Labels: []
@@ -347,7 +326,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-5614477484700226961
+--- !u!114 &-5472993526329102664
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -357,21 +336,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/intensity_solo_string_pizz
+  m_Name: parameter:/MainMusicTestCopie/intensity_brass2
   m_EditorClassIdentifier: 
-  Name: intensity_solo_string_pizz
+  Name: intensity_brass2
   StudioPath: 
   Min: 0
   Max: 1
   Default: 0
   ID:
-    data1: 1108253017
-    data2: 3707819176
+    data1: 409998793
+    data2: 3454063584
   Type: 0
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &-5198560725786473575
+--- !u!114 &-5240591884540694064
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -381,16 +360,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTensionTest/intensity_pad1
+  m_Name: parameter:/MainMusicTestCopie/intensity_orch_string_pizz
   m_EditorClassIdentifier: 
-  Name: intensity_pad1
+  Name: intensity_orch_string_pizz
   StudioPath: 
   Min: 0
   Max: 1
   Default: 0
   ID:
-    data1: 1046414045
-    data2: 3197995323
+    data1: 1629539163
+    data2: 2877274048
   Type: 0
   IsGlobal: 0
   Labels: []
@@ -422,7 +401,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-4788994925846963447
+--- !u!114 &-4851324302308834498
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -432,7 +411,103 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTensionTest/intensity_solo_string_pizz
+  m_Name: parameter:/MainMusicTestCopie/intensity_swells
+  m_EditorClassIdentifier: 
+  Name: intensity_swells
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 4155196205
+    data2: 3144685467
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-4414826854104030396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTestCopie/intensity_glock
+  m_EditorClassIdentifier: 
+  Name: intensity_glock
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 193400301
+    data2: 3497466712
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-4247611080953239937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTestCopie/intensity_harp_normale
+  m_EditorClassIdentifier: 
+  Name: intensity_harp_normale
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3787922598
+    data2: 2532601393
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-3430817976208801051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTestCopie/intensity_woods_swarm
+  m_EditorClassIdentifier: 
+  Name: intensity_woods_swarm
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2055708567
+    data2: 96884666
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-3274265540144375741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTestCopie/intensity_solo_string_pizz
   m_EditorClassIdentifier: 
   Name: intensity_solo_string_pizz
   StudioPath: 
@@ -446,7 +521,7 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &-3634535620589868402
+--- !u!114 &-3248479390991268749
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -456,115 +531,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/intensity_shakers
+  m_Name: parameter:/MainMusicTestCopie/intensity_pad2
   m_EditorClassIdentifier: 
-  Name: intensity_shakers
+  Name: intensity_pad2
   StudioPath: 
   Min: 0
   Max: 1
   Default: 0
   ID:
-    data1: 3484652067
-    data2: 2483905118
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &-3627521547562923946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Ambience/CaveAmbience
-  m_EditorClassIdentifier: 
-  Path: event:/Ambience/CaveAmbience
-  Guid:
-    Data1: 682853496
-    Data2: 1267999258
-    Data3: 204724393
-    Data4: -123668149
-  Banks:
-  - {fileID: 6918480860476981872}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 74500
---- !u!114 &-3267814769884708777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/intensity_piano
-  m_EditorClassIdentifier: 
-  Name: intensity_piano
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 3861050571
-    data2: 1823799795
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &-3149250311917260996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/intensity_orch_string_pizz
-  m_EditorClassIdentifier: 
-  Name: intensity_orch_string_pizz
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1629539163
-    data2: 2877274048
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &-2636593972452029065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTensionTest/intensity_cymbals
-  m_EditorClassIdentifier: 
-  Name: intensity_cymbals
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 363781581
-    data2: 375575299
+    data1: 1674631981
+    data2: 4221457999
   Type: 0
   IsGlobal: 0
   Labels: []
@@ -619,11 +595,11 @@ MonoBehaviour:
   Type: 2
   IsGlobal: 0
   Labels:
-  - Faible
-  - Moderee
-  - Forte
+  - Exploration
+  - Dialogue
+  - Combat
   Exists: 1
---- !u!114 &-1671642401122719872
+--- !u!114 &-1640790359992916080
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -633,49 +609,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTensionTest/intensity_shakers
+  m_Name: parameter:/MainMusicTestCopie/intensity_harp_gliss
   m_EditorClassIdentifier: 
-  Name: intensity_shakers
+  Name: intensity_harp_gliss
   StudioPath: 
   Min: 0
   Max: 1
   Default: 0
   ID:
-    data1: 3484652067
-    data2: 2483905118
+    data1: 2770673587
+    data2: 716064457
   Type: 0
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &-1612053340526644219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Ambience/AmbienceTest
-  m_EditorClassIdentifier: 
-  Path: event:/Ambience/AmbienceTest
-  Guid:
-    Data1: 920865563
-    Data2: 1146934380
-    Data3: -456946294
-    Data4: 289933084
-  Banks:
-  - {fileID: 6918480860476981872}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 110780540683121638}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1560096
---- !u!114 &-1255636800913875402
+--- !u!114 &-1538607298010642401
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -685,16 +633,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/intensity_brass2
+  m_Name: parameter:/MainMusicTestCopie/intensity_trumpets
   m_EditorClassIdentifier: 
-  Name: intensity_brass2
+  Name: intensity_trumpets
   StudioPath: 
   Min: 0
   Max: 1
   Default: 0
   ID:
-    data1: 409998793
-    data2: 3454063584
+    data1: 629182808
+    data2: 1258126821
   Type: 0
   IsGlobal: 0
   Labels: []
@@ -726,30 +674,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-584072779942876311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTensionTest/intensity_flutter_brass
-  m_EditorClassIdentifier: 
-  Name: intensity_flutter_brass
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 3289149710
-    data2: 1048447083
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
 --- !u!114 &-550135062737501803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -777,7 +701,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-389220560867112033
+--- !u!114 &-509219272025024540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -787,21 +711,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTensionTest/intensity_woods_swarm
+  m_Name: parameter:/MainMusicTestCopie/intensity_cymbals
   m_EditorClassIdentifier: 
-  Name: intensity_woods_swarm
+  Name: intensity_cymbals
   StudioPath: 
   Min: 0
   Max: 1
   Default: 0
   ID:
-    data1: 2055708567
-    data2: 96884666
+    data1: 363781581
+    data2: 375575299
   Type: 0
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &-375481654354069467
+--- !u!114 &-426722527952098943
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -810,21 +734,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTensionTest/intensity_harp_gliss
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambience/CaveAmbienceTest
   m_EditorClassIdentifier: 
-  Name: intensity_harp_gliss
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 2770673587
-    data2: 716064457
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
+  Path: event:/Ambience/CaveAmbienceTest
+  Guid:
+    Data1: 682853496
+    Data2: 1267999258
+    Data3: 204724393
+    Data4: -123668149
+  Banks:
+  - {fileID: 6918480860476981872}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 74500
 --- !u!114 &-270601740379383295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -870,9 +797,6 @@ MonoBehaviour:
   - {fileID: -8127459704306106220}
   - {fileID: 1426460621515787707}
   EditorEvents:
-  - {fileID: 1858434606946778931}
-  - {fileID: -1612053340526644219}
-  - {fileID: -3627521547562923946}
   - {fileID: 5284119263960265901}
   - {fileID: 5642638132054646883}
   - {fileID: 6358965872720031612}
@@ -898,14 +822,17 @@ MonoBehaviour:
   - {fileID: -270601740379383295}
   - {fileID: 4483775934921858890}
   - {fileID: -8106638597962662670}
+  - {fileID: -7132158078516474941}
+  - {fileID: -426722527952098943}
+  - {fileID: 7211323116813314576}
   EditorParameters: []
   MasterBanks:
   - {fileID: -8127459704306106220}
   StringsBanks:
   - {fileID: 5488868156226981610}
-  cacheTime: 638197020463996014
+  cacheTime: 638200379026534136
   cacheVersion: 131601
---- !u!114 &64533529364263432
+--- !u!114 &2607618840804678
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -915,21 +842,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/intensity_cymbals
+  m_Name: parameter:/MainMusicTestCopie/intensity_piano
   m_EditorClassIdentifier: 
-  Name: intensity_cymbals
+  Name: intensity_piano
   StudioPath: 
   Min: 0
   Max: 1
   Default: 0
   ID:
-    data1: 363781581
-    data2: 375575299
+    data1: 3861050571
+    data2: 1823799795
   Type: 0
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &110780540683121638
+--- !u!114 &274593112515092762
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -939,40 +866,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/AmbienceTest/ambience_intensity
+  m_Name: parameter:/MainMusicTestCopie/intensity_tenuto_swarm
   m_EditorClassIdentifier: 
-  Name: ambience_intensity
+  Name: intensity_tenuto_swarm
   StudioPath: 
   Min: 0
   Max: 1
   Default: 0
   ID:
-    data1: 2791387025
-    data2: 630549474
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &342604738641305004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/intensity_drum2
-  m_EditorClassIdentifier: 
-  Name: intensity_drum2
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1250810925
-    data2: 1850432416
+    data1: 1042852579
+    data2: 1997420304
   Type: 0
   IsGlobal: 0
   Labels: []
@@ -1058,6 +961,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &753850593448763277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTestCopie/intensity_shakers
+  m_EditorClassIdentifier: 
+  Name: intensity_shakers
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3484652067
+    data2: 2483905118
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &1070116119931371479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1085,30 +1012,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &1353323135402013006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/intensity_horns_legato
-  m_EditorClassIdentifier: 
-  Name: intensity_horns_legato
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 2976962206
-    data2: 1319648170
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
 --- !u!114 &1426460621515787707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1129,7 +1032,7 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1238432
   Exists: 1
---- !u!114 &1602451460587601111
+--- !u!114 &2051455889362207351
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1139,185 +1042,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/intensity_pad1
+  m_Name: parameter:/MainMusicTensionTest/LowTension
   m_EditorClassIdentifier: 
-  Name: intensity_pad1
+  Name: LowTension
   StudioPath: 
   Min: 0
   Max: 1
   Default: 0
   ID:
-    data1: 1046414045
-    data2: 3197995323
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &1658556533639624094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTensionTest/intensity_kidi
-  m_EditorClassIdentifier: 
-  Name: intensity_kidi
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 3963940857
-    data2: 545914430
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &1858434606946778931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/MainMusicTest
-  m_EditorClassIdentifier: 
-  Path: event:/Music/MainMusicTest
-  Guid:
-    Data1: 382647813
-    Data2: 1327055764
-    Data3: -1770697324
-    Data4: -679893626
-  Banks:
-  - {fileID: 6918480860476981872}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: -5614477484700226961}
-  - {fileID: 2741512343280734753}
-  - {fileID: 1602451460587601111}
-  - {fileID: 64533529364263432}
-  - {fileID: -3267814769884708777}
-  - {fileID: 342604738641305004}
-  - {fileID: -8115524520277416470}
-  - {fileID: 6572773889361809643}
-  - {fileID: -1255636800913875402}
-  - {fileID: 6831260496675595034}
-  - {fileID: -7517831694760413080}
-  - {fileID: 1353323135402013006}
-  - {fileID: -7634147862354245224}
-  - {fileID: 7696806884734119485}
-  - {fileID: -3634535620589868402}
-  - {fileID: 4628761393387073806}
-  - {fileID: 3709585130350507448}
-  - {fileID: 8341484623658458870}
-  - {fileID: -8007551415454294027}
-  - {fileID: -3149250311917260996}
-  - {fileID: 6488053458503417860}
-  - {fileID: 2458321401463030125}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 246517
---- !u!114 &2166972605160012502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTensionTest/intensity_glock
-  m_EditorClassIdentifier: 
-  Name: intensity_glock
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 193400301
-    data2: 3497466712
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &2273581076086332326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTensionTest/intensity_orch_string_pizz
-  m_EditorClassIdentifier: 
-  Name: intensity_orch_string_pizz
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1629539163
-    data2: 2877274048
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &2458321401463030125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/intensity_harp_gliss
-  m_EditorClassIdentifier: 
-  Name: intensity_harp_gliss
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 2770673587
-    data2: 716064457
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &2741512343280734753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/intensity_woods_swarm
-  m_EditorClassIdentifier: 
-  Name: intensity_woods_swarm
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 2055708567
-    data2: 96884666
+    data1: 566450803
+    data2: 3958160370
   Type: 0
   IsGlobal: 0
   Labels: []
@@ -1349,7 +1083,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &3270594240399821382
+--- !u!114 &3057923506134845447
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1359,16 +1093,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTensionTest/intensity_harp_normale
+  m_Name: parameter:/MainMusicTestCopie/intensity_pad1
   m_EditorClassIdentifier: 
-  Name: intensity_harp_normale
+  Name: intensity_pad1
   StudioPath: 
   Min: 0
   Max: 1
   Default: 0
   ID:
-    data1: 3787922598
-    data2: 2532601393
+    data1: 1046414045
+    data2: 3197995323
   Type: 0
   IsGlobal: 0
   Labels: []
@@ -1400,7 +1134,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &3709585130350507448
+--- !u!114 &4368356016491531515
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1410,7 +1144,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/intensity_mid_drum
+  m_Name: parameter:/MainMusicTestCopie/intensity_mid_drum
   m_EditorClassIdentifier: 
   Name: intensity_mid_drum
   StudioPath: 
@@ -1420,30 +1154,6 @@ MonoBehaviour:
   ID:
     data1: 1881363038
     data2: 3473163329
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &4249822744354664947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTensionTest/intensity_brass2
-  m_EditorClassIdentifier: 
-  Name: intensity_brass2
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 409998793
-    data2: 3454063584
   Type: 0
   IsGlobal: 0
   Labels: []
@@ -1475,30 +1185,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &4628761393387073806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/intensity_flutter_brass
-  m_EditorClassIdentifier: 
-  Name: intensity_flutter_brass
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 3289149710
-    data2: 1048447083
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
 --- !u!114 &4761901831473531842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1526,54 +1212,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &4858930378849368107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTensionTest/intensity_swells
-  m_EditorClassIdentifier: 
-  Name: intensity_swells
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 4155196205
-    data2: 3144685467
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &4882163901382611720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTensionTest/intensity_pad2
-  m_EditorClassIdentifier: 
-  Name: intensity_pad2
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1674631981
-    data2: 4221457999
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
 --- !u!114 &5271755733966257720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1615,19 +1253,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Ambience/MainAmbience
   Guid:
-    Data1: 597313203
-    Data2: 1135804260
-    Data3: 174042028
-    Data4: -1498086651
+    Data1: 920865563
+    Data2: 1146934380
+    Data3: -456946294
+    Data4: 289933084
   Banks:
   - {fileID: 6918480860476981872}
   IsStream: 1
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: -7192134217552360916}
   MinDistance: 1
   MaxDistance: 20
-  Length: 108768
+  Length: 0
 --- !u!114 &5488868156226981610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1643,10 +1282,10 @@ MonoBehaviour:
   Path: FMOD_project/Pakke_Is/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638197020463996014
+  lastModified: 638200379026534136
   FileSizes:
   - Name: Desktop
-    Value: 3372
+    Value: 3514
   Exists: 1
 --- !u!114 &5642638132054646883
 MonoBehaviour:
@@ -1702,6 +1341,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &6342900069579969439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainMusicTestCopie/intensity_flutter_brass
+  m_EditorClassIdentifier: 
+  Name: intensity_flutter_brass
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3289149710
+    data2: 1048447083
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &6358965872720031612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1729,7 +1392,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &6488053458503417860
+--- !u!114 &6621548463498615425
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1739,64 +1402,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/intensity_brass1
+  m_Name: parameter:/MainMusicTestCopie/intensity_kidi
   m_EditorClassIdentifier: 
-  Name: intensity_brass1
+  Name: intensity_kidi
   StudioPath: 
   Min: 0
   Max: 1
   Default: 0
   ID:
-    data1: 3763940618
-    data2: 4258212167
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &6572773889361809643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/intensity_harp_normale
-  m_EditorClassIdentifier: 
-  Name: intensity_harp_normale
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 3787922598
-    data2: 2532601393
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &6831260496675595034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/intensity_swells
-  m_EditorClassIdentifier: 
-  Name: intensity_swells
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 4155196205
-    data2: 3144685467
+    data1: 3963940857
+    data2: 545914430
   Type: 0
   IsGlobal: 0
   Labels: []
@@ -1816,10 +1431,10 @@ MonoBehaviour:
   Path: FMOD_project/Pakke_Is/Build/Desktop/Level1.bank
   Name: Level1
   StudioPath: bank:/Level1
-  lastModified: 638197020463956107
+  lastModified: 638200379026524102
   FileSizes:
   - Name: Desktop
-    Value: 46567872
+    Value: 30439648
   Exists: 1
 --- !u!114 &7006998516226058581
 MonoBehaviour:
@@ -1848,7 +1463,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &7543726949379773991
+--- !u!114 &7211323116813314576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambience/MainAmbienceTest
+  m_EditorClassIdentifier: 
+  Path: event:/Ambience/MainAmbienceTest
+  Guid:
+    Data1: 597313203
+    Data2: 1135804260
+    Data3: 174042028
+    Data4: -1498086651
+  Banks:
+  - {fileID: 6918480860476981872}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 108250
+--- !u!114 &7670097887496584317
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1858,88 +1500,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTensionTest/intensity_mid_drum
+  m_Name: parameter:/MainMusicTestCopie/intensity_horns_legato
   m_EditorClassIdentifier: 
-  Name: intensity_mid_drum
+  Name: intensity_horns_legato
   StudioPath: 
   Min: 0
   Max: 1
   Default: 0
   ID:
-    data1: 1881363038
-    data2: 3473163329
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &7696806884734119485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/intensity_pad2
-  m_EditorClassIdentifier: 
-  Name: intensity_pad2
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1674631981
-    data2: 4221457999
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &8341484623658458870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTest/intensity_tenuto_swarm
-  m_EditorClassIdentifier: 
-  Name: intensity_tenuto_swarm
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1042852579
-    data2: 1997420304
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &8382128767183710432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTensionTest/intensity_drum2
-  m_EditorClassIdentifier: 
-  Name: intensity_drum2
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1250810925
-    data2: 1850432416
+    data1: 2976962206
+    data2: 1319648170
   Type: 0
   IsGlobal: 0
   Labels: []
@@ -1968,33 +1538,14 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -4788994925846963447}
-  - {fileID: -389220560867112033}
-  - {fileID: -5198560725786473575}
-  - {fileID: -2636593972452029065}
-  - {fileID: 9077340552352407937}
-  - {fileID: 8382128767183710432}
-  - {fileID: -6030285073211698375}
   - {fileID: -2379976041374017172}
-  - {fileID: 3270594240399821382}
-  - {fileID: 4249822744354664947}
-  - {fileID: 4858930378849368107}
-  - {fileID: 2166972605160012502}
-  - {fileID: 9030411709947784341}
-  - {fileID: -8054126807199237119}
-  - {fileID: -1671642401122719872}
-  - {fileID: 4882163901382611720}
-  - {fileID: -584072779942876311}
-  - {fileID: 7543726949379773991}
-  - {fileID: -6892960770553835343}
-  - {fileID: 1658556533639624094}
-  - {fileID: -375481654354069467}
-  - {fileID: 2273581076086332326}
-  - {fileID: -7369873097376065127}
+  - {fileID: -7172367276276127828}
+  - {fileID: 2051455889362207351}
+  - {fileID: -7354223164105292940}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &9030411709947784341
+--- !u!114 &9064641627249485030
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2004,40 +1555,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTensionTest/intensity_horns_legato
+  m_Name: parameter:/MainMusicTestCopie/intensity_frame_drum
   m_EditorClassIdentifier: 
-  Name: intensity_horns_legato
+  Name: intensity_frame_drum
   StudioPath: 
   Min: 0
   Max: 1
   Default: 0
   ID:
-    data1: 2976962206
-    data2: 1319648170
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &9077340552352407937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MainMusicTensionTest/intensity_piano
-  m_EditorClassIdentifier: 
-  Name: intensity_piano
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 3861050571
-    data2: 1823799795
+    data1: 1659232653
+    data2: 3954115170
   Type: 0
   IsGlobal: 0
   Labels: []
