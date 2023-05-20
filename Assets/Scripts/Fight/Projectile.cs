@@ -18,7 +18,6 @@ namespace Fight
         public UnityEvent OnProjectileDie = new UnityEvent();
 
         private float _lifetime;
-        protected IHittable AutoAimHittable;
         protected bool HasTouched;
 
         private void Start()
@@ -82,6 +81,7 @@ namespace Fight
         }
         
         public virtual void Launch(Vector3 direction, float power) { }
+        public virtual void Launch(Transform hittable) { }
 
         protected virtual void Die()
         {
@@ -93,11 +93,6 @@ namespace Fight
             sedna.transform.DOMove(player.position, Data.Cooldown);
 
             Data.ForbiddenColliders.Clear();
-        }
-
-        public void SetHittableAutoAim(IHittable hittable)
-        {
-            AutoAimHittable = hittable;
         }
     }
 }

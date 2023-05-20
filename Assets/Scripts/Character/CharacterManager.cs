@@ -87,14 +87,13 @@ namespace Character
             }
             
             //anim
-        if (IKPlayerControl.CurrentType != IKType.Paddle || IKPlayerControl.Type == IKType.Paddle)
+            if (IKPlayerControl.CurrentType != IKType.Paddle || IKPlayerControl.Type == IKType.Paddle)
             {
                 return;
             }
             CurrentStateBaseProperty.TimeBeforeSettingPaddleAnimator -= Time.deltaTime;
             if (CurrentStateBaseProperty.TimeBeforeSettingPaddleAnimator <= 0)
             {
-                Debug.Log("set paddle");
                 IKPlayerControl.SetPaddle();
             }
         }

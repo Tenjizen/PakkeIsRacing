@@ -129,16 +129,19 @@ namespace Character.State
                         direction = hittable.Transform.position - CharacterManagerRef.transform.position;
                     }
 
-                    projectile.Launch(direction.normalized, power);
+                    if (_hittable != null)
+                    {
+                        projectile.Launch(_hittable.Transform);
+                    }
+                    else
+                    {
+                        projectile.Launch(direction.normalized, power);
+                    }
+                    
                     projectile.OnProjectileDie.AddListener(ProjectileHit);
                     
                     character.WeaponCooldown = _weaponPrefab.Data.Cooldown;
                     character.ProjectileIsInAir = true;
-
-                    if (_hittable != null)
-                    {
-                        projectile.SetHittableAutoAim(_hittable);
-                    }
                     
                     //anim
                     switch (_weaponPrefab.Data.Type)

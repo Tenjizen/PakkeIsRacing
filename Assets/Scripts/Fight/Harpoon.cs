@@ -17,6 +17,7 @@ namespace Fight
         
         private Rigidbody _rigidbody;
         private StudioEventEmitter _emitter;
+        private Transform _target;
 
         private void FixedUpdate()
         {
@@ -31,11 +32,11 @@ namespace Fight
                 transform.LookAt(transform.position + directionOfMotion);
             }
 
-            if (AutoAimHittable == null)
+            if (_target == null)
             {
                 return;
             }
-            Vector3 direction = (AutoAimHittable.Transform.position - transform.position).normalized;
+            Vector3 direction = (_target.position - transform.position).normalized;
             Vector3 desiredVelocity = direction * _rigidbody.velocity.magnitude;
             _rigidbody.velocity = desiredVelocity;
         }
@@ -60,6 +61,13 @@ namespace Fight
             _rigidbody.useGravity = true;
 
             _rigidbody.AddForce(direction * (Data.LaunchForce * power));
+        }
+
+        public override void Launch(Transform hittable)
+        {
+            base.Launch(hittable);
+
+            _target = hittable;
         }
     }
 }

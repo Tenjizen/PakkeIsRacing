@@ -527,6 +527,58 @@ MonoBehaviour:
   _launchSound: {fileID: 8300000, guid: 9dc32e7fa53cf4940acc7f48483736f1, type: 3}
   _dieSound: {fileID: 8300000, guid: afd6d421b02d4aa448f871f0cad96c78, type: 3}
   _rotationSpeed: 10
+  _arcMovementParameters:
+    BaseApexHeightForDistance1: 0.2
+    ArcMovementSpeed: 12
+    PercentOfFlyTimeToReachApex: 0.3
+    BaseToApexCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ApexToTargetCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0.0009652935
+        outSlope: 0.0009652935
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.25548258
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -2.7493737
+        outSlope: -2.7493737
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.057850294
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
 --- !u!114 &2498438549114173914
 MonoBehaviour:
   m_ObjectHideFlags: 0
