@@ -17,24 +17,22 @@ namespace Enemies.Shark
     {
         [field: SerializeField] public SharkBaseState CurrentStateBase { get; private set; }
         [field: SerializeField, ReadOnly] public Transform TargetTransform { get; private set; }
+        [field:SerializeField ,ReadOnly] public KayakController KayakControllerRef { get; set; }
         [field: SerializeField] public PlayerTriggerManager PlayerTriggerManager { get; private set; }
         [field: SerializeField] public GameObject ParentGameObject { get; private set; }
         [field: SerializeField] public GameObject Forward { get; private set; }
         [field: SerializeField] public GameObject Circle { get; private set; }
+        [field: SerializeField, Header("VFX")] public ParticleSystem HitParticles { get; private set; }
+        [field: SerializeField] public GameObject PosParticles { get; private set; }
 
         public GameObject PointTarget;
         [ReadOnly] public float CurrentSpeed;
         [ReadOnly] public bool IsCollided;
-
-        [field: SerializeField, Header("VFX")] public ParticleSystem HitParticles { get; private set; }
-        [field: SerializeField] public GameObject PosParticles { get; private set; }
-
-        [field: SerializeField, Header("Sound")] public AudioClip HitSound { get; private set; }
-
-        [Header("Hit")] public Collider SharkCollider;
-
-        [Header("Waves")] public Waves WavesData;
-
+        
+        [Header("Hit")]
+        public Collider SharkCollider;
+        [Header("Waves")] 
+        public Waves WavesData;
         [Header("feedback tempo"), Tooltip("depth at which the feedback circle pop")] 
         public float ShowCircleDepth = -14f;
         [Tooltip("distance at which the circle is from the shark in phase one")]
@@ -43,17 +41,16 @@ namespace Enemies.Shark
         public float DistanceSideOfShark = 1;
         [Tooltip("distance at which the circle is from the shark in phase three")] 
         public float DistanceInFrontOfSharkPhaseThree = 5;
-
-
-        [Space(5), Header("Shark Data")] public SharkData Data;
-
         
-        [Header("Events")] public UnityEvent StartJump;
+        [Space(5), Header("Shark Data")] 
+        public SharkData Data;
+        
+        [Header("Events")] 
+        public UnityEvent StartJump; 
         public UnityEvent EndJump;
-
-        Vector3 collision = Vector3.zero;
-        public LayerMask LayerMask;
-        [field:SerializeField ,ReadOnly] public KayakController KayakControllerRef { get; set; }
+        
+        private Vector3 _collision = Vector3.zero;
+        private Transform _player;
 
         private void Awake()
         {
@@ -80,6 +77,11 @@ namespace Enemies.Shark
                 PosParticles.transform.position = particlePosition;
             }
 
+            if (_player != null)
+            {
+                HandlePlayerDistanceToSetUI(_player, Data.DistanceAtWhichPlayerDisableUI);
+            }
+
             AvoidObstacle();
             ManagerCircleUI();
 
@@ -101,7 +103,8 @@ namespace Enemies.Shark
             {
                 return;
             }
-            
+
+            _player = CharacterManager.Instance.transform;
             TargetTransform = GetComponentInParent<PlayerTriggerManager>().PropKayakController.gameObject.GetComponent<Transform>();
             SharkCombatState sharkCombatState = new SharkCombatState();
             SwitchState(sharkCombatState);
@@ -187,7 +190,7 @@ namespace Enemies.Shark
                 return;
             }
             
-            collision = hit.point;
+            _collision = hit.point;
             Vector3 rotation = Forward.transform.localEulerAngles;
                 
             Vector3 hitPosition = hit.transform.position;
@@ -259,7 +262,7 @@ namespace Enemies.Shark
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(collision, 2f);
+            Gizmos.DrawWireSphere(_collision, 2f);
         }
         
         #endif

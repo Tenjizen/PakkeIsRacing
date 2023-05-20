@@ -1,4 +1,5 @@
-﻿using Character;
+﻿using System;
+using Character;
 using Fight;
 using Fight.Data;
 using UI;
@@ -18,13 +19,24 @@ namespace Enemies
 
         [field:SerializeField] public UnityEvent OnHit { get; set; }
         [field:SerializeField] public UnityEvent OnDie { get; set; }
-        
         [field:SerializeField] public WeaponType WeaponThatCanHitEnemy { get; set; }
         [field:SerializeField] public Sprite EnemySprite { get; private set; }
         [field:SerializeField, ReadOnly] public float CurrentLife { get; set; }
         [field:SerializeField, ReadOnly] public float MaxLife { get; set; }
         [field:SerializeField, ReadOnly] public bool IsPossessed { get; set; }
         [field:SerializeField] public GameObject PossessedVisualGameObject { get; set; }
+
+        protected void HandlePlayerDistanceToSetUI(Transform player, float distance)
+        {
+            if (Vector3.Distance(transform.position, player.position) > distance)
+            {
+                CharacterManager.Instance.EnemyUIManager.DisableEnemyUI();
+            }
+            else
+            {
+                CharacterManager.Instance.EnemyUIManager.ActiveEnemyUI(EnemySprite);
+            }
+        }
 
         public virtual void Hit(Projectile projectile, GameObject owner)
         {

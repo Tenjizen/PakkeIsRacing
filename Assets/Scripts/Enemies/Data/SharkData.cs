@@ -108,5 +108,7 @@ namespace Shark.Data
         public float SpeedCombatJumpInFront { get; private set; } = 15.0f;
         [field: SerializeField, Tooltip("Speed when rush for trigger the jump in front")]
         public float SpeedCombatToTriggerJumpInFront { get; private set; } = 35.0f;
+
+        [field: SerializeField] public float DistanceAtWhichPlayerDisableUI { get; private set; } = 50;
     }
 }

@@ -10,6 +10,7 @@ namespace UI
         [SerializeField] private List<Image> _uiImages;
         [SerializeField] private Image _lifeGauge;
         [SerializeField] private Image _enemyIconImage;
+        [ReadOnly] public bool IsActive;
     
         private void Start()
         {
@@ -24,6 +25,12 @@ namespace UI
 
         public void ActiveEnemyUI(Sprite icon)
         {
+            if (IsActive)
+            {
+                return;
+            }
+            
+            IsActive = true;
             _uiImages.ForEach(x => x.DOKill());
             _uiImages.ForEach(x => x.DOFade(1,0.3f));
             _enemyIconImage.sprite = icon;
@@ -31,6 +38,12 @@ namespace UI
         }
         public void DisableEnemyUI()
         {
+            if (IsActive == false)
+            {
+                return;
+            }
+            
+            IsActive = false;
             _uiImages.ForEach(x => x.DOKill());
             _uiImages.ForEach(x => x.DOFade(0,0.15f));
         }

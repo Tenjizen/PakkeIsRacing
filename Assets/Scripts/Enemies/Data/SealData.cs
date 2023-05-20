@@ -6,6 +6,9 @@ namespace Enemies.Data
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/SealData", order = 1)]
     public class SealData : ScriptableObject
     {
+        [field: SerializeField] 
+        public float DistanceAtWhichPlayerIsNotInCombat { get; private set; } = 50;
+        
         [field: SerializeField, Range(0, 0.01f)]
         public float MovingSpeed { get; private set; } = 0.05f;
         

@@ -46,6 +46,7 @@ namespace Enemies.Seal
         private float _speedMultiplier;
         private float _currentSpeedMultiplier;
         private Quaternion _targetRotation;
+        private Transform _player;
         
         private void Start()
         {
@@ -82,9 +83,11 @@ namespace Enemies.Seal
         {
             if (_isMoving == false)
             {
-                RotateAroundPoint(_splinePath.GetPoint(_sealCheckpoints[CurrentLife > 0 ? 0 : ^1].Position));
+                RotateAroundPoint(_splinePath.GetPoint(_sealCheckpoints[_player == null ? 0 : ^1].Position));
                 return;
             }
+
+            HandlePlayerDistanceToSetUI(_player, _data.DistanceAtWhichPlayerIsNotInCombat);
 
             CheckForCheckPoint();
             _speedMultiplier = Mathf.Lerp(_currentSpeedMultiplier, _speedMultiplier, 0.1f);
@@ -114,6 +117,7 @@ namespace Enemies.Seal
             }
             
             _isMoving = true;
+            _player = CharacterManager.Instance.transform;
             SetUpStartEnemyUI();
         }
 
