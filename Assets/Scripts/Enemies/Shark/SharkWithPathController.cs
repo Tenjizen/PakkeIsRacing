@@ -12,6 +12,8 @@ public class SharkWithPathController : MonoBehaviour
     [Header("Referance"), SerializeField] private GameObject _parent;
 
     private float _currentSplinePosition;
+    private Quaternion _targetRotation;
+
 
     [Header("Debug"), SerializeField, ReadOnly] private bool _playerIsTrigger;
     void Start()
@@ -61,10 +63,9 @@ public class SharkWithPathController : MonoBehaviour
         t.position = position;
 
         //rotation
-        Vector3 rotation = t.localEulerAngles;
-        Vector3 direction = _splinePath.GetDirection(_currentSplinePosition);
-
-        float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
-        t.localRotation = Quaternion.Euler(rotation.x, angle, rotation.z);
+        Vector3 pointB = _splinePath.GetPoint(Mathf.Clamp01(_currentSplinePosition + 0.01f));
+        Vector3 rotation = t.transform.rotation.eulerAngles;
+        t.LookAt(pointB);
+        t.rotation = Quaternion.Euler(new Vector3(rotation.x, Mathf.Lerp(rotation.y, t.rotation.eulerAngles.y, 0.1f), rotation.z));
     }
 }
