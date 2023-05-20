@@ -101,22 +101,15 @@ namespace UI.WeaponWheel
 
         private void FastWeaponChange()
         {
-            if (_lastSelectedButton.IsPaddle)
+            if (_lastSelectedButton.IsPaddle && _lastWeaponButtonSelected.IsUnlocked) //if in paddle -> select last weapon
             {
                 _lastWeaponButtonSelected.Select(_weaponIconInGame);
                 _lastSelectedButton = _lastWeaponButtonSelected;
             }
-            else
+            else //if in weapon -> select paddle
             {
-                foreach (WheelButton button in Buttons)
-                {
-                    if (button.ButtonController.IsPaddle == false)
-                    {
-                        continue;
-                    }
-                    _lastSelectedButton = button.ButtonController;
-                    _lastSelectedButton.Select(_weaponIconInGame);
-                }
+                _lastSelectedButton = Buttons.Find(x => x.ButtonController.IsPaddle).ButtonController;
+                _lastSelectedButton.Select(_weaponIconInGame);
                 CharacterManager.Instance.CurrentStateBaseProperty.LaunchNavigationState();
             }
         }

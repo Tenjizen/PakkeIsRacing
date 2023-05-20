@@ -29,7 +29,6 @@ namespace UI.WeaponWheel
         
         [Header("Events")] public UnityEvent OnSelected = new UnityEvent();
         
-        
         private CharacterManager _characterManager;
 
         private void Start()
@@ -78,19 +77,16 @@ namespace UI.WeaponWheel
 
         public void Select(Image weaponIcon)
         {
-            if (IsUnlocked == false)
+            _characterManager = CharacterManager.Instance;
+
+            if (IsUnlocked == false || _projectile == null)
             {
-                CharacterManager.Instance.CurrentStateBaseProperty.LaunchNavigationState();
+                _characterManager.CurrentStateBaseProperty.LaunchNavigationState();
                 return;
             }
-  
+
             weaponIcon.sprite = _weaponIcon == null ? weaponIcon.sprite : _weaponIcon;
             weaponIcon.DOFade(_weaponIcon == null ? 0 : 1, 0.2f);
-
-            if (_projectile == null)
-            {
-                return;
-            }
 
             OnSelected.Invoke();
             _characterManager.CurrentProjectile = _projectile;

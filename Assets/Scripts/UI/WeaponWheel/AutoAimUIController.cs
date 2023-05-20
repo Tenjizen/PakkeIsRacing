@@ -45,8 +45,9 @@ namespace UI.WeaponWheel
             {
                 return;
             }
-            
-            transform.Rotate(new Vector3(0, 0, 1), percentage >= 1 ? _lockedRotationSpeed : _baseRotationSpeed);
+
+            float speed = (percentage >= 1 ? _lockedRotationSpeed : _baseRotationSpeed) * Time.deltaTime * 100;
+            transform.Rotate(new Vector3(0, 0, 1), speed);
 
             Vector3 viewportPosition = Camera.main.WorldToViewportPoint(aimPosition);
             Vector2 canvasPosition = new Vector2(
