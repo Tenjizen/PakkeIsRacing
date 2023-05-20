@@ -1,42 +1,62 @@
+using GPEs;
 using UnityEngine;
+using WaterFlowGPE.Bezier;
 
 namespace Sedna
 {
     public class CompanionFollowManager : MonoBehaviour
     {
-        [SerializeField] private Transform _sednaTargetPosition;
-        [SerializeField] private Transform _kayakTransform;
+        [Header("Path"), SerializeField] private BezierSpline _splinePath;
+        [SerializeField] Transform _playerTransform;
+        private float _currentSplinePosition;
+        private Quaternion _targetRotation;
 
-        private Rigidbody _rigidbody;
-        private Vector3 _velocity;
+        public float MovingValue = 0.005f;
+        public float SpeedLerpToMovingValue  = 0.1f;
+
 
         private void Start()
         {
-            _rigidbody = GetComponent<Rigidbody>();
+
+            _currentSplinePosition = 0;
+
+            if (_splinePath == null)
+            {
+                return;
+            }
+
+            Vector3 splinePosition = _splinePath.GetPoint(_currentSplinePosition);
+            transform.position = new Vector3(splinePosition.x, transform.position.y, splinePosition.z);
         }
 
-        private void LateUpdate()
+        private void Update()
         {
-            HandlePosition();
-            HandleRotation();
+            ManageMovement();
         }
-        
-        private void HandlePosition()
+        private void ManageMovement()
         {
-            Vector3 current = new Vector3(transform.position.x, 0, transform.position.z);
-            Vector3 target = new Vector3(_sednaTargetPosition.transform.position.x, 0, _sednaTargetPosition.transform.position.z);
-            Vector3 positionToRefVelocity = Vector3.SmoothDamp(current, target, ref _velocity, 0.5f);
+            _currentSplinePosition += MovingValue * Time.deltaTime;
+            _currentSplinePosition = Mathf.Clamp01(_currentSplinePosition);
 
-            //apply velocity
-            Vector3 velocity = new Vector3(_velocity.x, _rigidbody.velocity.y, _velocity.z);
-            _rigidbody.velocity = velocity;
-        }
-        private void HandleRotation()
-        {
-            Quaternion kayakRotation = Quaternion.Euler(new Vector3(0, _kayakTransform.rotation.eulerAngles.y, 0));
-            Quaternion targetRotation = Quaternion.Slerp(_kayakTransform.rotation, kayakRotation, 0.5f);
 
-            _rigidbody.MoveRotation(targetRotation);
+            Transform t = transform;
+
+            Vector3 position = Vector3.Lerp(t.position, _splinePath.GetPoint(_currentSplinePosition), SpeedLerpToMovingValue * Time.deltaTime *100);
+            t.position = position;
+
+            if (_currentSplinePosition >= 1)
+            {
+                //_parent.SetActive(false);
+                t.LookAt(_playerTransform);
+            }
+            else
+            {
+                //rotation
+                Vector3 pointB = _splinePath.GetPoint(Mathf.Clamp01(_currentSplinePosition + 0.01f));
+                Vector3 rotation = t.transform.rotation.eulerAngles;
+                t.LookAt(pointB);
+                t.rotation = Quaternion.Euler(new Vector3(rotation.x, Mathf.Lerp(rotation.y, t.rotation.eulerAngles.y, 0.1f * Time.deltaTime*100), rotation.z));
+            }
         }
     }
 }
