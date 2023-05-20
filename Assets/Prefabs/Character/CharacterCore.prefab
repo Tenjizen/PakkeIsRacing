@@ -6096,6 +6096,8 @@ MonoBehaviour:
   <Parameters>k__BackingField:
     AutoAim: 1
     InversedControls: 0
+  <SednaGameObject>k__BackingField: {fileID: 7609300824953394914}
+  <SednaTargetRespawnPlayer>k__BackingField: {fileID: 8337715506076774778}
   <HarpoonAnimator>k__BackingField: {fileID: 2084915637}
   <NetAnimator>k__BackingField: {fileID: 0}
   Data: {fileID: 11400000, guid: 9383b9325ce5e464e84beb6010a91e0a, type: 2}
@@ -6184,6 +6186,7 @@ MonoBehaviour:
   RotatingSpeedMultiplier: 1
   BalanceLimitMultiplier: 1
   ProjectileSpeedMultiplier: 1
+  EventAtEachLevel: []
 --- !u!1 &8105421287264226680
 GameObject:
   m_ObjectHideFlags: 0
@@ -9181,6 +9184,12 @@ PrefabInstance:
 --- !u!4 &7609300824953394913 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2783859199191875585, guid: 41b89dcb864b1a841a81b0f15bd7c7f7,
+    type: 3}
+  m_PrefabInstance: {fileID: 5709416411141904096}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7609300824953394914 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2783859199191875586, guid: 41b89dcb864b1a841a81b0f15bd7c7f7,
     type: 3}
   m_PrefabInstance: {fileID: 5709416411141904096}
   m_PrefabAsset: {fileID: 0}
