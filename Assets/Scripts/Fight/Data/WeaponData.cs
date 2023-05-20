@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Tools.HideIf;
 using UnityEngine;
 
 namespace Fight.Data

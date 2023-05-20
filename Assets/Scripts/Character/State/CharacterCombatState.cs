@@ -123,13 +123,13 @@ namespace Character.State
                     }
                     
                     //auto aim
-                    IHittable hittable = GetAutoAimHittable();
+                    IHittable hittable = CharacterManagerRef.Parameters.AutoAim ? GetAutoAimHittable() : null;
                     if (hittable != null)
                     {
                         direction = hittable.Transform.position - CharacterManagerRef.transform.position;
                     }
 
-                    if (_hittable != null)
+                    if (_hittable != null && CharacterManagerRef.Parameters.AutoAim)
                     {
                         projectile.Launch(_hittable.Transform);
                     }
