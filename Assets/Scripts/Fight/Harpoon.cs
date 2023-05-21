@@ -15,30 +15,22 @@ namespace Fight
         [Header("Sound"), SerializeField] private AudioClip _launchSound;
         [SerializeField] private AudioClip _dieSound;
         
-        private Rigidbody _rigidbody;
         private StudioEventEmitter _emitter;
-        private Transform _target;
 
-        private void FixedUpdate()
+        protected override void FixedUpdate()
         {
-            if (_rigidbody == null)
+            base.FixedUpdate();
+            
+            if (RigidbodyProjectile == null)
             {
                 return;
             }
             
-            Vector3 directionOfMotion = _rigidbody.velocity.normalized;
+            Vector3 directionOfMotion = RigidbodyProjectile.velocity.normalized;
             if (directionOfMotion != Vector3.zero)
             {
                 transform.LookAt(transform.position + directionOfMotion);
             }
-
-            if (_target == null)
-            {
-                return;
-            }
-            Vector3 direction = (_target.position - transform.position).normalized;
-            Vector3 desiredVelocity = direction * _rigidbody.velocity.magnitude;
-            _rigidbody.velocity = desiredVelocity;
         }
 
         protected override void Die()
@@ -55,19 +47,8 @@ namespace Fight
         {
             base.Launch(direction, power);
             
-            _rigidbody = GetComponent<Rigidbody>();
-
-            _rigidbody.isKinematic = false;
-            _rigidbody.useGravity = true;
-
-            _rigidbody.AddForce(direction * (Data.LaunchForce * power));
-        }
-
-        public override void Launch(Transform hittable)
-        {
-            base.Launch(hittable);
-
-            _target = hittable;
+            RigidbodyProjectile.useGravity = true;
+            RigidbodyProjectile.AddForce(direction * (Data.LaunchForce * power));
         }
     }
 }

@@ -17,12 +17,52 @@ namespace Fight
 
         public UnityEvent OnProjectileDie = new UnityEvent();
 
-        private float _lifetime;
+        protected Rigidbody RigidbodyProjectile;
         protected bool HasTouched;
+        protected Transform Target;
+        protected float CurrentTime;
+        protected float TimeToReachTarget;
+        protected float TimeToReachApexFromBase, TimeToReachTargetFromApex;
+        protected float ApexHeight;
+        
+        private float _lifetime;
 
         private void Start()
         {
             _lifetime = Data.Lifetime;
+        }
+
+        protected virtual void FixedUpdate()
+        {
+            if (Target == null)
+            {
+                return;
+            }
+
+            CurrentTime += Time.deltaTime;
+            
+            //height
+            float percentage = CurrentTime <= TimeToReachApexFromBase
+                ? CurrentTime / TimeToReachApexFromBase
+                : (CurrentTime - TimeToReachApexFromBase) / TimeToReachTargetFromApex;
+            if (percentage > 1)
+            {
+                return;
+            }
+            
+            percentage = Mathf.Clamp01(percentage);
+            percentage = CurrentTime <= TimeToReachApexFromBase
+                ? Data.ArcMovementParameters.BaseToApexCurve.Evaluate(percentage)
+                : Data.ArcMovementParameters.ApexToTargetCurve.Evaluate(percentage);
+
+            Vector3 position = transform.position;
+            float height = Target.position.y + percentage * ApexHeight;
+            transform.position = new Vector3(position.x, height, position.z);
+            
+            //velocity
+            Vector3 direction = (Target.position - position).normalized;
+            Vector3 desiredVelocity = direction * Data.ArcMovementParameters.ArcMovementSpeed;
+            RigidbodyProjectile.velocity = desiredVelocity;
         }
 
         public void SetOwner(GameObject owner)
@@ -79,9 +119,31 @@ namespace Fight
         {
             Die();
         }
-        
-        public virtual void Launch(Vector3 direction, float power) { }
-        public virtual void Launch(Transform hittable) { }
+
+        public virtual void Launch(Vector3 direction, float power)
+        {
+            SetRigidbody();
+        }
+
+        public virtual void Launch(Transform hittable)
+        {
+            SetRigidbody();
+                
+            Target = hittable;
+            CurrentTime = 0;
+
+            float distance = Vector3.Distance(transform.position, Target.position);
+            ApexHeight = distance * Data.ArcMovementParameters.BaseApexHeightForDistance1;
+            TimeToReachTarget = distance / Data.ArcMovementParameters.ArcMovementSpeed;
+            TimeToReachApexFromBase = TimeToReachTarget * Data.ArcMovementParameters.PercentOfFlyTimeToReachApex;
+            TimeToReachTargetFromApex = TimeToReachTarget - TimeToReachApexFromBase;
+        }
+
+        private void SetRigidbody()
+        {
+            RigidbodyProjectile = GetComponent<Rigidbody>();
+            RigidbodyProjectile.isKinematic = false;
+        }
 
         protected virtual void Die()
         {
