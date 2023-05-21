@@ -55,10 +55,15 @@ namespace Character.Camera.State
             if (CamManager.VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance >= CamManager.Data.NavigationCamDistance)
                 CamManager.VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance -= Time.deltaTime * CamManager.Data.MultiplyTimeForDistanceWhenRespawn /* CameraManagerRef.ValueRemoveForDistanceWhenRespawn*/;
 
+            if (CamManager.VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance <= CamManager.Data.NavigationCamDistance + 2
+                     && CharacterManager.Instance.SednaManagerProperty.SednaIsMoving == false)
+            {
+                CharacterManager.Instance.SednaManagerProperty.SednaRespawn();
+            }
+
             if (CamManager.VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance <= CamManager.Data.NavigationCamDistance && CamManager.CameraAngleOverride <= 0)
             {
-                CharacterManager.Instance.SednaGameObject.transform.position = CharacterManager.Instance.SednaTargetRespawnPlayer.transform.position;
-                CharacterManager.Instance.CheckpointManagerProperty.SednaIsMoving = true;
+
                 CameraNavigationState cameraNavigationState = new CameraNavigationState();
                 CamManager.SwitchState(cameraNavigationState);
             }
