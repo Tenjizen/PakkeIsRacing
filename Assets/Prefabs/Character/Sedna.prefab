@@ -47,10 +47,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5964cfef310da04bb6a143c30bab8e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnumState: 0
   _splinePath: {fileID: 0}
   _playerTransform: {fileID: 0}
   MovingValue: 0.005
   SpeedLerpToMovingValue: 0.1
+  PosSednaDialog: {fileID: 0}
+  RemoveAtYPosValue: 0
+  MinimumVelocity: 0.5
+  EndDialog: 0
 --- !u!54 &2783859199191875591
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -177,7 +182,7 @@ PrefabInstance:
     - target: {fileID: 2874901841247543932, guid: bbcb0e743720f7e43a70396f2449d85c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: -1.2
       objectReference: {fileID: 0}
     - target: {fileID: 2874901841247543932, guid: bbcb0e743720f7e43a70396f2449d85c,
         type: 3}
