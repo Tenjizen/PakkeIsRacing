@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &833190002486787381
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1784311659638515471}
+  m_Layer: 0
+  m_Name: FiletGrabRightIK
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1784311659638515471
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833190002486787381}
+  m_LocalRotation: {x: -0.08710144, y: 0.0056138122, z: 0.014608337, w: 0.9960765}
+  m_LocalPosition: {x: 0.0048530544, y: -0.0073167374, z: -0.0050388915}
+  m_LocalScale: {x: 0.010904005, y: 0.010904008, z: 0.0109040085}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5090435042023652168}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: -9.203, y: 1.304, z: 0.865}
 --- !u!1 &1619303127763974198
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +197,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2811944896363430816
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3455654831271096184}
+  m_Layer: 0
+  m_Name: FiletGrabLeftIK
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3455654831271096184
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2811944896363430816}
+  m_LocalRotation: {x: -0.012008339, y: -0.0060825474, z: 0.007170985, w: 0.9998837}
+  m_LocalPosition: {x: -0.007221217, y: -0.0074806605, z: -0.0051795375}
+  m_LocalScale: {x: 0.010904006, y: 0.010904006, z: 0.010904004}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5090435042023652168}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: -0.589, y: -0.021, z: 0.052}
 --- !u!1 &3140846952371993731
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,6 +428,8 @@ Transform:
   - {fileID: 4712391475019305185}
   - {fileID: 8929228147619629821}
   - {fileID: 2232858672191386634}
+  - {fileID: 3455654831271096184}
+  - {fileID: 1784311659638515471}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
