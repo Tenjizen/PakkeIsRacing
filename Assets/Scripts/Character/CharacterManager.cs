@@ -11,6 +11,7 @@ using Tools.SingletonClassBase;
 using UI;
 using UI.WeaponWheel;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Character
 {
@@ -22,6 +23,7 @@ namespace Character
         [field: SerializeField, Header("Properties")] public CameraManager CameraManagerProperty { get; private set; }
         [field: SerializeField] public KayakController KayakControllerProperty { get; private set; }
         [field: SerializeField] public InputManagement InputManagementProperty { get; private set; }
+        [field: SerializeField] public SednaManager SednaManagerProperty { get; private set; }
         [field: SerializeField] public Animator PaddleAnimatorProperty { get; private set; }
         [field: SerializeField] public Animator CharacterAnimatorProperty { get; private set; }
         [field: SerializeField] public TransitionManager TransitionManagerProperty { get; private set; }
@@ -36,8 +38,7 @@ namespace Character
         [field: SerializeField] public PlayerParameters Parameters { get; set; }
         [field: SerializeField, Header("Animation")] public Animator HarpoonAnimator { get; private set; }
         [field: SerializeField] public Animator NetAnimator { get; private set; }
-        [field: SerializeField] public GameObject SednaGameObject { get; set; }
-        [field: SerializeField] public GameObject SednaTargetRespawnPlayer { get; set; }
+
         #endregion
 
         [Header("Character Data")]
@@ -54,6 +55,9 @@ namespace Character
         public Projectile CurrentProjectile;
         [Header("VFX")]
         public ParticleSystem WeaponChargedParticleSystem;
+
+        [Header("Event")] public UnityEvent StartGame;
+
 
         [HideInInspector] public float WeaponCooldown;
         [HideInInspector] public float WeaponCooldownBase;

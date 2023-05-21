@@ -28,6 +28,7 @@ namespace Character.Camera.State
 
             if (CharacterManager.Instance.InputManagementProperty.Inputs.AnyButton)
             {
+                CharacterManager.Instance.StartGame.Invoke();
                 _startTimer = true;
                 CamManager.CameraAnimator.Play("FreeLook");
 
