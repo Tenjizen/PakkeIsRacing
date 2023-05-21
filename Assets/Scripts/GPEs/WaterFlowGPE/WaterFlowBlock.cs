@@ -83,42 +83,44 @@ namespace GPEs.WaterFlowGPE
             }
 
             WaterFlowManager.SetClosestBlockToPlayer(kayakController.transform);
-            if (IsActive)
+            if (IsActive == false)
             {
-                //get rotation
-                Quaternion currentRotation = kayakController.transform.rotation;
-                Vector3 currentRotationEuler = currentRotation.eulerAngles;
-                //get target rotation
-                float targetYAngle = Quaternion.LookRotation(Direction).eulerAngles.y;
-                Quaternion targetRotation = Quaternion.Euler(currentRotationEuler.x, targetYAngle, currentRotationEuler.z);
-
-                //check if the boat is facing the flow direction or not
-                const float ANGLE_TO_FACE_FLOW = 20f;
-                float angleDifference = Mathf.Abs(Mathf.Abs(currentRotationEuler.y) - Mathf.Abs(targetYAngle));
-                bool isFacingFlow = angleDifference <= ANGLE_TO_FACE_FLOW;
-
-                //apply rotation
-                InputManagement inputManagement = CharacterManager.Instance.InputManagementProperty;
-                bool isMoving = inputManagement.Inputs.PaddleLeft || inputManagement.Inputs.PaddleRight ||
-                                Mathf.Abs(inputManagement.Inputs.RotateLeft) > 0.1f ||
-                                Mathf.Abs(inputManagement.Inputs.RotateRight) > 0.1f;
-                kayakController.transform.rotation = Quaternion.Lerp(currentRotation, targetRotation,
-                    isMoving ? _rotationLerpWhenMoving :
-                    isFacingFlow ? _rotationLerpWhenInDirection : _rotationLerpWhenNotInDirection);
-
-                //apply velocity by multiplying current by speed
-                Vector3 velocity = kayakController.Rigidbody.velocity;
-                float speed = _speed * (isFacingFlow ? _speed : _speed * _speedNotFacingMultiplier);
-
-                kayakController.Rigidbody.velocity = new Vector3(
-                    velocity.x + speed * Mathf.Sign(velocity.x),
-                    velocity.y,
-                    velocity.z + speed * Mathf.Sign(velocity.z));
-                    
-                //balance
-                double value = _balanceValue * UnityEngine.Random.Range(_balanceValueRandomMultiplierRange.x, _balanceValueRandomMultiplierRange.y);
-                CharacterManager.Instance.AddBalanceValueToCurrentSide(value);
+                return;
             }
+            
+            //get rotation
+            Quaternion currentRotation = kayakController.transform.rotation;
+            Vector3 currentRotationEuler = currentRotation.eulerAngles;
+            //get target rotation
+            float targetYAngle = Quaternion.LookRotation(Direction).eulerAngles.y;
+            Quaternion targetRotation = Quaternion.Euler(currentRotationEuler.x, targetYAngle, currentRotationEuler.z);
+
+            //check if the boat is facing the flow direction or not
+            const float ANGLE_TO_FACE_FLOW = 20f;
+            float angleDifference = Mathf.Abs(Mathf.Abs(currentRotationEuler.y) - Mathf.Abs(targetYAngle));
+            bool isFacingFlow = angleDifference <= ANGLE_TO_FACE_FLOW;
+
+            //apply rotation
+            InputManagement inputManagement = CharacterManager.Instance.InputManagementProperty;
+            bool isMoving = inputManagement.Inputs.PaddleLeft || inputManagement.Inputs.PaddleRight ||
+                            Mathf.Abs(inputManagement.Inputs.RotateLeft) > 0.1f ||
+                            Mathf.Abs(inputManagement.Inputs.RotateRight) > 0.1f;
+            kayakController.transform.rotation = Quaternion.Lerp(currentRotation, targetRotation,
+                isMoving ? _rotationLerpWhenMoving :
+                isFacingFlow ? _rotationLerpWhenInDirection : _rotationLerpWhenNotInDirection);
+
+            //apply velocity by multiplying current by speed
+            Vector3 velocity = kayakController.Rigidbody.velocity;
+            float speed = _speed * (isFacingFlow ? _speed : _speed * _speedNotFacingMultiplier);
+
+            kayakController.Rigidbody.velocity = new Vector3(
+                velocity.x + speed * Mathf.Sign(velocity.x),
+                velocity.y,
+                velocity.z + speed * Mathf.Sign(velocity.z));
+                    
+            //balance
+            double value = _balanceValue * UnityEngine.Random.Range(_balanceValueRandomMultiplierRange.x, _balanceValueRandomMultiplierRange.y);
+            CharacterManager.Instance.AddBalanceValueToCurrentSide(value);
         }
 
         /// <summary>
