@@ -14,7 +14,7 @@ namespace GPEs.Checkpoint
         [Header("References"), SerializeField] private ZoneManager _zoneManager;
         [SerializeField] private Transform _targetRespawnTransform;
         [SerializeField] private ParticleSystem _activationParticles;
-        public Checkpoint NextCheckPoint;
+        public GameObject NextCheckPointDirection;
 
         private StudioEventEmitter _emitter;
 

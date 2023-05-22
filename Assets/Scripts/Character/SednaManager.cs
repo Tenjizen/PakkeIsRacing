@@ -36,19 +36,19 @@ public class SednaManager : MonoBehaviour
 
     public void SednaRespawn()
     {
-        if (CharacterManager.Instance.CheckpointManagerProperty.CurrentCheckpoint.NextCheckPoint != null)
+        if (CharacterManager.Instance.CheckpointManagerProperty.CurrentCheckpoint.NextCheckPointDirection != null)
         {
             TimerSednaIsMoving = 0;
             SednaIsMoving = true;
             SednaGameObject.transform.position = SednaTargetRespawnPlayer.transform.position;
             SednaGameObject.SetActive(true);
-            LookAt.transform.position = CharacterManager.Instance.CheckpointManagerProperty.CurrentCheckpoint.NextCheckPoint.transform.position;
+            LookAt.transform.position = CharacterManager.Instance.CheckpointManagerProperty.CurrentCheckpoint.NextCheckPointDirection.transform.position;
         }
     }
 
     public void PlayerRespawn()
     {
-        if (CharacterManager.Instance.CheckpointManagerProperty.CurrentCheckpoint.NextCheckPoint == null)
+        if (CharacterManager.Instance.CheckpointManagerProperty.CurrentCheckpoint.NextCheckPointDirection == null)
         {
             return;
         }
@@ -66,7 +66,7 @@ public class SednaManager : MonoBehaviour
             }
             else
             {
-                SednaGameObject.transform.LookAt(CharacterManager.Instance.CheckpointManagerProperty.CurrentCheckpoint.NextCheckPoint.transform);
+                SednaGameObject.transform.LookAt(CharacterManager.Instance.CheckpointManagerProperty.CurrentCheckpoint.NextCheckPointDirection.transform);
             }
         }
         else
