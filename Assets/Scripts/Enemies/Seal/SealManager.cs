@@ -5,7 +5,6 @@ using Character;
 using Enemies.Data;
 using Fight;
 using GPEs;
-using Tools.HideIf;
 using UnityEditor;
 using UnityEngine;
 using WaterAndFloating;
@@ -45,6 +44,8 @@ namespace Enemies.Seal
         [Header("Path"), SerializeField] private BezierSpline _splinePath;
         [SerializeField] private List<ControlPoint> _sealCheckpoints;
         [Header("Data"), SerializeField] private SealData _data;
+        [field: SerializeField, Header("VFX")] public ParticleSystem HitParticles { get; private set; }
+
 
         private float _currentSplinePosition;
         private int _checkpointsIndex;
@@ -249,10 +250,18 @@ namespace Enemies.Seal
         
         #endregion
 
+        public override void Hit(Projectile projectile, GameObject owner)
+        {
+            base.Hit(projectile, owner);
+
+            HitParticles.Play();
+        }
+
         protected override void Die()
         {
             base.Die();
             
+            HitParticles.Play();
             _isMoving = false;
             
             SetPlayerExperience(CharacterManager.Instance.ExperienceManagerProperty.Data.ExperienceGainedAtEnemySeal);
