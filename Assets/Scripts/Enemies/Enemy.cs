@@ -35,6 +35,7 @@ namespace Enemies
             else
             {
                 CharacterManager.Instance.EnemyUIManager.ActiveEnemyUI(EnemySprite);
+                CharacterManager.Instance.EnemyUIManager.SetScreenPositionFromEnemyPosition(transform.position);
             }
         }
 

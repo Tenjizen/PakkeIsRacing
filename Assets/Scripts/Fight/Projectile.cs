@@ -41,6 +41,7 @@ namespace Fight
             }
 
             CurrentTime += Time.deltaTime;
+            Vector3 position = transform.position;
             
             //height
             float percentage = CurrentTime <= TimeToReachApexFromBase
@@ -49,7 +50,7 @@ namespace Fight
             if (percentage >= 1)
             {
                 PositionToReach = Target.position; 
-                return;
+                goto UpdateEnd;
             }
             
             percentage = Mathf.Clamp01(percentage);
@@ -57,15 +58,16 @@ namespace Fight
                 ? Data.ArcMovementParameters.BaseToApexCurve.Evaluate(percentage)
                 : Data.ArcMovementParameters.ApexToTargetCurve.Evaluate(percentage);
 
-            Vector3 position = transform.position;
             float height = Target.position.y + percentage * ApexHeight;
             PositionToReach = new Vector3(position.x, height, position.z);
-            transform.position = Vector3.Lerp(transform.position, PositionToReach,0.05f);
             
+            UpdateEnd:
             //velocity
             Vector3 direction = (Target.position - position).normalized;
             Vector3 desiredVelocity = direction * Data.ArcMovementParameters.ArcMovementSpeed;
             RigidbodyProjectile.velocity = desiredVelocity;
+            
+            transform.position = Vector3.Lerp(position, PositionToReach,0.05f);
         }
 
         public void SetOwner(GameObject owner)

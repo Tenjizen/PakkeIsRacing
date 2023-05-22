@@ -8,13 +8,33 @@ namespace UI
     public class UIEnemyManager : MonoBehaviour
     {
         [SerializeField] private List<Image> _uiImages;
+        [SerializeField] private RectTransform _gauge;
+        [SerializeField] private RectTransform _canvas;
+        [SerializeField] private Vector2 _offset;
         [SerializeField] private Image _lifeGauge;
         [SerializeField] private Image _enemyIconImage;
         [ReadOnly] public bool IsActive;
-    
+
+        private Dictionary<Image, float> _imagesDictionary = new Dictionary<Image, float>();
+
         private void Start()
         {
-            _uiImages.ForEach(x => x.DOFade(0,0));
+            Image[] array = _gauge.GetComponentsInChildren<Image>();
+            foreach (Image image in array)
+            {
+                _imagesDictionary.Add(image, image.color.a);
+                image.DOFade(0, 0);
+            }
+        }
+
+        public void SetScreenPositionFromEnemyPosition(Vector3 enemyPosition)
+        {
+            Vector3 viewportPosition = Camera.main.WorldToViewportPoint(enemyPosition);
+            Vector2 canvasPosition = new Vector2(
+                (viewportPosition.x - 0.5f) * _canvas.sizeDelta.x,
+                (viewportPosition.y - 0.5f) * _canvas.sizeDelta.y
+            );
+            _gauge.anchoredPosition = canvasPosition + _offset;
         }
 
         public void SetGauge(float life, float maxLife)
@@ -31,8 +51,11 @@ namespace UI
             }
             
             IsActive = true;
-            _uiImages.ForEach(x => x.DOKill());
-            _uiImages.ForEach(x => x.DOFade(1,0.3f));
+            foreach (var image in _imagesDictionary)
+            {
+                image.Key.DOKill();
+                image.Key.DOFade(image.Value,0.3f);
+            }
             _enemyIconImage.sprite = icon;
 
         }
@@ -44,8 +67,11 @@ namespace UI
             }
             
             IsActive = false;
-            _uiImages.ForEach(x => x.DOKill());
-            _uiImages.ForEach(x => x.DOFade(0,0.15f));
+            foreach (var image in _imagesDictionary)
+            {
+                image.Key.DOKill();
+                image.Key.DOFade(0,0.3f);
+            }
         }
     }
 }
