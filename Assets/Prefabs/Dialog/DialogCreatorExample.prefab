@@ -117,14 +117,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5964cfef310da04bb6a143c30bab8e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnumState: 0
+  EnumState: 1
   _splinePath: {fileID: 185075369292387095}
   _playerTransform: {fileID: 0}
   MovingValue: 0.3
   SpeedLerpToMovingValue: 0.1
-  PosSednaDialog: {fileID: 0}
+  PosSednaDialog:
+  - {fileID: 0}
+  - {fileID: 0}
   RemoveAtYPosValue: 1.5
-  MinimumVelocity: 3
+  MinimumVelocity: 2
+  directions:
+  - {x: 1, y: 0, z: 0}
+  - {x: -1, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
   EndDialog: 0
 --- !u!1 &4415997587140153625
 GameObject:
