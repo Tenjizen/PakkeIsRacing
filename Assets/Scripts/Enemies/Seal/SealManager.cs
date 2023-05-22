@@ -21,10 +21,18 @@ namespace Enemies.Seal
     }
     
     [Serializable]
+    public enum StopType
+    {
+        Time = 0,
+        Trigger = 1
+    }
+    
+    [Serializable]
     public struct ControlPoint
     {
         [Range(0, 1)] public float Position;
         public PointType Type;
+        public StopType StopType;
 
         [Range(0.25f, 4f)] public float SpeedMultiplier;
         [Range(0, 30f)] public float StopTime;
@@ -41,6 +49,7 @@ namespace Enemies.Seal
         private float _currentSplinePosition;
         private int _checkpointsIndex;
         private bool _isMoving;
+        private bool _isWaitingForTrigger;
         private bool _launchedWave;
         private float _currentStopTimer;
         private float _speedMultiplier;
@@ -61,6 +70,7 @@ namespace Enemies.Seal
             }
             
             _playerTrigger.OnPlayerEntered.AddListener(LaunchMovement);
+            _playerTrigger.OnPlayerEntered.AddListener(TriggerEnter);
 
             if (_splinePath == null)
             {
@@ -109,6 +119,11 @@ namespace Enemies.Seal
 
         #region Seal Controller
 
+        private void TriggerEnter()
+        {
+            _isWaitingForTrigger = false;
+        }
+        
         private void LaunchMovement()
         {
             if (_isMoving || CurrentLife <= 0)
@@ -142,6 +157,11 @@ namespace Enemies.Seal
                     break;
                 case PointType.Stop:
                     _currentStopTimer = controlPoint.StopTime;
+                    if (controlPoint.StopType == StopType.Trigger)
+                    {
+                        _isWaitingForTrigger = true;
+                        _currentStopTimer = 1f;
+                    }
                     break;
             }
             
@@ -153,7 +173,10 @@ namespace Enemies.Seal
         
         private void HandleStop()
         {
-            _currentStopTimer -= Time.deltaTime;
+            if (_isWaitingForTrigger == false)
+            {
+                _currentStopTimer -= Time.deltaTime;
+            }
             
             Vector3 center = _splinePath.GetPoint(_sealCheckpoints[_checkpointsIndex-1].Position);
             RotateAroundPoint(center);
@@ -248,7 +271,7 @@ namespace Enemies.Seal
                     _sealCheckpoints[i].Type == PointType.Speed ? $"{_sealCheckpoints[i].SpeedMultiplier}" : $"{_sealCheckpoints[i].StopTime}");
                 if (_sealCheckpoints[i].Type == PointType.Stop)
                 {
-                    Handles.color = new Color(0.69f, 0.33f, 0.28f, 0.43f);
+                    Handles.color = _sealCheckpoints[i].StopType == StopType.Time ? new Color(0.69f, 0.33f, 0.28f, 0.43f) : new Color(0.93f, 0.35f, 1f, 0.47f);
                     Handles.DrawSolidDisc(position,Vector3.up, _data.StopMovementRadius);
                 }
             }
