@@ -67,6 +67,7 @@ Transform:
   - {fileID: 5653984854915891797}
   - {fileID: 5217800695587321558}
   - {fileID: 798595114084665911}
+  - {fileID: 2403579588643699581}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -128,7 +129,7 @@ MonoBehaviour:
   _zoneManager: {fileID: 0}
   _targetRespawnTransform: {fileID: 5824427334280982204}
   _activationParticles: {fileID: 5389502103451266307}
-  NextCheckPoint: {fileID: 0}
+  NextCheckPointDirection: {fileID: 6145060315005018362}
 --- !u!114 &5223573444733396227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5029,6 +5030,37 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &6145060315005018362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2403579588643699581}
+  m_Layer: 0
+  m_Name: NextCheckpointDirection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2403579588643699581
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6145060315005018362}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4285338905635752385}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &282825231515106426
 PrefabInstance:
   m_ObjectHideFlags: 0
