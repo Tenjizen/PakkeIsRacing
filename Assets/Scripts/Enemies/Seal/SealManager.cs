@@ -271,7 +271,7 @@ namespace Enemies.Seal
                     _sealCheckpoints[i].Type == PointType.Speed ? $"{_sealCheckpoints[i].SpeedMultiplier}" : $"{_sealCheckpoints[i].StopTime}");
                 if (_sealCheckpoints[i].Type == PointType.Stop)
                 {
-                    Handles.color = _sealCheckpoints[i].StopType == StopType.Time ? new Color(0.69f, 0.33f, 0.28f, 0.43f) : new Color(0.93f, 0.35f, 1f, 0.47f);
+                    Handles.color = _sealCheckpoints[i].StopType == StopType.Time ? new Color(0.69f, 0.33f, 0.28f, 0.43f) : new Color(0.55f, 1f, 0.4f, 0.24f);
                     Handles.DrawSolidDisc(position,Vector3.up, _data.StopMovementRadius);
                 }
             }
