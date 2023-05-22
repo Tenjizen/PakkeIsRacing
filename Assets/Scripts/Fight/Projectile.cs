@@ -24,6 +24,7 @@ namespace Fight
         protected float TimeToReachTarget;
         protected float TimeToReachApexFromBase, TimeToReachTargetFromApex;
         protected float ApexHeight;
+        protected Vector3 PositionToReach;
         
         private float _lifetime;
 
@@ -45,8 +46,9 @@ namespace Fight
             float percentage = CurrentTime <= TimeToReachApexFromBase
                 ? CurrentTime / TimeToReachApexFromBase
                 : (CurrentTime - TimeToReachApexFromBase) / TimeToReachTargetFromApex;
-            if (percentage > 1)
+            if (percentage >= 1)
             {
+                PositionToReach = Target.position; 
                 return;
             }
             
@@ -57,7 +59,8 @@ namespace Fight
 
             Vector3 position = transform.position;
             float height = Target.position.y + percentage * ApexHeight;
-            transform.position = new Vector3(position.x, height, position.z);
+            PositionToReach = new Vector3(position.x, height, position.z);
+            transform.position = Vector3.Lerp(transform.position, PositionToReach,0.05f);
             
             //velocity
             Vector3 direction = (Target.position - position).normalized;
