@@ -68,6 +68,7 @@
 		<relationship name="modules">
 			<destination>{a9cf285f-086f-4b1b-b3c1-746e412fdd12}</destination>
 			<destination>{08fd32ca-eddb-4376-ada9-4ece4fdc6e23}</destination>
+			<destination>{d26af3cc-9db4-40af-98ba-934808fa60b8}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{25f2d07c-1a0f-44aa-9ff5-b5b071563014}</destination>
@@ -82,6 +83,7 @@
 		<relationship name="modules">
 			<destination>{a9cf285f-086f-4b1b-b3c1-746e412fdd12}</destination>
 			<destination>{08fd32ca-eddb-4376-ada9-4ece4fdc6e23}</destination>
+			<destination>{d26af3cc-9db4-40af-98ba-934808fa60b8}</destination>
 		</relationship>
 		<relationship name="preset">
 			<destination>{ef15253d-a1c7-49b9-a1de-6ebc924fa38d}</destination>
@@ -120,6 +122,14 @@
 		</property>
 		<relationship name="event">
 			<destination>{1715955c-b874-454b-9a34-0a2b675c16da}</destination>
+		</relationship>
+	</object>
+	<object class="EventSound" id="{d26af3cc-9db4-40af-98ba-934808fa60b8}">
+		<property name="start">
+			<value>2</value>
+		</property>
+		<relationship name="event">
+			<destination>{7216ced1-1a4f-43ca-9dbf-388106ca9bcb}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{25f2d07c-1a0f-44aa-9ff5-b5b071563014}">
