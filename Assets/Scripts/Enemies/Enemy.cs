@@ -26,9 +26,16 @@ namespace Enemies
         [field:SerializeField, ReadOnly] public bool IsPossessed { get; set; }
         [field:SerializeField] public GameObject PossessedVisualGameObject { get; set; }
 
+        private MeshRenderer _meshRenderer;
+
+        private void Awake()
+        {
+            _meshRenderer = GetComponentInChildren<MeshRenderer>();
+        }
+
         protected void HandlePlayerDistanceToSetUI(Transform player, float distance)
         {
-            if (Vector3.Distance(transform.position, player.position) > distance)
+            if (Vector3.Distance(transform.position, player.position) > distance || _meshRenderer.isVisible == false)
             {
                 CharacterManager.Instance.EnemyUIManager.DisableEnemyUI();
             }
