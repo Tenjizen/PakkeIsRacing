@@ -183,27 +183,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
       propertyPath: m_LocalScale.x
-      value: 8.565787
+      value: 7.127249
       objectReference: {fileID: 0}
     - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
       propertyPath: m_LocalScale.y
-      value: 8.565787
+      value: 7.127249
       objectReference: {fileID: 0}
     - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
       propertyPath: m_LocalScale.z
-      value: 8.565787
+      value: 7.127249
       objectReference: {fileID: 0}
     - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -22.311499
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.0299668
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 35.10456
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -238,6 +238,12 @@ PrefabInstance:
 --- !u!4 &7982456587029522066 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 410056, guid: e2550dae06524a94bbc4bcdf375a88b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7982456587029145434}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7982456587047819504 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19873706, guid: e2550dae06524a94bbc4bcdf375a88b9,
     type: 3}
   m_PrefabInstance: {fileID: 7982456587029145434}
   m_PrefabAsset: {fileID: 0}
@@ -327,7 +333,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _particleWhenHitWater
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7982456587047819504}
     - target: {fileID: 2453446874202040153, guid: 81bd7ce35f9b3c4419b0fb054e23afbb,
         type: 3}
       propertyPath: _circularWaveData.Distance

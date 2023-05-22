@@ -19,12 +19,14 @@ namespace UI.WeaponWheel
         [SerializeField] private Button _button;
         [SerializeField] private Projectile _projectile;
         [SerializeField] private Sprite _weaponIcon;
+        [SerializeField] private GameObject _lock;
         [SerializeField] private List<GameObject> _weaponObjectToSet;
         
         public WeaponType Type;
         public bool IsPaddle;
         
         public bool IsUnlocked;
+        public bool IsLocked;
         [ReadOnly] public bool IsSelected;
         
         [Header("Events")] public UnityEvent OnSelected = new UnityEvent();
@@ -35,11 +37,14 @@ namespace UI.WeaponWheel
         {
             _characterManager = CharacterManager.Instance;
             _weaponObjectToSet.ForEach(x => x.SetActive(IsUnlocked));
+           
+            _lock.SetActive(false);
+            IsLocked = false;
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (IsUnlocked == false)
+            if (IsUnlocked == false )
             {
                 return;
             }
@@ -55,6 +60,11 @@ namespace UI.WeaponWheel
 
         public void Hover()
         {
+            if (IsLocked)
+            {
+                return;
+            }
+            
             IsSelected = true;
             _animator.SetBool("Hover",true);
             _button.Select();
@@ -79,7 +89,7 @@ namespace UI.WeaponWheel
         {
             _characterManager = CharacterManager.Instance;
 
-            if (IsUnlocked == false || _projectile == null)
+            if (IsUnlocked == false || _projectile == null || IsLocked)
             {
                 _characterManager.CurrentStateBaseProperty.LaunchNavigationState();
                 return;
@@ -97,5 +107,20 @@ namespace UI.WeaponWheel
             CameraCombatState cameraCombatState = new CameraCombatState();
             _characterManager.CameraManagerProperty.SwitchState(cameraCombatState);
         }
+
+        #region Lock
+
+        public void Lock(bool isLock)
+        {
+            if (IsUnlocked == false)
+            {
+                return;
+            }
+            
+            IsLocked = isLock;
+            _lock.SetActive(IsLocked);
+        }
+
+        #endregion
     }
 }
