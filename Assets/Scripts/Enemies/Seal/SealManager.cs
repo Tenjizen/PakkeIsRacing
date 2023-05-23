@@ -33,8 +33,8 @@ namespace Enemies.Seal
         public PointType Type;
         public StopType StopType;
 
-        [Range(0.25f, 4f)] public float SpeedMultiplier;
-        [Range(0, 30f)] public float StopTime;
+        [Range(0f, 4f)] public float SpeedMultiplier;
+        [Range(0, 60f)] public float StopTime;
     }
     
     public class SealManager : Enemy
