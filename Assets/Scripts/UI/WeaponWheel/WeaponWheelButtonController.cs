@@ -25,9 +25,9 @@ namespace UI.WeaponWheel
         public WeaponType Type;
         public bool IsPaddle;
         
-        public bool CanBeUnlocked;
-        public bool IsUnlocked;
-        public bool IsLocked;
+        [ReadOnly] public bool CanBeUnlocked;
+        [ReadOnly] public bool IsUnlocked;
+        [ReadOnly] public bool IsLocked;
         [ReadOnly] public bool IsSelected;
         
         [Header("Events")] public UnityEvent OnSelected = new UnityEvent();
