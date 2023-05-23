@@ -15,7 +15,6 @@ namespace Sedna
         [Header("Path"), SerializeField] private BezierSpline _splinePath;
         [SerializeField] Transform _playerTransform;
         private float _currentSplinePosition;
-        private Quaternion _targetRotation;
 
         public float MovingValue = 0.005f;
         public float SpeedLerpToMovingValue = 0.1f;
@@ -29,6 +28,14 @@ namespace Sedna
         private GameObject _target;
         private bool _startMoving = false;
 
+        private int _index = 0;
+        public Vector3[] directions = { Vector3.right, Vector3.left, Vector3.forward };
+        public bool EndDialog = false;
+
+
+        public Rigidbody _rb;
+        public float LerpMovingPos = 3;
+
 
         private void Start()
         {
@@ -36,42 +43,65 @@ namespace Sedna
             {
                 _rbKayak = CharacterManager.Instance.KayakControllerProperty.Rigidbody;
             }
-            if (EnumState == State.Moving)
-            {
-                _currentSplinePosition = 0;
 
-                if (_splinePath == null)
-                {
-                    return;
-                }
-                splinePos = _splinePath.transform;
-                Vector3 splinePosition = _splinePath.GetPoint(_currentSplinePosition);
-                transform.position = new Vector3(splinePosition.x, transform.position.y, splinePosition.z);
+            switch (EnumState)
+            {
+                case State.Moving:
+                    _currentSplinePosition = 0;
+
+                    if (_splinePath == null)
+                    {
+                        return;
+                    }
+                    splinePos = _splinePath.transform;
+                    Vector3 splinePosition = _splinePath.GetPoint(_currentSplinePosition);
+                    transform.position = new Vector3(splinePosition.x, transform.position.y, splinePosition.z);
+                    break;
+
+
+                case State.Dialog:
+                    Vector3 lookPos = _playerTransform.position - transform.position;
+                    lookPos.y = 0;
+
+                    Quaternion rota = Quaternion.LookRotation(lookPos);
+                    transform.rotation = rota;
+
+                    var pos = transform.position;
+                    if (_target == null)
+                    {
+                        SetTarget();
+                    }
+                    pos = _target.transform.position;
+
+                    pos.y = CharacterManager.Instance.SednaManagerProperty.Waves.GetHeight(pos) - RemoveAtYPosValue - 10;
+                    transform.position = pos;
+                    break;
+
+                default:
+                    break;
             }
         }
-        bool canMove = false;
-        private void Update()
+        bool _goodHeight = false;
+        private void FixedUpdate()
         {
             if (EndDialog == true)
             {
                 Quaternion rota = transform.rotation;
                 rota = Quaternion.Euler(-180, 0, 0);
                 transform.rotation = Quaternion.Slerp(transform.rotation, rota, 0.02f * Time.deltaTime * 100);
-                if (transform.eulerAngles.x >= 60 && transform.eulerAngles.x > 0 || transform.eulerAngles.x <= -60 && transform.eulerAngles.x < 0) canMove = true;
 
-                if (transform.eulerAngles.x <= 35 && transform.eulerAngles.x > 0 && canMove == true
-                    || transform.eulerAngles.x >= -35 && transform.eulerAngles.x < 0 && canMove == true)
+                if (transform.eulerAngles.x <= 45 && transform.eulerAngles.x > 0 
+                    || transform.eulerAngles.x >= -45 && transform.eulerAngles.x < 0 )
                 {
                     var pos = transform.position;
                     pos.y = -15;
-                    pos = Vector3.Lerp(transform.position, pos, 0.01f * Time.deltaTime * 100);
+                    pos = Vector3.Lerp(transform.position, pos,  Time.deltaTime * 1);
                     transform.position = pos;
                 }
 
                 if (transform.position.y <= -10)
                 {
                     EndDialog = false;
-                    canMove = false;
                     this.gameObject.SetActive(false);
                 }
             }
@@ -82,47 +112,40 @@ namespace Sedna
                 switch (EnumState)
                 {
                     case State.Moving:
-
-
-
-                        break;
-                    case State.Dialog:
-                        if (Mathf.Abs(_rbKayak.velocity.x) + Mathf.Abs(_rbKayak.velocity.z) > MinimumVelocity)
+                        if (_currentSplinePosition < 1)
                         {
-
-                            if (_target == null || _startMoving == false)
-                            {
-                                _target = GetClosestPoint(transform.position);
-                                _startMoving = true;
-                            }
-                            foreach (Vector3 direction in directions)
-                            {
-                                // Convertir la direction en une direction normalisée
-                                Vector3 normalizedDirection = direction.normalized;
-
-                                // Effectuer le raycast dans la direction spécifiée
-                                RaycastHit hit;
-                                if (Physics.Raycast(transform.position, normalizedDirection, out hit, 3))
-                                {
-                                    if (hit.collider.gameObject.GetComponent<KayakController>() != null)
-                                    {
-                                        return;
-                                    }
-                                    // Le raycast a touché un objet, faire quelque chose en conséquence
-                                    Debug.Log("Raycast hit: " + hit.collider.gameObject.name);
-                                    Debug.Log(direction);
-                                    //if(direction == Vector3.forward)
-                                    //if(direction == Vector3.right)
-                                    //    _target = PosSednaDialog[]
-                                    _target = PosSednaDialog[index++ % PosSednaDialog.Count];
-                                }
-                            }
-
+                            ManageMovementInSpline();
                         }
+                        else
+                        {
+                            Moving();
+                        }
+                        break;
 
+                    case State.Dialog:
+                        if (transform.position.y < (CharacterManager.Instance.SednaManagerProperty.Waves.GetHeight(transform.position) - RemoveAtYPosValue) - 0.05f && _goodHeight == false)
+                        {
+                            Vector3 currentPosition = _target.transform.position;
 
+                            float newY = Mathf.Lerp(transform.position.y, CharacterManager.Instance.SednaManagerProperty.Waves.GetHeight(transform.position) - RemoveAtYPosValue, 0.01f * Time.deltaTime * 100);
 
+                            transform.position = Vector3.Lerp(transform.position, new Vector3(currentPosition.x, newY, currentPosition.z), Time.fixedDeltaTime * 100);
+                            //var targetPosition = Vector3.Lerp(transform.position, new Vector3(currentPosition.x, newY, currentPosition.z), Time.fixedDeltaTime * LerpMovingPos);
+                            //var targetPosition = new Vector3(currentPosition.x, newY, currentPosition.z) * Time.fixedDeltaTime * LerpMovingPos;
+                            //var targetPosition = new Vector3(currentPosition.x, newY, currentPosition.z) * Time.fixedDeltaTime * LerpMovingPos;
+                            //_rb.MovePosition(targetPosition);
 
+                            if (Mathf.Abs(_rbKayak.velocity.x) + Mathf.Abs(_rbKayak.velocity.z) > MinimumVelocity)
+                            {
+                                var targetRota = _playerTransform.eulerAngles;
+                                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(targetRota.x + 65, targetRota.y, targetRota.z), 0.02f * Time.deltaTime * 100);
+                            }
+                        }
+                        else
+                        {
+                            _goodHeight = true;
+                            Moving();
+                        }
                         break;
                     default:
                         break;
@@ -130,48 +153,78 @@ namespace Sedna
             }
 
         }
-        int index = 0;
-        public Vector3[] directions = { Vector3.right, Vector3.left, Vector3.forward };
-        private void FixedUpdate()
+
+        private void Moving()
         {
-            if (EndDialog == false)
+            if (Mathf.Abs(_rbKayak.velocity.x) + Mathf.Abs(_rbKayak.velocity.z) > MinimumVelocity)
             {
-                switch (EnumState)
+
+                //Vector3 directionTarget = _target.transform.position - transform.position;
+
+                var pos = transform.position;
+                if (_target != null)
                 {
-                    case State.Moving:
-                        ManageMovement();
-                        break;
-                    case State.Dialog:
-
-                        if (Mathf.Abs(_rbKayak.velocity.x) + Mathf.Abs(_rbKayak.velocity.z) > MinimumVelocity)
-                        {
-                            var pos = transform.position;
-                            if (_target != null)
-                            {
-                                pos = _target.transform.position;
-                            }
-
-                            pos.y = CharacterManager.Instance.SednaManagerProperty.Waves.GetHeight(pos) - RemoveAtYPosValue;
-                            transform.position = Vector3.Lerp(transform.position, pos, 0.03f * Time.deltaTime * 100);
-
-                            var targetRota = _playerTransform.eulerAngles;
-                            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(targetRota.x + 65, targetRota.y, targetRota.z), 0.02f * Time.deltaTime * 100);
-                        }
-                        else
-                        {
-                            _startMoving = false;
-
-                            var lookPos = _playerTransform.position - transform.position;
-                            lookPos.y = 0;
-
-                            var rota = Quaternion.LookRotation(lookPos);
-                            transform.rotation = Quaternion.Slerp(transform.rotation, rota, 0.05f * Time.deltaTime * 100);
-                        }
-
-                        break;
-                    default:
-                        break;
+                    //directionTarget = _target.transform.position - transform.position;
+                    pos = _target.transform.position;
                 }
+
+                //directionTarget.y = CharacterManager.Instance.SednaManagerProperty.Waves.GetHeight(directionTarget) - RemoveAtYPosValue;
+                //directionTarget.Normalize();
+
+                //pos.x += directionTarget.x * (Mathf.Abs(_rbKayak.velocity.x) + Mathf.Abs(_rbKayak.velocity.z)) * Time.fixedDeltaTime;
+                pos.y = CharacterManager.Instance.SednaManagerProperty.Waves.GetHeight(pos) - RemoveAtYPosValue;
+                //pos.z += directionTarget.z * (Mathf.Abs(_rbKayak.velocity.x) + Mathf.Abs(_rbKayak.velocity.z)) * Time.fixedDeltaTime;
+
+                //transform.position = Vector3.Lerp(transform.position, pos, Time.fixedDeltaTime / 0.5f);
+                transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime * LerpMovingPos);
+
+                //var targetPosition = pos * LerpMovingPos * Time.fixedDeltaTime ;
+
+
+                //transform.position = pos;
+                //_rb.MovePosition(targetPosition);
+
+
+
+                var targetRota = _playerTransform.eulerAngles;
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(targetRota.x + 65, targetRota.y, targetRota.z), 0.02f * Time.deltaTime * 100);
+
+                SetTarget();
+                foreach (Vector3 direction in directions)
+                {
+                    Vector3 normalizedDirection = direction.normalized;
+
+                    RaycastHit hit;
+                    if (Physics.Raycast(transform.position, normalizedDirection, out hit, 3))
+                    {
+                        if (hit.collider.gameObject.GetComponent<KayakController>() != null)
+                        {
+                            return;
+                        }
+                        //if(direction == Vector3.forward)
+                        //if(direction == Vector3.right)
+                        //    _target = PosSednaDialog[]
+                        _target = PosSednaDialog[_index++ % PosSednaDialog.Count];
+                    }
+                }
+            }
+            else
+            {
+                _startMoving = false;
+
+                Vector3 lookPos = _playerTransform.position - transform.position;
+                lookPos.y = 0;
+
+                Quaternion rota = Quaternion.LookRotation(lookPos);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rota, 0.05f * Time.deltaTime * 100);
+            }
+        }
+        private void SetTarget()
+        {
+            if (_target == null || _startMoving == false)
+            {
+                _target = GetClosestPoint(transform.position);
+                _startMoving = true;
             }
         }
 
@@ -196,7 +249,7 @@ namespace Sedna
             return bestPoint;
         }
 
-        private void ManageMovement()
+        private void ManageMovementInSpline()
         {
             _currentSplinePosition += MovingValue * Time.deltaTime;
             _currentSplinePosition = Mathf.Clamp01(_currentSplinePosition);
@@ -209,28 +262,27 @@ namespace Sedna
 
             Transform t = transform;
 
+
+
             Vector3 position = Vector3.Lerp(t.position, _splinePath.GetPoint(_currentSplinePosition), SpeedLerpToMovingValue * Time.deltaTime * 100);
             t.position = position;
+            //rotation
+            Vector3 pointB = _splinePath.GetPoint(Mathf.Clamp01(_currentSplinePosition + 0.01f));
+            pointB.y = 0;
+            Quaternion rota = Quaternion.LookRotation(pointB);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(rota.x + 65, rota.y, rota.z), 0.05f * Time.deltaTime * 100);
+            //Quaternion.Slerp(transform.rotation, Quaternion.Euler(targetRota.x + 65, targetRota.y, targetRota.z), 0.02f * Time.deltaTime * 100)
 
-            if (_currentSplinePosition >= 1)
-            {
-                //_parent.SetActive(false);
+            //Vector3 rotation = t.transform.rotation.eulerAngles;
+            //t.LookAt(pointB);
+            //t.rotation = Quaternion.Euler(new Vector3(rotation.x, Mathf.Lerp(rotation.y, t.rotation.eulerAngles.y, 0.1f * Time.deltaTime * 100), rotation.z));
 
-                Vector3 rotation = t.transform.rotation.eulerAngles;
-                t.LookAt(_playerTransform);
-                t.rotation = Quaternion.Euler(new Vector3(rotation.x, Mathf.Lerp(rotation.y, t.rotation.eulerAngles.y, 0.1f * Time.deltaTime * 100), rotation.z));
-            }
-            else
-            {
-                //rotation
-                Vector3 pointB = _splinePath.GetPoint(Mathf.Clamp01(_currentSplinePosition + 0.01f));
-                Vector3 rotation = t.transform.rotation.eulerAngles;
-                t.LookAt(pointB);
-                t.rotation = Quaternion.Euler(new Vector3(rotation.x, Mathf.Lerp(rotation.y, t.rotation.eulerAngles.y, 0.1f * Time.deltaTime * 100), rotation.z));
-            }
+
+            //Vector3 lookPos = _playerTransform.position - transform.position;
+            //lookPos.y = 0;
+
         }
 
-        public bool EndDialog = false;
         public void Enddialog()
         {
             EndDialog = true;
