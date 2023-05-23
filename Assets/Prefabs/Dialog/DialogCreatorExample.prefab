@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2235547686883313154}
-  - component: {fileID: 4065832146620445264}
   - component: {fileID: 185075369292387095}
   m_Layer: 0
   m_Name: Sedna path
@@ -33,22 +32,6 @@ Transform:
   m_Father: {fileID: 4415997587140153627}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!54 &4065832146620445264
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2384751538026536584}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0.01
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &185075369292387095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,6 +64,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6672999505881812473}
   - component: {fileID: 2983803235730955893}
+  - component: {fileID: 3513039167352294814}
   m_Layer: 0
   m_Name: Sedna
   m_TagString: Untagged
@@ -132,6 +116,24 @@ MonoBehaviour:
   - {x: -1, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
   EndDialog: 0
+  _rb: {fileID: 3513039167352294814}
+  LerpMovingPos: 10
+--- !u!54 &3513039167352294814
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2999911819472190894}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4415997587140153625
 GameObject:
   m_ObjectHideFlags: 0
