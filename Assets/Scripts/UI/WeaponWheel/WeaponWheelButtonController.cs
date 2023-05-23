@@ -25,11 +25,14 @@ namespace UI.WeaponWheel
         public WeaponType Type;
         public bool IsPaddle;
         
+        public bool CanBeUnlocked;
         public bool IsUnlocked;
         public bool IsLocked;
         [ReadOnly] public bool IsSelected;
         
         [Header("Events")] public UnityEvent OnSelected = new UnityEvent();
+        public UnityEvent OnWeaponTryUnlockButLocked = new UnityEvent();
+        public UnityEvent OnWeaponUnlocked = new UnityEvent();
         
         private CharacterManager _characterManager;
 
@@ -52,8 +55,20 @@ namespace UI.WeaponWheel
             Hover();
         }
 
+        public void SetCanBeUnlocked(bool canBeUnlocked)
+        {
+            CanBeUnlocked = true;
+        }
+        
         public void SetWeapon(bool isUnlocked)
         {
+            if (CanBeUnlocked == false)
+            {
+                OnWeaponTryUnlockButLocked.Invoke();
+                return;
+            }
+            
+            OnWeaponUnlocked.Invoke();
             _weaponObjectToSet.ForEach(x => x.SetActive(isUnlocked));
             IsUnlocked = isUnlocked;
         }

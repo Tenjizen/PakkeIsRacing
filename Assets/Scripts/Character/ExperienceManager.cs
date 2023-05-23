@@ -90,7 +90,7 @@ namespace Character
                 }
 
                 WheelButton button = CharacterManager.Instance.WeaponUIManagerProperty.Buttons.Find(x => x.ButtonController.Type == Data.WeaponLevels[i].Type);
-                button.ButtonController.SetWeapon(true);
+                button.ButtonController.SetCanBeUnlocked(true);
             }
         }
 
