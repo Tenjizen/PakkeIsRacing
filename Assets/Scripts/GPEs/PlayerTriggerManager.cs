@@ -87,18 +87,26 @@ namespace GPEs
 
         public virtual void OnDrawGizmos()
         {
-            if (_showTriggerGizmos)
+            if (_showTriggerGizmos == false)
             {
-                Gizmos.color = Color.green;
-                if (_triggerType == TriggerType.BoxTrigger)
-                {
-                    Gizmos.DrawWireCube(transform.position + _triggerOffsetPosition, _triggerBoxSize);
-                }
-                if (_triggerType == TriggerType.SphereTrigger)
-                {
-                    Gizmos.DrawWireSphere(transform.position + _triggerOffsetPosition, _triggerSphereSizeRadius);
-                }
+                return;
             }
+
+            Matrix4x4 originalMatrix = Gizmos.matrix;
+            Gizmos.matrix = this.transform.localToWorldMatrix;
+            
+            Gizmos.color = Color.green;
+            switch (_triggerType)
+            {
+                case TriggerType.BoxTrigger:
+                    Gizmos.DrawWireCube(Vector3.zero + _triggerOffsetPosition, _triggerBoxSize);
+                    break;
+                case TriggerType.SphereTrigger:
+                    Gizmos.DrawWireSphere(Vector3.zero + _triggerOffsetPosition, _triggerSphereSizeRadius);
+                    break;
+            }
+
+            Gizmos.matrix = originalMatrix;
         }
 
 #endif
