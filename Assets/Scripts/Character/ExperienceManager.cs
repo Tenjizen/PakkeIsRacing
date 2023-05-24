@@ -50,7 +50,7 @@ namespace Character
             _currentExperience += value;
             ExperienceUIManagerProperty.SetGauge(ExperienceUIManager.Gauge.Experience, _currentExperience, _currentLevelData.ExperienceNeededToComplete, 2f);
             
-            if (_currentExperience >= _currentLevelData.ExperienceNeededToComplete && _currentLevel <= Data.Levels.Count)
+            while (_currentExperience >= _currentLevelData.ExperienceNeededToComplete && _currentLevel <= Data.Levels.Count)
             {
                 LevelUp();
             }
@@ -84,7 +84,7 @@ namespace Character
             //weapons
             for (int i = 0; i < Data.WeaponLevels.Count; i++)
             {
-                if (Data.WeaponLevels[i].Level != _currentLevel)
+                if (Data.WeaponLevels[i].Level > _currentLevel)
                 {
                     continue;
                 }
