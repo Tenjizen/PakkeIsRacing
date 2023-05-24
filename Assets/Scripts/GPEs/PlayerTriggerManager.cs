@@ -46,7 +46,7 @@ namespace GPEs
             {
                 case TriggerType.BoxTrigger:
                 {
-                    int numHits = Physics.BoxCastNonAlloc(transform.position + _triggerOffsetPosition, new Vector3(_triggerBoxSize.x / 2, _triggerBoxSize.y / 2, _triggerBoxSize.z / 2), Vector3.forward, _hits, Quaternion.identity, 0f);
+                    int numHits = Physics.BoxCastNonAlloc(transform.position + _triggerOffsetPosition, new Vector3(_triggerBoxSize.x / 2, _triggerBoxSize.y / 2, _triggerBoxSize.z / 2), Vector3.forward, _hits, transform.rotation, 0f);
                     break;
                 }
                 case TriggerType.SphereTrigger:
