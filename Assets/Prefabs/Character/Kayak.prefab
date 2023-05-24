@@ -232,6 +232,8 @@ GameObject:
   - component: {fileID: 333907971529626019}
   - component: {fileID: 4950148468892883501}
   - component: {fileID: 4595948853936165718}
+  - component: {fileID: 2122146315348380069}
+  - component: {fileID: 749964286513759178}
   m_Layer: 0
   m_Name: Kayak
   m_TagString: Untagged
@@ -321,6 +323,44 @@ CapsuleCollider:
   m_Height: 3.77
   m_Direction: 2
   m_Center: {x: 0, y: 0.13, z: 0.28}
+--- !u!114 &2122146315348380069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333907971529626045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb12ca207c8fb8c41967292a1edca8fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+    Guid:
+      Data1: 1652478141
+      Data2: 1323385497
+      Data3: -1755269492
+      Data4: 1587637557
+    Path: event:/SFX/Kayak/FX_row_hull_water
+--- !u!114 &749964286513759178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333907971529626045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb12ca207c8fb8c41967292a1edca8fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+    Guid:
+      Data1: -638765913
+      Data2: 1217947207
+      Data3: -1165830249
+      Data4: 1794829881
+    Path: event:/SFX/Fx_collision_ice
 --- !u!1 &6072580230279934725
 GameObject:
   m_ObjectHideFlags: 0
