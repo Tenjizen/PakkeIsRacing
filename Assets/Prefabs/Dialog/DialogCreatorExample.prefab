@@ -101,23 +101,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5964cfef310da04bb6a143c30bab8e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnumState: 1
+  _enumState: 0
+  _posSednaDialog: []
+  _removeAtYPosValue: 0
+  _minimumPlayerVelocity: 1
+  _lerpMovingPos: 15
+  _lerpMovingRota: 5
   _splinePath: {fileID: 185075369292387095}
   _playerTransform: {fileID: 0}
   MovingValue: 0.3
   SpeedLerpToMovingValue: 0.1
-  PosSednaDialog:
-  - {fileID: 0}
-  - {fileID: 0}
-  RemoveAtYPosValue: 1.5
-  MinimumVelocity: 2
-  directions:
-  - {x: 1, y: 0, z: 0}
-  - {x: -1, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
-  EndDialog: 0
-  _rb: {fileID: 3513039167352294814}
-  LerpMovingPos: 10
+  _startMoving: 0
+  _endDialog: 0
 --- !u!54 &3513039167352294814
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -222,8 +217,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2983803235730955893}
-        m_TargetAssemblyTypeName: Sedna.CompanionFollowManager, Assembly-CSharp
-        m_MethodName: Enddialog
+        m_TargetAssemblyTypeName: Sedna.SednaDialog, Assembly-CSharp
+        m_MethodName: EndDialog
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
