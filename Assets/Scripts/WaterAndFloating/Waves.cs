@@ -421,7 +421,8 @@ namespace WaterAndFloating
         {
             Vector2 coordinate = new Vector2(vertice.x, vertice.y);
             if (_verticesAmplitudeGrowingDictionary.ContainsKey(coordinate) == false &&
-                _verticesAmplitudeCurrentGrowingDictionary.ContainsKey(coordinate) == false)
+                _verticesAmplitudeCurrentGrowingDictionary.ContainsKey(coordinate) == false && 
+                _verticesAmplitudeReducingDictionary.ContainsKey(coordinate) == false)
             {
                 _verticesAmplitudeGrowingDictionary.Add(coordinate,amplitude);
                 _verticesAmplitudeCurrentGrowingDictionary.Add(coordinate,0);
@@ -431,7 +432,7 @@ namespace WaterAndFloating
         private void ManageVerticesGrowingAmplitude()
         {
             //create lists from dictionaries
-            List<KeyValuePair<Vector2, float>> amplitudeList =        _verticesAmplitudeGrowingDictionary.ToList();
+            List<KeyValuePair<Vector2, float>> amplitudeList = _verticesAmplitudeGrowingDictionary.ToList();
             List<KeyValuePair<Vector2, float>> currentAmplitudeList = _verticesAmplitudeCurrentGrowingDictionary.ToList();
         
             //apply amplitude to vertices

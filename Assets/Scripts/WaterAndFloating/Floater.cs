@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using Character;
+using UnityEngine;
 
 namespace WaterAndFloating
 {
@@ -13,9 +15,15 @@ namespace WaterAndFloating
           [SerializeField] private float _waterDrag = 0.99f;
           [SerializeField] private float _waterAngularDrag = 0.5f;
 
-          [Header("Physic Render Update"), SerializeField] private Transform _playerTransform;
-          [SerializeField] private float _renderDistance;
+          [Header("Physic Render Update"), SerializeField] private float _renderDistance;
           [ReadOnly, SerializeField] private bool _isSimulated;
+          
+          private Transform _playerTransform;
+
+          private void Start()
+          {
+               _playerTransform = CharacterManager.Instance.transform;
+          }
 
           private void FixedUpdate()
           {

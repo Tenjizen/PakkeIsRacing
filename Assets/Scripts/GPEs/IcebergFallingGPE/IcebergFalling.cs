@@ -120,7 +120,7 @@ namespace IcebergFallingGPE
             Handles.DrawWireDisc(endPosition + Vector3.up*_circularWaveData.Amplitude, Vector3.up, _circularWaveData.Distance);
             
             //points
-            Gizmos.color = Color.white;
+            Gizmos.color = new Color(1f, 1f, 1f, 0.28f);
             float angleDifference = 360 / (float)_circularWaveData.NumberOfPoints;
             for (int i = 1; i <= _circularWaveData.NumberOfPoints; i++)
             {
