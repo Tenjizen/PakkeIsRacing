@@ -245,7 +245,7 @@ namespace Enemies.Seal
             Vector3 rotation = transform.rotation.eulerAngles;
             transform.LookAt(targetPositionNext);
             _targetRotation = Quaternion.Euler(new Vector3(rotation.x,transform.rotation.eulerAngles.y,rotation.z));
-            transform.rotation = Quaternion.Lerp(transform.rotation,_targetRotation,0.1f);
+            transform.rotation = Quaternion.Lerp(transform.rotation,_targetRotation,0.03f);
         }
         
         #endregion

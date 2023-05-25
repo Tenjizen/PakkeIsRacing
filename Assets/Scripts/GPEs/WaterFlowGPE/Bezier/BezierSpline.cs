@@ -66,7 +66,7 @@ namespace WaterFlowGPE.Bezier
             if (t >= 1f) {
                 if (t > 1)
                 {
-                    Debug.LogError("Tried to access a point beyond 1");
+                    //Debug.LogError("Tried to access a point beyond 1");
                 }
                 t = 1f;
                 index = _points.Length - 4;

@@ -50,7 +50,7 @@ namespace Character
             _currentExperience += value;
             ExperienceUIManagerProperty.SetGauge(ExperienceUIManager.Gauge.Experience, _currentExperience, _currentLevelData.ExperienceNeededToComplete, 2f);
             
-            while (_currentExperience >= _currentLevelData.ExperienceNeededToComplete && _currentLevel <= Data.Levels.Count)
+            while (_currentExperience >= _currentLevelData.ExperienceNeededToComplete && _currentLevel < Data.Levels.Count-1)
             {
                 LevelUp();
             }

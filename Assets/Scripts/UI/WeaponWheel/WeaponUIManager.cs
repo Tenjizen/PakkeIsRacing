@@ -7,6 +7,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI.WeaponWheel
@@ -18,7 +19,7 @@ namespace UI.WeaponWheel
 
         public List<WheelButton> Buttons;
 
-        [SerializeField] private Image _paddleArrowDownImage;
+        [SerializeField] private List<Image> _paddleArrowDownImages = new List<Image>();
         [SerializeField] private Image _cursor;
         [SerializeField] private Image _weaponIconInGame;
         [SerializeField] private Transform _cursorPivot;
@@ -214,7 +215,7 @@ namespace UI.WeaponWheel
 
         public void SetCombatWeaponUI(bool show)
         {
-            _paddleArrowDownImage.DOFade(show ? 1 : 0, 0.4f);
+            _paddleArrowDownImages.ForEach(x => x.DOFade(show ? 1 : 0, 0.4f));
             _weaponIconInGame.DOFade(show ? 1 : 0, 0.2f);
             _cursor.DOFade(show ? 1 : 0, 0.2f);
         }
