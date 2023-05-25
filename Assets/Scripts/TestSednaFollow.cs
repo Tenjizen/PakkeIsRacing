@@ -1,51 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using Character;
 using UnityEngine;
 
 public class TestSednaFollow : MonoBehaviour
 {
-    public float speed;
+    [SerializeField] private Transform _target;
+    [SerializeField, Range(0,0.2f)] private float _movementLerp;
 
-    public Rigidbody kayak;
+    private Rigidbody _kayak;
 
-
-    public GameObject target;
-
-    public float distTarget;
-
-
-    public Rigidbody rb;
-
-    void Update()
+    private void Start()
     {
-        distTarget = Vector3.Distance(target.transform.position, transform.position);
+        _kayak = CharacterManager.Instance.KayakControllerProperty.Rigidbody;
+    }
 
+    private void FixedUpdate()
+    {
+        Vector3 direction = _target.position - transform.position;
+        direction.Normalize();
 
-
-        Vector3 direction = target.transform.position - transform.position;
-        //direction.z = 0;
-
-
-
-        if (kayak.velocity.magnitude > 1)
+        if (_kayak.velocity.magnitude <= 1)
         {
-            if (distTarget < 0.5f)
-            {
-                speed = kayak.velocity.magnitude - 0.5f;
-            }
-            else if(distTarget > 5)
-            {
-                speed = kayak.velocity.magnitude + 0.5f;
-            }
-
-            direction.Normalize();
-            Vector3 movement = direction * speed;
-            rb.velocity = movement;
-
-
-            //Vector3 movement = direction * speed * Time.deltaTime;
-            //transform.position += movement;
+            return;
         }
-
+        
+        transform.position = Vector3.Lerp(transform.position, _target.position, _movementLerp);
+        
+        transform.rotation = Quaternion.Euler(new Vector3(0,_kayak.transform.rotation.eulerAngles.y,0));
     }
 }

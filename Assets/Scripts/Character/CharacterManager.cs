@@ -7,6 +7,7 @@ using Fight;
 using GPEs.Checkpoint;
 using Kayak;
 using SceneTransition;
+using Sedna;
 using Tools.SingletonClassBase;
 using UI;
 using UI.WeaponWheel;
