@@ -8,6 +8,7 @@ namespace Character.Camera.State
 
         public override void EnterState(CameraManager camera)
         {
+            _timerCameraReturnBehindBoat = CamManager.Data.TimerCameraReturnBehindBoat + 1;
             Time.timeScale = 1;
             CamManager.LastInputX = 0;
             CamManager.LastInputY = 0;
