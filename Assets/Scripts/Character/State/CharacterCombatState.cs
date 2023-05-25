@@ -123,15 +123,10 @@ namespace Character.State
                     }
                     
                     //auto aim
-                    IHittable hittable = CharacterManagerRef.Parameters.AutoAim ? GetAutoAimHittable() : null;
+                    IHittable hittable = GetAutoAimHittable();
                     if (hittable != null)
                     {
-                        direction = hittable.Transform.position - CharacterManagerRef.transform.position;
-                    }
-
-                    if (_hittable != null && CharacterManagerRef.Parameters.AutoAim)
-                    {
-                        projectile.Launch(_hittable.Transform);
+                        projectile.Launch(hittable.Transform);
                     }
                     else
                     {
@@ -236,6 +231,7 @@ namespace Character.State
         {
             if (_currentHittableAimTime >= CharacterManagerRef.Data.TimeToAutoAim && _hittable != null && CharacterManagerRef.Parameters.AutoAim)
             {
+                Debug.Log("auto aim");
                 return _hittable;
             }
 

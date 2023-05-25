@@ -12,9 +12,7 @@ namespace Fight
     {
 
         [Header("VFX"), SerializeField] private ParticleSystem _dieParticles;
-        [Header("Sound"), SerializeField] private AudioClip _launchSound;
-        [SerializeField] private AudioClip _dieSound;
-        
+
         private StudioEventEmitter _emitter;
 
         protected override void FixedUpdate()
