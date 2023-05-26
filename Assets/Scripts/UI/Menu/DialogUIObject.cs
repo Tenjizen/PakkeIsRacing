@@ -19,6 +19,7 @@ namespace UI.Menu
                 return;
             }
             DialogTitleText.text = Data.Title;
+            DialogTitleText.fontSize = isActive ? 40 : 32;
         }
     }
 }

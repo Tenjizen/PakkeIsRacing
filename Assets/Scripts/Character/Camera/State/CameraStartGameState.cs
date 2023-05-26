@@ -50,7 +50,6 @@ namespace Character.Camera.State
         }
         public override void SwitchState(CameraManager camera)
         {
-            Debug.Log("switch");
             camera.CanMoveCameraManually = true;
             CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterOpenWeapons = true;
             CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterMakeActions = true;

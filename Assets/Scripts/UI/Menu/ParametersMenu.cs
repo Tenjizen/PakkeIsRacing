@@ -64,6 +64,17 @@ namespace UI.Menu
         {
             base.SetMenu(isActive, isUsable);
 
+            for (int i = 0; i < _objectsList.Count; i++)
+            {
+                ParametersUIObject uiObject = _objectsList[i].GetComponent<ParametersUIObject>();
+                if (uiObject == null)
+                {
+                    continue;
+                }
+                uiObject.Set(i == _index);
+                uiObject.SetText();
+            }
+
             if (isUsable == false)
             {
                 return;

@@ -16,19 +16,12 @@ namespace UI.Menu
         [SerializeField] private ParametersMenu _parametersMenu;
         [SerializeField] private ControllerMenu _menuController;
         [SerializeField] private List<MenuUIObject> _objectsList = new List<MenuUIObject>();
-        [SerializeField] private TMP_Text _text;
         
         private Dictionary<Image, float> _imagesDictionary = new Dictionary<Image, float>();
         private Dictionary<TMP_Text, float> _textsDictionary = new Dictionary<TMP_Text, float>();
 
         private int _index;
         
-        private void Awake()
-        {
-            Color color = Color.white;
-            _text.color = color;
-        }
-
         protected override void Start()
         {
             _index = 0;

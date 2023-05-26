@@ -5,6 +5,8 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 using PlayerParameters = Character.PlayerParameters;
 
 namespace UI.Menu
@@ -20,12 +22,15 @@ namespace UI.Menu
         [SerializeField] private bool _isOn;
         [SerializeField] private Parameter _parameter;
         [SerializeField] TMP_Text _offText, _onText;
+        [SerializeField] Transform _selectionBackground;
+        [SerializeField] float _offsetY;
+        [SerializeField] private Color _textOffColor, _textOnColor;
+        [SerializeField] private Color _backgroundOffColor, _backgroundOnColor;
+        [SerializeField] private Image _backgroundImage;
 
         private void Awake()
         {
-            Color color = Color.white;
-            _offText.color = color;
-            _onText.color = color;
+            SetText();
         }
 
         public override void Set(bool isActive)
@@ -37,6 +42,9 @@ namespace UI.Menu
                 Parameter.AutoAim => CharacterManager.Instance.Parameters.AutoAim,
                 Parameter.InversedControls => CharacterManager.Instance.Parameters.InversedControls,
             };
+            
+            _backgroundImage.color = isActive ? _backgroundOnColor : _backgroundOffColor;
+
             SetParameters();
         }
 
@@ -50,7 +58,7 @@ namespace UI.Menu
             base.Activate(context);
             
             _isOn = _isOn == false;
-
+            
             SetParameters();
         }
 
@@ -67,10 +75,13 @@ namespace UI.Menu
             SetText();
         }
 
-        private void SetText()
+        public void SetText()
         {
-            _offText.DOFade(_isOn ? 0.25f : 1f, 0.3f);
-            _onText.DOFade(_isOn ? 1f : 0.25f, 0.3f);
+            _onText.DOColor(_isOn ? _textOnColor : _textOffColor, 0.2f);
+            _offText.DOColor(_isOn ? _textOffColor : _textOnColor, 0.2f);
+            
+            _selectionBackground.position = _isOn ? _onText.transform.position : _offText.transform.position;
+            _selectionBackground.position += new Vector3(0, _offsetY, 0);
         }
     }
 }

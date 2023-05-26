@@ -59,7 +59,7 @@ namespace UI.Menu
             
             _text.text = MenuList[HorizontalIndex].Name;
             
-            _pointsList[oldMenuIndex].color = new Color(0.48f, 0.48f, 0.48f);
+            _pointsList[oldMenuIndex].color = new Color(1f, 1f, 1f, 0f);
             _pointsList[HorizontalIndex].color = Color.white;
         }
 
