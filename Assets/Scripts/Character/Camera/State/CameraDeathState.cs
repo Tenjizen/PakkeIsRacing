@@ -9,7 +9,7 @@ namespace Character.Camera.State
         public override void EnterState(CameraManager camera)
         {
             Debug.Log("cam death");
-            CamManager.ShakeCamera(0);
+            CamManager.ShakeCameraWarning(0);
             CamManager.CameraAngleOverride = 0;
         }
         public override void UpdateState(CameraManager camera)

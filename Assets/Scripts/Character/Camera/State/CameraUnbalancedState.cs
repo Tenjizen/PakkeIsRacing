@@ -24,7 +24,7 @@ namespace Character.Camera.State
 
             CamManager.ApplyRotationCamera();
 
-            CamManager.ShakeCamera(CamManager.Data.AmplitudeShakeWhenUnbalanced);
+            CamManager.ShakeCameraWarning(CamManager.Data.AmplitudeShakeWhenUnbalanced);
         }
 
         public override void FixedUpdate(CameraManager camera)

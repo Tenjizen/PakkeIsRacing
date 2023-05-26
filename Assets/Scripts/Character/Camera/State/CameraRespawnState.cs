@@ -7,7 +7,7 @@ namespace Character.Camera.State
     {
         public override void EnterState(CameraManager camera)
         {
-            CamManager.ShakeCamera(0);
+            CamManager.ShakeCameraWarning(0);
             //CamManager.VirtualCameraCombat.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = CamManager.Data.CameraDistanceRespawn;
             CamManager.CameraAngleOverride = CamManager.Data.CameraAngleTopDownRespawn;
             ResetCameraBehindBoat();

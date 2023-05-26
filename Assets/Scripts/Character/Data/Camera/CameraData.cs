@@ -146,6 +146,11 @@ namespace Character.Data
 
         [field: SerializeField]
         public float AmplitudeShakeWhenWaterWave { get; private set; } = 0.2f;
+        
+        [field: SerializeField]
+        public float AmplitudeShakeMinimumWhenNavigating { get; private set; } = 0.5f;
+        [field: SerializeField]
+        public float AmplitudeDivideVelocityPlayer { get; private set; } = 20;
 
 
         [field: SerializeField, Header("Combat")]

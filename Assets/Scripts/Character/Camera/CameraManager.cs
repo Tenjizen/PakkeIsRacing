@@ -11,21 +11,23 @@ namespace Character.Camera
     {
         [Header("Start Menu Game")] public float TimerBeforeCanMovingAtStart = 1.5f;
 
-        
-        [field:SerializeField] public CameraStateBase CurrentStateBase { get; private set; }
-        [field: SerializeField, Header("Properties"), Space(5)] public GameObject CinemachineCameraTarget { get; private set; }
-        [field:SerializeField] public GameObject CinemachineCameraTargetFollow { get; private set; }
-        [field:SerializeField] public GameObject CinemachineCameraFollowCombat { get; private set; }
-        [field:SerializeField] public Animator CameraAnimator { get; private set; }
-        [field:SerializeField] public Rigidbody RigidbodyKayak { get; private set; }
-        [field:SerializeField, Header("Virtual Camera")] public CinemachineBrain Brain { get; private set; }
-        [field:SerializeField] public CinemachineVirtualCamera VirtualCameraFreeLook { get; private set; }
-        [field:SerializeField] public CinemachineVirtualCamera VirtualCameraCombat { get; private set; }
-        [field:SerializeField] public Waves Waves { get; private set; }
 
-        
+        [field: SerializeField] public CameraStateBase CurrentStateBase { get; private set; }
+        [field: SerializeField, Header("Properties"), Space(5)] public GameObject CinemachineCameraTarget { get; private set; }
+        [field: SerializeField] public GameObject CinemachineCameraTargetFollow { get; private set; }
+        [field: SerializeField] public GameObject CinemachineCameraFollowCombat { get; private set; }
+        [field: SerializeField] public Animator CameraAnimator { get; private set; }
+        [field: SerializeField] public Rigidbody RigidbodyKayak { get; private set; }
+        [field: SerializeField, Header("Virtual Camera")] public CinemachineBrain Brain { get; private set; }
+        [field: SerializeField] public CinemachineVirtualCamera VirtualCameraFreeLook { get; private set; }
+        [field: SerializeField] public CinemachineVirtualCamera VirtualCameraCombat { get; private set; }
+        [field: SerializeField] public Waves Waves { get; private set; }
+        [field: SerializeField] public NoiseSettings MyNoiseProfileWhenNavigating { get; private set; }
+        [field: SerializeField] public NoiseSettings MyNoiseProfileWarning { get; private set; }
+
+
         [Space(5), Header("Camera Data")] public CameraData Data;
-        
+
         public CharacterManager CharacterManager { get; private set; }
         public InputManagement Input { get; private set; }
         public Cinemachine3rdPersonFollow CinemachineCombat3RdPersonFollow { get; private set; }
@@ -80,11 +82,11 @@ namespace Character.Camera
         {
             CharacterManager = CharacterManager.Instance;
             Input = CharacterManager.InputManagementProperty;
-            
+
             CurrentStateBase.Initialize();
             CurrentStateBase.EnterState(this);
         }
-        
+
         private void Update()
         {
             CurrentStateBase.UpdateState(this);
@@ -114,8 +116,8 @@ namespace Character.Camera
             virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(virtualCamera.m_Lens.FieldOfView,
                 CameraBaseFov + (velocityXZ * Data.MultiplierFovCamera),
                 Data.LerpFOV);
-                    }
-        
+        }
+
         public void CameraDistance(CinemachineVirtualCamera virtualCamera)
         {
             float velocityXZ = Mathf.Abs(RigidbodyKayak.velocity.x) + Mathf.Abs(RigidbodyKayak.velocity.z);
@@ -205,9 +207,16 @@ namespace Character.Camera
             }
         }
 
-        public void ShakeCamera(float intensity)
+        public void ShakeCameraWarning(float intensity)
         {
             CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = VirtualCameraFreeLook.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            cinemachineBasicMultiChannelPerlin.m_NoiseProfile = MyNoiseProfileWarning;
+            cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
+        }
+        public void ShakeCameraNavigating(float intensity)
+        {
+            CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = VirtualCameraFreeLook.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            cinemachineBasicMultiChannelPerlin.m_NoiseProfile = MyNoiseProfileWhenNavigating;
             cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
         }
 

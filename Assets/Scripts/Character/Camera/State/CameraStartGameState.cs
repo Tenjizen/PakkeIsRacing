@@ -10,7 +10,7 @@ namespace Character.Camera.State
         public override void EnterState(CameraManager camera)
         {
             CamManager.CameraAnimator.Play("StartGame");
-            CamManager.ShakeCamera(0);
+            CamManager.ShakeCameraWarning(0);
         }
         public override void UpdateState(CameraManager camera)
         {
