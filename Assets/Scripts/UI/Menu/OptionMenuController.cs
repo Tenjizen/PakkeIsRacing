@@ -16,16 +16,16 @@ namespace UI.Menu
         [SerializeField] private ParametersMenu _parametersMenu;
         [SerializeField] private ControllerMenu _menuController;
         [SerializeField] private List<MenuUIObject> _objectsList = new List<MenuUIObject>();
-        
+
         private Dictionary<Image, float> _imagesDictionary = new Dictionary<Image, float>();
         private Dictionary<TMP_Text, float> _textsDictionary = new Dictionary<TMP_Text, float>();
 
         private int _index;
-        
+
         protected override void Start()
         {
             _index = 0;
-            
+
             foreach (Image image in MenuGameObject.transform.GetComponentsInChildren<Image>())
             {
                 _imagesDictionary.Add(image, image.color.a);
@@ -104,11 +104,14 @@ namespace UI.Menu
 
         public void OpenCloseMenu()
         {
-            CharacterManager characterManager = CharacterManager.Instance;
-            characterManager.CurrentStateBaseProperty.CanCharacterMove = IsActive;
-            characterManager.CurrentStateBaseProperty.CanCharacterMakeActions = IsActive;
-            characterManager.CurrentStateBaseProperty.CanCharacterOpenWeapons = IsActive;
-            characterManager.CameraManagerProperty.CanRotateCamera = IsActive;
+            if (_parametersMenu.IsActive == false && _menuController.IsActive == false)
+            {
+                CharacterManager characterManager = CharacterManager.Instance;
+                characterManager.CurrentStateBaseProperty.CanCharacterMove = IsActive;
+                characterManager.CurrentStateBaseProperty.CanCharacterMakeActions = IsActive;
+                characterManager.CurrentStateBaseProperty.CanCharacterOpenWeapons = IsActive;
+                characterManager.CameraManagerProperty.CanRotateCamera = IsActive;
+            }
 
             IsActive = IsActive == false;
 
@@ -162,7 +165,7 @@ namespace UI.Menu
             _menuController.SetMenu();
             SetVariableFalse();
         }
-        
+
         private void SetTile()
         {
             if (_objectsList.Count <= 0)
@@ -179,16 +182,18 @@ namespace UI.Menu
 
         private void SetVariableFalse()
         {
-            IsUsable = false;
-            CanBeOpened = false;
-            IsActive = false;
+            //IsUsable = false;
+            //CanBeOpened = false;
+            //IsActive = false;
+            OpenCloseMenu();
+
         }
-        
+
         public void SetVariableTrue()
         {
-            StartCoroutine(SetFieldToTrueEnumerator(0.1f));
+            StartCoroutine(SetFieldToTrueEnumerator(0.001f));
         }
-        
+
         IEnumerator SetFieldToTrueEnumerator(float time)
         {
             if (IsActive)
@@ -197,9 +202,10 @@ namespace UI.Menu
             }
 
             yield return new WaitForSeconds(time);
-            IsUsable = true;
-            CanBeOpened = true;
-            IsActive = true;
+            //IsUsable = true;
+            //CanBeOpened = true;
+            //IsActive = true;
+            OpenCloseMenu();
         }
     }
 }

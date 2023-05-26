@@ -93,12 +93,6 @@ namespace UI.Menu
                 return;
             }
             
-            CharacterManager characterManager = CharacterManager.Instance;
-            characterManager.CurrentStateBaseProperty.CanCharacterMove = IsActive;
-            characterManager.CurrentStateBaseProperty.CanCharacterMakeActions = IsActive;
-            characterManager.CurrentStateBaseProperty.CanCharacterOpenWeapons = IsActive;
-            characterManager.CameraManagerProperty.CanRotateCamera = IsActive;
-
             IsActive = IsActive == false;
             MenuGameObject.SetActive(IsActive);
 
