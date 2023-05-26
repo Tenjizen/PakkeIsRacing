@@ -93,7 +93,7 @@ namespace Enemies.Shark.State
         {
 
         }
-        
+
         #region Fonction
         private void RotateCombat(SharkManager sharkManager)
         {
@@ -175,10 +175,18 @@ namespace Enemies.Shark.State
 
             HandleAnimationCurve(sharkManager);
 
-            if (_attackNumber > 0)
+            if (sharkManager.IsPossessed == false)
+            {
+                _state = CombatState.RotateAroundPoint;
+                _attackState = AttackState.None;
+                _attack = 0;
+                _startJump = false;
+            }
+            else if (_attackNumber > 0)
             {
                 return;
             }
+
             _state = CombatState.RotateAroundPoint;
             _attackState = AttackState.None;
             _attack = 0;
@@ -263,37 +271,40 @@ namespace Enemies.Shark.State
 
             _lastKey = sharkManager.Data.JumpCurve[sharkManager.Data.JumpCurve.length - 1];
 
-            if (sharkManager.transform.position.y < sharkManager.ShowCircleDepth && _waveStartJump == false)
+            if (sharkManager.IsPossessed == true)
             {
-                Vector3 localPosCircle = sharkManager.Forward.transform.localPosition;
-
-                Vector3 offsetCircle = sharkManager.Forward.transform.forward * sharkManager.DistanceInFrontOfShark + sharkManager.Forward.transform.right * sharkManager.DistanceSideOfShark;
-                if (_left == true)
+                if (sharkManager.transform.position.y < sharkManager.ShowCircleDepth && _waveStartJump == false)
                 {
-                    offsetCircle = sharkManager.Forward.transform.forward * sharkManager.DistanceInFrontOfShark - sharkManager.Forward.transform.right * sharkManager.DistanceSideOfShark;
+                    Vector3 localPosCircle = sharkManager.Forward.transform.localPosition;
+
+                    Vector3 offsetCircle = sharkManager.Forward.transform.forward * sharkManager.DistanceInFrontOfShark + sharkManager.Forward.transform.right * sharkManager.DistanceSideOfShark;
+                    if (_left == true)
+                    {
+                        offsetCircle = sharkManager.Forward.transform.forward * sharkManager.DistanceInFrontOfShark - sharkManager.Forward.transform.right * sharkManager.DistanceSideOfShark;
+                    }
+                    else
+                    {
+                        offsetCircle = sharkManager.Forward.transform.forward * sharkManager.DistanceInFrontOfShark + sharkManager.Forward.transform.right * sharkManager.DistanceSideOfShark;
+                    }
+                    Vector3 positionCircle = localPosCircle + offsetCircle;
+                    Vector3 worldPosCircle = sharkManager.ParentGameObject.transform.TransformPoint(positionCircle);
+                    worldPosCircle.y = 0;
+
+                    sharkManager.Circle.transform.position = worldPosCircle;
+                    sharkManager.Circle.SetActive(true);
                 }
-                else
+
+                if (_timeAnimationCurve >= _lastKey.time - sharkManager.Data.StartFirstCircularWave && _waveStartJump == false)
                 {
-                    offsetCircle = sharkManager.Forward.transform.forward * sharkManager.DistanceInFrontOfShark + sharkManager.Forward.transform.right * sharkManager.DistanceSideOfShark;
+                    sharkManager.Data.StartFirstCircularWaveData.Center = GetCenter(sharkManager);
+                    sharkManager.WavesData.LaunchCircularWave(sharkManager.Data.StartFirstCircularWaveData);
+
+                    sharkManager.StartJump.Invoke();
+                    _waveStartJump = true;
+                    _movePointTarget = true;
+                    sharkManager.Circle.SetActive(false);
+                    sharkManager.PosParticles.SetActive(false);
                 }
-                Vector3 positionCircle = localPosCircle + offsetCircle;
-                Vector3 worldPosCircle = sharkManager.ParentGameObject.transform.TransformPoint(positionCircle);
-                worldPosCircle.y = 0;
-
-                sharkManager.Circle.transform.position = worldPosCircle;
-                sharkManager.Circle.SetActive(true);
-            }
-
-            if (_timeAnimationCurve >= _lastKey.time - sharkManager.Data.StartFirstCircularWave && _waveStartJump == false)
-            {
-                sharkManager.Data.StartFirstCircularWaveData.Center = GetCenter(sharkManager);
-                sharkManager.WavesData.LaunchCircularWave(sharkManager.Data.StartFirstCircularWaveData);
-
-                sharkManager.StartJump.Invoke();
-                _waveStartJump = true;
-                _movePointTarget = true;
-                sharkManager.Circle.SetActive(false);
-                sharkManager.PosParticles.SetActive(false);
             }
 
             Vector3 pos = sharkManager.transform.position;
@@ -305,15 +316,17 @@ namespace Enemies.Shark.State
             Vector3 rotation = sharkManager.transform.eulerAngles;
 
             rotation.x = sharkManager.Data.VisualCurve.Evaluate(_timeAnimationCurve) * 100;
-
-            if (_timeAnimationCurve >= _lastKey.time - sharkManager.Data.StartSecondCircularWaveTime && _waveEndJump == false)
+            if (sharkManager.IsPossessed == true)
             {
-                sharkManager.Data.StartSecondCircularWaveData.Center = GetCenter(sharkManager);
-                sharkManager.WavesData.LaunchCircularWave(sharkManager.Data.StartSecondCircularWaveData);
+                if (_timeAnimationCurve >= _lastKey.time - sharkManager.Data.StartSecondCircularWaveTime && _waveEndJump == false)
+                {
+                    sharkManager.Data.StartSecondCircularWaveData.Center = GetCenter(sharkManager);
+                    sharkManager.WavesData.LaunchCircularWave(sharkManager.Data.StartSecondCircularWaveData);
 
-                sharkManager.EndJump.Invoke();
-                _waveEndJump = true;
-                sharkManager.PosParticles.SetActive(true);
+                    sharkManager.EndJump.Invoke();
+                    _waveEndJump = true;
+                    sharkManager.PosParticles.SetActive(true);
+                }
             }
 
             if (_timeAnimationCurve >= _lastKey.time && _attackState != AttackState.None)
@@ -339,28 +352,31 @@ namespace Enemies.Shark.State
 
             _lastKey = sharkManager.Data.JumpCurvePhaseThree[sharkManager.Data.JumpCurvePhaseThree.length - 1];
 
-            if (sharkManager.transform.position.y < sharkManager.ShowCircleDepth && _waveStartJump == false)
+            if (sharkManager.IsPossessed == true)
             {
-                Vector3 localPosCircle = sharkManager.Forward.transform.localPosition;
+                if (sharkManager.transform.position.y < sharkManager.ShowCircleDepth && _waveStartJump == false)
+                {
+                    Vector3 localPosCircle = sharkManager.Forward.transform.localPosition;
 
-                Vector3 offsetCircle = sharkManager.Forward.transform.forward * sharkManager.DistanceInFrontOfSharkPhaseThree;
+                    Vector3 offsetCircle = sharkManager.Forward.transform.forward * sharkManager.DistanceInFrontOfSharkPhaseThree;
 
-                Vector3 positionCircle = localPosCircle + offsetCircle;
-                Vector3 worldPosCircle = sharkManager.ParentGameObject.transform.TransformPoint(positionCircle);
-                worldPosCircle.y = 0;
+                    Vector3 positionCircle = localPosCircle + offsetCircle;
+                    Vector3 worldPosCircle = sharkManager.ParentGameObject.transform.TransformPoint(positionCircle);
+                    worldPosCircle.y = 0;
 
-                sharkManager.Circle.transform.position = worldPosCircle;
-                sharkManager.Circle.SetActive(true);
-            }
-            if (_timeAnimationCurve >= _lastKey.time - sharkManager.Data.StartFirstCircularWavePhaseThree && _waveStartJump == false)
-            {
-                sharkManager.Data.StartFirstCircularWaveDataPhaseThree.Center = GetCenter(sharkManager);
-                sharkManager.WavesData.LaunchCircularWave(sharkManager.Data.StartFirstCircularWaveDataPhaseThree);
+                    sharkManager.Circle.transform.position = worldPosCircle;
+                    sharkManager.Circle.SetActive(true);
+                }
+                if (_timeAnimationCurve >= _lastKey.time - sharkManager.Data.StartFirstCircularWavePhaseThree && _waveStartJump == false)
+                {
+                    sharkManager.Data.StartFirstCircularWaveDataPhaseThree.Center = GetCenter(sharkManager);
+                    sharkManager.WavesData.LaunchCircularWave(sharkManager.Data.StartFirstCircularWaveDataPhaseThree);
 
-                sharkManager.StartJump.Invoke();
-                _waveStartJump = true;
-                sharkManager.Circle.SetActive(false);
+                    sharkManager.StartJump.Invoke();
+                    _waveStartJump = true;
+                    sharkManager.Circle.SetActive(false);
 
+                }
             }
             Vector3 sharkPosition = sharkManager.transform.position;
             sharkPosition.y = sharkManager.Data.JumpCurvePhaseThree.Evaluate(_timeAnimationCurve);
@@ -371,17 +387,24 @@ namespace Enemies.Shark.State
             Vector3 rotation = sharkManager.transform.eulerAngles;
 
             rotation.x = sharkManager.Data.VisualCurvePhaseThree.Evaluate(_timeAnimationCurve) * 100;
-            rotation.z += Time.deltaTime * sharkManager.Data.SpeedRotationOnItself;
 
-
-            if (_timeAnimationCurve >= _lastKey.time - sharkManager.Data.StartSecondCircularWaveTimePhaseThree && _waveEndJump == false)
+            if (sharkManager.IsPossessed == true)
             {
-                sharkManager.Data.StartSecondCircularWaveDataPhaseThree.Center = GetCenter(sharkManager);
-                sharkManager.WavesData.LaunchCircularWave(sharkManager.Data.StartSecondCircularWaveDataPhaseThree);
+                rotation.z += Time.deltaTime * sharkManager.Data.SpeedRotationOnItself;
 
-                sharkManager.EndJump.Invoke();
-                _waveEndJump = true;
-                sharkManager.PosParticles.SetActive(true);
+                if (_timeAnimationCurve >= _lastKey.time - sharkManager.Data.StartSecondCircularWaveTimePhaseThree && _waveEndJump == false)
+                {
+                    sharkManager.Data.StartSecondCircularWaveDataPhaseThree.Center = GetCenter(sharkManager);
+                    sharkManager.WavesData.LaunchCircularWave(sharkManager.Data.StartSecondCircularWaveDataPhaseThree);
+
+                    sharkManager.EndJump.Invoke();
+                    _waveEndJump = true;
+                    sharkManager.PosParticles.SetActive(true);
+                }
+            }
+            else
+            {
+                rotation.z = 0;
             }
 
             if (_timeAnimationCurve >= _lastKey.time && _attackState != AttackState.None)
