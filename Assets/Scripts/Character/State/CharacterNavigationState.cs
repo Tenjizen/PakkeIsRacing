@@ -32,6 +32,7 @@ namespace Character.State
         //kayak
         private Vector2 _paddleForceValue;
         private float _leftPaddleCooldown, _rightPaddleCooldown;
+        private Direction _lastPaddleSide;
 
         //reference
         private KayakController _kayakController;
@@ -240,8 +241,12 @@ namespace Character.State
             _staticInputTimer = _kayakValues.StaticRotationCooldownAfterPaddle;
             
             //rotation
-            float rotation = _kayakValues.PaddleSideRotationForce * CharacterManagerRef.ExperienceManagerProperty.RotatingSpeedMultiplier;
-            RotationPaddleForceY += direction == Direction.Right ? -rotation : rotation;
+            if (direction == _lastPaddleSide)
+            {
+                float rotation = _kayakValues.PaddleSideRotationForce * CharacterManagerRef.ExperienceManagerProperty.RotatingSpeedMultiplier;
+                RotationPaddleForceY += direction == Direction.Right ? -rotation : rotation;
+            }
+            _lastPaddleSide = direction;
             
             //balance
             CharacterManagerRef.Balance += RotationPaddleForceY * CharacterManagerRef.Data.RotationToBalanceMultiplier;
