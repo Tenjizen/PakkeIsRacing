@@ -248,10 +248,7 @@ namespace Character.State
             
             //force
             MonoBehaviourRef.StartCoroutine(PaddleForceCurve());
-            
-            //audio
-            //CharacterManager.Instance.SoundManagerProperty.PlaySound(_kayakController.Data.PaddlingAudioClip);
-            
+
             //animation & particles
             CharacterManagerRef.PaddleAnimatorProperty.SetTrigger(direction == Direction.Left ? "PaddleLeft" : "PaddleRight");
             CharacterManagerRef.CharacterAnimatorProperty.SetTrigger(direction == Direction.Left ? "PaddleLeft" : "PaddleRight");
@@ -267,6 +264,7 @@ namespace Character.State
                     OnPaddleRight.Invoke();
                     break;
             }
+            CharacterManagerRef.OnPaddle.Invoke();
         }
 
         /// <summary>

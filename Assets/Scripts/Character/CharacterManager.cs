@@ -57,7 +57,8 @@ namespace Character
         [Header("VFX")]
         public ParticleSystem WeaponChargedParticleSystem;
 
-        [Header("Event")] public UnityEvent StartGame;
+        [Header("Events")] public UnityEvent StartGame;
+        public UnityEvent OnPaddle;
 
 
         [HideInInspector] public float WeaponCooldown;
