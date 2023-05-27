@@ -27,6 +27,7 @@ namespace Character.State
         {
             Debug.Log("death");
             IsDead = true;
+            CharacterManagerRef.ScriptDebug.ResetTimerDebug();
         }
 
         public override void UpdateState(CharacterManager character)
@@ -118,8 +119,6 @@ namespace Character.State
                 //Switch state camera
                 CameraRespawnState cameraRespawnState = new CameraRespawnState();
                 CameraManagerRef.SwitchState(cameraRespawnState);
-                //CameraNavigationState cameraNavigationState = new CameraNavigationState(CameraManagerRef, MonoBehaviourRef);
-                //CameraManagerRef.SwitchState(cameraNavigationState);
             }
         }
     }

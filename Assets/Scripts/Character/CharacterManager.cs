@@ -39,6 +39,7 @@ namespace Character
         [field: SerializeField] public PlayerParameters Parameters { get; set; }
         [field: SerializeField, Header("Animation")] public Animator HarpoonAnimator { get; private set; }
         [field: SerializeField] public Animator NetAnimator { get; private set; }
+        [field: SerializeField] public ScriptForDebug ScriptDebug { get; private set; }
 
         #endregion
 
@@ -92,7 +93,7 @@ namespace Character
                 BalanceManagement();
                 ManageWeaponCooldown();
             }
-            
+
             //anim
             if (IKPlayerControl.CurrentType != IKType.Paddle || IKPlayerControl.Type == IKType.Paddle)
             {
@@ -181,8 +182,6 @@ namespace Character
         {
             Debug.Log(message);
         }
-
-
 
         #region GUI
 
