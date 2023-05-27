@@ -6182,6 +6182,7 @@ GameObject:
   - component: {fileID: 7611706348771366613}
   - component: {fileID: 2892348467265544919}
   - component: {fileID: 7327095685002635356}
+  - component: {fileID: 7657674392462614166}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -6291,6 +6292,7 @@ MonoBehaviour:
     InversedControls: 0
   <HarpoonAnimator>k__BackingField: {fileID: 2084915637}
   <NetAnimator>k__BackingField: {fileID: 0}
+  <ScriptDebug>k__BackingField: {fileID: 7657674392462614166}
   Data: {fileID: 11400000, guid: 9383b9325ce5e464e84beb6010a91e0a, type: 2}
   LerpBalanceTo0: 1
   Balance: 0
@@ -6299,6 +6301,9 @@ MonoBehaviour:
   CurrentProjectile: {fileID: 0}
   WeaponChargedParticleSystem: {fileID: 1850938747974982761}
   StartGame:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPaddle:
     m_PersistentCalls:
       m_Calls: []
   WeaponCooldown: 0
@@ -6435,6 +6440,19 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   LookAt: {fileID: 5257573041768709977}
+--- !u!114 &7657674392462614166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7217796708653836314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d756e6adb29ada46ac71d0199efdf8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fadeDead: {fileID: 0}
 --- !u!1 &7902324452847353565
 GameObject:
   m_ObjectHideFlags: 0

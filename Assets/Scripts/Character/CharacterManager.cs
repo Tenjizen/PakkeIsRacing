@@ -37,9 +37,9 @@ namespace Character
         [field: SerializeField] public Transform WeaponSpawnPosition { get; private set; }
         [field: SerializeField] public IKControl IKPlayerControl { get; private set; }
         [field: SerializeField] public PlayerParameters Parameters { get; set; }
+        [field: SerializeField] public ScriptForDebug ScriptDebug { get; private set; }
         [field: SerializeField, Header("Animation")] public Animator HarpoonAnimator { get; private set; }
         [field: SerializeField] public Animator NetAnimator { get; private set; }
-        [field: SerializeField] public ScriptForDebug ScriptDebug { get; private set; }
 
         #endregion
 
