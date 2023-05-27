@@ -2,5 +2,6 @@ public enum MusicArea
 {
     Exploration = 0,
     Dialogue = 1,
-    Combat = 2
+    CombatShark = 2,
+    CombatSeal = 3
 }
