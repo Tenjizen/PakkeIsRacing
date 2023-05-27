@@ -15,7 +15,7 @@ namespace UI.Menu
         [SerializeField] protected Image IconImage;
         public UnityEvent OnActivated;
 
-        private void Start()
+        protected virtual void Start()
         {
             CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.ParameterMenuPressButton.started += Activate;
         }

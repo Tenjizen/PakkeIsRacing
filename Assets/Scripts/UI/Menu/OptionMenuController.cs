@@ -16,6 +16,7 @@ namespace UI.Menu
         [SerializeField] private ParametersMenu _parametersMenu;
         [SerializeField] private ControllerMenu _menuController;
         [SerializeField] private List<MenuUIObject> _objectsList = new List<MenuUIObject>();
+        [SerializeField] private Image _backgroundImage;
 
         private Dictionary<Image, float> _imagesDictionary = new Dictionary<Image, float>();
         private Dictionary<TMP_Text, float> _textsDictionary = new Dictionary<TMP_Text, float>();
@@ -28,6 +29,11 @@ namespace UI.Menu
 
             foreach (Image image in MenuGameObject.transform.GetComponentsInChildren<Image>())
             {
+                if (image == _backgroundImage)
+                {
+                    _backgroundImage.DOFade(0, 0);
+                    continue;
+                }
                 _imagesDictionary.Add(image, image.color.a);
                 image.DOFade(0, 0);
             }
@@ -104,6 +110,8 @@ namespace UI.Menu
 
         public void OpenCloseMenu()
         {
+            const float fadeTime = 0.1f;
+
             if (_parametersMenu.IsActive == false && _menuController.IsActive == false)
             {
                 CharacterManager characterManager = CharacterManager.Instance;
@@ -111,11 +119,12 @@ namespace UI.Menu
                 characterManager.CurrentStateBaseProperty.CanCharacterMakeActions = IsActive;
                 characterManager.CurrentStateBaseProperty.CanCharacterOpenWeapons = IsActive;
                 characterManager.CameraManagerProperty.CanRotateCamera = IsActive;
+
+                _backgroundImage.DOFade(IsActive == false ? 0.8f : 0, fadeTime);
             }
 
             IsActive = IsActive == false;
 
-            const float fadeTime = 0.1f;
             foreach (var pair in _imagesDictionary)
             {
                 pair.Key.DOFade(IsActive ? pair.Value : 0, fadeTime);
@@ -126,21 +135,20 @@ namespace UI.Menu
             }
 
             IsUsable = IsActive;
-
-            if (IsActive)
-            {
-                SetTile();
-                Time.timeScale = 0.5f;
-                _menuManager.CanBeOpened = false;
-                if (_menuManager.IsActive == true)
-                {
-                    _menuManager.SetMenu();
-                }
-            }
-            else if (IsActive == false)
+            
+            if (IsActive == false)
             {
                 Time.timeScale = 1;
                 _menuManager.CanBeOpened = true;
+                return;
+            }
+            
+            SetTile();
+            Time.timeScale = 0.5f;
+            _menuManager.CanBeOpened = false;
+            if (_menuManager.IsActive == true)
+            {
+                _menuManager.SetMenu();
             }
         }
 
@@ -165,7 +173,7 @@ namespace UI.Menu
             _menuController.SetMenu();
             SetVariableFalse();
         }
-
+        
         private void SetTile()
         {
             if (_objectsList.Count <= 0)
@@ -179,14 +187,11 @@ namespace UI.Menu
                 _objectsList[i].IsSelected = i == _index;
             }
         }
+        
 
         private void SetVariableFalse()
         {
-            //IsUsable = false;
-            //CanBeOpened = false;
-            //IsActive = false;
             OpenCloseMenu();
-
         }
 
         public void SetVariableTrue()
@@ -202,9 +207,7 @@ namespace UI.Menu
             }
 
             yield return new WaitForSeconds(time);
-            //IsUsable = true;
-            //CanBeOpened = true;
-            //IsActive = true;
+
             OpenCloseMenu();
         }
     }

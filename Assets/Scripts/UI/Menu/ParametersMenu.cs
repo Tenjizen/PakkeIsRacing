@@ -72,7 +72,6 @@ namespace UI.Menu
                     continue;
                 }
                 uiObject.Set(i == _index);
-                uiObject.SetText();
             }
 
             if (isUsable == false)

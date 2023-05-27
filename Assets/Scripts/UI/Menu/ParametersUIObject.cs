@@ -23,26 +23,26 @@ namespace UI.Menu
         [SerializeField] private Parameter _parameter;
         [SerializeField] TMP_Text _offText, _onText;
         [SerializeField] Transform _selectionBackground;
-        [SerializeField] float _offsetY;
+        [SerializeField] Vector3 _offset;
         [SerializeField] private Color _textOffColor, _textOnColor;
         [SerializeField] private Color _backgroundOffColor, _backgroundOnColor;
         [SerializeField] private Image _backgroundImage;
 
-        private void Awake()
-        {
-            SetText();
-        }
+        [SerializeField] private Vector3 _onPosition, _offPosition;
 
         public override void Set(bool isActive)
         {
             base.Set(isActive);
+            
+            _onPosition = _onText.rectTransform.localPosition + _offset;
+            _offPosition = _offText.rectTransform.localPosition + _offset;
 
             _isOn = _parameter switch
             {
                 Parameter.AutoAim => CharacterManager.Instance.Parameters.AutoAim,
                 Parameter.InversedControls => CharacterManager.Instance.Parameters.InversedControls,
             };
-            
+
             _backgroundImage.color = isActive ? _backgroundOnColor : _backgroundOffColor;
 
             SetParameters();
@@ -75,13 +75,15 @@ namespace UI.Menu
             SetText();
         }
 
-        public void SetText()
+        private void SetText()
         {
-            _onText.DOColor(_isOn ? _textOnColor : _textOffColor, 0.2f);
-            _offText.DOColor(_isOn ? _textOffColor : _textOnColor, 0.2f);
+            const float fadeTime = 0.2f;
             
-            _selectionBackground.position = _isOn ? _onText.transform.position : _offText.transform.position;
-            _selectionBackground.position += new Vector3(0, _offsetY, 0);
+            _onText.DOColor(_isOn ? _textOnColor : _textOffColor, fadeTime);
+            _offText.DOColor(_isOn ? _textOffColor : _textOnColor, fadeTime);
+            
+            Vector3 position = _isOn ? _onPosition : _offPosition;
+            _selectionBackground.DOLocalMove(position,fadeTime);
         }
     }
 }
