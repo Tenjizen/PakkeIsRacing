@@ -37,7 +37,7 @@ namespace Collectible
             transform.Rotate(Vector3.up, _rotationSpeed);
         }
 
-        public void Hit(Projectile projectile, GameObject owner)
+        public void Hit(Projectile projectile, GameObject owner, int damage)
         {
             OnHit.Invoke();
             SetCollected();
