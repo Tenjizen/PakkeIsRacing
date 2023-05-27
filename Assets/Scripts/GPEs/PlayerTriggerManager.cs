@@ -84,7 +84,7 @@ namespace GPEs
         }
 
 #if UNITY_EDITOR
-
+        
         public virtual void OnDrawGizmos()
         {
             if (_showTriggerGizmos == false)
@@ -93,16 +93,19 @@ namespace GPEs
             }
 
             Matrix4x4 originalMatrix = Gizmos.matrix;
-            Gizmos.matrix = this.transform.localToWorldMatrix;
+            Matrix4x4 newMatrix = transform.localToWorldMatrix;
+            newMatrix.SetTRS(transform.position + _triggerOffsetPosition, newMatrix.rotation, Vector3.one);
             
+            Gizmos.matrix = newMatrix;
             Gizmos.color = Color.green;
+            
             switch (_triggerType)
             {
                 case TriggerType.BoxTrigger:
-                    Gizmos.DrawWireCube(Vector3.zero + _triggerOffsetPosition, _triggerBoxSize);
+                    Gizmos.DrawWireCube(Vector3.zero, _triggerBoxSize);
                     break;
                 case TriggerType.SphereTrigger:
-                    Gizmos.DrawWireSphere(Vector3.zero + _triggerOffsetPosition, _triggerSphereSizeRadius);
+                    Gizmos.DrawWireSphere(Vector3.zero, _triggerSphereSizeRadius);
                     break;
             }
 
