@@ -118,9 +118,9 @@ namespace Enemies.Shark
             TargetTransform = null;
         }
         
-        public override void Hit(Projectile projectile, GameObject owner)
+        public override void Hit(Projectile projectile, GameObject owner, int damage)
         {
-            base.Hit(projectile,owner);
+            base.Hit(projectile,owner, damage);
 
             if (HitParticles != null)
             {

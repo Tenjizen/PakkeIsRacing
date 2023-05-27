@@ -39,7 +39,7 @@ namespace Enemies
             }
         }
 
-        public virtual void Hit(Projectile projectile, GameObject owner)
+        public virtual void Hit(Projectile projectile, GameObject owner, int damage)
         {
             if (projectile.Data.Type != WeaponThatCanHitEnemy)
             {
@@ -48,7 +48,7 @@ namespace Enemies
             }
             
             OnHit.Invoke();
-            CurrentLife -= 1;
+            CurrentLife -= damage;
             SetEnemyLifeUIGauge();
             
             if (CurrentLife <= 0)

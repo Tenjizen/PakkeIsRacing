@@ -20,18 +20,7 @@ namespace Character.Camera.State
         {
             CamManager.CameraAnimator.Play("Combat");
 
-            //Debug.Log(camera.CinemachineTargetYaw + " entrer");
-
             _baseYaw = CamManager.CharacterManager.KayakControllerProperty.transform.rotation.eulerAngles.y;
-
-            //if (_baseYaw > 180)
-            //{
-            //    _baseYaw -= 360;
-            //}
-            //else if (_baseYaw < -180)
-            //{
-            //    _baseYaw += 360;
-            //}
 
             if (_baseYaw + CamManager.Data.CombatLengthClamp.x < -360)
             {
@@ -77,36 +66,15 @@ namespace Character.Camera.State
             }
 
             _cameraNoise = CamManager.VirtualCameraCombat.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-            _cameraNoise.m_AmplitudeGain = 1f;
+            _cameraNoise.m_AmplitudeGain = CharacterManager.Instance.CurrentProjectile.Data.CameraBaseShakeAmount;
 
             CombatSensitivityMultiplier = CamManager.Data.CameraCombatSensibility;
-
-            //Debug.Log(_min + " min");
-            //Debug.Log(_max + " max");
-            //Debug.Log(_baseYaw + " base");
-
-
-
-            //if yaw > max ou yaw < a min
-
-                //if Yaw plus proche de max partir vers max
-
-                //else if yaw plus proche de min partir vers min
-
-
         }
 
         public override void UpdateState(CameraManager camera)
         {
-
             CamManager.CurrentStateBase.ManageFreeCameraMove(CameraMode.Combat);
-
-            //var min = _baseYaw + CamManager.Data.CombatLengthClamp.x;
-            //var min = (_baseYaw + CamManager.Data.CombatLengthClamp.x > 180) ? ((_baseYaw + CamManager.Data.CombatLengthClamp.x) - 360) : (_baseYaw + CamManager.Data.CombatLengthClamp.x);
-            //var max = _baseYaw + CamManager.Data.CombatLengthClamp.y;
-            //var max = ((_baseYaw + CamManager.Data.CombatLengthClamp.y) % 360);
-
-
+            
             CamManager.CinemachineTargetPitch = ClampAngle(CamManager.CinemachineTargetPitch, CamManager.Data.CombatHeightClamp.x, CamManager.Data.CombatHeightClamp.y);
 
             CamManager.CinemachineTargetYaw = ClampAngle(CamManager.CinemachineTargetYaw, _min, _max);
@@ -120,7 +88,7 @@ namespace Character.Camera.State
                 float lerp = CamManager.Data.CombatZoomFovLerp;
                 _targetFOV = Mathf.Lerp(_targetFOV, CamManager.Data.CombatZoomFov, lerp);
                 FreeAimMultiplier = Mathf.Lerp(FreeAimMultiplier, CamManager.Data.CombatZoomAimSpeedMultiplier, lerp);
-                _cameraNoise.m_AmplitudeGain = Mathf.Lerp(_cameraNoise.m_AmplitudeGain, 0, lerp);
+                _cameraNoise.m_AmplitudeGain = Mathf.Lerp(_cameraNoise.m_AmplitudeGain, CharacterManager.Instance.CurrentProjectile.Data.CameraStabilizedShakeAmount, lerp);
             }
             else
             {

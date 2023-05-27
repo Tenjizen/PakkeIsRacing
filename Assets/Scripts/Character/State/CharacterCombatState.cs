@@ -1,5 +1,6 @@
 ﻿using System;
 using Art.Script;
+using Character.Camera.State;
 using Character.Data.Character;
 using Fight;
 using Fight.Data;
@@ -18,34 +19,29 @@ namespace Character.State
         private IHittable _hittable;
         private float _currentHittableAimTime;
 
+        private float _launchTime;
+        private bool _hasLaunched;
+        
         #region Base methods
 
         public override void EnterState(CharacterManager character)
         {
-            CharacterManagerRef.WeaponUIManagerProperty.SetCombatWeaponUI(true);
-            
-            _weaponPrefab = CharacterManagerRef.CurrentProjectile;
-            
-            CharacterManagerRef.WeaponUIManagerProperty.AutoAimController.ShowAutoAimCircle(true);
-
-            switch (_weaponPrefab.Data.Type)
-            {
-                case WeaponType.Harpoon:
-                    CharacterManagerRef.IKPlayerControl.CurrentType = IKType.Harpoon;
-                    CharacterManagerRef.IKPlayerControl.SetHarpoon();
-                    CharacterManagerRef.HarpoonAnimator.SetBool("IdleHarpoon",true);
-                    break;
-                case WeaponType.Net:
-                    CharacterManagerRef.IKPlayerControl.CurrentType = IKType.Net;
-                    CharacterManagerRef.IKPlayerControl.SetNet();
-                    CharacterManagerRef.HarpoonAnimator.SetBool("IdleNet",true);
-                    break;
-            }
-
+            _launchTime = CharacterManagerRef.CurrentProjectile.Data.LaunchTime;
         }
 
         public override void UpdateState(CharacterManager character)
         {
+            if (_launchTime > 0)
+            {
+                _launchTime -= Time.deltaTime;
+                return;
+            }
+
+            if (_hasLaunched == false)
+            {
+                LaunchState();
+            }
+            
             CheckAutoAim();
             HandleShoot();
             CheckBalance();
@@ -74,6 +70,34 @@ namespace Character.State
             CharacterManagerRef.IKPlayerControl.CurrentType = IKType.Paddle;
         }
 
+        private void LaunchState()
+        {
+            CharacterManagerRef.WeaponUIManagerProperty.SetCombatWeaponUI(true);
+
+            _weaponPrefab = CharacterManagerRef.CurrentProjectile;
+
+            CharacterManagerRef.WeaponUIManagerProperty.AutoAimController.ShowAutoAimCircle(true);
+
+            switch (_weaponPrefab.Data.Type)
+            {
+                case WeaponType.Harpoon:
+                    CharacterManagerRef.IKPlayerControl.CurrentType = IKType.Harpoon;
+                    CharacterManagerRef.IKPlayerControl.SetHarpoon();
+                    CharacterManagerRef.HarpoonAnimator.SetBool("IdleHarpoon", true);
+                    break;
+                case WeaponType.Net:
+                    CharacterManagerRef.IKPlayerControl.CurrentType = IKType.Net;
+                    CharacterManagerRef.IKPlayerControl.SetNet();
+                    CharacterManagerRef.HarpoonAnimator.SetBool("IdleNet", true);
+                    break;
+            }
+
+            CameraCombatState cameraCombatState = new CameraCombatState();
+            CharacterManagerRef.CameraManagerProperty.SwitchState(cameraCombatState);
+            
+            _hasLaunched = true;
+        }
+        
         #endregion
 
         #region Methods

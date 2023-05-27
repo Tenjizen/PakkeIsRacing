@@ -250,9 +250,9 @@ namespace Enemies.Seal
         
         #endregion
 
-        public override void Hit(Projectile projectile, GameObject owner)
+        public override void Hit(Projectile projectile, GameObject owner, int damage)
         {
-            base.Hit(projectile, owner);
+            base.Hit(projectile, owner, damage);
 
             HitParticles.Play();
         }

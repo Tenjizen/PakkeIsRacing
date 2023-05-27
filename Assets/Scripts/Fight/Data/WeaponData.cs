@@ -27,10 +27,15 @@ namespace Fight.Data
     {
         public WeaponType Type;
         public float LaunchForce;
+        public int Damage = 1;
         public float Cooldown;
         public float Lifetime = 4f;
+        public float LaunchTime = 0.5f;
         public ShootArcMovementParameters ArcMovementParameters;
         [HideInInspector] public List<GameObject> ForbiddenColliders;
+
+        [Header("Camera values"), SerializeField, Range(0,3)] public float CameraBaseShakeAmount = 1f;
+        [SerializeField, Range(0,1)] public float CameraStabilizedShakeAmount = 0f;
 
         public WeaponData()
         {

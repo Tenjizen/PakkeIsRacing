@@ -118,9 +118,6 @@ namespace UI.WeaponWheel
 
             CharacterCombatState characterCombatState = new CharacterCombatState();
             _characterManager.SwitchState(characterCombatState);
-        
-            CameraCombatState cameraCombatState = new CameraCombatState();
-            _characterManager.CameraManagerProperty.SwitchState(cameraCombatState);
         }
 
         #region Lock

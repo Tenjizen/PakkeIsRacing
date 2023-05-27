@@ -94,7 +94,7 @@ namespace Fight
             IHittable hittable = other.gameObject.GetComponent<IHittable>();
             if (hittable != null)
             {
-                hittable.Hit(this, Owner);
+                hittable.Hit(this, Owner, Data.Damage);
                 HitHittable(other);
                 return;
             }

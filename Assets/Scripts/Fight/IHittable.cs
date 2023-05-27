@@ -9,7 +9,7 @@ namespace Fight
 
         [field:SerializeField] public UnityEvent OnHit { get; set; }
         
-        public virtual void Hit(Projectile projectile, GameObject owner)
+        public virtual void Hit(Projectile projectile, GameObject owner, int damage)
         {
             OnHit.Invoke();
         }
