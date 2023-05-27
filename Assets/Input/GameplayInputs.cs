@@ -583,7 +583,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3b8fdf28-c343-4bca-b5d3-32eceed31fd4"",
-                    ""path"": ""<Gamepad>/start"",
+                    ""path"": ""<Gamepad>/select"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1056,7 +1056,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""6d4f3d27-641e-4225-8414-3b71eafb6814"",
-                    ""path"": ""<Gamepad>/select"",
+                    ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
