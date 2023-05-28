@@ -217,7 +217,8 @@ namespace Character.Camera
         {
             CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = VirtualCameraFreeLook.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
             cinemachineBasicMultiChannelPerlin.m_NoiseProfile = MyNoiseProfileWhenNavigating;
-            cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
+            if (cinemachineBasicMultiChannelPerlin.m_AmplitudeGain < intensity)
+                cinemachineBasicMultiChannelPerlin.m_AmplitudeGain += Time.deltaTime;
         }
 
         public void ResetCameraLocalPos()

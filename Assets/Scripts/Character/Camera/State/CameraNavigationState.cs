@@ -14,16 +14,16 @@ namespace Character.Camera.State
             CamManager.LastInputX = 0;
             CamManager.LastInputY = 0;
 
-            CamManager.ShakeCameraWarning(0);
+
             CamManager.CameraAnimator.Play("FreeLook");
             CamManager.Brain.m_BlendUpdateMethod = Cinemachine.CinemachineBrain.BrainUpdateMethod.LateUpdate;
 
+            CamManager.ShakeCameraNavigating(0);
             CamManager.ResetNavigationValue();
         }
         public override void UpdateState(CameraManager camera)
         {
             camera.CameraDistance(camera.VirtualCameraFreeLook);
-
             if (Mathf.Abs(CamManager.RotationZ) > 0)
             {
                 CamManager.SmoothResetRotateZ();
@@ -48,7 +48,7 @@ namespace Character.Camera.State
                 var velocity = Mathf.Abs(CamManager.RigidbodyKayak.velocity.x) + Mathf.Abs(CamManager.RigidbodyKayak.velocity.z);
                 if (velocity > 1)
                 {
-                    CamManager.ShakeCameraNavigating(CamManager.Data.AmplitudeShakeMinimumWhenNavigating + Mathf.Clamp(velocity, 0, 20)/ CamManager.Data.AmplitudeDivideVelocityPlayer);
+                    CamManager.ShakeCameraNavigating(CamManager.Data.AmplitudeShakeMinimumWhenNavigating + Mathf.Clamp(velocity, 0, 20) / CamManager.Data.AmplitudeDivideVelocityPlayer);
                 }
                 else
                 {
