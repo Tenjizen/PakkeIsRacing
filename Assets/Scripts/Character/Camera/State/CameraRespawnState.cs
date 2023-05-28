@@ -28,7 +28,8 @@ namespace Character.Camera.State
         }
         public override void SwitchState(CameraManager camera)
         {
-
+            CharacterManager.Instance.RespawnLastCheckpoint = false;
+            CharacterManager.Instance.OptionMenuManager.CanBeOpened = true;
         }
 
 
@@ -63,9 +64,12 @@ namespace Character.Camera.State
 
             if (CamManager.VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance <= CamManager.Data.NavigationCamDistance && CamManager.CameraAngleOverride <= 0)
             {
+                CharacterManager.Instance.CurrentStateBaseProperty.IsDead = false;
 
                 CameraNavigationState cameraNavigationState = new CameraNavigationState();
+                this.SwitchState(CamManager);
                 CamManager.SwitchState(cameraNavigationState);
+                
             }
 
             if (CamManager.CameraAngleOverride > 0)

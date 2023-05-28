@@ -10,6 +10,7 @@ using SceneTransition;
 using Sedna;
 using Tools.SingletonClassBase;
 using UI;
+using UI.Menu;
 using UI.WeaponWheel;
 using UnityEngine;
 using UnityEngine.Events;
@@ -37,6 +38,7 @@ namespace Character
         [field: SerializeField] public Transform WeaponSpawnPosition { get; private set; }
         [field: SerializeField] public IKControl IKPlayerControl { get; private set; }
         [field: SerializeField] public PlayerParameters Parameters { get; set; }
+        [field: SerializeField] public OptionMenuManager OptionMenuManager { get; private set; }
         [field: SerializeField] public ScriptForDebug ScriptDebug { get; private set; }
         [field: SerializeField, Header("Animation")] public Animator HarpoonAnimator { get; private set; }
         [field: SerializeField] public Animator NetAnimator { get; private set; }
@@ -49,6 +51,8 @@ namespace Character
         public bool LerpBalanceTo0 = true;
         [ReadOnly, Tooltip("The current balance value")]
         public float Balance = 0f;
+        [ReadOnly, Tooltip("Reset at last checkpoint in menu")]
+        public bool RespawnLastCheckpoint = false;
         [Tooltip("The timer"), ReadOnly]
         public float TimerUnbalanced = 0;
         [Tooltip("The number of times the button has been pressed"), ReadOnly]

@@ -10,7 +10,7 @@ namespace UI.Menu
 {
     public class ParametersMenu : MenuController
     {
-        [SerializeField] private OptionMenuController _optionMenuControllerManager;
+        [SerializeField] private OptionMenuManager _optionMenuControllerManager;
         [Header("Sub Menu"), SerializeField] private List<MenuUIObject> _objectsList = new List<MenuUIObject>();
 
         private Dictionary<Image, float> _imagesDictionary = new Dictionary<Image, float>();
@@ -57,7 +57,7 @@ namespace UI.Menu
             }
 
             SetMenu();
-            _optionMenuControllerManager.SetVariableTrue();
+            _optionMenuControllerManager.CloseMenu();
         }
 
         public override void SetMenu(bool isActive, bool isUsable)

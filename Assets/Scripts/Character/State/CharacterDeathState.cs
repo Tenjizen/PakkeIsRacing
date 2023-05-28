@@ -32,18 +32,22 @@ namespace Character.State
 
         public override void UpdateState(CharacterManager character)
         {
-            //Rotate kayak at 180 in z with balance
-            if (CharacterManagerRef.Balance > 0 && CharacterManagerRef.Balance < 60)
+            if (character.RespawnLastCheckpoint == false)
             {
-                CharacterManagerRef.Balance += 0.5f;
-            }
-            else if (CharacterManagerRef.Balance < -0 && CharacterManagerRef.Balance > -60)
-            {
-                CharacterManagerRef.Balance -= 0.5f;
+                Debug.Log("test");
+                //Rotate kayak at 180 in z with balance
+                if (CharacterManagerRef.Balance > 0 && CharacterManagerRef.Balance < 60)
+                {
+                    CharacterManagerRef.Balance += 0.5f;
+                }
+                else if (CharacterManagerRef.Balance < -0 && CharacterManagerRef.Balance > -60)
+                {
+                    CharacterManagerRef.Balance -= 0.5f;
+                }
             }
 
             //Switch camera
-            if (Mathf.Abs(CharacterManagerRef.Balance) >= 60 && _cameraSwitchState == false)
+            if (Mathf.Abs(CharacterManagerRef.Balance) >= 60 && _cameraSwitchState == false || character.RespawnLastCheckpoint == true && _cameraSwitchState == false)
             {
                 _cameraSwitchState = true;
                 CameraDeathState cameraDeathState = new CameraDeathState();
@@ -86,7 +90,6 @@ namespace Character.State
             //Transition out
             CharacterManagerRef.TransitionManagerProperty.LaunchTransitionOut(SceneTransition.TransitionType.Fade);
 
-            IsDead = false;
 
             //Switch state character
             CharacterNavigationState characterNavigationState = new CharacterNavigationState();
