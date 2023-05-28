@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Character;
@@ -15,11 +16,14 @@ namespace UI.Menu
     {
         [SerializeField, ReadOnly] public bool CanBeOpened = true;
         [SerializeField] private UIMenuManager _menuManager;
+        
         [SerializeField] private ParametersMenu _parametersMenu;
         [SerializeField] private ControllerMenu _menuController;
-        [SerializeField] private MenuCredits _menuCredits;
+        [SerializeField] private CreditsMenu creditsMenu;
+        
         [SerializeField] private List<MenuUIObject> _objectsList = new List<MenuUIObject>();
         [SerializeField] private Image _backgroundImage;
+        
         private Dictionary<Image, float> _imagesDictionary = new Dictionary<Image, float>();
         private Dictionary<TMP_Text, float> _textsDictionary = new Dictionary<TMP_Text, float>();
 
@@ -114,7 +118,7 @@ namespace UI.Menu
         {
             const float fadeTime = 0.1f;
 
-            if (_parametersMenu.IsActive == false && _menuController.IsActive == false && _menuCredits.IsActive == false)
+            if (_parametersMenu.IsActive == false && _menuController.IsActive == false && creditsMenu.IsActive == false)
             {
                 CharacterManager characterManager = CharacterManager.Instance;
                 characterManager.CurrentStateBaseProperty.CanCharacterMove = IsActive;
@@ -122,11 +126,8 @@ namespace UI.Menu
                 characterManager.CurrentStateBaseProperty.CanCharacterOpenWeapons = IsActive;
                 characterManager.CameraManagerProperty.CanRotateCamera = IsActive;
 
-                _backgroundImage.DOFade(IsActive == false ? 0.8f : 0, fadeTime);
-            }
-            else if(_menuCredits.IsActive == true)
-            {
-                _backgroundImage.DOFade(0, fadeTime);
+                float fadeValue = IsActive == false ? 0.8f : 0;
+                _backgroundImage.DOFade(fadeValue, fadeTime);
             }
 
             IsActive = IsActive == false;
@@ -184,7 +185,7 @@ namespace UI.Menu
         public void OpenCredits()
         {
             CanBeOpened = false;
-            _menuCredits.SetMenu();
+            creditsMenu.SetMenu();
             OpenCloseMenu();
         }
 

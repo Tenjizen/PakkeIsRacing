@@ -241,5 +241,6 @@ namespace Character
     {
         public bool AutoAim;
         public bool InversedControls;
+        public bool Language;
     }
 }

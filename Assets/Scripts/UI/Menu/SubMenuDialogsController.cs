@@ -101,7 +101,7 @@ namespace UI.Menu
                     continue;
                 }
                 
-                dialogUIObject.Data = JsonFilesManagerSingleton.Instance.DialogsJsonFileManagerProperty.CollectedDialogs[i].DialogCreatorGameObject.Dialog;
+                dialogUIObject.Data = JsonFilesManagerSingleton.Instance.DialogsJsonFileManagerProperty.CollectedDialogs[i].DialogCreatorGameObject.Dialog_FR;
             }
         }
 
@@ -123,13 +123,13 @@ namespace UI.Menu
             {
                 if (JsonFilesManagerSingleton.Instance.DialogsJsonFileManagerProperty.CollectedDialogs[i].IsCollected == false ||
                     _dialogsDictionary[i] == true || 
-                    JsonFilesManagerSingleton.Instance.DialogsJsonFileManagerProperty.CollectedDialogs[i].DialogCreatorGameObject.Dialog == null)
+                    JsonFilesManagerSingleton.Instance.DialogsJsonFileManagerProperty.CollectedDialogs[i].DialogCreatorGameObject.Dialog_FR == null)
                 {
                     continue;
                 }
                 
                 DialogUIObject dialogUIObject = Instantiate(_dialogUIObjectPrefab, _dialogsUIObjectLayout);
-                dialogUIObject.Data = JsonFilesManagerSingleton.Instance.DialogsJsonFileManagerProperty.CollectedDialogs[i].DialogCreatorGameObject.Dialog;
+                dialogUIObject.Data = JsonFilesManagerSingleton.Instance.DialogsJsonFileManagerProperty.CollectedDialogs[i].DialogCreatorGameObject.Dialog_FR;
                 _dialogsDictionary[i] = true;
                 dialogUIObject.Set(false);
                 _objectsList.Add(dialogUIObject);

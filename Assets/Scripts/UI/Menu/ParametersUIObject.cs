@@ -16,7 +16,8 @@ namespace UI.Menu
         public enum Parameter
         {
             AutoAim = 0,
-            InversedControls = 1
+            InversedControls = 1,
+            Language = 2
         }
         
         [SerializeField] private bool _isOn;
@@ -41,6 +42,7 @@ namespace UI.Menu
             {
                 Parameter.AutoAim => CharacterManager.Instance.Parameters.AutoAim,
                 Parameter.InversedControls => CharacterManager.Instance.Parameters.InversedControls,
+                Parameter.Language => CharacterManager.Instance.Parameters.Language,
             };
 
             _backgroundImage.color = isActive ? _backgroundOnColor : _backgroundOffColor;
@@ -68,7 +70,8 @@ namespace UI.Menu
             PlayerParameters parameters = new PlayerParameters()
             {
                 AutoAim = _parameter == Parameter.AutoAim ? _isOn : playerParameters.AutoAim,
-                InversedControls = _parameter == Parameter.InversedControls ? _isOn : playerParameters.InversedControls
+                InversedControls = _parameter == Parameter.InversedControls ? _isOn : playerParameters.InversedControls,
+                Language = _parameter == Parameter.Language ? _isOn : playerParameters.Language
             };
             CharacterManager.Instance.Parameters = parameters;
             
