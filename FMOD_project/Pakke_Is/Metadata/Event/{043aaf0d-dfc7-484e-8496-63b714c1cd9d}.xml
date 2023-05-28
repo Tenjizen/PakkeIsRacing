@@ -176,10 +176,24 @@
 		<relationship name="automators">
 			<destination>{eb6f9981-3736-43d4-a1aa-a3aa15930653}</destination>
 		</relationship>
+		<relationship name="modulators">
+			<destination>{1adf0588-4c5c-48ba-b48a-235a2e5120c4}</destination>
+		</relationship>
 	</object>
 	<object class="Automator" id="{eb6f9981-3736-43d4-a1aa-a3aa15930653}">
 		<property name="nameOfPropertyBeingAutomated">
 			<value>gain</value>
+		</property>
+	</object>
+	<object class="ADSRModulator" id="{1adf0588-4c5c-48ba-b48a-235a2e5120c4}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>gain</value>
+		</property>
+		<property name="initialValue">
+			<value>-80</value>
+		</property>
+		<property name="finalValue">
+			<value>-80</value>
 		</property>
 	</object>
 </objects>
