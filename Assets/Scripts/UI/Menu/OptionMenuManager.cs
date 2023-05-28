@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Character;
+using Character.Camera.State;
+using Character.State;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -9,15 +11,15 @@ using UnityEngine.UI;
 
 namespace UI.Menu
 {
-    public class OptionMenuController : MenuController
+    public class OptionMenuManager : MenuController
     {
         [SerializeField, ReadOnly] public bool CanBeOpened = true;
         [SerializeField] private UIMenuManager _menuManager;
         [SerializeField] private ParametersMenu _parametersMenu;
         [SerializeField] private ControllerMenu _menuController;
+        [SerializeField] private MenuCredits _menuCredits;
         [SerializeField] private List<MenuUIObject> _objectsList = new List<MenuUIObject>();
         [SerializeField] private Image _backgroundImage;
-
         private Dictionary<Image, float> _imagesDictionary = new Dictionary<Image, float>();
         private Dictionary<TMP_Text, float> _textsDictionary = new Dictionary<TMP_Text, float>();
 
@@ -112,7 +114,7 @@ namespace UI.Menu
         {
             const float fadeTime = 0.1f;
 
-            if (_parametersMenu.IsActive == false && _menuController.IsActive == false)
+            if (_parametersMenu.IsActive == false && _menuController.IsActive == false && _menuCredits.IsActive == false)
             {
                 CharacterManager characterManager = CharacterManager.Instance;
                 characterManager.CurrentStateBaseProperty.CanCharacterMove = IsActive;
@@ -135,14 +137,14 @@ namespace UI.Menu
             }
 
             IsUsable = IsActive;
-            
+
             if (IsActive == false)
             {
                 Time.timeScale = 1;
                 _menuManager.CanBeOpened = true;
                 return;
             }
-            
+
             SetTile();
             Time.timeScale = 0.5f;
             _menuManager.CanBeOpened = false;
@@ -164,16 +166,24 @@ namespace UI.Menu
 
         public void OpenParameters()
         {
+            CanBeOpened = false;
             _parametersMenu.SetMenu();
-            SetVariableFalse();
+            OpenCloseMenu();
         }
 
         public void OpenController()
         {
+            CanBeOpened = false;
             _menuController.SetMenu();
-            SetVariableFalse();
+            OpenCloseMenu();
         }
-        
+        public void OpenCredits()
+        {
+            CanBeOpened = false;
+            _menuCredits.SetMenu();
+            OpenCloseMenu();
+        }
+
         private void SetTile()
         {
             if (_objectsList.Count <= 0)
@@ -187,28 +197,34 @@ namespace UI.Menu
                 _objectsList[i].IsSelected = i == _index;
             }
         }
-        
 
-        private void SetVariableFalse()
+        public void CloseMenu()
         {
-            OpenCloseMenu();
+            StartCoroutine(SetMenuCloseEnumerator(0.001f));
         }
-
-        public void SetVariableTrue()
-        {
-            StartCoroutine(SetFieldToTrueEnumerator(0.001f));
-        }
-
-        IEnumerator SetFieldToTrueEnumerator(float time)
+        IEnumerator SetMenuCloseEnumerator(float time)
         {
             if (IsActive)
             {
                 yield break;
             }
-
             yield return new WaitForSeconds(time);
 
+            CanBeOpened = true;
             OpenCloseMenu();
+        }
+
+        public void LastCheckpoint()
+        {
+            OpenCloseMenu();
+
+            CanBeOpened = false;
+
+            CharacterManager.Instance.RespawnLastCheckpoint = true;
+
+            CharacterDeathState characterDeathState = new CharacterDeathState();
+            CharacterManager.Instance.SwitchState(characterDeathState);
+
         }
     }
 }

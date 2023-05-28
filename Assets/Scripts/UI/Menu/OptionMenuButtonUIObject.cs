@@ -7,7 +7,7 @@ namespace UI.Menu
 {
     public class OptionMenuButtonUIObject : MenuUIObject
     {
-        [SerializeField] private OptionMenuController _optionMenuController;
+        [SerializeField] private OptionMenuManager _optionMenuManager;
         [SerializeField] private Color _baseColor, _unselectedColor;
         [SerializeField] private Image _background;
 
@@ -19,7 +19,7 @@ namespace UI.Menu
 
         protected override void Activate(InputAction.CallbackContext context)
         {
-            if (IsSelected == false || _optionMenuController.IsUsable == false)
+            if (IsSelected == false || _optionMenuManager.IsUsable == false)
             {
                 return;
             }
