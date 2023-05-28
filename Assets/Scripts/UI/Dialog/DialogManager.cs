@@ -1,4 +1,6 @@
-﻿using Dialog;
+﻿using System.Collections.Generic;
+using DG.Tweening;
+using Dialog;
 using Tools.SingletonClassBase;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +13,8 @@ namespace UI.Dialog
         [field:SerializeField] public GameObject DialogUIGameObject { get; set; }
         [field:SerializeField] public Image PressButtonImage { get; set; }
 
+        public Queue<DialogCreator> DialogQueue { get; set; } = new Queue<DialogCreator>();
+
         private void Start()
         {
             DialogUIGameObject.SetActive(false);
@@ -18,6 +22,7 @@ namespace UI.Dialog
 
         public void ToggleDialog(bool setActive)
         {
+            DialogUIGameObject.transform.DOKill();
             DialogUIGameObject.SetActive(setActive);
         }
     }

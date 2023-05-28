@@ -45,7 +45,7 @@ namespace Json
             string json = JsonUtility.ToJson(Wrapper, true);
             string filePath = path + $"/{typeof(T)}{_id}.json";
             System.IO.File.WriteAllText(filePath, json);
-            Debug.Log("Data saved to: " + filePath);
+            //Debug.Log("Data saved to: " + filePath);
         }
 
         public void ClearDataList()

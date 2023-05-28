@@ -97,6 +97,13 @@ namespace UI.Dialog
             
             if ((_hasEnded && _canBeReplayed) || (_hasEnded == false && _currentDialogState == DialogState.NotLaunched))
             {
+                DialogManager.Instance.DialogQueue.Enqueue(this);
+                
+                if (DialogManager.Instance.DialogQueue.Count > 1)
+                {
+                    return;
+                }
+                
                 LaunchDialog();
             }
         }
@@ -152,6 +159,7 @@ namespace UI.Dialog
         public void LaunchDialog()
         {
             DialogManager.Instance.ToggleDialog(true);
+            
             OnDialogLaunch.Invoke();
 
             _dialogIndex = 0;
@@ -201,27 +209,32 @@ namespace UI.Dialog
             //visual
             DialogManager.Instance.TypeWriterText.transform.DOPunchScale(Vector3.one * _currentDialogData.DialogList[index].SizeEffect, 0.3f, 10, 0);
             DialogManager.Instance.PressButtonImage.DOFade(0, 0.1f);
-        
-            //audio
-            //CharacterManager.Instance.SoundManagerProperty.PlayDialog(_dialog[index].Clip);
         }
 
         private void EndDialog()
         {
             OnDialogEnd.Invoke();
+            
             _hasEnded = true;
             _currentDialogState = DialogState.NotLaunched;
-
-            //visual
-            GameObject dialog = DialogManager.Instance.DialogUIGameObject;
-            dialog.transform.DOScale(Vector3.zero, 0.25f).OnComplete(DeactivateDialogObject);
-
+            
             //booleans
             _characterManager.CurrentStateBaseProperty.CanCharacterMove = true;
             _cameraManager.CanMoveCameraManually = true;
             
             //json
             JsonFilesManagerSingleton.Instance.DialogsJsonFileManagerProperty.SetDialogCollected(this);
+            
+            //check for queue
+            DialogManager.Instance.DialogQueue.Dequeue();
+            if (DialogManager.Instance.DialogQueue.Count > 0)
+            {
+                DialogManager.Instance.DialogQueue.Peek().LaunchDialog();
+            }
+            else
+            {
+                DialogManager.Instance.DialogUIGameObject.transform.DOScale(Vector3.zero, 0.25f).OnComplete(DeactivateDialogObject);
+            }
         }
 
         private void CheckForDialogEnd()

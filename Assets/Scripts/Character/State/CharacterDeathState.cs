@@ -25,7 +25,6 @@ namespace Character.State
 
         public override void EnterState(CharacterManager character)
         {
-            Debug.Log("death");
             IsDead = true;
             CharacterManagerRef.ScriptDebug.ResetTimerDebug();
         }
@@ -34,7 +33,6 @@ namespace Character.State
         {
             if (character.RespawnLastCheckpoint == false)
             {
-                Debug.Log("test");
                 //Rotate kayak at 180 in z with balance
                 if (CharacterManagerRef.Balance > 0 && CharacterManagerRef.Balance < 60)
                 {
