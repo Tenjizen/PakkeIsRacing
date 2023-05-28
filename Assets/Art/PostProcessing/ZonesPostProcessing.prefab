@@ -703,8 +703,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.03
-      minScalar: 0.01
+      scalar: 0.4
+      minScalar: 0.4
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1085,7 +1085,7 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: -0.138, y: 0.0000000085681675, z: 0.09200001}
+    m_Position: {x: -0.45, y: 0.000000027939677, z: 0.3}
     m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
@@ -1908,8 +1908,8 @@ ParticleSystem:
     x:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.113800004
-      minScalar: -0.0862
+      scalar: 0.145
+      minScalar: -0.055000003
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -2014,8 +2014,8 @@ ParticleSystem:
     z:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.0908
-      minScalar: -0.1092
+      scalar: 0.07
+      minScalar: -0.13000001
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5447,7 +5447,7 @@ MonoBehaviour:
   noiseStrength: 1
   noiseScale: 24.14
   noiseFinalMultiplier: 0.28
-  density: 0.13
+  density: 0.08
   mediumAlbedo: {r: 1, g: 1, b: 1, a: 1}
   brightness: 1.05
   attenuationMode: 0
@@ -5463,9 +5463,9 @@ MonoBehaviour:
   windDirection: {x: 0.03, y: 0.02, z: 0}
   enableDustParticles: 1
   dustBrightness: 0.95
-  dustMinSize: 0.01
-  dustMaxSize: 0.03
-  dustWindSpeed: 0.46
+  dustMinSize: 0.4
+  dustMaxSize: 0.4
+  dustWindSpeed: 1.5
   dustDistanceAttenuation: 16.14
   dustAutoToggle: 0
   dustDistanceDeactivation: 70
