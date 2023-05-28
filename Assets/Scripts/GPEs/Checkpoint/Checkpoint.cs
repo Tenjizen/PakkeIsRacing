@@ -3,13 +3,15 @@ using Sound;
 using UI;
 using UnityEngine;
 using FMODUnity;
+using JetBrains.Annotations;
 
 namespace GPEs.Checkpoint
 {
     [RequireComponent(typeof(StudioEventEmitter))]
     public class Checkpoint : PlayerTriggerManager
     {
-        [SerializeField] private string _zoneName;
+        [SerializeField] private string _zoneNameFR;
+        [SerializeField] [CanBeNull] private string _zoneNameEN;
         
         [Header("References"), SerializeField] private ZoneManager _zoneManager;
         [SerializeField] private Transform _targetRespawnTransform;
@@ -41,7 +43,7 @@ namespace GPEs.Checkpoint
             _hasBeenUsed = true;
             
             _activationParticles.Play();
-            _zoneManager.ShowZone(_zoneName);
+            _zoneManager.ShowZone(CharacterManager.Instance.Parameters.Language ? _zoneNameEN : _zoneNameFR);
             SetPlayerExperience();
 
             if (AudioManager.Instance != null)

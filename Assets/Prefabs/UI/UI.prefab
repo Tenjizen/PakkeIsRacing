@@ -2747,6 +2747,7 @@ MonoBehaviour:
   - {fileID: 922510534845697927}
   - {fileID: 1732385602142522460}
   _zoneNameText: {fileID: 922510534845697927}
+  _titleText: {fileID: 1732385602142522460}
   _showTime: 1
   holdTime: 1
   _hideTime: 0.5
@@ -2938,8 +2939,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13, y: 102}
-  m_SizeDelta: {x: 546.9894, y: 136.7473}
+  m_AnchoredPosition: {x: 0, y: 102}
+  m_SizeDelta: {x: 1180.92, y: 136.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6290515254714786289
 CanvasRenderer:
@@ -2969,10 +2970,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Nouveau checkpoint
+  m_text: New zone discovered
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 03876ecf1a1cce34aa9faa68575a7c9f, type: 2}
+  m_sharedMaterial: {fileID: -8411640361534313158, guid: 03876ecf1a1cce34aa9faa68575a7c9f,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6321,7 +6323,7 @@ GameObject:
   - component: {fileID: 5871812646655530809}
   - component: {fileID: 41285777616420909}
   m_Layer: 5
-  m_Name: Text (TMP) (3)
+  m_Name: "VilleHolmstr\xF6m"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6375,7 +6377,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Skleebus
+  m_text: "Ville Holmstr\xF6m"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 03876ecf1a1cce34aa9faa68575a7c9f, type: 2}
   m_sharedMaterial: {fileID: -8411640361534313158, guid: 03876ecf1a1cce34aa9faa68575a7c9f,
@@ -15646,8 +15648,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: 10}
-  m_SizeDelta: {x: 994.5981, y: 129.8962}
+  m_AnchoredPosition: {x: 0, y: 10}
+  m_SizeDelta: {x: 1514.13, y: 129.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8065703076010472713
 CanvasRenderer:
@@ -15679,8 +15681,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Lac glac\xE9"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bba011c6e14237048ac9f6722d56439a, type: 2}
+  m_sharedMaterial: {fileID: -9081560113746883648, guid: bba011c6e14237048ac9f6722d56439a,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

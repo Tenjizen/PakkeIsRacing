@@ -1,4 +1,5 @@
 ﻿using System;
+using Character;
 using Collectible.Data;
 using UnityEngine;
 
@@ -25,12 +26,18 @@ namespace UI.Menu
 
         public override string GetName()
         {
-            return Data == null ? "Mysterious collectible" : Data.Name;
+            bool isInEnglish = CharacterManager.Instance.Parameters.Language;
+            return Data == null ? 
+                isInEnglish ? "Mysterious collectible" : "Collectible mystère" : 
+                isInEnglish ? Data.NameEN : Data.NameFR;
         }
         
         public override string GetDescription()
         {
-            return Data == null ? "Collectible not found yet." : Data.Description;
+            bool isInEnglish = CharacterManager.Instance.Parameters.Language;
+            return Data == null ? 
+                isInEnglish ? "Collectible not found yet" : "Collectible pas encore trouvé" : 
+                isInEnglish ? Data.DescriptionEN : Data.DescriptionFR;
         }
     }
 }
