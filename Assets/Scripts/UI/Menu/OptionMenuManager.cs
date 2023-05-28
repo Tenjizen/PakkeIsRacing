@@ -124,6 +124,10 @@ namespace UI.Menu
 
                 _backgroundImage.DOFade(IsActive == false ? 0.8f : 0, fadeTime);
             }
+            else if(_menuCredits.IsActive == true)
+            {
+                _backgroundImage.DOFade(0, fadeTime);
+            }
 
             IsActive = IsActive == false;
 
