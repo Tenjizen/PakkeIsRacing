@@ -4,6 +4,7 @@ using Fight.Data;
 using GPEs.WaterFlowGPE;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 using WaterFlowGPE;
 
 namespace Fight
@@ -84,7 +85,8 @@ namespace Fight
             
             if (Data.ForbiddenColliders.Contains(other.gameObject) || 
                 (other.gameObject.transform.parent != null && Data.ForbiddenColliders.Contains(other.gameObject.transform.parent.gameObject)) ||
-                other.gameObject.GetComponent<WaterFlowBlock>() != null)
+                other.gameObject.GetComponent<WaterFlowBlock>() != null ||
+                other.gameObject.GetComponent<Volume>() != null)
             {
                 return;
             }
