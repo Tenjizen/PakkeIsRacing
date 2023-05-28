@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using Character;
 using Collectible;
+using Dialog;
 using Json;
 using TMPro;
+using UI.Dialog;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -100,8 +102,9 @@ namespace UI.Menu
                 {
                     continue;
                 }
-                
-                dialogUIObject.Data = JsonFilesManagerSingleton.Instance.DialogsJsonFileManagerProperty.CollectedDialogs[i].DialogCreatorGameObject.Dialog_FR;
+
+                DialogCreator dialog = JsonFilesManagerSingleton.Instance.DialogsJsonFileManagerProperty.CollectedDialogs[i].DialogCreatorGameObject;
+                dialogUIObject.Data = CharacterManager.Instance.Parameters.Language ? dialog.Dialog_EN : dialog.Dialog_FR;
             }
         }
 
@@ -121,9 +124,11 @@ namespace UI.Menu
             
             for (int i = 0; i < count; i++)
             {
+                DialogCreator dialog = JsonFilesManagerSingleton.Instance.DialogsJsonFileManagerProperty.CollectedDialogs[i].DialogCreatorGameObject;
+                DialogData data = CharacterManager.Instance.Parameters.Language ? dialog.Dialog_EN : dialog.Dialog_FR;
+                
                 if (JsonFilesManagerSingleton.Instance.DialogsJsonFileManagerProperty.CollectedDialogs[i].IsCollected == false ||
-                    _dialogsDictionary[i] == true || 
-                    JsonFilesManagerSingleton.Instance.DialogsJsonFileManagerProperty.CollectedDialogs[i].DialogCreatorGameObject.Dialog_FR == null)
+                    _dialogsDictionary[i] || data == null)
                 {
                     continue;
                 }

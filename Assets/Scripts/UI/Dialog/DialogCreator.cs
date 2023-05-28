@@ -35,7 +35,8 @@ namespace UI.Dialog
         #endregion
 
         [Header("Parameters")]
-        public DialogData Dialog;
+        public DialogData Dialog_FR;
+        public DialogData Dialog_EN;
         [SerializeField]
         private LaunchType _launchType;
         [SerializeField] 
@@ -56,6 +57,8 @@ namespace UI.Dialog
         private GameplayInputs _gameplayInputs;
         private CharacterManager _characterManager;
         private CameraManager _cameraManager;
+
+        private DialogData _currentDialogData;
 
         private void Start()
         {
@@ -111,15 +114,15 @@ namespace UI.Dialog
             {
                 case DialogState.Showing:
                     _currentDialogState = DialogState.Holding;
-                    _currentDialogCooldown = Dialog.DialogList[_dialogIndex].TextHoldTime;
+                    _currentDialogCooldown = _currentDialogData.DialogList[_dialogIndex].TextHoldTime;
                     break;
             
                 case DialogState.Holding:
-                    if (Dialog.DialogList[_dialogIndex].SequencingTypeNext == SequencingType.Automatic)
+                    if (_currentDialogData.DialogList[_dialogIndex].SequencingTypeNext == SequencingType.Automatic)
                     {
                         _dialogIndex++;
                         CheckForDialogEnd();
-                        if (_dialogIndex < Dialog.DialogList.Count)
+                        if (_dialogIndex < _currentDialogData.DialogList.Count)
                         {
                             ShowDialog(_dialogIndex);
                         }
@@ -137,7 +140,7 @@ namespace UI.Dialog
                         _dialogIndex++;
                         CheckForDialogEnd();
 
-                        if (_dialogIndex < Dialog.DialogList.Count)
+                        if (_dialogIndex < _currentDialogData.DialogList.Count)
                         {
                             ShowDialog(_dialogIndex);
                         }
@@ -152,6 +155,7 @@ namespace UI.Dialog
             OnDialogLaunch.Invoke();
 
             _dialogIndex = 0;
+            _currentDialogData = CharacterManager.Instance.Parameters.Language ? Dialog_EN : Dialog_FR;
             ShowDialog(_dialogIndex);
 
             if (_blockPlayerMovement)
@@ -174,28 +178,28 @@ namespace UI.Dialog
 
         private void ShowDialog(int index)
         {
-            if (Dialog == null)
+            if (_currentDialogData == null)
             {
                 return;
             }
             
             _currentDialogState = DialogState.Showing;
-            _currentDialogCooldown = Dialog.DialogList[index].TextShowTime;
+            _currentDialogCooldown = _currentDialogData.DialogList[index].TextShowTime;
 
-            DialogManager.Instance.TypeWriterText.DisplayText.color = Dialog.DialogList[index].TextColor;
-            if (Dialog.DialogList[index].ShowLetterByLetter)
+            DialogManager.Instance.TypeWriterText.DisplayText.color = _currentDialogData.DialogList[index].TextColor;
+            if (_currentDialogData.DialogList[index].ShowLetterByLetter)
             {
-                DialogManager.Instance.TypeWriterText.FullText = Dialog.DialogList[index].Text;
-                DialogManager.Instance.TypeWriterText.Delay =  Dialog.DialogList[index].TextShowTime / Dialog.DialogList[index].Text.Length;
+                DialogManager.Instance.TypeWriterText.FullText = _currentDialogData.DialogList[index].Text;
+                DialogManager.Instance.TypeWriterText.Delay =  _currentDialogData.DialogList[index].TextShowTime / _currentDialogData.DialogList[index].Text.Length;
                 StartCoroutine(DialogManager.Instance.TypeWriterText.ShowText());
             }
             else
             {
-                DialogManager.Instance.TypeWriterText.DisplayText.text = Dialog.DialogList[index].Text;
+                DialogManager.Instance.TypeWriterText.DisplayText.text = _currentDialogData.DialogList[index].Text;
             }
 
             //visual
-            DialogManager.Instance.TypeWriterText.transform.DOPunchScale(Vector3.one * Dialog.DialogList[index].SizeEffect, 0.3f, 10, 0);
+            DialogManager.Instance.TypeWriterText.transform.DOPunchScale(Vector3.one * _currentDialogData.DialogList[index].SizeEffect, 0.3f, 10, 0);
             DialogManager.Instance.PressButtonImage.DOFade(0, 0.1f);
         
             //audio
@@ -222,7 +226,7 @@ namespace UI.Dialog
 
         private void CheckForDialogEnd()
         {
-            if (_dialogIndex >= Dialog.DialogList.Count)
+            if (_dialogIndex >= _currentDialogData.DialogList.Count)
             {
                 EndDialog();
             }
