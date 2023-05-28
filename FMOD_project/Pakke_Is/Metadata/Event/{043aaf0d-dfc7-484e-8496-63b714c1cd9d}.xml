@@ -32,7 +32,7 @@
 			<destination>{e732f60b-4867-44f8-a2dc-eb14d2ab7e3b}</destination>
 		</relationship>
 		<relationship name="parameters">
-			<destination>{67de13e9-75dc-492c-b6bf-48277b6b1395}</destination>
+			<destination>{f68e5a66-fcaa-48a7-96ef-bf0e8f07757c}</destination>
 		</relationship>
 		<relationship name="banks">
 			<destination>{57653899-edc4-4f40-b880-68576b2af811}</destination>
@@ -66,10 +66,10 @@
 			<destination>{24d11f17-c682-46d7-89e1-3929ef809477}</destination>
 		</relationship>
 		<relationship name="modules">
-			<destination>{a9cf285f-086f-4b1b-b3c1-746e412fdd12}</destination>
-			<destination>{08fd32ca-eddb-4376-ada9-4ece4fdc6e23}</destination>
-			<destination>{d26af3cc-9db4-40af-98ba-934808fa60b8}</destination>
-			<destination>{f27217f3-0f4d-4269-b783-a39996854da0}</destination>
+			<destination>{5b1e67c8-38bd-41bd-aacb-2ac892a74537}</destination>
+			<destination>{4b5a0a9b-ec32-4dcf-87cd-875f4f30d49a}</destination>
+			<destination>{f594f0ff-07a0-436a-8bd4-29ab30854e81}</destination>
+			<destination>{987a1bf2-333c-479d-ad4e-7c58b097044b}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{25f2d07c-1a0f-44aa-9ff5-b5b071563014}</destination>
@@ -80,12 +80,12 @@
 			<value>false</value>
 		</property>
 	</object>
-	<object class="ParameterProxy" id="{67de13e9-75dc-492c-b6bf-48277b6b1395}">
+	<object class="ParameterProxy" id="{f68e5a66-fcaa-48a7-96ef-bf0e8f07757c}">
 		<relationship name="modules">
-			<destination>{a9cf285f-086f-4b1b-b3c1-746e412fdd12}</destination>
-			<destination>{08fd32ca-eddb-4376-ada9-4ece4fdc6e23}</destination>
-			<destination>{d26af3cc-9db4-40af-98ba-934808fa60b8}</destination>
-			<destination>{f27217f3-0f4d-4269-b783-a39996854da0}</destination>
+			<destination>{5b1e67c8-38bd-41bd-aacb-2ac892a74537}</destination>
+			<destination>{4b5a0a9b-ec32-4dcf-87cd-875f4f30d49a}</destination>
+			<destination>{f594f0ff-07a0-436a-8bd4-29ab30854e81}</destination>
+			<destination>{987a1bf2-333c-479d-ad4e-7c58b097044b}</destination>
 		</relationship>
 		<relationship name="preset">
 			<destination>{ef15253d-a1c7-49b9-a1de-6ebc924fa38d}</destination>
@@ -113,20 +113,15 @@
 			<destination>{eb6f9981-3736-43d4-a1aa-a3aa15930653}</destination>
 		</relationship>
 	</object>
-	<object class="EventSound" id="{a9cf285f-086f-4b1b-b3c1-746e412fdd12}">
-		<relationship name="event">
-			<destination>{427f99f9-4167-4df3-a0b6-5b749ce74117}</destination>
-		</relationship>
-	</object>
-	<object class="EventSound" id="{08fd32ca-eddb-4376-ada9-4ece4fdc6e23}">
+	<object class="EventSound" id="{5b1e67c8-38bd-41bd-aacb-2ac892a74537}">
 		<property name="start">
-			<value>1</value>
+			<value>3</value>
 		</property>
 		<relationship name="event">
-			<destination>{1715955c-b874-454b-9a34-0a2b675c16da}</destination>
+			<destination>{b1107310-8289-4c8e-a625-543eba2c2f60}</destination>
 		</relationship>
 	</object>
-	<object class="EventSound" id="{d26af3cc-9db4-40af-98ba-934808fa60b8}">
+	<object class="EventSound" id="{4b5a0a9b-ec32-4dcf-87cd-875f4f30d49a}">
 		<property name="start">
 			<value>2</value>
 		</property>
@@ -134,21 +129,20 @@
 			<destination>{7216ced1-1a4f-43ca-9dbf-388106ca9bcb}</destination>
 		</relationship>
 	</object>
-	<object class="EventSound" id="{f27217f3-0f4d-4269-b783-a39996854da0}">
+	<object class="EventSound" id="{f594f0ff-07a0-436a-8bd4-29ab30854e81}">
+		<relationship name="event">
+			<destination>{427f99f9-4167-4df3-a0b6-5b749ce74117}</destination>
+		</relationship>
+	</object>
+	<object class="EventSound" id="{987a1bf2-333c-479d-ad4e-7c58b097044b}">
 		<property name="start">
-			<value>3</value>
-		</property>
-		<property name="volume">
-			<value>3</value>
+			<value>1</value>
 		</property>
 		<relationship name="event">
-			<destination>{b1107310-8289-4c8e-a625-543eba2c2f60}</destination>
+			<destination>{1715955c-b874-454b-9a34-0a2b675c16da}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{25f2d07c-1a0f-44aa-9ff5-b5b071563014}">
-		<property name="volume">
-			<value>10</value>
-		</property>
 		<property name="name">
 			<value>Audio 2</value>
 		</property>
