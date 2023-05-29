@@ -43,8 +43,8 @@ namespace Character
         [field: SerializeField] public ScriptForDebug ScriptDebug { get; private set; }
         [field: SerializeField, Header("Weapons")] public Animator HarpoonAnimator { get; private set; }
         [field: SerializeField] public Animator NetAnimator { get; private set; }
-        [field: SerializeField] public DissolveScript HarpoonDissolve { get; private set; }
-        [field: SerializeField] public DissolveScript NetDissolve { get; private set; }
+        [field: SerializeField] public WeaponMeshController HarpoonMeshController { get; private set; }
+        [field: SerializeField] public WeaponMeshController NetMeshController { get; private set; }
 
         #endregion
 

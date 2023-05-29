@@ -21,6 +21,7 @@ namespace Character.State
 
         private float _launchTime;
         private bool _hasLaunched;
+        private bool _weaponThrown;
         
         #region Base methods
 
@@ -81,16 +82,22 @@ namespace Character.State
             switch (_weaponPrefab.Data.Type)
             {
                 case WeaponType.Harpoon:
-                    CharacterManagerRef.HarpoonDissolve.Launch();
+                    CharacterManagerRef.HarpoonMeshController.LaunchDissolveUp();
+                    
                     CharacterManagerRef.IKPlayerControl.CurrentType = IKType.Harpoon;
                     CharacterManagerRef.IKPlayerControl.SetHarpoon();
+                    
                     CharacterManagerRef.HarpoonAnimator.SetBool("IdleHarpoon", true);
+                    CharacterManagerRef.CharacterAnimatorProperty.SetBool("IdleHarpoon", true);
                     break;
                 case WeaponType.Net:
-                    CharacterManagerRef.NetDissolve.Launch();
+                    CharacterManagerRef.NetMeshController.LaunchDissolveUp();
+                    
                     CharacterManagerRef.IKPlayerControl.CurrentType = IKType.Net;
                     CharacterManagerRef.IKPlayerControl.SetNet();
+                    
                     CharacterManagerRef.NetAnimator.SetBool("IdleNet", true);
+                    CharacterManagerRef.CharacterAnimatorProperty.SetBool("IdleNet", true);
                     break;
             }
 
@@ -121,7 +128,7 @@ namespace Character.State
                 }
             }
 
-            if (_isHoldingShoot && character.InputManagementProperty.Inputs.Shoot == false)
+            if (_isHoldingShoot && character.InputManagementProperty.Inputs.Shoot == false && _weaponThrown == false)
             {
                 if (character.WeaponCooldown <= 0 && _weaponPrefab != null)
                 {
@@ -169,14 +176,23 @@ namespace Character.State
                     {
                         case WeaponType.Harpoon:
                             CharacterManagerRef.IKPlayerControl.SetHarpoon();
+                            CharacterManagerRef.CharacterAnimatorProperty.SetTrigger("FireHarpoon");
                             CharacterManagerRef.HarpoonAnimator.SetTrigger("FireHarpoon");
+                            CharacterManagerRef.HarpoonMeshController.SetMeshes(false);
                             break;
                         case WeaponType.Net:
                             CharacterManagerRef.IKPlayerControl.SetNet();
-                            CharacterManagerRef.HarpoonAnimator.SetTrigger("FireNet");
+                            CharacterManagerRef.CharacterAnimatorProperty.SetTrigger("FireNet");
+                            CharacterManagerRef.NetAnimator.SetTrigger("FireNet");
+                            CharacterManagerRef.NetMeshController.SetMeshes(false);
                             break;
                     }
+                    CharacterManagerRef.HarpoonAnimator.SetBool("IdleHarpoon", false);
+                    CharacterManagerRef.CharacterAnimatorProperty.SetBool("IdleHarpoon", false);
+                    CharacterManagerRef.NetAnimator.SetBool("IdleNet", false);
+                    CharacterManagerRef.CharacterAnimatorProperty.SetBool("IdleNet", false);
                     
+                    _weaponThrown = true;
                     LaunchNavigationState();
                 }
 

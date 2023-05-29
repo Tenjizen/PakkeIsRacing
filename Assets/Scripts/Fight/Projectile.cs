@@ -1,4 +1,5 @@
 ﻿using System;
+using Art.Test.Dissolve;
 using DG.Tweening;
 using Fight.Data;
 using GPEs.WaterFlowGPE;
@@ -13,6 +14,7 @@ namespace Fight
     {
         [field:SerializeField] public GameObject Owner { get; private set; }
         [field:SerializeField] public WeaponData Data { get; private set; }
+        [field:SerializeField] public WeaponMeshController WeaponMeshControllerRef { get; private set; }
         
         [SerializeField] private SednaWeaponToPlayerController _sednaWeaponToPlayerPrefab;
 
@@ -32,6 +34,8 @@ namespace Fight
         private void Start()
         {
             _lifetime = Data.Lifetime;
+            WeaponMeshControllerRef.SetDissolveMax();
+            WeaponMeshControllerRef.SetMeshes(true);
         }
 
         protected virtual void FixedUpdate()

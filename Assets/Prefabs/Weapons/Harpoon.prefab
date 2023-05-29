@@ -365,6 +365,7 @@ MonoBehaviour:
   <Owner>k__BackingField: {fileID: 0}
   <Data>k__BackingField: {fileID: 11400000, guid: 2f66cc1fc962647478a68e686d304648,
     type: 2}
+  <WeaponMeshControllerRef>k__BackingField: {fileID: 5567763478592024340}
   _sednaWeaponToPlayerPrefab: {fileID: 1804849885034642166, guid: 50640a99ba2a579448150b15cf51f016,
     type: 3}
   OnProjectileDie:
@@ -383,8 +384,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _dieParticles: {fileID: 8734386948639349553}
-  _launchSound: {fileID: 8300000, guid: 9dc32e7fa53cf4940acc7f48483736f1, type: 3}
-  _dieSound: {fileID: 8300000, guid: afd6d421b02d4aa448f871f0cad96c78, type: 3}
 --- !u!114 &1326249160998105256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -664,6 +663,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1693175064017002430}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6386091333688470181 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5755786709773841691, guid: 2b142a2adf088b345aae289a597a6281,
+    type: 3}
+  m_PrefabInstance: {fileID: 1693175064017002430}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5567763478592024340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6386091333688470181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f80024d9d7ed60489523d3235a88da5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _noiseStrength: 0.25
+  _invisibleValue: 0.5
+  _visibleValue: 2.5
+  _timeToShow: 1.5
+  _gameObjectsToActivateAfterDissolve: []
+  _percentageToShowObjects: 0.7
 --- !u!1001 &8338071646987913723
 PrefabInstance:
   m_ObjectHideFlags: 0
