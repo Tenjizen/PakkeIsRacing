@@ -9,10 +9,11 @@ namespace Art.Test.Dissolve
     public class DissolveScript : MonoBehaviour
     {
         [SerializeField] private float _noiseStrength = 0.25f;
-        [SerializeField] private float _objectHeight = 1.0f;
         [SerializeField] private float _invisibleValue = 0.5f;
         [SerializeField] private float _visibleValue = 2.5f;
         [SerializeField] private float _timeToShow = 1.5f;
+        [SerializeField] private List<GameObject> _gameObjectsToActivateAfterDissolve = new List<GameObject>();
+        [Range(0,1) ,SerializeField] private float _percentageToShowObjects = 0.7f;
         
         private float _time;
         private bool _launcheffect;
@@ -20,10 +21,10 @@ namespace Art.Test.Dissolve
 
         private void Awake()
         {
-            List<Renderer> _renderers = GetComponentsInChildren<Renderer>().ToList();
-            foreach (Renderer renderer in _renderers)
+            List<Renderer> rendererList = GetComponentsInChildren<Renderer>().ToList();
+            foreach (Renderer r in rendererList)
             {
-                _materials.Add(renderer.material);
+                _materials.Add(r.material);
             }
         }
 
@@ -31,6 +32,8 @@ namespace Art.Test.Dissolve
         {
             _time = 0;
             _launcheffect = true;
+            SetDissolve(0);
+            _gameObjectsToActivateAfterDissolve.ForEach(x=>x.SetActive(false));
         }
 
         private void Update()
@@ -40,15 +43,15 @@ namespace Art.Test.Dissolve
                 return;
             }
             
-            Debug.Log("launch");
             _time += Time.deltaTime;
+            
             float value = (_time / _timeToShow) * (_visibleValue - _invisibleValue) + _invisibleValue;
             SetDissolve(value);
-            
-            //var time = Time.time * Mathf.PI * 0.25f;
-            //float height = transform.position.y;
-            //height += Mathf.Sin(time) * (objectHeight / 2.0f);
-            //SetHeight(height);
+
+            if ((_time / _timeToShow) > _percentageToShowObjects)
+            {
+                _gameObjectsToActivateAfterDissolve.ForEach(x=>x.SetActive(true));
+            }
         }
 
         private void SetDissolve(float height)

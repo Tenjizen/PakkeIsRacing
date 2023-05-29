@@ -81,16 +81,16 @@ namespace Character.State
             switch (_weaponPrefab.Data.Type)
             {
                 case WeaponType.Harpoon:
+                    CharacterManagerRef.HarpoonDissolve.Launch();
                     CharacterManagerRef.IKPlayerControl.CurrentType = IKType.Harpoon;
                     CharacterManagerRef.IKPlayerControl.SetHarpoon();
                     CharacterManagerRef.HarpoonAnimator.SetBool("IdleHarpoon", true);
-                    CharacterManagerRef.HarpoonDissolve.Launch();
                     break;
                 case WeaponType.Net:
+                    CharacterManagerRef.NetDissolve.Launch();
                     CharacterManagerRef.IKPlayerControl.CurrentType = IKType.Net;
                     CharacterManagerRef.IKPlayerControl.SetNet();
                     CharacterManagerRef.NetAnimator.SetBool("IdleNet", true);
-                    CharacterManagerRef.NetDissolve.Launch();
                     break;
             }
 
