@@ -84,11 +84,13 @@ namespace Character.State
                     CharacterManagerRef.IKPlayerControl.CurrentType = IKType.Harpoon;
                     CharacterManagerRef.IKPlayerControl.SetHarpoon();
                     CharacterManagerRef.HarpoonAnimator.SetBool("IdleHarpoon", true);
+                    CharacterManagerRef.HarpoonDissolve.Launch();
                     break;
                 case WeaponType.Net:
                     CharacterManagerRef.IKPlayerControl.CurrentType = IKType.Net;
                     CharacterManagerRef.IKPlayerControl.SetNet();
-                    CharacterManagerRef.HarpoonAnimator.SetBool("IdleNet", true);
+                    CharacterManagerRef.NetAnimator.SetBool("IdleNet", true);
+                    CharacterManagerRef.NetDissolve.Launch();
                     break;
             }
 

@@ -1,5 +1,6 @@
 using System;
 using Art.Script;
+using Art.Test.Dissolve;
 using Character.Camera;
 using Character.Data.Character;
 using Character.State;
@@ -40,8 +41,10 @@ namespace Character
         [field: SerializeField] public PlayerParameters Parameters { get; set; }
         [field: SerializeField] public OptionMenuManager OptionMenuManager { get; private set; }
         [field: SerializeField] public ScriptForDebug ScriptDebug { get; private set; }
-        [field: SerializeField, Header("Animation")] public Animator HarpoonAnimator { get; private set; }
+        [field: SerializeField, Header("Weapons")] public Animator HarpoonAnimator { get; private set; }
         [field: SerializeField] public Animator NetAnimator { get; private set; }
+        [field: SerializeField] public DissolveScript HarpoonDissolve { get; private set; }
+        [field: SerializeField] public DissolveScript NetDissolve { get; private set; }
 
         #endregion
 

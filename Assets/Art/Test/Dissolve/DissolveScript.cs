@@ -1,54 +1,60 @@
-using System.Collections;
+
 using System.Collections.Generic;
+using System.Linq;
+using UI.WeaponWheel;
 using UnityEngine;
 
-[RequireComponent(typeof(Renderer))]
-public class DissolveScript : MonoBehaviour
+namespace Art.Test.Dissolve
 {
-    [SerializeField] private float noiseStrength = 0.25f;
-    [SerializeField] private float objectHeight = 1.0f;
-    [SerializeField] private float invisiblevalue = 0.5f;
-    [SerializeField] private float visiblevalue = 2.5f;
-    [SerializeField] private float timetoshow = 1.5f;
-    private float time;
-    private bool launcheffect;
-    
-
-
-    private Material material;
-
-    private void Awake()
+    public class DissolveScript : MonoBehaviour
     {
-        material = GetComponent<Renderer>().material;
-    }
+        [SerializeField] private float _noiseStrength = 0.25f;
+        [SerializeField] private float _objectHeight = 1.0f;
+        [SerializeField] private float _invisibleValue = 0.5f;
+        [SerializeField] private float _visibleValue = 2.5f;
+        [SerializeField] private float _timeToShow = 1.5f;
+        
+        private float _time;
+        private bool _launcheffect;
+        private List<Material> _materials = new List<Material>();
 
-    public void Launch()
-    {
-        time = 0;
-        launcheffect = true;
-    }
-
-    private void Update()
-    {
-        if(launcheffect = false)
+        private void Awake()
         {
-            return;
+            List<Renderer> _renderers = GetComponentsInChildren<Renderer>().ToList();
+            foreach (Renderer renderer in _renderers)
+            {
+                _materials.Add(renderer.material);
+            }
         }
-        time += Time.deltaTime;
-        SetHeight((time / timetoshow)*(visiblevalue-invisiblevalue)+invisiblevalue);
 
+        public void Launch()
+        {
+            _time = 0;
+            _launcheffect = true;
+        }
 
-        //var time = Time.time * Mathf.PI * 0.25f;
+        private void Update()
+        {
+            if(_launcheffect == false || _time > _timeToShow)
+            {
+                return;
+            }
+            
+            Debug.Log("launch");
+            _time += Time.deltaTime;
+            float value = (_time / _timeToShow) * (_visibleValue - _invisibleValue) + _invisibleValue;
+            SetDissolve(value);
+            
+            //var time = Time.time * Mathf.PI * 0.25f;
+            //float height = transform.position.y;
+            //height += Mathf.Sin(time) * (objectHeight / 2.0f);
+            //SetHeight(height);
+        }
 
-        //float height = transform.position.y;
-        //height += Mathf.Sin(time) * (objectHeight / 2.0f);
-        //SetHeight(height);
-    }
-
-    private void SetHeight(float height)
-    {
-        Debug.Log(height);
-        material.SetFloat("_CutoffHeight", height);
-        material.SetFloat("_NoiseStrength", noiseStrength);
+        private void SetDissolve(float height)
+        {
+            _materials.ForEach( x => x.SetFloat("_CutoffHeight", height));
+            _materials.ForEach( x => x.SetFloat("_NoiseStrength", _noiseStrength));
+        }
     }
 }
