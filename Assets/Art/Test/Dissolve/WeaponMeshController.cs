@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Art.Test.Dissolve
 {
-    public class DissolveScript : MonoBehaviour
+    public class WeaponMeshController : MonoBehaviour
     {
         [SerializeField] private float _noiseStrength = 0.25f;
         [SerializeField] private float _invisibleValue = 0.5f;
@@ -18,22 +18,31 @@ namespace Art.Test.Dissolve
         private float _time;
         private bool _launcheffect;
         private List<Material> _materials = new List<Material>();
+        private List<Renderer> _rendererList = new List<Renderer>();
 
         private void Awake()
         {
-            List<Renderer> rendererList = GetComponentsInChildren<Renderer>().ToList();
-            foreach (Renderer r in rendererList)
+            _rendererList = GetComponentsInChildren<Renderer>().ToList();
+            foreach (Renderer r in _rendererList)
             {
                 _materials.Add(r.material);
             }
         }
 
-        public void Launch()
+        public void LaunchDissolveUp()
         {
             _time = 0;
             _launcheffect = true;
             SetDissolve(0);
+            
+            SetMeshes(true);
             _gameObjectsToActivateAfterDissolve.ForEach(x=>x.SetActive(false));
+        }
+
+        public void SetMeshes(bool set)
+        {
+            _rendererList.ForEach(x=> x.gameObject.SetActive(set));
+            _gameObjectsToActivateAfterDissolve.ForEach(x=>x.SetActive(set));
         }
 
         private void Update()
@@ -58,6 +67,11 @@ namespace Art.Test.Dissolve
         {
             _materials.ForEach( x => x.SetFloat("_CutoffHeight", height));
             _materials.ForEach( x => x.SetFloat("_NoiseStrength", _noiseStrength));
+        }
+
+        public void SetDissolveMax()
+        {
+            SetDissolve(_visibleValue);
         }
     }
 }
