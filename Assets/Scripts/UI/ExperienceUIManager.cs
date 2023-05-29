@@ -87,7 +87,8 @@ namespace UI
         {
             _levelText.text = _level.ToString();
             _smallLevelText.text = _level.ToString();
-            
+
+            _uIGameObjectSmall.transform.DOComplete();
             _uIGameObjectSmall.transform.DOPunchScale(Vector3.one * 0.05f, 0.2f);
             _experienceGaugeSmall.fillAmount = 0;
             _experienceGauge.fillAmount = 0;

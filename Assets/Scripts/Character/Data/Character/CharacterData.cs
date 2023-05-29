@@ -33,6 +33,9 @@ namespace Character.Data.Character
         [field:SerializeField, Range(0, 10), Tooltip("The multiplier to the floaters' level difference added to the balance value")]
         public float FloatersLevelDifferenceToBalanceMultiplier { get; private set; } = 1f;
         
+        [field:SerializeField, Range(0, 10)]
+        public float InvincibleTimeAfterUnbalance { get; private set; } = 3f;
+        
         
         [field:SerializeField, Header("Unbalanced"), Tooltip("The number of times to press the button")]
         public int NumberPressButton { get; private set; }

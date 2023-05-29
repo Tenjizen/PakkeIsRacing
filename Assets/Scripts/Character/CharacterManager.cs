@@ -64,10 +64,10 @@ namespace Character
 
         [Header("Events")] public UnityEvent StartGame;
         public UnityEvent OnPaddle;
-
-
+        
         [HideInInspector] public float WeaponCooldown;
         [HideInInspector] public float WeaponCooldownBase;
+        [HideInInspector] public float InvincibilityTime;
         [HideInInspector] public bool ProjectileIsInAir;
 
         protected override void Awake()
@@ -130,6 +130,8 @@ namespace Character
                 return;
             }
 
+            InvincibilityTime -= Time.deltaTime;
+            
             if (LerpBalanceTo0)
             {
                 Balance = Mathf.Lerp(Balance, 0, Data.BalanceLerpTo0Value);

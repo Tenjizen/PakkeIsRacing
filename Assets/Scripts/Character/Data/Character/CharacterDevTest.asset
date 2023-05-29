@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a2742a9e32fab4a893aa1a519b0c5f, type: 3}
+  m_Name: CharacterDevTest
+  m_EditorClassIdentifier: 
+  <BalanceLerpTo0Value>k__BackingField: 0.03
+  <BalanceLimit>k__BackingField: 2
+  <BalanceDeathLimit>k__BackingField: 14
+  <RebalanceAngle>k__BackingField: 3
+  <MinimumTimeUnbalanced>k__BackingField: 3
+  <RotationToBalanceMultiplier>k__BackingField: 5
+  <FloatersLevelDifferenceToBalanceMultiplier>k__BackingField: 0.5
+  <InvincibleTimeAfterUnbalance>k__BackingField: 10
+  <NumberPressButton>k__BackingField: 4
+  <UnitBalanceToTimer>k__BackingField: 0.5
+  <ReductionForce>k__BackingField: 2
+  <BoatFollowAimLerp>k__BackingField: 0.355
+  <HarpoonPrefab>k__BackingField: {fileID: 4447602596650765180, guid: 3c5bd57966ac3044bb55ce1daa1a52fd,
+    type: 3}
+  <NetPrefab>k__BackingField: {fileID: 5818197527617267939, guid: 5fe0b6ba9c8ba064c8d71b53722431ad,
+    type: 3}
+  <AutoAimSize>k__BackingField: 2.98
+  <TimeToAutoAim>k__BackingField: 1.5
+  <AutoAimNumberOfCastStep>k__BackingField: 16
+  <AutoAimDistanceToSweepEachStep>k__BackingField: 200
+  <AutoAimDistanceBetweenEachStep>k__BackingField: 5
