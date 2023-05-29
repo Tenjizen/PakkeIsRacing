@@ -67,6 +67,11 @@ namespace UI.WeaponWheel
                 OnWeaponTryUnlockButLocked.Invoke();
                 return;
             }
+
+            if (IsUnlocked)
+            {
+                return;
+            }
             
             OnWeaponUnlocked.Invoke();
             _weaponObjectToSet.ForEach(x => x.SetActive(true));
