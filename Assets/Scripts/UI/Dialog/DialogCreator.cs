@@ -45,6 +45,8 @@ namespace UI.Dialog
         private bool _hasEnded;
         [SerializeField] 
         private bool _blockPlayerMovement, _blockCameraMovement;
+        [SerializeField]
+        private float _timeUntilLaunch;
 
         [Space(20), Header("Events")] 
         public UnityEvent OnDialogLaunch = new UnityEvent();
@@ -53,11 +55,11 @@ namespace UI.Dialog
         [Header("Debug"), SerializeField, ReadOnly] private DialogState _currentDialogState = DialogState.NotLaunched;
        
         private int _dialogIndex;
-        private float _currentDialogCooldown; 
+        private float _currentDialogCooldown;
+        private bool _launchTimer;
         private GameplayInputs _gameplayInputs;
         private CharacterManager _characterManager;
         private CameraManager _cameraManager;
-
         private DialogData _currentDialogData;
 
         private void Start()
@@ -80,6 +82,16 @@ namespace UI.Dialog
         public override void Update()
         {
             base.Update();
+            
+            if (_launchTimer && _timeUntilLaunch > 0)
+            {
+                _timeUntilLaunch -= Time.deltaTime;
+                if (_timeUntilLaunch <= 0)
+                {
+                    StartTrigger();
+                }
+            }
+            
             if (_currentDialogState == DialogState.NotLaunched)
             {
                 return;
@@ -95,7 +107,7 @@ namespace UI.Dialog
                 return;
             }
             
-            if ((_hasEnded && _canBeReplayed) || (_hasEnded == false && _currentDialogState == DialogState.NotLaunched))
+            if ( ((_hasEnded && _canBeReplayed) || (_hasEnded == false && _currentDialogState == DialogState.NotLaunched)) && _timeUntilLaunch <= 0)
             {
                 DialogManager.Instance.DialogQueue.Enqueue(this);
                 
@@ -105,6 +117,10 @@ namespace UI.Dialog
                 }
                 
                 LaunchDialog();
+            }
+            else
+            {
+                _launchTimer = true;
             }
         }
 
