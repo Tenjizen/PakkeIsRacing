@@ -10,32 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e97d26dbb3b886f42ac1a8b0c3c3167d, type: 3}
-  m_Name: D_Chap2_6
+  m_Name: D_Chap3_2
   m_EditorClassIdentifier: 
   DialogList:
-  - Text: "Vous \xEAtes une d\xE9esse, vous contr\xF4lez les animaux. Pourquoi avez
-      vous besoin de moi pour lib\xE9rer ceux qui sont poss\xE9d\xE9s ?"
-    TextShowTime: 1
+  - Text: Sedna !
+    TextShowTime: 0.5
     ShowLetterByLetter: 0
-    TextHoldTime: 6
+    TextHoldTime: 1
     TextColor:
       serializedVersion: 2
       rgba: 4294836198
     SizeEffect: 0
     SequencingTypeNext: 0
     Clip: {fileID: 0}
-  - Text: "Je n'ai pas le pouvoir absolu, je guide les animaux mais je ne les contr\xF4les
-      pas."
-    TextShowTime: 1
-    ShowLetterByLetter: 0
-    TextHoldTime: 3
-    TextColor:
-      serializedVersion: 2
-      rgba: 4294297274
-    SizeEffect: 0
-    SequencingTypeNext: 0
-    Clip: {fileID: 0}
-  - Text: "Les \xE2mes perdues sont hors de contr\xF4le."
+  - Text: Que ce passe t-il ?
     TextShowTime: 1
     ShowLetterByLetter: 0
     TextHoldTime: 2
@@ -45,29 +33,8 @@ MonoBehaviour:
     SizeEffect: 0
     SequencingTypeNext: 0
     Clip: {fileID: 0}
-  - Text: "Je ne peux pas purifier seule, une \xE2me errante qui s'est m\xEAl\xE9e
-      \xE0 un animal vivant."
-    TextShowTime: 1
-    ShowLetterByLetter: 0
-    TextHoldTime: 4
-    TextColor:
-      serializedVersion: 2
-      rgba: 4294297274
-    SizeEffect: 0
-    SequencingTypeNext: 0
-    Clip: {fileID: 0}
-  - Text: J'ai besoin d'une passerelle avec le monde des mortels.
-    TextShowTime: 2
-    ShowLetterByLetter: 0
-    TextHoldTime: 3
-    TextColor:
-      serializedVersion: 2
-      rgba: 4294297274
-    SizeEffect: 0
-    SequencingTypeNext: 0
-    Clip: {fileID: 0}
-  - Text: "La fusion avec un humain ayant une \xE9nergie spirituelle assez puissante."
-    TextShowTime: 1.5
+  - Text: "Changez vous en aurore bor\xE9ale !"
+    TextShowTime: 0.5
     ShowLetterByLetter: 0
     TextHoldTime: 3
     TextColor:
@@ -76,7 +43,39 @@ MonoBehaviour:
     SizeEffect: 0
     SequencingTypeNext: 0
     Clip: {fileID: 0}
-  - Text: Exactement !
+  - Text: "Haha, pour l'instant je ne peux pas. Tu dois d'abord renforcer ton \xE9nergie
+      spirituelle."
+    TextShowTime: 0.5
+    ShowLetterByLetter: 0
+    TextHoldTime: 4.5
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294297274
+    SizeEffect: 0
+    SequencingTypeNext: 0
+    Clip: {fileID: 0}
+  - Text: "Mon \xE9nergie spirituelle ?"
+    TextShowTime: 0.5
+    ShowLetterByLetter: 0
+    TextHoldTime: 2
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294836198
+    SizeEffect: 0
+    SequencingTypeNext: 0
+    Clip: {fileID: 0}
+  - Text: Elle nous lie, et te permet de me transformer en tout ce que tu es capable
+      d'imaginer.
+    TextShowTime: 0.5
+    ShowLetterByLetter: 0
+    TextHoldTime: 4
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294297274
+    SizeEffect: 0
+    SequencingTypeNext: 0
+    Clip: {fileID: 0}
+  - Text: "A condition que j'en trouve l'utilit\xE9."
     TextShowTime: 0.5
     ShowLetterByLetter: 0
     TextHoldTime: 2
@@ -86,8 +85,28 @@ MonoBehaviour:
     SizeEffect: 0
     SequencingTypeNext: 0
     Clip: {fileID: 0}
-  - Text: Pourtant je n'avais jamais vue d'esprit auparavant.
-    TextShowTime: 1
+  - Text: Et comment la renforcer ?
+    TextShowTime: 0.5
+    ShowLetterByLetter: 0
+    TextHoldTime: 2
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294836198
+    SizeEffect: 0
+    SequencingTypeNext: 0
+    Clip: {fileID: 0}
+  - Text: "La fa\xE7on la plus simple est d'aller \xE0 la rencontre de totems anciens."
+    TextShowTime: 0.5
+    ShowLetterByLetter: 0
+    TextHoldTime: 4
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294297274
+    SizeEffect: 0
+    SequencingTypeNext: 0
+    Clip: {fileID: 0}
+  - Text: Vous parlez des grandes statues de pierre ?
+    TextShowTime: 0.5
     ShowLetterByLetter: 0
     TextHoldTime: 3
     TextColor:
@@ -96,10 +115,31 @@ MonoBehaviour:
     SizeEffect: 0
     SequencingTypeNext: 0
     Clip: {fileID: 0}
-  - Text: "Quelque chose a \xE9veill\xE9 cette facult\xE9."
-    TextShowTime: 1
+  - Text: "Oui, la premi\xE8re que tu as rencontr\xE9 t'as permis d'\xE9veiller ce
+      pouvoir."
+    TextShowTime: 0.5
     ShowLetterByLetter: 0
-    TextHoldTime: 2
+    TextHoldTime: 4
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294297274
+    SizeEffect: 0
+    SequencingTypeNext: 0
+    Clip: {fileID: 0}
+  - Text: Et quelles sont les autres moyens d'y parvenir ?
+    TextShowTime: 0.5
+    ShowLetterByLetter: 0
+    TextHoldTime: 3
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294836198
+    SizeEffect: 0
+    SequencingTypeNext: 0
+    Clip: {fileID: 0}
+  - Text: "Tu les d\xE9couvriras par toi m\xEAme."
+    TextShowTime: 0.5
+    ShowLetterByLetter: 0
+    TextHoldTime: 3
     TextColor:
       serializedVersion: 2
       rgba: 4294297274
