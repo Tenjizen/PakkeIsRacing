@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e97d26dbb3b886f42ac1a8b0c3c3167d, type: 3}
-  m_Name: D_Chap1_6
+  m_Name: D_Chap3_2
   m_EditorClassIdentifier: 
   DialogList:
-  - Text: Woooh !
-    TextShowTime: 1
+  - Text: Sedna !
+    TextShowTime: 0.5
     ShowLetterByLetter: 0
     TextHoldTime: 1
     TextColor:
@@ -23,8 +23,38 @@ MonoBehaviour:
     SizeEffect: 0
     SequencingTypeNext: 0
     Clip: {fileID: 0}
-  - Text: "Vous \xEAtes qui vous ?"
+  - Text: What's going on ?
     TextShowTime: 1
+    ShowLetterByLetter: 0
+    TextHoldTime: 2
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294297274
+    SizeEffect: 0
+    SequencingTypeNext: 0
+    Clip: {fileID: 0}
+  - Text: Change into the northern lights !
+    TextShowTime: 0.5
+    ShowLetterByLetter: 0
+    TextHoldTime: 3
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294836198
+    SizeEffect: 0
+    SequencingTypeNext: 0
+    Clip: {fileID: 0}
+  - Text: I can't right now. You need to strengthen your spiritual energy first.
+    TextShowTime: 0.5
+    ShowLetterByLetter: 0
+    TextHoldTime: 4.5
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294297274
+    SizeEffect: 0
+    SequencingTypeNext: 0
+    Clip: {fileID: 0}
+  - Text: My spiritual energy ?
+    TextShowTime: 0.5
     ShowLetterByLetter: 0
     TextHoldTime: 2
     TextColor:
@@ -33,78 +63,84 @@ MonoBehaviour:
     SizeEffect: 0
     SequencingTypeNext: 0
     Clip: {fileID: 0}
-  - Text: "Je suis Sedna la d\xE9esse des oc\xE9ans."
-    TextShowTime: 1
+  - Text: It binds us together, and allows you to transform me into anything you
+      can imagine.
+    TextShowTime: 0.5
+    ShowLetterByLetter: 0
+    TextHoldTime: 4
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294297274
+    SizeEffect: 0
+    SequencingTypeNext: 0
+    Clip: {fileID: 0}
+  - Text: But only if I can find a use for it.
+    TextShowTime: 0.5
+    ShowLetterByLetter: 0
+    TextHoldTime: 2
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294297274
+    SizeEffect: 0
+    SequencingTypeNext: 0
+    Clip: {fileID: 0}
+  - Text: And how do I strengthen it ?
+    TextShowTime: 0.5
+    ShowLetterByLetter: 0
+    TextHoldTime: 2
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294836198
+    SizeEffect: 0
+    SequencingTypeNext: 0
+    Clip: {fileID: 0}
+  - Text: The simplest way is to seak for ancient totems.
+    TextShowTime: 0.5
+    ShowLetterByLetter: 0
+    TextHoldTime: 4
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294297274
+    SizeEffect: 0
+    SequencingTypeNext: 0
+    Clip: {fileID: 0}
+  - Text: Are you talking about the stone statues ?
+    TextShowTime: 0.5
+    ShowLetterByLetter: 0
+    TextHoldTime: 3
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294836198
+    SizeEffect: 0
+    SequencingTypeNext: 0
+    Clip: {fileID: 0}
+  - Text: Yes, the first one you met awakened your power.
+    TextShowTime: 0.5
+    ShowLetterByLetter: 0
+    TextHoldTime: 4
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294297274
+    SizeEffect: 0
+    SequencingTypeNext: 0
+    Clip: {fileID: 0}
+  - Text: And what are the other ways of doing this ?
+    TextShowTime: 0.5
+    ShowLetterByLetter: 0
+    TextHoldTime: 3
+    TextColor:
+      serializedVersion: 2
+      rgba: 4294836198
+    SizeEffect: 0
+    SequencingTypeNext: 0
+    Clip: {fileID: 0}
+  - Text: You'll find out by yourself.
+    TextShowTime: 0.5
     ShowLetterByLetter: 0
     TextHoldTime: 3
     TextColor:
       serializedVersion: 2
       rgba: 4294297274
-    SizeEffect: 0
-    SequencingTypeNext: 0
-    Clip: {fileID: 0}
-  - Text: "Une d\xE9esse ?! Alors vous existez r\xE9ellement ? Pourquoi vous montrez
-      maintenant ?"
-    TextShowTime: 1
-    ShowLetterByLetter: 0
-    TextHoldTime: 5
-    TextColor:
-      serializedVersion: 2
-      rgba: 4294836198
-    SizeEffect: 0
-    SequencingTypeNext: 0
-    Clip: {fileID: 0}
-  - Text: "Il est trop tard, mon village a \xE9t\xE9 d\xE9truit ! J'ai tout perdu
-      !"
-    TextShowTime: 1
-    ShowLetterByLetter: 0
-    TextHoldTime: 4
-    TextColor:
-      serializedVersion: 2
-      rgba: 4294836198
-    SizeEffect: 0
-    SequencingTypeNext: 0
-    Clip: {fileID: 0}
-  - Text: "Je suis navr\xE9e mais me bl\xE2mer ne t'avancera en rien. Laisse moi
-      t'expliquer m'a venue."
-    TextShowTime: 1
-    ShowLetterByLetter: 0
-    TextHoldTime: 5
-    TextColor:
-      serializedVersion: 2
-      rgba: 4294297274
-    SizeEffect: 0
-    SequencingTypeNext: 0
-    Clip: {fileID: 0}
-  - Text: "Vous \xEAtes navr\xE9e ?? A quoi bon vous v\xE9n\xE9rer si c'est pour
-      r\xE9colter des excuses ?!"
-    TextShowTime: 1
-    ShowLetterByLetter: 0
-    TextHoldTime: 4
-    TextColor:
-      serializedVersion: 2
-      rgba: 4294836198
-    SizeEffect: 0
-    SequencingTypeNext: 0
-    Clip: {fileID: 0}
-  - Text: "Prend le temps de m'\xE9couter."
-    TextShowTime: 1
-    ShowLetterByLetter: 0
-    TextHoldTime: 2
-    TextColor:
-      serializedVersion: 2
-      rgba: 4294297274
-    SizeEffect: 0
-    SequencingTypeNext: 0
-    Clip: {fileID: 0}
-  - Text: "Je n'ai pas besoin de vous. Je pars retrouver ce monstre qui a tu\xE9
-      mon p\xE8re, pour le tuer \xE0 son tour !"
-    TextShowTime: 1
-    ShowLetterByLetter: 0
-    TextHoldTime: 4.5
-    TextColor:
-      serializedVersion: 2
-      rgba: 4294836198
     SizeEffect: 0
     SequencingTypeNext: 0
     Clip: {fileID: 0}
