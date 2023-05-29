@@ -60,7 +60,7 @@ namespace UI.WeaponWheel
             CanBeUnlocked = true;
         }
         
-        public void SetWeapon(bool isUnlocked)
+        public void SetWeapon()
         {
             if (CanBeUnlocked == false)
             {
@@ -69,8 +69,13 @@ namespace UI.WeaponWheel
             }
             
             OnWeaponUnlocked.Invoke();
-            _weaponObjectToSet.ForEach(x => x.SetActive(isUnlocked));
-            IsUnlocked = isUnlocked;
+            _weaponObjectToSet.ForEach(x => x.SetActive(true));
+            IsUnlocked = true;
+
+            string weaponName = Type == WeaponType.Harpoon ?
+                CharacterManager.Instance.Parameters.Language ? "Harpoon" : "Harpon"
+                : CharacterManager.Instance.Parameters.Language ? "Net" : "Filet";
+            CharacterManager.Instance.WeaponUIManagerProperty.LaunchNotification(weaponName, _weaponIcon);
         }
 
         public void Hover()

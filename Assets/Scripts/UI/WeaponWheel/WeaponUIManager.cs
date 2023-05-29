@@ -4,6 +4,7 @@ using System.Linq;
 using Character;
 using Character.Camera;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -26,6 +27,10 @@ namespace UI.WeaponWheel
         [SerializeField] private Image _cooldown;
         [SerializeField] private float _pressTimeToOpenMenu;
 
+        [Header("Notification Unlock"), SerializeField] private Animator _notificationAnimator;
+        [SerializeField] private Image _weaponIconImage;
+        [SerializeField] private TMP_Text _weaponNotificationText;
+
         [field: SerializeField, Header("AutoAim")]
         public AutoAimUIController AutoAimController { get; private set; }
 
@@ -42,6 +47,7 @@ namespace UI.WeaponWheel
 
         private float _currentPressTime;
         private WeaponWheelButtonController _lastSelectedButton, _lastWeaponButtonSelected, _lastButtonCursorWasOn;
+        private static readonly int Launch = Animator.StringToHash("Launch");
 
         private void Start()
         {
@@ -233,6 +239,19 @@ namespace UI.WeaponWheel
             {
                 _cooldown.DOFade(1, 0.2f);
             }
+        }
+
+        #endregion
+
+        #region Notification
+
+        public void LaunchNotification(string weaponName, Sprite weaponIcon)
+        {
+            _weaponIconImage.sprite = weaponIcon;
+            string text = CharacterManager.Instance.Parameters.Language ? "unlocked" : "débloqué";
+            _weaponNotificationText.text = $"{weaponName} {text}";
+            
+            _notificationAnimator.SetTrigger(Launch);
         }
 
         #endregion
