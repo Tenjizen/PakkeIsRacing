@@ -242,7 +242,10 @@ namespace UI.Dialog
             JsonFilesManagerSingleton.Instance.DialogsJsonFileManagerProperty.SetDialogCollected(this);
             
             //check for queue
-            DialogManager.Instance.DialogQueue.Dequeue();
+            if (DialogManager.Instance.DialogQueue.Count > 0)
+            {
+                DialogManager.Instance.DialogQueue.Dequeue();
+            }
             if (DialogManager.Instance.DialogQueue.Count > 0)
             {
                 DialogManager.Instance.DialogQueue.Peek().LaunchDialog();
