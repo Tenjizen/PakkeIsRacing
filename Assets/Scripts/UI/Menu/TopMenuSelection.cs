@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Character;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -70,6 +71,10 @@ namespace UI.Menu
             
             MenuList.ForEach(x => x.Menu.SetMenu(false,false));
             MenuList[HorizontalIndex].Menu.SetMenu(isActive,isUsable);
+
+            _pointsList.ForEach(x => x.DOKill());
+            _pointsList.ForEach(x => x.color = new Color(1f, 1f, 1f, 0f));
+            _pointsList[HorizontalIndex].color = Color.white;
         }
     }
 }
