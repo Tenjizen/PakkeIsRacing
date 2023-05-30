@@ -4,7 +4,6 @@ using Kayak;
 using Tools.HideIf;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 namespace GPEs
 {
@@ -23,6 +22,7 @@ namespace GPEs
         [SerializeField, HideIf("_triggerType", TriggerType.BoxTrigger)] private float _triggerSphereSizeRadius = 1;
         [SerializeField] private Vector3 _triggerOffsetPosition = Vector3.zero;
         [SerializeField] private LayerMask _playerLayerMask;
+        [SerializeField] private int _arrayHitsSize = 20;
         
         [Header("Event")] public UnityEvent OnPlayerEntered = new UnityEvent();
         public UnityEvent OnPlayerStay = new UnityEvent();
@@ -31,6 +31,11 @@ namespace GPEs
         public KayakController PropKayakController { get; private set; }
         
         private RaycastHit[] _hits = new RaycastHit[20];
+
+        private void Awake()
+        {
+            Array.Resize(ref _hits,_arrayHitsSize);
+        }
 
         public virtual void Update()
         {
