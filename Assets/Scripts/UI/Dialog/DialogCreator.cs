@@ -102,12 +102,14 @@ namespace UI.Dialog
 
         private void StartTrigger()
         {
-            if (_launchType != LaunchType.TriggerZone || _currentDialogState != DialogState.NotLaunched)
+            if (_launchType != LaunchType.TriggerZone || _currentDialogState != DialogState.NotLaunched || 
+                (_hasEnded && _canBeReplayed == false))
             {
                 return;
             }
             
-            if ( ((_hasEnded && _canBeReplayed) || (_hasEnded == false && _currentDialogState == DialogState.NotLaunched)) && _timeUntilLaunch <= 0)
+            if ( ( (_hasEnded && _canBeReplayed) || (_hasEnded == false && _currentDialogState == DialogState.NotLaunched) ) && 
+                 _timeUntilLaunch <= 0)
             {
                 DialogManager.Instance.DialogQueue.Enqueue(this);
                 
