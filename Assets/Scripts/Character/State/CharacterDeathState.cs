@@ -97,6 +97,7 @@ namespace Character.State
 
         public override void ExitState(CharacterManager character)
         {
+            CharacterManagerRef.Balance = 0;
         }
 
         private void RespawnCheckpoint(Transform checkpoint)

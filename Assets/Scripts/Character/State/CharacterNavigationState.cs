@@ -68,7 +68,8 @@ namespace Character.State
             _rightPaddleCooldown = _kayakValues.PaddleCooldown;
             _leftPaddleCooldown = _kayakValues.PaddleCooldown;
             _staticInputTimer = _kayakValues.StaticRotationCooldownAfterPaddle;
-                
+            CharacterManagerRef.Balance = 0;
+
             //booleans
             CharacterManagerRef.LerpBalanceTo0 = true;
             CanBeMoved = true;
