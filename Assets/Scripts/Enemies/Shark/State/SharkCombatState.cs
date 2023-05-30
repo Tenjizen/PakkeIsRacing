@@ -33,6 +33,12 @@ namespace Enemies.Shark.State
         private bool _left;
         private bool _movePointTarget;
         #endregion
+
+
+        string _idle = "SharkIdle";
+        string _fast = "SharkFast";
+        string _jump = "SharkJump";
+
         public override void EnterState(SharkManager sharkManager)
         {
             sharkManager.SetUpStartEnemyUI();
@@ -77,6 +83,13 @@ namespace Enemies.Shark.State
 
             if (_attackState == AttackState.None)
             {
+                sharkManager.AnimatorSharkPossessed.SetBool(_idle, true);
+                sharkManager.AnimatorSharkPossessed.SetBool(_jump, false);
+                sharkManager.AnimatorSharkPossessed.SetBool(_fast, false);
+                sharkManager.AnimatorShark.SetBool(_idle, true);
+                sharkManager.AnimatorShark.SetBool(_jump, false);
+                sharkManager.AnimatorShark.SetBool(_fast, false);
+
                 _attack += Time.deltaTime;
             }
 
@@ -238,6 +251,11 @@ namespace Enemies.Shark.State
             {
                 _currentOffSet = Mathf.Lerp(_currentOffSet, sharkManager.Data.ElevationOffsetWhenRush, 0.05f);
 
+                sharkManager.AnimatorSharkPossessed.SetBool(_idle, false);
+                sharkManager.AnimatorSharkPossessed.SetBool(_fast, true);
+                sharkManager.AnimatorShark.SetBool(_idle, false);
+                sharkManager.AnimatorShark.SetBool(_fast, true);
+
                 sharkManager.SwitchSpeed(sharkManager.Data.SpeedCombatRush);
 
                 var pos = sharkManager.transform.position;
@@ -302,9 +320,20 @@ namespace Enemies.Shark.State
                     sharkManager.StartJump.Invoke();
                     _waveStartJump = true;
                     _movePointTarget = true;
+
+
                     sharkManager.Circle.SetActive(false);
                     sharkManager.PosParticles.SetActive(false);
                 }
+            }
+
+
+            if (_timeAnimationCurve >= _lastKey.time - (_lastKey.time / 2) - 2f)
+            {
+                sharkManager.AnimatorSharkPossessed.SetBool(_idle, false);
+                sharkManager.AnimatorSharkPossessed.SetBool(_jump, true);
+                sharkManager.AnimatorShark.SetBool(_idle, false);
+                sharkManager.AnimatorShark.SetBool(_jump, true);
             }
 
             Vector3 pos = sharkManager.transform.position;
@@ -329,6 +358,14 @@ namespace Enemies.Shark.State
                 }
             }
 
+            if (_timeAnimationCurve >= _lastKey.time - 1f)
+            {
+                sharkManager.AnimatorSharkPossessed.SetBool(_idle, true);
+                sharkManager.AnimatorSharkPossessed.SetBool(_jump, false);
+                sharkManager.AnimatorShark.SetBool(_idle, true);
+                sharkManager.AnimatorShark.SetBool(_jump, false);
+            }
+
             if (_timeAnimationCurve >= _lastKey.time && _attackState != AttackState.None)
             {
                 _timeAnimationCurve = 0;
@@ -342,6 +379,7 @@ namespace Enemies.Shark.State
 
                 _startAttack = false;
                 _attackNumber -= 1;
+
             }
 
             sharkManager.transform.eulerAngles = rotation;

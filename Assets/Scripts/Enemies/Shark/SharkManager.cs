@@ -18,6 +18,11 @@ namespace Enemies.Shark
         [field: SerializeField] public SharkBaseState CurrentStateBase { get; private set; }
         [field: SerializeField, ReadOnly] public Transform TargetTransform { get; private set; }
         [field:SerializeField ,ReadOnly] public KayakController KayakControllerRef { get; set; }
+
+        [field:SerializeField ] public Animator AnimatorSharkPossessed{ get; set; }
+        [field:SerializeField ] public Animator AnimatorShark{ get; set; }
+
+
         [field: SerializeField] public PlayerTriggerManager PlayerTriggerManager { get; private set; }
         [field: SerializeField] public GameObject ParentGameObject { get; private set; }
         [field: SerializeField] public GameObject Forward { get; private set; }
