@@ -41,12 +41,12 @@ namespace UI.Menu
                     continue;
                 }
                 _imagesDictionary.Add(image, image.color.a);
-                image.DOFade(0, 0);
+                image.DOFade(0, 0).SetUpdate(true);
             }
             foreach (TMP_Text text in MenuGameObject.transform.GetComponentsInChildren<TMP_Text>())
             {
                 _textsDictionary.Add(text, text.color.a);
-                text.DOFade(0, 0);
+                text.DOFade(0, 0).SetUpdate(true);
             }
 
             CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.ShowLeaveMenu.started += AbleDisable;
@@ -127,18 +127,18 @@ namespace UI.Menu
                 characterManager.CameraManagerProperty.CanRotateCamera = IsActive;
 
                 float fadeValue = IsActive == false ? 0.8f : 0;
-                _backgroundImage.DOFade(fadeValue, fadeTime);
+                _backgroundImage.DOFade(fadeValue, fadeTime).SetUpdate(true);
             }
 
             IsActive = IsActive == false;
 
             foreach (var pair in _imagesDictionary)
             {
-                pair.Key.DOFade(IsActive ? pair.Value : 0, fadeTime);
+                pair.Key.DOFade(IsActive ? pair.Value : 0, fadeTime).SetUpdate(true);
             }
             foreach (var pair in _textsDictionary)
             {
-                pair.Key.DOFade(IsActive ? pair.Value : 0, fadeTime);
+                pair.Key.DOFade(IsActive ? pair.Value : 0, fadeTime).SetUpdate(true);
             }
 
             IsUsable = IsActive;
@@ -151,7 +151,7 @@ namespace UI.Menu
             }
 
             SetTile();
-            Time.timeScale = 0.5f;
+            Time.timeScale = 0f;
             _menuManager.CanBeOpened = false;
             if (_menuManager.IsActive == true)
             {
@@ -174,6 +174,7 @@ namespace UI.Menu
             CanBeOpened = false;
             _parametersMenu.SetMenu();
             OpenCloseMenu();
+            Time.timeScale = 0f;
         }
 
         public void OpenController()
@@ -181,12 +182,14 @@ namespace UI.Menu
             CanBeOpened = false;
             _menuController.SetMenu();
             OpenCloseMenu();
+            Time.timeScale = 0f;
         }
         public void OpenCredits()
         {
             CanBeOpened = false;
             creditsMenu.SetMenu();
             OpenCloseMenu();
+            Time.timeScale = 0f;
         }
 
         private void SetTile()
@@ -205,15 +208,15 @@ namespace UI.Menu
 
         public void CloseMenu()
         {
-            StartCoroutine(SetMenuCloseEnumerator(0.001f));
+            transform.DOMove(transform.position, 0.005f).SetUpdate(true).OnComplete(SetMenuFromCloseMenu);
         }
-        IEnumerator SetMenuCloseEnumerator(float time)
+
+        private void SetMenuFromCloseMenu()
         {
             if (IsActive)
             {
-                yield break;
+                return;
             }
-            yield return new WaitForSeconds(time);
 
             CanBeOpened = true;
             OpenCloseMenu();

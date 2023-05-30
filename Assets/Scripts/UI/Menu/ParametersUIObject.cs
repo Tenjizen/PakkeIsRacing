@@ -82,11 +82,11 @@ namespace UI.Menu
         {
             const float fadeTime = 0.2f;
             
-            _onText.DOColor(_isOn ? _textOnColor : _textOffColor, fadeTime);
-            _offText.DOColor(_isOn ? _textOffColor : _textOnColor, fadeTime);
+            _onText.DOColor(_isOn ? _textOnColor : _textOffColor, fadeTime).SetUpdate(true);
+            _offText.DOColor(_isOn ? _textOffColor : _textOnColor, fadeTime).SetUpdate(true);
             
             Vector3 position = _isOn ? _onPosition : _offPosition;
-            _selectionBackground.DOLocalMove(position,fadeTime);
+            _selectionBackground.DOLocalMove(position,fadeTime).SetUpdate(true);
         }
     }
 }

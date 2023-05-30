@@ -92,6 +92,11 @@ namespace Enemies.Seal
 
         private void Update()
         {
+            if (Time.deltaTime == 0)
+            {
+                return;
+            }
+            
             if (_isMoving == false)
             {
                 RotateAroundPoint(_splinePath.GetPoint(_sealCheckpoints[_player == null ? 0 : _checkpointsIndex].Position));

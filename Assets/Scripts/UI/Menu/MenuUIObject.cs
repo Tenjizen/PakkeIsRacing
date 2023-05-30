@@ -28,7 +28,7 @@ namespace UI.Menu
         public virtual void Set(bool isActive)
         {
             OverlayImage.DOKill();
-            OverlayImage.DOFade(isActive ? 1f : 0f, 0.1f);
+            OverlayImage.DOFade(isActive ? 1f : 0f, 0.1f).SetUpdate(true);
         }
 
         public virtual string GetName()

@@ -22,12 +22,12 @@ namespace UI.Menu
             foreach (Image image in MenuGameObject.GetComponentsInChildren<Image>())
             {
                 _imagesDictionary.Add(image, image.color.a);
-                image.DOFade(0, 0);
+                image.DOFade(0, 0).SetUpdate(true);
             }
             foreach (TMP_Text text in MenuGameObject.GetComponentsInChildren<TMP_Text>())
             {
                 _textsDictionary.Add(text, text.color.a);
-                text.DOFade(0, 0);
+                text.DOFade(0, 0).SetUpdate(true);
             }
 
             CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.ClosePauseMenu.started += CloseMenu;
@@ -46,11 +46,6 @@ namespace UI.Menu
             _optionMenuControllerManager.CloseMenu();
         }
 
-        public override void SetMenu(bool isActive, bool isUsable)
-        {
-            base.SetMenu(isActive, isUsable);
-        }
-
         public void SetMenu()
         {
             if (CanBeOpened == false)
@@ -65,12 +60,12 @@ namespace UI.Menu
             foreach (var pair in _imagesDictionary)
             {
                 pair.Key.DOKill();
-                pair.Key.DOFade(IsActive ? pair.Value : 0, fadeTime);
+                pair.Key.DOFade(IsActive ? pair.Value : 0, fadeTime).SetUpdate(true);
             }
             foreach (var pair in _textsDictionary)
             {
                 pair.Key.DOKill();
-                pair.Key.DOFade(IsActive ? pair.Value : 0, fadeTime);
+                pair.Key.DOFade(IsActive ? pair.Value : 0, fadeTime).SetUpdate(true);
             }
 
             IsUsable = IsActive;
