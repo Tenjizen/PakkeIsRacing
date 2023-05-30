@@ -131,8 +131,8 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.7660998, b: 0.2028302, a: 1}
-  m_Intensity: 1.14
+  m_Color: {r: 1, g: 0.57859534, b: 0.15566039, a: 1}
+  m_Intensity: 1.22
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -240,9 +240,9 @@ MonoBehaviour:
   frustumAngle: 0
   windDirection: {x: 0.03, y: 0.02, z: 0}
   enableDustParticles: 1
-  dustBrightness: 0.6
-  dustMinSize: 0.01
-  dustMaxSize: 0.02
+  dustBrightness: 1.86
+  dustMinSize: 0.1
+  dustMaxSize: 0.2
   dustWindSpeed: 1
   dustDistanceAttenuation: 10
   dustAutoToggle: 0
@@ -687,8 +687,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.02
-      minScalar: 0.01
+      scalar: 0.2
+      minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
