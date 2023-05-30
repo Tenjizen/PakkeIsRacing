@@ -2,6 +2,7 @@ using System;
 using Character;
 using Kayak;
 using Tools.HideIf;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -102,7 +103,7 @@ namespace GPEs
             newMatrix.SetTRS(transform.position + _triggerOffsetPosition, newMatrix.rotation, Vector3.one);
             
             Gizmos.matrix = newMatrix;
-            Gizmos.color = Color.green;
+            Gizmos.color = Selection.Contains (gameObject) ? Color.green : new Color(0f, 1f, 0f, 0.26f);
             
             switch (_triggerType)
             {
