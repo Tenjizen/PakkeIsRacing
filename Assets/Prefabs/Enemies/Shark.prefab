@@ -195,6 +195,7 @@ MonoBehaviour:
   _playerLayerMask:
     serializedVersion: 2
     m_Bits: 0
+  _arrayHitsSize: 20
   OnPlayerEntered:
     m_PersistentCalls:
       m_Calls:
@@ -500,6 +501,7 @@ MonoBehaviour:
   _playerLayerMask:
     serializedVersion: 2
     m_Bits: 1
+  _arrayHitsSize: 20
   OnPlayerEntered:
     m_PersistentCalls:
       m_Calls:
@@ -573,7 +575,7 @@ MonoBehaviour:
   <OnDie>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
-  <WeaponThatCanHitEnemy>k__BackingField: 0
+  <WeaponThatCanHitEnemy>k__BackingField: 1
   <EnemySprite>k__BackingField: {fileID: 21300000, guid: a61074ef7bf9f20488cca90fb2bcc242,
     type: 3}
   <CurrentLife>k__BackingField: 0
@@ -582,6 +584,8 @@ MonoBehaviour:
   <PossessedVisualGameObject>k__BackingField: {fileID: 7048016843578924253}
   <TargetTransform>k__BackingField: {fileID: 0}
   <KayakControllerRef>k__BackingField: {fileID: 0}
+  <AnimatorSharkPossessed>k__BackingField: {fileID: 938645580070060639}
+  <AnimatorShark>k__BackingField: {fileID: 1183123524971212471}
   <PlayerTriggerManager>k__BackingField: {fileID: 6385060041424428043}
   <ParentGameObject>k__BackingField: {fileID: 4724983407470673250}
   <Forward>k__BackingField: {fileID: 3481916426435834060}
@@ -802,6 +806,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90ce8a73e6e51c944ae3fca7eb692539, type: 3}
+--- !u!95 &938645580070060639 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1350245236796305118, guid: 90ce8a73e6e51c944ae3fca7eb692539,
+    type: 3}
+  m_PrefabInstance: {fileID: 2286621127909911681}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1183123524971212471 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1139684891465089590, guid: 90ce8a73e6e51c944ae3fca7eb692539,
+    type: 3}
+  m_PrefabInstance: {fileID: 2286621127909911681}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7048016843578924253 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9111943367419555932, guid: 90ce8a73e6e51c944ae3fca7eb692539,
