@@ -47,7 +47,6 @@ namespace Sedna
 
             //SetTarget();
             _target = _posSednaDialog[0];
-            Debug.Log("awake");
         }
 
         private void Start()
@@ -72,7 +71,6 @@ namespace Sedna
                         var pos = _target.transform.position;
                         pos.y = CharacterManager.Instance.SednaManagerProperty.Waves.GetHeight(pos) - _removeAtYPosValue - 10;
                         transform.position = pos;
-                        Debug.Log(_target.transform.position);
 
 
                         Vector3 lookPos = _playerTransform.position - transform.position;
