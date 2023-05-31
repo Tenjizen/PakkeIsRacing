@@ -12,6 +12,7 @@ namespace Art.Test.Dissolve
         [SerializeField] private float _invisibleValue = 0.5f;
         [SerializeField] private float _visibleValue = 2.5f;
         [SerializeField] private float _timeToShow = 1.5f;
+        [SerializeField] private float _cutoffHeightLaunch = 1000f;
         [SerializeField] private List<GameObject> _gameObjectsToActivateAfterDissolve = new List<GameObject>();
         [Range(0,1) ,SerializeField] private float _percentageToShowObjects = 0.7f;
         
@@ -71,7 +72,7 @@ namespace Art.Test.Dissolve
 
         public void SetDissolveMax()
         {
-            SetDissolve(_visibleValue);
+            SetDissolve(_cutoffHeightLaunch);
         }
     }
 }
