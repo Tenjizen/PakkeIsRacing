@@ -199,6 +199,7 @@ namespace Character
 #if UNITY_EDITOR
             GUI.skin.label.fontSize = 30;
 
+            return;
             GUI.color = Color.white;
             GUI.Label(new Rect(10, 10, 500, 100), "Balance : " + Math.Round(Balance, 1));
 #endif
