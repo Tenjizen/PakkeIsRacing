@@ -17,7 +17,6 @@ public class MovingBird : MonoBehaviour
     }
     void FixedUpdate()
     {
-
         _tempPosition += transform.forward * Time.fixedDeltaTime * HorizontalSpeed;
 
         _tempPosition.y = Mathf.Sin(_startTime + Time.realtimeSinceStartup * VerticalSpeed * Time.fixedDeltaTime) * Amplitude + _startPosition.y;
@@ -26,9 +25,9 @@ public class MovingBird : MonoBehaviour
     }
 
 
-    public void ResetVariable(Vector3 position)
+    public void ResetVariable()
     {
-        _tempPosition = position;
-        _startPosition = position;
+        _tempPosition = transform.position;
+        _startPosition = transform.position;
     }
 }
