@@ -21,7 +21,6 @@ public class MovingBird : MonoBehaviour
 
         _tempPosition.y = Mathf.Sin(_startTime + Time.realtimeSinceStartup * VerticalSpeed * Time.fixedDeltaTime) * Amplitude + _startPosition.y;
         transform.position = _tempPosition;
-
     }
 
 

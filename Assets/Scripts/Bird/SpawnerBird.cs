@@ -68,19 +68,6 @@ public class SpawnerBird : MonoBehaviour
                             _tempBirdList.Remove(_tempBirdList[i]);
                         }
                     }
-
-                    //foreach (var item in _tempBirdList)
-                    //{
-                    //    if (item.transform.localScale.x > 0.3f)
-                    //    {
-                    //        item.transform.localScale -= Vector3.one * 0.1f;
-                    //    }
-                    //    else
-                    //    {
-                    //        item.gameObject.SetActive(false);
-                    //        _tempBirdList.Remove(item);
-                    //    }
-                    //}
                 }
             }
             else
