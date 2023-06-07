@@ -54,7 +54,7 @@ namespace UI.Menu
             SetParameters();
         }
 
-        protected override void Activate(InputAction.CallbackContext context)
+        public override void Activate(InputAction.CallbackContext context)
         {
             if (IsSelected == false)
             {

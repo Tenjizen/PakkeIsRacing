@@ -71,7 +71,6 @@ namespace UI.Menu
 
         private void AbleDisable(InputAction.CallbackContext context)
         {
-            Debug.Log($"option menu : isgamelaunched -> {CharacterManager.Instance.IsGameLaunched}");
             if (CharacterManager.Instance.IsGameLaunched == false || CanBeOpened == false || CharacterManager.Instance.CurrentStateBaseProperty.CanOpenMenus == false)
             {
                 return;

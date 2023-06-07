@@ -5,8 +5,9 @@ namespace Character.Camera.State
 {
     public class CameraStartGameState : CameraStateBase
     {
-        private bool _startTimer;
+        private bool _isTimerStarted;
         private float _timer;
+        
         public override void EnterState(CameraManager camera)
         {
             CamManager.CameraAnimator.Play("StartGame");
@@ -16,34 +17,36 @@ namespace Character.Camera.State
         {
             if (CharacterManager.Instance.IsGameLaunched == false)
             {
+                CharacterStateBase character = CharacterManager.Instance.CurrentStateBaseProperty;
+                character.CanCharacterMakeActions = false;
+                character.CanCharacterOpenWeapons = false;
+                character.CanOpenMenus = false;
+                character.CanBeMoved = false;
+                character.CanCharacterMove = false;
+                camera.CanMoveCameraManually = false;
                 return;
             }
             
-            if (_startTimer)
+            if (CharacterManager.Instance.InputManagementProperty.Inputs.AnyButton)
+            {
+                CharacterManager.Instance.StartGame.Invoke();
+                _isTimerStarted = true;
+                CamManager.CameraAnimator.Play("FreeLook");
+            }
+
+            if (_isTimerStarted)
             {
                 _timer += Time.deltaTime;
             }
 
-            CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterMakeActions = false;
-            CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterOpenWeapons = false;
-            CharacterManager.Instance.CurrentStateBaseProperty.CanOpenMenus = false;
-            CharacterManager.Instance.CurrentStateBaseProperty.CanBeMoved = false;
-            CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterMove = false;
-            camera.CanMoveCameraManually = false;
-
-            if (CharacterManager.Instance.InputManagementProperty.Inputs.AnyButton)
+            if (_timer < camera.TimerBeforeCanMovingAtStart)
             {
-                CharacterManager.Instance.StartGame.Invoke();
-                _startTimer = true;
-                CamManager.CameraAnimator.Play("FreeLook");
-
+                return;
             }
-            if (_timer >= camera.TimerBeforeCanMovingAtStart)
-            {
-                SwitchState(camera);
-                CameraNavigationState cameraNavigationState = new CameraNavigationState();
-                CamManager.SwitchState(cameraNavigationState);
-            }
+            
+            SwitchState(camera);
+            CameraNavigationState cameraNavigationState = new CameraNavigationState();
+            CamManager.SwitchState(cameraNavigationState);
         }
         public override void FixedUpdate(CameraManager camera)
         {

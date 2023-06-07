@@ -34,6 +34,8 @@ namespace UI.Menu
 
             CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuDown.started += Down;
             CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuUp.started += Up;
+            CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuLeft.started += Left;
+            CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuRight.started += Right;
             CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.ShowLeaveMenu.started += CloseMenu;
 
             IsActive = true;
@@ -50,9 +52,7 @@ namespace UI.Menu
             {
                 item.IsSelected = false;
             }
-
-            MenuGameObject.SetActive(IsActive);
-
+            
             const float fadeTime = 1f;
             foreach (Image image in _imagesDictionary)
             {
@@ -89,11 +89,29 @@ namespace UI.Menu
                 return;
             }
             
-            Debug.Log("down");
-
             base.Down(context);
             _index++;
             SetTile();
+        }
+        
+        protected override void Left(InputAction.CallbackContext context)
+        {
+            if (IsUsable == false)
+            {
+                return;
+            }
+
+            _objectsList[_index].Activate(new InputAction.CallbackContext());
+        }
+        
+        protected override void Right(InputAction.CallbackContext context)
+        {
+            if (IsUsable == false)
+            {
+                return;
+            }
+
+            _objectsList[_index].Activate(new InputAction.CallbackContext());
         }
 
         private void SetTile()
@@ -113,6 +131,7 @@ namespace UI.Menu
         private IEnumerator SetGameLaunched(float time)
         {
             yield return new WaitForSeconds(time);
+            MenuGameObject.SetActive(IsActive);
             CharacterManager.Instance.IsGameLaunched = true;
         }
     }

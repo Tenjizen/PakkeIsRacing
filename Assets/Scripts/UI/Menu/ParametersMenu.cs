@@ -36,6 +36,8 @@ namespace UI.Menu
 
             CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuDown.started += Down;
             CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuUp.started += Up;
+            CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuLeft.started += Left;
+            CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuRight.started += Right;
             CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.ClosePauseMenu.started += CloseMenu;
             
             base.SetMenu(IsActive,IsUsable);
@@ -139,6 +141,26 @@ namespace UI.Menu
             SetTile();
         }
 
+        protected override void Left(InputAction.CallbackContext context)
+        {
+            if (IsUsable == false)
+            {
+                return;
+            }
+
+            _objectsList[_index].Activate(new InputAction.CallbackContext());
+        }
+        
+        protected override void Right(InputAction.CallbackContext context)
+        {
+            if (IsUsable == false)
+            {
+                return;
+            }
+
+            _objectsList[_index].Activate(new InputAction.CallbackContext());
+        }
+        
         private void SetTile()
         {
             if (_objectsList.Count <= 0)

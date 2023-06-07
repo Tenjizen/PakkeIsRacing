@@ -17,7 +17,7 @@ namespace UI.Menu
             _background.color = isActive ? _baseColor : _unselectedColor;
         }
 
-        protected override void Activate(InputAction.CallbackContext context)
+        public override void Activate(InputAction.CallbackContext context)
         {
             if (IsSelected == false || _optionMenuManager.IsUsable == false)
             {

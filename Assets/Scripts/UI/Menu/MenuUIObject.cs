@@ -41,7 +41,7 @@ namespace UI.Menu
             return string.Empty;
         }
 
-        protected virtual void Activate(InputAction.CallbackContext context)
+        public virtual void Activate(InputAction.CallbackContext context)
         {
             OnActivated.Invoke();
         }
