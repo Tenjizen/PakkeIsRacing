@@ -66,7 +66,7 @@ MonoBehaviour:
   Path: FMOD_project/Pakke_Is/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638198397128898110
+  lastModified: 638198518893852855
   FileSizes:
   - Name: Desktop
     Value: 1592
@@ -98,6 +98,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-7636483014320338817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/PaddleRowing02
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/PaddleRowing02
+  Guid:
+    Data1: 1189626219
+    Data2: 1081722312
+    Data3: -415900243
+    Data4: -416574103
+  Banks:
+  - {fileID: 1426460621515787707}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2250
 --- !u!114 &-7440880626131763104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -587,7 +614,7 @@ MonoBehaviour:
   Name: Tension
   StudioPath: 
   Min: 0
-  Max: 2
+  Max: 3
   Default: 0
   ID:
     data1: 1872520944
@@ -597,7 +624,8 @@ MonoBehaviour:
   Labels:
   - Exploration
   - Dialogue
-  - Combat
+  - Combat_shark
+  - Combat_seal
   Exists: 1
 --- !u!114 &-1640790359992916080
 MonoBehaviour:
@@ -825,12 +853,13 @@ MonoBehaviour:
   - {fileID: -7132158078516474941}
   - {fileID: -426722527952098943}
   - {fileID: 7211323116813314576}
+  - {fileID: -7636483014320338817}
   EditorParameters: []
   MasterBanks:
   - {fileID: -8127459704306106220}
   StringsBanks:
   - {fileID: 5488868156226981610}
-  cacheTime: 638205365656490922
+  cacheTime: 638210516186780853
   cacheVersion: 131601
 --- !u!114 &2607618840804678
 MonoBehaviour:
@@ -1027,10 +1056,10 @@ MonoBehaviour:
   Path: FMOD_project/Pakke_Is/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638205365656490922
+  lastModified: 638210516186780853
   FileSizes:
   - Name: Desktop
-    Value: 1157152
+    Value: 1159360
   Exists: 1
 --- !u!114 &2051455889362207351
 MonoBehaviour:
@@ -1048,7 +1077,7 @@ MonoBehaviour:
   StudioPath: 
   Min: 0
   Max: 1
-  Default: 0
+  Default: 1
   ID:
     data1: 566450803
     data2: 3958160370
@@ -1282,10 +1311,10 @@ MonoBehaviour:
   Path: FMOD_project/Pakke_Is/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638203421717354672
+  lastModified: 638210516186700832
   FileSizes:
   - Name: Desktop
-    Value: 3514
+    Value: 3558
   Exists: 1
 --- !u!114 &5642638132054646883
 MonoBehaviour:
@@ -1431,10 +1460,10 @@ MonoBehaviour:
   Path: FMOD_project/Pakke_Is/Build/Desktop/Level1.bank
   Name: Level1
   StudioPath: bank:/Level1
-  lastModified: 638205365656360890
+  lastModified: 638210516186660819
   FileSizes:
   - Name: Desktop
-    Value: 34856416
+    Value: 36348864
   Exists: 1
 --- !u!114 &7006998516226058581
 MonoBehaviour:
