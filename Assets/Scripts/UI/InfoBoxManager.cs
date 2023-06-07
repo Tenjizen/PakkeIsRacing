@@ -124,11 +124,8 @@ namespace UI
             if (_isActive)
             {
                 return;
-            }
-            _isActive = true;
-            Time.timeScale = _timeScale;
+            }  
             
-            _currentTuto = _tutorialsList.Find(x => x.ID == tutorialID);
             for (int i = 0; i < _tutorialsList.Count; i++)
             {
                 if (_tutorialsList[i].ID != tutorialID)
@@ -141,15 +138,19 @@ namespace UI
                 {
                     return;
                 }
+
                 _currentTuto.HasBeenActivated = true;
                 _tutorialsList[i] = _currentTuto;
                 break;
             }
 
+            _isActive = true;
+            Time.timeScale = _timeScale;
+
             _buttonImage.sprite = _currentTuto.ButtonImage;
             _actionText.text = CharacterManager.Instance.Parameters.Language ? _currentTuto.ActionText_EN : _currentTuto.ActionText_FR;
             _descriptionText.text = CharacterManager.Instance.Parameters.Language ? _currentTuto.DescriptionText_EN : _currentTuto.DescriptionText_FR;
-            _boxTransform.position = new Vector3(_currentTuto.Position.x, _currentTuto.Position.y, _boxTransform.position.z);
+            _boxTransform.localPosition = new Vector3(_currentTuto.Position.x, _currentTuto.Position.y, 0);
 
             _boxTransform.DOKill();
             _boxTransform.DOScale(Vector3.one, 0.3f).SetUpdate(true);
