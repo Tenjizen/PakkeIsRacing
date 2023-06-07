@@ -14,7 +14,11 @@ namespace Character.Camera.State
         }
         public override void UpdateState(CameraManager camera)
         {
-
+            if (CharacterManager.Instance.IsGameLaunched == false)
+            {
+                return;
+            }
+            
             if (_startTimer)
             {
                 _timer += Time.deltaTime;
@@ -22,6 +26,7 @@ namespace Character.Camera.State
 
             CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterMakeActions = false;
             CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterOpenWeapons = false;
+            CharacterManager.Instance.CurrentStateBaseProperty.CanOpenMenus = false;
             CharacterManager.Instance.CurrentStateBaseProperty.CanBeMoved = false;
             CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterMove = false;
             camera.CanMoveCameraManually = false;
@@ -35,7 +40,7 @@ namespace Character.Camera.State
             }
             if (_timer >= camera.TimerBeforeCanMovingAtStart)
             {
-                this.SwitchState(camera);
+                SwitchState(camera);
                 CameraNavigationState cameraNavigationState = new CameraNavigationState();
                 CamManager.SwitchState(cameraNavigationState);
             }
@@ -51,8 +56,10 @@ namespace Character.Camera.State
         public override void SwitchState(CameraManager camera)
         {
             camera.CanMoveCameraManually = true;
+            
             CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterOpenWeapons = true;
             CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterMakeActions = true;
+            CharacterManager.Instance.CurrentStateBaseProperty.CanOpenMenus = true;
             CharacterManager.Instance.CurrentStateBaseProperty.CanBeMoved = true;
             CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterMove = true;
         }

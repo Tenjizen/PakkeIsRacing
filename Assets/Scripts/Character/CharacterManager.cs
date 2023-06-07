@@ -72,6 +72,7 @@ namespace Character
         [HideInInspector] public float WeaponCooldownBase;
         [HideInInspector] public float InvincibilityTime;
         [HideInInspector] public bool ProjectileIsInAir;
+        [HideInInspector] public bool IsGameLaunched;
 
         protected override void Awake()
         {

@@ -81,7 +81,8 @@ namespace UI.Menu
     [Serializable]
     public struct MenuStruct
     {
-        public string Name;
+        public string Name_FR;
+        public string Name_EN;
         public MenuController Menu;
     }
 }

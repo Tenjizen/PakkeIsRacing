@@ -17,6 +17,7 @@ namespace Character.State
         public bool CanBeMoved = true;
         public bool CanCharacterMove = true;
         public bool CanCharacterMakeActions = true;
+        public bool CanOpenMenus = true;
         public bool CanCharacterOpenWeapons = true;
         public bool IsDead;
 
@@ -154,6 +155,5 @@ namespace Character.State
         }
 
         #endregion
-
     }
 }

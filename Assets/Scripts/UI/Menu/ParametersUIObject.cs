@@ -4,6 +4,7 @@ using Character.Data.Character;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -30,6 +31,9 @@ namespace UI.Menu
         [SerializeField] private Image _backgroundImage;
 
         [SerializeField] private Vector3 _onPosition, _offPosition;
+
+        public UnityEvent OnOn;
+        public UnityEvent OnOff;
 
         public override void Set(bool isActive)
         {
@@ -60,6 +64,11 @@ namespace UI.Menu
             base.Activate(context);
             
             _isOn = _isOn == false;
+            switch (_isOn)
+            {
+                case true : OnOn.Invoke(); break;
+                case false : OnOff.Invoke(); break;
+            }
             
             SetParameters();
         }
