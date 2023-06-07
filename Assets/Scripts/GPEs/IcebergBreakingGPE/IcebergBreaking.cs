@@ -11,10 +11,7 @@ public class IcebergBreaking : MonoBehaviour
     [Header("References"),SerializeField] GameObject _normalObject;
     [SerializeField] GameObject _breakingObject;
 
-    [SerializeField] Collider _collider;
-
     [Header("VFX"), SerializeField] ParticleSystem _hitParticles;
-
 
     private bool _startLifeTimer = false;
 
