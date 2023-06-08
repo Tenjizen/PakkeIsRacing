@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Dialog
+namespace UI.Dialog.Data
 {
     [Serializable]
     public enum SequencingType
@@ -15,7 +15,7 @@ namespace Dialog
     public class DialogData : ScriptableObject
     {
         public List<DialogStruct> DialogList = new List<DialogStruct>();
-        [Space(10), Header("Dialog Summary")] public string Title;
+        [Space(10), Header("Dialog Summary")]
         [TextArea] public string Summary;
     }
     

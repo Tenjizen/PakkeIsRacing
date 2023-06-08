@@ -11,6 +11,6 @@ namespace Json
         public CollectibleJsonFileManager CollectibleJsonFileManagerProperty { get; private set; }
         
         [field:SerializeField]
-        public DialogsJsonFileManager DialogsJsonFileManagerProperty { get; private set; }
+        public MemoriesJsonFileManager MemoriesJsonFileManagerProperty { get; private set; }
     }
 }

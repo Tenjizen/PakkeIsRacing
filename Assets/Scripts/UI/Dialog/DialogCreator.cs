@@ -8,6 +8,7 @@ using Dialog;
 using GPEs;
 using Json;
 using Sound;
+using UI.Dialog.Data;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -35,19 +36,16 @@ namespace UI.Dialog
 
         #endregion
 
-        [Header("Parameters")]
+        [Header("Parameters")] 
+        public string CategoryID;
         public DialogData Dialog_FR;
         public DialogData Dialog_EN;
-        [SerializeField]
-        private LaunchType _launchType;
-        [SerializeField] 
-        private bool _canBeReplayed;
-        [SerializeField, ReadOnly] 
-        private bool _hasEnded;
-        [SerializeField] 
-        private bool _blockPlayerMovement, _blockCameraMovement;
-        [SerializeField]
-        private float _timeUntilLaunch;
+        
+        [SerializeField] private LaunchType _launchType;
+        [SerializeField] private bool _canBeReplayed;
+        [SerializeField, ReadOnly] private bool _hasEnded;
+        [SerializeField] private bool _blockPlayerMovement, _blockCameraMovement;
+        [SerializeField] private float _timeUntilLaunch;
 
         [Space(20), Header("Events")] 
         public UnityEvent OnDialogLaunch = new UnityEvent();
@@ -61,6 +59,7 @@ namespace UI.Dialog
         private GameplayInputs _gameplayInputs;
         private CharacterManager _characterManager;
         private CameraManager _cameraManager;
+        
         private DialogData _currentDialogData;
 
         private void Start()
@@ -238,7 +237,7 @@ namespace UI.Dialog
             _cameraManager.CanMoveCameraManually = true;
             
             //json
-            JsonFilesManagerSingleton.Instance.DialogsJsonFileManagerProperty.SetDialogCollected(this);
+            JsonFilesManagerSingleton.Instance.MemoriesJsonFileManagerProperty.SetDialogCollected(this);
             
             //check for queue
             if (DialogManager.Instance.DialogQueue.Count > 0)
