@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Character;
 using Character.Camera;
@@ -196,10 +197,6 @@ namespace UI.Dialog
 
             //visual
             DialogManager.Instance.PressButtonImage.DOFade(0f, 0f);
-            GameObject dialog = DialogManager.Instance.DialogUIGameObject;
-            Vector3 scale = Vector3.one;
-            dialog.transform.localScale = Vector3.zero;
-            dialog.transform.DOScale(scale, 0.25f);
         }
 
         private void ShowDialog(int index)
@@ -254,7 +251,8 @@ namespace UI.Dialog
             }
             else
             {
-                DialogManager.Instance.DialogUIGameObject.transform.DOScale(Vector3.zero, 0.25f).OnComplete(DeactivateDialogObject);
+                Transform dialog = DialogManager.Instance.DialogUIGameObject.transform;
+                StartCoroutine(DeactivateDialogObject(0.25f));
             }
         }
 
@@ -266,8 +264,9 @@ namespace UI.Dialog
             }
         }
 
-        private void DeactivateDialogObject()
+        private IEnumerator DeactivateDialogObject(float time)
         {
+            yield return new WaitForSeconds(time);
             DialogManager.Instance.ToggleDialog(false);
         }
     }
