@@ -77,6 +77,7 @@ namespace Character
         protected override void Awake()
         {
             base.Awake();
+            Cursor.visible = false;
             CharacterMonoBehaviour = this;
         }
 
