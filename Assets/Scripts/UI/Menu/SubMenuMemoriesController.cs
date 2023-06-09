@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Character;
-using Collectible;
-using Dialog;
 using Json;
 using TMPro;
 using UI.Dialog;
 using UI.Dialog.Data;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 namespace UI.Menu
 {
@@ -123,7 +119,7 @@ namespace UI.Menu
             int count = JsonFilesManagerSingleton.Instance.MemoriesJsonFileManagerProperty.CollectedDialogs.Count;
             Height = count;
             
-            for (int i = 0; i < _memoryCategories.Count; i++)
+            for (int i = 0; i < _memoryCategories.Count; i++) //loop se relance trop de fois et a chaque fois pas de verif si la category est la bonnne
             {
                 bool isCategoryCreated = false;
                 MemoryUIObject currentObject = new MemoryUIObject();
