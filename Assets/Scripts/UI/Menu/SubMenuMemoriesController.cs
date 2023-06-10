@@ -104,16 +104,16 @@ namespace UI.Menu
             {
                 MemoryUIObject currentObject = null;
                 
-                List<CollectedDialogsData> list = JsonFilesManagerSingleton.Instance.MemoriesJsonFileManagerProperty.CollectedDialogs;
+                List<CollectedMemoriesData> list = JsonFilesManagerSingleton.Instance.MemoriesJsonFileManagerProperty.CollectedDialogs;
                 for (int j = 0; j < list.Count; j++)
                 {
-                    CollectedDialogsData collectedDialogData = list[j];
+                    CollectedMemoriesData collectedMemoryData = list[j];
                     DialogData data = CharacterManager.Instance.Parameters.Language ? 
-                        collectedDialogData.DialogCreatorGameObject.Dialog_EN : 
-                        collectedDialogData.DialogCreatorGameObject.Dialog_FR;
+                        collectedMemoryData.DialogCreatorGameObject.Dialog_EN : 
+                        collectedMemoryData.DialogCreatorGameObject.Dialog_FR;
 
-                    if (collectedDialogData.IsCollected == false || data == null ||
-                        _memoryCategories[i].CategoryID != collectedDialogData.CategoryID) 
+                    if (collectedMemoryData.IsCollected == false || data == null ||
+                        _memoryCategories[i].CategoryID != collectedMemoryData.CategoryID) 
                     {
                         continue;
                     }
@@ -122,7 +122,7 @@ namespace UI.Menu
                     if (currentObject == null)
                     {
                         currentObject = Instantiate(_memoryUIObjectPrefab, _memoriesUIObjectLayout);
-                        MemoryCategory category = _memoryCategories.Find(x => x.CategoryID == collectedDialogData.DialogCreatorGameObject.CategoryID);
+                        MemoryCategory category = _memoryCategories.Find(x => x.CategoryID == collectedMemoryData.DialogCreatorGameObject.CategoryID);
                         currentObject.SetCategoryName(category);
                         _objectsList.Add(currentObject);
                         Height++;

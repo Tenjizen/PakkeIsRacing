@@ -9,7 +9,7 @@ using UnityEngine.Serialization;
 namespace UI.Dialog
 {
     [System.Serializable]
-    public class CollectedDialogsData
+    public class CollectedMemoriesData
     {
         [ReadOnly] public string CategoryID;
         [ReadOnly] public bool IsCollected;
@@ -19,18 +19,18 @@ namespace UI.Dialog
     public class MemoriesJsonFileManager : MonoBehaviour
     {
         [field: SerializeField, Header("Memories")] 
-        public List<CollectedDialogsData> CollectedDialogs { get; set; } = new List<CollectedDialogsData>();
+        public List<CollectedMemoriesData> CollectedDialogs { get; set; } = new List<CollectedMemoriesData>();
         
         [SerializeField] private string _jsonFileID;
         
-        private JsonFileManager<CollectedDialogsData> _fileManager;
+        private JsonFileManager<CollectedMemoriesData> _fileManager;
 
         public UnityEvent OnNewDialogGet = new UnityEvent(); 
         
 
         protected void Awake()
         {
-            _fileManager = new JsonFileManager<CollectedDialogsData>(_jsonFileID);
+            _fileManager = new JsonFileManager<CollectedMemoriesData>(_jsonFileID);
         }
 
         private void Start()
@@ -42,7 +42,7 @@ namespace UI.Dialog
         {
             _fileManager.ClearDataList();
             
-            foreach (CollectedDialogsData item in CollectedDialogs)
+            foreach (CollectedMemoriesData item in CollectedDialogs)
             {
                 _fileManager.AddToDataList(item);
             }
@@ -54,11 +54,11 @@ namespace UI.Dialog
         {
             CollectedDialogs = _fileManager.GetDataList();
 
-            CollectedDialogsData dialog = CollectedDialogs.Find(item => item.DialogCreatorGameObject == dialogCreator);
-            if (dialog != null)
+            CollectedMemoriesData memory = CollectedDialogs.Find(item => item.DialogCreatorGameObject == dialogCreator);
+            if (memory != null)
             {
-                dialog.IsCollected = true;
-                dialog.CategoryID = dialog.DialogCreatorGameObject.CategoryID;
+                memory.IsCollected = true;
+                memory.CategoryID = memory.DialogCreatorGameObject.CategoryID;
             }
             
             WriteJsonFile();
