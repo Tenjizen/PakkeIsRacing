@@ -17,6 +17,9 @@ namespace UI.Menu
         public QuestData Data;
         [field:SerializeField] public TMP_Text QuestTitleText { get; private set; }
         [field:SerializeField] public Image QuestLogo { get; private set; }
+        [field:SerializeField] public Image DoneImage { get; private set; }
+
+        public bool IsDone { get; private set; }
 
         public string GetTitle()
         {
@@ -39,6 +42,12 @@ namespace UI.Menu
 
             QuestTitleText.text = GetTitle();
             QuestLogo.sprite = Data.QuestLogo;
+        }
+
+        public void SetDone(bool isDone)
+        {
+            IsDone = isDone;
+            DoneImage.gameObject.SetActive(IsDone);
         }
     }
 }

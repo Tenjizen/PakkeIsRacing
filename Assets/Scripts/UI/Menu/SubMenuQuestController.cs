@@ -17,6 +17,7 @@ namespace UI.Menu
         [Header("Sub Menu"), SerializeField] private List<MenuUIObject> _objectsList = new List<MenuUIObject>();
         [SerializeField] private TMP_Text _questTitleText, _questDescriptionText;
         [SerializeField] private Image _questLogoImage;
+        [SerializeField] private Image _isDoneImage;
         [SerializeField] private Transform _questUIObjectLayout;
         [SerializeField] private QuestUIObject _questUIObjectPrefab;
 
@@ -87,6 +88,8 @@ namespace UI.Menu
             _questDescriptionText.text = questUIObject == null ? String.Empty : questUIObject.GetDescription();
             _questLogoImage.gameObject.SetActive(true);
             _questLogoImage.sprite = questUIObject.Data.QuestLogo;
+            
+            _isDoneImage.gameObject.SetActive(questUIObject.IsDone);
         }
 
         private void CreateQuestsUIObject()
@@ -112,6 +115,7 @@ namespace UI.Menu
 
                 QuestUIObject questUIObject = Instantiate(_questUIObjectPrefab, _questUIObjectLayout);
                 questUIObject.Data = list[i].QuestCreatorGameObject.QuestCreatorData;
+                questUIObject.SetDone(list[i].IsDone);
                 
                 _objectsList.Add(questUIObject);
                 Height++;
