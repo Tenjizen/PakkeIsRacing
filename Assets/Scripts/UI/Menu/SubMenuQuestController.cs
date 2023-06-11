@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Character;
+using DG.Tweening;
 using Json;
 using TMPro;
 using UI.Dialog;
@@ -22,6 +23,12 @@ namespace UI.Menu
         [SerializeField] private QuestUIObject _questUIObjectPrefab;
 
         private int _index;
+        private float _baseHeight;
+
+        private void Awake()
+        {
+            _baseHeight = _questUIObjectLayout.transform.position.y;
+        }
 
         public override void SetMenu(bool isActive, bool isUsable)
         {
@@ -47,6 +54,8 @@ namespace UI.Menu
             base.Up(context);
             _index--;
             SetTile();
+            
+            SetHeight();
         }
 
         protected override void Down(InputAction.CallbackContext context)
@@ -59,6 +68,19 @@ namespace UI.Menu
             base.Down(context);
             _index++;
             SetTile();
+
+            SetHeight();
+        }
+
+        private void SetHeight()
+        {
+            float index = _index < 2 ? 0 : _index;
+
+            Vector3 position = _questUIObjectLayout.transform.position;
+            float heightMovement = _index * 0.35f;
+            Vector3 newPosition = new Vector3(position.x, _baseHeight + index * heightMovement, position.z);
+            _questUIObjectLayout.transform.DOKill();
+            _questUIObjectLayout.transform.DOMove(newPosition, 0.5f);
         }
 
         private void SetTile()
