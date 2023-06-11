@@ -20,6 +20,7 @@ namespace UI.WeaponWheel
         [SerializeField] private Button _button;
         [SerializeField] private Projectile _projectile;
         [SerializeField] private Sprite _weaponIcon;
+        [SerializeField] private Image _weaponSelectedBackground;
         [SerializeField] private GameObject _lock;
         [SerializeField] private List<GameObject> _weaponObjectToSet;
         
@@ -41,6 +42,7 @@ namespace UI.WeaponWheel
         {
             _characterManager = CharacterManager.Instance;
             _weaponObjectToSet.ForEach(x => x.SetActive(IsUnlocked));
+            _weaponSelectedBackground.DOFade(0, 0);
            
             _lock.SetActive(false);
             IsLocked = false;
@@ -94,6 +96,9 @@ namespace UI.WeaponWheel
             IsSelected = true;
             _animator.SetBool("Hover",true);
             _button.Select();
+            
+            _weaponSelectedBackground.DOKill();
+            _weaponSelectedBackground.DOFade(1, 0.2f);
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -109,6 +114,9 @@ namespace UI.WeaponWheel
             }
             IsSelected = false;
             _animator.SetBool("Hover",false);
+
+            _weaponSelectedBackground.DOKill();
+            _weaponSelectedBackground.DOFade(0, 0.1f);
         }
 
         public void Select(Image weaponIcon)

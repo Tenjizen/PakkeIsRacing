@@ -164,9 +164,9 @@ namespace UI.WeaponWheel
         {
             //angle
             const float DEADZONE = 0.25f;
-            float angleRad = Mathf.Atan2(_inputManagement.Inputs.SelectWeaponMenu.y,
-                _inputManagement.Inputs.SelectWeaponMenu.x);
+            float angleRad = Mathf.Atan2(_inputManagement.Inputs.SelectWeaponMenu.y, _inputManagement.Inputs.SelectWeaponMenu.x);
             float angleDeg = angleRad * Mathf.Rad2Deg - 90;
+            
             if (angleDeg < 0)
             {
                 angleDeg += 360f;
@@ -181,7 +181,8 @@ namespace UI.WeaponWheel
             for (int i = 0; i < Buttons.Count; i++)
             {
                 WheelButton button = Buttons[i];
-                if (angleDeg < button.Angle.y && angleDeg >= button.Angle.x)
+                if ((angleDeg < button.Angle.y && angleDeg >= button.Angle.x) ||
+                    (angleDeg < button.Angle.y - 360 && angleDeg > 0))
                 {
                     WeaponWheelButtonController controller = button.ButtonController;
                     if (controller != _lastButtonCursorWasOn)
