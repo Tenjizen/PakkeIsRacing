@@ -5,6 +5,7 @@ using Json;
 using TMPro;
 using UI.Dialog;
 using UI.Dialog.Data;
+using UI.Quest;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -84,6 +85,7 @@ namespace UI.Menu
             QuestUIObject questUIObject = _objectsList[_index].GetComponent<QuestUIObject>();
             _questTitleText.text = questUIObject == null ? String.Empty : questUIObject.GetTitle();
             _questDescriptionText.text = questUIObject == null ? String.Empty : questUIObject.GetDescription();
+            _questLogoImage.gameObject.SetActive(true);
             _questLogoImage.sprite = questUIObject.Data.QuestLogo;
         }
 
@@ -97,22 +99,19 @@ namespace UI.Menu
             _objectsList.Clear();
             Height = 0;
 
-            // TODO create a questJsonFileManager + integration dans les dialogs creator + systeme de quete fait/pas fait
-            List<CollectedMemoriesData> list = JsonFilesManagerSingleton.Instance.MemoriesJsonFileManagerProperty.CollectedDialogs;
+            List<CollectedQuestData> list = JsonFilesManagerSingleton.Instance.QuestJsonFileManagerProperty.CollectedQuests;
             for (int i = 0; i < list.Count; i++)
             {
-                CollectedMemoriesData collectedMemoryData = list[i];
-                DialogData data = CharacterManager.Instance.Parameters.Language
-                    ? collectedMemoryData.DialogCreatorGameObject.Dialog_EN
-                    : collectedMemoryData.DialogCreatorGameObject.Dialog_FR;
+                CollectedQuestData collectedQuestData = list[i];
+                QuestData data = collectedQuestData.QuestCreatorGameObject.QuestCreatorData;
 
-                if (collectedMemoryData.IsCollected == false || data == null)
+                if (collectedQuestData.IsCollected == false || data == null)
                 {
                     continue;
                 }
 
                 QuestUIObject questUIObject = Instantiate(_questUIObjectPrefab, _questUIObjectLayout);
-                //questUIObject.Data = list[i].;
+                questUIObject.Data = list[i].QuestCreatorGameObject.QuestCreatorData;
                 
                 _objectsList.Add(questUIObject);
                 Height++;

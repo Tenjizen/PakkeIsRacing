@@ -15,8 +15,8 @@ namespace UI.Menu
     public class QuestUIObject : MenuUIObject
     {
         public QuestData Data;
-        public TMP_Text QuestTitleText { get; private set; }
-        public Image QuestLogo { get; private set; }
+        [field:SerializeField] public TMP_Text QuestTitleText { get; private set; }
+        [field:SerializeField] public Image QuestLogo { get; private set; }
 
         public string GetTitle()
         {

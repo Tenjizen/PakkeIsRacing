@@ -1,6 +1,7 @@
 ﻿using Collectible;
 using Tools.SingletonClassBase;
 using UI.Dialog;
+using UI.Quest;
 using UnityEngine;
 
 namespace Json
@@ -12,5 +13,8 @@ namespace Json
         
         [field:SerializeField]
         public MemoriesJsonFileManager MemoriesJsonFileManagerProperty { get; private set; }
+        
+        [field:SerializeField]
+        public QuestJsonFileManager QuestJsonFileManagerProperty { get; private set; }
     }
 }

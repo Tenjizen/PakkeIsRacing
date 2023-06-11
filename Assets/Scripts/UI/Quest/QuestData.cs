@@ -2,7 +2,7 @@
 
 namespace UI.Quest
 {
-    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/DialogData", order = 1)]
+    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/QuestData", order = 1)]
     public class QuestData : ScriptableObject
     {
         public Sprite QuestLogo;
