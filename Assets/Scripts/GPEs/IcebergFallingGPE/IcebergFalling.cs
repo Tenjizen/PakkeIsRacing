@@ -115,7 +115,7 @@ namespace IcebergFallingGPE
             Handles.DrawDottedLine(startPosition, endPosition, 0.5f);
             
             //wave
-            Gizmos.color = Color.red;
+            Handles.color = new Color(1f, 1f, 1f, 0.28f);
             Handles.DrawWireDisc(endPosition, Vector3.up, _circularWaveData.Distance);
             Handles.DrawWireDisc(endPosition + Vector3.up*_circularWaveData.Amplitude, Vector3.up, _circularWaveData.Distance);
             
