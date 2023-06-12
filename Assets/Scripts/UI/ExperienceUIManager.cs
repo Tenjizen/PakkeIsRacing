@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Character;
 using DG.Tweening;
 using TMPro;
@@ -10,13 +12,6 @@ namespace UI
 {
     public class ExperienceUIManager : MonoBehaviour
     {
-        public enum Gauge
-        {
-            Experience,
-            Combat,
-            Navigation
-        }
-
         [Header("Big"), SerializeField] private GameObject _uIGameObjectBig;
         [SerializeField] private Image _experienceGauge;
         [SerializeField] private TMP_Text _levelText;
@@ -29,12 +24,24 @@ namespace UI
         private float _percentageToSetAfterLevelUp;
         private float _cooldownUntilHideSmallUI;
 
+        private Dictionary<Image, float> _images = new Dictionary<Image, float>();
+        private Dictionary<TMP_Text, float> _texts = new Dictionary<TMP_Text, float>();
+
         private void Start()
         {
             _levelText.text = _level.ToString();
             _smallLevelText.text = _level.ToString();
-            _uIGameObjectSmall.SetActive(false);
+            SetSmallUI(false);
             _cooldownUntilHideSmallUI = 0;
+
+            foreach (Image image in _uIGameObjectSmall.GetComponentsInChildren<Image>())
+            {
+                _images.Add(image,image.color.a);
+            }
+            foreach (TMP_Text text in _uIGameObjectSmall.GetComponentsInChildren<TMP_Text>())
+            {
+                _texts.Add(text,text.color.a);
+            }
         }
 
         private void Update()
@@ -66,7 +73,7 @@ namespace UI
             }
 
             _cooldownUntilHideSmallUI = appearanceTime;
-            _uIGameObjectSmall.SetActive(true);
+            SetSmallUI(true);
         }
 
         private void SetExperienceGaugeAfterLevelUp()
@@ -87,7 +94,7 @@ namespace UI
 
             if (_uIGameObjectSmall.activeInHierarchy && isActive)
             {
-                _uIGameObjectSmall.SetActive(false);
+                SetSmallUI(false);
             }
         }
 
@@ -96,8 +103,14 @@ namespace UI
             _cooldownUntilHideSmallUI -= Time.deltaTime;
             if (_cooldownUntilHideSmallUI < 0 && _uIGameObjectSmall.activeInHierarchy)
             {
-                _uIGameObjectSmall.SetActive(false);
+                SetSmallUI(false);
             }
+        }
+
+        private void SetSmallUI(bool isActive)
+        {
+            _images.ToList().ForEach(x => x.Key.DOFade(isActive ? x.Value : 0, 0.4f));
+            _texts.ToList().ForEach(x => x.Key.DOFade(isActive ? x.Value : 0, 0.4f));
         }
     }
 }

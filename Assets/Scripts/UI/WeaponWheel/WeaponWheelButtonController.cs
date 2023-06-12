@@ -88,7 +88,7 @@ namespace UI.WeaponWheel
 
         public void Hover()
         {
-            if (IsLocked)
+            if (IsLocked || IsUnlocked == false)
             {
                 return;
             }
