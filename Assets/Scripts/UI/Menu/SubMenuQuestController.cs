@@ -21,6 +21,7 @@ namespace UI.Menu
         [SerializeField] private Image _isDoneImage;
         [SerializeField] private Transform _questUIObjectLayout;
         [SerializeField] private QuestUIObject _questUIObjectPrefab;
+        [SerializeField] private List<float> _scrollPosition;
 
         private int _index;
         private float _baseHeight;
@@ -74,11 +75,10 @@ namespace UI.Menu
 
         private void SetHeight()
         {
-            float index = _index < 2 ? 0 : _index;
+            int index = _index >= _scrollPosition.Count ? _scrollPosition.Count - 1 : _index;
 
             Vector3 position = _questUIObjectLayout.transform.position;
-            float heightMovement = _index * 0.35f;
-            Vector3 newPosition = new Vector3(position.x, _baseHeight + index * heightMovement, position.z);
+            Vector3 newPosition = new Vector3(position.x, _baseHeight + _scrollPosition[index], position.z);
             _questUIObjectLayout.transform.DOKill();
             _questUIObjectLayout.transform.DOMove(newPosition, 0.5f);
         }

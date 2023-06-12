@@ -3001,6 +3001,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponUI: {fileID: 4216831512123217972}
   _vignette: {fileID: 4000094957696149738}
+  _timeScaleValueWhenOpen: 0.1
   Buttons:
   - ButtonController: {fileID: 6779203941408853403}
     Angle: {x: 330, y: 390}
@@ -8232,6 +8233,12 @@ MonoBehaviour:
   _questUIObjectLayout: {fileID: 3891695911003578512}
   _questUIObjectPrefab: {fileID: 9037854957148703942, guid: f91344bc596abb446bb09ddbc7fcb1d2,
     type: 3}
+  _scrollPosition:
+  - 0
+  - 0
+  - 1
+  - 2
+  - 4
 --- !u!1 &4216831512123217972
 GameObject:
   m_ObjectHideFlags: 0
