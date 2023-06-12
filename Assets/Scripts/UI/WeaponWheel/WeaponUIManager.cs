@@ -17,7 +17,7 @@ namespace UI.WeaponWheel
     {
         [SerializeField] private GameObject _weaponUI;
         [SerializeField] private Transform _vignette;
-        [SerializeField] private float _timeScaleValueWhenOpen = 0.1f;
+        [SerializeField] private float _timeScaleValueWhenOpen = 0.25f;
         public List<WheelButton> Buttons;
 
         [SerializeField] private List<Image> _paddleArrowDownImages = new List<Image>();
