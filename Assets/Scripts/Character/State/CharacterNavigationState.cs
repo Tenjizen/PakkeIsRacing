@@ -39,12 +39,15 @@ namespace Character.State
         private KayakParameters _kayakValues;
         private Rigidbody _kayakRigidbody;
         //private Floaters _floaters;
-        
+
         //priority
         private RotationType _lastInputType;
         private float _staticTime;
         private float _paddleTime;
         private bool _paddleWasReleased, _staticWasReleased;
+
+        private float _timerLastInputTrigger = 0;
+        private Direction _lastInputPaddle;
 
         #region Constructor
 
@@ -281,17 +284,41 @@ namespace Character.State
             //input -> paddleMovement
             if (_inputs.Inputs.PaddleLeft && _leftPaddleCooldown <= 0 && _inputs.Inputs.PaddleRight == false)
             {
+                Direction direction = CharacterManagerRef.Parameters.InversedControls ? Direction.Right : Direction.Left;
                 _leftPaddleCooldown = _kayakValues.PaddleCooldown;
                 _rightPaddleCooldown = _kayakValues.PaddleCooldown / 2;
-                Paddle(CharacterManagerRef.Parameters.InversedControls ? Direction.Right : Direction.Left);
+                CheckIfCanSprint(direction);
+                Paddle(direction);
             }
-            
+
             if (_inputs.Inputs.PaddleRight && _rightPaddleCooldown <= 0 && _inputs.Inputs.PaddleLeft == false)
             {
+                Direction direction = CharacterManagerRef.Parameters.InversedControls ? Direction.Left : Direction.Right;
                 _rightPaddleCooldown = _kayakValues.PaddleCooldown;
                 _leftPaddleCooldown = _kayakValues.PaddleCooldown / 2;
-                Paddle(CharacterManagerRef.Parameters.InversedControls ? Direction.Left : Direction.Right);
+                CheckIfCanSprint(direction);
+                Paddle(direction);
             }
+        }
+
+        private void CheckIfCanSprint(Direction direction)
+        {
+            if (_lastInputPaddle == direction || CharacterManagerRef.Parameters.SprintUnlock == false)
+            {
+                return;
+            }
+
+            if (_timerLastInputTrigger > _kayakValues.TimerMinForSprint && _timerLastInputTrigger < _kayakValues.TimerMaxForSprint)
+            {
+                CharacterManagerRef.SprintInProgress = true;
+            }
+            else
+            {
+                CharacterManagerRef.SprintInProgress = false;
+            }
+
+            _timerLastInputTrigger = 0;
+            _lastInputPaddle = direction;
         }
 
         /// <summary>
@@ -299,10 +326,11 @@ namespace Character.State
         /// </summary>
         private IEnumerator PaddleForceCurve()
         {
+            float sprintMultiply = CharacterManagerRef.SprintInProgress ? 1.5f : 1;
             for (int i = 0; i <= _kayakValues.NumberOfForceAppliance; i++)
             {
-                float x = 1f/_kayakValues.NumberOfForceAppliance * i;
-                float force = _kayakValues.ForceCurve.Evaluate(x) * _kayakValues.PaddleForce;
+                float x = 1f / _kayakValues.NumberOfForceAppliance * i;
+                float force = (_kayakValues.ForceCurve.Evaluate(x) * _kayakValues.PaddleForce) * sprintMultiply;
                 Vector3 forceToApply = _kayakController.transform.forward * force;
                 _kayakRigidbody.AddForce(forceToApply);
 
@@ -319,12 +347,14 @@ namespace Character.State
             _rightPaddleCooldown -= Time.deltaTime;
 
             _staticInputTimer -= Time.deltaTime;
+
+            _timerLastInputTrigger += Time.deltaTime;
         }
 
         #endregion
 
         #region Rotate Movement
-        
+
         /// <summary>
         ///detect static rotation input and apply static rotation by adding rotation force & setting animator booleans
         /// </summary>

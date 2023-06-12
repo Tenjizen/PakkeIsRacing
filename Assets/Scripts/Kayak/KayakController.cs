@@ -69,14 +69,15 @@ namespace Kayak
         {
             Vector3 velocity = Rigidbody.velocity;
             KayakParameters kayakValues = Data.KayakValues;
-            
+
             float velocityX = velocity.x;
-            float maxClamp = kayakValues.MaximumFrontVelocity * CharacterManager.Instance.ExperienceManagerProperty.MaximumDistanceMultiplier;
+            float maxClamp = CharacterManager.Instance.SprintInProgress ? kayakValues.MaximumFrontSprintVelocity :
+                kayakValues.MaximumFrontVelocity * CharacterManager.Instance.ExperienceManagerProperty.MaximumDistanceMultiplier;
             velocityX = Mathf.Clamp(velocityX, -maxClamp, maxClamp);
-            
+
             float velocityZ = velocity.z;
             velocityZ = Mathf.Clamp(velocityZ, -maxClamp, maxClamp);
-            
+
             Rigidbody.velocity = new Vector3(velocityX, velocity.y, velocityZ);
         }
 

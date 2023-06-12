@@ -50,6 +50,7 @@ namespace Character
 
         [Header("Character Data")]
         public CharacterData Data;
+        [Range(0, 360)] public float BaseOrientation;
         [Header("Balance Infos"), ReadOnly, Tooltip("Can the balance lerp itself to 0 ?")]
         public bool LerpBalanceTo0 = true;
         [ReadOnly, Tooltip("The current balance value")]
@@ -74,6 +75,8 @@ namespace Character
         [HideInInspector] public bool ProjectileIsInAir;
         [HideInInspector] public bool IsGameLaunched;
 
+        [ReadOnly] public bool SprintInProgress = false;
+
         protected override void Awake()
         {
             base.Awake();
@@ -92,6 +95,9 @@ namespace Character
             BalanceGaugeManagerRef.SetBalanceGaugeActive(false);
             ExperienceManagerProperty.ExperienceUIManagerProperty.SetActive(false);
             BalanceGaugeManagerRef.ShowTrigger(false, false);
+
+            KayakControllerProperty.transform.eulerAngles = new Vector3(0, BaseOrientation, 0);
+            //TODO rotate the cameras also
         }
         private void Update()
         {
@@ -250,5 +256,6 @@ namespace Character
         public bool AutoAim;
         public bool InversedControls;
         public bool Language;
+        public bool SprintUnlock;
     }
 }

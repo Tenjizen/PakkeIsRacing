@@ -29,6 +29,14 @@ namespace Kayak.Data
         [Header("Velocity & Collisions")]
         [Range(0,40), Tooltip("the maximum velocity that the kayak can go")] 
         public float MaximumFrontVelocity;
+        [Range(0,40), Tooltip("the maximum velocity that the kayak can go in sprint")] 
+        public float MaximumFrontSprintVelocity;
+        [Range(0,2), Tooltip("the multiplier value add to the force of paddling")] 
+        public float MultiplyValueForceInSprint;
+        [Range(0.5f,2), Tooltip("the minimum value timing to press the input trigger")] 
+        public float TimerMinForSprint;
+        [Range(0.5f,4), Tooltip("the maximum value timing to press the input trigger")] 
+        public float TimerMaxForSprint;
         [Range(0,40), Tooltip("the divider of the collision magnitude value applied to the balance")] 
         public float CollisionToBalanceMagnitudeDivider;
 
