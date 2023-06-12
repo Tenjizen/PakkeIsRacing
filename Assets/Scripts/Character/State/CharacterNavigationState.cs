@@ -37,6 +37,7 @@ namespace Character.State
         //reference
         private KayakController _kayakController;
         private KayakParameters _kayakValues;
+
         private Rigidbody _kayakRigidbody;
         //private Floaters _floaters;
 
@@ -77,7 +78,7 @@ namespace Character.State
             CharacterManagerRef.LerpBalanceTo0 = true;
             CanBeMoved = true;
             CanCharacterMakeActions = true;
-            
+
             //anim
             TimeBeforeSettingPaddleAnimator = 1f;
         }
@@ -94,7 +95,7 @@ namespace Character.State
         public override void FixedUpdate(CharacterManager character)
         {
             SetBrakeAnimationToFalse();
-            
+
             if (CanCharacterMove == false)
             {
                 StopCharacter();
@@ -105,7 +106,7 @@ namespace Character.State
 
             KayakRotationManager(RotationType.Paddle);
             KayakRotationManager(RotationType.Static);
-            
+
             VelocityToward();
 
             CheckRigidbodyFloatersBalance();
@@ -178,7 +179,7 @@ namespace Character.State
             CharacterManagerRef.CharacterAnimatorProperty.SetBool("BrakeLeft", false);
             CharacterManagerRef.CharacterAnimatorProperty.SetBool("BrakeRight", false);
         }
-        
+
         /// <summary>
         /// Manage the kayak static/paddle movement method choice
         /// </summary>
@@ -188,8 +189,8 @@ namespace Character.State
             bool staticInput = _inputs.Inputs.RotateLeft != 0 || _inputs.Inputs.RotateRight != 0;
             bool paddleInput = _inputs.Inputs.PaddleLeft || _inputs.Inputs.PaddleRight;
 
-            if (((paddleInput == false) || 
-                 (_lastInputType == RotationType.Paddle) || 
+            if (((paddleInput == false) ||
+                 (_lastInputType == RotationType.Paddle) ||
                  (_paddleWasReleased) == false && _lastInputType == RotationType.Paddle) &&
                 _staticInputTimer <= 0 && staticInput)
             {
@@ -203,8 +204,8 @@ namespace Character.State
                 }
             }
 
-            if ((( staticInput == false) ||
-                (_lastInputType == RotationType.Static)) &&
+            if (((staticInput == false) ||
+                 (_lastInputType == RotationType.Static)) &&
                 paddleInput)
             {
                 HandlePaddleMovement();
@@ -243,24 +244,30 @@ namespace Character.State
             //timers
             _kayakController.DragReducingTimer = 0.5f;
             _staticInputTimer = _kayakValues.StaticRotationCooldownAfterPaddle;
-            
+
             //rotation
             if (direction == _lastPaddleSide)
             {
-                float rotation = _kayakValues.PaddleSideRotationForce * CharacterManagerRef.ExperienceManagerProperty.RotatingSpeedMultiplier;
+                float rotation = _kayakValues.PaddleSideRotationForce *
+                                 CharacterManagerRef.ExperienceManagerProperty.RotatingSpeedMultiplier;
                 RotationPaddleForceY += direction == Direction.Right ? -rotation : rotation;
             }
+
             _lastPaddleSide = direction;
-            
+
             //balance
             CharacterManagerRef.Balance += RotationPaddleForceY * CharacterManagerRef.Data.RotationToBalanceMultiplier;
-            
+
             //force
             MonoBehaviourRef.StartCoroutine(PaddleForceCurve());
 
             //animation & particles
-            CharacterManagerRef.PaddleAnimatorProperty.SetTrigger(direction == Direction.Left ? "PaddleLeft" : "PaddleRight");
-            CharacterManagerRef.CharacterAnimatorProperty.SetTrigger(direction == Direction.Left ? "PaddleLeft" : "PaddleRight");
+            CharacterManagerRef.PaddleAnimatorProperty.SetTrigger(direction == Direction.Left
+                ? "PaddleLeft"
+                : "PaddleRight");
+            CharacterManagerRef.CharacterAnimatorProperty.SetTrigger(direction == Direction.Left
+                ? "PaddleLeft"
+                : "PaddleRight");
             _kayakController.PlayPaddleParticle(direction);
 
             //events
@@ -273,6 +280,7 @@ namespace Character.State
                     OnPaddleRight.Invoke();
                     break;
             }
+
             CharacterManagerRef.OnPaddle.Invoke();
         }
 
@@ -282,9 +290,15 @@ namespace Character.State
         private void HandlePaddleMovement()
         {
             //input -> paddleMovement
+            if (_inputs.Inputs.PaddleRight && _inputs.Inputs.PaddleLeft)
+            {
+                HandleBothPress();
+            }
+
             if (_inputs.Inputs.PaddleLeft && _leftPaddleCooldown <= 0 && _inputs.Inputs.PaddleRight == false)
             {
-                Direction direction = CharacterManagerRef.Parameters.InversedControls ? Direction.Right : Direction.Left;
+                Direction direction =
+                    CharacterManagerRef.Parameters.InversedControls ? Direction.Right : Direction.Left;
                 _leftPaddleCooldown = _kayakValues.PaddleCooldown;
                 _rightPaddleCooldown = _kayakValues.PaddleCooldown / 2;
                 CheckIfCanSprint(direction);
@@ -293,12 +307,34 @@ namespace Character.State
 
             if (_inputs.Inputs.PaddleRight && _rightPaddleCooldown <= 0 && _inputs.Inputs.PaddleLeft == false)
             {
-                Direction direction = CharacterManagerRef.Parameters.InversedControls ? Direction.Left : Direction.Right;
+                Direction direction =
+                    CharacterManagerRef.Parameters.InversedControls ? Direction.Left : Direction.Right;
                 _rightPaddleCooldown = _kayakValues.PaddleCooldown;
                 _leftPaddleCooldown = _kayakValues.PaddleCooldown / 2;
                 CheckIfCanSprint(direction);
                 Paddle(direction);
             }
+        }
+
+        private void HandleBothPress()
+        {
+            if (_leftPaddleCooldown < 0)
+            {
+                Direction direction = CharacterManagerRef.Parameters.InversedControls ? Direction.Right : Direction.Left;
+                _leftPaddleCooldown = _kayakValues.PaddleCooldown;
+                _rightPaddleCooldown = _kayakValues.PaddleCooldown / 2;
+                Paddle(direction);
+            }
+            if (_rightPaddleCooldown < 0)
+            {
+                Direction direction = CharacterManagerRef.Parameters.InversedControls ? Direction.Left : Direction.Right;
+                _rightPaddleCooldown= _kayakValues.PaddleCooldown;
+                 _leftPaddleCooldown = _kayakValues.PaddleCooldown / 2;
+                Paddle(direction);
+            }
+
+            //change the rotation inertia to 0
+            RotationPaddleForceY = Mathf.Lerp(RotationPaddleForceY, 0, 0.1f);
         }
 
         private void CheckIfCanSprint(Direction direction)
@@ -308,7 +344,8 @@ namespace Character.State
                 return;
             }
 
-            if (_timerLastInputTrigger > _kayakValues.TimerMinForSprint && _timerLastInputTrigger < _kayakValues.TimerMaxForSprint)
+            if (_timerLastInputTrigger > _kayakValues.TimerMinForSprint &&
+                _timerLastInputTrigger < _kayakValues.TimerMaxForSprint)
             {
                 CharacterManagerRef.SprintInProgress = true;
             }
@@ -369,17 +406,18 @@ namespace Character.State
                 {
                     DecelerationAndRotate(Direction.Right);
                 }
+
                 RotationStaticForceY += _kayakValues.StaticRotationForce;
-                
-                CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeLeft",true);
-                CharacterManagerRef.CharacterAnimatorProperty.SetBool("BrakeLeft",true);
+
+                CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeLeft", true);
+                CharacterManagerRef.CharacterAnimatorProperty.SetBool("BrakeLeft", true);
             }
             else
             {
-                CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeLeft",false);
-                CharacterManagerRef.CharacterAnimatorProperty.SetBool("BrakeLeft",false);
+                CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeLeft", false);
+                CharacterManagerRef.CharacterAnimatorProperty.SetBool("BrakeLeft", false);
             }
-            
+
             //right
             if (_inputs.Inputs.RotateRight > _inputs.Inputs.Deadzone)
             {
@@ -387,15 +425,16 @@ namespace Character.State
                 {
                     DecelerationAndRotate(Direction.Left);
                 }
+
                 RotationStaticForceY -= _kayakValues.StaticRotationForce;
-                
-                CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeRight",true);
-                CharacterManagerRef.CharacterAnimatorProperty.SetBool("BrakeRight",true);
+
+                CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeRight", true);
+                CharacterManagerRef.CharacterAnimatorProperty.SetBool("BrakeRight", true);
             }
             else
             {
-                CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeRight",false);
-                CharacterManagerRef.CharacterAnimatorProperty.SetBool("BrakeRight",false);
+                CharacterManagerRef.PaddleAnimatorProperty.SetBool("BrakeRight", false);
+                CharacterManagerRef.CharacterAnimatorProperty.SetBool("BrakeRight", false);
             }
         }
 
@@ -406,17 +445,15 @@ namespace Character.State
         {
             Vector3 targetVelocity = new Vector3(0, _kayakRigidbody.velocity.y, 0);
 
-            float lerp = _kayakValues.VelocityDecelerationLerp * CharacterManagerRef.ExperienceManagerProperty.BreakingDistanceMultiplier;
+            float lerp = _kayakValues.VelocityDecelerationLerp *
+                         CharacterManagerRef.ExperienceManagerProperty.BreakingDistanceMultiplier;
             _kayakRigidbody.velocity = Vector3.Lerp(_kayakRigidbody.velocity, targetVelocity, lerp);
-            
+
             float force = _kayakValues.VelocityDecelerationRotationForce;
-            
+
             RotationStaticForceY += direction == Direction.Left ? -force : force;
         }
 
         #endregion
-
-      
-        
     }
 }
