@@ -98,7 +98,7 @@ namespace UI.WeaponWheel
             _button.Select();
             
             _weaponSelectedBackground.DOKill();
-            _weaponSelectedBackground.DOFade(1, 0.2f);
+            _weaponSelectedBackground.DOFade(1, 0.2f).SetUpdate(true);
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -130,7 +130,7 @@ namespace UI.WeaponWheel
             }
 
             weaponIcon.sprite = _weaponIcon == null ? weaponIcon.sprite : _weaponIcon;
-            weaponIcon.DOFade(_weaponIcon == null ? 0 : 1, 0.2f);
+            weaponIcon.DOFade(_weaponIcon == null ? 0 : 1, 0.2f).SetUpdate(true);
 
             OnSelected.Invoke();
             _characterManager.CurrentProjectile = _projectile;

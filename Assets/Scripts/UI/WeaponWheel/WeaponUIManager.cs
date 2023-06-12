@@ -17,7 +17,7 @@ namespace UI.WeaponWheel
     {
         [SerializeField] private GameObject _weaponUI;
         [SerializeField] private Transform _vignette;
-
+        [SerializeField] private float _timeScaleValueWhenOpen = 0.1f;
         public List<WheelButton> Buttons;
 
         [SerializeField] private List<Image> _paddleArrowDownImages = new List<Image>();
@@ -76,6 +76,8 @@ namespace UI.WeaponWheel
             //menu is open
             if (_isMenuOpen)
             {
+                Time.timeScale = _timeScaleValueWhenOpen;
+
                 WeaponChoice();
                 if (_inputManagement.Inputs.OpenWeaponMenu == false)
                 {
@@ -84,6 +86,10 @@ namespace UI.WeaponWheel
 
                 _currentPressTime = 0;
                 return;
+            }
+            else if(_isMenuOpen == false && Time.timeScale < 1)
+            {
+                Time.timeScale = 1;
             }
 
             //menu is closed && open menu touch is pressed
@@ -104,6 +110,7 @@ namespace UI.WeaponWheel
                 FastWeaponChange();
                 _currentPressTime = 0;
             }
+
         }
 
         private void FastWeaponChange()
@@ -149,6 +156,8 @@ namespace UI.WeaponWheel
             ResetSelection();
 
             _weaponUI.SetActive(_isMenuOpen);
+
+
             CharacterManager.Instance.ExperienceManagerProperty.ExperienceUIManagerProperty.SetActive(_isMenuOpen);
 
             if (_isMenuOpen)
@@ -210,7 +219,7 @@ namespace UI.WeaponWheel
         private void VignetteZoom()
         {
             _vignette.localScale = _vignetteBaseScale * 2;
-            _vignette.DOScale(_vignetteBaseScale, 0.3f);
+            _vignette.DOScale(_vignetteBaseScale, 0.3f).SetUpdate(true);
         }
 
         public void SetLastSelectedPaddle()
@@ -222,9 +231,9 @@ namespace UI.WeaponWheel
 
         public void SetCombatWeaponUI(bool show)
         {
-            _paddleArrowDownImages.ForEach(x => x.DOFade(show ? 1 : 0, 0.4f));
-            _weaponIconInGame.DOFade(show ? 1 : 0, 0.2f);
-            _cursor.DOFade(show ? 1 : 0, 0.2f);
+            _paddleArrowDownImages.ForEach(x => x.DOFade(show ? 1 : 0, 0.4f).SetUpdate(true));
+            _weaponIconInGame.DOFade(show ? 1 : 0, 0.2f).SetUpdate(true);
+            _cursor.DOFade(show ? 1 : 0, 0.2f).SetUpdate(true);
         }
         
         public void SetCooldownUI(float value)
@@ -234,11 +243,11 @@ namespace UI.WeaponWheel
 
             if (value is 0 or 1)
             {
-                _cooldown.DOFade(0, 0.5f);
+                _cooldown.DOFade(0, 0.5f).SetUpdate(true);
             }
             else
             {
-                _cooldown.DOFade(1, 0.2f);
+                _cooldown.DOFade(1, 0.2f).SetUpdate(true);
             }
         }
 
