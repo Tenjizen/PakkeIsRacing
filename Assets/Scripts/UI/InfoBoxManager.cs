@@ -146,6 +146,7 @@ namespace UI
 
             _isActive = true;
             Time.timeScale = _timeScale;
+	    Debug.Log(_timeScale);
 
             _buttonImage.sprite = _currentTuto.ButtonImage;
             _actionText.text = CharacterManager.Instance.Parameters.Language ? _currentTuto.ActionText_EN : _currentTuto.ActionText_FR;

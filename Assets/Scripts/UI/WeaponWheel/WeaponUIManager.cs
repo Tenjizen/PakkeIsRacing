@@ -87,10 +87,6 @@ namespace UI.WeaponWheel
                 _currentPressTime = 0;
                 return;
             }
-            else if(_isMenuOpen == false && Time.timeScale < 1)
-            {
-                Time.timeScale = 1;
-            }
 
             //menu is closed && open menu touch is pressed
             if (_inputManagement.Inputs.OpenWeaponMenu)
@@ -166,6 +162,7 @@ namespace UI.WeaponWheel
                 OnWheelOpened.Invoke();
                 return;
             }
+            Time.timeScale = 1;
             OnWheelClosed.Invoke();
         }
 
