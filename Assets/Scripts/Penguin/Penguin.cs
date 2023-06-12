@@ -30,7 +30,7 @@ public class Penguin : MonoBehaviour
     private float _timerRun;
     private float _randTimerForIdle;
     private float _randTimerForWalk;
-    private RaycastHit[] _hitBuffer = new RaycastHit[1];
+    private RaycastHit[] _hitBuffer = new RaycastHit[3];
 
     void Start()
     {
@@ -43,7 +43,7 @@ public class Penguin : MonoBehaviour
             return;
         }
         Vector3 splinePosition = _splinePath.GetPoint(_currentSplinePosition);
-        transform.position = new Vector3(splinePosition.x, splinePosition.y+1, splinePosition.z);
+        transform.position = new Vector3(splinePosition.x, splinePosition.y + 1, splinePosition.z);
     }
 
     void Update()
@@ -126,7 +126,16 @@ public class Penguin : MonoBehaviour
         int hitCount = Physics.RaycastNonAlloc(origin, direction, _hitBuffer, distance);
         if (hitCount > 0)
         {
-            position.y = Mathf.Lerp(t.position.y, _hitBuffer[0].point.y, 0.2f);
+            int temp = 0;
+            for (int i = 0; i < hitCount; i++)
+            {
+                if (_hitBuffer[temp].distance > _hitBuffer[i].distance)
+                {
+                    temp = i;
+                }
+            }
+            position.y = Mathf.Lerp(t.position.y, _hitBuffer[temp].point.y, 0.2f);
+
         }
         t.position = position;
 
