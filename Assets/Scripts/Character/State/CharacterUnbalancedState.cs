@@ -20,6 +20,7 @@ namespace Character.State
 
         private float _timerDebug = 0;
 
+        private int _signeBalance;
         #endregion
 
         #region Constructor
@@ -41,6 +42,8 @@ namespace Character.State
             _timerDebug = 0;
             CharacterManagerRef.BalanceGaugeManagerRef.ResetGauge();
             CharacterManagerRef.LerpBalanceTo0 = false;
+
+            _signeBalance = CharacterManagerRef.Balance > 0 ? 1 : -1;
 
             //values
             CanBeMoved = false;
@@ -87,7 +90,8 @@ namespace Character.State
                 {
                     _kayakController.CanReduceDrag = true;
                     CameraManagerRef.CanMoveCameraManually = true;
-                    CharacterManagerRef.SetBalanceValueToCurrentSide(0);
+                    ResetRotationBoat(_kayakController.transform, 2);
+                    //CharacterManagerRef.SetBalanceValueToCurrentSide(0);
                     CanCharacterMakeActions = true;
 
                     CharacterNavigationState characterNavigationState = new CharacterNavigationState();
@@ -119,7 +123,7 @@ namespace Character.State
 
 
 
-                MakeBoatRotationWithBalance(_kayakController.transform, 2);
+                MakeBoatRotationWithBalance(_kayakController.transform, 1);
 
                 if ((percentGauge * 100) + 2.5f < Mathf.Abs((angle / 90) * 100))
                 {
@@ -127,6 +131,9 @@ namespace Character.State
                     CharacterManagerRef.SwitchState(characterDeathState);
                 }
             }
+
+            CharacterManagerRef.Balance = 10 * _signeBalance;
+
         }
 
         public override void FixedUpdate(CharacterManager character)
@@ -159,13 +166,15 @@ namespace Character.State
 
             if (CharacterManagerRef.NumberButtonIsPressed >= CharacterManagerRef.Data.NumberPressButton && _timerUnbalanced <= Mathf.Abs(CharacterManagerRef.TimerUnbalanced))
             {
+                ResetRotationBoat(_kayakController.transform, 2);
+
                 _timerReturnNavigationState += Time.deltaTime;
 
-                if (_timerReturnNavigationState > 0.5f)
+                if (_timerReturnNavigationState > 0.5f && _kayakController.transform.eulerAngles.z < 0.5f)
                 {
                     _kayakController.CanReduceDrag = true;
                     CameraManagerRef.CanMoveCameraManually = true;
-                    CharacterManagerRef.SetBalanceValueToCurrentSide(0);
+                    //CharacterManagerRef.SetBalanceValueToCurrentSide(0);
                     CanCharacterMakeActions = true;
 
                     CharacterNavigationState characterNavigationState = new CharacterNavigationState();
@@ -189,6 +198,16 @@ namespace Character.State
                 CharacterManagerRef.NumberButtonIsPressed++;
                 CharacterManagerRef.BalanceGaugeManagerRef.MakeCursorFeedback();
             }
+        }
+
+        private void ResetRotationBoat(Transform kayakTransform, float multiplier)
+        {
+            CharacterManagerRef.Balance = 0;
+            Quaternion localRotation = kayakTransform.localRotation;
+            Vector3 boatRotation = localRotation.eulerAngles;
+            Quaternion targetBoatRotation = Quaternion.Euler(0, boatRotation.y, CharacterManagerRef.Balance * 3 * multiplier);
+            localRotation = Quaternion.Lerp(localRotation, targetBoatRotation, 0.025f);
+            kayakTransform.localRotation = localRotation;
         }
         #endregion
     }
