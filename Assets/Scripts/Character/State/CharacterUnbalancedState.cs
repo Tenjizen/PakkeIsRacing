@@ -38,10 +38,9 @@ namespace Character.State
 
         public override void EnterState(CharacterManager character)
         {
-            Debug.Log("unbalanced");
+            _timerDebug = 0;
             CharacterManagerRef.BalanceGaugeManagerRef.ResetGauge();
             CharacterManagerRef.LerpBalanceTo0 = false;
-            _timerDebug = 0;
 
             //values
             CanBeMoved = false;

@@ -119,11 +119,9 @@ namespace Character.Camera.State
 
                         //rotation
                         CamManager.CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, targetQuaternion, CamManager.Data.LerpLocalRotationWhenRotating * Time.deltaTime * 100);
-                        //CamManager.CinemachineCameraTarget.transform.localRotation = targetQuaternion;
                     }
                     else if (Mathf.Abs(rotationPaddleY) > rotationThreshold / 2)// if kayak is moving
                     {
-
                         //rotation
                         targetQuaternion = Quaternion.Euler(
                             new Vector3(CamManager.RigidbodyKayak.velocity.magnitude * 0.2f < CamManager.Data.NavigationRotation.x - CamManager.Data.ClampValueRotationX ?

@@ -53,20 +53,6 @@ namespace Character.Camera
 
         private void Awake()
         {
-            CinemachineCameraFollowCombat.transform.localPosition = Data.CombatPosition;
-
-            CinemachineCameraTarget.transform.localPosition = Data.NavigationPosition;
-            CinemachineCameraTarget.transform.localEulerAngles = Data.NavigationRotation;
-            VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = Data.NavigationCamDistance;
-
-            VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().ShoulderOffset = Data.NavigationCamShoulderOffset;
-
-
-            CinemachineTargetPitch = Data.NavigationRotation.x;
-            CinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-            CameraTargetBasePos = CinemachineCameraTarget.transform.localPosition;
-            CameraBaseFov = VirtualCameraFreeLook.m_Lens.FieldOfView;
-
             CameraStartGameState startGameState = new CameraStartGameState();
             CurrentStateBase = startGameState;
 
@@ -78,6 +64,8 @@ namespace Character.Camera
         {
             CharacterManager = CharacterManager.Instance;
             Input = CharacterManager.InputManagementProperty;
+
+           
 
             CurrentStateBase.Initialize();
             CurrentStateBase.EnterState(this);
@@ -235,5 +223,32 @@ namespace Character.Camera
             CinemachineTargetEulerAnglesToRotation(cameraTargetLocalPosition);
         }
         #endregion
+        public void InitializeCams()
+        {
+            Transform kayakTransform = CharacterManager.KayakControllerProperty.transform;
+            Transform stateDrivenCam = CameraAnimator.gameObject.transform;
+            Cinemachine3rdPersonFollow cinemachine3rdPerson = VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
+
+            stateDrivenCam.position = kayakTransform.position;
+            stateDrivenCam.eulerAngles = kayakTransform.eulerAngles;
+
+            CinemachineCameraFollowCombat.transform.localPosition = Data.CombatPosition;
+            CinemachineCameraTarget.transform.localPosition = Data.NavigationPosition; 
+
+            Vector3 targetAngles = CinemachineCameraTarget.transform.localEulerAngles;
+            targetAngles.x = Data.NavigationRotation.x;
+            targetAngles.y = Data.NavigationRotation.y + kayakTransform.eulerAngles.y;
+            targetAngles.z = Data.NavigationRotation.z;
+            CinemachineCameraTarget.transform.localEulerAngles = targetAngles;
+            
+            cinemachine3rdPerson.CameraDistance = Data.NavigationCamDistance;
+            cinemachine3rdPerson.ShoulderOffset = Data.NavigationCamShoulderOffset;
+
+            CinemachineTargetPitch = Data.NavigationRotation.x;
+            CinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
+            CameraTargetBasePos = CinemachineCameraTarget.transform.localPosition;
+            CameraBaseFov = VirtualCameraFreeLook.m_Lens.FieldOfView;
+
+        }
     }
 }

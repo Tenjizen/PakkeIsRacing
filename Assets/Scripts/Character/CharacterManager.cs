@@ -100,12 +100,8 @@ namespace Character
             Transform kayakTransform = KayakControllerProperty.transform;
             kayakTransform.eulerAngles = new Vector3(0, BaseOrientation, 0);
 
-            //manages cameras, Start camera
-            Transform stateDrivenCam = CameraManagerProperty.CameraAnimator.gameObject.transform;
-            stateDrivenCam.position = kayakTransform.position;
-            stateDrivenCam.eulerAngles = new Vector3(0, BaseOrientation, 0);
-            //Navigation camera
-            CameraManagerProperty.CinemachineCameraTarget.transform.eulerAngles = kayakTransform.eulerAngles;
+            CameraManagerProperty.InitializeCams();
+
         }
         private void Update()
         {
