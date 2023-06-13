@@ -5278,15 +5278,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2978053083437446368}
-  m_LocalRotation: {x: 0.053540315, y: -0.0000000037252903, z: -4.656613e-10, w: 0.99856573}
-  m_LocalPosition: {x: -4.86, y: 3.34, z: -2.71}
+  m_LocalRotation: {x: 0.05349342, y: 0.041787438, z: 0.002240526, w: 0.99769104}
+  m_LocalPosition: {x: -5, y: 4.1, z: -13.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 336320245044667687}
   m_Father: {fileID: 6442714203276166712}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 6.138, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 6.117, y: 4.824, z: 0.515}
 --- !u!114 &2091088283570573891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6347,6 +6347,7 @@ MonoBehaviour:
     AutoAim: 1
     InversedControls: 0
     Language: 1
+    SprintUnlock: 0
   <OptionMenuManager>k__BackingField: {fileID: 7770405408085932737}
   <ScriptDebug>k__BackingField: {fileID: 7657674392462614166}
   <HarpoonAnimator>k__BackingField: {fileID: 2084915637}
@@ -6354,6 +6355,7 @@ MonoBehaviour:
   <HarpoonMeshController>k__BackingField: {fileID: 7699899684140501931}
   <NetMeshController>k__BackingField: {fileID: 6768947641953917617}
   Data: {fileID: 11400000, guid: 9383b9325ce5e464e84beb6010a91e0a, type: 2}
+  BaseOrientation: 0
   LerpBalanceTo0: 1
   Balance: 0
   RespawnLastCheckpoint: 0
@@ -6372,6 +6374,7 @@ MonoBehaviour:
   InvincibilityTime: 0
   ProjectileIsInAir: 0
   IsGameLaunched: 0
+  SprintInProgress: 0
 --- !u!114 &7217796708653836311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6441,9 +6444,8 @@ MonoBehaviour:
   Data: {fileID: 11400000, guid: 798a3c696e9fbdd43990e5dc91f90e8b, type: 2}
   _currentLevelData:
     ExperienceNeededToComplete: 0
-    CombatExperienceGained: 0
-    NavigationExperienceGained: 0
   _currentLevel: 0
+  _currentSkillPoints: 0
   _currentExperience: 0
   _currentCombatExperience: 0
   _currentNavigationExperience: 0
