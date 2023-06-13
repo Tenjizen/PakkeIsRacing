@@ -67,8 +67,6 @@ namespace Character.Camera
             CameraTargetBasePos = CinemachineCameraTarget.transform.localPosition;
             CameraBaseFov = VirtualCameraFreeLook.m_Lens.FieldOfView;
 
-            //CameraNavigationState navigationState = new CameraNavigationState();
-            //CurrentStateBase = navigationState;
             CameraStartGameState startGameState = new CameraStartGameState();
             CurrentStateBase = startGameState;
 
@@ -89,7 +87,6 @@ namespace Character.Camera
         {
             CurrentStateBase.UpdateState(this);
             CurrentStateBase.ResetShoulderOffset();
-
             FieldOfView(VirtualCameraFreeLook);
         }
         private void FixedUpdate()
