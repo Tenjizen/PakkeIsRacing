@@ -11,6 +11,7 @@ namespace Character.State
     {
         #region Variables
         private const float DIVIDE_TIMER_PERCENT = 4;
+        private const float VALUE_BALANCE_REMOVE = 2;
 
         private KayakController _kayakController;
         private InputManagement _inputs;
@@ -149,7 +150,7 @@ namespace Character.State
         public override void ExitState(CharacterManager character)
         {
             CharacterManagerRef.InvincibilityTime = CharacterManagerRef.Data.InvincibleTimeAfterUnbalance;
-            
+
             CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeActive(false);
             CharacterManagerRef.BalanceGaugeManagerRef.ShowTrigger(false, false);
 
@@ -162,19 +163,20 @@ namespace Character.State
         #region Methods
         private void Timer()
         {
-            _timerUnbalanced += Time.deltaTime;
+            if (CharacterManagerRef.NumberButtonIsPressed < CharacterManagerRef.Data.NumberPressButton)
+                _timerUnbalanced += Time.deltaTime;
 
             if (CharacterManagerRef.NumberButtonIsPressed >= CharacterManagerRef.Data.NumberPressButton && _timerUnbalanced <= Mathf.Abs(CharacterManagerRef.TimerUnbalanced))
             {
+                _timerReturnNavigationState += Time.deltaTime;
                 ResetRotationBoat(_kayakController.transform, 2);
 
-                _timerReturnNavigationState += Time.deltaTime;
-
-                if (_timerReturnNavigationState > 0.5f && _kayakController.transform.eulerAngles.z < 0.5f)
+                if (_timerReturnNavigationState > 0.5f && _kayakController.transform.eulerAngles.z < 0 + VALUE_BALANCE_REMOVE ||
+                    _timerReturnNavigationState > 0.5f && _kayakController.transform.eulerAngles.z > 360 - VALUE_BALANCE_REMOVE)
                 {
                     _kayakController.CanReduceDrag = true;
                     CameraManagerRef.CanMoveCameraManually = true;
-                    //CharacterManagerRef.SetBalanceValueToCurrentSide(0);
+                    CharacterManagerRef.SetBalanceValueToCurrentSide(0);
                     CanCharacterMakeActions = true;
 
                     CharacterNavigationState characterNavigationState = new CharacterNavigationState();
