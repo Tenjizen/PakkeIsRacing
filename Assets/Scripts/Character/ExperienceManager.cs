@@ -17,10 +17,7 @@ namespace Character
 
         [Header("Levels"),ReadOnly, SerializeField] private Level _currentLevelData;
         [ReadOnly, SerializeField] private int _currentLevel;
-        [ReadOnly, SerializeField] private int _currentSkillPoints;
         [ReadOnly, SerializeField] private float _currentExperience;
-        [ReadOnly, SerializeField] private float _currentCombatExperience;
-        [ReadOnly, SerializeField] private float _currentNavigationExperience;
 
         [Header("Character Values multiplier")]
         //navigation
@@ -33,6 +30,8 @@ namespace Character
 
         [Header("Events")] 
         public List<UnityEvent> EventAtEachLevel = new List<UnityEvent>();
+
+        [ReadOnly] public int SkillPoints;
         
         private void Start()
         {
@@ -60,7 +59,7 @@ namespace Character
             _currentExperience -= _currentLevelData.ExperienceNeededToComplete;
 
             _currentLevel++;
-            _currentSkillPoints++;
+            SkillPoints++;
             _currentLevelData = Data.Levels[_currentLevel];
 
             //events

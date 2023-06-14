@@ -18,7 +18,7 @@ namespace UI.Menu
     {
         [SerializeField] private Color _navigationColor, _combatColor;
         [SerializeField] private List<SkillTreeLine> _navigationLines, _combatLines;
-        [SerializeField] private TMP_Text _titleText, _descriptionText;
+        [SerializeField] private TMP_Text _titleText, _descriptionText, _skillPointsText;
 
         private List<SkillTileUIObject> _objects = new List<SkillTileUIObject>();
 
@@ -65,8 +65,14 @@ namespace UI.Menu
                 return;
             }
 
+            SetSkillsPoints();
             SetLine(Length,VerticalIndex);
             SetTile();
+        }
+
+        private void SetSkillsPoints()
+        {
+            _skillPointsText.text = CharacterManager.Instance.ExperienceManagerProperty.SkillPoints.ToString();
         }
 
         #region Direction
