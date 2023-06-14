@@ -11,7 +11,7 @@ namespace Character.State
     {
         #region Variables
         private const float DIVIDE_TIMER_PERCENT = 4;
-        private const float VALUE_BALANCE_REMOVE = 2;
+        private const float VALUE_BALANCE_TO_NORMAL_STATE = 2;
 
         private KayakController _kayakController;
         private InputManagement _inputs;
@@ -124,7 +124,7 @@ namespace Character.State
 
 
 
-                MakeBoatRotationWithBalance(_kayakController.transform, 1);
+                MakeBoatRotationWithBalance(_kayakController.transform, 2);
 
                 if ((percentGauge * 100) + 2.5f < Mathf.Abs((angle / 90) * 100))
                 {
@@ -133,7 +133,8 @@ namespace Character.State
                 }
             }
 
-            CharacterManagerRef.Balance = 10 * _signeBalance;
+            if (CharacterManagerRef.NumberButtonIsPressed < CharacterManagerRef.Data.NumberPressButton)
+                CharacterManagerRef.Balance = 10 * _signeBalance;
 
         }
 
@@ -170,13 +171,12 @@ namespace Character.State
             {
                 _timerReturnNavigationState += Time.deltaTime;
                 ResetRotationBoat(_kayakController.transform, 2);
-
-                if (_timerReturnNavigationState > 0.5f && _kayakController.transform.eulerAngles.z < 0 + VALUE_BALANCE_REMOVE ||
-                    _timerReturnNavigationState > 0.5f && _kayakController.transform.eulerAngles.z > 360 - VALUE_BALANCE_REMOVE)
+                if (_timerReturnNavigationState > 0.5f && _kayakController.transform.eulerAngles.z < 0 + VALUE_BALANCE_TO_NORMAL_STATE ||
+                    _timerReturnNavigationState > 0.5f && _kayakController.transform.eulerAngles.z > 360 - VALUE_BALANCE_TO_NORMAL_STATE)
                 {
                     _kayakController.CanReduceDrag = true;
                     CameraManagerRef.CanMoveCameraManually = true;
-                    CharacterManagerRef.SetBalanceValueToCurrentSide(0);
+                    //CharacterManagerRef.SetBalanceValueToCurrentSide(0);
                     CanCharacterMakeActions = true;
 
                     CharacterNavigationState characterNavigationState = new CharacterNavigationState();
@@ -208,7 +208,7 @@ namespace Character.State
             Quaternion localRotation = kayakTransform.localRotation;
             Vector3 boatRotation = localRotation.eulerAngles;
             Quaternion targetBoatRotation = Quaternion.Euler(0, boatRotation.y, CharacterManagerRef.Balance * 3 * multiplier);
-            localRotation = Quaternion.Lerp(localRotation, targetBoatRotation, 0.025f);
+            localRotation = Quaternion.Lerp(localRotation, targetBoatRotation, Time.deltaTime * 0.5f);
             kayakTransform.localRotation = localRotation;
         }
         #endregion

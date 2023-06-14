@@ -70,8 +70,7 @@ namespace Character.State
             Quaternion localRotation = kayakTransform.localRotation;
             Vector3 boatRotation = localRotation.eulerAngles;
             Quaternion targetBoatRotation = Quaternion.Euler(boatRotation.x,boatRotation.y, CharacterManagerRef.Balance * 3 * multiplier);
-            
-            localRotation = Quaternion.Lerp(localRotation, targetBoatRotation, 0.025f);
+            localRotation = Quaternion.Lerp(localRotation, targetBoatRotation, Time.deltaTime * 0.5f);
             kayakTransform.localRotation = localRotation;
         }
 
