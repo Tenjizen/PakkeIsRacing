@@ -65,7 +65,7 @@ namespace Character.Camera
             CharacterManager = CharacterManager.Instance;
             Input = CharacterManager.InputManagementProperty;
 
-           
+
 
             CurrentStateBase.Initialize();
             CurrentStateBase.EnterState(this);
@@ -142,6 +142,11 @@ namespace Character.Camera
             VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = Data.NavigationCamDistance;
             StartDeath = false;
         }
+        public void SmoothResetDistanceValue()
+        {
+            Cinemachine3rdPersonFollow camFollow = VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
+            camFollow.CameraDistance = Mathf.Lerp(camFollow.CameraDistance, Data.NavigationCamDistance, Time.deltaTime * 2);
+        }
 
 
         public void LastInputValue()
@@ -199,9 +204,20 @@ namespace Character.Camera
         public void ShakeCameraNavigating(float intensity)
         {
             CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = VirtualCameraFreeLook.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-            cinemachineBasicMultiChannelPerlin.m_NoiseProfile = MyNoiseProfileWhenNavigating;
+            if (cinemachineBasicMultiChannelPerlin.m_NoiseProfile != MyNoiseProfileWhenNavigating)
+            {
+                cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
+                cinemachineBasicMultiChannelPerlin.m_NoiseProfile = MyNoiseProfileWhenNavigating;
+            }
+
             if (cinemachineBasicMultiChannelPerlin.m_AmplitudeGain < intensity)
+            {
                 cinemachineBasicMultiChannelPerlin.m_AmplitudeGain += Time.deltaTime;
+            }
+            else
+            {
+                cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
+            }
         }
 
         public void ResetCameraLocalPos()
@@ -233,14 +249,14 @@ namespace Character.Camera
             stateDrivenCam.eulerAngles = kayakTransform.eulerAngles;
 
             CinemachineCameraFollowCombat.transform.localPosition = Data.CombatPosition;
-            CinemachineCameraTarget.transform.localPosition = Data.NavigationPosition; 
+            CinemachineCameraTarget.transform.localPosition = Data.NavigationPosition;
 
             Vector3 targetAngles = CinemachineCameraTarget.transform.localEulerAngles;
             targetAngles.x = Data.NavigationRotation.x;
             targetAngles.y = Data.NavigationRotation.y + kayakTransform.eulerAngles.y;
             targetAngles.z = Data.NavigationRotation.z;
             CinemachineCameraTarget.transform.localEulerAngles = targetAngles;
-            
+
             cinemachine3rdPerson.CameraDistance = Data.NavigationCamDistance;
             cinemachine3rdPerson.ShoulderOffset = Data.NavigationCamShoulderOffset;
 

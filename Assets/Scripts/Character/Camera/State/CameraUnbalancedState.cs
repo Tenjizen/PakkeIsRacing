@@ -13,6 +13,7 @@ namespace Character.Camera.State
         {
             CamManager.MakeSmoothCameraBehindBoat();
             CamManager.MakeTargetFollowRotationWithKayak();
+            CamManager.SmoothResetDistanceValue();
             if (Mathf.Abs(CamManager.CharacterManager.Balance) < CamManager.CharacterManager.Data.BalanceDeathLimit)
             {
                 RotateCameraInZ();

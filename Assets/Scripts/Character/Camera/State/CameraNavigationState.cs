@@ -39,7 +39,7 @@ namespace Character.Camera.State
             {
                 CamManager.ShakeCameraWarning(CamManager.Data.AmplitudeShakeWhenWaterWave);
             }
-            else if (CamManager.WaterFlow)
+            else if (CamManager.WaterFlow == true)
             {
                 CamManager.ShakeCameraWarning(CamManager.Data.AmplitudeShakeWhenWaterFlow);
             }
