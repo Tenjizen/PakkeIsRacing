@@ -258,6 +258,11 @@ namespace Enemies.Seal
         public override void Hit(Projectile projectile, GameObject owner, int damage)
         {
             base.Hit(projectile, owner, damage);
+            
+            if (projectile.Data.Type != WeaponThatCanHitEnemy || CurrentLife <= 0)
+            {
+                return;
+            }
 
             HitParticles.Play();
         }

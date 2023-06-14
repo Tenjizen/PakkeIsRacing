@@ -127,6 +127,11 @@ namespace Enemies.Shark
         {
             base.Hit(projectile,owner, damage);
 
+            if (projectile.Data.Type != WeaponThatCanHitEnemy || CurrentLife <= 0)
+            {
+                return;
+            }
+            
             if (HitParticles != null)
             {
                 HitParticles.transform.parent = null;

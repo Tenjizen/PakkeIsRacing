@@ -41,9 +41,8 @@ namespace Enemies
 
         public virtual void Hit(Projectile projectile, GameObject owner, int damage)
         {
-            if (projectile.Data.Type != WeaponThatCanHitEnemy)
+            if (projectile.Data.Type != WeaponThatCanHitEnemy || CurrentLife <= 0)
             {
-                Debug.Log($"{projectile.Data.Type} can't hit {gameObject.name}");
                 return;
             }
             
