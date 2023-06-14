@@ -11,9 +11,11 @@ namespace Character.Data
     {
         [field: SerializeField, Header("Navigation")]
         public Vector3 NavigationPosition { get; private set; }
+        public float NavigationPositionYMin { get; private set; }
 
         [field: SerializeField]
         public float NavigationCamDistance { get; private set; }
+
 
         [field: SerializeField]
         public Vector3 NavigationCamShoulderOffset { get; private set; }
@@ -95,6 +97,9 @@ namespace Character.Data
         public float MultiplierCameraGettingCloser { get; private set; } = 0.2f;
         [field: SerializeField]
         public float LerpCameraGettingCloser { get; private set; } = 0.1f;
+
+        [field: SerializeField, Tooltip("Multiplier for the distance when you rotate freely the camera")]
+        public float MultiplierFreeCamDistance { get; private set; } = 0.1f;
 
         [field: SerializeField, Header("Lerp"), Range(0, 0.1f), Tooltip("The lerp value applied to the field of view of camera depending on the speed of the player")]
         public float LerpFOV { get; private set; } = .01f;

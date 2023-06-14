@@ -23,13 +23,13 @@ namespace Character.Camera.State
         }
         public override void UpdateState(CameraManager camera)
         {
-            camera.CameraDistance(camera.VirtualCameraFreeLook);
             if (Mathf.Abs(CamManager.RotationZ) > 0)
             {
                 CamManager.SmoothResetRotateZ();
             }
 
-            MoveCamera();
+
+            MoveCamera(camera);
 
             camera.MakeTargetFollowRotationWithKayak();
 
@@ -72,7 +72,8 @@ namespace Character.Camera.State
             if (rotateInput && CamManager.CanMoveCameraManually /*&& rotateCamClick*/)
             {
                 _startMoving = false;
-                //ManageFreeCameraMove(ref _timerCameraReturnBehindBoat, CameraMode.Navigation);
+                camera.MoveTargetInFreeLook();
+                camera.CameraDistanceFreeLook(camera.VirtualCameraFreeLook);
             }
 
             //manage rotate to stay behind boat
@@ -80,6 +81,8 @@ namespace Character.Camera.State
                      (Mathf.Abs(CamManager.CharacterManager.CurrentStateBaseProperty.RotationStaticForceY) > minimumVelocityToReplaceCamera) && _timerCameraReturnBehindBoat > CamManager.Data.TimerCameraReturnBehindBoat ||
                     _startMoving == true && _timerCameraReturnBehindBoat > CamManager.Data.TimerCameraReturnBehindBoat)
             {
+                camera.CameraDistance(camera.VirtualCameraFreeLook);
+                camera.ResetTargetPos();
                 _startMoving = true;
                 #region clavier souris
                 //avoid last input to be 0
@@ -168,7 +171,7 @@ namespace Character.Camera.State
         {
 
         }
-        private void MoveCamera()
+        private void MoveCamera(CameraManager camera)
         {
             //rotate freely with inputs
             bool rotateInput = Mathf.Abs(CamManager.Input.Inputs.RotateCamera.x) + Mathf.Abs(CamManager.Input.Inputs.RotateCamera.y) >= CamManager.Input.Inputs.Deadzone; //0.5f;

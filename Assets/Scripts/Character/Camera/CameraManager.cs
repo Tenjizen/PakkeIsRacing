@@ -108,6 +108,38 @@ namespace Character.Camera
             var Dist = virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance;
             virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = Mathf.Lerp(Dist, Data.NavigationCamDistance - (velocityXZ * Data.MultiplierCameraGettingCloser), Data.LerpCameraGettingCloser);
         }
+        public void CameraDistanceFreeLook(CinemachineVirtualCamera virtualCamera)
+        {
+            var Dist = virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance;
+
+            Dist = Mathf.Lerp(Dist,
+                Data.NavigationCamDistance - ((((Data.BottomClamp + Data.TopClamp) / 2) - CinemachineTargetPitch) * Data.MultiplierFreeCamDistance),
+                Data.LerpCameraGettingCloser);
+
+            virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = Mathf.Clamp(Dist,
+                Data.NavigationCamDistance - Data.NavigationCamDistance + 3,
+                Data.NavigationCamDistance + Data.NavigationCamDistance - 3);
+        }
+
+        public void MoveTargetInFreeLook()
+        {
+            var targetPos = CinemachineCameraTarget.transform.position;
+
+            if (CinemachineTargetPitch < ((Data.BottomClamp + Data.TopClamp) / 3))
+            {
+                targetPos.y = Mathf.Lerp(targetPos.y, (Data.NavigationPosition.y - Data.NavigationPositionYMin) - (((Data.BottomClamp + Data.TopClamp) / 2) - CinemachineTargetPitch) / ((Data.BottomClamp + Data.TopClamp) / 2), Time.deltaTime * 4);
+                targetPos.y = Mathf.Clamp(targetPos.y, Data.NavigationPositionYMin, Data.NavigationPosition.y);
+            }
+            CinemachineCameraTarget.transform.position = targetPos;
+        }
+        public void ResetTargetPos()
+        {
+            var targetPos = CinemachineCameraTarget.transform.position;
+
+            targetPos.y = Mathf.Lerp(targetPos.y, Data.NavigationPosition.y, Time.deltaTime * 2);
+
+            CinemachineCameraTarget.transform.position = targetPos;
+        }
 
         #region Methods
         public void ApplyRotationCamera()
