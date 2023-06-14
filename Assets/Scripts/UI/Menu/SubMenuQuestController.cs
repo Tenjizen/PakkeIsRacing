@@ -92,6 +92,7 @@ namespace UI.Menu
                     ? "No quest available for the moment"
                     : "Pas de quête pour le moment";
                 _questDescriptionText.text = String.Empty;
+                _isDoneImage.gameObject.SetActive(false);
                 return;
             }
 
