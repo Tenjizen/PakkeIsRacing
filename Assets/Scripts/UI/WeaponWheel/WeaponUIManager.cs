@@ -8,7 +8,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI.WeaponWheel
@@ -160,6 +159,10 @@ namespace UI.WeaponWheel
             {
                 VignetteZoom();
                 OnWheelOpened.Invoke();
+
+                Vector3 rotation = _cursorPivot.rotation.eulerAngles;
+                _cursorPivot.rotation = Quaternion.Euler(new Vector3(rotation.x, rotation.y, 0));
+                
                 return;
             }
             Time.timeScale = 1;

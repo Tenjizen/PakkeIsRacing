@@ -116,7 +116,7 @@ namespace UI.WeaponWheel
             _animator.SetBool("Hover",false);
 
             _weaponSelectedBackground.DOKill();
-            _weaponSelectedBackground.DOFade(0, 0.1f);
+            _weaponSelectedBackground.DOFade(0, 0.1f).SetUpdate(true);
         }
 
         public void Select(Image weaponIcon)
