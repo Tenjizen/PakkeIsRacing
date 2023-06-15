@@ -34,6 +34,7 @@ namespace GPEs.WaterFlowGPE
 
         [Header("Particles"), SerializeField] 
         private List<ParticleSystem> _particlesList;
+        [SerializeField] private List<Transform> _particlesTransformsList;
 
         [SerializeField, Tooltip("One of the particles will play at a random time between those two values")]
         private Vector2 _randomPlayOfParticleTime;
@@ -48,6 +49,11 @@ namespace GPEs.WaterFlowGPE
         private void Start()
         {
             _playParticleTime = UnityEngine.Random.Range(_randomPlayOfParticleTime.x, _randomPlayOfParticleTime.y);
+
+            for (int i = 0; i < _particlesTransformsList.Count; i++)
+            {
+                Instantiate(_particlesList[i], _particlesTransformsList[i]);
+            }
         }
 
         private void Update()
