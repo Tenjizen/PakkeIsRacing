@@ -49,6 +49,8 @@ namespace Kayak.Data
         public float PaddleRotationDeceleration;
         [Range(0,200), Tooltip("The raw front force applied to the kayak when paddling once")] 
         public float PaddleForce;
+        [Range(0, 4), Tooltip("Multiply paddle force for the sprint")] 
+        public float SprintMultiplierPaddleForce;
         [Range(0,30), Tooltip("The number of times the kayak will \"paddle\" when pressing the input once")] 
         public int NumberOfForceAppliance;
         [Range(0,0.2f), Tooltip("The time between each of those paddling, the lower it is the seamless the kayak paddling is")] 
