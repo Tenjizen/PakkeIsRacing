@@ -81,8 +81,8 @@ namespace Character.State
 
         public override void UpdateState(CharacterManager character)
         {
+            _kayakController.Rigidbody.velocity = Vector3.zero;
             Timer();
-
             #region Debug timer
             _timerDebug += Time.deltaTime;
             if (_timerDebug > Mathf.Abs(CharacterManagerRef.TimerUnbalanced) + 10)
@@ -124,7 +124,7 @@ namespace Character.State
 
 
 
-                MakeBoatRotationWithBalance(_kayakController.transform, 2);
+                MakeBoatRotationWithBalance(_kayakController.transform, 1);
 
                 if ((percentGauge * 100) + 2.5f < Mathf.Abs((angle / 90) * 100))
                 {

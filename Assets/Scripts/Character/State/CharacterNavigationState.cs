@@ -348,10 +348,12 @@ namespace Character.State
                 _timerLastInputTrigger < _kayakValues.TimerMaxForSprint)
             {
                 CharacterManagerRef.SprintInProgress = true;
-            }
+                CharacterManagerRef.OnEnterSprint.Invoke();
+    }
             else
             {
                 CharacterManagerRef.SprintInProgress = false;
+                CharacterManagerRef.OnStopSprint.Invoke();
             }
 
             _timerLastInputTrigger = 0;

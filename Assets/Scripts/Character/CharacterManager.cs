@@ -68,6 +68,8 @@ namespace Character
 
         [Header("Events")] public UnityEvent StartGame;
         public UnityEvent OnPaddle;
+        public UnityEvent OnEnterSprint;
+        public UnityEvent OnStopSprint;
         
         [HideInInspector] public float WeaponCooldown;
         [HideInInspector] public float WeaponCooldownBase;
