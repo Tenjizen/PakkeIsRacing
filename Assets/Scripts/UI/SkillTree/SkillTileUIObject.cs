@@ -32,15 +32,29 @@ namespace UI.SkillTree
             OverlayImage.DOFade(0f, 0f).SetUpdate(true);
 
             SetLock(false);
+            _lockIcon.DOComplete();
+            
             _activatedIcon.gameObject.SetActive(false);
         }
 
-        private void SetLock(bool isLock)
+        public void SetLock(bool isUnlock)
         {
-            _isUnlocked = _unlockAtStart || isLock;
-            
-            _lockIcon.gameObject.SetActive(_isUnlocked == false);
+            _isUnlocked = _unlockAtStart || isUnlock;
+
+            _lockIcon.DOFade(_isUnlocked ? 0 : 1, 0.5f);
             _unlockIcon.gameObject.SetActive(_isUnlocked);
+        }
+
+        public void SetActivated(bool isActivated)
+        {
+            _isActivated = isActivated;
+            _unlockIcon.gameObject.SetActive(_isActivated == false);
+
+            _activatedIcon.gameObject.SetActive(_isActivated);
+            _activatedIcon.gameObject.transform.DOComplete();
+            _activatedIcon.gameObject.transform.DOPunchScale(Vector3.one*0.1f, 0.2f);
+
+            //capacity
         }
 
         public void SetSkillTile(Color color)

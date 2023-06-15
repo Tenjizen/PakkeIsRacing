@@ -21,6 +21,7 @@ namespace UI.Menu
         [SerializeField] private TMP_Text _titleText, _descriptionText, _skillPointsText;
 
         private List<SkillTileUIObject> _objects = new List<SkillTileUIObject>();
+        private SkillTileUIObject _currentTile;
 
         private void Awake()
         {
@@ -38,6 +39,9 @@ namespace UI.Menu
                     _objects.Add(skillObject);
                 }
             }
+
+            _currentTile = _navigationLines[0].Tiles[0];
+            _currentTile.OnActivated.AddListener(ActivateSkill);
         }
 
         private void SetColors()
@@ -145,16 +149,40 @@ namespace UI.Menu
 
             _objects.ForEach(x => x.Set(false));
 
-            SkillTileUIObject skillTile = line[IsLeftSide(Length) ? HorizontalIndex : Math.Clamp(HorizontalIndex-1,0,100) / 2 ];
-            skillTile.Set(true);
+            _currentTile.OnActivated.RemoveListener(ActivateSkill);
+            _currentTile = line[IsLeftSide(Length) ? HorizontalIndex : Math.Clamp(HorizontalIndex-1,0,100) / 2 ];
+            _currentTile.Set(true);
+            _currentTile.OnActivated.AddListener(ActivateSkill);
+
 
             if (_titleText == null || _descriptionText == null)
             {
                 return;
             }
 
-            _titleText.text = skillTile == null ? String.Empty : skillTile.GetTitle();
-            _descriptionText.text = skillTile == null ? String.Empty : skillTile.GetDescription();
+            _titleText.text = _currentTile == null ? String.Empty : _currentTile.GetTitle();
+            _descriptionText.text = _currentTile == null ? String.Empty : _currentTile.GetDescription();
+        }
+
+        private void ActivateSkill()
+        {
+            if (CharacterManager.Instance.ExperienceManagerProperty.SkillPoints <= 0)
+            {
+                return;
+            }
+            
+            _currentTile.SetActivated(true);
+            CharacterManager.Instance.ExperienceManagerProperty.SkillPoints--;
+            SetSkillsPoints();
+
+            bool isNavigation = IsLeftSide(Length);
+            List<SkillTreeLine> skillTree = isNavigation ? _navigationLines : _combatLines;
+            int index = VerticalIndex + 1 < skillTree.Count ? VerticalIndex + 1 : -1;
+            if (index == -1)
+            {
+                return;
+            }
+            skillTree[index].Tiles.ForEach(x => x.SetLock(true));
         }
     }
 }
