@@ -37,13 +37,13 @@ namespace Character.Camera.State
         private void Isdead()
         {
 
-            CamManager.VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance += CamManager.Data.ValueAddForDistanceWhenDeath * Time.deltaTime;
+            CamManager.VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance += CamManager.Data.SpeedForDistanceWhenDeath * Time.deltaTime;
 
             if (CamManager.VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance > CamManager.Data.MaxValueDistanceToStartDeath)
             {
                 CamManager.StartDeath = true;
             }
-            CamManager.CameraAngleOverride += CamManager.Data.ValueAddForTopDownWhenDeath * Time.deltaTime;
+            CamManager.CameraAngleOverride += CamManager.Data.SpeedForTopDownWhenDeath * Time.deltaTime;
         }
 
     }

@@ -46,11 +46,11 @@ namespace Character.Camera.State
         {
             if (CamManager.CharacterManager.Balance > 0)
             {
-                CamManager.RotationZ = Mathf.Lerp(CamManager.RotationZ, CamManager.CharacterManager.Balance + 10, 0.01f);
+                CamManager.RotationZ = Mathf.Lerp(CamManager.RotationZ, CamManager.CharacterManager.Balance + 10, CamManager.Data.BalanceRotationZ * Time.deltaTime * 100);
             }
             else if (CamManager.CharacterManager.Balance < 0)
             {
-                CamManager.RotationZ = Mathf.Lerp(CamManager.RotationZ, CamManager.CharacterManager.Balance - 10, 0.01f);
+                CamManager.RotationZ = Mathf.Lerp(CamManager.RotationZ, CamManager.CharacterManager.Balance - 10, CamManager.Data.BalanceRotationZ * Time.deltaTime * 100);
             }
         }
     }

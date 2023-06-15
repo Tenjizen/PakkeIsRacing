@@ -8,7 +8,7 @@ namespace Character.Camera.State
         public override void EnterState(CameraManager camera)
         {
             CamManager.ShakeCameraWarning(0);
-            //CamManager.VirtualCameraCombat.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = CamManager.Data.CameraDistanceRespawn;
+            CamManager.VirtualCameraCombat.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = CamManager.Data.CameraDistanceRespawn;
             CamManager.CameraAngleOverride = CamManager.Data.CameraAngleTopDownRespawn;
             ResetCameraBehindBoat();
         }
@@ -53,16 +53,16 @@ namespace Character.Camera.State
 
         private void Respawn()
         {
-            if (CamManager.VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance >= CamManager.Data.NavigationCamDistance)
-                CamManager.VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance -= Time.deltaTime * CamManager.Data.MultiplyTimeForDistanceWhenRespawn /* CameraManagerRef.ValueRemoveForDistanceWhenRespawn*/;
+            if (CamManager.VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance >= CamManager.Data.BaseDistance)
+                CamManager.VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance -= Time.deltaTime * CamManager.Data.SpeedRemoveDistanceWhenRespawn;
 
-            if (CamManager.VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance <= CamManager.Data.NavigationCamDistance + 2
+            if (CamManager.VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance <= CamManager.Data.BaseDistance + 2
                      && CharacterManager.Instance.SednaManagerProperty.SednaIsMoving == false)
             {
                 CharacterManager.Instance.SednaManagerProperty.SednaRespawn();
             }
 
-            if (CamManager.VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance <= CamManager.Data.NavigationCamDistance && CamManager.CameraAngleOverride <= 0)
+            if (CamManager.VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance <= CamManager.Data.BaseDistance && CamManager.CameraAngleOverride <= 0)
             {
                 CharacterManager.Instance.CurrentStateBaseProperty.IsDead = false;
 
@@ -73,7 +73,7 @@ namespace Character.Camera.State
             }
 
             if (CamManager.CameraAngleOverride > 0)
-                CamManager.CameraAngleOverride -= Time.deltaTime * CamManager.Data.MultiplyTimeForTopDownWhenRespawn;
+                CamManager.CameraAngleOverride -= Time.deltaTime * CamManager.Data.SpeedRemoveTopDownWhenRespawn;
         }
     }
 }

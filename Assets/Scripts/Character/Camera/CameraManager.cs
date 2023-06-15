@@ -106,19 +106,19 @@ namespace Character.Camera
             float velocityXZ = Mathf.Abs(RigidbodyKayak.velocity.x) + Mathf.Abs(RigidbodyKayak.velocity.z);
 
             var Dist = virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance;
-            virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = Mathf.Lerp(Dist, Data.NavigationCamDistance - (velocityXZ * Data.MultiplierCameraGettingCloser), Data.LerpCameraGettingCloser);
+            virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = Mathf.Lerp(Dist, Data.BaseDistance - (velocityXZ * Data.MultiplierCameraGettingCloser), Data.LerpCameraGettingCloser);
         }
         public void CameraDistanceFreeLook(CinemachineVirtualCamera virtualCamera)
         {
             var Dist = virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance;
 
             Dist = Mathf.Lerp(Dist,
-                Data.NavigationCamDistance - ((((Data.BottomClamp + Data.TopClamp) / 2) - CinemachineTargetPitch) * Data.MultiplierFreeCamDistance),
+                Data.BaseDistance - ((((Data.BottomClamp + Data.TopClamp) / 2) - CinemachineTargetPitch) * Data.MultiplierFreeCamDistance),
                 Data.LerpCameraGettingCloser);
 
             virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = Mathf.Clamp(Dist,
-                Data.NavigationCamDistance - Data.NavigationCamDistance + 3,
-                Data.NavigationCamDistance + Data.NavigationCamDistance - 3);
+                Data.BaseDistance - Data.BaseDistance + 3,
+                Data.BaseDistance + Data.BaseDistance - 3);
         }
 
         public void MoveTargetInFreeLook()
@@ -127,8 +127,8 @@ namespace Character.Camera
 
             if (CinemachineTargetPitch < ((Data.BottomClamp + Data.TopClamp) / 3))
             {
-                targetPos.y = Mathf.Lerp(targetPos.y, (Data.NavigationPosition.y - Data.NavigationPositionYMin) - (((Data.BottomClamp + Data.TopClamp) / 2) - CinemachineTargetPitch) / ((Data.BottomClamp + Data.TopClamp) / 2), Time.deltaTime * 4);
-                targetPos.y = Mathf.Clamp(targetPos.y, Data.NavigationPositionYMin, Data.NavigationPosition.y);
+                targetPos.y = Mathf.Lerp(targetPos.y, (Data.BasePosition.y - Data.NavigationPositionYMin) - (((Data.BottomClamp + Data.TopClamp) / 2) - CinemachineTargetPitch) / ((Data.BottomClamp + Data.TopClamp) / 2), Time.deltaTime * 4);
+                targetPos.y = Mathf.Clamp(targetPos.y, Data.NavigationPositionYMin, Data.BasePosition.y);
             }
             CinemachineCameraTarget.transform.position = targetPos;
         }
@@ -136,7 +136,7 @@ namespace Character.Camera
         {
             var targetPos = CinemachineCameraTarget.transform.position;
 
-            targetPos.y = Mathf.Lerp(targetPos.y, Data.NavigationPosition.y, Time.deltaTime * 2);
+            targetPos.y = Mathf.Lerp(targetPos.y, Data.BasePosition.y, Time.deltaTime * 2);
 
             CinemachineCameraTarget.transform.position = targetPos;
         }
@@ -171,13 +171,13 @@ namespace Character.Camera
 
         public void ResetNavigationValue()
         {
-            VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = Data.NavigationCamDistance;
+            VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = Data.BaseDistance;
             StartDeath = false;
         }
         public void SmoothResetDistanceValue()
         {
             Cinemachine3rdPersonFollow camFollow = VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
-            camFollow.CameraDistance = Mathf.Lerp(camFollow.CameraDistance, Data.NavigationCamDistance, Time.deltaTime * 2);
+            camFollow.CameraDistance = Mathf.Lerp(camFollow.CameraDistance, Data.BaseDistance, Time.deltaTime * 2);
         }
 
 
@@ -186,8 +186,8 @@ namespace Character.Camera
             //last input value
             LastInputX = CurrentStateBase.ClampAngle(LastInputX, -5.0f, 5.0f);
             LastInputY = CurrentStateBase.ClampAngle(LastInputY, -1.0f, 1.0f);
-            LastInputX = Mathf.Lerp(LastInputX, 0, Data.LerpTimeX);
-            LastInputY = Mathf.Lerp(LastInputY, 0, Data.LerpTimeY);
+            LastInputX = Mathf.Lerp(LastInputX, 0, Data.LerpTimeLastInputX);
+            LastInputY = Mathf.Lerp(LastInputY, 0, Data.LerpTimeLastInputY);
 
             //apply value to camera
             CinemachineTargetYaw += LastInputX;
@@ -207,8 +207,8 @@ namespace Character.Camera
             Quaternion localRotation = CinemachineCameraTarget.transform.localRotation;
             Vector3 cameraTargetLocalPosition = CinemachineCameraTarget.transform.localPosition;
 
-            CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, Quaternion.Euler(new Vector3(Data.NavigationRotation.x, Data.NavigationRotation.y, localRotation.z)), Data.LerpLocalRotationNotMoving);
-            cameraTargetLocalPosition.x = Mathf.Lerp(cameraTargetLocalPosition.x, 0, Data.LerpLocalPositionNotMoving);
+            CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, Quaternion.Euler(new Vector3(Data.BaseRotation.x, Data.BaseRotation.y, localRotation.z)), Data.LerpRotationNotMoving);
+            cameraTargetLocalPosition.x = Mathf.Lerp(cameraTargetLocalPosition.x, 0, Data.LerpPositionNotMoving);
             CinemachineTargetEulerAnglesToRotation(cameraTargetLocalPosition);
         }
 
@@ -266,8 +266,8 @@ namespace Character.Camera
             Quaternion localRotation = CinemachineCameraTarget.transform.localRotation;
             Vector3 cameraTargetLocalPosition = CinemachineCameraTarget.transform.localPosition;
 
-            CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, Quaternion.Euler(new Vector3(Data.NavigationRotation.x, 0, localRotation.z)), 1f);
-            cameraTargetLocalPosition.x = Mathf.Lerp(cameraTargetLocalPosition.x, 0, Data.LerpLocalPositionNotMoving);
+            CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, Quaternion.Euler(new Vector3(Data.BaseRotation.x, 0, localRotation.z)), 1f);
+            cameraTargetLocalPosition.x = Mathf.Lerp(cameraTargetLocalPosition.x, 0, Data.LerpPositionNotMoving);
             CinemachineTargetEulerAnglesToRotation(cameraTargetLocalPosition);
         }
         #endregion
@@ -281,18 +281,18 @@ namespace Character.Camera
             stateDrivenCam.eulerAngles = kayakTransform.eulerAngles;
 
             CinemachineCameraFollowCombat.transform.localPosition = Data.CombatPosition;
-            CinemachineCameraTarget.transform.localPosition = Data.NavigationPosition;
+            CinemachineCameraTarget.transform.localPosition = Data.BasePosition;
 
             Vector3 targetAngles = CinemachineCameraTarget.transform.localEulerAngles;
-            targetAngles.x = Data.NavigationRotation.x;
-            targetAngles.y = Data.NavigationRotation.y + kayakTransform.eulerAngles.y;
-            targetAngles.z = Data.NavigationRotation.z;
+            targetAngles.x = Data.BaseRotation.x;
+            targetAngles.y = Data.BaseRotation.y + kayakTransform.eulerAngles.y;
+            targetAngles.z = Data.BaseRotation.z;
             CinemachineCameraTarget.transform.localEulerAngles = targetAngles;
 
-            cinemachine3rdPerson.CameraDistance = Data.NavigationCamDistance;
-            cinemachine3rdPerson.ShoulderOffset = Data.NavigationCamShoulderOffset;
+            cinemachine3rdPerson.CameraDistance = Data.BaseDistance;
+            cinemachine3rdPerson.ShoulderOffset = Vector3.zero;
 
-            CinemachineTargetPitch = Data.NavigationRotation.x;
+            CinemachineTargetPitch = Data.BaseRotation.x;
             CinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             CameraTargetBasePos = CinemachineCameraTarget.transform.localPosition;
             CameraBaseFov = VirtualCameraFreeLook.m_Lens.FieldOfView;
