@@ -244,14 +244,14 @@ namespace UI.Dialog
             {
                 DialogManager.Instance.DialogQueue.Dequeue();
             }
+            
             if (DialogManager.Instance.DialogQueue.Count > 0)
             {
                 DialogManager.Instance.DialogQueue.Peek().LaunchDialog();
             }
             else
             {
-                Transform dialog = DialogManager.Instance.DialogUIGameObject.transform;
-                StartCoroutine(DeactivateDialogObject(0.25f));
+                DialogManager.Instance.ToggleDialog(false);
             }
         }
 
@@ -261,12 +261,6 @@ namespace UI.Dialog
             {
                 EndDialog();
             }
-        }
-
-        private IEnumerator DeactivateDialogObject(float time)
-        {
-            yield return new WaitForSeconds(time);
-            DialogManager.Instance.ToggleDialog(false);
         }
     }
 }
