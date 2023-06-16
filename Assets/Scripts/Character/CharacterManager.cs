@@ -102,7 +102,7 @@ namespace Character
             Transform kayakTransform = KayakControllerProperty.transform;
             kayakTransform.eulerAngles = new Vector3(0, BaseOrientation, 0);
 
-            CameraManagerProperty.InitializeCams();
+            CameraManagerProperty.InitializeCams(kayakTransform);
 
         }
         private void Update()

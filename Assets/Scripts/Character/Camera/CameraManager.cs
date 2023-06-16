@@ -271,21 +271,21 @@ namespace Character.Camera
             CinemachineTargetEulerAnglesToRotation(cameraTargetLocalPosition);
         }
         #endregion
-        public void InitializeCams()
+        public void InitializeCams(Transform transform)
         {
-            Transform kayakTransform = CharacterManager.KayakControllerProperty.transform;
+            //Transform kayakTransform = CharacterManager.KayakControllerProperty.transform;
             Transform stateDrivenCam = CameraAnimator.gameObject.transform;
             Cinemachine3rdPersonFollow cinemachine3rdPerson = VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
 
-            stateDrivenCam.position = kayakTransform.position;
-            stateDrivenCam.eulerAngles = kayakTransform.eulerAngles;
+            stateDrivenCam.position = transform.position;
+            stateDrivenCam.eulerAngles = transform.eulerAngles;
 
             CinemachineCameraFollowCombat.transform.localPosition = Data.CombatPosition;
             CinemachineCameraTarget.transform.localPosition = Data.BasePosition;
 
             Vector3 targetAngles = CinemachineCameraTarget.transform.localEulerAngles;
             targetAngles.x = Data.BaseRotation.x;
-            targetAngles.y = Data.BaseRotation.y + kayakTransform.eulerAngles.y;
+            targetAngles.y = Data.BaseRotation.y + transform.eulerAngles.y;
             targetAngles.z = Data.BaseRotation.z;
             CinemachineCameraTarget.transform.localEulerAngles = targetAngles;
 
