@@ -11,15 +11,15 @@ namespace GPEs.WaterFlowGPE
     public class WaterFlowBlock : MonoBehaviour
     {
         //TODO to scriptable object
-        [Header("Parameters"), SerializeField] 
+        [Header("Parameters"), SerializeField]
         private float _speed;
 
-        [SerializeField, Range(0, 1), Tooltip("Max balance value added to kayak while in water flow")] 
+        [SerializeField, Range(0, 1), Tooltip("Max balance value added to kayak while in water flow")]
         private float _balanceValue;
-        
-        [SerializeField, Tooltip("The range in-between which the balance value will be multiplied randomly")] 
+
+        [SerializeField, Tooltip("The range in-between which the balance value will be multiplied randomly")]
         private Vector2 _balanceValueRandomMultiplierRange;
-        
+
         [SerializeField, Range(0, 1), Tooltip("Multiplier applied to the speed when the boat isn't facing the direction")]
         private float _speedNotFacingMultiplier = 0.5f;
 
@@ -32,9 +32,10 @@ namespace GPEs.WaterFlowGPE
         [SerializeField, Range(0, 0.05f), Tooltip("The lerp applied to the boat rotation to match the flow direction when the player is trying to move away")]
         private float _rotationLerpWhenMoving = 0.005f;
 
-        [Header("Particles"), SerializeField] 
+        [Header("Particles"), SerializeField]
         private List<ParticleSystem> _particlesList;
         [SerializeField] private List<Transform> _particlesTransformsList;
+        private List<ParticleSystem> _particlesTempList = new List<ParticleSystem>(); //private list for take the particules you instantiate
 
         [SerializeField, Tooltip("One of the particles will play at a random time between those two values")]
         private Vector2 _randomPlayOfParticleTime;
@@ -52,7 +53,7 @@ namespace GPEs.WaterFlowGPE
 
             for (int i = 0; i < _particlesTransformsList.Count; i++)
             {
-                Instantiate(_particlesList[i], _particlesTransformsList[i]);
+                _particlesTempList.Add(Instantiate(_particlesList[i], _particlesTransformsList[i]));
             }
         }
 
@@ -81,7 +82,7 @@ namespace GPEs.WaterFlowGPE
         private void CheckForKayak(Collider collider)
         {
             KayakController kayakController = CharacterManager.Instance.KayakControllerProperty;
-            
+
             if (kayakController.gameObject != collider.gameObject || WaterFlowManager == null ||
                 CharacterManager.Instance.CurrentStateBaseProperty.CanBeMoved == false)
             {
@@ -150,7 +151,7 @@ namespace GPEs.WaterFlowGPE
             if (_playParticleTime <= 0)
             {
                 int particleIndex = new Random().Next(0, _particlesList.Count);
-                _particlesList[particleIndex].Emit(new ParticleSystem.EmitParams(), 1);
+                _particlesTempList[particleIndex].Emit(new ParticleSystem.EmitParams(), 1);
                 _playParticleTime = UnityEngine.Random.Range(_randomPlayOfParticleTime.x, _randomPlayOfParticleTime.y);
             }
         }
@@ -166,7 +167,7 @@ namespace GPEs.WaterFlowGPE
         }
         private void ResetCameraShake(Collider other)
         {
-            CameraManager _tempoCameraManager=other.GetComponentInParent<CameraManager>();
+            CameraManager _tempoCameraManager = other.GetComponentInParent<CameraManager>();
             if (_tempoCameraManager != null)
             {
                 _tempoCameraManager.WaterFlow = false;
