@@ -107,14 +107,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _splinePath: {fileID: 7686737726112734184}
-  _movingValueWalk: 0.0001
-  _movingValueRun: 0.0003
+  _movingValueWalk: 0.000642
+  _movingValueRun: 0.001
   _speedLerpToMovingValue: 0.1
-  _valueTimerMinWalk: 1
-  _valueTimerMaxWalk: 3
+  _valueTimerMinWalk: 3
+  _valueTimerMaxWalk: 15
   _valueTimerMinIdle: 5
-  _valueTimerMaxIdle: 15
-  _timerStopRunning: 3
+  _valueTimerMaxIdle: 10
+  _timerStopRunning: 15
   _percentChanceRunning: 15
 --- !u!1001 &6604436480426397391
 PrefabInstance:

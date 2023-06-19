@@ -6369,6 +6369,12 @@ MonoBehaviour:
   OnPaddle:
     m_PersistentCalls:
       m_Calls: []
+  OnEnterSprint:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStopSprint:
+    m_PersistentCalls:
+      m_Calls: []
   WeaponCooldown: 0
   WeaponCooldownBase: 0
   InvincibilityTime: 0
@@ -6400,7 +6406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d49cd67baff6c54aa5d47073fe1fc45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimerBeforeCanMovingAtStart: 0.5
+  TimerBeforeCanMovingAtStart: 0.1
   <CinemachineCameraTarget>k__BackingField: {fileID: 5773740044235661809}
   <CinemachineCameraTargetFollow>k__BackingField: {fileID: 3814212815698604900}
   <CinemachineCameraFollowCombat>k__BackingField: {fileID: 1094441883}
@@ -6445,16 +6451,14 @@ MonoBehaviour:
   _currentLevelData:
     ExperienceNeededToComplete: 0
   _currentLevel: 0
-  _currentSkillPoints: 0
   _currentExperience: 0
-  _currentCombatExperience: 0
-  _currentNavigationExperience: 0
   BreakingDistanceMultiplier: 1
   MaximumDistanceMultiplier: 1
   RotatingSpeedMultiplier: 1
   BalanceLimitMultiplier: 1
   ProjectileSpeedMultiplier: 1
   EventAtEachLevel: []
+  SkillPoints: 0
 --- !u!114 &7327095685002635356
 MonoBehaviour:
   m_ObjectHideFlags: 0

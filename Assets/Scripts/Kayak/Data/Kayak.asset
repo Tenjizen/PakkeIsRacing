@@ -15,15 +15,16 @@ MonoBehaviour:
   DragReducingMultiplier: 50.654
   KayakValues:
     MaximumFrontVelocity: 12
-    MaximumFrontSprintVelocity: 22
-    MultiplyValueForceInSprint: 1.5
+    MaximumFrontSprintVelocity: 25
+    MultiplyValueForceInSprint: 1.6
     TimerMinForSprint: 0.7
-    TimerMaxForSprint: 1
+    TimerMaxForSprint: 1.8
     CollisionToBalanceMagnitudeDivider: 1.4
     PaddleSideRotationForce: 0.254
     PaddleCooldown: 1
     PaddleRotationDeceleration: 0.008
     PaddleForce: 52.6
+    SprintMultiplierPaddleForce: 0
     NumberOfForceAppliance: 9
     TimeBetweenEveryAppliance: 0.0386
     ForceCurve:
