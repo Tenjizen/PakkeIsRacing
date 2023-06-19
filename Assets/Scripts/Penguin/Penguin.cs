@@ -120,9 +120,9 @@ public class Penguin : MonoBehaviour
         Vector3 splinePos = _splinePath.GetPoint(_currentSplinePosition);
         Vector3 position = Vector3.Lerp(new Vector3(t.position.x, 0, t.position.z), new Vector3(splinePos.x, 0, splinePos.z), _speedLerpToMovingValue);
         Vector3 origin = transform.position;
-        origin.y = transform.position.y + 1f;
+        origin.y = transform.position.y + 5f;
         Vector3 direction = -Vector3.up;
-        float distance = 15f;
+        float distance = 20f;
         int hitCount = Physics.RaycastNonAlloc(origin, direction, _hitBuffer, distance);
         if (hitCount > 0)
         {
@@ -138,7 +138,6 @@ public class Penguin : MonoBehaviour
 
         }
         t.position = position;
-
         //rotation
         Vector3 pointB = _splinePath.GetPoint(Mathf.Clamp01(_currentSplinePosition + 0.01f));
         t.LookAt(pointB);
