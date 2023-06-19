@@ -124,7 +124,10 @@ namespace Character.State
 
 
 
-                MakeBoatRotationWithBalance(_kayakController.transform, 1);
+                if (CharacterManagerRef.NumberButtonIsPressed < CharacterManagerRef.Data.NumberPressButton)
+                {
+                    MakeBoatRotationWithBalanceInUnbalanced(_kayakController.transform, 1);
+                }
 
                 if ((percentGauge * 100) + 2.5f < Mathf.Abs((angle / 90) * 100))
                 {
@@ -132,12 +135,7 @@ namespace Character.State
                     CharacterManagerRef.SwitchState(characterDeathState);
                 }
             }
-
-            if (CharacterManagerRef.NumberButtonIsPressed < CharacterManagerRef.Data.NumberPressButton)
-                CharacterManagerRef.Balance = 10 * _signeBalance;
-
         }
-
         public override void FixedUpdate(CharacterManager character)
         {
 
@@ -201,7 +199,14 @@ namespace Character.State
                 CharacterManagerRef.BalanceGaugeManagerRef.MakeCursorFeedback();
             }
         }
-
+        private void MakeBoatRotationWithBalanceInUnbalanced(Transform kayakTransform, float multiplier)
+        {
+            Quaternion localRotation = kayakTransform.localRotation;
+            Vector3 boatRotation = localRotation.eulerAngles;
+            Quaternion targetBoatRotation = Quaternion.Euler(0, boatRotation.y, 15 * 3 * multiplier);
+            localRotation = Quaternion.Lerp(localRotation, targetBoatRotation, Time.deltaTime * 2);
+            kayakTransform.localRotation = localRotation;
+        }
         private void ResetRotationBoat(Transform kayakTransform, float multiplier)
         {
             CharacterManagerRef.Balance = 0;
