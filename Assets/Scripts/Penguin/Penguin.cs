@@ -22,7 +22,9 @@ public class Penguin : MonoBehaviour
     [SerializeField] float _valueTimerMaxIdle = 6f;
     [SerializeField] float _timerStopRunning = 1.5f;
     [SerializeField] float _percentChanceRunning = 15f;
+    [SerializeField] Animator _animator;
 
+    private int _randIdle;
 
     private float _currentSplinePosition;
     private float _timerIdle;
@@ -60,6 +62,7 @@ public class Penguin : MonoBehaviour
                     _timerWalk = 0;
                     _randTimerForIdle = Random.Range(_valueTimerMinIdle, _valueTimerMaxIdle);
 
+                    _animator.SetBool("Idle" + _randIdle, false);
                     TryRunning(State.Walk);
                 }
                 break;
@@ -67,6 +70,7 @@ public class Penguin : MonoBehaviour
             case State.Walk:
                 if (_timerWalk < _randTimerForIdle)
                 {
+                    _animator.SetBool("Walk", true);
                     _timerWalk += Time.deltaTime;
                     ManageMovement(_movingValueWalk);
                 }
@@ -75,6 +79,7 @@ public class Penguin : MonoBehaviour
                     _timerIdle = 0;
                     _randTimerForWalk = Random.Range(_valueTimerMinWalk, _valueTimerMaxWalk);
 
+                    _animator.SetBool("Walk", false);
                     TryRunning(State.Idle);
                 }
                 break;
@@ -89,6 +94,11 @@ public class Penguin : MonoBehaviour
                 {
                     _timerIdle = 0;
                     _randTimerForWalk = Random.Range(_valueTimerMinWalk, _valueTimerMaxWalk);
+
+                    _animator.SetBool("Walk", false);
+                    _randIdle = Random.Range(0, 2) + 1;
+                    _animator.SetBool("Idle" + _randIdle, true);
+
                     _stateEnum = State.Idle;
                 }
                 break;
@@ -99,13 +109,25 @@ public class Penguin : MonoBehaviour
         if (Random.Range(0, 100) < _percentChanceRunning)
         {
             _timerRun = 0;
+            _animator.SetBool("Walk", true);
             _stateEnum = State.Run;
         }
         else
         {
+            if (state == State.Idle)
+            {
+                _randIdle = Random.Range(0, 2) + 1;
+                _animator.SetBool("Idle" + _randIdle, true);
+            }
+            else
+            {
+                _animator.SetBool("Walk", true);
+            }
+
             _stateEnum = state;
         }
     }
+
     private void ManageMovement(float speed)
     {
         _currentSplinePosition += speed;
