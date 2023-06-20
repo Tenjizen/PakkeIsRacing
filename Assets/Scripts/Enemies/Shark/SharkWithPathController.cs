@@ -18,6 +18,19 @@ public class SharkWithPathController : MonoBehaviour
     [Header("Debug"), SerializeField, ReadOnly] private bool _playerIsTrigger;
     void Start()
     {
+        Initialize();
+    }
+
+    void Update()
+    {
+        if (_playerIsTrigger == true)
+        {
+            ManageMovement();
+        }
+    }
+
+    public void Initialize()
+    {
         _playerTrigger.OnPlayerEntered.AddListener(SetPlayerIsTriggerAtTrue);
 
         _currentSplinePosition = 0;
@@ -31,20 +44,13 @@ public class SharkWithPathController : MonoBehaviour
             return;
         }
 
+
         Vector3 splinePosition = _splinePath.GetPoint(_currentSplinePosition);
         transform.position = new Vector3(splinePosition.x, transform.position.y, splinePosition.z);
     }
 
-    void Update()
-    {
-        if (_playerIsTrigger == true)
-        {
-            ManageMovement();
-        }
-    }
 
-
-    private void SetPlayerIsTriggerAtTrue()
+    public void SetPlayerIsTriggerAtTrue()
     {
         _playerIsTrigger = true;
     }
