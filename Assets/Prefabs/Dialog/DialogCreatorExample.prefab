@@ -102,14 +102,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enumState: 0
-  _posSednaDialog: []
+  _positionSednaDialog:
+  - {fileID: 0}
+  - {fileID: 0}
   _removeAtYPosValue: 0
   _minimumPlayerVelocity: 1
-  _lerpMovingPos: 15
+  _lerpMovingPos: 1
   _lerpMovingRota: 5
   _splinePath: {fileID: 185075369292387095}
   _playerTransform: {fileID: 0}
-  MovingValue: 0.3
+  MovingValue: 0.07
   SpeedLerpToMovingValue: 0.1
   _startMoving: 0
   _endDialog: 0
@@ -183,6 +185,7 @@ MonoBehaviour:
   _playerLayerMask:
     serializedVersion: 2
     m_Bits: 1
+  _arrayHitsSize: 20
   OnPlayerEntered:
     m_PersistentCalls:
       m_Calls:
@@ -204,12 +207,15 @@ MonoBehaviour:
   OnPlayerExited:
     m_PersistentCalls:
       m_Calls: []
-  Dialog: {fileID: 0}
+  CategoryID: 
+  Dialog_FR: {fileID: 0}
+  Dialog_EN: {fileID: 0}
   _launchType: 0
   _canBeReplayed: 0
   _hasEnded: 0
   _blockPlayerMovement: 0
   _blockCameraMovement: 0
+  _timeUntilLaunch: 0
   OnDialogLaunch:
     m_PersistentCalls:
       m_Calls: []
