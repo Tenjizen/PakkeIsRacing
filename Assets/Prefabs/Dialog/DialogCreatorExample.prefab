@@ -207,7 +207,19 @@ MonoBehaviour:
       m_Calls: []
   OnPlayerExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2983803235730955893}
+        m_TargetAssemblyTypeName: Sedna.SednaDialog, Assembly-CSharp
+        m_MethodName: StartDialog
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2999911819472190894}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   CategoryID: 
   Dialog_FR: {fileID: 0}
   Dialog_EN: {fileID: 0}
