@@ -34,7 +34,6 @@ namespace Character.Camera
 
         //camera
         [HideInInspector] public float CameraAngleOverride = 0.0f;
-        [HideInInspector] public float CameraBaseFov;
         [HideInInspector] public Vector3 CameraTargetBasePos;
         [HideInInspector] public float RotationZ = 0;
         [HideInInspector] public bool CanMoveCameraManually;
@@ -73,9 +72,14 @@ namespace Character.Camera
 
         private void Update()
         {
+            float velocityXZ = Mathf.Abs(RigidbodyKayak.velocity.x) + Mathf.Abs(RigidbodyKayak.velocity.z);
+
             CurrentStateBase.UpdateState(this);
             CurrentStateBase.ResetShoulderOffset();
-            FieldOfView(VirtualCameraFreeLook);
+
+            if (CharacterManager.Instance.SprintInProgress == false
+                   && velocityXZ < CharacterManager.Instance.KayakControllerProperty.Data.KayakValues.MaximumFrontVelocity + 1)
+                FieldOfView(VirtualCameraFreeLook, velocityXZ);
         }
         private void FixedUpdate()
         {
@@ -93,11 +97,10 @@ namespace Character.Camera
             stateBaseCharacter.EnterState(this);
         }
 
-        private void FieldOfView(CinemachineVirtualCamera virtualCamera)
+        private void FieldOfView(CinemachineVirtualCamera virtualCamera, float velocityXZ)
         {
-            float velocityXZ = Mathf.Abs(RigidbodyKayak.velocity.x) + Mathf.Abs(RigidbodyKayak.velocity.z);
             virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(virtualCamera.m_Lens.FieldOfView,
-                CameraBaseFov + (velocityXZ * Data.MultiplierFovCamera),
+                Data.BaseFOV + (velocityXZ * Data.MultiplierFovCamera),
                 Data.LerpFOV);
         }
 
@@ -295,8 +298,6 @@ namespace Character.Camera
             CinemachineTargetPitch = Data.BaseRotation.x;
             CinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             CameraTargetBasePos = CinemachineCameraTarget.transform.localPosition;
-            CameraBaseFov = VirtualCameraFreeLook.m_Lens.FieldOfView;
-
         }
     }
 }

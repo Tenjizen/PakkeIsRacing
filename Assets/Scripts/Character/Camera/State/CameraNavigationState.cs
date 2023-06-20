@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 
 namespace Character.Camera.State
@@ -109,12 +110,30 @@ namespace Character.Camera.State
                 float rotationPaddleY = CamManager.CharacterManager.CurrentStateBaseProperty.RotationPaddleForceY;
 
                 #endregion
+                if (CharacterManager.Instance.SprintInProgress == true
+                    && Mathf.Abs(CamManager.RigidbodyKayak.velocity.x) + Mathf.Abs(CamManager.RigidbodyKayak.velocity.z) > CharacterManager.Instance.KayakControllerProperty.Data.KayakValues.MaximumFrontVelocity + 1)
+                {
+                    //CamManager.Data.SprintPosition 
+                    cameraTargetLocalPosition = Vector3.Lerp(cameraTargetLocalPosition, CamManager.Data.SprintPosition, Time.deltaTime * CamManager.Data.LerpSprint);
 
+                    //CamManager.Data.SprintRotation 
+                    targetQuaternion = Quaternion.Euler(CamManager.Data.SprintRotation);
+
+                    CamManager.CinemachineCameraTarget.transform.localRotation = Quaternion.Slerp(localRotation, targetQuaternion, Time.deltaTime * CamManager.Data.LerpSprint);
+
+                    //CamManager.Data.SprintDistance 
+                    var Dist = camera.VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance;
+
+                    camera.VirtualCameraFreeLook.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = Mathf.Lerp(Dist, CamManager.Data.SprintDistance, Time.deltaTime * CamManager.Data.LerpSprint);
+
+                    //CamManager.Data.SprintFOV
+                    camera.VirtualCameraFreeLook.m_Lens.FieldOfView = Mathf.Lerp(camera.VirtualCameraFreeLook.m_Lens.FieldOfView, camera.Data.SprintFOV, Time.deltaTime * CamManager.Data.LerpSprint);
+
+                }
                 //calculate camera rotation & position
-                if (Mathf.Abs(rotationStaticY) > rotationThreshold || // if kayak is rotating
+                else if (Mathf.Abs(rotationStaticY) > rotationThreshold || // if kayak is rotating
                     Mathf.Abs(rotationPaddleY) > rotationThreshold) //if kayak moving
                 {
-
                     if (Mathf.Abs(rotationPaddleY) > rotationThreshold / 2)// if kayak is moving
                     {
                         //rotation

@@ -90,6 +90,11 @@ namespace Character.State
             CheckBalance();
 
             MakeBoatRotationWithBalance(_kayakController.transform, 1);
+
+            if(_timerLastInputTrigger > _kayakValues.TimerMaxForSprint)
+            {
+                CharacterManagerRef.SprintInProgress = false;
+            }
         }
 
         public override void FixedUpdate(CharacterManager character)
@@ -344,8 +349,9 @@ namespace Character.State
                 return;
             }
 
-            if (_timerLastInputTrigger > _kayakValues.TimerMinForSprint &&
-                _timerLastInputTrigger < _kayakValues.TimerMaxForSprint)
+
+            if (_timerLastInputTrigger >= _kayakValues.TimerMinForSprint &&
+                _timerLastInputTrigger <= _kayakValues.TimerMaxForSprint)
             {
                 CharacterManagerRef.SprintInProgress = true;
                 CharacterManagerRef.OnEnterSprint.Invoke();
@@ -365,7 +371,7 @@ namespace Character.State
         /// </summary>
         private IEnumerator PaddleForceCurve()
         {
-            float sprintMultiply = CharacterManagerRef.SprintInProgress ? 1.5f : 1;
+            float sprintMultiply = CharacterManagerRef.SprintInProgress ? _kayakValues.MultiplyValueForceInSprint : 1;
             for (int i = 0; i <= _kayakValues.NumberOfForceAppliance; i++)
             {
                 float x = 1f / _kayakValues.NumberOfForceAppliance * i;

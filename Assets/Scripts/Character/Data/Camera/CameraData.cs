@@ -25,10 +25,13 @@ namespace Character.Data
         public Vector3 BasePosition { get; private set; }
 
         [field: SerializeField]
-        public float BaseDistance { get; private set; }
+        public float BaseDistance { get; private set; } = 10;
 
         [field: SerializeField]
         public Vector3 BaseRotation { get; private set; }
+
+        [field: SerializeField]
+        public float BaseFOV { get; private set; } = 56f;
 
         [field: SerializeField, Header("Clamp"), Tooltip("How far in degrees can you move the camera up")]
         public float TopClamp { get; private set; } = 70.0f;
@@ -74,6 +77,21 @@ namespace Character.Data
         
         [field: SerializeField]
         public float LerpCameraGettingCloser { get; private set; } = 0.1f;
+        
+        [field: SerializeField, Header("Sprint")] 
+        public Vector3 SprintPosition { get; private set; }
+
+        [field: SerializeField]
+        public Vector3 SprintRotation { get; private set; }
+
+        [field: SerializeField]
+        public float SprintDistance { get; private set; }
+        
+        [field: SerializeField]
+        public float SprintFOV { get; private set; }
+
+        [field: SerializeField, Range(0.1f,10)]
+        public float LerpSprint { get; private set; }
 
         [field: SerializeField,Header("Camera free look")]
         public float NavigationPositionYMin { get; private set; }
