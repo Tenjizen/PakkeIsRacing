@@ -306,7 +306,7 @@ namespace Character.State
                     CharacterManagerRef.Parameters.InversedControls ? Direction.Right : Direction.Left;
                 _leftPaddleCooldown = _kayakValues.PaddleCooldown;
                 _rightPaddleCooldown = _kayakValues.PaddleCooldown / 2;
-                CheckIfCanSprint(direction);
+                CheckIfSprint(direction);
                 Paddle(direction);
             }
 
@@ -316,7 +316,7 @@ namespace Character.State
                     CharacterManagerRef.Parameters.InversedControls ? Direction.Left : Direction.Right;
                 _rightPaddleCooldown = _kayakValues.PaddleCooldown;
                 _leftPaddleCooldown = _kayakValues.PaddleCooldown / 2;
-                CheckIfCanSprint(direction);
+                CheckIfSprint(direction);
                 Paddle(direction);
             }
         }
@@ -342,13 +342,12 @@ namespace Character.State
             RotationPaddleForceY = Mathf.Lerp(RotationPaddleForceY, 0, 0.1f);
         }
 
-        private void CheckIfCanSprint(Direction direction)
+        private void CheckIfSprint(Direction direction)
         {
             if (_lastInputPaddle == direction || CharacterManagerRef.Parameters.SprintUnlock == false)
             {
                 return;
             }
-
 
             if (_timerLastInputTrigger >= _kayakValues.TimerMinForSprint &&
                 _timerLastInputTrigger <= _kayakValues.TimerMaxForSprint)
