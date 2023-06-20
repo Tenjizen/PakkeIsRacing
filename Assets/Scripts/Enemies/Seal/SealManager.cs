@@ -204,8 +204,8 @@ namespace Enemies.Seal
 
             //rotation
             Vector3 pointB = _splinePath.GetPoint(Mathf.Clamp01(_currentSplinePosition+0.01f));
-            Vector3 rotation = t.transform.rotation.eulerAngles;
             t.LookAt(pointB);
+            Vector3 rotation = t.transform.rotation.eulerAngles;
             t.rotation = Quaternion.Euler(new Vector3(rotation.x,Mathf.Lerp(rotation.y,t.rotation.eulerAngles.y,0.1f),rotation.z));
             
             //wave
