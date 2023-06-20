@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enumState: 0
+  dialog: {fileID: 4415997587140153624}
   _positionSednaDialog:
   - {fileID: 0}
   - {fileID: 0}
@@ -189,13 +190,13 @@ MonoBehaviour:
   OnPlayerEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2999911819472190894}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 2983803235730955893}
+        m_TargetAssemblyTypeName: Sedna.SednaDialog, Assembly-CSharp
+        m_MethodName: StartDialog
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 2999911819472190894}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
