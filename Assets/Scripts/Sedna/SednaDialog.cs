@@ -2,6 +2,7 @@ using Character;
 using GPEs;
 using Kayak;
 using System.Collections.Generic;
+using UI.Dialog;
 using UnityEngine;
 using WaterFlowGPE.Bezier;
 
@@ -16,6 +17,7 @@ namespace Sedna
         };
         
         [SerializeField] private State _enumState;
+        [SerializeField] private DialogCreator dialog;
 
         [SerializeField] private List<GameObject> _positionSednaDialog = new List<GameObject>();
         [SerializeField] private float _removeAtYPosValue;
@@ -272,5 +274,16 @@ namespace Sedna
         {
             _endDialog = true;
         }
+        public void StartDialog(GameObject gameObject)
+        {
+            if(dialog.HasEnded == true && dialog.CanBeReplayed == false)
+            {
+                return;
+            }
+
+            gameObject.SetActive(true);
+
+        }
+
     }
 }

@@ -47,6 +47,9 @@ namespace UI.Dialog
         [SerializeField] private bool _blockPlayerMovement, _blockCameraMovement;
         [SerializeField] private float _timeUntilLaunch;
 
+        public bool HasEnded => _hasEnded;
+        public bool CanBeReplayed => _canBeReplayed;
+
         [Space(20), Header("Events")] 
         public UnityEvent OnDialogLaunch = new UnityEvent();
         public UnityEvent OnDialogEnd = new UnityEvent();
