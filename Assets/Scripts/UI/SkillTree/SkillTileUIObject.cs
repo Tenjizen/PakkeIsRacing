@@ -33,6 +33,11 @@ namespace UI.SkillTree
         
         private bool _isUnlocked;
         private bool _isActivated;
+
+        public bool CanBeActivated()
+        {
+            return _isUnlocked && _isActivated == false;
+        }
         
         protected override void Start()
         {
@@ -62,6 +67,7 @@ namespace UI.SkillTree
 
         public void SetActivated(bool isActivated)
         {
+            
             _isActivated = isActivated;
             _unlockIcon.gameObject.SetActive(_isActivated == false);
 
