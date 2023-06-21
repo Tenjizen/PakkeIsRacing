@@ -15,9 +15,24 @@ using UI.Menu;
 using UI.WeaponWheel;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace Character
 {
+    [Serializable]
+    public class PlayerStatsMultipliers
+    {
+        public float BreakingDistanceMultiplier = 1;
+        public float MaximumSpeedMultiplier = 1;
+        public float RotationSpeedMultiplier = 1;
+        public float UnbalancedThresholdMultiplier = 1;
+        
+        public float WeaponLaunchDistanceMultiplier = 1;
+        public float ChargeTimeReducingMultiplier = 1;
+        public float ExperienceGainMultiplier = 1;
+        public float WeaponRecallTimeMultiplier = 1;
+    }
+    
     public class CharacterManager : Singleton<CharacterManager>
     {
         #region Properties
@@ -81,8 +96,12 @@ namespace Character
 
         [ReadOnly] public bool SprintInProgress = false;
 
+        public PlayerStatsMultipliers PlayerStats;
+
         protected override void Awake()
         {
+            PlayerStats = new PlayerStatsMultipliers();
+            
             base.Awake();
             Cursor.visible = false;
             CharacterMonoBehaviour = this;
@@ -105,8 +124,8 @@ namespace Character
             kayakTransform.eulerAngles = new Vector3(0, BaseOrientation, 0);
 
             CameraManagerProperty.InitializeCams(kayakTransform);
-
         }
+        
         private void Update()
         {
             CurrentStateBaseProperty.UpdateState(this);
@@ -132,6 +151,7 @@ namespace Character
         {
             CurrentStateBaseProperty.FixedUpdate(this);
         }
+        
         public void SwitchState(CharacterStateBase stateBaseCharacter)
         {
             CurrentStateBaseProperty.ExitState(this);

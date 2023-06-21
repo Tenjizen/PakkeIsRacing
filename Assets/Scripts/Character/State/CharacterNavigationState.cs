@@ -256,7 +256,7 @@ namespace Character.State
             if (direction == _lastPaddleSide)
             {
                 float rotation = _kayakValues.PaddleSideRotationForce *
-                                 CharacterManagerRef.ExperienceManagerProperty.RotatingSpeedMultiplier;
+                                 CharacterManagerRef.PlayerStats.RotationSpeedMultiplier;
                 RotationPaddleForceY += direction == Direction.Right ? -rotation : rotation;
             }
 
@@ -456,7 +456,7 @@ namespace Character.State
             Vector3 targetVelocity = new Vector3(0, _kayakRigidbody.velocity.y, 0);
 
             float lerp = _kayakValues.VelocityDecelerationLerp *
-                         CharacterManagerRef.ExperienceManagerProperty.BreakingDistanceMultiplier;
+                         CharacterManagerRef.PlayerStats.BreakingDistanceMultiplier;
             _kayakRigidbody.velocity = Vector3.Lerp(_kayakRigidbody.velocity, targetVelocity, lerp);
 
             float force = _kayakValues.VelocityDecelerationRotationForce;

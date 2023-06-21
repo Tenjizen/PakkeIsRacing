@@ -91,7 +91,7 @@ namespace Character.State
         protected void CheckBalance()
         {
             //check balanced -> unbalanced
-            if (Mathf.Abs(CharacterManagerRef.Balance) >= CharacterManagerRef.Data.BalanceLimit * CharacterManagerRef.ExperienceManagerProperty.BalanceLimitMultiplier &&
+            if (Mathf.Abs(CharacterManagerRef.Balance) >= CharacterManagerRef.Data.BalanceLimit * CharacterManagerRef.PlayerStats.UnbalancedThresholdMultiplier &&
                 CharacterManagerRef.InvincibilityTime <= 0)
             {
                 CameraManagerRef.CanMoveCameraManually = false;

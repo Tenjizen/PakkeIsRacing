@@ -71,8 +71,9 @@ namespace Kayak
             KayakParameters kayakValues = Data.KayakValues;
 
             float velocityX = velocity.x;
-            float maxClamp = CharacterManager.Instance.SprintInProgress ? kayakValues.MaximumFrontSprintVelocity :
-                kayakValues.MaximumFrontVelocity * CharacterManager.Instance.ExperienceManagerProperty.MaximumDistanceMultiplier;
+            float maxClamp = CharacterManager.Instance.SprintInProgress ? 
+                kayakValues.MaximumFrontSprintVelocity :
+                kayakValues.MaximumFrontVelocity * CharacterManager.Instance.PlayerStats.MaximumSpeedMultiplier;
             velocityX = Mathf.Clamp(velocityX, -maxClamp, maxClamp);
 
             float velocityZ = velocity.z;

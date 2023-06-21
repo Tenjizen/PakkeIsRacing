@@ -8,10 +8,18 @@ using UnityEngine.UI;
 namespace UI.SkillTree
 {
     [Serializable]
-    public enum SkillCategory
+    public enum CapacityType
     {
-        Navigation,
-        Combat
+        BreakingDistance,
+        MaximumSpeed,
+        RotationSpeed,
+        UnbalanceThreshold,
+        Sprint,
+        LaunchDistance,
+        ChargingTimeReduction,
+        MoreExperience,
+        SednaRecuperationAfterShoot,
+        IcebergDestruction
     }
     
     public class SkillTileUIObject : MenuUIObject
@@ -20,6 +28,8 @@ namespace UI.SkillTree
         [SerializeField] private string _title_EN, _title_FR;
         [SerializeField, TextArea] private string _description_EN, _description_FR;
         [Space(5), SerializeField] private bool _unlockAtStart;
+        [Space(5), SerializeField] private CapacityType _capacity;
+        [SerializeField] private float _multiplier;
         
         private bool _isUnlocked;
         private bool _isActivated;
@@ -59,7 +69,37 @@ namespace UI.SkillTree
             _activatedIcon.gameObject.transform.DOComplete();
             _activatedIcon.gameObject.transform.DOPunchScale(Vector3.one*0.1f, 0.2f);
 
-            //TODO capacity
+            SetCapacityEffect();
+        }
+
+        private void SetCapacityEffect()
+        {
+            CharacterManager character = CharacterManager.Instance;
+            switch (_capacity)
+            {
+                case CapacityType.BreakingDistance:
+                    break;
+                case CapacityType.MaximumSpeed:
+                    break;
+                case CapacityType.RotationSpeed:
+                    break;
+                case CapacityType.UnbalanceThreshold:
+                    break;
+                case CapacityType.Sprint:
+                    break;
+                case CapacityType.LaunchDistance:
+                    break;
+                case CapacityType.ChargingTimeReduction:
+                    break;
+                case CapacityType.MoreExperience:
+                    break;
+                case CapacityType.SednaRecuperationAfterShoot:
+                    break;
+                case CapacityType.IcebergDestruction:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         public void SetSkillTile(Color color)

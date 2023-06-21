@@ -19,15 +19,6 @@ namespace Character
         [ReadOnly, SerializeField] private int _currentLevel;
         [ReadOnly, SerializeField] private float _currentExperience;
 
-        [Header("Character Values multiplier")]
-        //navigation
-        [ReadOnly] public float BreakingDistanceMultiplier = 1;
-        [ReadOnly] public float MaximumDistanceMultiplier = 1;
-        [ReadOnly] public float RotatingSpeedMultiplier = 1;
-        [ReadOnly] public float BalanceLimitMultiplier = 1;
-        //combat
-        [ReadOnly] public float ProjectileSpeedMultiplier = 1;
-
         [Header("Events")] 
         public List<UnityEvent> EventAtEachLevel = new List<UnityEvent>();
 
