@@ -15,6 +15,8 @@ public class UISprintManager : MonoBehaviour
     [SerializeField] private float _speed = 2;
     [SerializeField] private float _duration = 0.5f;
 
+    [SerializeField] private GameObject[] _trails;
+
     private Direction _lastDirection;
 
     public void ManageScaleUISprint(float timer)
@@ -25,6 +27,10 @@ public class UISprintManager : MonoBehaviour
             {
                 _left.enabled = false;
                 _right.enabled = false;
+            }
+            foreach (var trail in _trails)
+            {
+                trail.SetActive(false);
             }
             return;
         }
@@ -100,6 +106,10 @@ public class UISprintManager : MonoBehaviour
         {
             _left.enabled = false;
         }
+        foreach (var trail in _trails)
+        {
+            trail.SetActive(false);
+        }
     }
 
     public void EnableFeedback(Direction direction)
@@ -119,6 +129,10 @@ public class UISprintManager : MonoBehaviour
             return;
         }
 
+        foreach (var trail in _trails)
+        {
+            trail.SetActive(true);
+        }
 
         Vector3 initScale = (Vector3.one / 2) / 10;
         if (direction == Direction.Left)
