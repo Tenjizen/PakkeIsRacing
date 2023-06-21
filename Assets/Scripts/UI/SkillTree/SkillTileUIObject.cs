@@ -90,7 +90,9 @@ namespace UI.SkillTree
                     character.UnbalancedThresholdMultiplier = _multiplier;
                     break;
                 case CapacityType.Sprint:
-                    //unlock sprint
+                    PlayerAbilities abilities = CharacterManager.Instance.Abilities;
+                    abilities.SprintUnlock = true;
+                    CharacterManager.Instance.Abilities = abilities;
                     break;
                 case CapacityType.LaunchDistance:
                     character.WeaponLaunchDistanceMultiplier = _multiplier;
@@ -105,7 +107,9 @@ namespace UI.SkillTree
                     character.WeaponRecallTimeMultiplier = _multiplier;
                     break;
                 case CapacityType.IcebergDestruction:
-                    //unlock iceberg destruction
+                    PlayerAbilities abilitiesDestroy = CharacterManager.Instance.Abilities;
+                    abilities.CanDestroyIceberg = true;
+                    CharacterManager.Instance.Abilities = abilitiesDestroy;
                     break;
             }
         }

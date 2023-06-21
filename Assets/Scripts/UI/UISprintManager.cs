@@ -43,7 +43,7 @@ public class UISprintManager : MonoBehaviour
     {
         var _character = CharacterManager.Instance;
 
-        if (_character.Parameters.SprintUnlock == false ||
+        if (_character.Abilities.SprintUnlock == false ||
             (_character.InputManagementProperty.Inputs.PaddleRight && _character.InputManagementProperty.Inputs.PaddleLeft) ||
             _character.KayakControllerProperty.Rigidbody.velocity.magnitude < 5f ||
             direction == _lastDirection)
