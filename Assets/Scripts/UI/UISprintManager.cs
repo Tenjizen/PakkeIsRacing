@@ -30,7 +30,8 @@ public class UISprintManager : MonoBehaviour
             }
             foreach (var trail in _trails)
             {
-                trail.SetActive(false);
+                //trail.GetComponent<TrailRenderer>().time = Mathf.Lerp(trail.GetComponent<TrailRenderer>().time, 0, Time.deltaTime);
+                trail.GetComponent<TrailRenderer>().emitting = false;
             }
             return;
         }
@@ -108,7 +109,8 @@ public class UISprintManager : MonoBehaviour
         }
         foreach (var trail in _trails)
         {
-            trail.SetActive(false);
+            //trail.GetComponent<TrailRenderer>().time = Mathf.Lerp(trail.GetComponent<TrailRenderer>().time, 0, Time.deltaTime);
+            trail.GetComponent<TrailRenderer>().emitting = false;
         }
     }
 
@@ -131,8 +133,13 @@ public class UISprintManager : MonoBehaviour
 
         foreach (var trail in _trails)
         {
-            trail.SetActive(true);
+            trail.GetComponent<TrailRenderer>().emitting = true;
         }
+
+        //if (_trails[0].GetComponent<TrailRenderer>().time < 0.4f)
+        //{
+        //    StartCoroutine(TrailEmitting());
+        //}
 
         Vector3 initScale = (Vector3.one / 2) / 10;
         if (direction == Direction.Left)
@@ -150,5 +157,24 @@ public class UISprintManager : MonoBehaviour
 
         _lastDirection = direction;
     }
-
+    private IEnumerator TrailEmitting()
+    {
+        float timeElapsed = 0f;
+        while (timeElapsed < 0.5f)
+        {
+            float t = timeElapsed / 0.5f;
+            foreach (var trail in _trails)
+            {
+                trail.GetComponent<TrailRenderer>().time = Mathf.Lerp(trail.GetComponent<TrailRenderer>().time, 0.5f, t);
+                trail.GetComponent<TrailRenderer>().emitting = true;
+            }
+            timeElapsed += Time.deltaTime * _speed;
+            yield return null;
+            Debug.Log(timeElapsed);
+            if(_trails[0].GetComponent<TrailRenderer>().time > 0.45f)
+            {
+                break;
+            }
+        }
+    }
 }
