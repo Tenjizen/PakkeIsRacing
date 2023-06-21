@@ -95,6 +95,8 @@ namespace Character.State
             {
                 CharacterManagerRef.SprintInProgress = false;
             }
+
+            CharacterManagerRef.SprintUIManager.ManageScaleUISprint(_timerLastInputTrigger);
         }
 
         public override void FixedUpdate(CharacterManager character)
@@ -344,6 +346,7 @@ namespace Character.State
 
         private void CheckIfSprint(Direction direction)
         {
+            CharacterManagerRef.SprintUIManager.EnableDisable(direction);
             if (_lastInputPaddle == direction || CharacterManagerRef.Parameters.SprintUnlock == false)
             {
                 return;
