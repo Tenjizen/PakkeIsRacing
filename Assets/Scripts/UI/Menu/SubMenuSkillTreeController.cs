@@ -132,7 +132,6 @@ namespace UI.Menu
         private void SetLine(int previousLenght, int newVerticalIndex)
         {
             VerticalIndex = newVerticalIndex < 0 ? 0 : newVerticalIndex;
-            print(newVerticalIndex);
             Length = _navigationLines[VerticalIndex].Tiles.Count + _combatLines[VerticalIndex].Tiles.Count;
 
             HorizontalIndex = IsLeftSide(previousLenght) ? 0 : Length/2;
@@ -175,6 +174,7 @@ namespace UI.Menu
             CharacterManager.Instance.ExperienceManagerProperty.SkillPoints--;
             SetSkillsPoints();
 
+            //unlock line below
             bool isNavigation = IsLeftSide(Length);
             List<SkillTreeLine> skillTree = isNavigation ? _navigationLines : _combatLines;
             int index = VerticalIndex + 1 < skillTree.Count ? VerticalIndex + 1 : -1;

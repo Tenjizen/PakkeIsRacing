@@ -27,7 +27,6 @@ namespace UI.Menu
         
         public virtual void Set(bool isActive)
         {
-            print($"{gameObject.name} : active {isActive}");
             OverlayImage.DOKill();
             OverlayImage.DOFade(isActive ? 1f : 0f, 0.1f).SetUpdate(true);
         }

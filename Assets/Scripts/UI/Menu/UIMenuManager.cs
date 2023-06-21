@@ -18,6 +18,7 @@ namespace UI.Menu
 
         private Dictionary<Image,float> _imagesDictionary = new Dictionary<Image,float>();
         private Dictionary<TMP_Text,float> _textsDictionary = new Dictionary<TMP_Text,float>();
+        private List<Image> _untouchablesImages = new List<Image>();
 
         private void Start()
         {
@@ -45,6 +46,11 @@ namespace UI.Menu
             SetMenu();
         }
 
+        public void RemoveFromDictionary(Image image)
+        {
+            _untouchablesImages.Add(image);
+        }
+
         public void SetMenu()
         {
             CharacterManager characterManager = CharacterManager.Instance;
@@ -58,6 +64,10 @@ namespace UI.Menu
             const float fadeTime = 0.2f;
             foreach (var pair in _imagesDictionary)
             {
+                if (_untouchablesImages.Contains(pair.Key))
+                {
+                    continue;
+                }
                 pair.Key.DOFade(IsActive ? pair.Value : 0, fadeTime);
             }
             foreach (var pair in _textsDictionary)

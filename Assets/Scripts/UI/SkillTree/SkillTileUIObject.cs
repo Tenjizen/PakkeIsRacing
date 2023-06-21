@@ -43,6 +43,11 @@ namespace UI.SkillTree
 
             _lockIcon.DOFade(_isUnlocked ? 0 : 1, 0.5f);
             _unlockIcon.gameObject.SetActive(_isUnlocked);
+
+            if (_isUnlocked)
+            {
+                CharacterManager.Instance.UIMenuManagerRef.RemoveFromDictionary(_lockIcon);
+            }
         }
 
         public void SetActivated(bool isActivated)
@@ -54,7 +59,7 @@ namespace UI.SkillTree
             _activatedIcon.gameObject.transform.DOComplete();
             _activatedIcon.gameObject.transform.DOPunchScale(Vector3.one*0.1f, 0.2f);
 
-            //capacity
+            //TODO capacity
         }
 
         public void SetSkillTile(Color color)
