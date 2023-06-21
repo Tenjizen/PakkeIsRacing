@@ -4,11 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static Character.State.CharacterNavigationState;
+using DG.Tweening;
 
 public class UISprintManager : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _left;
     [SerializeField] private SpriteRenderer _right;
+
+    [SerializeField, Header("Good timing")] private float _scaleMax = 0.05f;
+    [SerializeField] private float _speed = 2;
     [SerializeField] private float _duration = 0.5f;
 
     private Direction _lastDirection;
@@ -44,31 +48,44 @@ public class UISprintManager : MonoBehaviour
     public IEnumerator GoodTiming()
     {
         float timeElapsed = 0f;
-
         while (timeElapsed < _duration)
         {
             float t = timeElapsed / _duration;
+
             if (_lastDirection == Direction.Right)
             {
                 _right.enabled = true;
                 _right.gameObject.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, t);
-                if (_right.gameObject.transform.localScale.x >= 0.5)
+                if (_right.gameObject.transform.localScale.x >= _scaleMax - 0.05f)
                 {
-                    _right.enabled = false;
-                    yield return null;
+                    _right.DOFade(0, 0.2f);
+
+                    if (_right.color.a <= 0.01f)
+                    {
+                        _right.DOKill();
+                        _right.enabled = false;
+                        yield return null;
+                        break;
+                    }
                 }
             }
             else if (_lastDirection == Direction.Left)
             {
                 _left.enabled = true;
                 _left.gameObject.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, t);
-                if (_left.gameObject.transform.localScale.x >= 0.5)
+                if (_left.gameObject.transform.localScale.x >= _scaleMax - 0.05f)
                 {
-                    _left.enabled = false;
-                    yield return null;
+                    _left.DOFade(0, 0.2f);
+                    if (_left.color.a <= 0.01f)
+                    {
+                        _left.DOKill();
+                        _left.enabled = false;
+                        yield return null;
+                        break;
+                    }
                 }
             }
-            timeElapsed += Time.deltaTime;
+            timeElapsed += Time.deltaTime * _speed;
             yield return null;
         }
     }
@@ -107,11 +124,13 @@ public class UISprintManager : MonoBehaviour
         if (direction == Direction.Left)
         {
             _right.gameObject.transform.localScale = initScale;
+            _right.DOFade(1, 0);
             _right.enabled = true;
         }
         else if (direction == Direction.Right)
         {
             _left.gameObject.transform.localScale = initScale;
+            _left.DOFade(1, 0);
             _left.enabled = true;
         }
 
