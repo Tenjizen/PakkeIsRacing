@@ -55,6 +55,7 @@ namespace Character
         [field: SerializeField] public Transform WeaponSpawnPosition { get; private set; }
         [field: SerializeField] public IKControl IKPlayerControl { get; private set; }
         [field: SerializeField] public PlayerParameters Parameters { get; set; }
+        [field: SerializeField] public PlayerAbilities Abilities { get; set; }
         [field: SerializeField] public OptionMenuManager OptionMenuManager { get; private set; }
         [field: SerializeField] public ScriptForDebug ScriptDebug { get; private set; }
         [field: SerializeField, Header("Weapons")] public Animator HarpoonAnimator { get; private set; }
@@ -284,6 +285,11 @@ namespace Character
         public bool AutoAim;
         public bool InversedControls;
         public bool Language;
+    }
+    [Serializable]
+    public struct PlayerAbilities
+    {
         public bool SprintUnlock;
+        public bool CanDestroyIceberg;
     }
 }

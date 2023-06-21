@@ -347,7 +347,7 @@ namespace Character.State
         private void CheckIfSprint(Direction direction)
         {
             CharacterManagerRef.SprintUIManager.EnableDisable(direction);
-            if (_lastInputPaddle == direction || CharacterManagerRef.Parameters.SprintUnlock == false)
+            if (_lastInputPaddle == direction || CharacterManagerRef.Abilities.SprintUnlock == false)
             {
                 return;
             }

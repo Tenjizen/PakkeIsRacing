@@ -1,3 +1,4 @@
+using Character;
 using Fight;
 using Fight.Data;
 using System.Collections;
@@ -19,7 +20,7 @@ public class PlayEventForHittable : MonoBehaviour, IHittable
 
     public virtual void Hit(Projectile projectile, GameObject owner, int damage)
     {
-        if (projectile.Data.Type != WeaponThatCanHit)
+        if (projectile.Data.Type != WeaponThatCanHit || CharacterManager.Instance.Abilities.CanDestroyIceberg == false)
         {
             Debug.Log($"{projectile.Data.Type} can't hit {gameObject.name}");
             return;
