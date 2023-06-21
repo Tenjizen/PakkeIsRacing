@@ -95,7 +95,7 @@ namespace UI.Menu
 
         protected override void Down(InputAction.CallbackContext context)
         {
-            if (IsUsable == false || VerticalIndex >= Height)
+            if (IsUsable == false || VerticalIndex >= Height-1)
             {
                 return;
             }

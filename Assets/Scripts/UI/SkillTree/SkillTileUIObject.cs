@@ -108,7 +108,7 @@ namespace UI.SkillTree
                     break;
                 case CapacityType.IcebergDestruction:
                     PlayerAbilities abilitiesDestroy = CharacterManager.Instance.Abilities;
-                    abilities.CanDestroyIceberg = true;
+                    abilitiesDestroy.CanDestroyIceberg = true;
                     CharacterManager.Instance.Abilities = abilitiesDestroy;
                     break;
             }
