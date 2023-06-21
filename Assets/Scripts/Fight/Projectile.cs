@@ -1,5 +1,6 @@
 ﻿using System;
 using Art.Test.Dissolve;
+using Character;
 using DG.Tweening;
 using Fight.Data;
 using GPEs.WaterFlowGPE;
@@ -33,7 +34,7 @@ namespace Fight
 
         private void Start()
         {
-            _lifetime = Data.Lifetime;
+            _lifetime = Data.Lifetime * CharacterManager.Instance.PlayerStats.WeaponRecallTimeMultiplier;
             WeaponMeshControllerRef.SetDissolveMax();
             WeaponMeshControllerRef.SetMeshes(true);
         }
@@ -133,12 +134,12 @@ namespace Fight
 
         public virtual void Launch(Vector3 direction, float power)
         {
-            SetRigidbody();
+            DisableKinematic();
         }
 
         public virtual void Launch(Transform hittable)
         {
-            SetRigidbody();
+            DisableKinematic();
                 
             Target = hittable;
             CurrentTime = 0;
@@ -150,7 +151,7 @@ namespace Fight
             TimeToReachTargetFromApex = TimeToReachTarget - TimeToReachApexFromBase;
         }
 
-        private void SetRigidbody()
+        private void DisableKinematic()
         {
             RigidbodyProjectile = GetComponent<Rigidbody>();
             RigidbodyProjectile.isKinematic = false;

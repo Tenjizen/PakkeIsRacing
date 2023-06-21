@@ -46,7 +46,7 @@ namespace Fight
             base.Launch(direction, power);
             
             RigidbodyProjectile.useGravity = true;
-            RigidbodyProjectile.AddForce(direction * (Data.LaunchForce * power));
+            RigidbodyProjectile.AddForce(direction * (Data.LaunchForce * power * CharacterManager.Instance.PlayerStats.WeaponLaunchDistanceMultiplier));
         }
     }
 }

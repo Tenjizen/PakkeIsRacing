@@ -3009,8 +3009,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba1aa0dd97033f24b858c5680aec8c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waterRipplePaggaieLeft: {fileID: 0}
-  _waterRipplePaggaieRight: {fileID: 0}
   _left: {fileID: 0}
   _right: {fileID: 0}
 --- !u!1 &1706888413195782091
@@ -19879,6 +19877,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
+      propertyPath: _capacity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
+        type: 3}
       propertyPath: _title_EN
       value: Unbalance threshold
       objectReference: {fileID: 0}
@@ -19886,6 +19889,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _title_FR
       value: "Seuil de d\xE9s\xE9quilibre"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
+        type: 3}
+      propertyPath: _multiplier
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
@@ -20915,6 +20923,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
+      propertyPath: _capacity
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
+        type: 3}
       propertyPath: _title_EN
       value: "Port\xE9e du lancer"
       objectReference: {fileID: 0}
@@ -20922,6 +20935,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _title_FR
       value: "Port\xE9e du lancer"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
+        type: 3}
+      propertyPath: _multiplier
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
@@ -21173,6 +21191,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _title_FR
       value: Distance de freinage
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
+        type: 3}
+      propertyPath: _multiplier
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
@@ -21469,6 +21492,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
+      propertyPath: _capacity
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
+        type: 3}
       propertyPath: _title_EN
       value: Recovery speed
       objectReference: {fileID: 0}
@@ -21476,6 +21504,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _title_FR
       value: "Vitesse de r\xE9cup\xE9ration"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
+        type: 3}
+      propertyPath: _multiplier
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
@@ -21577,6 +21610,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
+      propertyPath: _capacity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
+        type: 3}
       propertyPath: _title_EN
       value: Rotation speed
       objectReference: {fileID: 0}
@@ -21584,6 +21622,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _title_FR
       value: Vitesse de rotation
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
+        type: 3}
+      propertyPath: _multiplier
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
@@ -22466,6 +22509,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
+      propertyPath: _capacity
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
+        type: 3}
       propertyPath: _title_EN
       value: Icebergs destruction
       objectReference: {fileID: 0}
@@ -22763,6 +22811,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
+        type: 3}
+      propertyPath: _capacity
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
@@ -24520,6 +24573,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
+      propertyPath: _capacity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
+        type: 3}
       propertyPath: _title_EN
       value: Maximum speed
       objectReference: {fileID: 0}
@@ -24527,6 +24585,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _title_FR
       value: Vitesse maximum
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
+        type: 3}
+      propertyPath: _multiplier
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
@@ -24979,6 +25042,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
+      propertyPath: _capacity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
+        type: 3}
       propertyPath: _title_EN
       value: Reduced charging time
       objectReference: {fileID: 0}
@@ -24986,6 +25054,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _title_FR
       value: "R\xE9duction du temps de charge"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
+        type: 3}
+      propertyPath: _multiplier
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
@@ -25087,6 +25160,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
+      propertyPath: _capacity
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
+        type: 3}
       propertyPath: _title_EN
       value: More experience
       objectReference: {fileID: 0}
@@ -25094,6 +25172,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _title_FR
       value: "Plus d'exp\xE9rience"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
+        type: 3}
+      propertyPath: _multiplier
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}

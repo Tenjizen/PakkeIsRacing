@@ -120,7 +120,7 @@ namespace Character.State
                 _isHoldingShoot = true;
                 
                 //holding vfx
-                _holdingTime += Time.deltaTime;
+                _holdingTime += Time.deltaTime * CharacterManagerRef.PlayerStats.ChargeTimeReducingMultiplier;
                 const float startTime = 0.3f;
                 if (_holdingTime > startTime && character.WeaponChargedParticleSystem.isPlaying == false)
                 {
@@ -264,7 +264,7 @@ namespace Character.State
             {
                 CharacterManagerRef.WeaponUIManagerProperty.AutoAimController.ShowAutoAimUI(true);
             }
-            _currentHittableAimTime += Time.deltaTime;
+            _currentHittableAimTime += Time.deltaTime * CharacterManagerRef.PlayerStats.ChargeTimeReducingMultiplier;
             float percentage = _currentHittableAimTime / CharacterManagerRef.Data.TimeToAutoAim;
             CharacterManagerRef.WeaponUIManagerProperty.AutoAimController.SetAutoAimUI(percentage, _hittable.Transform.position);
         }

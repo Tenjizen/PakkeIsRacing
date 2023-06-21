@@ -29,7 +29,7 @@ namespace UI.SkillTree
         [SerializeField, TextArea] private string _description_EN, _description_FR;
         [Space(5), SerializeField] private bool _unlockAtStart;
         [Space(5), SerializeField] private CapacityType _capacity;
-        [SerializeField] private float _multiplier;
+        [SerializeField] private float _multiplier = 1;
         
         private bool _isUnlocked;
         private bool _isActivated;
@@ -74,31 +74,39 @@ namespace UI.SkillTree
 
         private void SetCapacityEffect()
         {
-            CharacterManager character = CharacterManager.Instance;
+            PlayerStatsMultipliers character = CharacterManager.Instance.PlayerStats;
             switch (_capacity)
             {
                 case CapacityType.BreakingDistance:
+                    character.BreakingDistanceMultiplier = _multiplier;
                     break;
                 case CapacityType.MaximumSpeed:
+                    character.MaximumSpeedMultiplier = _multiplier;
                     break;
                 case CapacityType.RotationSpeed:
+                    character.RotationSpeedMultiplier = _multiplier;
                     break;
                 case CapacityType.UnbalanceThreshold:
+                    character.UnbalancedThresholdMultiplier = _multiplier;
                     break;
                 case CapacityType.Sprint:
+                    //unlock sprint
                     break;
                 case CapacityType.LaunchDistance:
+                    character.WeaponLaunchDistanceMultiplier = _multiplier;
                     break;
                 case CapacityType.ChargingTimeReduction:
+                    character.ChargeTimeReducingMultiplier = _multiplier;
                     break;
                 case CapacityType.MoreExperience:
+                    character.ExperienceGainMultiplier = _multiplier;
                     break;
                 case CapacityType.SednaRecuperationAfterShoot:
+                    character.WeaponRecallTimeMultiplier = _multiplier;
                     break;
                 case CapacityType.IcebergDestruction:
+                    //unlock iceberg destruction
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
 
