@@ -5616,8 +5616,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3858187113969445702}
-  m_LocalRotation: {x: 0.053479154, y: 0.04771767, z: -0.0025584893, w: 0.99742496}
-  m_LocalPosition: {x: -3.8953812, y: 4.7072444, z: -10.895796}
+  m_LocalRotation: {x: 0.05353937, y: 0.08941557, z: -0.00031828156, w: 0.9945543}
+  m_LocalPosition: {x: -5.074336, y: 5.467244, z: -21.722696}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6505,6 +6505,7 @@ MonoBehaviour:
   <TransitionManagerProperty>k__BackingField: {fileID: 0}
   <WeaponUIManagerProperty>k__BackingField: {fileID: 7505718252749942973}
   <EnemyUIManager>k__BackingField: {fileID: 2749849978099324265}
+  <UIMenuManagerRef>k__BackingField: {fileID: 8551579746196302997}
   <BalanceGaugeManagerRef>k__BackingField: {fileID: 879472272538970528}
   <CheckpointManagerProperty>k__BackingField: {fileID: 0}
   <CharacterMonoBehaviour>k__BackingField: {fileID: 7217796708653836310}
@@ -9095,6 +9096,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba1aa0dd97033f24b858c5680aec8c8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8551579746196302997 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8190976413022181645, guid: 5f3937e671440d847b7282995fde0507,
+    type: 3}
+  m_PrefabInstance: {fileID: 504792243475772824}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa3a79edf604a86b26d2128d7e5db44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1253579668420134801
