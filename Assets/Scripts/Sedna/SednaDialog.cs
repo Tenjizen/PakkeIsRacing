@@ -4,6 +4,7 @@ using Kayak;
 using System.Collections.Generic;
 using UI.Dialog;
 using UnityEngine;
+using WaterAndFloating;
 using WaterFlowGPE.Bezier;
 
 namespace Sedna
@@ -44,6 +45,7 @@ namespace Sedna
         private Rigidbody _rigidbodyKayak;
         private GameObject _target;
         private Vector3[] _directionsRaycast = { Vector3.right, Vector3.left, Vector3.forward };
+        private Waves _waves;
 
         private void Awake()
         {
@@ -60,6 +62,7 @@ namespace Sedna
 
         private void Start()
         {
+            _waves = CharacterManager.Instance.SednaManagerProperty.Waves;
             switch (_enumState)
             {
                 case State.Moving:
@@ -168,7 +171,7 @@ namespace Sedna
                 SetTarget();
 
                 var pos = _target.transform.position;
-                pos.y = CharacterManager.Instance.SednaManagerProperty.Waves.GetHeight(transform.position) - _removeAtYPosValue;
+                pos.y = _waves.GetHeight(transform.position) - _removeAtYPosValue;
                 transform.position = Vector3.Lerp(transform.position, pos, _lerpMovingPos * Time.deltaTime);
 
                 var targetRota = _playerTransform.eulerAngles;
@@ -182,7 +185,7 @@ namespace Sedna
                 _startMoving = false;
 
                 var pos = transform.position;
-                pos.y = CharacterManager.Instance.SednaManagerProperty.Waves.GetHeight(transform.position) - _removeAtYPosValue;
+                pos.y = _waves.GetHeight(transform.position) - _removeAtYPosValue;
                 transform.position = Vector3.Lerp(transform.position, pos, _lerpMovingPos);
 
                 Vector3 lookPos = _playerTransform.position - transform.position;
@@ -261,13 +264,17 @@ namespace Sedna
             Transform t = transform;
 
             Vector3 position = Vector3.Lerp(t.position, _splinePath.GetPoint(_currentSplinePosition), SpeedLerpToMovingValue * Time.deltaTime * 100);
+
+            float heightWave = _waves.GetHeight(transform.position) - _removeAtYPosValue;
+            if (position.y > heightWave)
+                position.y = heightWave;
             t.position = position;
 
             //rotation
             Vector3 pointB = _splinePath.GetPoint(Mathf.Clamp01(_currentSplinePosition + 0.01f));
             t.LookAt(pointB);
-            Vector3 rotation = t.transform.rotation.eulerAngles;
-            t.rotation = Quaternion.Euler(rotation.x + 65, Mathf.Lerp(rotation.y, t.rotation.eulerAngles.y, 0.1f), rotation.z);
+            Vector3 rotation = t.transform.localEulerAngles;
+            t.localRotation = Quaternion.Euler(65, Mathf.Lerp(rotation.y, t.rotation.eulerAngles.y, 0.1f), rotation.z);
         }
 
 

@@ -76,7 +76,13 @@ namespace Sedna
             }
 
             Vector3 sednaPosition = SednaGameObject.transform.position;
+            float heightWave = Waves.GetHeight(transform.position);
+
             sednaPosition.y = Curve.Evaluate(_timerSednaIsMoving);
+
+            if (sednaPosition.y > heightWave)
+                sednaPosition.y = heightWave;
+
             SednaGameObject.transform.position = sednaPosition;
         }
         #endregion
