@@ -51,6 +51,7 @@ namespace Character
             inputsEnum.Deadzone = DeadzoneJoystick;
 
             inputsEnum.AnyButton = _gameplayInputs.Boat.AnyButton.ReadValue<float>() > 0.3f;
+            inputsEnum.Start = _gameplayInputs.Boat.ShowLeaveMenu.ReadValue<float>() > 0.3f;
 
             Inputs = inputsEnum;
         }
@@ -81,5 +82,6 @@ namespace Character
         public bool Unbalanced;
 
         public bool AnyButton;
+        public bool Start;
     }
 }
