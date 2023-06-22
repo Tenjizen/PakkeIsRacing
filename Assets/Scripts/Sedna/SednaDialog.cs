@@ -12,10 +12,10 @@ namespace Sedna
     {
         private enum State
         {
-            Moving = 0, 
+            Moving = 0,
             Dialog = 1
         };
-        
+
         [SerializeField] private State _enumState;
         [SerializeField] private DialogCreator dialog;
 
@@ -25,6 +25,7 @@ namespace Sedna
 
         [SerializeField] float _lerpMovingPos = 15;
         [SerializeField] float _lerpMovingRota = 5;
+        [SerializeField] Animator _animator;
 
         [Header("Path"), SerializeField] private BezierSpline _splinePath;
         [SerializeField] private Transform _playerTransform;
@@ -36,7 +37,7 @@ namespace Sedna
 
         [Header("Debug"), SerializeField, ReadOnly] private bool _startMoving = false;
         [SerializeField, ReadOnly] private bool _endDialog = false;
-        
+
         private bool _goodHeight = false;
         private int _index = 0;
         private Transform _spline;
@@ -89,13 +90,14 @@ namespace Sedna
                     }
                     break;
             }
+            SetAnimatorToSwim();
         }
 
 
         private void FixedUpdate()
         {
             Transform t = transform;
-            
+
             if (_endDialog)
             {
                 Quaternion rotation = t.rotation;
@@ -116,13 +118,9 @@ namespace Sedna
                     _endDialog = false;
                     gameObject.SetActive(false);
                 }
-            }
-
-            if (_endDialog)
-            {
                 return;
             }
-            
+
             switch (_enumState)
             {
                 case State.Moving:
@@ -148,7 +146,7 @@ namespace Sedna
                         if (Mathf.Abs(_rigidbodyKayak.velocity.x) + Mathf.Abs(_rigidbodyKayak.velocity.z) > _minimumPlayerVelocity)
                         {
                             var targetRota = _playerTransform.eulerAngles;
-                            t.rotation = Quaternion.Slerp(t.rotation, Quaternion.Euler(targetRota.x + 65, targetRota.y, targetRota.z),Time.deltaTime * _lerpMovingRota);
+                            t.rotation = Quaternion.Slerp(t.rotation, Quaternion.Euler(targetRota.x + 65, targetRota.y, targetRota.z), Time.deltaTime * _lerpMovingRota);
                         }
                     }
                     else
@@ -165,6 +163,8 @@ namespace Sedna
         {
             if (Mathf.Abs(_rigidbodyKayak.velocity.x) + Mathf.Abs(_rigidbodyKayak.velocity.z) > _minimumPlayerVelocity && _target != null)
             {
+                SetAnimatorToSwim();
+
                 SetTarget();
 
                 var pos = _target.transform.position;
@@ -178,6 +178,7 @@ namespace Sedna
             }
             else
             {
+                SetAnimatorToIdle();
                 _startMoving = false;
 
                 var pos = transform.position;
@@ -216,7 +217,7 @@ namespace Sedna
             {
                 return;
             }
-            
+
             _target = GetClosestPoint(transform.position);
             _startMoving = true;
         }
@@ -251,7 +252,7 @@ namespace Sedna
             {
                 return;
             }
-            
+
             Vector3 p = _spline.position;
             p.x = _playerTransform.position.x;
             p.z = _playerTransform.position.z;
@@ -276,7 +277,7 @@ namespace Sedna
         }
         public void StartDialog(GameObject gameObject)
         {
-            if(dialog.HasEnded == true && dialog.CanBeReplayed == false)
+            if (dialog.HasEnded == true && dialog.CanBeReplayed == false)
             {
                 return;
             }
@@ -284,6 +285,19 @@ namespace Sedna
             gameObject.SetActive(true);
 
         }
+
+        private void SetAnimatorToIdle()
+        {
+            _animator.SetBool("IdleSedna", true);
+            _animator.SetBool("SwimSedna", false);
+        }
+
+        private void SetAnimatorToSwim()
+        {
+            _animator.SetBool("SwimSedna", true);
+            _animator.SetBool("IdleSedna", false);
+        }
+
 
     }
 }
