@@ -137,6 +137,8 @@ namespace Character
                 ManageWeaponCooldown();
             }
 
+            ManageInvincibilityBalance();
+
             //anim
             if (IKPlayerControl.CurrentType != IKType.Paddle || IKPlayerControl.Type == IKType.Paddle)
             {
@@ -221,6 +223,22 @@ namespace Character
                 WeaponCooldown -= Time.deltaTime;
                 float value = WeaponCooldown / WeaponCooldownBase;
                 WeaponUIManagerProperty.SetCooldownUI(value);
+            }
+        }
+
+        private void ManageInvincibilityBalance()
+        {
+            if (InvincibilityTime < 0 && KayakControllerProperty.Rigidbody.freezeRotation == false)
+                return;
+
+            if (InvincibilityTime >= 0)
+            {
+                Balance = 0;
+                KayakControllerProperty.Rigidbody.freezeRotation = true;
+            }
+            else if (KayakControllerProperty.Rigidbody.freezeRotation == true)
+            {
+                KayakControllerProperty.Rigidbody.freezeRotation = false;
             }
         }
 

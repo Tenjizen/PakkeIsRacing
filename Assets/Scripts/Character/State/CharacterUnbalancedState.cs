@@ -95,6 +95,8 @@ namespace Character.State
                     //CharacterManagerRef.SetBalanceValueToCurrentSide(0);
                     CanCharacterMakeActions = true;
 
+                    CharacterManagerRef.InvincibilityTime = CharacterManagerRef.Data.InvincibleTimeAfterUnbalance;
+
                     CharacterNavigationState characterNavigationState = new CharacterNavigationState();
                     CharacterManagerRef.SwitchState(characterNavigationState);
 
@@ -148,7 +150,6 @@ namespace Character.State
 
         public override void ExitState(CharacterManager character)
         {
-            CharacterManagerRef.InvincibilityTime = CharacterManagerRef.Data.InvincibleTimeAfterUnbalance;
 
             CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeActive(false);
             CharacterManagerRef.BalanceGaugeManagerRef.ShowTrigger(false, false);
@@ -176,6 +177,8 @@ namespace Character.State
                     CameraManagerRef.CanMoveCameraManually = true;
                     //CharacterManagerRef.SetBalanceValueToCurrentSide(0);
                     CanCharacterMakeActions = true;
+
+                    CharacterManagerRef.InvincibilityTime = CharacterManagerRef.Data.InvincibleTimeAfterUnbalance;
 
                     CharacterNavigationState characterNavigationState = new CharacterNavigationState();
                     CharacterManagerRef.SwitchState(characterNavigationState);
