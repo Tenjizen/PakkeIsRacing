@@ -90,6 +90,12 @@ namespace Enemies.Shark
             AvoidObstacle();
             ManagerCircleUI();
 
+
+            if(IsPossessed == false)
+            {
+                Die();
+            }
+
         }
         private void FixedUpdate()
         {
