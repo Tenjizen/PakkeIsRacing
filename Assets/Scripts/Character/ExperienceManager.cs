@@ -70,6 +70,8 @@ namespace Character
                 WheelButton button = CharacterManager.Instance.WeaponUIManagerProperty.Buttons.Find(x => x.ButtonController.Type == Data.WeaponLevels[i].Type);
                 button.ButtonController.SetCanBeUnlocked(true);
             }
+            
+            CharacterManager.Instance.NotificationsUIController.LaunchSkillPointNotification();
         }
     }
 }
