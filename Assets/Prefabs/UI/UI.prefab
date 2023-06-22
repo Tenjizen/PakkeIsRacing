@@ -3014,6 +3014,7 @@ MonoBehaviour:
   _scaleMax: 0.08
   _speed: 0.02
   _duration: 0.1
+  _trails: []
 --- !u!1 &1706888413195782091
 GameObject:
   m_ObjectHideFlags: 0
@@ -6816,6 +6817,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3125875062380749686}
   - component: {fileID: 3788667527396610980}
+  - component: {fileID: 2634438158935894207}
   m_Layer: 5
   m_Name: StartParameters
   m_TagString: Untagged
@@ -6863,11 +6865,42 @@ MonoBehaviour:
   MenuGameObject: {fileID: 1734284938371844827}
   OnSelected:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2634438158935894207}
+        m_TargetAssemblyTypeName: Sound.PlaySound, Assembly-CSharp
+        m_MethodName: PlaySoundTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _objectsList:
   - {fileID: 9061116154835219749}
   - {fileID: 2941446425072537332}
   CanBeOpened: 1
+--- !u!114 &2634438158935894207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3485729211960781344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb12ca207c8fb8c41967292a1edca8fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+    Guid:
+      Data1: 1741907874
+      Data2: 1137378262
+      Data3: -780664424
+      Data4: 636253921
+    Path: event:/SFX/UI/UI_button
 --- !u!1 &3491875993427919742
 GameObject:
   m_ObjectHideFlags: 0
@@ -19901,7 +19934,7 @@ PrefabInstance:
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
       propertyPath: _description_EN
-      value: The kayak is more stable by increasing the threshold of imbalance
+      value: The kayak is more stable by increasing the threshold of unbalance
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
@@ -20348,8 +20381,138 @@ PrefabInstance:
       propertyPath: _parameter
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOn.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOff.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOn.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOff.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOn.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3469659561709617550}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOff.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3469659561709617550}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOn.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOff.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOn.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlaySoundTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOff.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlaySoundTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3469659561709617550}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlaySoundTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOn.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Sound.PlaySound, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOff.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Sound.PlaySound, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Sound.PlaySound, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOn.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOff.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49dc44d911c89064d845fada12fdc427, type: 3}
+--- !u!1 &577323825471482950 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 158846415478293071, guid: 49dc44d911c89064d845fada12fdc427,
+    type: 3}
+  m_PrefabInstance: {fileID: 736132985328594441}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3469659561709617550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577323825471482950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb12ca207c8fb8c41967292a1edca8fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+    Guid:
+      Data1: 1741907874
+      Data2: 1137378262
+      Data3: -780664424
+      Data4: 636253921
+    Path: event:/SFX/UI/UI_button
 --- !u!114 &4206349602073257148 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3488233218616576693, guid: 49dc44d911c89064d845fada12fdc427,
@@ -20374,7 +20537,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 736132985328594441}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 577323825471482950}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6d4efe24013475cb44906147fdd3ba2, type: 3}
@@ -20948,11 +21111,6 @@ PrefabInstance:
         type: 3}
       propertyPath: _unlockAtStart
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
-        type: 3}
-      propertyPath: _description_EN
-      value: increases the distance at which Nuna can throw her weapons
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
@@ -21636,12 +21794,6 @@ PrefabInstance:
       propertyPath: _description_EN
       value: Increased efficiency of multiple paddle strokes on the same side to
         facilitate turns
-      objectReference: {fileID: 0}
-    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
-        type: 3}
-      propertyPath: _description_FR
-      value: "augmentation de l'efficacit\xE9 de plusieurs coups de pagaie d'un m\xEAme
-        c\xF4t\xE9 pour faciliter les virages"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9e4d481decb37442a5b930b5c5a3413, type: 3}
@@ -22833,13 +22985,14 @@ PrefabInstance:
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
       propertyPath: _description_EN
-      value: The player can sprint following a precise timing to go faster
+      value: The player can sprint following a precise timing of alternating paddle
+        strokes to go faster
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
       propertyPath: _description_FR
-      value: "Le joueur peut effectuer un sprint en suivant un timing pr\xE9cis pour
-        aller plus vite"
+      value: "Le joueur peut effectuer un sprint en suivant un timing pr\xE9cis d'alternance
+        de coup de pagaie pour aller plus vite"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9e4d481decb37442a5b930b5c5a3413, type: 3}
@@ -23818,6 +23971,111 @@ PrefabInstance:
       propertyPath: _parameter
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOn.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOff.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOn.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOff.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOn.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2714664964952823118}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOff.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2714664964952823118}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOn.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOff.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOn.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlaySoundTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOff.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlaySoundTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2714664964952823118}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlaySoundTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOn.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Sound.PlaySound, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOff.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Sound.PlaySound, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Sound.PlaySound, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOn.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnOff.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613354388388633388, guid: 49dc44d911c89064d845fada12fdc427,
+        type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49dc44d911c89064d845fada12fdc427, type: 3}
 --- !u!224 &746828616253450541 stripped
@@ -23832,12 +24090,37 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 6871039331641742808}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 6732459397963044759}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6d4efe24013475cb44906147fdd3ba2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6732459397963044759 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 158846415478293071, guid: 49dc44d911c89064d845fada12fdc427,
+    type: 3}
+  m_PrefabInstance: {fileID: 6871039331641742808}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2714664964952823118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6732459397963044759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb12ca207c8fb8c41967292a1edca8fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+    Guid:
+      Data1: 1741907874
+      Data2: 1137378262
+      Data3: -780664424
+      Data4: 636253921
+    Path: event:/SFX/UI/UI_button
 --- !u!114 &8012577186511167341 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3488233218616576693, guid: 49dc44d911c89064d845fada12fdc427,
