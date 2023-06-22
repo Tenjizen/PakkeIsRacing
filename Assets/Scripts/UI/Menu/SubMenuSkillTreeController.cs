@@ -166,7 +166,7 @@ namespace UI.Menu
         private void ActivateSkill()
         {
             if (CharacterManager.Instance.ExperienceManagerProperty.SkillPoints <= 0 ||
-                _currentTile.CanBeActivated() == false)
+                _currentTile.CanBeActivated() == false || IsActive == false || IsUsable == false)
             {
                 return;
             }
