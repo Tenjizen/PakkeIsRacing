@@ -48,6 +48,7 @@ MonoBehaviour:
   HorizontalSpeed: 10
   VerticalSpeed: 50
   Amplitude: 1
+  _animator: {fileID: 4185186767278022225}
 --- !u!1001 &5754789789631689618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -132,6 +133,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2ad1e2a009a5744bbc1bd7f1c1a3fbb, type: 3}
+--- !u!95 &4185186767278022225 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8487556736571354563, guid: e2ad1e2a009a5744bbc1bd7f1c1a3fbb,
+    type: 3}
+  m_PrefabInstance: {fileID: 5754789789631689618}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7823762152308731308 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2544121384146787902, guid: e2ad1e2a009a5744bbc1bd7f1c1a3fbb,
