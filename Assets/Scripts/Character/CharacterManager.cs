@@ -97,6 +97,7 @@ namespace Character
         [HideInInspector] public bool IsGameLaunched;
 
         [ReadOnly] public bool SprintInProgress = false;
+        [ReadOnly] public bool InWaterFlow = false;
 
         public PlayerStatsMultipliers PlayerStats;
 

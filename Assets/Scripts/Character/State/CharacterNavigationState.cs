@@ -96,7 +96,15 @@ namespace Character.State
                 CharacterManagerRef.SprintInProgress = false;
             }
 
-            CharacterManagerRef.SprintUIManager.ManageScaleUISprint(_timerLastInputTrigger);
+            if (CharacterManagerRef.InWaterFlow == false)
+            {
+                CharacterManagerRef.SprintUIManager.SprintEnded(_timerLastInputTrigger);
+            }
+            else if (CharacterManagerRef.InWaterFlow == true)
+            {
+                CharacterManagerRef.SprintUIManager.ParticleSpeedEmission(true);
+                CharacterManagerRef.SprintUIManager.TrailEmitting(true);
+            }
         }
 
         public override void FixedUpdate(CharacterManager character)

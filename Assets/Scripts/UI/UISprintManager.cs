@@ -16,10 +16,11 @@ public class UISprintManager : MonoBehaviour
     [SerializeField] private float _duration = 0.5f;
 
     [SerializeField] private GameObject[] _trails;
+    [SerializeField] private ParticleSystem _particle;
 
     private Direction _lastDirection;
 
-    public void ManageScaleUISprint(float timer)
+    public void SprintEnded(float timer)
     {
         if (timer > CharacterManager.Instance.KayakControllerProperty.Data.KayakValues.TimerMaxForSprint)
         {
@@ -28,11 +29,11 @@ public class UISprintManager : MonoBehaviour
                 _left.enabled = false;
                 _right.enabled = false;
             }
-            foreach (var trail in _trails)
-            {
-                //trail.GetComponent<TrailRenderer>().time = Mathf.Lerp(trail.GetComponent<TrailRenderer>().time, 0, Time.deltaTime);
-                trail.GetComponent<TrailRenderer>().emitting = false;
-            }
+            ParticleSpeedEmission(false);
+
+            if (_trails.Length > 0 && _trails[_trails.Length - 1].GetComponent<TrailRenderer>().emitting == true)
+                TrailEmitting(false);
+
             return;
         }
 
@@ -107,11 +108,15 @@ public class UISprintManager : MonoBehaviour
         {
             _left.enabled = false;
         }
-        foreach (var trail in _trails)
-        {
-            //trail.GetComponent<TrailRenderer>().time = Mathf.Lerp(trail.GetComponent<TrailRenderer>().time, 0, Time.deltaTime);
-            trail.GetComponent<TrailRenderer>().emitting = false;
-        }
+
+        //foreach (var trail in _trails)
+        //{
+        //    //trail.GetComponent<TrailRenderer>().time = Mathf.Lerp(trail.GetComponent<TrailRenderer>().time, 0, Time.deltaTime);
+        //    trail.GetComponent<TrailRenderer>().emitting = false;
+        //}
+
+        TrailEmitting(false);
+        ParticleSpeedEmission(false);
     }
 
     public void EnableFeedback(Direction direction)
@@ -131,15 +136,12 @@ public class UISprintManager : MonoBehaviour
             return;
         }
 
-        foreach (var trail in _trails)
-        {
-            trail.GetComponent<TrailRenderer>().emitting = true;
-        }
-
-        //if (_trails[0].GetComponent<TrailRenderer>().time < 0.4f)
+        //foreach (var trail in _trails)
         //{
-        //    StartCoroutine(TrailEmitting());
+        //    trail.GetComponent<TrailRenderer>().emitting = true;
         //}
+        TrailEmitting(true);
+        ParticleSpeedEmission(true);
 
         Vector3 initScale = (Vector3.one / 2) / 10;
         if (direction == Direction.Left)
@@ -157,24 +159,17 @@ public class UISprintManager : MonoBehaviour
 
         _lastDirection = direction;
     }
-    private IEnumerator TrailEmitting()
+
+    public void ParticleSpeedEmission(bool active)
     {
-        float timeElapsed = 0f;
-        while (timeElapsed < 0.5f)
+        var ps = _particle.emission;
+        ps.enabled = active;
+    }
+    public void TrailEmitting(bool active)
+    {
+        foreach (var trail in _trails)
         {
-            float t = timeElapsed / 0.5f;
-            foreach (var trail in _trails)
-            {
-                trail.GetComponent<TrailRenderer>().time = Mathf.Lerp(trail.GetComponent<TrailRenderer>().time, 0.5f, t);
-                trail.GetComponent<TrailRenderer>().emitting = true;
-            }
-            timeElapsed += Time.deltaTime * _speed;
-            yield return null;
-            Debug.Log(timeElapsed);
-            if(_trails[0].GetComponent<TrailRenderer>().time > 0.45f)
-            {
-                break;
-            }
+            trail.GetComponent<TrailRenderer>().emitting = active;
         }
     }
 }

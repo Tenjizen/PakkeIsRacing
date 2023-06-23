@@ -94,7 +94,11 @@ namespace GPEs.WaterFlowGPE
             {
                 return;
             }
-            
+
+
+            //In water flow
+            CharacterManager.Instance.InWaterFlow = true;
+
             //get rotation
             Quaternion currentRotation = kayakController.transform.rotation;
             Vector3 currentRotationEuler = currentRotation.eulerAngles;
@@ -167,11 +171,17 @@ namespace GPEs.WaterFlowGPE
         }
         private void ResetCameraShake(Collider other)
         {
+            if (CharacterManager.Instance.InWaterFlow == true)
+            {
+                CharacterManager.Instance.InWaterFlow = false;
+            }
+
             CameraManager _tempoCameraManager = other.GetComponentInParent<CameraManager>();
             if (_tempoCameraManager != null)
             {
                 _tempoCameraManager.WaterFlow = false;
             }
+
         }
         #endregion
 
