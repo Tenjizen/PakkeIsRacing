@@ -335,14 +335,17 @@ namespace Character.State
         {
             if (_leftPaddleCooldown < 0)
             {
-                Direction direction = CharacterManagerRef.Parameters.InversedControls ? Direction.Right : Direction.Left;
+                Direction direction =
+                    CharacterManagerRef.Parameters.InversedControls ? Direction.Right : Direction.Left;
                 _leftPaddleCooldown = _kayakValues.PaddleCooldown;
                 _rightPaddleCooldown = _kayakValues.PaddleCooldown / 2;
                 Paddle(direction);
             }
+
             if (_rightPaddleCooldown < 0)
             {
-                Direction direction = CharacterManagerRef.Parameters.InversedControls ? Direction.Left : Direction.Right;
+                Direction direction =
+                    CharacterManagerRef.Parameters.InversedControls ? Direction.Left : Direction.Right;
                 _rightPaddleCooldown = _kayakValues.PaddleCooldown;
                 _leftPaddleCooldown = _kayakValues.PaddleCooldown / 2;
                 Paddle(direction);
@@ -350,6 +353,8 @@ namespace Character.State
 
             //change the rotation inertia to 0
             RotationPaddleForceY = Mathf.Lerp(RotationPaddleForceY, 0, 0.1f);
+            RotationStaticForceY = Mathf.Lerp(RotationStaticForceY, 0, 0.1f);
+            
         }
 
         private void CheckIfSprint(Direction direction)
