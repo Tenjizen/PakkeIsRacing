@@ -5,12 +5,21 @@ public class MovingBird : MonoBehaviour
     public float HorizontalSpeed;
     public float VerticalSpeed;
     public float Amplitude;
+
+    [SerializeField] private Animator _animator;
+
     private Vector3 _tempPosition;
     private Vector3 _startPosition;
     private float _startTime;
 
+
     void Start()
     {
+        //AnimationName["ClipName"].time = random.range(0f, AnimationName["ClipName"].length)
+        AnimatorStateInfo state = _animator.GetCurrentAnimatorStateInfo(0);//could replace 0 by any other animation layer index
+        _animator.Play(state.fullPathHash, -1, Random.Range(0f, 1f) * state.length);
+        
+
         _startTime = Random.value;
         _tempPosition = transform.position;
         _startPosition = transform.position;
