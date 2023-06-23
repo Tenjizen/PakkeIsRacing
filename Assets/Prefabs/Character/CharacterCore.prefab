@@ -5425,7 +5425,11 @@ MonoBehaviour:
   m_AnimatedTarget: {fileID: 4963052748703314965}
   m_LayerIndex: 0
   m_ShowDebugText: 0
-  m_ChildCameras: []
+  m_ChildCameras:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_Instructions:
   - m_FullHash: -1195735313
     m_VirtualCamera: {fileID: 4192299973026284776}
@@ -5437,6 +5441,10 @@ MonoBehaviour:
     m_MinDuration: 0
   - m_FullHash: -1117726298
     m_VirtualCamera: {fileID: 2091088283570573891}
+    m_ActivateAfter: 0
+    m_MinDuration: 0
+  - m_FullHash: 1220816286
+    m_VirtualCamera: {fileID: 4959831362825320263}
     m_ActivateAfter: 0
     m_MinDuration: 0
   m_DefaultBlend:
@@ -6706,7 +6714,7 @@ MonoBehaviour:
     PaddleRight: 0
     RotateLeft: 0
     RotateRight: 0
-    RotateCameraClick: 0
+    ResetCamera: 0
     RotateCamera: {x: 0, y: 0}
     Deadzone: 0
     OpenWeaponMenu: 0
