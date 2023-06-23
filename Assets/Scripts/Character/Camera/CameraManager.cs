@@ -19,6 +19,7 @@ namespace Character.Camera
         [field: SerializeField, Header("Virtual Camera")] public CinemachineBrain Brain { get; private set; }
         [field: SerializeField] public CinemachineVirtualCamera VirtualCameraFreeLook { get; private set; }
         [field: SerializeField] public CinemachineVirtualCamera VirtualCameraCombat { get; private set; }
+        [field: SerializeField] public CinemachineVirtualCamera VirtualCameraLookAt { get; private set; }
         [field: SerializeField] public Waves Waves { get; private set; }
         [field: SerializeField] public NoiseSettings MyNoiseProfileWhenNavigating { get; private set; }
         [field: SerializeField] public NoiseSettings MyNoiseProfileWarning { get; private set; }
