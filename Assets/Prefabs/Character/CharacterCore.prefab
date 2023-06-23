@@ -6696,6 +6696,7 @@ MonoBehaviour:
   ProjectileIsInAir: 0
   IsGameLaunched: 0
   SprintInProgress: 0
+  InWaterFlow: 0
   PlayerStats:
     BreakingDistanceMultiplier: 1
     MaximumSpeedMultiplier: 1
@@ -9283,6 +9284,11 @@ PrefabInstance:
       objectReference: {fileID: 4212806810178006464}
     - target: {fileID: 8278373982930158887, guid: 5f3937e671440d847b7282995fde0507,
         type: 3}
+      propertyPath: _particle
+      value: 
+      objectReference: {fileID: 2696206347028872990}
+    - target: {fileID: 8278373982930158887, guid: 5f3937e671440d847b7282995fde0507,
+        type: 3}
       propertyPath: _trails.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -10945,7 +10951,7 @@ PrefabInstance:
     - target: {fileID: 4339259734915468042, guid: 975d19df47628cf4283803d15433afaf,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4339259734915468047, guid: 975d19df47628cf4283803d15433afaf,
         type: 3}
@@ -10972,6 +10978,12 @@ PrefabInstance:
 --- !u!4 &2696206347028872984 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4339259734915468041, guid: 975d19df47628cf4283803d15433afaf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1824798830458434577}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2696206347028872990 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4339259734915468047, guid: 975d19df47628cf4283803d15433afaf,
     type: 3}
   m_PrefabInstance: {fileID: 1824798830458434577}
   m_PrefabAsset: {fileID: 0}
