@@ -91,10 +91,10 @@ namespace Enemies.Shark
             ManagerCircleUI();
 
 
-            if(IsPossessed == false)
-            {
-                Die();
-            }
+            // if(IsPossessed == false)
+            // {
+            //     Die();
+            // }
 
         }
         private void FixedUpdate()

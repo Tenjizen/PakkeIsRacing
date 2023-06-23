@@ -28,7 +28,7 @@ namespace Enemies
 
         protected void HandlePlayerDistanceToSetUI(Transform player, float distance)
         {
-            if (Vector3.Distance(transform.position, player.position) > distance)
+            if (Vector3.Distance(transform.position, player.position) > distance || CurrentLife <= 0)
             {
                 CharacterManager.Instance.EnemyUIManager.DisableEnemyUI();
             }
