@@ -64,7 +64,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""RotateCameraActivation"",
+                    ""name"": ""ResetCamera"",
                     ""type"": ""Value"",
                     ""id"": ""ab86d594-21ec-40bb-8ec8-749b64f9654a"",
                     ""expectedControlType"": ""Button"",
@@ -374,11 +374,11 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d1b4b7b8-9fe4-428b-84be-cf322c633df0"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Mouse>/middleButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
-                    ""action"": ""RotateCameraActivation"",
+                    ""action"": ""ResetCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -389,7 +389,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""GamePad"",
-                    ""action"": ""RotateCameraActivation"",
+                    ""action"": ""ResetCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1097,7 +1097,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         m_Boat_PaddleRight = m_Boat.FindAction("PaddleRight", throwIfNotFound: true);
         m_Boat_StaticRotateLeft = m_Boat.FindAction("StaticRotateLeft", throwIfNotFound: true);
         m_Boat_StaticRotateRight = m_Boat.FindAction("StaticRotateRight", throwIfNotFound: true);
-        m_Boat_RotateCameraActivation = m_Boat.FindAction("RotateCameraActivation", throwIfNotFound: true);
+        m_Boat_ResetCamera = m_Boat.FindAction("ResetCamera", throwIfNotFound: true);
         m_Boat_RotateCamera = m_Boat.FindAction("RotateCamera", throwIfNotFound: true);
         m_Boat_DialogSkip = m_Boat.FindAction("DialogSkip", throwIfNotFound: true);
         m_Boat_OpenWheelMenu = m_Boat.FindAction("OpenWheelMenu", throwIfNotFound: true);
@@ -1183,7 +1183,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Boat_PaddleRight;
     private readonly InputAction m_Boat_StaticRotateLeft;
     private readonly InputAction m_Boat_StaticRotateRight;
-    private readonly InputAction m_Boat_RotateCameraActivation;
+    private readonly InputAction m_Boat_ResetCamera;
     private readonly InputAction m_Boat_RotateCamera;
     private readonly InputAction m_Boat_DialogSkip;
     private readonly InputAction m_Boat_OpenWheelMenu;
@@ -1214,7 +1214,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         public InputAction @PaddleRight => m_Wrapper.m_Boat_PaddleRight;
         public InputAction @StaticRotateLeft => m_Wrapper.m_Boat_StaticRotateLeft;
         public InputAction @StaticRotateRight => m_Wrapper.m_Boat_StaticRotateRight;
-        public InputAction @RotateCameraActivation => m_Wrapper.m_Boat_RotateCameraActivation;
+        public InputAction @ResetCamera => m_Wrapper.m_Boat_ResetCamera;
         public InputAction @RotateCamera => m_Wrapper.m_Boat_RotateCamera;
         public InputAction @DialogSkip => m_Wrapper.m_Boat_DialogSkip;
         public InputAction @OpenWheelMenu => m_Wrapper.m_Boat_OpenWheelMenu;
@@ -1258,9 +1258,9 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @StaticRotateRight.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnStaticRotateRight;
                 @StaticRotateRight.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnStaticRotateRight;
                 @StaticRotateRight.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnStaticRotateRight;
-                @RotateCameraActivation.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnRotateCameraActivation;
-                @RotateCameraActivation.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnRotateCameraActivation;
-                @RotateCameraActivation.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnRotateCameraActivation;
+                @ResetCamera.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnResetCamera;
+                @ResetCamera.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnResetCamera;
+                @ResetCamera.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnResetCamera;
                 @RotateCamera.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnRotateCamera;
                 @RotateCamera.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnRotateCamera;
                 @RotateCamera.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnRotateCamera;
@@ -1343,9 +1343,9 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
                 @StaticRotateRight.started += instance.OnStaticRotateRight;
                 @StaticRotateRight.performed += instance.OnStaticRotateRight;
                 @StaticRotateRight.canceled += instance.OnStaticRotateRight;
-                @RotateCameraActivation.started += instance.OnRotateCameraActivation;
-                @RotateCameraActivation.performed += instance.OnRotateCameraActivation;
-                @RotateCameraActivation.canceled += instance.OnRotateCameraActivation;
+                @ResetCamera.started += instance.OnResetCamera;
+                @ResetCamera.performed += instance.OnResetCamera;
+                @ResetCamera.canceled += instance.OnResetCamera;
                 @RotateCamera.started += instance.OnRotateCamera;
                 @RotateCamera.performed += instance.OnRotateCamera;
                 @RotateCamera.canceled += instance.OnRotateCamera;
@@ -1440,7 +1440,7 @@ public partial class @GameplayInputs : IInputActionCollection2, IDisposable
         void OnPaddleRight(InputAction.CallbackContext context);
         void OnStaticRotateLeft(InputAction.CallbackContext context);
         void OnStaticRotateRight(InputAction.CallbackContext context);
-        void OnRotateCameraActivation(InputAction.CallbackContext context);
+        void OnResetCamera(InputAction.CallbackContext context);
         void OnRotateCamera(InputAction.CallbackContext context);
         void OnDialogSkip(InputAction.CallbackContext context);
         void OnOpenWheelMenu(InputAction.CallbackContext context);

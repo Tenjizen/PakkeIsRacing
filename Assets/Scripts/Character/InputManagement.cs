@@ -36,7 +36,7 @@ namespace Character
             inputsEnum.RotateLeft = _gameplayInputs.Boat.StaticRotateLeft.ReadValue<float>();
             inputsEnum.RotateRight = _gameplayInputs.Boat.StaticRotateRight.ReadValue<float>();
 
-            inputsEnum.RotateCameraClick = _gameplayInputs.Boat.RotateCameraActivation.ReadValue<float>() > 0;
+            inputsEnum.ResetCamera = _gameplayInputs.Boat.ResetCamera.ReadValue<float>() > 0;
             
             inputsEnum.RotateCamera = _gameplayInputs.Boat.RotateCamera.ReadValue<Vector2>();
 
@@ -66,7 +66,7 @@ namespace Character
         public float RotateLeft;
         public float RotateRight;
         
-        public bool RotateCameraClick;
+        public bool ResetCamera;
         public Vector2 RotateCamera;
         
         public float Deadzone;

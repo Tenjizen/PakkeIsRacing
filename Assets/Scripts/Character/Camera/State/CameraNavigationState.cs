@@ -17,7 +17,7 @@ namespace Character.Camera.State
 
 
             CamManager.CameraAnimator.Play("FreeLook");
-            CamManager.Brain.m_BlendUpdateMethod = Cinemachine.CinemachineBrain.BrainUpdateMethod.LateUpdate;
+            CamManager.Brain.m_BlendUpdateMethod = CinemachineBrain.BrainUpdateMethod.LateUpdate;
 
             CamManager.ShakeCameraNavigating(0);
             CamManager.ResetNavigationValue();
@@ -29,6 +29,11 @@ namespace Character.Camera.State
                 CamManager.SmoothResetRotateZ();
             }
 
+            if (CamManager.Input.Inputs.ResetCamera)
+            {
+                _timerCameraReturnBehindBoat += CamManager.Data.TimerCameraReturnBehindBoat + 1;
+                _startMoving = true;
+            }
 
             MoveCamera(camera);
 
@@ -67,9 +72,12 @@ namespace Character.Camera.State
             //rotate freely with inputs
             bool rotateInput = Mathf.Abs(CamManager.Input.Inputs.RotateCamera.x) + Mathf.Abs(CamManager.Input.Inputs.RotateCamera.y) >= CamManager.Input.Inputs.Deadzone; //0.5f;
             const float minimumVelocityToReplaceCamera = 0.05f;
-            bool rotateCamClick = CamManager.Input.Inputs.RotateCameraClick;
+            bool rotateCamClick = CamManager.Input.Inputs.ResetCamera;
 
             _timerCameraReturnBehindBoat += Time.deltaTime;
+
+       
+
             if (rotateInput && CamManager.CanMoveCameraManually /*&& rotateCamClick*/)
             {
                 _startMoving = false;
@@ -186,7 +194,7 @@ namespace Character.Camera.State
             const float minimumVelocityToReplaceCamera = 0.05f;
             _timerCameraReturnBehindBoat += Time.deltaTime;
 
-            bool rotateCamClick = CamManager.Input.Inputs.RotateCameraClick;
+            bool rotateCamClick = CamManager.Input.Inputs.ResetCamera;
 
             if (rotateInput && CamManager.CanMoveCameraManually /*&& rotateCamClick*/)
             {

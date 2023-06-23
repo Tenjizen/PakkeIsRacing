@@ -42,7 +42,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "RotateCameraActivation",
+                    "name": "ResetCamera",
                     "type": "Value",
                     "id": "ab86d594-21ec-40bb-8ec8-749b64f9654a",
                     "expectedControlType": "Button",
@@ -352,11 +352,11 @@
                 {
                     "name": "",
                     "id": "d1b4b7b8-9fe4-428b-84be-cf322c633df0",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Mouse>/middleButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "RotateCameraActivation",
+                    "action": "ResetCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -367,7 +367,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "GamePad",
-                    "action": "RotateCameraActivation",
+                    "action": "ResetCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
