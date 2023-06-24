@@ -69,7 +69,7 @@ namespace UI.SkillTree
         {
             
             _isActivated = isActivated;
-            _unlockIcon.gameObject.SetActive(_isActivated == false);
+            _unlockIcon.gameObject.SetActive(_isActivated);
 
             _activatedIcon.gameObject.SetActive(_isActivated);
             _activatedIcon.gameObject.transform.DOComplete();
