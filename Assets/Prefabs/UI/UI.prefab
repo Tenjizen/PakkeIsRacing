@@ -22946,16 +22946,6 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
-      propertyPath: _title_EN
-      value: Breaking distance
-      objectReference: {fileID: 0}
-    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
-        type: 3}
-      propertyPath: _title_FR
-      value: Distance de freinage
-      objectReference: {fileID: 0}
-    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
-        type: 3}
       propertyPath: _unlockAtStart
       value: 1
       objectReference: {fileID: 0}
@@ -23388,23 +23378,13 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
-      propertyPath: _capacity
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
-        type: 3}
       propertyPath: _title_EN
-      value: Rotation speed
+      value: Breaking distance
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
       propertyPath: _title_FR
-      value: Vitesse de rotation
-      objectReference: {fileID: 0}
-    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
-        type: 3}
-      propertyPath: _multiplier
-      value: 1.6
+      value: Distance de freinage
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
@@ -23415,8 +23395,7 @@ PrefabInstance:
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
       propertyPath: _description_FR
-      value: "Augmentation de l'efficacit\xE9 de plusieurs coups de pagaie d'un m\xEAme
-        c\xF4t\xE9 pour faciliter les virages"
+      value: "R\xE9duction du temps qu'il faut au bateau pour freiner"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9e4d481decb37442a5b930b5c5a3413, type: 3}
@@ -26566,18 +26545,22 @@ PrefabInstance:
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
       propertyPath: _title_EN
-      value: Maximum speed
+      value: More speed
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
+        type: 3}
+      propertyPath: _title_FR
+      value: Plus de vitesse
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
       propertyPath: _description_EN
-      value: Increased maximum kayak speed when alternating paddle strokes
+      value: Increasing the force of paddle strokes
       objectReference: {fileID: 0}
     - target: {fileID: 5504189569539387895, guid: a9e4d481decb37442a5b930b5c5a3413,
         type: 3}
       propertyPath: _description_FR
-      value: Augmentation de la vitesse maximale du kayak lorsque le joueur alterne
-        les coups de pagaie
+      value: Augmentation de la force des coups de pagaie
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9e4d481decb37442a5b930b5c5a3413, type: 3}
