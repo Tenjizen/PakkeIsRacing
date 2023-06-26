@@ -14,10 +14,10 @@ namespace Character.Camera.State
         public override void UpdateState(CameraManager camera)
         {
             CamManager.SmoothResetRotateZ();
-            if (Mathf.Abs(CamManager.RotationZ) <= 5)
-            {
-                Isdead();
-            }
+            //if (Mathf.Abs(CamManager.RotationZ) <= 5)
+            //{
+            Isdead();
+            //}
             CamManager.ApplyRotationCameraWhenCharacterDeath();
         }
         public override void FixedUpdate(CameraManager camera)

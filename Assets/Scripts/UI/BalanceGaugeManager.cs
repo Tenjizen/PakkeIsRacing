@@ -7,12 +7,25 @@ namespace UI
 {
     public class BalanceGaugeManager : MonoBehaviour
     {
-        [field:SerializeField] public Transform Cursor { get; private set; }
-        
+        [field: SerializeField] public Transform Cursor { get; private set; }
+
         [SerializeField] private GameObject _balanceGaugeUI;
         [SerializeField] private float _cursorAngleMultiplier = 4;
         [SerializeField] private GameObject _lT, _rT;
         [SerializeField] private Image _gaugeLeft, _gaugeRight;
+
+        [Space(5)]
+        [Header("Death reference"),SerializeField] Transform _balanceGauge;
+        [SerializeField] Image[] _imagesTargetColor;
+        [SerializeField] CanvasGroup _balanceCanvas;
+        [SerializeField] Color _baseColor;
+        [SerializeField] Color _deathColor;
+
+        [Header("Variable"),SerializeField] float _timeFadeTo0 = 0.5f;
+        [SerializeField] float _timeSwitchColor = 0.5f;
+        [SerializeField] float _timeSwitchScale = 0.5f;
+        [SerializeField] float _scaleGaugeTarget = 1.2f;
+
 
         private float _currentAngle;
 
@@ -43,13 +56,18 @@ namespace UI
 
         public void ReduceGauge(float timer)
         {
-            _gaugeLeft.fillAmount = 0.25f- timer;
+            _gaugeLeft.fillAmount = 0.25f - timer;
             _gaugeRight.fillAmount = 0.25f - timer;
         }
         public void ResetGauge()
         {
             _gaugeLeft.fillAmount = 0.25f;
             _gaugeRight.fillAmount = 0.25f;
+            foreach (var item in _imagesTargetColor)
+            {
+                item.DOColor(_baseColor, 0);
+            }
+            _balanceCanvas.DOFade(1, 0);
         }
 
         public float PercentGauge()
@@ -57,5 +75,20 @@ namespace UI
             return _gaugeLeft.fillAmount / .25f;
         }
 
+        public void SetBalanceGaugeScale()
+        {
+            _balanceGauge.DOScale(_scaleGaugeTarget, _timeSwitchScale);
+        }
+        public void SetBalanceGaugeColor()
+        {
+            foreach (var item in _imagesTargetColor)
+            {
+                item.DOColor(_deathColor, _timeSwitchColor);
+            }
+        }
+        public void SetBalanceGaugeDisable()
+        {
+            _balanceCanvas.DOFade(0, _timeFadeTo0);
+        }
     }
 }

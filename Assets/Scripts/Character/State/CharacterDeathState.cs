@@ -27,6 +27,9 @@ namespace Character.State
         {
             IsDead = true;
             CharacterManagerRef.ScriptDebug.ResetTimerDebug();
+
+            CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeColor();
+            CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeScale();
         }
 
         public override void UpdateState(CharacterManager character)
@@ -48,6 +51,7 @@ namespace Character.State
             if (Mathf.Abs(CharacterManagerRef.Balance) >= 60 && _cameraSwitchState == false || character.RespawnLastCheckpoint == true && _cameraSwitchState == false)
             {
                 _cameraSwitchState = true;
+                CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeDisable();
                 CameraDeathState cameraDeathState = new CameraDeathState();
                 CameraManagerRef.SwitchState(cameraDeathState);
             }
