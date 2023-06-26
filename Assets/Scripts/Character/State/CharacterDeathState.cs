@@ -16,6 +16,7 @@ namespace Character.State
         private bool _cameraSwitchState = false;
         private float _timerToRespawnCheckpoint = 0;
         private float _timerFadeOutStart = 0;
+        private float _speed = 100;
 
         public CharacterDeathState() : base()
         {
@@ -31,7 +32,6 @@ namespace Character.State
             CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeColor();
             CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeScale();
         }
-
         public override void UpdateState(CharacterManager character)
         {
             if (character.RespawnLastCheckpoint == false)
@@ -39,11 +39,11 @@ namespace Character.State
                 //Rotate kayak at 180 in z with balance
                 if (CharacterManagerRef.Balance > 0 && CharacterManagerRef.Balance < 60)
                 {
-                    CharacterManagerRef.Balance += 0.5f;
+                    CharacterManagerRef.Balance += Time.deltaTime * _speed;
                 }
                 else if (CharacterManagerRef.Balance < -0 && CharacterManagerRef.Balance > -60)
                 {
-                    CharacterManagerRef.Balance -= 0.5f;
+                    CharacterManagerRef.Balance -= Time.deltaTime * _speed;
                 }
             }
 
