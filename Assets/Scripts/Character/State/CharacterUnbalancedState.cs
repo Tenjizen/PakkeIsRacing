@@ -77,8 +77,8 @@ namespace Character.State
             _triggerLeft = balance < 0;
 
             //anim
-            CharacterManagerRef.PaddleAnimatorProperty.SetBool("Unbalanced", true);
-            CharacterManagerRef.CharacterAnimatorProperty.SetBool("Unbalanced", true);
+            CharacterManagerRef.PaddleAnimatorProperty.SetTrigger("Unbalance");
+            CharacterManagerRef.CharacterAnimatorProperty.SetTrigger("Unbalance");
         }
 
         public override void UpdateState(CharacterManager character)
@@ -162,6 +162,9 @@ namespace Character.State
 
             CanBeMoved = true;
             CanCharacterOpenWeapons = true;
+            
+            CharacterManagerRef.PaddleAnimatorProperty.SetTrigger("Rebalance");
+            CharacterManagerRef.CharacterAnimatorProperty.SetTrigger("Rebalance");
         }
 
         #endregion

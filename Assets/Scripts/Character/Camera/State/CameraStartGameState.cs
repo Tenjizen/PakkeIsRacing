@@ -12,6 +12,8 @@ namespace Character.Camera.State
         {
             CamManager.CameraAnimator.Play("StartGame");
             CamManager.ShakeCameraWarning(0);
+            
+            CharacterManager.Instance.CharacterAnimatorProperty.SetBool("Sleep",true);
         }
         public override void UpdateState(CameraManager camera)
         {
@@ -32,6 +34,10 @@ namespace Character.Camera.State
                 CharacterManager.Instance.StartGame.Invoke();
                 _isTimerStarted = true;
                 CamManager.CameraAnimator.Play("FreeLook");
+                
+                CharacterManager.Instance.CharacterAnimatorProperty.SetTrigger("WakeUp");
+                CharacterManager.Instance.CharacterAnimatorProperty.SetBool("Sleep",false);
+
             }
 
             if (_isTimerStarted)
