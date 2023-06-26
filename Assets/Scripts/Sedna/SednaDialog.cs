@@ -30,6 +30,7 @@ namespace Sedna
 
         [Header("Path"), SerializeField] private BezierSpline _splinePath;
         [SerializeField] private Transform _playerTransform;
+        [SerializeField] private bool _rotateSpline = true;
         private float _currentSplinePosition;
 
         [Header("Spline")]
@@ -256,10 +257,18 @@ namespace Sedna
                 return;
             }
 
-            Vector3 p = _spline.position;
-            p.x = _playerTransform.position.x;
-            p.z = _playerTransform.position.z;
-            _spline.position = Vector3.Lerp(_spline.position, p, 0.02f * Time.deltaTime * 100);
+            Vector3 pSpline = _spline.position;
+            pSpline.x = _playerTransform.position.x;
+            pSpline.z = _playerTransform.position.z;
+            _spline.position = Vector3.Lerp(_spline.position, pSpline, Time.deltaTime * 1.5f);
+
+            if (_rotateSpline == true)
+            {
+                Vector3 rotationSpline = _spline.eulerAngles;
+                rotationSpline.y = _playerTransform.eulerAngles.y - 90;
+                _spline.eulerAngles = Vector3.Lerp(_spline.eulerAngles, rotationSpline, Time.deltaTime * 1.5f);
+            }
+
 
             Transform t = transform;
 
