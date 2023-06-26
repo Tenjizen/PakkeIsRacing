@@ -22,6 +22,8 @@ namespace Character.State
         private float _timerDebug = 0;
 
         private int _signeBalance;
+        private bool _triggerLeft = false;
+
         #endregion
 
         #region Constructor
@@ -53,7 +55,6 @@ namespace Character.State
             CharacterManagerRef.NumberButtonIsPressed = 0;
             _timerUnbalanced = 0;
 
-
             var balanceTimer = (CharacterManagerRef.Data.UnitBalanceToTimer * Mathf.Abs(CharacterManagerRef.Balance));
             var collisionForce = (Mathf.Abs(CharacterManagerRef.Balance) - CharacterManagerRef.Data.BalanceLimit) * CharacterManagerRef.Data.ReductionForce;
 
@@ -73,6 +74,7 @@ namespace Character.State
             CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeActive(true);
             float balance = CharacterManagerRef.Balance;
             CharacterManagerRef.BalanceGaugeManagerRef.ShowTrigger(balance < 0, balance > 0);
+            _triggerLeft = balance < 0;
 
             //anim
             CharacterManagerRef.PaddleAnimatorProperty.SetBool("Unbalanced", true);
@@ -139,6 +141,10 @@ namespace Character.State
                     CharacterManagerRef.SwitchState(characterDeathState);
                 }
             }
+            else
+            {
+                CharacterManagerRef.BalanceGaugeManagerRef.FillAmoutGradient();
+            }
         }
         public override void FixedUpdate(CharacterManager character)
         {
@@ -179,6 +185,16 @@ namespace Character.State
                     CanCharacterMakeActions = true;
 
                     CharacterManagerRef.InvincibilityTime = CharacterManagerRef.Data.InvincibleTimeAfterUnbalance;
+
+                    //particule 
+                    if (_triggerLeft == true)
+                    {
+                        CharacterManagerRef.SplashLeft.Play();
+                    }
+                    else
+                    {
+                        CharacterManagerRef.SplashRight.Play();
+                    }
 
                     CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeDisable();
                     CharacterNavigationState characterNavigationState = new CharacterNavigationState();

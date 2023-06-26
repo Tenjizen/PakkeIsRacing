@@ -84,6 +84,8 @@ namespace Character
         public Projectile CurrentProjectile;
         [Header("VFX")]
         public ParticleSystem WeaponChargedParticleSystem;
+        public ParticleSystem SplashLeft;
+        public ParticleSystem SplashRight;
 
         [Header("Events")] public UnityEvent StartGame;
         public UnityEvent OnPaddle;

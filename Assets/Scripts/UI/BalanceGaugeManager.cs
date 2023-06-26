@@ -15,20 +15,23 @@ namespace UI
         [SerializeField] private Image _gaugeLeft, _gaugeRight;
 
         [Space(5)]
-        [Header("Death reference"),SerializeField] Transform _balanceGauge;
+        [Header("Go to death"), SerializeField] Transform _balanceGauge;
         [SerializeField] Image[] _imagesTargetColor;
         [SerializeField] CanvasGroup _balanceCanvas;
         [SerializeField] Color _baseColor;
         [SerializeField] Color _deathColor;
-
-        [Header("Variable"),SerializeField] float _timeFadeTo0 = 0.5f;
+        [SerializeField] float _timeFadeTo0 = 0.5f;
         [SerializeField] float _timeSwitchColor = 0.5f;
         [SerializeField] float _timeSwitchScale = 0.5f;
         [SerializeField] float _scaleGaugeTarget = 1.2f;
 
 
-        private float _currentAngle;
+        [Space(5)]
+        [Header("Go to navigation"), SerializeField] Image _imageGradient;
+        [SerializeField] float _timeFillAmout;
+        //fx *2
 
+        private float _currentAngle;
         public void SetBalanceGaugeActive(bool isActive)
         {
             _balanceGaugeUI.SetActive(isActive);
@@ -68,6 +71,7 @@ namespace UI
                 item.DOColor(_baseColor, 0);
             }
             _balanceCanvas.DOFade(1, 0);
+            _imageGradient.fillAmount = 0;
         }
 
         public float PercentGauge()
@@ -90,5 +94,12 @@ namespace UI
         {
             _balanceCanvas.DOFade(0, _timeFadeTo0);
         }
+
+
+        public void FillAmoutGradient()
+        {
+            _imageGradient.fillAmount += 1.0f / _timeFillAmout * Time.deltaTime;
+        }
+
     }
 }
