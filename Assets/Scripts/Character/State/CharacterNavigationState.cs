@@ -133,6 +133,7 @@ namespace Character.State
 
         public override void ExitState(CharacterManager character)
         {
+            DisableSprint();
         }
 
         #endregion
@@ -374,13 +375,18 @@ namespace Character.State
             }
             else
             {
-                CharacterManagerRef.SprintInProgress = false;
-                CharacterManagerRef.OnStopSprint.Invoke();
-                CharacterManagerRef.SprintUIManager.DisableFeedback();
+                DisableSprint();
             }
 
             _timerLastInputTrigger = 0;
             _lastInputPaddle = direction;
+        }
+
+        public void DisableSprint()
+        {
+            CharacterManagerRef.SprintInProgress = false;
+            CharacterManagerRef.OnStopSprint.Invoke();
+            CharacterManagerRef.SprintUIManager.DisableSprintUI();
         }
 
         /// <summary>

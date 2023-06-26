@@ -98,7 +98,7 @@ public class UISprintManager : MonoBehaviour
         }
     }
 
-    public void DisableFeedback()
+    public void UIDirection()
     {
         if (_lastDirection == Direction.Right)
         {
@@ -109,12 +109,12 @@ public class UISprintManager : MonoBehaviour
             _left.enabled = false;
         }
 
-        //foreach (var trail in _trails)
-        //{
-        //    //trail.GetComponent<TrailRenderer>().time = Mathf.Lerp(trail.GetComponent<TrailRenderer>().time, 0, Time.deltaTime);
-        //    trail.GetComponent<TrailRenderer>().emitting = false;
-        //}
+    }
 
+    public void DisableSprintUI()
+    {
+        _right.enabled = false;
+        _left.enabled = false;
         TrailEmitting(false);
         ParticleSpeedEmission(false);
     }
@@ -122,10 +122,11 @@ public class UISprintManager : MonoBehaviour
     public void EnableFeedback(Direction direction)
     {
         var _character = CharacterManager.Instance;
-
+        var velocity = Mathf.Abs(_character.KayakControllerProperty.Rigidbody.velocity.x) + Mathf.Abs(_character.KayakControllerProperty.Rigidbody.velocity.z);
+        Debug.Log(velocity);
         if (_character.Abilities.SprintUnlock == false ||
             (_character.InputManagementProperty.Inputs.PaddleRight && _character.InputManagementProperty.Inputs.PaddleLeft) ||
-            _character.KayakControllerProperty.Rigidbody.velocity.magnitude < 5f ||
+            velocity < 13f ||
             direction == _lastDirection)
         {
             if (_left.enabled != false || _right.enabled != false)
@@ -136,10 +137,6 @@ public class UISprintManager : MonoBehaviour
             return;
         }
 
-        //foreach (var trail in _trails)
-        //{
-        //    trail.GetComponent<TrailRenderer>().emitting = true;
-        //}
         TrailEmitting(true);
         ParticleSpeedEmission(true);
 
