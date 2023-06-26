@@ -69,8 +69,10 @@ namespace Enemies.Shark
         {
             IsPossessed = true;
             CurrentStateBase.EnterState(this);
+
+            Forward.transform.eulerAngles = new Vector3(0, Forward.transform.eulerAngles.y, 0);
         }
-        
+
         private void Update()
         {
             CurrentStateBase.UpdateState(this);
@@ -89,13 +91,6 @@ namespace Enemies.Shark
 
             AvoidObstacle();
             ManagerCircleUI();
-
-
-            // if(IsPossessed == false)
-            // {
-            //     Die();
-            // }
-
         }
         private void FixedUpdate()
         {
