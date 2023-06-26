@@ -14,6 +14,7 @@ namespace Character.Camera.State
             CamManager.ShakeCameraWarning(0);
             
             CharacterManager.Instance.CharacterAnimatorProperty.SetBool("Sleep",true);
+            CharacterManager.Instance.PaddleAnimatorProperty.SetBool("Sleep",true);
         }
         public override void UpdateState(CameraManager camera)
         {
@@ -37,7 +38,9 @@ namespace Character.Camera.State
                 
                 CharacterManager.Instance.CharacterAnimatorProperty.SetTrigger("WakeUp");
                 CharacterManager.Instance.CharacterAnimatorProperty.SetBool("Sleep",false);
-
+                
+                CharacterManager.Instance.PaddleAnimatorProperty.SetTrigger("WakeUp");
+                CharacterManager.Instance.PaddleAnimatorProperty.SetBool("Sleep",false);
             }
 
             if (_isTimerStarted)
