@@ -123,7 +123,6 @@ public class UISprintManager : MonoBehaviour
     {
         var _character = CharacterManager.Instance;
         var velocity = Mathf.Abs(_character.KayakControllerProperty.Rigidbody.velocity.x) + Mathf.Abs(_character.KayakControllerProperty.Rigidbody.velocity.z);
-        Debug.Log(velocity);
         if (_character.Abilities.SprintUnlock == false ||
             (_character.InputManagementProperty.Inputs.PaddleRight && _character.InputManagementProperty.Inputs.PaddleLeft) ||
             velocity < 13f ||
