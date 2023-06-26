@@ -266,7 +266,7 @@ namespace Sedna
             {
                 Vector3 rotationSpline = _spline.eulerAngles;
                 rotationSpline.y = _playerTransform.eulerAngles.y - 90;
-                _spline.eulerAngles = Vector3.Lerp(_spline.eulerAngles, rotationSpline, Time.deltaTime * 1.5f);
+                _spline.eulerAngles = rotationSpline;
             }
 
 
