@@ -3159,6 +3159,18 @@ MonoBehaviour:
   _rT: {fileID: 8778226217617458269}
   _gaugeLeft: {fileID: 6227666449047617463}
   _gaugeRight: {fileID: 1814854340970939}
+  _balanceGauge: {fileID: 5282044547902733050}
+  _imagesTargetColor:
+  - {fileID: 6227666449047617463}
+  - {fileID: 1814854340970939}
+  - {fileID: 4876743938237887589}
+  _balanceCanvas: {fileID: 4748513518710356193}
+  _baseColor: {r: 1, g: 1, b: 1, a: 1}
+  _deathColor: {r: 0.4339623, g: 0, b: 0, a: 1}
+  _timeFadeTo0: 0.5
+  _timeSwitchColor: 0.5
+  _timeSwitchScale: 0.5
+  _scaleGaugeTarget: 1.2
 --- !u!114 &2162054960577607322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20422,6 +20434,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5282044547902733050}
+  - component: {fileID: 4748513518710356193}
   m_Layer: 5
   m_Name: BalanceGauge
   m_TagString: Untagged
@@ -20451,6 +20464,18 @@ Transform:
   m_Father: {fileID: 1632394491362935184}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!225 &4748513518710356193
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9041261449522701783}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &9078293803603400825
 GameObject:
   m_ObjectHideFlags: 0
