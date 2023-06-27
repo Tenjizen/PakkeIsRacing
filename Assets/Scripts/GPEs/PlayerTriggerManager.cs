@@ -33,7 +33,7 @@ namespace GPEs
         
         private RaycastHit[] _hits = new RaycastHit[20];
 
-        private void Awake()
+        protected virtual void Awake()
         {
             Array.Resize(ref _hits,_arrayHitsSize);
         }
