@@ -137,7 +137,7 @@ public class SpawnerBird : MonoBehaviour
         if (bird == null) return;
 
         bird.gameObject.SetActive(true);
-        bird.transform.localPosition = position;
+        bird.transform.position = position;
         bird.GetComponent<MovingBird>().ResetVariable();
         bird.transform.localScale = Vector3.zero;
         bird.transform.localEulerAngles = Vector3.zero;
