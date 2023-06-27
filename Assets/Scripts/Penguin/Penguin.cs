@@ -1,3 +1,4 @@
+using GPEs.WaterFlowGPE;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -149,9 +150,15 @@ public class Penguin : MonoBehaviour
         if (hitCount > 0)
         {
             int temp = 0;
+            while (_hitBuffer[temp].collider.GetComponent<WaterFlowBlock>() == true)
+            {
+                if (temp >= _hitBuffer.Length)
+                    return;
+                temp++;
+            }
             for (int i = 0; i < hitCount; i++)
             {
-                if (_hitBuffer[temp].distance > _hitBuffer[i].distance)
+                if (_hitBuffer[temp].distance > _hitBuffer[i].distance && _hitBuffer[i].collider.GetComponent<WaterFlowBlock>() == false)
                 {
                     temp = i;
                 }
