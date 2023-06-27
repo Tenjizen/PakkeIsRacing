@@ -23,6 +23,7 @@ Material:
   m_Name: Mat_os
   m_Shader: {fileID: 4800000, guid: 7ffc1bc2bbb1ef64f84b552b2d2f0619, type: 3}
   m_ValidKeywords:
+  - TCP2_OCCLUSION
   - TCP2_REFLECTIONS_FRESNEL
   - TCP2_RIM_LIGHTING_LIGHTMASK
   - _ALPHATEST_ON
@@ -40,7 +41,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: b672c30fc7e59914e8db3eaad8e1da89, type: 3}
+        m_Texture: {fileID: 2800000, guid: 850316c7e1c41d647a8ea2d9295abeaa, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -80,7 +81,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 262130f1b213abb4797650ca33cc4fa5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
@@ -158,7 +159,7 @@ Material:
     - _RampOffset: 0
     - _RampScale: 1
     - _RampSmoothing: 0.51
-    - _RampThreshold: 0.75
+    - _RampThreshold: 0.581
     - _RampType: 0
     - _ReceiveShadows: 1
     - _ReceiveShadowsOff: 0
@@ -185,7 +186,7 @@ Material:
     - _UseMatCapMask: 0
     - _UseMobileMode: 0
     - _UseNormalMap: 1
-    - _UseOcclusion: 0
+    - _UseOcclusion: 1
     - _UseOutline: 0
     - _UseReflections: 0
     - _UseRim: 0
