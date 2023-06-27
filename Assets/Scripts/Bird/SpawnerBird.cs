@@ -8,6 +8,7 @@ public class SpawnerBird : MonoBehaviour
     [Header("Objcet to pool"), SerializeField] ObjectPool _birdObjectPool;
     //[SerializeField] Vector3 _offset;
     [Header("Target"), SerializeField] Transform _targetSpawn;
+    [SerializeField] Transform[] _birdSpawns;
 
     [Tooltip("Time before the objects spawn")]
     [SerializeField] float _timerMin;
@@ -112,15 +113,16 @@ public class SpawnerBird : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(lookAtPos);
 
 
-            float count = 0;
+            //float count = 0;
             for (int i = 0; i < _randNumberBird; i++)
             {
-                int signI = i % 2 == 0 ? 1 : -1;
-                SpawnObject(new Vector3((i * signI), 0, -(count * 2)));
-                if (i % 2 == 0)
-                {
-                    count++;
-                }
+                SpawnObject(_birdSpawns[i].position);
+                //int signI = i % 2 == 0 ? 1 : -1;
+                //SpawnObject(new Vector3((i * signI), 0, -(count * 2)));
+                //if (i % 2 == 0)
+                //{
+                //    count++;
+                //}
             }
             _randTimer = Random.Range(_timerMin, _timerMax);
             _randNumberBird = Random.Range(_numberBirdMin, _numberBirdMax);
