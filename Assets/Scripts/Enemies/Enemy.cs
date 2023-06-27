@@ -19,6 +19,7 @@ namespace Enemies
 
         [field:SerializeField] public UnityEvent OnHit { get; set; }
         [field:SerializeField] public UnityEvent OnDie { get; set; }
+        [field:SerializeField] public UnityEvent OnNotUsableWeaponHitTaken { get; set; }
         [field:SerializeField] public WeaponType WeaponThatCanHitEnemy { get; set; }
         [field:SerializeField] public Sprite EnemySprite { get; private set; }
         [field:SerializeField, ReadOnly] public float CurrentLife { get; set; }
@@ -43,6 +44,10 @@ namespace Enemies
         {
             if (projectile.Data.Type != WeaponThatCanHitEnemy || CurrentLife <= 0)
             {
+                if (projectile.Data.Type != WeaponThatCanHitEnemy)
+                {
+                    OnNotUsableWeaponHitTaken.Invoke();
+                }
                 return;
             }
             
