@@ -23,6 +23,7 @@ Material:
   m_Name: Mat_kayak_casse_2
   m_Shader: {fileID: 4800000, guid: 7ffc1bc2bbb1ef64f84b552b2d2f0619, type: 3}
   m_ValidKeywords:
+  - TCP2_OCCLUSION
   - TCP2_REFLECTIONS_FRESNEL
   - TCP2_RIM_LIGHTING_LIGHTMASK
   - _ALPHATEST_ON
@@ -40,7 +41,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 832c9e87cf3a5f84d88e7d153a91a820, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9b6dfe31f8a98784387dabd07c36c2b3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -80,7 +81,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 9864969e60cc8114582a0b523ea3b881, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
@@ -122,7 +123,7 @@ Material:
     - _BumpScale: 0.32
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Cull: 2
+    - _Cull: 0
     - _Cutoff: 0
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
@@ -143,7 +144,7 @@ Material:
     - _NormalsSource: 0
     - _NormalsUVType: 0
     - _OcclusionChannel: 1
-    - _OcclusionStrength: 1
+    - _OcclusionStrength: 0.635
     - _OutlineLightingType: 0
     - _OutlineLightingTypeURP: 0
     - _OutlineMinWidth: 1
@@ -157,8 +158,8 @@ Material:
     - _RampBandsSmoothing: 0.1
     - _RampOffset: 0
     - _RampScale: 1
-    - _RampSmoothing: 0.51
-    - _RampThreshold: 0.75
+    - _RampSmoothing: 0.661
+    - _RampThreshold: 0.709
     - _RampType: 0
     - _ReceiveShadows: 1
     - _ReceiveShadowsOff: 0
@@ -185,7 +186,7 @@ Material:
     - _UseMatCapMask: 0
     - _UseMobileMode: 0
     - _UseNormalMap: 1
-    - _UseOcclusion: 0
+    - _UseOcclusion: 1
     - _UseOutline: 0
     - _UseReflections: 0
     - _UseRim: 0
