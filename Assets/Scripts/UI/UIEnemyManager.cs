@@ -30,6 +30,14 @@ namespace UI
         public void SetScreenPositionFromEnemyPosition(Vector3 enemyPosition)
         {
             Vector3 viewportPosition = Camera.main.WorldToViewportPoint(enemyPosition);
+            
+            if (viewportPosition.x < 0 || viewportPosition.x > 1 ||
+                viewportPosition.y < 0 || viewportPosition.y > 1 ||
+                viewportPosition.z < 0)
+            {
+                DisableEnemyUI();
+            }
+            
             Vector2 canvasPosition = new Vector2(
                 (viewportPosition.x - 0.5f) * _canvas.sizeDelta.x,
                 (viewportPosition.y - 0.5f) * _canvas.sizeDelta.y
