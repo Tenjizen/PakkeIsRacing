@@ -74,8 +74,34 @@ namespace Sedna
                         return;
                     }
                     _spline = _splinePath.transform;
-                    Vector3 splinePosition = _splinePath.GetPoint(_currentSplinePosition);
-                    transform.position = new Vector3(splinePosition.x, transform.position.y, splinePosition.z);
+
+                    Vector3 pSpline = _spline.position;
+                    pSpline.x = _playerTransform.position.x;
+                    pSpline.z = _playerTransform.position.z;
+                    _spline.position = pSpline;
+
+                    if (_rotateSpline == true)
+                    {
+                        Vector3 rotationSpline = _spline.eulerAngles;
+                        rotationSpline.y = _playerTransform.eulerAngles.y - 90;
+                        _spline.eulerAngles = rotationSpline;
+                    }
+
+
+                    Transform t = transform;
+
+
+                    Vector3 position = _splinePath.GetPoint(_currentSplinePosition);
+                    float heightWave = _waves.GetHeight(transform.position) - _removeAtYPosValue;
+                    if (position.y > heightWave)
+                        position.y = heightWave;
+                    t.position = position;
+
+                    //rotation
+                    Vector3 pointB = _splinePath.GetPoint(Mathf.Clamp01(_currentSplinePosition + 0.01f));
+                    t.LookAt(pointB);
+                    Vector3 rotation = t.transform.localEulerAngles;
+                    t.localRotation = Quaternion.Euler(65, Mathf.Lerp(rotation.y, t.rotation.eulerAngles.y, 0.1f), rotation.z);
                     break;
 
                 case State.Dialog:
@@ -94,6 +120,7 @@ namespace Sedna
                     }
                     break;
             }
+            gameObject.transform.localScale = Vector3.one;
             SetAnimatorToSwim();
         }
 
@@ -299,6 +326,7 @@ namespace Sedna
             }
 
             gameObject.SetActive(true);
+            gameObject.transform.localScale = Vector3.zero;
 
         }
 
