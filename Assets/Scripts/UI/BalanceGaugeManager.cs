@@ -41,7 +41,7 @@ namespace UI
         {
             angle *= _cursorAngleMultiplier;
             Vector3 rotation = Cursor.transform.rotation.eulerAngles;
-            _currentAngle = Mathf.Lerp(_currentAngle, angle, 0.1f);
+            _currentAngle = Mathf.Lerp(_currentAngle, angle, 0.1f * Time.deltaTime * 100);
             Cursor.transform.rotation = Quaternion.Euler(rotation.x, rotation.y, _currentAngle);
         }
 
