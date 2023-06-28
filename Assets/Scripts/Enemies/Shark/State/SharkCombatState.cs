@@ -243,6 +243,7 @@ namespace Enemies.Shark.State
             _attack = 0;
             _startJump = false;
         }
+        private bool _startRush = false;
         private void RushToTarget(SharkManager sharkManager)
         {
             float angle = GetAngle(sharkManager);
@@ -251,6 +252,13 @@ namespace Enemies.Shark.State
 
             if (angle < 3 || angle > 357)
             {
+
+                if(_startRush == false)
+                {
+                    sharkManager.RushParticles.Play();
+                    _startRush = true;
+                }
+
                 _currentOffSet = Mathf.Lerp(_currentOffSet, sharkManager.Data.ElevationOffsetWhenRush, 0.05f);
 
                 sharkManager.AnimatorSharkPossessed.SetBool(_idle, false);
@@ -559,6 +567,7 @@ namespace Enemies.Shark.State
                         _attack = 0;
                         _state = CombatState.RotateAroundPoint;
                         sharkManager.PointTarget.transform.position = MathTools.GetPointFromAngleAndDistance(sharkManager.TargetTransform.position, 0, 0);
+                        _startRush = false;
                         _attackState = AttackState.None;
                     }
                     else

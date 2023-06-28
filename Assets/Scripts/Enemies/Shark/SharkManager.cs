@@ -28,6 +28,7 @@ namespace Enemies.Shark
         [field: SerializeField] public GameObject Forward { get; private set; }
         [field: SerializeField] public GameObject Circle { get; private set; }
         [field: SerializeField, Header("VFX")] public ParticleSystem HitParticles { get; private set; }
+        [field: SerializeField] public ParticleSystem RushParticles { get; private set; }
         [field: SerializeField] public GameObject PosParticles { get; private set; }
 
         public GameObject PointTarget;
