@@ -111,7 +111,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 461.59, y: -330.75}
+  m_AnchoredPosition: {x: 461.59, y: -300}
   m_SizeDelta: {x: 769.99, y: 189.05}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2428288749257259185
@@ -170,14 +170,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 39.84
-  m_fontSizeBase: 39.84
+  m_fontSize: 35.06
+  m_fontSizeBase: 35.06
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 8
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -634,7 +634,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 16
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -663,7 +663,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 48.856598, y: 0, z: -54.604492, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -704,7 +704,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 503, y: -170}
+  m_AnchoredPosition: {x: 503, y: -139.24998}
   m_SizeDelta: {x: 848.8075, y: 158.1346}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2733060495591564054
@@ -3397,8 +3397,8 @@ MonoBehaviour:
     TextFr: Niveau
     TextEn: Level
   - Text: {fileID: 2068052756392084465}
-    TextFr: points disponibles
-    TextEn: points available
+    TextFr: "Points d'\xE9nergie"
+    TextEn: Energy points
   - Text: {fileID: 8727310582801327696}
     TextFr: "Nouvelle qu\xEAte disponible"
     TextEn: New quest available
@@ -3407,8 +3407,8 @@ MonoBehaviour:
       familles."
     TextEn: "We also thanks our professors at P\xF4le3D, our friend and our families."
   - Text: {fileID: 8846455719924845964}
-    TextFr: "Point de comp\xE9tence"
-    TextEn: Skill point
+    TextFr: "Point d'\xE9nergie"
+    TextEn: Energy point
   - Text: {fileID: 3295980032267866667}
     TextFr: "Qu\xEAte compl\xE9t\xE9e"
     TextEn: Quest completed
@@ -6340,8 +6340,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2956021803128402547}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 137.00003, y: -35, z: 0}
-  m_LocalScale: {x: 200, y: 200, z: 200}
+  m_LocalPosition: {x: 190.67, y: 33, z: -232.03}
+  m_LocalScale: {x: 161.11, y: 161.11, z: 161.11}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1019342617000440998}
@@ -7313,7 +7313,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Skill point
+  m_text: Energy point
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ca5162086ad2ac2489e1809c49c63f51, type: 2}
   m_sharedMaterial: {fileID: -8411640361534313158, guid: ca5162086ad2ac2489e1809c49c63f51,
@@ -9171,6 +9171,9 @@ MonoBehaviour:
   - 1
   - 2
   - 4
+  - 6
+  - 7
+  - 8
 --- !u!1 &4216831512123217972
 GameObject:
   m_ObjectHideFlags: 0
@@ -10269,8 +10272,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.2592}
-  m_SizeDelta: {x: 1748.77, y: 98.858}
+  m_AnchoredPosition: {x: -0.88, y: 27.99}
+  m_SizeDelta: {x: 1280.95, y: 72.19}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3774529737245698293
 CanvasRenderer:
@@ -10300,7 +10303,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Nuna, fais attention devant toi, une baleine !
+  m_text: Nuna, fais attention devant toi, une baleine ! Nuna, fais attention devant
+    toi, une baleine ! Nuna, fais attention devant toi, une baleine !
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 12116b9926bb4e841b3e5cdba7243dc3, type: 2}
   m_sharedMaterial: {fileID: -8954878829323302804, guid: 12116b9926bb4e841b3e5cdba7243dc3,
@@ -10328,12 +10332,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37.15
+  m_fontSize: 26
   m_fontSizeBase: 37.15
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 26
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -12515,8 +12519,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.26}
-  m_SizeDelta: {x: 1772.98, y: 98.86}
+  m_AnchoredPosition: {x: 0, y: 29.000803}
+  m_SizeDelta: {x: 1379.95, y: 98.86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &14247766590517880
 CanvasRenderer:
@@ -17747,7 +17751,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: points available
+  m_text: Energy points
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bba011c6e14237048ac9f6722d56439a, type: 2}
   m_sharedMaterial: {fileID: -9081560113746883648, guid: bba011c6e14237048ac9f6722d56439a,
@@ -17775,7 +17779,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55.65
+  m_fontSize: 63.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -18718,18 +18722,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   MenuList:
+  - Name_FR: "Comp\xE9tences"
+    Name_EN: Skills
+    Menu: {fileID: 1033311471346717668}
+  - Name_FR: "Qu\xEAtes"
+    Name_EN: Quests
+    Menu: {fileID: 8118509132983772267}
   - Name_FR: Collectibles
     Name_EN: Collectibles
     Menu: {fileID: 7411560351061697492}
   - Name_FR: "M\xE9moires"
     Name_EN: Memories
     Menu: {fileID: 3388703597922856963}
-  - Name_FR: "Qu\xEAtes"
-    Name_EN: Quests
-    Menu: {fileID: 8118509132983772267}
-  - Name_FR: "Comp\xE9tences"
-    Name_EN: Skills
-    Menu: {fileID: 1033311471346717668}
   _pointsList:
   - {fileID: 831983955385988719}
   - {fileID: 3268905478631616722}
