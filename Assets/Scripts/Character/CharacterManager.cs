@@ -134,7 +134,7 @@ namespace Character
         private void Update()
         {
             CurrentStateBaseProperty.UpdateState(this);
-
+            
             if (CurrentStateBaseProperty.IsDead == false)
             {
                 BalanceManagement();

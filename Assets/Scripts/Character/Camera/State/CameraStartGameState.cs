@@ -70,11 +70,12 @@ namespace Character.Camera.State
         {
             camera.CanMoveCameraManually = true;
             
-            CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterOpenWeapons = true;
             CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterMakeActions = true;
+            CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterOpenWeapons = true;
             CharacterManager.Instance.CurrentStateBaseProperty.CanOpenMenus = true;
             CharacterManager.Instance.CurrentStateBaseProperty.CanBeMoved = true;
             CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterMove = true;
+            camera.CanMoveCameraManually = true;
         }
     }
 }

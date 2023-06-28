@@ -25,6 +25,8 @@ namespace UI.Menu
         [SerializeField] Image _imageSkip;
         [SerializeField] TMP_Text _textSkip;
         [SerializeField] bool _videoIsPlaying;
+        
+        private bool _hasPlayedIntro;
 
         private float _timeToSkip;
 
@@ -69,7 +71,7 @@ namespace UI.Menu
 
         private void CheckSkip()
         {
-            if (_videoIsPlaying == false)
+            if (_videoIsPlaying == false || _hasPlayedIntro)
             {
                 return;
             }
@@ -115,6 +117,12 @@ namespace UI.Menu
 
         private void CheckVideoOver(VideoPlayer vp)
         {
+            if (_hasPlayedIntro)
+            {
+                return;
+            }
+
+            _hasPlayedIntro = true;
             _videoRender.DOFade(0, 1).SetUpdate(true);
             _videoIsPlaying = false;
             StartCoroutine(SetGameLaunched(1));
@@ -149,6 +157,11 @@ namespace UI.Menu
 
         private void LaunchVideo()
         {
+            if (_hasPlayedIntro)
+            {
+                return;
+            }
+            
             _video.Play();
             StartCoroutine(WaitShowVideo(1));
 
