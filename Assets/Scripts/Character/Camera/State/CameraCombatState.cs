@@ -73,6 +73,11 @@ namespace Character.Camera.State
 
         public override void UpdateState(CameraManager camera)
         {
+            if (Mathf.Abs(CamManager.RotationZ) > 0)
+            {
+                CamManager.SmoothResetRotateZ();
+            }
+
             CamManager.CurrentStateBase.ManageFreeCameraMove(CameraMode.Combat);
             
             CamManager.CinemachineTargetPitch = ClampAngle(CamManager.CinemachineTargetPitch, CamManager.Data.CombatHeightClamp.x, CamManager.Data.CombatHeightClamp.y);

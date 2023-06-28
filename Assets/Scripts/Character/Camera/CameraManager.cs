@@ -35,9 +35,9 @@ namespace Character.Camera
 
         [ReadOnly] public bool CanRotateCamera = true;
 
-        [Header("Evenet")] public UnityEvent OnPlayerStart;     
-        [SerializeField] private float _timeToLaunchEvent;     
-        
+        [Header("Evenet")] public UnityEvent OnPlayerStart;
+        [SerializeField] private float _timeToLaunchEvent;
+
         //camera
         [HideInInspector] public float CameraAngleOverride = 0.0f;
         [HideInInspector] public Vector3 CameraTargetBasePos;
@@ -175,7 +175,7 @@ namespace Character.Camera
 
         public void SmoothResetRotateZ()
         {
-            RotationZ = Mathf.Lerp(RotationZ, 0, 0.01f);
+            RotationZ = Mathf.Lerp(RotationZ, 0,  Time.deltaTime * 0.5f);
         }
 
         public void ResetNavigationValue()
@@ -250,7 +250,7 @@ namespace Character.Camera
                 cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
                 cinemachineBasicMultiChannelPerlin.m_NoiseProfile = MyNoiseProfileWhenNavigating;
             }
-
+            intensity = Mathf.Clamp(intensity, 0.5f, 1f);
             if (cinemachineBasicMultiChannelPerlin.m_AmplitudeGain < intensity)
             {
                 cinemachineBasicMultiChannelPerlin.m_AmplitudeGain += Time.deltaTime;
