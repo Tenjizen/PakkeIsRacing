@@ -25,7 +25,7 @@ namespace UI.Menu
         [SerializeField] Image _imageSkip;
         [SerializeField] TMP_Text _textSkip;
         [SerializeField] bool _videoIsPlaying;
-        
+
         private bool _hasPlayedIntro;
 
         private float _timeToSkip;
@@ -40,6 +40,8 @@ namespace UI.Menu
 
         protected override void Start()
         {
+
+            StartCoroutine(StopVideo(0.5f));
             _index = 0;
             foreach (Image image in MenuGameObject.transform.GetComponentsInChildren<Image>())
             {
@@ -127,12 +129,12 @@ namespace UI.Menu
             _videoIsPlaying = false;
             StartCoroutine(SetGameLaunched(1));
         }
-        
+
         private void CloseMenu(InputAction.CallbackContext context)
         {
             IsActive = false;
 
-
+            _video.Play();
             foreach (var item in _objectsList)
             {
                 item.IsSelected = false;
@@ -161,8 +163,7 @@ namespace UI.Menu
             {
                 return;
             }
-            
-            _video.Play();
+
             StartCoroutine(WaitShowVideo(1));
 
             CharacterManager.Instance.CurrentStateBaseProperty.CanOpenMenus = false;
@@ -238,6 +239,11 @@ namespace UI.Menu
         {
             yield return new WaitForSeconds(time);
             _videoRender.DOColor(Color.white, 1f).SetUpdate(true);
+        }
+        private IEnumerator StopVideo(float time)
+        {
+            yield return new WaitForSeconds(time);
+            _video.Stop();
         }
     }
 }
