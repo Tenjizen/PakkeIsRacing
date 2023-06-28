@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Character;
 using DG.Tweening;
@@ -21,8 +22,19 @@ namespace UI.Menu
 
         [SerializeField] VideoPlayer _video;
         [SerializeField] RawImage _videoRender;
+        [SerializeField] Image _imageSkip;
+        [SerializeField] TMP_Text _textSkip;
+        [SerializeField] bool _videoIsPlaying;
+
+        private float _timeToSkip;
 
         private int _index;
+
+        private void Awake()
+        {
+            _videoIsPlaying = true;
+            _imageSkip.fillAmount = 0f;
+        }
 
         protected override void Start()
         {
@@ -49,11 +61,61 @@ namespace UI.Menu
 
             SetTile();
         }
-        void CheckVideoOver(VideoPlayer vp)
+
+        private void Update()
+        {
+            CheckSkip();
+        }
+
+        private void CheckSkip()
+        {
+            if (_videoIsPlaying == false)
+            {
+                return;
+            }
+
+            const float timeToSkip = 2f;
+            if (CharacterManager.Instance.InputManagementProperty.Inputs.AnyButton)
+            {
+                _timeToSkip += Time.deltaTime;
+
+                if (_timeToSkip < 0.25f)
+                {
+                    return;
+                }
+
+                _imageSkip.DOKill();
+                _imageSkip.DOFade(1, 0.2f);
+                _imageSkip.fillAmount = _timeToSkip / timeToSkip;
+
+                _textSkip.DOKill();
+                _textSkip.DOFade(1, 0.2f);
+            }
+            else
+            {
+                _timeToSkip = 0;
+
+                _imageSkip.DOKill();
+                _imageSkip.DOFade(0, 0.2f);
+                _textSkip.DOKill();
+                _textSkip.DOFade(0, 0.2f);
+            }
+
+            if (_timeToSkip < timeToSkip)
+            {
+                return;
+            }
+
+            CheckVideoOver(_video);
+        }
+
+        private void CheckVideoOver(VideoPlayer vp)
         {
             _videoRender.DOFade(0, 1).SetUpdate(true);
+            _videoIsPlaying = false;
             StartCoroutine(SetGameLaunched(1));
         }
+        
         private void CloseMenu(InputAction.CallbackContext context)
         {
             IsActive = false;

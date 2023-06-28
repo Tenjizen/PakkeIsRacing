@@ -38,7 +38,7 @@ namespace UI.Dialog
         {
             const float fadeTime = 0.2f;
             _images.ForEach( x=> x.DOKill());
-            _images.ForEach( x=> x.DOFade(setActive ? 0.3f : 0f,fadeTime));
+            _images.ForEach( x=> x.DOFade(setActive ? 1f : 0f,fadeTime));
             _texts.ForEach( x=> x.DOKill());
             _texts.ForEach( x=> x.DOFade(setActive ? 1f : 0f,fadeTime));
         }
