@@ -106,6 +106,10 @@ namespace UI.Menu
                 return;
             }
 
+            _imageSkip.DOKill();
+            _imageSkip.DOFade(0, 0.2f);
+            _textSkip.DOKill();
+            _textSkip.DOFade(0, 0.2f);
             CheckVideoOver(_video);
         }
 
@@ -113,7 +117,6 @@ namespace UI.Menu
         {
             _videoRender.DOFade(0, 1).SetUpdate(true);
             _videoIsPlaying = false;
-            CharacterManager.Instance.CurrentStateBaseProperty.CanOpenMenus = true;
             StartCoroutine(SetGameLaunched(1));
         }
         

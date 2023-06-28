@@ -39,7 +39,7 @@ namespace UI.Menu
 
         private void Set(InputAction.CallbackContext context)
         {
-            if (CanBeOpened == false)
+            if (CanBeOpened == false || CharacterManager.Instance.CurrentStateBaseProperty.CanOpenMenus == false)
             {
                 return;
             }
@@ -54,6 +54,7 @@ namespace UI.Menu
         public void SetMenu()
         {
             CharacterManager characterManager = CharacterManager.Instance;
+
             characterManager.CurrentStateBaseProperty.CanCharacterMove = IsActive;
             characterManager.CurrentStateBaseProperty.CanCharacterMakeActions = IsActive;
             characterManager.CurrentStateBaseProperty.CanCharacterOpenWeapons = IsActive;
