@@ -4,6 +4,7 @@ using Character;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Video;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -17,6 +18,9 @@ namespace UI.Menu
         private List<TMP_Text> _textsDictionary = new List<TMP_Text>();
 
         [SerializeField, ReadOnly] public bool CanBeOpened = true;
+
+        [SerializeField] VideoPlayer _video;
+        [SerializeField] RawImage _videoRender;
 
         private int _index;
 
@@ -38,21 +42,28 @@ namespace UI.Menu
             CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuRight.started += Right;
             CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.ShowLeaveMenu.started += CloseMenu;
 
+            _video.loopPointReached += CheckVideoOver;
+
             IsActive = true;
             IsUsable = true;
-            
+
             SetTile();
         }
-
+        void CheckVideoOver(VideoPlayer vp)
+        {
+            _videoRender.DOFade(0, 1).SetUpdate(true);
+            StartCoroutine(SetGameLaunched(1));
+        }
         private void CloseMenu(InputAction.CallbackContext context)
         {
             IsActive = false;
-            
+
+
             foreach (var item in _objectsList)
             {
                 item.IsSelected = false;
             }
-            
+
             const float fadeTime = 1f;
             foreach (Image image in _imagesDictionary)
             {
@@ -66,8 +77,10 @@ namespace UI.Menu
             }
 
             IsUsable = IsActive;
-            
-            StartCoroutine(SetGameLaunched(fadeTime));
+
+            //StartCoroutine(SetGameLaunched(fadeTime));
+            _video.Play();
+            StartCoroutine(WaitShowVideo(1));
         }
 
         protected override void Up(InputAction.CallbackContext context)
@@ -88,12 +101,12 @@ namespace UI.Menu
             {
                 return;
             }
-            
+
             base.Down(context);
             _index++;
             SetTile();
         }
-        
+
         protected override void Left(InputAction.CallbackContext context)
         {
             if (IsUsable == false)
@@ -103,7 +116,7 @@ namespace UI.Menu
 
             _objectsList[_index].Activate(new InputAction.CallbackContext());
         }
-        
+
         protected override void Right(InputAction.CallbackContext context)
         {
             if (IsUsable == false)
@@ -131,8 +144,15 @@ namespace UI.Menu
         private IEnumerator SetGameLaunched(float time)
         {
             yield return new WaitForSeconds(time);
+            _video.gameObject.SetActive(false);
             MenuGameObject.SetActive(IsActive);
             CharacterManager.Instance.IsGameLaunched = true;
+        }
+
+        private IEnumerator WaitShowVideo(float time)
+        {
+            yield return new WaitForSeconds(time);
+            _videoRender.DOColor(Color.white, 1f).SetUpdate(true);
         }
     }
 }
