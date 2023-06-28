@@ -11,26 +11,7 @@ namespace UI
     {
         [SerializeField] private UnityEngine.UI.Image _blackBackground;
         [SerializeField] private TMP_Text _text;
-        [SerializeField] string _sceneToLoadAfter;
-        [SerializeField] private float _timerInSeconds = 5f;
-
-        private bool _timerStart = false;
         
-        private void Update()
-        {
-            if (_timerStart == false)
-            {
-                return;
-            }
-
-            _timerInSeconds -= Time.deltaTime;
-            if (_timerInSeconds > 0)
-            {
-                return;
-            }
-
-            SceneManager.LoadScene(_sceneToLoadAfter, LoadSceneMode.Single);
-        }
 
         private void Awake()
         {
@@ -48,8 +29,6 @@ namespace UI
             CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterMove = false;
             CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterMakeActions = false;
             CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterOpenWeapons = false;
-
-            _timerStart = true;
         }
     }
 }
