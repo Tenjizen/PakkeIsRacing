@@ -28,6 +28,8 @@ namespace Enemies.Shark.State
         private int _attackNumber;
         private float _attack;
         private float _percentLife;
+        private const float _percentToAtk2 = 80;
+        private const float _percentToAtk3 = 40;
         private bool _startJump;
         private bool _startAttack;
         private bool _left;
@@ -118,7 +120,7 @@ namespace Enemies.Shark.State
 
             switch (_percentLife)
             {
-                case > 75:
+                case > _percentToAtk2:
                     {
                         if (_distSharkTarget > sharkManager.Data.MinDistanceBetweenTargetWhenRotatePhaseOne)
                         {
@@ -130,7 +132,7 @@ namespace Enemies.Shark.State
                         }
                         break;
                     }
-                case <= 75 and > 25:
+                case <= _percentToAtk2 and > _percentToAtk3:
                     {
                         if (_distSharkTarget > sharkManager.Data.MinDistanceBetweenTargetWhenRotatePhaseTwo)
                         {
@@ -142,7 +144,7 @@ namespace Enemies.Shark.State
                         }
                         break;
                     }
-                case <= 25:
+                case <= _percentToAtk3:
                     {
                         if (_distSharkTarget > sharkManager.Data.MinDistanceBetweenTargetWhenRotatePhaseThree)
                         {
@@ -502,7 +504,7 @@ namespace Enemies.Shark.State
             switch (_state)
             {
                 case CombatState.MoveToTarget:
-                    if (_percentLife > 75)
+                    if (_percentLife > _percentToAtk2)
                     {
                         if (_distSharkPointTarget >= sharkManager.Data.MaxDistanceBetweenPointInCombatPhaseOne)
                         {
@@ -514,7 +516,7 @@ namespace Enemies.Shark.State
                             _state = CombatState.RotateAroundPoint;
                         }
                     }
-                    else if (_percentLife <= 75 && _percentLife > 25)
+                    else if (_percentLife <= _percentToAtk2 && _percentLife > _percentToAtk3)
                     {
                         if (_distSharkPointTarget >= sharkManager.Data.MaxDistanceBetweenPointInCombatPhaseTwo)
                         {
@@ -527,7 +529,7 @@ namespace Enemies.Shark.State
                             _state = CombatState.RotateAroundPoint;
                         }
                     }
-                    else if (_percentLife <= 25)
+                    else if (_percentLife <= _percentToAtk3)
                     {
                         if (_distSharkPointTarget >= sharkManager.Data.MaxDistanceBetweenPointInCombatPhaseThree)
                         {
@@ -603,9 +605,9 @@ namespace Enemies.Shark.State
 
                 _attackState = _percentLife switch
                 {
-                    > 75 => AttackState.JumpAround,
-                    <= 75 and > 25 => AttackState.Rush,
-                    <= 25 => AttackState.JumpToTarget,
+                    > _percentToAtk2 => AttackState.JumpAround,
+                    <= _percentToAtk2 and > _percentToAtk3 => AttackState.Rush,
+                    <= _percentToAtk3 => AttackState.JumpToTarget,
                     _ => _attackState
                 };
             }
