@@ -56,6 +56,7 @@ namespace Character.Camera.State
             SwitchState(camera);
             CameraNavigationState cameraNavigationState = new CameraNavigationState();
             CamManager.SwitchState(cameraNavigationState);
+            CharacterManager.Instance.StartCoroutine(CharacterManager.Instance.CameraManagerProperty.LaunchEventStart());
         }
         public override void FixedUpdate(CameraManager camera)
         {

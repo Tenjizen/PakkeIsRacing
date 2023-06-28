@@ -1,6 +1,8 @@
+using System.Collections;
 using Character.Camera.State;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering.Universal;
 using WaterAndFloating;
 using CameraData = Character.Data.CameraData;
@@ -33,6 +35,9 @@ namespace Character.Camera
 
         [ReadOnly] public bool CanRotateCamera = true;
 
+        [Header("Evenet")] public UnityEvent OnPlayerStart;     
+        [SerializeField] private float _timeToLaunchEvent;     
+        
         //camera
         [HideInInspector] public float CameraAngleOverride = 0.0f;
         [HideInInspector] public Vector3 CameraTargetBasePos;
@@ -299,6 +304,12 @@ namespace Character.Camera
             CinemachineTargetPitch = Data.BaseRotation.x;
             CinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             CameraTargetBasePos = CinemachineCameraTarget.transform.localPosition;
+        }
+
+        public IEnumerator LaunchEventStart()
+        {
+            yield return new WaitForSeconds(_timeToLaunchEvent);
+            OnPlayerStart.Invoke();
         }
     }
 }
