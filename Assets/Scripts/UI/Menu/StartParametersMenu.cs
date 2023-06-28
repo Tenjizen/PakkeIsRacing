@@ -113,6 +113,7 @@ namespace UI.Menu
         {
             _videoRender.DOFade(0, 1).SetUpdate(true);
             _videoIsPlaying = false;
+            CharacterManager.Instance.CurrentStateBaseProperty.CanOpenMenus = true;
             StartCoroutine(SetGameLaunched(1));
         }
         
@@ -140,9 +141,15 @@ namespace UI.Menu
 
             IsUsable = IsActive;
 
-            //StartCoroutine(SetGameLaunched(fadeTime));
+            LaunchVideo();
+        }
+
+        private void LaunchVideo()
+        {
             _video.Play();
             StartCoroutine(WaitShowVideo(1));
+
+            CharacterManager.Instance.CurrentStateBaseProperty.CanOpenMenus = false;
         }
 
         protected override void Up(InputAction.CallbackContext context)
