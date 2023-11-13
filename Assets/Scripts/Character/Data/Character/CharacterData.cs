@@ -53,14 +53,6 @@ namespace Character.Data.Character
         public float BoatFollowAimLerp { get; private set; } = 0.05f;
         
         
-        [field:SerializeField] 
-        public Projectile HarpoonPrefab { get; private set; }
-        
-        
-        [field:SerializeField] 
-        public Projectile NetPrefab { get; private set; }
-        
-        
         [field:SerializeField, Header("Auto-Aim"), Tooltip("The width of the circle in within the auto aim detect an enemy")]
         public float AutoAimSize { get; private set; }
         

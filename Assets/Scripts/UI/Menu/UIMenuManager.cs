@@ -59,7 +59,6 @@ namespace UI.Menu
             characterManager.CurrentStateBaseProperty.CanCharacterMakeActions = IsActive;
             characterManager.CurrentStateBaseProperty.CanCharacterOpenWeapons = IsActive;
 
-            CharacterManager.Instance.CameraManagerProperty.CanRotateCamera = IsActive;
             IsActive = IsActive == false;
 
             const float fadeTime = 0.2f;

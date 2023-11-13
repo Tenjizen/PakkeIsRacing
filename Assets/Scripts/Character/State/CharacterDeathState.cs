@@ -1,7 +1,4 @@
-﻿using Character.Camera;
-using Character.Camera.State;
-using GPEs.Checkpoint;
-using Kayak;
+﻿using Kayak;
 using UnityEngine;
 
 namespace Character.State
@@ -52,28 +49,14 @@ namespace Character.State
             {
                 _cameraSwitchState = true;
                 CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeDisable();
-                CameraDeathState cameraDeathState = new CameraDeathState();
-                CameraManagerRef.SwitchState(cameraDeathState);
             }
             MakeBoatRotationWithBalance(_kayakController.transform, 1);
 
-            //Transition In
-            if (CameraManagerRef.StartDeath == true && _transitionIn == false)
-            {
-                CharacterManagerRef.TransitionManagerProperty.LaunchTransitionIn(SceneTransition.TransitionType.Fade);
-                _transitionIn = true;
-            }
 
             //Timer transition In
             if (_transitionIn && _respawned == false)
             {
                 _timerToRespawnCheckpoint += Time.deltaTime;
-            }
-
-            if (_timerToRespawnCheckpoint >= 1.5f)
-            {
-                Transform checkpoint = CharacterManager.Instance.CheckpointManagerProperty.GetRespawnPoint();
-                RespawnCheckpoint(checkpoint);
             }
 
             if (_timerFadeOutStart > 1.5f && _respawned)
@@ -118,13 +101,8 @@ namespace Character.State
 
                 //Reset value
                 _kayakController.CanReduceDrag = true;
-                CameraManagerRef.CanMoveCameraManually = true;
                 CharacterManagerRef.SetBalanceValueToCurrentSide(0);
                 _respawned = true;
-
-                //Switch state camera
-                CameraRespawnState cameraRespawnState = new CameraRespawnState();
-                CameraManagerRef.SwitchState(cameraRespawnState);
             }
         }
     }

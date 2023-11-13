@@ -61,7 +61,7 @@ namespace Enemies.Shark.State
 
         public override void UpdateState(SharkManager sharkManager)
         {
-            if (CharacterManager.Instance.CameraManagerProperty.StartDeath == true || sharkManager.IsPossessed == false && _attackState == AttackState.None)
+            if (sharkManager.IsPossessed == false && _attackState == AttackState.None)
             {
                 sharkManager.FreeRoamState();
             }

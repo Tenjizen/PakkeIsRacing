@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Character;
-using Character.Camera.State;
 using Character.State;
 using DG.Tweening;
 using TMPro;
@@ -124,7 +123,6 @@ namespace UI.Menu
                 characterManager.CurrentStateBaseProperty.CanCharacterMove = IsActive;
                 characterManager.CurrentStateBaseProperty.CanCharacterMakeActions = IsActive;
                 characterManager.CurrentStateBaseProperty.CanCharacterOpenWeapons = IsActive;
-                characterManager.CameraManagerProperty.CanRotateCamera = IsActive;
 
                 float fadeValue = IsActive == false ? 0.8f : 0;
                 _backgroundImage.DOFade(fadeValue, fadeTime).SetUpdate(true);

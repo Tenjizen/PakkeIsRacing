@@ -255,15 +255,10 @@ namespace Enemies.Seal
         
         #endregion
 
-        public override void Hit(Projectile projectile, GameObject owner, int damage)
+        public override void Hit( GameObject owner, int damage)
         {
-            base.Hit(projectile, owner, damage);
+            base.Hit( owner, damage);
             
-            if (projectile.Data.Type != WeaponThatCanHitEnemy || CurrentLife <= 0)
-            {
-                return;
-            }
-
             HitParticles.Play();
         }
 

@@ -3,7 +3,6 @@ using Character;
 using Collectible.Data;
 using DG.Tweening;
 using Fight;
-using Json;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -37,7 +36,7 @@ namespace Collectible
             transform.Rotate(Vector3.up, _rotationSpeed);
         }
 
-        public void Hit(Projectile projectile, GameObject owner, int damage)
+        public void Hit(GameObject owner, int damage)
         {
             OnHit.Invoke();
             SetCollected();
@@ -48,12 +47,6 @@ namespace Collectible
             gameObject.SetActive(false);
             OnCollected.Invoke();
             CharacterManager.Instance.ExperienceManagerProperty.AddExperience(CharacterManager.Instance.ExperienceManagerProperty.Data.ExperienceGainedAtCollectible);
-            
-            CollectibleJsonFileManager instance = JsonFilesManagerSingleton.Instance.CollectibleJsonFileManagerProperty;
-            if (instance != null)
-            {
-                instance.SetCollectibleCollected(this);
-            }
         }
 
         public void SetCollectedAtStart()

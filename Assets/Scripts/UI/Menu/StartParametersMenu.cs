@@ -20,28 +20,15 @@ namespace UI.Menu
 
         [SerializeField, ReadOnly] public bool CanBeOpened = true;
 
-        [SerializeField] VideoPlayer _video;
-        [SerializeField] RawImage _videoRender;
-        [SerializeField] Image _imageSkip;
-        [SerializeField] TMP_Text _textSkip;
-        [SerializeField] bool _videoIsPlaying;
-
         private bool _hasPlayedIntro;
 
         private float _timeToSkip;
 
         private int _index;
 
-        private void Awake()
-        {
-            _videoIsPlaying = true;
-            _imageSkip.fillAmount = 0f;
-        }
-
         protected override void Start()
         {
 
-            StartCoroutine(StopVideo(0.5f));
             _index = 0;
             foreach (Image image in MenuGameObject.transform.GetComponentsInChildren<Image>())
             {
@@ -58,7 +45,6 @@ namespace UI.Menu
             CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuRight.started += Right;
             CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.ShowLeaveMenu.started += CloseMenu;
 
-            _video.loopPointReached += CheckVideoOver;
 
             IsActive = true;
             IsUsable = true;
@@ -68,73 +54,13 @@ namespace UI.Menu
 
         private void Update()
         {
-            CheckSkip();
         }
 
-        private void CheckSkip()
-        {
-            if (_videoIsPlaying == false || _hasPlayedIntro)
-            {
-                return;
-            }
-
-            const float timeToSkip = 2f;
-            if (CharacterManager.Instance.InputManagementProperty.Inputs.AnyButton)
-            {
-                _timeToSkip += Time.deltaTime;
-
-                if (_timeToSkip < 0.25f)
-                {
-                    return;
-                }
-
-                _imageSkip.DOKill();
-                _imageSkip.DOFade(1, 0.2f);
-                _imageSkip.fillAmount = _timeToSkip / timeToSkip;
-
-                _textSkip.DOKill();
-                _textSkip.DOFade(1, 0.2f);
-            }
-            else
-            {
-                _timeToSkip = 0;
-
-                _imageSkip.DOKill();
-                _imageSkip.DOFade(0, 0.2f);
-                _textSkip.DOKill();
-                _textSkip.DOFade(0, 0.2f);
-            }
-
-            if (_timeToSkip < timeToSkip)
-            {
-                return;
-            }
-
-            _imageSkip.DOKill();
-            _imageSkip.DOFade(0, 0.2f);
-            _textSkip.DOKill();
-            _textSkip.DOFade(0, 0.2f);
-            CheckVideoOver(_video);
-        }
-
-        private void CheckVideoOver(VideoPlayer vp)
-        {
-            if (_hasPlayedIntro)
-            {
-                return;
-            }
-
-            _hasPlayedIntro = true;
-            _videoRender.DOFade(0, 1).SetUpdate(true);
-            _videoIsPlaying = false;
-            StartCoroutine(SetGameLaunched(1));
-        }
 
         private void CloseMenu(InputAction.CallbackContext context)
         {
             IsActive = false;
 
-            _video.Play();
             foreach (var item in _objectsList)
             {
                 item.IsSelected = false;
@@ -153,20 +79,6 @@ namespace UI.Menu
             }
 
             IsUsable = IsActive;
-
-            LaunchVideo();
-        }
-
-        private void LaunchVideo()
-        {
-            if (_hasPlayedIntro)
-            {
-                return;
-            }
-
-            StartCoroutine(WaitShowVideo(1));
-
-            CharacterManager.Instance.CurrentStateBaseProperty.CanOpenMenus = false;
         }
 
         protected override void Up(InputAction.CallbackContext context)
@@ -227,23 +139,5 @@ namespace UI.Menu
             }
         }
 
-        private IEnumerator SetGameLaunched(float time)
-        {
-            yield return new WaitForSeconds(time);
-            _video.gameObject.SetActive(false);
-            MenuGameObject.SetActive(IsActive);
-            CharacterManager.Instance.IsGameLaunched = true;
-        }
-
-        private IEnumerator WaitShowVideo(float time)
-        {
-            yield return new WaitForSeconds(time);
-            _videoRender.DOColor(Color.white, 1f).SetUpdate(true);
-        }
-        private IEnumerator StopVideo(float time)
-        {
-            yield return new WaitForSeconds(time);
-            _video.Stop();
-        }
     }
 }

@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using Character.Camera;
-using Character.Camera.State;
 using Kayak;
 using Kayak.Data;
 using Sound;

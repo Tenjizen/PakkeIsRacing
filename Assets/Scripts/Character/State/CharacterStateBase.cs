@@ -1,6 +1,4 @@
 using Art.Script;
-using Character.Camera;
-using Character.Camera.State;
 using DG.Tweening;
 using Kayak.Data;
 using UnityEngine;
@@ -11,7 +9,6 @@ namespace Character.State
     public abstract class CharacterStateBase 
     {
         protected CharacterManager CharacterManagerRef;
-        public CameraManager CameraManagerRef;
         public MonoBehaviour MonoBehaviourRef;
         
         public bool CanBeMoved = true;
@@ -46,7 +43,6 @@ namespace Character.State
         public void Initialize()
         {
             CharacterManagerRef = CharacterManager.Instance;
-            CameraManagerRef = CharacterManager.Instance.CameraManagerProperty;
             MonoBehaviourRef = CharacterManager.Instance.CharacterMonoBehaviour;
 
             Floaters = CharacterManagerRef.KayakControllerProperty.FloatersRef;
@@ -94,15 +90,12 @@ namespace Character.State
             if (Mathf.Abs(CharacterManagerRef.Balance) >= CharacterManagerRef.Data.BalanceLimit * CharacterManagerRef.PlayerStats.UnbalancedThresholdMultiplier &&
                 CharacterManagerRef.InvincibilityTime <= 0)
             {
-                CameraManagerRef.CanMoveCameraManually = false;
                 CharacterManagerRef.KayakControllerProperty.CanReduceDrag = false;
                 
                 //switch states
                 CharacterUnbalancedState characterUnbalancedState = new CharacterUnbalancedState();
                 CharacterManagerRef.SwitchState(characterUnbalancedState);
 
-                CameraUnbalancedState cameraUnbalancedState = new CameraUnbalancedState();
-                CameraManagerRef.SwitchState(cameraUnbalancedState);
             }
         }
         
@@ -111,20 +104,9 @@ namespace Character.State
             CharacterManager character = CharacterManager.Instance;
             character.WeaponChargedParticleSystem.Stop();
 
-            CameraNavigationState cameraNavigationState = new CameraNavigationState();
-            character.CameraManagerProperty.SwitchState(cameraNavigationState);
-                
             CharacterNavigationState characterNavigationState = new CharacterNavigationState();
             character.SwitchState(characterNavigationState);
 
-            character.WeaponUIManagerProperty.SetCombatWeaponUI(false);
-            character.WeaponUIManagerProperty.SetCooldownUI(0);
-            
-            character.WeaponUIManagerProperty.AutoAimController.ShowAutoAimCircle(false);
-            character.WeaponUIManagerProperty.AutoAimController.ShowAutoAimUI(false);
-            
-            character.WeaponUIManagerProperty.SetLastSelectedPaddle();
-            
             CharacterManagerRef.IKPlayerControl.CurrentType = IKType.Paddle;
         }
 

@@ -12,9 +12,6 @@ namespace UI
 {
     public class ExperienceUIManager : MonoBehaviour
     {
-        [Header("Big"), SerializeField] private GameObject _uIGameObjectBig;
-        [SerializeField] private Image _experienceGauge;
-        [SerializeField] private TMP_Text _levelText;
         [Header("Small"), SerializeField] private GameObject _uIGameObjectSmall;
         [SerializeField] private Image _experienceGaugeSmall;
         [SerializeField] private TMP_Text _smallLevelText;
@@ -29,7 +26,6 @@ namespace UI
 
         private void Start()
         {
-            _levelText.text = _level.ToString();
             _smallLevelText.text = _level.ToString();
             SetSmallUI(false);
             _cooldownUntilHideSmallUI = 0;
@@ -61,14 +57,12 @@ namespace UI
             
             if (percentage < 1 || (percentage >= 1 && _level >= _maxLevel))
             {
-                _experienceGauge.DOFillAmount(percentage, time);
                 _experienceGaugeSmall.DOFillAmount(percentage, time);
             }
             else
             {
                 _percentageToSetAfterLevelUp = percentage - 1;
                 _level++;
-                _experienceGauge.DOFillAmount(1, time).OnComplete(SetExperienceGaugeAfterLevelUp);
                 _experienceGaugeSmall.DOFillAmount(1, time).OnComplete(SetExperienceGaugeAfterLevelUp);
             }
 
@@ -78,20 +72,16 @@ namespace UI
 
         private void SetExperienceGaugeAfterLevelUp()
         {
-            _levelText.text = _level.ToString();
             _smallLevelText.text = _level.ToString();
 
             _uIGameObjectSmall.transform.DOComplete();
             _uIGameObjectSmall.transform.DOPunchScale(Vector3.one * 0.05f, 0.2f);
             _experienceGaugeSmall.fillAmount = 0;
-            _experienceGauge.fillAmount = 0;
             SetGauge(_percentageToSetAfterLevelUp, 1f, 2f);
         }
 
         public void SetActive(bool isActive)
         {
-            _uIGameObjectBig.SetActive(isActive);
-
             if (_uIGameObjectSmall.activeInHierarchy && isActive)
             {
                 SetSmallUI(false);

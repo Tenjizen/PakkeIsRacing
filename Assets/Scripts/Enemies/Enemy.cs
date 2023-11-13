@@ -1,7 +1,6 @@
 ﻿using System;
 using Character;
 using Fight;
-using Fight.Data;
 using UI;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -20,7 +19,6 @@ namespace Enemies
         [field:SerializeField] public UnityEvent OnHit { get; set; }
         [field:SerializeField] public UnityEvent OnDie { get; set; }
         [field:SerializeField] public UnityEvent OnNotUsableWeaponHitTaken { get; set; }
-        [field:SerializeField] public WeaponType WeaponThatCanHitEnemy { get; set; }
         [field:SerializeField] public Sprite EnemySprite { get; private set; }
         [field:SerializeField, ReadOnly] public float CurrentLife { get; set; }
         [field:SerializeField, ReadOnly] public float MaxLife { get; set; }
@@ -40,17 +38,8 @@ namespace Enemies
             }
         }
 
-        public virtual void Hit(Projectile projectile, GameObject owner, int damage)
+        public virtual void Hit(GameObject owner, int damage)
         {
-            if (projectile.Data.Type != WeaponThatCanHitEnemy || CurrentLife <= 0)
-            {
-                if (projectile.Data.Type != WeaponThatCanHitEnemy)
-                {
-                    OnNotUsableWeaponHitTaken.Invoke();
-                }
-                return;
-            }
-            
             OnHit.Invoke();
             CurrentLife -= damage;
             SetEnemyLifeUIGauge();

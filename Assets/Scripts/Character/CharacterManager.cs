@@ -1,18 +1,14 @@
 using System;
 using Art.Script;
 using Art.Test.Dissolve;
-using Character.Camera;
 using Character.Data.Character;
 using Character.State;
 using Fight;
-using GPEs.Checkpoint;
 using Kayak;
 using SceneTransition;
-using Sedna;
 using Tools.SingletonClassBase;
 using UI;
 using UI.Menu;
-using UI.WeaponWheel;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -38,19 +34,15 @@ namespace Character
         #region Properties
 
         [field: SerializeField] public CharacterStateBase CurrentStateBaseProperty { get; private set; }
-        [field: SerializeField, Header("Properties")] public CameraManager CameraManagerProperty { get; private set; }
         [field: SerializeField] public KayakController KayakControllerProperty { get; private set; }
         [field: SerializeField] public InputManagement InputManagementProperty { get; private set; }
-        [field: SerializeField] public SednaManager SednaManagerProperty { get; private set; }
         [field: SerializeField] public Animator PaddleAnimatorProperty { get; private set; }
         [field: SerializeField] public Animator CharacterAnimatorProperty { get; private set; }
         [field: SerializeField] public TransitionManager TransitionManagerProperty { get; private set; }
-        [field: SerializeField] public WeaponUIManager WeaponUIManagerProperty { get; private set; }
         [field: SerializeField] public UIEnemyManager EnemyUIManager { get; private set; }
         [field: SerializeField] public UIMenuManager UIMenuManagerRef { get; private set; }
         [field: SerializeField] public NotificationsController NotificationsUIController { get; private set; }
         [field: SerializeField] public BalanceGaugeManager BalanceGaugeManagerRef { get; private set; }
-        [field: SerializeField] public CheckpointManager CheckpointManagerProperty { get; private set; }
         [field: SerializeField] public MonoBehaviour CharacterMonoBehaviour { get; private set; }
         [field: SerializeField] public ExperienceManager ExperienceManagerProperty { get; private set; }
         [field: SerializeField] public Transform WeaponSpawnPosition { get; private set; }
@@ -80,8 +72,6 @@ namespace Character
         public float TimerUnbalanced = 0;
         [Tooltip("The number of times the button has been pressed"), ReadOnly]
         public int NumberButtonIsPressed = 0;
-        [ReadOnly]
-        public Projectile CurrentProjectile;
         [Header("VFX")]
         public ParticleSystem WeaponChargedParticleSystem;
         public ParticleSystem SplashLeft;
@@ -128,7 +118,6 @@ namespace Character
             Transform kayakTransform = KayakControllerProperty.transform;
             kayakTransform.eulerAngles = new Vector3(0, BaseOrientation, 0);
 
-            CameraManagerProperty.InitializeCams(kayakTransform);
         }
         
         private void Update()
@@ -138,7 +127,6 @@ namespace Character
             if (CurrentStateBaseProperty.IsDead == false)
             {
                 BalanceManagement();
-                ManageWeaponCooldown();
             }
 
             ManageInvincibilityBalance();
@@ -220,16 +208,6 @@ namespace Character
             AddBalanceValueToCurrentSide((float)value);
         }
 
-        private void ManageWeaponCooldown()
-        {
-            if (ProjectileIsInAir == false && WeaponCooldown > 0)
-            {
-                WeaponCooldown -= Time.deltaTime;
-                float value = WeaponCooldown / WeaponCooldownBase;
-                WeaponUIManagerProperty.SetCooldownUI(value);
-            }
-        }
-
         private void ManageInvincibilityBalance()
         {
             if (InvincibilityTime < 0 && KayakControllerProperty.Rigidbody.freezeRotation == false)
@@ -266,39 +244,6 @@ namespace Character
 
         #endregion
 
-#if UNITY_EDITOR
-
-        private void OnDrawGizmos()
-        {
-            UnityEngine.Camera mainCamera = UnityEngine.Camera.main;
-
-            Vector3 screenCenter = new Vector3(0.5f, 0.5f, 0f);
-            Vector3 rayDirection = mainCamera.ViewportPointToRay(screenCenter).direction;
-            Ray ray = new Ray(mainCamera.transform.position, rayDirection);
-
-            Color gizmoColor = new Color(1f, 0.36f, 0.24f);
-
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                Gizmos.color = gizmoColor;
-
-                Gizmos.DrawLine(CameraManagerProperty.VirtualCameraCombat.transform.position, hit.point);
-                Gizmos.DrawSphere(hit.point, 1f);
-            }
-
-            Transform camera = UnityEngine.Camera.main.transform;
-            for (int i = 0; i < Data.AutoAimNumberOfCastStep; i++)
-            {
-                break;
-                float positionMultiplier = Mathf.Clamp((Data.AutoAimDistanceBetweenEachStep * i), 1, 10000);
-                Vector3 newPosition = camera.position + camera.forward * positionMultiplier;
-                float radiusMultiplier = Mathf.Clamp(Vector3.Distance(camera.position, newPosition) / 5, 1, 10000);
-                float radius = Data.AutoAimSize * radiusMultiplier;
-                Gizmos.DrawWireSphere(newPosition, radius);
-            }
-        }
-
-#endif
     }
 
     [Serializable]

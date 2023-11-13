@@ -1,6 +1,4 @@
-﻿using Character.Camera;
-using Character.Camera.State;
-using Kayak;
+﻿using Kayak;
 using Kayak.Data;
 using Sound;
 using UnityEngine;
@@ -92,7 +90,6 @@ namespace Character.State
                 if (CharacterManagerRef.NumberButtonIsPressed >= CharacterManagerRef.Data.NumberPressButton && _timerUnbalanced <= Mathf.Abs(CharacterManagerRef.TimerUnbalanced))
                 {
                     _kayakController.CanReduceDrag = true;
-                    CameraManagerRef.CanMoveCameraManually = true;
                     ResetRotationBoat(_kayakController.transform, 2);
                     //CharacterManagerRef.SetBalanceValueToCurrentSide(0);
                     CanCharacterMakeActions = true;
@@ -104,8 +101,6 @@ namespace Character.State
                     CharacterNavigationState characterNavigationState = new CharacterNavigationState();
                     CharacterManagerRef.SwitchState(characterNavigationState);
 
-                    CameraNavigationState cameraNavigationState = new CameraNavigationState();
-                    CameraManagerRef.SwitchState(cameraNavigationState);
                 }
                 else
                 {
@@ -183,7 +178,6 @@ namespace Character.State
                     _timerReturnNavigationState > 0.5f && _kayakController.transform.eulerAngles.z > 360 - VALUE_BALANCE_TO_NORMAL_STATE)
                 {
                     _kayakController.CanReduceDrag = true;
-                    CameraManagerRef.CanMoveCameraManually = true;
                     //CharacterManagerRef.SetBalanceValueToCurrentSide(0);
                     CanCharacterMakeActions = true;
 
@@ -202,9 +196,6 @@ namespace Character.State
                     CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeDisable();
                     CharacterNavigationState characterNavigationState = new CharacterNavigationState();
                     CharacterManagerRef.SwitchState(characterNavigationState);
-
-                    CameraNavigationState cameraNavigationState = new CameraNavigationState();
-                    CameraManagerRef.SwitchState(cameraNavigationState);
                 }
             }
         }
