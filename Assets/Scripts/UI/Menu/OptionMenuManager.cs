@@ -14,7 +14,6 @@ namespace UI.Menu
     public class OptionMenuManager : MenuController
     {
         [SerializeField, ReadOnly] public bool CanBeOpened = true;
-        [SerializeField] private UIMenuManager _menuManager;
         
         [SerializeField] private ParametersMenu _parametersMenu;
         [SerializeField] private ControllerMenu _menuController;
@@ -144,17 +143,11 @@ namespace UI.Menu
             if (IsActive == false)
             {
                 Time.timeScale = 1;
-                _menuManager.CanBeOpened = true;
                 return;
             }
 
             SetTile();
             Time.timeScale = 0f;
-            _menuManager.CanBeOpened = false;
-            if (_menuManager.IsActive == true)
-            {
-                _menuManager.SetMenu();
-            }
         }
 
         private void CloseMenu(InputAction.CallbackContext context)

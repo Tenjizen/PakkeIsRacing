@@ -40,7 +40,6 @@ namespace Character
         [field: SerializeField] public Animator CharacterAnimatorProperty { get; private set; }
         [field: SerializeField] public TransitionManager TransitionManagerProperty { get; private set; }
         [field: SerializeField] public UIEnemyManager EnemyUIManager { get; private set; }
-        [field: SerializeField] public UIMenuManager UIMenuManagerRef { get; private set; }
         [field: SerializeField] public NotificationsController NotificationsUIController { get; private set; }
         [field: SerializeField] public BalanceGaugeManager BalanceGaugeManagerRef { get; private set; }
         [field: SerializeField] public MonoBehaviour CharacterMonoBehaviour { get; private set; }
