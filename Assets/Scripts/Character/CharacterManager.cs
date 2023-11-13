@@ -49,12 +49,7 @@ namespace Character
         [field: SerializeField] public PlayerParameters Parameters { get; set; }
         [field: SerializeField] public PlayerAbilities Abilities { get; set; }
         [field: SerializeField] public OptionMenuManager OptionMenuManager { get; private set; }
-        [field: SerializeField] public ScriptForDebug ScriptDebug { get; private set; }
-        [field: SerializeField, Header("Weapons")] public Animator HarpoonAnimator { get; private set; }
-        [field: SerializeField] public Animator NetAnimator { get; private set; }
-        [field: SerializeField] public WeaponMeshController HarpoonMeshController { get; private set; }
-        [field: SerializeField] public WeaponMeshController NetMeshController { get; private set; }
-        [field: SerializeField] public UISprintManager SprintUIManager { get; private set; }
+        [field: SerializeField, Header("Weapons")] public UISprintManager SprintUIManager { get; private set; }
 
         #endregion
 

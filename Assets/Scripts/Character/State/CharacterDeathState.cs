@@ -24,7 +24,6 @@ namespace Character.State
         public override void EnterState(CharacterManager character)
         {
             IsDead = true;
-            CharacterManagerRef.ScriptDebug.ResetTimerDebug();
 
             CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeColor();
             CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeScale();
