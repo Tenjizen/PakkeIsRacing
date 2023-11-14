@@ -29,9 +29,10 @@ namespace UI.Menu
                 _textsDictionary.Add(text, text.color.a);
                 text.DOFade(0, 0).SetUpdate(true);
             }
-            
-            CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.ClosePauseMenu.started += CloseMenu;
-            
+
+            Debug.Log("comm input");
+            //CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.ClosePauseMenu.started += CloseMenu;
+
             base.SetMenu(IsActive,IsUsable);
         }
 

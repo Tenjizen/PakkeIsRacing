@@ -110,7 +110,9 @@ namespace Enemies.Shark
                 return;
             }
 
-            _player = CharacterManager.Instance.transform;
+
+            Debug.Log("comm");
+            //_player = CharacterManager.Instance.transform;
             TargetTransform = GetComponentInParent<PlayerTriggerManager>().PropKayakController.gameObject.GetComponent<Transform>();
             SharkCombatState sharkCombatState = new SharkCombatState();
             SwitchState(sharkCombatState);
@@ -143,7 +145,8 @@ namespace Enemies.Shark
             PlayerTriggerManager.enabled = false;
             PointTarget.transform.localPosition = new Vector3(0, 0, 0);
             
-            SetPlayerExperience(CharacterManager.Instance.ExperienceManagerProperty.Data.ExperienceGainedAtEnemyShark);
+            Debug.Log("comm");
+            //SetPlayerExperience(CharacterManager.Instance.ExperienceManagerProperty.Data.ExperienceGainedAtEnemyShark);
         }
 
         private void ManagerCircleUI()
@@ -170,7 +173,8 @@ namespace Enemies.Shark
             }
             
             IsCollided = true;
-            CharacterManager.Instance.AddBalanceValueToCurrentSide(8.5f);
+            Debug.Log("comm");
+            //CharacterManager.Instance.AddBalanceValueToCurrentSide(8.5f);
         }
         private void OnCollisionEnter(Collision col)
         {
@@ -180,7 +184,8 @@ namespace Enemies.Shark
             }
             
             IsCollided = true;
-            CharacterManager.Instance.AddBalanceValueToCurrentSide(8.5f);
+            Debug.Log("comm");
+            //CharacterManager.Instance.AddBalanceValueToCurrentSide(8.5f);
         }
 
         private void AvoidObstacle()

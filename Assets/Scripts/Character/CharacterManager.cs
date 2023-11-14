@@ -29,9 +29,10 @@ namespace Character
         public float WeaponRecallTimeMultiplier = 1;
     }
     
-    public class CharacterManager : Singleton<CharacterManager>
+    public class CharacterManager : MonoBehaviour
     {
         #region Properties
+        public CharacterMultiPlayerManager Character;
 
         [field: SerializeField] public CharacterStateBase CurrentStateBaseProperty { get; private set; }
         [field: SerializeField] public KayakController KayakControllerProperty { get; private set; }
@@ -42,7 +43,6 @@ namespace Character
         [field: SerializeField] public UIEnemyManager EnemyUIManager { get; private set; }
         [field: SerializeField] public NotificationsController NotificationsUIController { get; private set; }
         [field: SerializeField] public BalanceGaugeManager BalanceGaugeManagerRef { get; private set; }
-        [field: SerializeField] public MonoBehaviour CharacterMonoBehaviour { get; private set; }
         [field: SerializeField] public ExperienceManager ExperienceManagerProperty { get; private set; }
         [field: SerializeField] public Transform WeaponSpawnPosition { get; private set; }
         [field: SerializeField] public IKControl IKPlayerControl { get; private set; }
@@ -87,18 +87,16 @@ namespace Character
 
         public PlayerStatsMultipliers PlayerStats;
 
-        protected override void Awake()
+        protected void Awake()
         {
             PlayerStats = new PlayerStatsMultipliers();
             
-            base.Awake();
             Cursor.visible = false;
-            CharacterMonoBehaviour = this;
         }
 
         private void Start()
         {
-            CharacterNavigationState navigationState = new CharacterNavigationState();
+            CharacterNavigationState navigationState = new CharacterNavigationState(Character);
             CurrentStateBaseProperty = navigationState;
             CurrentStateBaseProperty.Initialize();
 
@@ -222,21 +220,6 @@ namespace Character
         {
             Debug.Log(message);
         }
-
-        #region GUI
-
-        private void OnGUI()
-        {
-#if UNITY_EDITOR
-            GUI.skin.label.fontSize = 30;
-
-            return;
-            GUI.color = Color.white;
-            GUI.Label(new Rect(10, 10, 500, 100), "Balance : " + Math.Round(Balance, 1));
-#endif
-        }
-
-        #endregion
 
     }
 

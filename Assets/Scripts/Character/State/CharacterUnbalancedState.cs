@@ -26,7 +26,7 @@ namespace Character.State
 
         #region Constructor
 
-        public CharacterUnbalancedState() : base()
+        public CharacterUnbalancedState(CharacterMultiPlayerManager character) : base(character)
         {
             _kayakController = CharacterManagerRef.KayakControllerProperty;
             _inputs = CharacterManagerRef.InputManagementProperty;
@@ -98,13 +98,13 @@ namespace Character.State
 
                     CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeDisable();
 
-                    CharacterNavigationState characterNavigationState = new CharacterNavigationState();
+                    CharacterNavigationState characterNavigationState = new CharacterNavigationState(Character);
                     CharacterManagerRef.SwitchState(characterNavigationState);
 
                 }
                 else
                 {
-                    CharacterDeathState characterDeathState = new CharacterDeathState();
+                    CharacterDeathState characterDeathState = new CharacterDeathState(Character);
                     CharacterManagerRef.SwitchState(characterDeathState);
                 }
             }
@@ -132,7 +132,7 @@ namespace Character.State
 
                 if ((percentGauge * 100) + 2.5f < Mathf.Abs((angle / 90) * 100))
                 {
-                    CharacterDeathState characterDeathState = new CharacterDeathState();
+                    CharacterDeathState characterDeathState = new CharacterDeathState(Character);
                     CharacterManagerRef.SwitchState(characterDeathState);
                 }
             }
@@ -194,7 +194,7 @@ namespace Character.State
                     }
 
                     CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeDisable();
-                    CharacterNavigationState characterNavigationState = new CharacterNavigationState();
+                    CharacterNavigationState characterNavigationState = new CharacterNavigationState(Character);
                     CharacterManagerRef.SwitchState(characterNavigationState);
                 }
             }

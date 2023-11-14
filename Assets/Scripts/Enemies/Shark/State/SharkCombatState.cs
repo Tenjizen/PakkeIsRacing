@@ -70,18 +70,19 @@ namespace Enemies.Shark.State
 
             GetDistances(sharkManager);
 
-            Vector3 kayakVelocity = CharacterManager.Instance.KayakControllerProperty.Rigidbody.velocity;
-            kayakVelocity.y = 0;
-            if (kayakVelocity.magnitude > 1f && _attackState == AttackState.None)
-            {
-                sharkManager.PointTarget.transform.position = GetPointInFrontAndDistance(sharkManager.TargetTransform.position,
-                    sharkManager.TargetTransform,
-                    kayakVelocity.magnitude * sharkManager.Data.MutliplySpeed);
-            }
-            else if (_attackState == AttackState.JumpToTarget && _distSharkTarget > sharkManager.Data.DistSharkTargetPointStopMoving)
-            {
-                sharkManager.PointTarget.transform.position = MathTools.GetPointFromAngleAndDistance(sharkManager.TargetTransform.position, 0, 0);
-            }
+            Debug.Log("comm");
+            //Vector3 kayakVelocity = CharacterManager.Instance.KayakControllerProperty.Rigidbody.velocity;
+            //kayakVelocity.y = 0;
+            //if (kayakVelocity.magnitude > 1f && _attackState == AttackState.None)
+            //{
+            //    sharkManager.PointTarget.transform.position = GetPointInFrontAndDistance(sharkManager.TargetTransform.position,
+            //        sharkManager.TargetTransform,
+            //        kayakVelocity.magnitude * sharkManager.Data.MutliplySpeed);
+            //}
+            //else if (_attackState == AttackState.JumpToTarget && _distSharkTarget > sharkManager.Data.DistSharkTargetPointStopMoving)
+            //{
+            //    sharkManager.PointTarget.transform.position = MathTools.GetPointFromAngleAndDistance(sharkManager.TargetTransform.position, 0, 0);
+            //}
 
             if (_attackState == AttackState.None)
             {
@@ -174,18 +175,18 @@ namespace Enemies.Shark.State
 
             if (_movePointTarget)
             {
-                var rbKayak = CharacterManager.Instance.KayakControllerProperty.Rigidbody.velocity;
-                rbKayak.y = 0;
-                if (rbKayak.magnitude > 1f)
-                {
-                    sharkManager.PointTarget.transform.position = GetPointInFrontAndDistance(sharkManager.TargetTransform.position,
-                        sharkManager.TargetTransform,
-                        rbKayak.magnitude * sharkManager.Data.MutliplySpeed);
-                }
-                else
-                {
-                    sharkManager.PointTarget.transform.position = MathTools.GetPointFromAngleAndDistance(sharkManager.TargetTransform.position, 0, 0);
-                }
+                //var rbKayak = CharacterManager.Instance.KayakControllerProperty.Rigidbody.velocity;
+                //rbKayak.y = 0;
+                //if (rbKayak.magnitude > 1f)
+                //{
+                //    sharkManager.PointTarget.transform.position = GetPointInFrontAndDistance(sharkManager.TargetTransform.position,
+                //        sharkManager.TargetTransform,
+                //        rbKayak.magnitude * sharkManager.Data.MutliplySpeed);
+                //}
+                //else
+                //{
+                //    sharkManager.PointTarget.transform.position = MathTools.GetPointFromAngleAndDistance(sharkManager.TargetTransform.position, 0, 0);
+                //}
             }
 
             HandleAnimationCurve(sharkManager);

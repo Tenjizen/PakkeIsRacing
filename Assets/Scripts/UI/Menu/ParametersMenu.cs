@@ -34,12 +34,13 @@ namespace UI.Menu
                 text.DOFade(0, 0).SetUpdate(true);
             }
 
-            CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuDown.started += Down;
-            CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuUp.started += Up;
-            CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuLeft.started += Left;
-            CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuRight.started += Right;
-            CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.ClosePauseMenu.started += CloseMenu;
-            
+            Debug.Log("comm input");
+            //CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuDown.started += Down;
+            //CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuUp.started += Up;
+            //CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuLeft.started += Left;
+            //CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuRight.started += Right;
+            //CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.ClosePauseMenu.started += CloseMenu;
+
             base.SetMenu(IsActive,IsUsable);
         }
 

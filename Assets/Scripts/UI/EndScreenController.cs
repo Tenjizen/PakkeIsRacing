@@ -24,11 +24,12 @@ namespace UI
             _text.DOFade(1,1);
             _blackBackground.DOFade(1,1);
 
-            CharacterManager.Instance.CurrentStateBaseProperty.CanBeMoved = false;
-            CharacterManager.Instance.CurrentStateBaseProperty.CanOpenMenus = false;
-            CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterMove = false;
-            CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterMakeActions = false;
-            CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterOpenWeapons = false;
+            Debug.Log("comm");
+            //CharacterManager.Instance.CurrentStateBaseProperty.CanBeMoved = false;
+            //CharacterManager.Instance.CurrentStateBaseProperty.CanOpenMenus = false;
+            //CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterMove = false;
+            //CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterMakeActions = false;
+            //CharacterManager.Instance.CurrentStateBaseProperty.CanCharacterOpenWeapons = false;
         }
     }
 }

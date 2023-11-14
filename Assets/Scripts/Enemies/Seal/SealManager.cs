@@ -138,7 +138,8 @@ namespace Enemies.Seal
             }
             
             _isMoving = true;
-            _player = CharacterManager.Instance.transform;
+            Debug.Log("comm");
+            //_player = CharacterManager.Instance.transform;
             SetUpStartEnemyUI();
         }
 
@@ -268,8 +269,10 @@ namespace Enemies.Seal
             
             HitParticles.Play();
             _isMoving = false;
-            
-            SetPlayerExperience(CharacterManager.Instance.ExperienceManagerProperty.Data.ExperienceGainedAtEnemySeal);
+
+
+            Debug.Log("comm");
+            //SetPlayerExperience(CharacterManager.Instance.ExperienceManagerProperty.Data.ExperienceGainedAtEnemySeal);
         }
 
 #if UNITY_EDITOR

@@ -19,9 +19,10 @@ namespace UI.Menu
 
         protected override void Start()
         {
-            CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuTopLeft.started += Left;
-            CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuTopRight.started += Right;
-            
+            Debug.Log("comm input");
+            //CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuTopLeft.started += Left;
+            //CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuTopRight.started += Right;
+
             Height = 1;
         }
 
@@ -58,8 +59,9 @@ namespace UI.Menu
             MenuList[oldMenuIndex].Menu.SetMenu(false, false);
             MenuList[HorizontalIndex].Menu.SetMenu(true,true);
             
-            _text.text = CharacterManager.Instance.Parameters.Language ? MenuList[HorizontalIndex].Name_EN : MenuList[HorizontalIndex].Name_FR;
-            
+            Debug.Log("comm");
+            //_text.text = CharacterManager.Instance.Parameters.Language ? MenuList[HorizontalIndex].Name_EN : MenuList[HorizontalIndex].Name_FR;
+
             _pointsList[oldMenuIndex].color = new Color(1f, 1f, 1f, 0f);
             _pointsList[HorizontalIndex].color = Color.white;
         }
@@ -67,8 +69,9 @@ namespace UI.Menu
         public override void SetMenu(bool isActive, bool isUsable)
         {
             base.SetMenu(isActive, isUsable);
-            _text.text = CharacterManager.Instance.Parameters.Language ? MenuList[HorizontalIndex].Name_EN : MenuList[HorizontalIndex].Name_FR;
-            
+            Debug.Log("comm");
+            //_text.text = CharacterManager.Instance.Parameters.Language ? MenuList[HorizontalIndex].Name_EN : MenuList[HorizontalIndex].Name_FR;
+
             MenuList.ForEach(x => x.Menu.SetMenu(false,false));
             MenuList[HorizontalIndex].Menu.SetMenu(isActive,isUsable);
 

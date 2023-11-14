@@ -17,7 +17,8 @@ namespace Kayak
     public class KayakController : MonoBehaviour
     {
         public KayakData Data;
-        
+
+        public CharacterMultiPlayerManager Character;
         [field:SerializeField, Tooltip("Reference of the kayak rigidbody")] public Rigidbody Rigidbody { get; private set; }
         [ReadOnly, Tooltip("If this value is <= 0, the drag reducing will be activated")] public float DragReducingTimer;
         [ReadOnly, Tooltip("= is the drag reducing method activated ?")] public bool CanReduceDrag = true;
@@ -55,10 +56,9 @@ namespace Kayak
 
         private void OnCollisionEnter(Collision collision)
         {
-            CharacterManager characterManager = CharacterManager.Instance;
             float value = collision.relativeVelocity.magnitude / Data.KayakValues.CollisionToBalanceMagnitudeDivider;
             //Debug.Log($"collision V.M. :{Math.Round(collision.relativeVelocity.magnitude)} -> {Math.Round(value,2)}");
-            characterManager.AddBalanceValueToCurrentSide(value);
+            Character.CharacterManager.AddBalanceValueToCurrentSide(value);
             OnKayakCollision.Invoke();
         }
 
@@ -71,9 +71,9 @@ namespace Kayak
             KayakParameters kayakValues = Data.KayakValues;
 
             float velocityX = velocity.x;
-            float maxClamp = CharacterManager.Instance.SprintInProgress ? 
+            float maxClamp = Character.CharacterManager.SprintInProgress ? 
                 kayakValues.MaximumFrontSprintVelocity :
-                kayakValues.MaximumFrontVelocity * CharacterManager.Instance.PlayerStats.MaximumSpeedMultiplier;
+                kayakValues.MaximumFrontVelocity * Character.CharacterManager.PlayerStats.MaximumSpeedMultiplier;
             velocityX = Mathf.Clamp(velocityX, -maxClamp, maxClamp);
 
             float velocityZ = velocity.z;

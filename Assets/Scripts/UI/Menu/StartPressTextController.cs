@@ -11,15 +11,16 @@ namespace UI.Menu
 
         private void Update()
         {
-            if (CharacterManager.Instance.IsGameLaunched == false)
-            {
-                return;
-            }
+
+            //if (CharacterManager.Instance.IsGameLaunched == false)
+            //{
+            //    return;
+            //}
         
-            if (CharacterManager.Instance.InputManagementProperty.Inputs.AnyButton)
-            {
-                DisableMenuStartUI();
-            }
+            //if (CharacterManager.Instance.InputManagementProperty.Inputs.AnyButton)
+            //{
+            //    DisableMenuStartUI();
+            //}
         }
 
 

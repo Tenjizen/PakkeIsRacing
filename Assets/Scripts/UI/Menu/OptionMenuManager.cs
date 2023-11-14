@@ -14,14 +14,14 @@ namespace UI.Menu
     public class OptionMenuManager : MenuController
     {
         [SerializeField, ReadOnly] public bool CanBeOpened = true;
-        
+
         [SerializeField] private ParametersMenu _parametersMenu;
         [SerializeField] private ControllerMenu _menuController;
         [SerializeField] private CreditsMenu creditsMenu;
-        
+
         [SerializeField] private List<MenuUIObject> _objectsList = new List<MenuUIObject>();
         [SerializeField] private Image _backgroundImage;
-        
+
         private Dictionary<Image, float> _imagesDictionary = new Dictionary<Image, float>();
         private Dictionary<TMP_Text, float> _textsDictionary = new Dictionary<TMP_Text, float>();
 
@@ -47,10 +47,11 @@ namespace UI.Menu
                 text.DOFade(0, 0).SetUpdate(true);
             }
 
-            CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.ShowLeaveMenu.started += AbleDisable;
-            CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuDown.started += Down;
-            CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuUp.started += Up;
-            CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.ClosePauseMenu.started += CloseMenu;
+            Debug.Log("comm input");
+            //CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.ShowLeaveMenu.started += AbleDisable;
+            //CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuDown.started += Down;
+            //CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.MenuUp.started += Up;
+            //CharacterManager.Instance.InputManagementProperty.GameplayInputs.Boat.ClosePauseMenu.started += CloseMenu;
         }
 
         public override void SetMenu(bool isActive, bool isUsable)
@@ -69,12 +70,13 @@ namespace UI.Menu
 
         private void AbleDisable(InputAction.CallbackContext context)
         {
-            if (CharacterManager.Instance.IsGameLaunched == false || CanBeOpened == false || CharacterManager.Instance.CurrentStateBaseProperty.CanOpenMenus == false)
-            {
-                return;
-            }
+            Debug.Log("comm");
+            //if (CharacterManager.Instance.IsGameLaunched == false || CanBeOpened == false || CharacterManager.Instance.CurrentStateBaseProperty.CanOpenMenus == false)
+            //{
+            //    return;
+            //}
 
-            OpenCloseMenu();
+            //OpenCloseMenu();
         }
 
 
@@ -118,10 +120,11 @@ namespace UI.Menu
 
             if (_parametersMenu.IsActive == false && _menuController.IsActive == false && creditsMenu.IsActive == false)
             {
-                CharacterManager characterManager = CharacterManager.Instance;
-                characterManager.CurrentStateBaseProperty.CanCharacterMove = IsActive;
-                characterManager.CurrentStateBaseProperty.CanCharacterMakeActions = IsActive;
-                characterManager.CurrentStateBaseProperty.CanCharacterOpenWeapons = IsActive;
+                Debug.Log("comm");
+                //CharacterManager characterManager = CharacterManager.Instance;
+                //characterManager.CurrentStateBaseProperty.CanCharacterMove = IsActive;
+                //characterManager.CurrentStateBaseProperty.CanCharacterMakeActions = IsActive;
+                //characterManager.CurrentStateBaseProperty.CanCharacterOpenWeapons = IsActive;
 
                 float fadeValue = IsActive == false ? 0.8f : 0;
                 _backgroundImage.DOFade(fadeValue, fadeTime).SetUpdate(true);
@@ -211,19 +214,6 @@ namespace UI.Menu
 
             CanBeOpened = true;
             OpenCloseMenu();
-        }
-
-        public void LastCheckpoint()
-        {
-            OpenCloseMenu();
-
-            CanBeOpened = false;
-
-            CharacterManager.Instance.RespawnLastCheckpoint = true;
-
-            CharacterDeathState characterDeathState = new CharacterDeathState();
-            CharacterManager.Instance.SwitchState(characterDeathState);
-
         }
     }
 }

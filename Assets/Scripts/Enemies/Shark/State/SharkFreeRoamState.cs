@@ -19,7 +19,9 @@ namespace Enemies.Shark.State
         public override void EnterState(SharkManager sharkManager)
         {
             _state = FreeRoamState.RotateToMoveTarget;
-            CharacterManager.Instance.EnemyUIManager.DisableEnemyUI();
+
+            Debug.Log("comm");
+            //CharacterManager.Instance.EnemyUIManager.DisableEnemyUI();
 
             sharkManager.SharkCollider.enabled = false;
 

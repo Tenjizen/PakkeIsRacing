@@ -46,7 +46,8 @@ namespace Collectible
         {
             gameObject.SetActive(false);
             OnCollected.Invoke();
-            CharacterManager.Instance.ExperienceManagerProperty.AddExperience(CharacterManager.Instance.ExperienceManagerProperty.Data.ExperienceGainedAtCollectible);
+            Debug.Log("comm ici");
+            //CharacterManager.Instance.ExperienceManagerProperty.AddExperience(CharacterManager.Instance.ExperienceManagerProperty.Data.ExperienceGainedAtCollectible);
         }
 
         public void SetCollectedAtStart()

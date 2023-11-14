@@ -45,52 +45,53 @@ namespace GPEs
 
         private void CheckForPlayerInTrigger()
         {
-            bool isKayakInTrigger = false;
-            Array.Clear(_hits,0,_hits.Length);
+            Debug.Log("comm");
+            //bool isKayakInTrigger = false;
+            //Array.Clear(_hits,0,_hits.Length);
 
-            switch (_triggerType)
-            {
-                case TriggerType.BoxTrigger:
-                {
-                    int numHits = Physics.BoxCastNonAlloc(transform.position + _triggerOffsetPosition, new Vector3(_triggerBoxSize.x / 2, _triggerBoxSize.y / 2, _triggerBoxSize.z / 2), Vector3.forward, _hits, transform.rotation, 0f);
-                    break;
-                }
-                case TriggerType.SphereTrigger:
-                {
-                    int numHits = Physics.SphereCastNonAlloc(transform.position + _triggerOffsetPosition,_triggerSphereSizeRadius, Vector3.forward,_hits, 0f);
-                    break;
-                }
-            }
+            //switch (_triggerType)
+            //{
+            //    case TriggerType.BoxTrigger:
+            //    {
+            //        int numHits = Physics.BoxCastNonAlloc(transform.position + _triggerOffsetPosition, new Vector3(_triggerBoxSize.x / 2, _triggerBoxSize.y / 2, _triggerBoxSize.z / 2), Vector3.forward, _hits, transform.rotation, 0f);
+            //        break;
+            //    }
+            //    case TriggerType.SphereTrigger:
+            //    {
+            //        int numHits = Physics.SphereCastNonAlloc(transform.position + _triggerOffsetPosition,_triggerSphereSizeRadius, Vector3.forward,_hits, 0f);
+            //        break;
+            //    }
+            //}
 
-            KayakController kayakManager = CharacterManager.Instance.KayakControllerProperty;
-            for (int i = 0; i < _hits.Length; i++)
-            {
-                if (_hits[i].collider == null || _hits[i].collider.gameObject != kayakManager.gameObject)
-                {
-                    continue;
-                }
+            //KayakController kayakManager = CharacterManager.Instance.KayakControllerProperty;
+            //for (int i = 0; i < _hits.Length; i++)
+            //{
+            //    if (_hits[i].collider == null || _hits[i].collider.gameObject != kayakManager.gameObject)
+            //    {
+            //        continue;
+            //    }
 
-                if (PropKayakController == null)
-                {
-                    PropKayakController = kayakManager;
-                    OnPlayerEntered.Invoke();
-                }
-                
-                OnPlayerStay.Invoke();
-                isKayakInTrigger = true;
-            }
-            
-            if (PropKayakController == null || isKayakInTrigger)
-            {
-                return;
-            }
-            
-            PropKayakController = null;
-            OnPlayerExited.Invoke();
+            //    if (PropKayakController == null)
+            //    {
+            //        PropKayakController = kayakManager;
+            //        OnPlayerEntered.Invoke();
+            //    }
+
+            //    OnPlayerStay.Invoke();
+            //    isKayakInTrigger = true;
+            //}
+
+            //if (PropKayakController == null || isKayakInTrigger)
+            //{
+            //    return;
+            //}
+
+            //PropKayakController = null;
+            //OnPlayerExited.Invoke();
         }
 
 #if UNITY_EDITOR
-        
+
         public virtual void OnDrawGizmos()
         {
             if (_showTriggerGizmos == false)

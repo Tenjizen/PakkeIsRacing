@@ -23,14 +23,15 @@ public class ScriptForDebug : MonoBehaviour
         {
             _timerDebug += Time.deltaTime;
 
-            if(_timerDebug > 10f)
+            if (_timerDebug > 10f)
             {
                 //Reset value
-                CharacterManager.Instance.KayakControllerProperty.CanReduceDrag = true;
-                CharacterManager.Instance.SetBalanceValueToCurrentSide(0);
-                
-                CharacterManager.Instance.TransitionManagerProperty.LaunchTransitionOut(SceneTransition.TransitionType.Fade);
-              
+                Debug.Log("comm");
+                //CharacterManager.Instance.KayakControllerProperty.CanReduceDrag = true;
+                //CharacterManager.Instance.SetBalanceValueToCurrentSide(0);
+
+                //CharacterManager.Instance.TransitionManagerProperty.LaunchTransitionOut(SceneTransition.TransitionType.Fade);
+
             }
         }
 

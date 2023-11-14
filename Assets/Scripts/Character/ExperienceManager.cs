@@ -34,7 +34,9 @@ namespace Character
 
         public void AddExperience(float value)
         {
-            _currentExperience += value * CharacterManager.Instance.PlayerStats.ExperienceGainMultiplier;
+
+            Debug.Log("comm");
+            //_currentExperience += value * CharacterManager.Instance.PlayerStats.ExperienceGainMultiplier;
             ExperienceUIManagerProperty.SetGauge(_currentExperience, _currentLevelData.ExperienceNeededToComplete, 2f);
             
             while (_currentExperience >= _currentLevelData.ExperienceNeededToComplete && _currentLevel < Data.Levels.Count-1)
@@ -56,8 +58,6 @@ namespace Character
             {
                 EventAtEachLevel[_currentLevel].Invoke();
             }
-            
-            CharacterManager.Instance.NotificationsUIController.LaunchSkillPointNotification();
         }
     }
 }

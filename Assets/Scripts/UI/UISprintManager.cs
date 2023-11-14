@@ -22,35 +22,36 @@ public class UISprintManager : MonoBehaviour
 
     public void SprintEnded(float timer)
     {
-        if (timer > CharacterManager.Instance.KayakControllerProperty.Data.KayakValues.TimerMaxForSprint)
-        {
-            if (_left.enabled != false || _right.enabled != false)
-            {
-                _left.enabled = false;
-                _right.enabled = false;
-            }
-            ParticleSpeedEmission(false);
+        Debug.Log("comm ici");
+        //if (timer > CharacterManager.Instance.KayakControllerProperty.Data.KayakValues.TimerMaxForSprint)
+        //{
+        //    if (_left.enabled != false || _right.enabled != false)
+        //    {
+        //        _left.enabled = false;
+        //        _right.enabled = false;
+        //    }
+        //    ParticleSpeedEmission(false);
 
-            if (_trails.Length > 0 && _trails[_trails.Length - 1].GetComponent<TrailRenderer>().emitting == true)
-                TrailEmitting(false);
+        //    if (_trails.Length > 0 && _trails[_trails.Length - 1].GetComponent<TrailRenderer>().emitting == true)
+        //        TrailEmitting(false);
 
-            return;
-        }
+        //    return;
+        //}
 
-        float middle = (CharacterManager.Instance.KayakControllerProperty.Data.KayakValues.TimerMaxForSprint + CharacterManager.Instance.KayakControllerProperty.Data.KayakValues.TimerMinForSprint) / 2;
-        Vector3 initScale = (Vector3.one / 2) / 10;
-        Vector3 scale = Vector3.one * (initScale.x - timer / (middle / initScale.x));
-        if (scale.x >= 0)
-        {
-            if (_lastDirection == Direction.Left)
-            {
-                _right.gameObject.transform.localScale = scale;
-            }
-            else if (_lastDirection == Direction.Right)
-            {
-                _left.gameObject.transform.localScale = scale;
-            }
-        }
+        //float middle = (CharacterManager.Instance.KayakControllerProperty.Data.KayakValues.TimerMaxForSprint + CharacterManager.Instance.KayakControllerProperty.Data.KayakValues.TimerMinForSprint) / 2;
+        //Vector3 initScale = (Vector3.one / 2) / 10;
+        //Vector3 scale = Vector3.one * (initScale.x - timer / (middle / initScale.x));
+        //if (scale.x >= 0)
+        //{
+        //    if (_lastDirection == Direction.Left)
+        //    {
+        //        _right.gameObject.transform.localScale = scale;
+        //    }
+        //    else if (_lastDirection == Direction.Right)
+        //    {
+        //        _left.gameObject.transform.localScale = scale;
+        //    }
+        //}
     }
 
     public IEnumerator GoodTiming()
@@ -121,39 +122,40 @@ public class UISprintManager : MonoBehaviour
 
     public void EnableFeedback(Direction direction)
     {
-        var _character = CharacterManager.Instance;
-        var velocity = Mathf.Abs(_character.KayakControllerProperty.Rigidbody.velocity.x) + Mathf.Abs(_character.KayakControllerProperty.Rigidbody.velocity.z);
-        if (_character.Abilities.SprintUnlock == false ||
-            (_character.InputManagementProperty.Inputs.PaddleRight && _character.InputManagementProperty.Inputs.PaddleLeft) ||
-            velocity < 13f ||
-            direction == _lastDirection)
-        {
-            if (_left.enabled != false || _right.enabled != false)
-            {
-                _left.enabled = false;
-                _right.enabled = false;
-            }
-            return;
-        }
+        Debug.Log("comm ici");
+        //var _character = CharacterManager.Instance;
+        //var velocity = Mathf.Abs(_character.KayakControllerProperty.Rigidbody.velocity.x) + Mathf.Abs(_character.KayakControllerProperty.Rigidbody.velocity.z);
+        //if (_character.Abilities.SprintUnlock == false ||
+        //    (_character.InputManagementProperty.Inputs.PaddleRight && _character.InputManagementProperty.Inputs.PaddleLeft) ||
+        //    velocity < 13f ||
+        //    direction == _lastDirection)
+        //{
+        //    if (_left.enabled != false || _right.enabled != false)
+        //    {
+        //        _left.enabled = false;
+        //        _right.enabled = false;
+        //    }
+        //    return;
+        //}
 
-        TrailEmitting(true);
-        ParticleSpeedEmission(true);
+        //TrailEmitting(true);
+        //ParticleSpeedEmission(true);
 
-        Vector3 initScale = (Vector3.one / 2) / 10;
-        if (direction == Direction.Left)
-        {
-            _right.gameObject.transform.localScale = initScale;
-            _right.DOFade(1, 0);
-            _right.enabled = true;
-        }
-        else if (direction == Direction.Right)
-        {
-            _left.gameObject.transform.localScale = initScale;
-            _left.DOFade(1, 0);
-            _left.enabled = true;
-        }
+        //Vector3 initScale = (Vector3.one / 2) / 10;
+        //if (direction == Direction.Left)
+        //{
+        //    _right.gameObject.transform.localScale = initScale;
+        //    _right.DOFade(1, 0);
+        //    _right.enabled = true;
+        //}
+        //else if (direction == Direction.Right)
+        //{
+        //    _left.gameObject.transform.localScale = initScale;
+        //    _left.DOFade(1, 0);
+        //    _left.enabled = true;
+        //}
 
-        _lastDirection = direction;
+        //_lastDirection = direction;
     }
 
     public void ParticleSpeedEmission(bool active)

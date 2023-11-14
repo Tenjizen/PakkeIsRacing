@@ -8,6 +8,9 @@ namespace Character.State
 {
     public abstract class CharacterStateBase 
     {
+        public CharacterMultiPlayerManager Character;
+
+
         protected CharacterManager CharacterManagerRef;
         public MonoBehaviour MonoBehaviourRef;
         
@@ -32,9 +35,10 @@ namespace Character.State
         //anim
         public float TimeBeforeSettingPaddleAnimator;
         
-        protected CharacterStateBase()
+        protected CharacterStateBase(CharacterMultiPlayerManager character)
         {
-            if (CharacterManager.Instance != null)
+            Character = character;
+            if (Character != null)
             {
                 Initialize();
             }
@@ -42,8 +46,8 @@ namespace Character.State
 
         public void Initialize()
         {
-            CharacterManagerRef = CharacterManager.Instance;
-            MonoBehaviourRef = CharacterManager.Instance.CharacterMonoBehaviour;
+            CharacterManagerRef = Character.CharacterManager;
+            MonoBehaviourRef = Character.CharacterManager;
 
             Floaters = CharacterManagerRef.KayakControllerProperty.FloatersRef;
         }
@@ -93,7 +97,7 @@ namespace Character.State
                 CharacterManagerRef.KayakControllerProperty.CanReduceDrag = false;
                 
                 //switch states
-                CharacterUnbalancedState characterUnbalancedState = new CharacterUnbalancedState();
+                CharacterUnbalancedState characterUnbalancedState = new CharacterUnbalancedState(Character);
                 CharacterManagerRef.SwitchState(characterUnbalancedState);
 
             }
@@ -101,10 +105,10 @@ namespace Character.State
         
         public void LaunchNavigationState()
         {
-            CharacterManager character = CharacterManager.Instance;
+            CharacterManager character = Character.CharacterManager;
             character.WeaponChargedParticleSystem.Stop();
 
-            CharacterNavigationState characterNavigationState = new CharacterNavigationState();
+            CharacterNavigationState characterNavigationState = new CharacterNavigationState(Character);
             character.SwitchState(characterNavigationState);
 
             CharacterManagerRef.IKPlayerControl.CurrentType = IKType.Paddle;
