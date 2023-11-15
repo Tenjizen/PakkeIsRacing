@@ -123,12 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &2862678 stripped
+--- !u!1 &31002342
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 7217796708653836314, guid: 36e32e7372e41e346abb29f843dd75b3,
-    type: 3}
-  m_PrefabInstance: {fileID: 1205077730}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 31002343}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &31002343
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31002342}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,12 +421,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &835062629 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2610664555048439514, guid: 36e32e7372e41e346abb29f843dd75b3,
-    type: 3}
-  m_PrefabInstance: {fileID: 1205077730}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &836276842 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3427529567279728894, guid: 36e32e7372e41e346abb29f843dd75b3,
@@ -2209,6 +2228,41 @@ PrefabInstance:
       propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2635726040258605002, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2635726040258605002, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2635726040258605002, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2635726040258605002, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2635726040258605002, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HandlePlayerJoin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2635726040258605002, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerConfigManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2635726040258605002, guid: 36e32e7372e41e346abb29f843dd75b3,
+        type: 3}
+      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2646292495298845624, guid: 36e32e7372e41e346abb29f843dd75b3,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -2988,7 +3042,7 @@ PrefabInstance:
     - target: {fileID: 4304487834092224275, guid: 36e32e7372e41e346abb29f843dd75b3,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4327933871431219554, guid: 36e32e7372e41e346abb29f843dd75b3,
         type: 3}
@@ -3469,7 +3523,7 @@ PrefabInstance:
     - target: {fileID: 6108613704423858370, guid: 36e32e7372e41e346abb29f843dd75b3,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6171598321212949500, guid: 36e32e7372e41e346abb29f843dd75b3,
         type: 3}
@@ -4112,7 +4166,7 @@ PrefabInstance:
         type: 3}
       propertyPath: FloatersRef.FrontLeft
       value: 
-      objectReference: {fileID: 1230124251}
+      objectReference: {fileID: 0}
     - target: {fileID: 7217796708653836310, guid: 36e32e7372e41e346abb29f843dd75b3,
         type: 3}
       propertyPath: WeaponChargedParticleSystem
@@ -4212,7 +4266,7 @@ PrefabInstance:
         type: 3}
       propertyPath: OnPaddle.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2122313878}
+      objectReference: {fileID: 0}
     - target: {fileID: 7217796708653836310, guid: 36e32e7372e41e346abb29f843dd75b3,
         type: 3}
       propertyPath: StartGame.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -5177,10 +5231,13 @@ PrefabInstance:
     - {fileID: 8494862674207551679, guid: 36e32e7372e41e346abb29f843dd75b3, type: 3}
     - {fileID: 4572933434825384514, guid: 36e32e7372e41e346abb29f843dd75b3, type: 3}
     - {fileID: 4859290683407613557, guid: 36e32e7372e41e346abb29f843dd75b3, type: 3}
+    - {fileID: 3621669228119378942, guid: 36e32e7372e41e346abb29f843dd75b3, type: 3}
+    - {fileID: 2635726040258605002, guid: 36e32e7372e41e346abb29f843dd75b3, type: 3}
     m_RemovedGameObjects:
     - {fileID: 8824912030659317839, guid: 36e32e7372e41e346abb29f843dd75b3, type: 3}
     - {fileID: 6210831834118464095, guid: 36e32e7372e41e346abb29f843dd75b3, type: 3}
     - {fileID: 889234005, guid: 36e32e7372e41e346abb29f843dd75b3, type: 3}
+    - {fileID: 4304487834092224275, guid: 36e32e7372e41e346abb29f843dd75b3, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2858330930476149053, guid: 36e32e7372e41e346abb29f843dd75b3,
@@ -5207,10 +5264,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1414415143}
-    - targetCorrespondingSourceObject: {fileID: 7217796708653836314, guid: 36e32e7372e41e346abb29f843dd75b3,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2122313878}
   m_SourcePrefab: {fileID: 100100000, guid: 36e32e7372e41e346abb29f843dd75b3, type: 3}
 --- !u!20 &1222747039 stripped
 Camera:
@@ -5218,18 +5271,123 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 1205077730}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1230124251 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2610664555456840929, guid: 36e32e7372e41e346abb29f843dd75b3,
-    type: 3}
-  m_PrefabInstance: {fileID: 1205077730}
+--- !u!1 &1321506607
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1321506610}
+  - component: {fileID: 1321506609}
+  - component: {fileID: 1321506608}
+  m_Layer: 0
+  m_Name: PlayerConfigManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1321506608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321506607}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df155ef2fef04dd9894a6b06844aff8a, type: 3}
+  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_NotificationBehavior: 2
+  m_MaxPlayerCount: 4
+  m_AllowJoining: 1
+  m_JoinBehavior: 0
+  m_PlayerJoinedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1321506609}
+        m_TargetAssemblyTypeName: PlayerConfigManager, Assembly-CSharp
+        m_MethodName: HandlePlayerJoin
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 31002342}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  m_PlayerLeftEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_JoinAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Join
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: cad8b264-b706-40c2-82c0-f6b533fada6f
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 2728233529033322021, guid: ddf020e5030facd4cb61b6b52cfe7ec3,
+      type: 3}
+  m_PlayerPrefab: {fileID: 3227863994013744349, guid: 5c84f19ca4eb0c9498995fdae2dc3739,
+    type: 3}
+  m_SplitScreen: 0
+  m_MaintainAspectRatioInSplitScreen: 0
+  m_FixedNumberOfSplitScreens: -1
+  m_SplitScreenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!114 &1321506609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321506607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be6b149fdc935dd438aaae719dd5885e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerPanel: {fileID: 1751927645}
+  _maxPlayer: 4
+--- !u!4 &1321506610
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321506607}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1414415140 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2588816552377294092, guid: 36e32e7372e41e346abb29f843dd75b3,
@@ -5267,6 +5425,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1751927645 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6108613704423858370, guid: 36e32e7372e41e346abb29f843dd75b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1205077730}
+  m_PrefabAsset: {fileID: 0}
 --- !u!850595691 &1862951427
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -5413,7 +5577,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _playerTransform
       value: 
-      objectReference: {fileID: 835062629}
+      objectReference: {fileID: 0}
     - target: {fileID: 2039563051251762258, guid: 08da085c59a3187449a7aa5e115cd0ee,
         type: 3}
       propertyPath: _waveParticlePool
@@ -5505,25 +5669,6 @@ MonoBehaviour:
       Data3: -780664424
       Data4: 636253921
     Path: event:/SFX/UI/UI_button
---- !u!114 &2122313878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2862678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb12ca207c8fb8c41967292a1edca8fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sound:
-    Guid:
-      Data1: 1189626219
-      Data2: 1081722312
-      Data3: -415900243
-      Data4: -416574103
-    Path: event:/SFX/PaddleRowing02
 --- !u!1001 &5502001551166004553
 PrefabInstance:
   m_ObjectHideFlags: 0

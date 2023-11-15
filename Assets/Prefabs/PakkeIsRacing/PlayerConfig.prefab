@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5097941341850591544}
-  - component: {fileID: 4451325867513299393}
+  - component: {fileID: -4406434598126732270}
   - component: {fileID: 7446306706332290151}
   m_Layer: 0
   m_Name: PlayerConfig
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4451325867513299393
+--- !u!114 &-4406434598126732270
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,8 +58,76 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ec7d4462-88fd-4f43-8928-11e27232ea53
+    m_ActionName: Boat/PaddleLeft[/Keyboard/q,/XInputControllerWindows/leftTrigger,/XInputControllerWindows1/leftTrigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 90c3aca1-1a2b-4b05-a9a6-0ecf98f6952b
+    m_ActionName: Boat/PaddleRight[/Keyboard/e,/XInputControllerWindows/rightTrigger,/XInputControllerWindows1/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 31fcf997-f244-4d71-9596-0801daf74d3f
+    m_ActionName: Boat/StaticRotateLeft[/Keyboard/d,/XInputControllerWindows/leftStick/right,/XInputControllerWindows1/leftStick/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 68f74b2f-e772-4377-9710-58135b74f550
+    m_ActionName: Boat/StaticRotateRight[/Keyboard/a,/XInputControllerWindows/leftStick/left,/XInputControllerWindows1/leftStick/left]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 536c1b49-1bbd-4281-94e8-66356b26c49c
+    m_ActionName: Boat/UnbalancedRight[/XInputControllerWindows/rightTrigger,/XInputControllerWindows1/rightTrigger,/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 825655f2-9165-416b-a147-181bd2009188
+    m_ActionName: Boat/UnbalancedLeft[/XInputControllerWindows/leftTrigger,/XInputControllerWindows1/leftTrigger,/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e412642b-f162-4c33-9f57-0efea12c64c4
+    m_ActionName: Boat/ShowPauseMenus[/XInputControllerWindows/select,/XInputControllerWindows1/select,/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 32572d08-52fc-40bf-aae4-ec14ab9564d6
+    m_ActionName: Boat/MenuUp[/Keyboard/upArrow,/XInputControllerWindows/dpad/up,/XInputControllerWindows1/dpad/up,/XInputControllerWindows/leftStick/up,/XInputControllerWindows1/leftStick/up]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d0d92bef-1600-401f-9ba7-e7beb25a860e
+    m_ActionName: Boat/MenuDown[/Keyboard/downArrow,/XInputControllerWindows/dpad/down,/XInputControllerWindows1/dpad/down,/XInputControllerWindows/leftStick/down,/XInputControllerWindows1/leftStick/down]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 97b135d6-f8df-431f-93a3-31745bd76226
+    m_ActionName: Boat/MenuLeft[/Keyboard/leftArrow,/XInputControllerWindows/dpad/left,/XInputControllerWindows1/dpad/left,/XInputControllerWindows/leftStick/left,/XInputControllerWindows1/leftStick/left]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7cb7aa46-ea7d-4221-8288-a0d70a7d9623
+    m_ActionName: Boat/MenuRight[/Keyboard/rightArrow,/XInputControllerWindows/dpad/right,/XInputControllerWindows1/dpad/right,/XInputControllerWindows/leftStick/right,/XInputControllerWindows1/leftStick/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 812d2664-a5e6-46cb-a2bb-110f327173d5
+    m_ActionName: Boat/MenuTopLeft[/XInputControllerWindows/leftShoulder,/XInputControllerWindows1/leftShoulder,/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c967f5ea-3c02-4d98-bf19-51d86d2a89b4
+    m_ActionName: Boat/MenuTopRight[/XInputControllerWindows/rightShoulder,/XInputControllerWindows1/rightShoulder,/Keyboard/rightShift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c51ba526-eb6c-4664-a10d-a7ef60efa205
+    m_ActionName: Boat/ParameterMenuPressButton[/Keyboard/enter,/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f48ba92a-5447-4450-a90e-df13a3299c44
+    m_ActionName: Boat/ClosePauseMenu[/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast,/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b3be2c60-e795-4356-be41-3ca008864ecb
+    m_ActionName: Boat/AnyButton[/Keyboard/anyKey,/Mouse/rightButton,/Mouse/middleButton,/Mouse/leftButton,/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast,/XInputControllerWindows/buttonNorth,/XInputControllerWindows1/buttonNorth,/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth,/XInputControllerWindows/buttonWest,/XInputControllerWindows1/buttonWest,/XInputControllerWindows/dpad/down,/XInputControllerWindows1/dpad/down,/XInputControllerWindows/dpad/left,/XInputControllerWindows1/dpad/left,/XInputControllerWindows/dpad/right,/XInputControllerWindows1/dpad/right,/XInputControllerWindows/dpad/up,/XInputControllerWindows1/dpad/up,/XInputControllerWindows/leftShoulder,/XInputControllerWindows1/leftShoulder,/XInputControllerWindows/leftStickPress,/XInputControllerWindows1/leftStickPress,/XInputControllerWindows/leftTrigger,/XInputControllerWindows1/leftTrigger,/XInputControllerWindows/rightShoulder,/XInputControllerWindows1/rightShoulder,/XInputControllerWindows/rightStickPress,/XInputControllerWindows1/rightStickPress,/XInputControllerWindows/rightTrigger,/XInputControllerWindows1/rightTrigger,/XInputControllerWindows/select,/XInputControllerWindows1/select,/XInputControllerWindows/start,/XInputControllerWindows1/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6002375a-62e0-4484-8344-9e95513a061c
+    m_ActionName: Boat/ShowLeaveMenu[/XInputControllerWindows/start,/XInputControllerWindows1/start,/Keyboard/escape]
+  m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Boat
   m_SplitScreenIndex: -1
@@ -78,4 +146,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSetupMenuPrefab: {fileID: 7248978247266492954, guid: 63570d3f6d0f1814da35ed0504ef363d,
     type: 3}
-  input: {fileID: 4451325867513299393}
+  input: {fileID: -4406434598126732270}
