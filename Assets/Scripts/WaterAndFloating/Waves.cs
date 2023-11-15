@@ -192,6 +192,8 @@ namespace WaterAndFloating
 
         private void WaveGeneration()
         {
+            if (_playerTransform == null) return;
+
             //octave
             Octave octave = _octave;
             float time = Time.time;
