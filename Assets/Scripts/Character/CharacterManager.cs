@@ -6,7 +6,6 @@ using Character.State;
 using Fight;
 using Kayak;
 using SceneTransition;
-using Tools.SingletonClassBase;
 using UI;
 using UI.Menu;
 using UnityEngine;
@@ -39,17 +38,14 @@ namespace Character
         [field: SerializeField] public InputManagement InputManagementProperty { get; private set; }
         [field: SerializeField] public Animator PaddleAnimatorProperty { get; private set; }
         [field: SerializeField] public Animator CharacterAnimatorProperty { get; private set; }
-        [field: SerializeField] public TransitionManager TransitionManagerProperty { get; private set; }
-        [field: SerializeField] public UIEnemyManager EnemyUIManager { get; private set; }
-        [field: SerializeField] public NotificationsController NotificationsUIController { get; private set; }
+        //[field: SerializeField] public TransitionManager TransitionManagerProperty { get; private set; }
+        //[field: SerializeField] public NotificationsController NotificationsUIController { get; private set; }
         [field: SerializeField] public BalanceGaugeManager BalanceGaugeManagerRef { get; private set; }
         [field: SerializeField] public ExperienceManager ExperienceManagerProperty { get; private set; }
-        [field: SerializeField] public Transform WeaponSpawnPosition { get; private set; }
         [field: SerializeField] public IKControl IKPlayerControl { get; private set; }
         [field: SerializeField] public PlayerParameters Parameters { get; set; }
         [field: SerializeField] public PlayerAbilities Abilities { get; set; }
-        [field: SerializeField] public OptionMenuManager OptionMenuManager { get; private set; }
-        [field: SerializeField, Header("Weapons")] public UISprintManager SprintUIManager { get; private set; }
+        [field: SerializeField, Header("Sprint")] public UISprintManager SprintUIManager { get; private set; }
 
         #endregion
 
@@ -67,7 +63,6 @@ namespace Character
         [Tooltip("The number of times the button has been pressed"), ReadOnly]
         public int NumberButtonIsPressed = 0;
         [Header("VFX")]
-        public ParticleSystem WeaponChargedParticleSystem;
         public ParticleSystem SplashLeft;
         public ParticleSystem SplashRight;
 
@@ -76,10 +71,7 @@ namespace Character
         public UnityEvent OnEnterSprint;
         public UnityEvent OnStopSprint;
         
-        [HideInInspector] public float WeaponCooldown;
-        [HideInInspector] public float WeaponCooldownBase;
         [HideInInspector] public float InvincibilityTime;
-        [HideInInspector] public bool ProjectileIsInAir;
         [HideInInspector] public bool IsGameLaunched;
 
         [ReadOnly] public bool SprintInProgress = false;
@@ -226,7 +218,6 @@ namespace Character
     [Serializable]
     public struct PlayerParameters
     {
-        public bool AutoAim;
         public bool InversedControls;
         public bool Language;
     }
@@ -234,6 +225,5 @@ namespace Character
     public struct PlayerAbilities
     {
         public bool SprintUnlock;
-        public bool CanDestroyIceberg;
     }
 }

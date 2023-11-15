@@ -8,11 +8,9 @@ public class PlayerInputHandler : MonoBehaviour
     PlayerConfig _pc;
     //[HideInInspector] public PlayerController Mover;
 
-    InputManagement _inputActions;
     void Awake()
     {
         //Mover = GetComponent<PlayerController>();
-        _inputActions = new InputManagement();
     }
 
     public void InitPlayer(PlayerConfig pc)

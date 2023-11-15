@@ -6,7 +6,6 @@ namespace Character.State
     public class CharacterDeathState : CharacterStateBase
     {
         private KayakController _kayakController;
-        private InputManagement _inputs;
 
         private bool _transitionIn = false;
         private bool _respawned = false;
@@ -18,7 +17,6 @@ namespace Character.State
         public CharacterDeathState(CharacterMultiPlayerManager character) : base(character)
         {
             _kayakController = CharacterManagerRef.KayakControllerProperty;
-            _inputs = CharacterManagerRef.InputManagementProperty;
         }
 
         public override void EnterState(CharacterManager character)
@@ -72,7 +70,7 @@ namespace Character.State
         public override void SwitchState(CharacterManager character)
         {
             //Transition out
-            character.TransitionManagerProperty.LaunchTransitionOut(SceneTransition.TransitionType.Fade);
+            //character.TransitionManagerProperty.LaunchTransitionOut(SceneTransition.TransitionType.Fade);
 
 
             //Switch state character

@@ -106,7 +106,6 @@ namespace Character.State
         public void LaunchNavigationState()
         {
             CharacterManager character = Character.CharacterManager;
-            character.WeaponChargedParticleSystem.Stop();
 
             CharacterNavigationState characterNavigationState = new CharacterNavigationState(Character);
             character.SwitchState(characterNavigationState);

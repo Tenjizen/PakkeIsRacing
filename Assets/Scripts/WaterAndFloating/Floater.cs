@@ -24,6 +24,7 @@ namespace WaterAndFloating
         private void Start()
         {
             if (GetComponentInParent<KayakController>() != null) _playerTransform = GetComponentInParent<KayakController>().Character.transform;
+            _waves = GameManager.Instance.WavesRef;
         }
 
         private void FixedUpdate()
