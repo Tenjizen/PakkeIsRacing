@@ -202,16 +202,16 @@ namespace Character.State
 
         private void ClickSpam()
         {
-            //if (_inputs.GameplayInputs.Boat.UnbalancedLeft.WasPerformedThisFrame() && CharacterManagerRef.Balance < 0)
-            //{
-            //    CharacterManagerRef.NumberButtonIsPressed++;
-            //    CharacterManagerRef.BalanceGaugeManagerRef.MakeCursorFeedback();
-            //}
-            //if (_inputs.GameplayInputs.Boat.UnbalancedRight.WasPerformedThisFrame() && CharacterManagerRef.Balance > 0)
-            //{
-            //    CharacterManagerRef.NumberButtonIsPressed++;
-            //    CharacterManagerRef.BalanceGaugeManagerRef.MakeCursorFeedback();
-            //}
+            if (_inputs.GameplayInputs.Boat.UnbalancedLeft.WasPerformedThisFrame() && CharacterManagerRef.Balance < 0)
+            {
+                CharacterManagerRef.NumberButtonIsPressed++;
+                CharacterManagerRef.BalanceGaugeManagerRef.MakeCursorFeedback();
+            }
+            if (_inputs.GameplayInputs.Boat.UnbalancedRight.WasPerformedThisFrame() && CharacterManagerRef.Balance > 0)
+            {
+                CharacterManagerRef.NumberButtonIsPressed++;
+                CharacterManagerRef.BalanceGaugeManagerRef.MakeCursorFeedback();
+            }
         }
         private void MakeBoatRotationWithBalanceInUnbalanced(Transform kayakTransform, float multiplier)
         {

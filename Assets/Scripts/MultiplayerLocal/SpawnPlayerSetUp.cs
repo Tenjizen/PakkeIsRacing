@@ -11,7 +11,7 @@ public class SpawnPlayerSetUp : MonoBehaviour
 
     private void Awake()
     {
-        var rootMenu = GameObject.Find("Playerpannel");
+        var rootMenu = GameObject.Find("PlayerPannel");
         if (rootMenu != null)
         {
             var menu = Instantiate(playerSetupMenuPrefab, rootMenu.transform);

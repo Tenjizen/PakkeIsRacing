@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerConfigManager : MonoBehaviour
 {
     private List<PlayerConfig> playersConfig;
+    [SerializeField] InitLvl _initlvl;
     [SerializeField] GameObject _playerPanel;
     [SerializeField] int _maxPlayer = 4;
     public static PlayerConfigManager Instance { get; private set; }
@@ -32,7 +33,7 @@ public class PlayerConfigManager : MonoBehaviour
             && playersConfig.All(p => p.IsReady == true))
         {
             _playerPanel.SetActive(false);
-            //_initlvl.Init();
+            _initlvl.Init();
         }
     }
 

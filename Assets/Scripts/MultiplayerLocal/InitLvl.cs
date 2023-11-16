@@ -1,3 +1,4 @@
+using Character;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,8 +16,8 @@ public class InitLvl : MonoBehaviour
         {
             var player = Instantiate(_playerPrefab, playerSpawn[i].position, playerSpawn[i].rotation, gameObject.transform);
 
-            player.GetComponent<CharacterMultiPlayerManager>();
-            //player.GetComponent<PlayerInputHandler>().InitPlayer(playerConfigs[i]);
+            //player.GetComponent<CharacterMultiPlayerManager>();
+            player.GetComponent<CharacterMultiPlayerManager>().InputManager.InitPlayer(playerConfigs[i]);
             //player.GetComponent<PlayerController>().SetTeam(i % 2);
             //player.GetComponent<PlayerController>().ID = i;
             //playerSpawn.Remove(playerSpawn[i]);
