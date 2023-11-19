@@ -16,26 +16,26 @@ namespace WaterAndFloating
         [SerializeField] private float _waterDrag = 0.99f;
         [SerializeField] private float _waterAngularDrag = 0.5f;
 
-        [Header("Physic Render Update"), SerializeField] private float _renderDistance;
-        [ReadOnly, SerializeField] private bool _isSimulated;
+        //[Header("Physic Render Update"), SerializeField] private float _renderDistance;
+        //[ReadOnly, SerializeField] private bool _isSimulated;
 
-        private Transform _playerTransform;
+        //private Transform _playerTransform;
 
         private void Start()
         {
-            if (GetComponentInParent<KayakController>() != null) _playerTransform = GetComponentInParent<KayakController>().Character.transform;
+            //if (GetComponentInParent<KayakController>() != null) _playerTransform = GetComponentInParent<KayakController>().Character.transform;
             _waves = GameManager.Instance.WavesRef;
         }
 
         private void FixedUpdate()
         {
-            if (Vector3.Distance(transform.position, _playerTransform.position) > _renderDistance)
-            {
-                _isSimulated = false;
-                return;
-            }
+            //if (Vector3.Distance(transform.position, _playerTransform.position) > _renderDistance)
+            //{
+            //    _isSimulated = false;
+            //    return;
+            //}
 
-            _isSimulated = true;
+            //_isSimulated = true;
             ManageFloater();
         }
 
