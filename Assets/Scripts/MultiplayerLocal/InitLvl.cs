@@ -1,23 +1,24 @@
 using Character;
 using System.Collections;
 using System.Collections.Generic;
+using MultiplayerLocal;
 using UnityEngine;
 
 public class InitLvl : MonoBehaviour
 {
     [SerializeField] List<Transform> playerSpawn;
-    [SerializeField] GameObject _playerPrefab;
-
+    [SerializeField] CharacterMultiPlayerManager _playerPrefab;
+    [SerializeField] MultipleTargetCamera _multipleTargetCamera ;
 
     public void Init()
     {
         var playerConfigs = PlayerConfigManager.Instance.GetPlayerConfigs().ToArray();
         for (int i = 0; i < playerConfigs.Length; i++)
         {
-            var player = Instantiate(_playerPrefab, playerSpawn[i].position, playerSpawn[i].rotation, gameObject.transform);
-
+            CharacterMultiPlayerManager player = Instantiate(_playerPrefab, playerSpawn[i].position, playerSpawn[i].rotation, gameObject.transform);
+            _multipleTargetCamera.Targets.Add(player.Kayak.transform);
             //player.GetComponent<CharacterMultiPlayerManager>();
-            player.GetComponent<CharacterMultiPlayerManager>().InputManager.InitPlayer(playerConfigs[i]);
+            player.InputManager.InitPlayer(playerConfigs[i]);
             //player.GetComponent<PlayerController>().SetTeam(i % 2);
             //player.GetComponent<PlayerController>().ID = i;
             //playerSpawn.Remove(playerSpawn[i]);

@@ -185,7 +185,7 @@ Transform:
   - {fileID: 5518916933648646618}
   - {fileID: 2949693239264989499}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7462900990157805195
 MonoBehaviour:
@@ -201,6 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterManager: {fileID: 5518916933648646613}
   InputManager: {fileID: 8723659837373602303}
+  Kayak: {fileID: 5518916933789822100}
 --- !u!1 &1717494486604363860
 GameObject:
   m_ObjectHideFlags: 0
@@ -1057,15 +1058,7 @@ MonoBehaviour:
     PaddleRight: 0
     RotateLeft: 0
     RotateRight: 0
-    ResetCamera: 0
-    RotateCamera: {x: 0, y: 0}
     Deadzone: 0
-    OpenWeaponMenu: 0
-    SelectWeaponMenu: {x: 0, y: 0}
-    DeselectWeapon: 0
-    Aim: 0
-    Shoot: 0
-    MovingAim: {x: 0, y: 0}
     Unbalanced: 0
     AnyButton: 0
     Start: 0
