@@ -1,21 +1,17 @@
-using GPEs;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using WaterFlowGPE.Bezier;
 using SharkWithPath.Data;
+
 public class SharkWithPathController : MonoBehaviour
 {
-    [Header("Player detection"), SerializeField] private PlayerTriggerManager _playerTrigger;
     [Header("Path"), SerializeField] private BezierSpline _splinePath;
     [Header("Data"), SerializeField] private SharkWithPathData _data;
-    [Header("Referance"), SerializeField] private GameObject _parent;
 
     private float _currentSplinePosition;
-    private Quaternion _targetRotation;
+
+    [Header("Debug"), SerializeField] private bool _slow;
 
 
-    [Header("Debug"), SerializeField, ReadOnly] private bool _playerIsTrigger;
     void Start()
     {
         Initialize();
@@ -23,45 +19,37 @@ public class SharkWithPathController : MonoBehaviour
 
     void Update()
     {
-        if (_playerIsTrigger == true)
-        {
-            ManageMovement();
-        }
+        ManageMovement();
     }
 
     public void Initialize()
     {
-        _playerTrigger.OnPlayerEntered.AddListener(SetPlayerIsTriggerAtTrue);
 
         _currentSplinePosition = 0;
 
-        if (_playerTrigger == null)
-        {
-            return;
-        }
         if (_splinePath == null)
         {
             return;
         }
-
 
         Vector3 splinePosition = _splinePath.GetPoint(_currentSplinePosition);
         transform.position = new Vector3(splinePosition.x, transform.position.y, splinePosition.z);
     }
 
 
-    public void SetPlayerIsTriggerAtTrue()
-    {
-        _playerIsTrigger = true;
-    }
-
     private void ManageMovement()
     {
-        _currentSplinePosition += _data.MovingValue;
+        if (_slow == false)
+        {
+            _currentSplinePosition += _data.MovingValue;
+        }
+        else
+        {
+            _currentSplinePosition += _data.SlowMovingValue;
+        }
         _currentSplinePosition = Mathf.Clamp01(_currentSplinePosition);
 
-        if (_currentSplinePosition >= 1)
-            _parent.SetActive(false);
+        if (_currentSplinePosition >= 1) _currentSplinePosition = 0;
 
         Transform t = transform;
 

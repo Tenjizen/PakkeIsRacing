@@ -7,6 +7,8 @@ namespace SharkWithPath.Data
     {
         [field: SerializeField, Header("Speed"), Range(0, 0.1f)]
         public float MovingValue { get; private set; } = 0.05f;
+        [field: SerializeField, Header("Speed"), Range(0, 0.1f)]
+        public float SlowMovingValue { get; private set; } = 0.01f;
 
         [field: SerializeField, Range(0, 1f)]
         public float SpeedLerpToMovingValue { get; private set; } = 0.1f;
