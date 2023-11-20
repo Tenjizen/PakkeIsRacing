@@ -1,6 +1,7 @@
 using UnityEngine;
 using WaterFlowGPE.Bezier;
 using SharkWithPath.Data;
+using System;
 
 public class SharkWithPathController : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class SharkWithPathController : MonoBehaviour
     [Header("Data"), SerializeField] private SharkWithPathData _data;
 
     private float _currentSplinePosition;
+    public bool StartRunning = false;
 
     [Header("Debug"), SerializeField] private bool _slow;
 
@@ -19,7 +21,34 @@ public class SharkWithPathController : MonoBehaviour
 
     void Update()
     {
+        if (StartRunning == false) return;
         ManageMovement();
+    }
+    private void FixedUpdate()
+    {
+        if (StartRunning == false) return;
+        DistanceManager();
+    }
+
+    private void DistanceManager()
+    {
+        float bestDist = float.MaxValue;
+        foreach (var item in GameManager.Instance.MultiTargetRef.Targets)
+        {
+            float distTarget = Vector3.Distance(item.transform.position, this.transform.position);
+            if (distTarget < bestDist)
+            {
+                bestDist = distTarget;
+            }
+        }
+        if (bestDist < _data.MaxDistBetweenSharkAndClosestPlayer)
+        {
+            _slow = true;
+        }
+        else
+        {
+            _slow = false;
+        }
     }
 
     public void Initialize()
