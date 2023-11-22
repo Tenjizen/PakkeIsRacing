@@ -38,6 +38,9 @@ public class IsInCameraView : MonoBehaviour
             }
             else
             {
+                // transform.position = new Vector3(Camera.main.transform.position.x, transform.position.y, Camera.main.transform.position.z - 20);
+                // _timer = 0;
+                // MultipleTargetCamera.AddTarget(transform);
             }
         }
         else

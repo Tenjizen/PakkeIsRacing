@@ -8,7 +8,6 @@ namespace MultiplayerLocal
     public class MultipleTargetCamera : MonoBehaviour
     {
         [field: SerializeField] public List<Transform> Targets { get; set; } = new List<Transform>();
-        [SerializeField] private Vector3 _offset;
         [SerializeField] private float _maxPossibleDistance;
         [SerializeField] private float _minDistanceForZoom;
         [SerializeField] private float _smoothTime;
@@ -38,20 +37,21 @@ namespace MultiplayerLocal
             }
 
             float newY = Mathf.Lerp(_minY, _maxY, greatestDistance / _maxPossibleDistance);
-            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, newY, Time.deltaTime), transform.position.z);
+            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, newY, Time.deltaTime * _smoothTime), transform.position.z);
         }
 
         private void Move()
         {
             Vector3 centerPoint = Targets[0].position;
             centerPoint.y = transform.position.y;
-            transform.position = Vector3.SmoothDamp(transform.position, centerPoint, ref _velocity, _smoothTime);
+            transform.position = Vector3.SmoothDamp(transform.position, centerPoint, ref _velocity, 0);
         }
 
         private float GetGreatestDistance()
         {
             Bounds bounds = CreateBounds();
-            return bounds.size.x > bounds.size.z ? bounds.size.x : bounds.size.z;
+            return bounds.size.z;
+            // return bounds.size.x > bounds.size.z ? bounds.size.x : bounds.size.z;
         }
 
         private Vector3 GetCenterPoint()
@@ -69,7 +69,7 @@ namespace MultiplayerLocal
         private Bounds CreateBounds()
         {
             Bounds bounds = new Bounds(Targets[0].position, Vector3.zero);
-            
+
             foreach (Transform target in Targets)
             {
                 bounds.Encapsulate(target.position);
@@ -81,6 +81,14 @@ namespace MultiplayerLocal
         public void RemoveTarget(Transform transform)
         {
             Targets.Remove(transform);
+        }
+
+        public void AddTarget(Transform transform)
+        {
+            if (Targets.Contains(transform) == false)
+            {
+                Targets.Add(transform);
+            }
         }
     }
 }
