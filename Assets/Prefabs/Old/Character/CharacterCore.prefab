@@ -245,8 +245,7 @@ MonoBehaviour:
   m_AnimatedTarget: {fileID: 4963052748703314965}
   m_LayerIndex: 0
   m_ShowDebugText: 0
-  m_ChildCameras:
-  - {fileID: 2091088283570573891}
+  m_ChildCameras: []
   m_Instructions:
   - m_FullHash: -1195735313
     m_VirtualCamera: {fileID: 0}
@@ -609,6 +608,7 @@ MonoBehaviour:
   - {fileID: 8911046656043875791}
   _playerPrefab: {fileID: 1369514891194472144, guid: 7bb67df9b55caf54c9d4179d591eea26,
     type: 3}
+  _multipleTargetCamera: {fileID: 0}
 --- !u!1 &7057282173032592734
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,8 +649,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7217796707971164476}
-  - component: {fileID: 3621669228119378942}
-  - component: {fileID: 2635726040258605002}
   - component: {fileID: 3852877846602064567}
   m_Layer: 0
   m_Name: CharacterCore
@@ -678,65 +676,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3621669228119378942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7217796707971164477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be6b149fdc935dd438aaae719dd5885e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerPanel: {fileID: 6108613704423858370}
-  _maxPlayer: 4
---- !u!114 &2635726040258605002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7217796707971164477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_NotificationBehavior: 2
-  m_MaxPlayerCount: 4
-  m_AllowJoining: 1
-  m_JoinBehavior: 0
-  m_PlayerJoinedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_PlayerLeftEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_JoinAction:
-    m_UseReference: 0
-    m_Action:
-      m_Name: 
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 3227863994013744349, guid: 5c84f19ca4eb0c9498995fdae2dc3739,
-    type: 3}
-  m_SplitScreen: 0
-  m_MaintainAspectRatioInSplitScreen: 0
-  m_FixedNumberOfSplitScreens: -1
-  m_SplitScreenRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
 --- !u!114 &3852877846602064567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -751,6 +690,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPersistant: 0
   <WavesRef>k__BackingField: {fileID: 0}
+  <MultiTargetRef>k__BackingField: {fileID: 0}
 --- !u!1 &7217796708230699273
 GameObject:
   m_ObjectHideFlags: 0
@@ -2383,12 +2323,6 @@ Transform:
 --- !u!20 &2469365734887823950 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 2685714190101671894, guid: 5f3937e671440d847b7282995fde0507,
-    type: 3}
-  m_PrefabInstance: {fileID: 504792243475772824}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6108613704423858370 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6036870870112834906, guid: 5f3937e671440d847b7282995fde0507,
     type: 3}
   m_PrefabInstance: {fileID: 504792243475772824}
   m_PrefabAsset: {fileID: 0}
