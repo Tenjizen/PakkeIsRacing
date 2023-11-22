@@ -89,9 +89,9 @@ namespace Character
 
             CurrentStateBaseProperty.EnterState(this);
 
-            BalanceGaugeManagerRef.SetBalanceGaugeActive(false);
-            ExperienceManagerProperty.ExperienceUIManagerProperty.SetActive(false);
-            BalanceGaugeManagerRef.ShowTrigger(false, false);
+            //BalanceGaugeManagerRef.SetBalanceGaugeActive(false);
+            //ExperienceManagerProperty.ExperienceUIManagerProperty.SetActive(false);
+            //BalanceGaugeManagerRef.ShowTrigger(false, false);
 
             //rotate kayak
             Transform kayakTransform = KayakControllerProperty.transform;
@@ -209,23 +209,7 @@ namespace Character
             Debug.Log(message);
         }
 
-        #region ZoneShark
-        private void OnTriggerEnter(Collider other)
-        {
-            if(other.GetComponent<SharkWithPathController>() != false)
-            {
-                Character.InSharkZone = true;
-            }
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            if(other.GetComponent<SharkWithPathController>() != false)
-            {
-                Character.InSharkZone = false;
-            }
-        }
-        #endregion
+      
     }
 
     [Serializable]

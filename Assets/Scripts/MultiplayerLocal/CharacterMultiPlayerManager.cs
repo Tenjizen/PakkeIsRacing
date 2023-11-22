@@ -1,5 +1,6 @@
 using Character;
 using Kayak;
+using System;
 using UnityEngine;
 
 public class CharacterMultiPlayerManager : MonoBehaviour
@@ -8,12 +9,62 @@ public class CharacterMultiPlayerManager : MonoBehaviour
     public InputManagement InputManager;
     public KayakController Kayak;
 
+
+    [SerializeField] ParticleSystem _particleSystem;
+
     public bool InSharkZone = false;
 
     private int _points;
     public int Points => _points;
 
+
     private float _timerInTrigger = 0;
     public float TimerInTrigger => _timerInTrigger;
 
+
+    public bool MaxPts = false;
+
+
+
+    private void Update()
+    {
+        if (InSharkZone == true)
+        {
+
+            if (MaxPts == true) return;
+
+            _timerInTrigger += Time.deltaTime;
+
+            if (_timerInTrigger >= GameManager.Instance.TimerInTriggerShark)
+            {
+                Point();
+                _timerInTrigger -= GameManager.Instance.TimerInTriggerShark;
+            }
+        }
+        else
+        {
+            _timerInTrigger = 0;
+        }
+    }
+
+    [SerializeField] int _addValueParticleRateOverTime = 10;
+    int _addRateOverTimeParticle = 10;
+    private void Point()
+    {
+        if (_points < GameManager.Instance.MaxPointToUnlockButton)
+        {
+            _points += GameManager.Instance.PointsWin;
+
+            var emission = _particleSystem.emission;
+            _addRateOverTimeParticle += _addValueParticleRateOverTime;
+            emission.rateOverTime = _addRateOverTimeParticle;
+        }
+        else if (MaxPts == false)
+        {
+            MaxPts = true;
+            var colorParticle = _particleSystem.main;
+            colorParticle.startColor = Color.yellow;
+        }
+
+    }
 }

@@ -103,6 +103,16 @@ namespace Character.State
                 CharacterManagerRef.SprintUIManager.ParticleSpeedEmission(true);
                 CharacterManagerRef.SprintUIManager.TrailEmitting(true);
             }
+
+            CheckPurify();
+        }
+
+        private void CheckPurify()
+        {
+            if(_inputs.Inputs.Purify == true && Character.MaxPts == true && Character.InSharkZone == true)
+            {
+                Debug.Log("wwwwiiiiiiiiiiiinnnnnnnnneeeeeeeeeerrrrrrrrrrrrr");
+            }
         }
 
         public override void FixedUpdate(CharacterManager character)
