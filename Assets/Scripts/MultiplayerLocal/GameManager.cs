@@ -7,10 +7,17 @@ using WaterAndFloating;
 using MultiplayerLocal;
 public class GameManager : Singleton<GameManager>
 {
-    //[field: SerializeField] public OptionMenuManager OptionMenuManager { get; private set; }
-    //[field: SerializeField] public UIEnemyManager EnemyUIManager { get; private set; }
     [field: SerializeField] public Waves WavesRef { get; private set; }
     [field: SerializeField] public MultipleTargetCamera MultiTargetRef { get; private set; }
+
+
+    [field: SerializeField] public float TimerInTriggerShark { get; private set; }
+    [field: SerializeField] public int PointsWin { get; private set; }
+    [field: SerializeField] public int MaxPointToUnlockButton { get; private set; }
+
+
+
+
 
 
     void Start()

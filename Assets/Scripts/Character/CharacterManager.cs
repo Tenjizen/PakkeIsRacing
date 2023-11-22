@@ -209,6 +209,23 @@ namespace Character
             Debug.Log(message);
         }
 
+        #region ZoneShark
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.GetComponent<SharkWithPathController>() != false)
+            {
+                Character.InSharkZone = true;
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if(other.GetComponent<SharkWithPathController>() != false)
+            {
+                Character.InSharkZone = false;
+            }
+        }
+        #endregion
     }
 
     [Serializable]
