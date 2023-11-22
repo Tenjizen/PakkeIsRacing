@@ -109,9 +109,13 @@ namespace Character.State
 
         private void CheckPurify()
         {
-            if(_inputs.Inputs.Purify == true && Character.MaxPts == true && Character.InSharkZone == true)
+            if (_inputs.Inputs.Purify == true && Character.MaxPts == true && Character.InSharkZone == true)
             {
+                Character.MaxPts = false;
+                Character.RemovePoint(GameManager.Instance.MaxPointToUnlockButton);
                 Debug.Log("wwwwiiiiiiiiiiiinnnnnnnnneeeeeeeeeerrrrrrrrrrrrr");
+                GameManager.Instance.SharkPossessed.SetActive(false);
+                GameManager.Instance.EnnemyPossessed = false;
             }
         }
 
@@ -363,7 +367,7 @@ namespace Character.State
             //change the rotation inertia to 0
             RotationPaddleForceY = Mathf.Lerp(RotationPaddleForceY, 0, 0.1f);
             RotationStaticForceY = Mathf.Lerp(RotationStaticForceY, 0, 0.1f);
-            
+
         }
 
         private void CheckIfSprint(Direction direction)

@@ -28,9 +28,8 @@ public class CharacterMultiPlayerManager : MonoBehaviour
 
     private void Update()
     {
-        if (InSharkZone == true)
+        if (InSharkZone == true && GameManager.Instance.EnnemyPossessed == true)
         {
-
             if (MaxPts == true) return;
 
             _timerInTrigger += Time.deltaTime;
@@ -64,6 +63,22 @@ public class CharacterMultiPlayerManager : MonoBehaviour
             MaxPts = true;
             var colorParticle = _particleSystem.main;
             colorParticle.startColor = Color.yellow;
+        }
+
+    }
+    public void RemovePoint(int pts)
+    {
+        _points -= pts;
+
+        var emission = _particleSystem.emission;
+        _addRateOverTimeParticle -= _addValueParticleRateOverTime * pts;
+        emission.rateOverTime = _addRateOverTimeParticle;
+
+        if (MaxPts == true)
+        {
+            MaxPts = false;
+            var colorParticle = _particleSystem.main;
+            colorParticle.startColor = Color.white;
         }
 
     }

@@ -16,6 +16,8 @@ public class GameManager : Singleton<GameManager>
     [field: SerializeField] public int MaxPointToUnlockButton { get; private set; }
 
 
+    [SerializeField] public bool EnnemyPossessed = true;
+    [field: SerializeField] public GameObject SharkPossessed { get; private set; }
 
 
 
