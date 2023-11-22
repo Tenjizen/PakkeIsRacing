@@ -179,6 +179,15 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Purify"",
+                    ""type"": ""Button"",
+                    ""id"": ""ef00199d-0bde-4d1a-8dc9-7ce018da53b3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -764,6 +773,28 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
                     ""action"": ""ShowLeaveMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d250a9a-98f1-4630-abab-07fbb86710ca"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Purify"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b8da7095-ab14-4978-88dc-96007e19fc9e"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Purify"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -903,6 +934,7 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
         m_Boat_ClosePauseMenu = m_Boat.FindAction("ClosePauseMenu", throwIfNotFound: true);
         m_Boat_AnyButton = m_Boat.FindAction("AnyButton", throwIfNotFound: true);
         m_Boat_ShowLeaveMenu = m_Boat.FindAction("ShowLeaveMenu", throwIfNotFound: true);
+        m_Boat_Purify = m_Boat.FindAction("Purify", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Move = m_Menu.FindAction("Move", throwIfNotFound: true);
@@ -985,6 +1017,7 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Boat_ClosePauseMenu;
     private readonly InputAction m_Boat_AnyButton;
     private readonly InputAction m_Boat_ShowLeaveMenu;
+    private readonly InputAction m_Boat_Purify;
     public struct BoatActions
     {
         private @GameplayInputs m_Wrapper;
@@ -1006,6 +1039,7 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
         public InputAction @ClosePauseMenu => m_Wrapper.m_Boat_ClosePauseMenu;
         public InputAction @AnyButton => m_Wrapper.m_Boat_AnyButton;
         public InputAction @ShowLeaveMenu => m_Wrapper.m_Boat_ShowLeaveMenu;
+        public InputAction @Purify => m_Wrapper.m_Boat_Purify;
         public InputActionMap Get() { return m_Wrapper.m_Boat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1066,6 +1100,9 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
             @ShowLeaveMenu.started += instance.OnShowLeaveMenu;
             @ShowLeaveMenu.performed += instance.OnShowLeaveMenu;
             @ShowLeaveMenu.canceled += instance.OnShowLeaveMenu;
+            @Purify.started += instance.OnPurify;
+            @Purify.performed += instance.OnPurify;
+            @Purify.canceled += instance.OnPurify;
         }
 
         private void UnregisterCallbacks(IBoatActions instance)
@@ -1121,6 +1158,9 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
             @ShowLeaveMenu.started -= instance.OnShowLeaveMenu;
             @ShowLeaveMenu.performed -= instance.OnShowLeaveMenu;
             @ShowLeaveMenu.canceled -= instance.OnShowLeaveMenu;
+            @Purify.started -= instance.OnPurify;
+            @Purify.performed -= instance.OnPurify;
+            @Purify.canceled -= instance.OnPurify;
         }
 
         public void RemoveCallbacks(IBoatActions instance)
@@ -1211,6 +1251,7 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
         void OnClosePauseMenu(InputAction.CallbackContext context);
         void OnAnyButton(InputAction.CallbackContext context);
         void OnShowLeaveMenu(InputAction.CallbackContext context);
+        void OnPurify(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

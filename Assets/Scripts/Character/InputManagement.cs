@@ -58,7 +58,12 @@ namespace Character
                 inputsEnum.AnyButton = obj.ReadValue<float>() > DeadzoneJoystickTrigger;
 
             if (obj.action.name == _gameplayInputs.Boat.ShowLeaveMenu.name)
-                inputsEnum.Start = obj.ReadValue<float>() > DeadzoneJoystickTrigger;
+                inputsEnum.Start = obj.ReadValue<float>() > DeadzoneJoystickTrigger; 
+            
+
+
+            if (obj.action.name == _gameplayInputs.Boat.Purify.name)
+                inputsEnum.Purify = obj.ReadValue<float>() > DeadzoneJoystickTrigger;
 
 
 
@@ -107,5 +112,7 @@ namespace Character
 
         public bool AnyButton;
         public bool Start;
+
+        public bool Purify;
     }
 }
