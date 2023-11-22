@@ -270,7 +270,7 @@ namespace Character.State
             _lastPaddleSide = direction;
 
             //balance
-            CharacterManagerRef.Balance += RotationPaddleForceY * CharacterManagerRef.Data.RotationToBalanceMultiplier;
+            //CharacterManagerRef.Balance += RotationPaddleForceY * CharacterManagerRef.Data.RotationToBalanceMultiplier;
 
             //force
             MonoBehaviourRef.StartCoroutine(PaddleForceCurve());

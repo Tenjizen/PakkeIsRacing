@@ -28,38 +28,38 @@ namespace Character.State
         }
         public override void UpdateState(CharacterManager character)
         {
-            if (character.RespawnLastCheckpoint == false)
-            {
-                //Rotate kayak at 180 in z with balance
-                if (character.Balance > 0 && character.Balance < 60)
-                {
-                    character.Balance += Time.deltaTime * _speed;
-                }
-                else if (character.Balance < -0 && character.Balance > -60)
-                {
-                    character.Balance -= Time.deltaTime * _speed;
-                }
-            }
+            //if (character.RespawnLastCheckpoint == false)
+            //{
+            //    //Rotate kayak at 180 in z with balance
+            //    if (character.Balance > 0 && character.Balance < 60)
+            //    {
+            //        character.Balance += Time.deltaTime * _speed;
+            //    }
+            //    else if (character.Balance < -0 && character.Balance > -60)
+            //    {
+            //        character.Balance -= Time.deltaTime * _speed;
+            //    }
+            //}
 
-            //Switch camera
-            if (Mathf.Abs(character.Balance) >= 60 && _cameraSwitchState == false || character.RespawnLastCheckpoint == true && _cameraSwitchState == false)
-            {
-                _cameraSwitchState = true;
-                character.BalanceGaugeManagerRef.SetBalanceGaugeDisable();
-            }
-            MakeBoatRotationWithBalance(_kayakController.transform, 1);
+            ////Switch camera
+            //if (Mathf.Abs(character.Balance) >= 60 && _cameraSwitchState == false || character.RespawnLastCheckpoint == true && _cameraSwitchState == false)
+            //{
+            //    _cameraSwitchState = true;
+            //    character.BalanceGaugeManagerRef.SetBalanceGaugeDisable();
+            //}
+            //MakeBoatRotationWithBalance(_kayakController.transform, 1);
 
 
             //Timer transition In
-            if (_transitionIn && _respawned == false)
-            {
-                _timerToRespawnCheckpoint += Time.deltaTime;
-            }
+            //if (_transitionIn && _respawned == false)
+            //{
+            //    _timerToRespawnCheckpoint += Time.deltaTime;
+            //}
 
-            if (_timerFadeOutStart > 1.5f && _respawned)
-            {
-                SwitchState(character);
-            }
+            //if (_timerFadeOutStart > 1.5f && _respawned)
+            //{
+            //    SwitchState(character);
+            //}
 
         }
 
@@ -81,7 +81,7 @@ namespace Character.State
 
         public override void ExitState(CharacterManager character)
         {
-            character.Balance = 0;
+            //character.Balance = 0;
         }
     }
 

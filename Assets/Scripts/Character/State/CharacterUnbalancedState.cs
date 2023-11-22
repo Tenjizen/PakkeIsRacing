@@ -44,7 +44,7 @@ namespace Character.State
             CharacterManagerRef.BalanceGaugeManagerRef.ResetGauge();
             CharacterManagerRef.LerpBalanceTo0 = false;
 
-            _signeBalance = CharacterManagerRef.Balance > 0 ? 1 : -1;
+            //_signeBalance = CharacterManagerRef.Balance > 0 ? 1 : -1;
 
             //values
             CanBeMoved = false;
@@ -53,30 +53,30 @@ namespace Character.State
             CharacterManagerRef.NumberButtonIsPressed = 0;
             _timerUnbalanced = 0;
 
-            var balanceTimer = (CharacterManagerRef.Data.UnitBalanceToTimer * Mathf.Abs(CharacterManagerRef.Balance));
-            var collisionForce = (Mathf.Abs(CharacterManagerRef.Balance) - CharacterManagerRef.Data.BalanceLimit) * CharacterManagerRef.Data.ReductionForce;
+            //var balanceTimer = (CharacterManagerRef.Data.UnitBalanceToTimer * Mathf.Abs(CharacterManagerRef.Balance));
+            //var collisionForce = (Mathf.Abs(CharacterManagerRef.Balance) - CharacterManagerRef.Data.BalanceLimit) * CharacterManagerRef.Data.ReductionForce;
 
-            if (balanceTimer - collisionForce < CharacterManagerRef.Data.MinimumTimeUnbalanced)
-                CharacterManagerRef.TimerUnbalanced = CharacterManagerRef.Data.MinimumTimeUnbalanced;
-            else
-                CharacterManagerRef.TimerUnbalanced = balanceTimer - collisionForce;
+            //if (balanceTimer - collisionForce < CharacterManagerRef.Data.MinimumTimeUnbalanced)
+            //    CharacterManagerRef.TimerUnbalanced = CharacterManagerRef.Data.MinimumTimeUnbalanced;
+            //else
+            //    CharacterManagerRef.TimerUnbalanced = balanceTimer - collisionForce;
 
             //balance
-            if (Mathf.Abs(CharacterManagerRef.Balance) >
-                CharacterManagerRef.Data.BalanceDeathLimit - CharacterManagerRef.Data.MinimumTimeUnbalanced)
-            {
-                CharacterManagerRef.SetBalanceValueToCurrentSide(CharacterManagerRef.Data.BalanceDeathLimit - CharacterManagerRef.Data.MinimumTimeUnbalanced);
-            }
+            //if (Mathf.Abs(CharacterManagerRef.Balance) >
+            //    CharacterManagerRef.Data.BalanceDeathLimit - CharacterManagerRef.Data.MinimumTimeUnbalanced)
+            //{
+            //    CharacterManagerRef.SetBalanceValueToCurrentSide(CharacterManagerRef.Data.BalanceDeathLimit - CharacterManagerRef.Data.MinimumTimeUnbalanced);
+            //}
 
-            //gauge
-            CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeActive(true);
-            float balance = CharacterManagerRef.Balance;
-            CharacterManagerRef.BalanceGaugeManagerRef.ShowTrigger(balance < 0, balance > 0);
-            _triggerLeft = balance < 0;
+            ////gauge
+            //CharacterManagerRef.BalanceGaugeManagerRef.SetBalanceGaugeActive(true);
+            //float balance = CharacterManagerRef.Balance;
+            //CharacterManagerRef.BalanceGaugeManagerRef.ShowTrigger(balance < 0, balance > 0);
+            //_triggerLeft = balance < 0;
 
             //anim
-            CharacterManagerRef.PaddleAnimatorProperty.SetTrigger("Unbalance");
-            CharacterManagerRef.CharacterAnimatorProperty.SetTrigger("Unbalance");
+            //CharacterManagerRef.PaddleAnimatorProperty.SetTrigger("Unbalance");
+            //CharacterManagerRef.CharacterAnimatorProperty.SetTrigger("Unbalance");
         }
 
         public override void UpdateState(CharacterManager character)
@@ -202,16 +202,16 @@ namespace Character.State
 
         private void ClickSpam()
         {
-            if (_inputs.GameplayInputs.Boat.UnbalancedLeft.WasPerformedThisFrame() && CharacterManagerRef.Balance < 0)
-            {
-                CharacterManagerRef.NumberButtonIsPressed++;
-                CharacterManagerRef.BalanceGaugeManagerRef.MakeCursorFeedback();
-            }
-            if (_inputs.GameplayInputs.Boat.UnbalancedRight.WasPerformedThisFrame() && CharacterManagerRef.Balance > 0)
-            {
-                CharacterManagerRef.NumberButtonIsPressed++;
-                CharacterManagerRef.BalanceGaugeManagerRef.MakeCursorFeedback();
-            }
+            //if (_inputs.GameplayInputs.Boat.UnbalancedLeft.WasPerformedThisFrame() && CharacterManagerRef.Balance < 0)
+            //{
+            //    CharacterManagerRef.NumberButtonIsPressed++;
+            //    CharacterManagerRef.BalanceGaugeManagerRef.MakeCursorFeedback();
+            //}
+            //if (_inputs.GameplayInputs.Boat.UnbalancedRight.WasPerformedThisFrame() && CharacterManagerRef.Balance > 0)
+            //{
+            //    CharacterManagerRef.NumberButtonIsPressed++;
+            //    CharacterManagerRef.BalanceGaugeManagerRef.MakeCursorFeedback();
+            //}
         }
         private void MakeBoatRotationWithBalanceInUnbalanced(Transform kayakTransform, float multiplier)
         {

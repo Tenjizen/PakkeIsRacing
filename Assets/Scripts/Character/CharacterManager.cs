@@ -21,11 +21,6 @@ namespace Character
         public float MaximumSpeedMultiplier = 1;
         public float RotationSpeedMultiplier = 1;
         public float UnbalancedThresholdMultiplier = 1;
-        
-        public float WeaponLaunchDistanceMultiplier = 1;
-        public float ChargeTimeReducingMultiplier = 1;
-        public float ExperienceGainMultiplier = 1;
-        public float WeaponRecallTimeMultiplier = 1;
     }
     
     public class CharacterManager : MonoBehaviour
@@ -143,29 +138,30 @@ namespace Character
         /// </summary>
         private void BalanceManagement()
         {
-            if (CurrentStateBaseProperty.IsDead)
-            {
-                return;
-            }
-
-            InvincibilityTime -= Time.deltaTime;
             
-            if (LerpBalanceTo0)
-            {
-                Balance = Mathf.Lerp(Balance, 0, Data.BalanceLerpTo0Value);
-            }
+            //if (CurrentStateBaseProperty.IsDead)
+            //{
+            //    return;
+            //}
 
-            if (Balance >= 0)
-            {
-                float function = Mathf.Pow(Balance, 2) - (((float)NumberButtonIsPressed / (float)Data.NumberPressButton) * 10) * (Mathf.Pow(Balance, 2) / 10);
-                BalanceGaugeManagerRef.SetBalanceCursor(function);
-            }
-            else if (Balance < 0)
-            {
-                //Change of sign
-                float function = -Mathf.Pow(Balance, 2) + (((float)NumberButtonIsPressed / (float)Data.NumberPressButton) * 10) * (Mathf.Pow(Balance, 2) / 10);
-                BalanceGaugeManagerRef.SetBalanceCursor(function);
-            }
+            //InvincibilityTime -= Time.deltaTime;
+            
+            //if (LerpBalanceTo0)
+            //{
+            //    Balance = Mathf.Lerp(Balance, 0, Data.BalanceLerpTo0Value);
+            //}
+
+            //if (Balance >= 0)
+            //{
+            //    float function = Mathf.Pow(Balance, 2) - (((float)NumberButtonIsPressed / (float)Data.NumberPressButton) * 10) * (Mathf.Pow(Balance, 2) / 10);
+            //    BalanceGaugeManagerRef.SetBalanceCursor(function);
+            //}
+            //else if (Balance < 0)
+            //{
+            //    //Change of sign
+            //    float function = -Mathf.Pow(Balance, 2) + (((float)NumberButtonIsPressed / (float)Data.NumberPressButton) * 10) * (Mathf.Pow(Balance, 2) / 10);
+            //    BalanceGaugeManagerRef.SetBalanceCursor(function);
+            //}
         }
 
         /// <summary>
@@ -174,8 +170,8 @@ namespace Character
         /// <param name="value">the (float)value to add</param>
         public void SetBalanceValueToCurrentSide(float value)
         {
-            float sign = Mathf.Sign(Balance);
-            Balance = value * sign;
+            //float sign = Mathf.Sign(Balance);
+            //Balance = value * sign;
         }
 
         /// <summary>
@@ -184,8 +180,8 @@ namespace Character
         /// <param name="value">the (float)value to add</param>
         public void AddBalanceValueToCurrentSide(float value)
         {
-            float sign = Mathf.Sign(Balance);
-            Balance += value * sign;
+            //float sign = Mathf.Sign(Balance);
+            //Balance += value * sign;
         }
         public void AddBalanceValueToCurrentSide(double value)
         {
@@ -197,15 +193,15 @@ namespace Character
             if (InvincibilityTime < 0 && KayakControllerProperty.Rigidbody.freezeRotation == false)
                 return;
 
-            if (InvincibilityTime >= 0)
-            {
-                Balance = 0;
-                KayakControllerProperty.Rigidbody.freezeRotation = true;
-            }
-            else if (KayakControllerProperty.Rigidbody.freezeRotation == true)
-            {
-                KayakControllerProperty.Rigidbody.freezeRotation = false;
-            }
+            //if (InvincibilityTime >= 0)
+            //{
+            //    Balance = 0;
+            //    KayakControllerProperty.Rigidbody.freezeRotation = true;
+            //}
+            //else if (KayakControllerProperty.Rigidbody.freezeRotation == true)
+            //{
+            //    KayakControllerProperty.Rigidbody.freezeRotation = false;
+            //}
         }
 
         public void SendDebugMessage(string message)

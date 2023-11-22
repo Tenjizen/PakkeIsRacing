@@ -67,11 +67,11 @@ namespace Character.State
         /// </summary>
         protected void MakeBoatRotationWithBalance(Transform kayakTransform, float multiplier)
         {
-            Quaternion localRotation = kayakTransform.localRotation;
-            Vector3 boatRotation = localRotation.eulerAngles;
-            Quaternion targetBoatRotation = Quaternion.Euler(boatRotation.x,boatRotation.y, CharacterManagerRef.Balance * 3 * multiplier);
-            localRotation = Quaternion.Lerp(localRotation, targetBoatRotation, Time.deltaTime * 2);
-            kayakTransform.localRotation = localRotation;
+            //Quaternion localRotation = kayakTransform.localRotation;
+            //Vector3 boatRotation = localRotation.eulerAngles;
+            //Quaternion targetBoatRotation = Quaternion.Euler(boatRotation.x,boatRotation.y, CharacterManagerRef.Balance * 3 * multiplier);
+            //localRotation = Quaternion.Lerp(localRotation, targetBoatRotation, Time.deltaTime * 2);
+            //kayakTransform.localRotation = localRotation;
         }
 
         /// <summary>
@@ -91,16 +91,16 @@ namespace Character.State
         protected void CheckBalance()
         {
             //check balanced -> unbalanced
-            if (Mathf.Abs(CharacterManagerRef.Balance) >= CharacterManagerRef.Data.BalanceLimit * CharacterManagerRef.PlayerStats.UnbalancedThresholdMultiplier &&
-                CharacterManagerRef.InvincibilityTime <= 0)
-            {
-                CharacterManagerRef.KayakControllerProperty.CanReduceDrag = false;
+            //if (Mathf.Abs(CharacterManagerRef.Balance) >= CharacterManagerRef.Data.BalanceLimit * CharacterManagerRef.PlayerStats.UnbalancedThresholdMultiplier &&
+            //    CharacterManagerRef.InvincibilityTime <= 0)
+            //{
+            //    CharacterManagerRef.KayakControllerProperty.CanReduceDrag = false;
                 
-                //switch states
-                CharacterUnbalancedState characterUnbalancedState = new CharacterUnbalancedState(Character);
-                CharacterManagerRef.SwitchState(characterUnbalancedState);
+            //    //switch states
+            //    CharacterUnbalancedState characterUnbalancedState = new CharacterUnbalancedState(Character);
+            //    CharacterManagerRef.SwitchState(characterUnbalancedState);
 
-            }
+            //}
         }
         
         public void LaunchNavigationState()
@@ -131,11 +131,11 @@ namespace Character.State
             float rightLevel = (frontRightY + backRightY) / 2;
 
             float multiplier = CharacterManagerRef.Data.FloatersLevelDifferenceToBalanceMultiplier;
-            float frontBackDifference = Mathf.Abs(frontLevel - backLevel) * multiplier;
-            float leftRightDifference = Mathf.Abs(leftLevel - rightLevel) * multiplier;
+            //float frontBackDifference = Mathf.Abs(frontLevel - backLevel) * multiplier;
+            //float leftRightDifference = Mathf.Abs(leftLevel - rightLevel) * multiplier;
 
-            CharacterManagerRef.AddBalanceValueToCurrentSide(frontBackDifference);
-            CharacterManagerRef.Balance += leftRightDifference;
+            //CharacterManagerRef.AddBalanceValueToCurrentSide(frontBackDifference);
+            //CharacterManagerRef.Balance += leftRightDifference;
         }
 
         #endregion
