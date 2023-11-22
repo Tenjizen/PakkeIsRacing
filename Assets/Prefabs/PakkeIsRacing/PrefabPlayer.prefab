@@ -202,6 +202,7 @@ MonoBehaviour:
   CharacterManager: {fileID: 5518916933648646613}
   InputManager: {fileID: 8723659837373602303}
   Kayak: {fileID: 5518916933789822100}
+  _particleSystem: {fileID: 8212883785615781063}
   InSharkZone: 0
 --- !u!1 &1717494486604363860
 GameObject:
@@ -1081,7 +1082,7 @@ MonoBehaviour:
   <InputManagementProperty>k__BackingField: {fileID: 8723659837373602303}
   <PaddleAnimatorProperty>k__BackingField: {fileID: 8571992417096195542}
   <CharacterAnimatorProperty>k__BackingField: {fileID: 3675305721752544134}
-  <BalanceGaugeManagerRef>k__BackingField: {fileID: 2843018877882016873}
+  <BalanceGaugeManagerRef>k__BackingField: {fileID: 0}
   <ExperienceManagerProperty>k__BackingField: {fileID: 44558755904195348}
   <IKPlayerControl>k__BackingField: {fileID: 296978694019486335}
   <Parameters>k__BackingField:
@@ -2201,7 +2202,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2949693239264989499}
-  - component: {fileID: 2843018877882016873}
   - component: {fileID: 3580880605695711578}
   - component: {fileID: 7547222635669113937}
   m_Layer: 0
@@ -2210,7 +2210,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2949693239264989499
 Transform:
   m_ObjectHideFlags: 0
@@ -2227,39 +2227,6 @@ Transform:
   m_Father: {fileID: 4774128453200700741}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2843018877882016873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8489191068423017981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd6fdc2e6ea538b4388998fcbbe86465, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Cursor>k__BackingField: {fileID: 6852337636788257542}
-  _balanceGaugeUI: {fileID: 8092131415447944330}
-  _cursorAngleMultiplier: 0.5
-  _lT: {fileID: 6881363518188433210}
-  _rT: {fileID: 8037402320963235353}
-  _gaugeLeft: {fileID: 3507094394965219095}
-  _gaugeRight: {fileID: 3258098626143061295}
-  _balanceGauge: {fileID: 845030952568379530}
-  _imagesTargetColor:
-  - {fileID: 3507094394965219095}
-  - {fileID: 3258098626143061295}
-  - {fileID: 8786592185335357495}
-  _balanceCanvas: {fileID: 6139327909643600681}
-  _baseColor: {r: 1, g: 1, b: 1, a: 1}
-  _deathColor: {r: 0.43529412, g: 0, b: 0, a: 1}
-  _timeFadeTo0: 0.5
-  _timeSwitchColor: 0.5
-  _timeSwitchScale: 0.5
-  _scaleGaugeTarget: 1.2
-  _imageGradient: {fileID: 2559949243927273611}
-  _timeFillAmout: 0.2
 --- !u!114 &3580880605695711578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2369,6 +2336,16 @@ PrefabInstance:
         type: 3}
       propertyPath: EmissionModule.rateOverDistance.scalar
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4817381632774259392, guid: bc06d1e844ba3694bbdecce4a99ba863,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4817381632774259392, guid: bc06d1e844ba3694bbdecce4a99ba863,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4950148468892883501, guid: bc06d1e844ba3694bbdecce4a99ba863,
         type: 3}
@@ -2485,8 +2462,39 @@ PrefabInstance:
       propertyPath: EmissionModule.rateOverDistance.scalar
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 8781828172184443518, guid: bc06d1e844ba3694bbdecce4a99ba863,
+        type: 3}
+      propertyPath: ShapeModule.angle
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781828172184443518, guid: bc06d1e844ba3694bbdecce4a99ba863,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781828172184443518, guid: bc06d1e844ba3694bbdecce4a99ba863,
+        type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781828172184443518, guid: bc06d1e844ba3694bbdecce4a99ba863,
+        type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781828172184443518, guid: bc06d1e844ba3694bbdecce4a99ba863,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781828172184443518, guid: bc06d1e844ba3694bbdecce4a99ba863,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1674879474787739805, guid: bc06d1e844ba3694bbdecce4a99ba863, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2786279800225264015, guid: bc06d1e844ba3694bbdecce4a99ba863,
         type: 3}
@@ -2622,6 +2630,12 @@ ParticleSystem:
 --- !u!198 &7143172362035354434 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 7711553517519023611, guid: bc06d1e844ba3694bbdecce4a99ba863,
+    type: 3}
+  m_PrefabInstance: {fileID: 586968217032062649}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8212883785615781063 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8781828172184443518, guid: bc06d1e844ba3694bbdecce4a99ba863,
     type: 3}
   m_PrefabInstance: {fileID: 586968217032062649}
   m_PrefabAsset: {fileID: 0}
