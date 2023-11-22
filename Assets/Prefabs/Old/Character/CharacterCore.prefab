@@ -386,6 +386,7 @@ GameObject:
   - component: {fileID: 5181289905579767155}
   - component: {fileID: 1967899735}
   - component: {fileID: -5038646530012617906}
+  - component: {fileID: 3379999885806410755}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -553,6 +554,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attenuationObject: {fileID: 0}
+--- !u!114 &3379999885806410755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3858187113969445702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3340cb614443fc14a9883513e47fde20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Targets>k__BackingField:
+  - {fileID: 0}
+  _offset: {x: 0, y: 0, z: -27}
+  _maxPossibleDistance: 50
+  _minDistanceForZoom: 2.6
+  _smoothTime: 0
+  _minY: 35
+  _maxY: 70
 --- !u!1 &4652991038580386127
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,6 +712,9 @@ MonoBehaviour:
   isPersistant: 0
   <WavesRef>k__BackingField: {fileID: 0}
   <MultiTargetRef>k__BackingField: {fileID: 0}
+  <TimerInTriggerShark>k__BackingField: 0
+  <PointsWin>k__BackingField: 0
+  <MaxPointToUnlockButton>k__BackingField: 0
 --- !u!1 &7217796708230699273
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ public class InitLvl : MonoBehaviour
         {
             CharacterMultiPlayerManager player = Instantiate(_playerPrefab, playerSpawn[i].position, playerSpawn[i].rotation, gameObject.transform);
             _multipleTargetCamera.Targets.Add(player.Kayak.transform);
+            player.GetComponentInChildren<IsInCameraView>().MultipleTargetCamera = _multipleTargetCamera;
             player.InputManager.InitPlayer(playerConfigs[i]);
         }
     }

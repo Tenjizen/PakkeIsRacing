@@ -185,7 +185,7 @@ Transform:
   - {fileID: 5518916933648646618}
   - {fileID: 2949693239264989499}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7462900990157805195
 MonoBehaviour:
@@ -202,6 +202,7 @@ MonoBehaviour:
   CharacterManager: {fileID: 5518916933648646613}
   InputManager: {fileID: 8723659837373602303}
   Kayak: {fileID: 5518916933789822100}
+  InSharkZone: 0
 --- !u!1 &1717494486604363860
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,6 +1063,7 @@ MonoBehaviour:
     Unbalanced: 0
     AnyButton: 0
     Start: 0
+    Purify: 0
 --- !u!114 &5518916933648646613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1118,10 +1120,6 @@ MonoBehaviour:
     MaximumSpeedMultiplier: 1
     RotationSpeedMultiplier: 1
     UnbalancedThresholdMultiplier: 1
-    WeaponLaunchDistanceMultiplier: 1
-    ChargeTimeReducingMultiplier: 1
-    ExperienceGainMultiplier: 1
-    WeaponRecallTimeMultiplier: 1
 --- !u!114 &5518916933648646612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2501,15 +2499,15 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 333907971529626045, guid: bc06d1e844ba3694bbdecce4a99ba863,
         type: 3}
-      insertIndex: -1
+      insertIndex: 6
       addedObject: {fileID: 2935751471953366593}
     - targetCorrespondingSourceObject: {fileID: 333907971529626045, guid: bc06d1e844ba3694bbdecce4a99ba863,
         type: 3}
-      insertIndex: -1
+      insertIndex: 7
       addedObject: {fileID: 3260748378060610653}
     - targetCorrespondingSourceObject: {fileID: 333907971529626045, guid: bc06d1e844ba3694bbdecce4a99ba863,
         type: 3}
-      insertIndex: -1
+      insertIndex: 8
       addedObject: {fileID: 6955056733154031917}
   m_SourcePrefab: {fileID: 100100000, guid: bc06d1e844ba3694bbdecce4a99ba863, type: 3}
 --- !u!1 &902712224036038404 stripped
