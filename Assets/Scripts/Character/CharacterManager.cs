@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using Art.Script;
 using Art.Test.Dissolve;
 using Character.Data.Character;
@@ -22,17 +24,20 @@ namespace Character
         public float RotationSpeedMultiplier = 1;
         public float UnbalancedThresholdMultiplier = 1;
     }
-    
+
     public class CharacterManager : MonoBehaviour
     {
         #region Properties
+
         public CharacterMultiPlayerManager Character;
 
         [field: SerializeField] public CharacterStateBase CurrentStateBaseProperty { get; private set; }
         [field: SerializeField] public KayakController KayakControllerProperty { get; private set; }
         [field: SerializeField] public InputManagement InputManagementProperty { get; private set; }
         [field: SerializeField] public Animator PaddleAnimatorProperty { get; private set; }
+
         [field: SerializeField] public Animator CharacterAnimatorProperty { get; private set; }
+
         //[field: SerializeField] public TransitionManager TransitionManagerProperty { get; private set; }
         //[field: SerializeField] public NotificationsController NotificationsUIController { get; private set; }
         [field: SerializeField] public BalanceGaugeManager BalanceGaugeManagerRef { get; private set; }
@@ -40,32 +45,42 @@ namespace Character
         [field: SerializeField] public IKControl IKPlayerControl { get; private set; }
         [field: SerializeField] public PlayerParameters Parameters { get; set; }
         [field: SerializeField] public PlayerAbilities Abilities { get; set; }
-        [field: SerializeField, Header("Sprint")] public UISprintManager SprintUIManager { get; private set; }
+
+        [field: SerializeField, Header("Sprint")]
+        public UISprintManager SprintUIManager { get; private set; }
 
         #endregion
 
-        [Header("Character Data")]
-        public CharacterData Data;
+        [Header("Bump")]
+        [SerializeField] private Bump _bumpPrefab;
+        [SerializeField] private float _bumpTimer;
+        [SerializeField] private Collider _collider;
+        
+        [Header("Character Data")] public CharacterData Data;
         [Range(0, 360)] public float BaseOrientation;
+
         [Header("Balance Infos"), ReadOnly, Tooltip("Can the balance lerp itself to 0 ?")]
         public bool LerpBalanceTo0 = true;
+
         [ReadOnly, Tooltip("The current balance value")]
         public float Balance = 0f;
+
         [ReadOnly, Tooltip("Reset at last checkpoint in menu")]
         public bool RespawnLastCheckpoint = false;
-        [Tooltip("The timer"), ReadOnly]
-        public float TimerUnbalanced = 0;
+
+        [Tooltip("The timer"), ReadOnly] public float TimerUnbalanced = 0;
+
         [Tooltip("The number of times the button has been pressed"), ReadOnly]
         public int NumberButtonIsPressed = 0;
-        [Header("VFX")]
-        public ParticleSystem SplashLeft;
+
+        [Header("VFX")] public ParticleSystem SplashLeft;
         public ParticleSystem SplashRight;
 
         [Header("Events")] public UnityEvent StartGame;
         public UnityEvent OnPaddle;
         public UnityEvent OnEnterSprint;
         public UnityEvent OnStopSprint;
-        
+
         [HideInInspector] public float InvincibilityTime;
         [HideInInspector] public bool IsGameLaunched;
 
@@ -77,7 +92,7 @@ namespace Character
         protected void Awake()
         {
             PlayerStats = new PlayerStatsMultipliers();
-            
+
             Cursor.visible = false;
         }
 
@@ -96,13 +111,12 @@ namespace Character
             //rotate kayak
             Transform kayakTransform = KayakControllerProperty.transform;
             kayakTransform.eulerAngles = new Vector3(0, BaseOrientation, 0);
-
         }
-        
+
         private void Update()
         {
             CurrentStateBaseProperty.UpdateState(this);
-            
+
             if (CurrentStateBaseProperty.IsDead == false)
             {
                 BalanceManagement();
@@ -115,17 +129,19 @@ namespace Character
             {
                 return;
             }
+
             CurrentStateBaseProperty.TimeBeforeSettingPaddleAnimator -= Time.deltaTime;
             if (CurrentStateBaseProperty.TimeBeforeSettingPaddleAnimator <= 0)
             {
                 IKPlayerControl.SetPaddle();
             }
         }
+
         private void FixedUpdate()
         {
             CurrentStateBaseProperty.FixedUpdate(this);
         }
-        
+
         public void SwitchState(CharacterStateBase stateBaseCharacter)
         {
             CurrentStateBaseProperty.ExitState(this);
@@ -133,19 +149,38 @@ namespace Character
             stateBaseCharacter.EnterState(this);
         }
 
+
+        private bool _canBump = true;
+
+        public void CreateBump()
+        {
+            if (_canBump)
+            {
+                Bump bump = Instantiate(_bumpPrefab, transform.position, Quaternion.identity);
+                bump.Explode(_collider);
+                _canBump = false;
+                StartCoroutine(WaitToBumpAgain());
+            }
+        }
+
+        private IEnumerator WaitToBumpAgain()
+        {
+            yield return new WaitForSeconds(_bumpTimer);
+            _canBump = true;
+        }
+
         /// <summary>
         /// Lerp the Balance value to 0 
         /// </summary>
         private void BalanceManagement()
         {
-            
             //if (CurrentStateBaseProperty.IsDead)
             //{
             //    return;
             //}
 
             //InvincibilityTime -= Time.deltaTime;
-            
+
             //if (LerpBalanceTo0)
             //{
             //    Balance = Mathf.Lerp(Balance, 0, Data.BalanceLerpTo0Value);
@@ -183,6 +218,7 @@ namespace Character
             //float sign = Mathf.Sign(Balance);
             //Balance += value * sign;
         }
+
         public void AddBalanceValueToCurrentSide(double value)
         {
             AddBalanceValueToCurrentSide((float)value);
@@ -208,8 +244,6 @@ namespace Character
         {
             Debug.Log(message);
         }
-
-      
     }
 
     [Serializable]
@@ -218,6 +252,7 @@ namespace Character
         public bool InversedControls;
         public bool Language;
     }
+
     [Serializable]
     public struct PlayerAbilities
     {

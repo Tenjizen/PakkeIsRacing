@@ -204,6 +204,8 @@ MonoBehaviour:
   Kayak: {fileID: 5518916933789822100}
   _particleSystem: {fileID: 8212883785615781063}
   InSharkZone: 0
+  MaxPts: 0
+  _addValueParticleRateOverTime: 10
 --- !u!1 &1717494486604363860
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,6 +1067,7 @@ MonoBehaviour:
     AnyButton: 0
     Start: 0
     Purify: 0
+    Bump: 0
 --- !u!114 &5518916933648646613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1091,6 +1094,10 @@ MonoBehaviour:
   <Abilities>k__BackingField:
     SprintUnlock: 0
   <SprintUIManager>k__BackingField: {fileID: 7547222635669113937}
+  _bumpPrefab: {fileID: 5544715627544484282, guid: 35288ed4ba5166c4f92464727337c0a4,
+    type: 3}
+  _bumpTimer: 5
+  _collider: {fileID: 4029951295830451695}
   Data: {fileID: 11400000, guid: 9383b9325ce5e464e84beb6010a91e0a, type: 2}
   BaseOrientation: 90
   LerpBalanceTo0: 1
@@ -2332,6 +2339,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kayak
       objectReference: {fileID: 0}
+    - target: {fileID: 333907971529626045, guid: bc06d1e844ba3694bbdecce4a99ba863,
+        type: 3}
+      propertyPath: m_TagString
+      value: Kayak
+      objectReference: {fileID: 0}
     - target: {fileID: 4290263588516138253, guid: bc06d1e844ba3694bbdecce4a99ba863,
         type: 3}
       propertyPath: EmissionModule.rateOverDistance.scalar
@@ -2600,6 +2612,12 @@ Transform:
 --- !u!198 &3724266313966681012 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 4290263588516138253, guid: bc06d1e844ba3694bbdecce4a99ba863,
+    type: 3}
+  m_PrefabInstance: {fileID: 586968217032062649}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &4029951295830451695 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 4595948853936165718, guid: bc06d1e844ba3694bbdecce4a99ba863,
     type: 3}
   m_PrefabInstance: {fileID: 586968217032062649}
   m_PrefabAsset: {fileID: 0}

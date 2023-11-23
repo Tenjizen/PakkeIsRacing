@@ -105,6 +105,7 @@ namespace Character.State
             }
 
             CheckPurify();
+            CheckBump();
         }
 
         private void CheckPurify()
@@ -116,6 +117,14 @@ namespace Character.State
                 Debug.Log("wwwwiiiiiiiiiiiinnnnnnnnneeeeeeeeeerrrrrrrrrrrrr");
                 GameManager.Instance.SharkPossessed.SetActive(false);
                 GameManager.Instance.EnnemyPossessed = false;
+            }
+        }
+        
+        private void CheckBump()
+        {
+            if (_inputs.Inputs.Bump)
+            {
+                CharacterManagerRef.CreateBump();
             }
         }
 

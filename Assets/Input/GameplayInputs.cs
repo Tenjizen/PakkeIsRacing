@@ -188,6 +188,15 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Bump"",
+                    ""type"": ""Button"",
+                    ""id"": ""7c9e0c3d-368c-4495-97af-c4aeca88de50"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -795,6 +804,28 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
                     ""action"": ""Purify"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2cee310d-6d5f-449d-93c2-e66abbc097b4"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Bump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""03b893bc-97d1-41ea-9c2f-a9d113920414"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Bump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -935,6 +966,7 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
         m_Boat_AnyButton = m_Boat.FindAction("AnyButton", throwIfNotFound: true);
         m_Boat_ShowLeaveMenu = m_Boat.FindAction("ShowLeaveMenu", throwIfNotFound: true);
         m_Boat_Purify = m_Boat.FindAction("Purify", throwIfNotFound: true);
+        m_Boat_Bump = m_Boat.FindAction("Bump", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Move = m_Menu.FindAction("Move", throwIfNotFound: true);
@@ -1018,6 +1050,7 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Boat_AnyButton;
     private readonly InputAction m_Boat_ShowLeaveMenu;
     private readonly InputAction m_Boat_Purify;
+    private readonly InputAction m_Boat_Bump;
     public struct BoatActions
     {
         private @GameplayInputs m_Wrapper;
@@ -1040,6 +1073,7 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
         public InputAction @AnyButton => m_Wrapper.m_Boat_AnyButton;
         public InputAction @ShowLeaveMenu => m_Wrapper.m_Boat_ShowLeaveMenu;
         public InputAction @Purify => m_Wrapper.m_Boat_Purify;
+        public InputAction @Bump => m_Wrapper.m_Boat_Bump;
         public InputActionMap Get() { return m_Wrapper.m_Boat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1103,6 +1137,9 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
             @Purify.started += instance.OnPurify;
             @Purify.performed += instance.OnPurify;
             @Purify.canceled += instance.OnPurify;
+            @Bump.started += instance.OnBump;
+            @Bump.performed += instance.OnBump;
+            @Bump.canceled += instance.OnBump;
         }
 
         private void UnregisterCallbacks(IBoatActions instance)
@@ -1161,6 +1198,9 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
             @Purify.started -= instance.OnPurify;
             @Purify.performed -= instance.OnPurify;
             @Purify.canceled -= instance.OnPurify;
+            @Bump.started -= instance.OnBump;
+            @Bump.performed -= instance.OnBump;
+            @Bump.canceled -= instance.OnBump;
         }
 
         public void RemoveCallbacks(IBoatActions instance)
@@ -1252,6 +1292,7 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
         void OnAnyButton(InputAction.CallbackContext context);
         void OnShowLeaveMenu(InputAction.CallbackContext context);
         void OnPurify(InputAction.CallbackContext context);
+        void OnBump(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

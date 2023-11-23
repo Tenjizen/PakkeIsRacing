@@ -24,8 +24,6 @@ public class CharacterMultiPlayerManager : MonoBehaviour
 
     public bool MaxPts = false;
 
-
-
     private void Update()
     {
         if (InSharkZone == true && GameManager.Instance.EnnemyPossessed == true)
@@ -48,6 +46,7 @@ public class CharacterMultiPlayerManager : MonoBehaviour
 
     [SerializeField] int _addValueParticleRateOverTime = 10;
     int _addRateOverTimeParticle = 10;
+
     private void Point()
     {
         if (_points < GameManager.Instance.MaxPointToUnlockButton)
@@ -64,8 +63,8 @@ public class CharacterMultiPlayerManager : MonoBehaviour
             var colorParticle = _particleSystem.main;
             colorParticle.startColor = Color.yellow;
         }
-
     }
+
     public void RemovePoint(int pts)
     {
         _points -= pts;
@@ -80,6 +79,5 @@ public class CharacterMultiPlayerManager : MonoBehaviour
             var colorParticle = _particleSystem.main;
             colorParticle.startColor = Color.white;
         }
-
     }
 }

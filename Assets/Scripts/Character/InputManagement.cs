@@ -65,7 +65,8 @@ namespace Character
             if (obj.action.name == _gameplayInputs.Boat.Purify.name)
                 inputsEnum.Purify = obj.ReadValue<float>() > DeadzoneJoystickTrigger;
 
-
+            if (obj.action.name == _gameplayInputs.Boat.Bump.name)
+                inputsEnum.Bump = obj.ReadValue<float>() > DeadzoneJoystickTrigger;
 
 
             Inputs = inputsEnum;
@@ -114,5 +115,6 @@ namespace Character
         public bool Start;
 
         public bool Purify;
+        public bool Bump;
     }
 }
