@@ -23,8 +23,8 @@ namespace MultiplayerLocal
                 return;
             }
 
-            // Move();
-            // Zoom();
+           Move();
+           Zoom();
         }
 
         private void Zoom()
