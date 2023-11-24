@@ -12,6 +12,8 @@ namespace Character
 
         private GameplayInputs _gameplayInputs;
 
+        public CharacterMultiPlayerManager Character;
+
         public GameplayInputs GameplayInputs { get { return _gameplayInputs; } private set { _gameplayInputs = value; } }
         [SerializeField] float DeadzoneJoystick = 0.3f;
         [SerializeField] float DeadzoneJoystickTrigger = 0.3f;
@@ -58,8 +60,8 @@ namespace Character
                 inputsEnum.AnyButton = obj.ReadValue<float>() > DeadzoneJoystickTrigger;
 
             if (obj.action.name == _gameplayInputs.Boat.ShowLeaveMenu.name)
-                inputsEnum.Start = obj.ReadValue<float>() > DeadzoneJoystickTrigger; 
-            
+                inputsEnum.Start = obj.ReadValue<float>() > DeadzoneJoystickTrigger;
+
 
 
             if (obj.action.name == _gameplayInputs.Boat.Purify.name)
@@ -67,6 +69,20 @@ namespace Character
 
             if (obj.action.name == _gameplayInputs.Boat.Bump.name)
                 inputsEnum.Bump = obj.ReadValue<float>() > DeadzoneJoystickTrigger;
+
+            if (Character.CharacterManager.CurrentStateBaseProperty != null)
+            {
+                if (obj.started && obj.action.name == _gameplayInputs.Boat.Submit.name && Character.CharacterManager.CurrentStateBaseProperty.CanBeMoved == false)
+                {
+                    Debug.Log("fds");
+                    PlayerConfigManager.Instance.ReadyPlayer(_pc.PlayerIndex);
+                }
+
+                if (obj.started && obj.action.name == _gameplayInputs.Boat.Color.name && Character.CharacterManager.CurrentStateBaseProperty.CanBeMoved == false)
+                {
+                    Debug.Log("pierre");
+                }
+            }
 
 
             Inputs = inputsEnum;

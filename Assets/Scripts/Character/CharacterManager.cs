@@ -103,7 +103,6 @@ namespace Character
             CurrentStateBaseProperty.Initialize();
 
             CurrentStateBaseProperty.EnterState(this);
-
             //BalanceGaugeManagerRef.SetBalanceGaugeActive(false);
             //ExperienceManagerProperty.ExperienceUIManagerProperty.SetActive(false);
             //BalanceGaugeManagerRef.ShowTrigger(false, false);
@@ -115,6 +114,9 @@ namespace Character
 
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.P)) SetCanMove(!CurrentStateBaseProperty.CanBeMoved);
+
+
             CurrentStateBaseProperty.UpdateState(this);
 
             if (CurrentStateBaseProperty.IsDead == false)
@@ -149,7 +151,10 @@ namespace Character
             stateBaseCharacter.EnterState(this);
         }
 
-
+        public void SetCanMove(bool value)
+        {
+            CurrentStateBaseProperty.CanBeMoved = value;
+        }
         private bool _canBump = true;
 
         public void CreateBump()

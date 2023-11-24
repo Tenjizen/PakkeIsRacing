@@ -14,7 +14,7 @@ namespace Character.State
         protected CharacterManager CharacterManagerRef;
         public MonoBehaviour MonoBehaviourRef;
         
-        public bool CanBeMoved = true;
+        public bool CanBeMoved = false;
         public bool CanCharacterMove = true;
         public bool CanCharacterMakeActions = true;
         public bool CanOpenMenus = true;

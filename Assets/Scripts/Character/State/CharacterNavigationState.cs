@@ -74,7 +74,7 @@ namespace Character.State
 
             //booleans
             CharacterManagerRef.LerpBalanceTo0 = true;
-            CanBeMoved = true;
+            CanBeMoved = false;
             CanCharacterMakeActions = true;
 
             //anim
@@ -83,6 +83,8 @@ namespace Character.State
 
         public override void UpdateState(CharacterManager character)
         {
+            if (CanBeMoved == false) return;
+
             PaddleCooldownManagement();
 
             CheckBalance();

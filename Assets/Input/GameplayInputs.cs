@@ -197,6 +197,24 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Submit"",
+                    ""type"": ""Button"",
+                    ""id"": ""78a730a8-c6c2-40c7-bf87-ee0dd51fc4e0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Color"",
+                    ""type"": ""Button"",
+                    ""id"": ""224be6a6-a032-4320-a171-7fce5ef705b4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -826,6 +844,50 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
                     ""action"": ""Bump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""146f0528-5d95-4884-9a84-90bb45ed8b4a"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""667b3740-b0b3-4c60-839b-34e1b04f4e17"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3a42eda9-04b8-43bd-857d-311f468ec6ca"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Color"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a4439b77-13bb-4aaa-a755-43075513c941"",
+                    ""path"": ""<Keyboard>/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Color"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -841,15 +903,6 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Submit"",
-                    ""type"": ""Button"",
-                    ""id"": ""6d9db8d9-159f-4b00-9073-d48aaf7052af"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -918,28 +971,6 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c255be26-1d17-4af1-a100-5422cfa06618"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Submit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""87f11a47-2451-425e-a1ed-4fca0017aa04"",
-                    ""path"": ""<Keyboard>/enter"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Submit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -967,10 +998,11 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
         m_Boat_ShowLeaveMenu = m_Boat.FindAction("ShowLeaveMenu", throwIfNotFound: true);
         m_Boat_Purify = m_Boat.FindAction("Purify", throwIfNotFound: true);
         m_Boat_Bump = m_Boat.FindAction("Bump", throwIfNotFound: true);
+        m_Boat_Submit = m_Boat.FindAction("Submit", throwIfNotFound: true);
+        m_Boat_Color = m_Boat.FindAction("Color", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Move = m_Menu.FindAction("Move", throwIfNotFound: true);
-        m_Menu_Submit = m_Menu.FindAction("Submit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1051,6 +1083,8 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Boat_ShowLeaveMenu;
     private readonly InputAction m_Boat_Purify;
     private readonly InputAction m_Boat_Bump;
+    private readonly InputAction m_Boat_Submit;
+    private readonly InputAction m_Boat_Color;
     public struct BoatActions
     {
         private @GameplayInputs m_Wrapper;
@@ -1074,6 +1108,8 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
         public InputAction @ShowLeaveMenu => m_Wrapper.m_Boat_ShowLeaveMenu;
         public InputAction @Purify => m_Wrapper.m_Boat_Purify;
         public InputAction @Bump => m_Wrapper.m_Boat_Bump;
+        public InputAction @Submit => m_Wrapper.m_Boat_Submit;
+        public InputAction @Color => m_Wrapper.m_Boat_Color;
         public InputActionMap Get() { return m_Wrapper.m_Boat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1140,6 +1176,12 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
             @Bump.started += instance.OnBump;
             @Bump.performed += instance.OnBump;
             @Bump.canceled += instance.OnBump;
+            @Submit.started += instance.OnSubmit;
+            @Submit.performed += instance.OnSubmit;
+            @Submit.canceled += instance.OnSubmit;
+            @Color.started += instance.OnColor;
+            @Color.performed += instance.OnColor;
+            @Color.canceled += instance.OnColor;
         }
 
         private void UnregisterCallbacks(IBoatActions instance)
@@ -1201,6 +1243,12 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
             @Bump.started -= instance.OnBump;
             @Bump.performed -= instance.OnBump;
             @Bump.canceled -= instance.OnBump;
+            @Submit.started -= instance.OnSubmit;
+            @Submit.performed -= instance.OnSubmit;
+            @Submit.canceled -= instance.OnSubmit;
+            @Color.started -= instance.OnColor;
+            @Color.performed -= instance.OnColor;
+            @Color.canceled -= instance.OnColor;
         }
 
         public void RemoveCallbacks(IBoatActions instance)
@@ -1223,13 +1271,11 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Menu;
     private List<IMenuActions> m_MenuActionsCallbackInterfaces = new List<IMenuActions>();
     private readonly InputAction m_Menu_Move;
-    private readonly InputAction m_Menu_Submit;
     public struct MenuActions
     {
         private @GameplayInputs m_Wrapper;
         public MenuActions(@GameplayInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Menu_Move;
-        public InputAction @Submit => m_Wrapper.m_Menu_Submit;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1242,9 +1288,6 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @Submit.started += instance.OnSubmit;
-            @Submit.performed += instance.OnSubmit;
-            @Submit.canceled += instance.OnSubmit;
         }
 
         private void UnregisterCallbacks(IMenuActions instance)
@@ -1252,9 +1295,6 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @Submit.started -= instance.OnSubmit;
-            @Submit.performed -= instance.OnSubmit;
-            @Submit.canceled -= instance.OnSubmit;
         }
 
         public void RemoveCallbacks(IMenuActions instance)
@@ -1293,10 +1333,11 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
         void OnShowLeaveMenu(InputAction.CallbackContext context);
         void OnPurify(InputAction.CallbackContext context);
         void OnBump(InputAction.CallbackContext context);
+        void OnSubmit(InputAction.CallbackContext context);
+        void OnColor(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnSubmit(InputAction.CallbackContext context);
     }
 }
