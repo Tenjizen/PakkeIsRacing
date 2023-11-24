@@ -27,7 +27,7 @@ public class SharkWithPathController : MonoBehaviour
     private void FixedUpdate()
     {
         if (StartRunning == false) return;
-        DistanceManager();
+        //DistanceManager();
     }
 
     private void DistanceManager()
@@ -70,11 +70,11 @@ public class SharkWithPathController : MonoBehaviour
     {
         if (_slow == false)
         {
-            _currentSplinePosition += _data.MovingValue;
+            _currentSplinePosition += _data.MovingValue * Time.deltaTime;
         }
         else
         {
-            _currentSplinePosition += _data.SlowMovingValue;
+            _currentSplinePosition += _data.SlowMovingValue * Time.deltaTime;
         }
         _currentSplinePosition = Mathf.Clamp01(_currentSplinePosition);
 
