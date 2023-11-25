@@ -14,23 +14,9 @@ public class ColorPlayer : MonoBehaviour
 
     private int _indexColor;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            ChangeColor();
-        }
-    }
-
+ 
     public void ChangeColor()
     {
-
 
 
         _indexColor = (_indexColor + 1) % MaterialColorKayak.Count;
@@ -39,6 +25,8 @@ public class ColorPlayer : MonoBehaviour
         {
             item.material = MaterialColorCharacter[_indexColor];
         }
+
+        Debug.Log(MaterialColorCharacter[_indexColor].name);
         MeshKayak.material = MaterialColorKayak[_indexColor];
     }
 

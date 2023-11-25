@@ -74,13 +74,12 @@ namespace Character
             {
                 if (obj.started && obj.action.name == _gameplayInputs.Boat.Submit.name && Character.CharacterManager.CurrentStateBaseProperty.CanBeMoved == false)
                 {
-                    Debug.Log("fds");
                     PlayerConfigManager.Instance.ReadyPlayer(_pc.PlayerIndex);
                 }
 
                 if (obj.started && obj.action.name == _gameplayInputs.Boat.Color.name && Character.CharacterManager.CurrentStateBaseProperty.CanBeMoved == false)
                 {
-                    Debug.Log("pierre");
+                    Character.ColorPlayer.ChangeColor();
                 }
             }
 
