@@ -7,12 +7,7 @@ namespace Character.State
     {
         private KayakController _kayakController;
 
-        private bool _transitionIn = false;
-        private bool _respawned = false;
-        private bool _cameraSwitchState = false;
-        private float _timerToRespawnCheckpoint = 0;
         private float _timerFadeOutStart = 0;
-        private float _speed = 100;
 
         public CharacterDeathState(CharacterMultiPlayerManager character) : base(character)
         {
@@ -22,65 +17,26 @@ namespace Character.State
         public override void EnterState(CharacterManager character)
         {
             IsDead = true;
-            Debug.Log("mort");
 
-
-            //character.BalanceGaugeManagerRef.SetBalanceGaugeColor();
-            //character.BalanceGaugeManagerRef.SetBalanceGaugeScale();
         }
         private void Respawn(Vector3 vector3)
         {
             //put kayak in checkpoint position & rotation
             _kayakController.transform.localPosition = vector3;
+
+            var rota = _kayakController.transform.localRotation;
+            rota.y = CharacterManagerRef.InCam.CameraMain.transform.rotation.y;
+            _kayakController.transform.localRotation = rota;
+
+            _kayakController.Rigidbody.velocity = Vector3.zero;
+
             _timerFadeOutStart += Time.deltaTime;
 
-            //Reset value
-            //_kayakController.CanReduceDrag = true;
-            //CameraManagerRef.CanMoveCameraManually = true;
-            //CharacterManagerRef.SetBalanceValueToCurrentSide(0);
-            //_respawned = true;
-
-            //Switch state camera
-            //CameraRespawnState cameraRespawnState = new CameraRespawnState();
-            //CameraManagerRef.SwitchState(cameraRespawnState);
-
-
-            //CharacterNavigationState characterNavigationState = new CharacterNavigationState(Character);
         }
         public override void UpdateState(CharacterManager character)
         {
 
             Respawn(CharacterManagerRef.InCam.TargetRespawn);
-
-            //this.SwitchState(character);
-
-            //if (character.RespawnLastCheckpoint == false)
-            //{
-            //    //Rotate kayak at 180 in z with balance
-            //    if (character.Balance > 0 && character.Balance < 60)
-            //    {
-            //        character.Balance += Time.deltaTime * _speed;
-            //    }
-            //    else if (character.Balance < -0 && character.Balance > -60)
-            //    {
-            //        character.Balance -= Time.deltaTime * _speed;
-            //    }
-            //}
-
-            ////Switch camera
-            //if (Mathf.Abs(character.Balance) >= 60 && _cameraSwitchState == false || character.RespawnLastCheckpoint == true && _cameraSwitchState == false)
-            //{
-            //    _cameraSwitchState = true;
-            //    character.BalanceGaugeManagerRef.SetBalanceGaugeDisable();
-            //}
-            //MakeBoatRotationWithBalance(_kayakController.transform, 1);
-
-
-            //Timer transition In
-            //if (_transitionIn && _respawned == false)
-            //{
-            //    _timerToRespawnCheckpoint += Time.deltaTime;
-            //}
 
             if (_timerFadeOutStart > 0.5f)
             {
@@ -95,21 +51,19 @@ namespace Character.State
 
         public override void SwitchState(CharacterManager character)
         {
-            //Transition out
-            //character.TransitionManagerProperty.LaunchTransitionOut(SceneTransition.TransitionType.Fade);
-
             IsDead = false;
 
             //Switch state character
             CharacterNavigationState characterNavigationState = new CharacterNavigationState(Character);
             characterNavigationState.CanBeMoved = true;
+            CharacterManagerRef.InCam.MultipleTargetCamera.AddTarget(_kayakController.transform);
+
             character.SwitchState(characterNavigationState);
 
         }
 
         public override void ExitState(CharacterManager character)
         {
-            //character.Balance = 0;
         }
     }
 
