@@ -6,16 +6,21 @@ using UnityEngine;
 
 public class IsInCameraView : MonoBehaviour
 {
-    [SerializeField] private float _timerOutOfView;
+    public float TimerOutOfView;
 
     private Camera _camera;
     private Plane[] _cameraFrustrum;
-    public bool _isInCameraView;
+    public bool IsInCameraViewValue;
     private Bounds _bounds;
-    private float _timer;
+    public float Timer;
     private Collider _collider;
 
     public MultipleTargetCamera MultipleTargetCamera;
+
+    public CharacterMultiPlayerManager Character;
+
+
+    public Vector3 TargetRespawn;
 
     private void Start()
     {
@@ -25,27 +30,42 @@ public class IsInCameraView : MonoBehaviour
 
     private void Update()
     {
+        //Debug.Log(_camera.transform.position + " pos");
+        //Debug.Log(_camera.transform.localPosition + " local pos");
+
         _bounds = _collider.bounds;
         _cameraFrustrum = GeometryUtility.CalculateFrustumPlanes(_camera);
-        _isInCameraView = GeometryUtility.TestPlanesAABB(_cameraFrustrum, _bounds);
+        IsInCameraViewValue = GeometryUtility.TestPlanesAABB(_cameraFrustrum, _bounds);
 
-        if (_isInCameraView == false)
+        if (IsInCameraViewValue == false)
         {
             MultipleTargetCamera.RemoveTarget(transform);
-            if (_timer < _timerOutOfView)
+            if (Timer < TimerOutOfView)
             {
-                _timer += Time.deltaTime;
+                Timer += Time.deltaTime;
+                Character.CharacterManager.CurrentStateBaseProperty.CanBeMoved = false;
             }
-            else
-            {
-                // transform.position = new Vector3(Camera.main.transform.position.x, transform.position.y, Camera.main.transform.position.z - 20);
-                // _timer = 0;
-                // MultipleTargetCamera.AddTarget(transform);
-            }
+            TargetRespawn = new Vector3(_camera.transform.localPosition.x, transform.localPosition.y , _camera.transform.localPosition.z);
+
+            //else
+            //{
+            //    Character.SetPosKayak(Vector3.zero);
+            //    //var pos = transform.localPosition;
+
+            //    //pos.x = Camera.main.transform.position.x;
+            //    //pos.z = Camera.main.transform.position.z;
+
+            //    //transform.localPosition = pos;
+
+            //    Timer = 0;
+
+            //    MultipleTargetCamera.AddTarget(transform);
+            //    Character.CharacterManager.CurrentStateBaseProperty.CanBeMoved = true;
+            //}
         }
         else
         {
-            _timer = 0;
+            Timer = 0;
         }
     }
 }

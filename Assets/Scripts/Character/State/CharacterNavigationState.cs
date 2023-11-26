@@ -74,7 +74,7 @@ namespace Character.State
 
             //booleans
             CharacterManagerRef.LerpBalanceTo0 = true;
-            CanBeMoved = false;
+            //CanBeMoved = true;
             CanCharacterMakeActions = true;
 
             //anim
@@ -83,6 +83,8 @@ namespace Character.State
 
         public override void UpdateState(CharacterManager character)
         {
+            CheckCamView(character);
+
             if (CanBeMoved == false) return;
 
             PaddleCooldownManagement();
@@ -108,6 +110,18 @@ namespace Character.State
 
             CheckPurify();
             CheckBump();
+
+
+        }
+
+        private void CheckCamView(CharacterManager character)
+        {
+            
+            if (CharacterManagerRef.InCam.IsInCameraViewValue == false && CharacterManagerRef.InCam.Timer >= CharacterManagerRef.InCam.TimerOutOfView)
+            {
+                CharacterDeathState characterNavigationState = new CharacterDeathState(Character);
+                character.SwitchState(characterNavigationState);
+            }
         }
 
         private void CheckPurify()
@@ -121,7 +135,7 @@ namespace Character.State
                 GameManager.Instance.EnnemyPossessed = false;
             }
         }
-        
+
         private void CheckBump()
         {
             if (_inputs.Inputs.Bump)
@@ -152,6 +166,7 @@ namespace Character.State
 
         public override void SwitchState(CharacterManager character)
         {
+            //CanBeMoved = true;
         }
 
         public override void ExitState(CharacterManager character)

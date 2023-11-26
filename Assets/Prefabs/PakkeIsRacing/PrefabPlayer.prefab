@@ -1133,6 +1133,7 @@ MonoBehaviour:
   <Abilities>k__BackingField:
     SprintUnlock: 0
   <SprintUIManager>k__BackingField: {fileID: 7547222635669113937}
+  InCam: {fileID: 73538855098686107}
   _bumpPrefab: {fileID: 5544715627544484282, guid: 35288ed4ba5166c4f92464727337c0a4,
     type: 3}
   _bumpTimer: 5
@@ -2383,6 +2384,21 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Kayak
       objectReference: {fileID: 0}
+    - target: {fileID: 657551148734704674, guid: bc06d1e844ba3694bbdecce4a99ba863,
+        type: 3}
+      propertyPath: Character
+      value: 
+      objectReference: {fileID: 7462900990157805195}
+    - target: {fileID: 657551148734704674, guid: bc06d1e844ba3694bbdecce4a99ba863,
+        type: 3}
+      propertyPath: TimerOutOfView
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 657551148734704674, guid: bc06d1e844ba3694bbdecce4a99ba863,
+        type: 3}
+      propertyPath: _timerOutOfView
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2271926049294467189, guid: bc06d1e844ba3694bbdecce4a99ba863,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2579,6 +2595,18 @@ PrefabInstance:
       insertIndex: 8
       addedObject: {fileID: 6955056733154031917}
   m_SourcePrefab: {fileID: 100100000, guid: bc06d1e844ba3694bbdecce4a99ba863, type: 3}
+--- !u!114 &73538855098686107 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 657551148734704674, guid: bc06d1e844ba3694bbdecce4a99ba863,
+    type: 3}
+  m_PrefabInstance: {fileID: 586968217032062649}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902712224036038404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ec04c8543d70394f93a558bedbb0384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &902712224036038404 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 333907971529626045, guid: bc06d1e844ba3694bbdecce4a99ba863,

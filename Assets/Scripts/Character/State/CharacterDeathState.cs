@@ -22,12 +22,38 @@ namespace Character.State
         public override void EnterState(CharacterManager character)
         {
             IsDead = true;
+            Debug.Log("mort");
 
-            character.BalanceGaugeManagerRef.SetBalanceGaugeColor();
-            character.BalanceGaugeManagerRef.SetBalanceGaugeScale();
+
+            //character.BalanceGaugeManagerRef.SetBalanceGaugeColor();
+            //character.BalanceGaugeManagerRef.SetBalanceGaugeScale();
+        }
+        private void Respawn(Vector3 vector3)
+        {
+            //put kayak in checkpoint position & rotation
+            _kayakController.transform.localPosition = vector3;
+            _timerFadeOutStart += Time.deltaTime;
+
+            //Reset value
+            //_kayakController.CanReduceDrag = true;
+            //CameraManagerRef.CanMoveCameraManually = true;
+            //CharacterManagerRef.SetBalanceValueToCurrentSide(0);
+            //_respawned = true;
+
+            //Switch state camera
+            //CameraRespawnState cameraRespawnState = new CameraRespawnState();
+            //CameraManagerRef.SwitchState(cameraRespawnState);
+
+
+            //CharacterNavigationState characterNavigationState = new CharacterNavigationState(Character);
         }
         public override void UpdateState(CharacterManager character)
         {
+
+            Respawn(CharacterManagerRef.InCam.TargetRespawn);
+
+            //this.SwitchState(character);
+
             //if (character.RespawnLastCheckpoint == false)
             //{
             //    //Rotate kayak at 180 in z with balance
@@ -56,10 +82,10 @@ namespace Character.State
             //    _timerToRespawnCheckpoint += Time.deltaTime;
             //}
 
-            //if (_timerFadeOutStart > 1.5f && _respawned)
-            //{
-            //    SwitchState(character);
-            //}
+            if (_timerFadeOutStart > 0.5f)
+            {
+                SwitchState(character);
+            }
 
         }
 
@@ -72,9 +98,11 @@ namespace Character.State
             //Transition out
             //character.TransitionManagerProperty.LaunchTransitionOut(SceneTransition.TransitionType.Fade);
 
+            IsDead = false;
 
             //Switch state character
             CharacterNavigationState characterNavigationState = new CharacterNavigationState(Character);
+            characterNavigationState.CanBeMoved = true;
             character.SwitchState(characterNavigationState);
 
         }

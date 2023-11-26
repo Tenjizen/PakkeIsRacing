@@ -46,7 +46,10 @@ public class CharacterMultiPlayerManager : MonoBehaviour
 
     [SerializeField] int _addValueParticleRateOverTime = 10;
     int _addRateOverTimeParticle = 10;
-
+    public void SetPosKayak(Vector3 target)
+    {
+        Kayak.transform.position = target;
+    }
     private void Point()
     {
         if (_points < GameManager.Instance.MaxPointToUnlockButton)

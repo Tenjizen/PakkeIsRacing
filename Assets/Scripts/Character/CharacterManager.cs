@@ -49,6 +49,8 @@ namespace Character
         [field: SerializeField, Header("Sprint")]
         public UISprintManager SprintUIManager { get; private set; }
 
+        public IsInCameraView InCam;
+
         #endregion
 
         [Header("Bump")]

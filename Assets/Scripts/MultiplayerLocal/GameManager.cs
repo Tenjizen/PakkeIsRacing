@@ -20,7 +20,7 @@ public class GameManager : Singleton<GameManager>
     [field: SerializeField] public GameObject SharkPossessed { get; private set; }
 
 
-    public Dictionary<Material, string> UseColor = new Dictionary<Material, string>();
+    public Dictionary<Material, string> CurrentColorPlayer = new Dictionary<Material, string>();
 
 
     void Start()
