@@ -7,20 +7,15 @@ using UnityEngine;
 public class IsInCameraView : MonoBehaviour
 {
     public float TimerOutOfView;
-
     public Camera CameraMain;
-    private Plane[] _cameraFrustrum;
     public bool IsInCameraViewValue;
-    private Bounds _bounds;
     public float Timer;
-    private Collider _collider;
-
     public MultipleTargetCamera MultipleTargetCamera;
-
-    public CharacterMultiPlayerManager Character;
-
-
     public Vector3 TargetRespawn;
+
+    private Plane[] _cameraFrustrum;
+    private Bounds _bounds;
+    private Collider _collider;
 
     private void Start()
     {
@@ -40,10 +35,8 @@ public class IsInCameraView : MonoBehaviour
             if (Timer < TimerOutOfView)
             {
                 Timer += Time.deltaTime;
-                Character.CharacterManager.CurrentStateBaseProperty.CanBeMoved = false;
             }
             TargetRespawn = new Vector3(CameraMain.transform.localPosition.x, transform.localPosition.y , CameraMain.transform.localPosition.z);
-
 
         }
         else

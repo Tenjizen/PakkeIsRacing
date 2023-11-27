@@ -40,7 +40,7 @@ public class PlayerConfigManager : MonoBehaviour
             {
                 player.CharacterManager.SetCanMove(true);
             }
-            _initlvl.gameObject.SetActive(false);
+            // _initlvl.gameObject.SetActive(false);
             GameManager.Instance.SharkPossessed.GetComponentInParent<SharkWithPathController>().StartRunning = true;
         }
     }
