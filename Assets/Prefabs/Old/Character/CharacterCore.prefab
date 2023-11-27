@@ -568,12 +568,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Targets>k__BackingField:
   - {fileID: 0}
-  _offset: {x: 0, y: 0, z: -27}
   _maxPossibleDistance: 50
   _minDistanceForZoom: 2
-  _smoothTime: 70
+  _smoothTime: 5
   _minY: 35
-  _maxY: 70
+  _maxY: 50
 --- !u!1 &4652991038580386127
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,6 +714,8 @@ MonoBehaviour:
   <TimerInTriggerShark>k__BackingField: 0
   <PointsWin>k__BackingField: 0
   <MaxPointToUnlockButton>k__BackingField: 0
+  EnnemyPossessed: 1
+  <SharkPossessed>k__BackingField: {fileID: 0}
 --- !u!1 &7217796708230699273
 GameObject:
   m_ObjectHideFlags: 0
