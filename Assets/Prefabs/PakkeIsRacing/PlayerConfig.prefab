@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5097941341850591544}
   - component: {fileID: -4406434598126732270}
-  - component: {fileID: 7446306706332290151}
   m_Layer: 0
   m_Name: PlayerConfig
   m_TagString: Untagged
@@ -132,18 +131,3 @@ MonoBehaviour:
   m_DefaultActionMap: Boat
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &7446306706332290151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3227863994013744349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 760f4f250ca7b8149be1380258a4034a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerSetupMenuPrefab: {fileID: 7248978247266492954, guid: 63570d3f6d0f1814da35ed0504ef363d,
-    type: 3}
-  input: {fileID: -4406434598126732270}

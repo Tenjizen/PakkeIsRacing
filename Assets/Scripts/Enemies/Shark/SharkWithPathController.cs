@@ -2,17 +2,19 @@ using UnityEngine;
 using WaterFlowGPE.Bezier;
 using SharkWithPath.Data;
 using System;
+using System.Collections.Generic;
 
 public class SharkWithPathController : MonoBehaviour
 {
-    [Header("Path"), SerializeField] private BezierSpline _splinePath;
     [Header("Data"), SerializeField] private SharkWithPathData _data;
 
-    private float _currentSplinePosition;
+    private int _indexTarget;
     public bool StartRunning = false;
 
-    [Header("Debug"), SerializeField] private bool _slow;
+    [SerializeField] Transform _targetRoot;
+    private List<Transform> _targets = new List<Transform>();
 
+    [Header("Debug"), SerializeField] private bool _slow;
 
     void Start()
     {
@@ -27,7 +29,7 @@ public class SharkWithPathController : MonoBehaviour
     private void FixedUpdate()
     {
         if (StartRunning == false) return;
-        //DistanceManager();
+        DistanceManager();
     }
 
     private void DistanceManager()
@@ -35,10 +37,13 @@ public class SharkWithPathController : MonoBehaviour
         float bestDist = float.MaxValue;
         foreach (var item in GameManager.Instance.MultiTargetRef.Targets)
         {
-            float distTarget = Vector3.Distance(item.transform.position, this.transform.position);
-            if (distTarget < bestDist)
+            if (item != GameManager.Instance.MultiTargetRef.Targets[0])
             {
-                bestDist = distTarget;
+                float distTarget = Vector3.Distance(item.transform.position, this.transform.position);
+                if (distTarget < bestDist)
+                {
+                    bestDist = distTarget;
+                }
             }
         }
         if (bestDist < _data.MaxDistBetweenSharkAndClosestPlayer)
@@ -54,43 +59,45 @@ public class SharkWithPathController : MonoBehaviour
     public void Initialize()
     {
 
-        _currentSplinePosition = 0;
+        _indexTarget = 1;
 
-        if (_splinePath == null)
+
+        for (int i = 0; i < _targetRoot.childCount; i++)
         {
-            return;
+            _targets.Add(_targetRoot.GetChild(i));
         }
 
-        Vector3 splinePosition = _splinePath.GetPoint(_currentSplinePosition);
-        transform.position = new Vector3(splinePosition.x, transform.position.y, splinePosition.z);
+        if (_targets.Count <= 0) return;
+
+        Vector3 position = _targets[0].position;
+        transform.position = new Vector3(position.x, transform.position.y, position.z);
     }
 
 
     private void ManageMovement()
     {
-        if (_slow == false)
-        {
-            _currentSplinePosition += _data.MovingValue * Time.deltaTime;
-        }
-        else
-        {
-            _currentSplinePosition += _data.SlowMovingValue * Time.deltaTime;
-        }
-        _currentSplinePosition = Mathf.Clamp01(_currentSplinePosition);
-
-        if (_currentSplinePosition >= 1) _currentSplinePosition = 0;
-
         Transform t = transform;
 
-        Vector3 position = Vector3.Lerp(t.position, _splinePath.GetPoint(_currentSplinePosition), _data.SpeedLerpToMovingValue);
+        var target = _targets[_indexTarget].position;
+        var distTarget = Vector3.Distance(t.position, target);
+
+        if (distTarget <= 0.5f) { _indexTarget = (_indexTarget + 1) % _targets.Count; }
+        var speed = _data.MovingValue;
+
+        if (_slow == true)
+            speed += _data.SlowMovingValue * Time.deltaTime;
+
+        var position = Vector3.MoveTowards(t.position, target, speed * Time.deltaTime);
         t.position = position;
 
-        //rotation
-        Vector3 pointB = _splinePath.GetPoint(Mathf.Clamp01(_currentSplinePosition + 0.01f));
-        t.LookAt(pointB);
-        Vector3 rotation = t.transform.rotation.eulerAngles;
-        t.rotation = Quaternion.Euler(new Vector3(rotation.x, Mathf.Lerp(rotation.y, t.rotation.eulerAngles.y, 0.1f), rotation.z));
 
+        //rotation
+        var dir = _targets[_indexTarget].position - t.position;
+
+        var rota = Quaternion.Slerp(t.rotation, Quaternion.LookRotation(dir), _data.RotationSpeedValue * Time.deltaTime);
+        rota.x = 0;
+        rota.z = 0;
+        t.rotation = rota;
 
     }
 

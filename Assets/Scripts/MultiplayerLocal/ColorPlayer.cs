@@ -24,7 +24,6 @@ public class ColorPlayer : MonoBehaviour
             item.material = MaterialColorCharacter[_indexColor];
         }
 
-        Debug.Log(MaterialColorCharacter[_indexColor].name);
         MeshKayak.material = MaterialColorKayak[_indexColor];
     }
     public void InitColor(int index)
@@ -36,7 +35,6 @@ public class ColorPlayer : MonoBehaviour
             item.material = MaterialColorCharacter[index];
         }
 
-        Debug.Log(MaterialColorCharacter[index].name);
         MeshKayak.material = MaterialColorKayak[index];
     }
 
