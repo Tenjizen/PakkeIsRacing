@@ -14,11 +14,9 @@ public class ColorPlayer : MonoBehaviour
 
     private int _indexColor;
 
- 
+
     public void ChangeColor()
     {
-
-
         _indexColor = (_indexColor + 1) % MaterialColorKayak.Count;
 
         foreach (var item in MeshCharacter)
@@ -28,6 +26,18 @@ public class ColorPlayer : MonoBehaviour
 
         Debug.Log(MaterialColorCharacter[_indexColor].name);
         MeshKayak.material = MaterialColorKayak[_indexColor];
+    }
+    public void InitColor(int index)
+    {
+        _indexColor = (index) % MaterialColorKayak.Count;
+
+        foreach (var item in MeshCharacter)
+        {
+            item.material = MaterialColorCharacter[index];
+        }
+
+        Debug.Log(MaterialColorCharacter[index].name);
+        MeshKayak.material = MaterialColorKayak[index];
     }
 
 }

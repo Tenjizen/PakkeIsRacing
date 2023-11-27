@@ -8,9 +8,8 @@ using UnityEngine.InputSystem;
 public class PlayerConfigManager : MonoBehaviour
 {
     private List<PlayerConfig> playersConfig;
-    //[SerializeField] InitLvl _initlvl;
-    [SerializeField] List<GameObject> _playerReady;
-    [SerializeField] List<GameObject> _playerColor;
+    [SerializeField] InitLvl _initlvl;
+
     [SerializeField] int _maxPlayer = 4;
 
     public static PlayerConfigManager Instance { get; private set; }
@@ -37,12 +36,12 @@ public class PlayerConfigManager : MonoBehaviour
             && playersConfig.All(p => p.IsReady == true))
         {
             var players = _playersParent.GetComponentsInChildren<CharacterMultiPlayerManager>();
-            foreach (var player in players)
+            foreach (var player in players) 
             {
                 player.CharacterManager.SetCanMove(true);
-                //playerPanel.SetActive(false);
             }
-            //_initlvl.Init();
+            _initlvl.gameObject.SetActive(false);
+            GameManager.Instance.SharkPossessed.GetComponentInParent<SharkWithPathController>().StartRunning = true;
         }
     }
 
@@ -66,6 +65,7 @@ public class PlayerConfigManager : MonoBehaviour
             player.InputManager.InitPlayer(playersConfig[pi.playerIndex]);
 
             playerSpawn[pi.playerIndex].transform.GetChild(0).gameObject.SetActive(false);
+            player.ColorPlayer.InitColor(pi.playerIndex);
 
         }
     }
