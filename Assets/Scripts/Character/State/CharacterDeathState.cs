@@ -19,6 +19,7 @@ namespace Character.State
             IsDead = true;
 
         }
+
         private void Respawn(Vector3 vector3)
         {
             //put kayak in checkpoint position & rotation
@@ -33,6 +34,7 @@ namespace Character.State
             _timerFadeOutStart += Time.deltaTime;
 
         }
+
         public override void UpdateState(CharacterManager character)
         {
 
@@ -56,7 +58,7 @@ namespace Character.State
             //Switch state character
             CharacterNavigationState characterNavigationState = new CharacterNavigationState(Character);
             characterNavigationState.CanBeMoved = true;
-            CharacterManagerRef.InCam.MultipleTargetCamera.AddTarget(_kayakController.transform);
+            CharacterManagerRef.InCam.MultipleTargetCamera.AddTarget(_kayakController.transform, 1);
 
             character.SwitchState(characterNavigationState);
 
@@ -66,6 +68,4 @@ namespace Character.State
         {
         }
     }
-
-
 }

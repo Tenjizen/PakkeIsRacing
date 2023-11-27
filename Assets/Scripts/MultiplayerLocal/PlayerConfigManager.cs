@@ -8,7 +8,6 @@ using UnityEngine.InputSystem;
 public class PlayerConfigManager : MonoBehaviour
 {
     private List<PlayerConfig> playersConfig;
-    [SerializeField] InitLvl _initlvl;
 
     [SerializeField] int _maxPlayer = 4;
 
@@ -42,6 +41,7 @@ public class PlayerConfigManager : MonoBehaviour
             }
             // _initlvl.gameObject.SetActive(false);
             GameManager.Instance.SharkPossessed.GetComponentInParent<SharkWithPathController>().StartRunning = true;
+            _multipleTargetCamera.AddTarget(GameManager.Instance.SharkPossessed.transform, 0);
         }
     }
 
