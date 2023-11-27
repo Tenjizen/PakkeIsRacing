@@ -17,7 +17,7 @@ namespace Character.State
         public override void EnterState(CharacterManager character)
         {
             IsDead = true;
-
+            _timerFadeOutStart = 0;
         }
 
         private void Respawn(Vector3 vector3)
@@ -38,7 +38,7 @@ namespace Character.State
 
             Respawn(CharacterManagerRef.InCam.TargetRespawn);
 
-            if (_timerFadeOutStart > 0.2f)
+            if (_timerFadeOutStart > 0.3f)
             {
                 SwitchState(character);
             }
@@ -57,7 +57,9 @@ namespace Character.State
             CharacterNavigationState characterNavigationState = new CharacterNavigationState(Character);
             characterNavigationState.CanBeMoved = true;
             CharacterManagerRef.InCam.MultipleTargetCamera.AddTarget(_kayakController.transform, 1);
-
+            CharacterManagerRef.InCam.IsInCameraViewValue = true;
+            CharacterManagerRef.InCam.Timer = 0;
+            Debug.Log("tf");
             character.SwitchState(characterNavigationState);
 
         }
