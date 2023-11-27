@@ -39,14 +39,18 @@ namespace MultiplayerLocal
         private void Zoom()
         {
             float greatestDistance = GetGreatestDistance();
-
             if (greatestDistance < _minDistanceForZoom)
             {
                 greatestDistance = 0f;
             }
 
             float newY = Mathf.Lerp(_minY, _maxY, greatestDistance / _maxPossibleDistance);
-            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, newY, Time.deltaTime * _smoothTime), transform.position.z);
+            if (Mathf.Abs(transform.position.y - newY) < 25 && newY < _maxY)
+            {
+                transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, newY, Time.deltaTime * _smoothTime), transform.position.z);
+
+            }
+
         }
 
         private void Move()
@@ -58,7 +62,7 @@ namespace MultiplayerLocal
 
         private void Rotate()
         {
-                transform.eulerAngles = new Vector3(transform.eulerAngles.x, Targets[0].transform.eulerAngles.y, transform.eulerAngles.z);
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, Targets[0].transform.eulerAngles.y, transform.eulerAngles.z);
         }
 
         private float GetGreatestDistance()
