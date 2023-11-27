@@ -192,8 +192,6 @@ namespace WaterAndFloating
 
         private void WaveGeneration()
         {
-            if (_playerTransform == null) return;
-
             //octave
             Octave octave = _octave;
             float time = Time.time;
@@ -202,10 +200,10 @@ namespace WaterAndFloating
             float octaveSpeedX = octave.Speed.x * time;
             float octaveSpeedY = octave.Speed.y * time;
             float octaveHeight = octave.Height;
-            
+
             //render values setup
             Vector3 position = _playerTransform.position;
-            Vector3 renderCenter = _vertices[FindIndexOfVerticeAt(new Vector2(position.x,position.z), true)];
+            Vector3 renderCenter = _vertices[FindIndexOfVerticeAt(new Vector2(position.x, position.z), true)];
             int xStart = (int)renderCenter.x - _renderDistance;
             int xEnd = (int)renderCenter.x + _renderDistance;
             int yStart = (int)renderCenter.z - _renderDistance;
@@ -219,7 +217,7 @@ namespace WaterAndFloating
                 {
                     float y = 0f;
 
-                    if ((int)x * (_dimension + 1) + (int)z <=0 || (int)x * (_dimension + 1) + (int)z >= count)
+                    if ((int)x * (_dimension + 1) + (int)z <= 0 || (int)x * (_dimension + 1) + (int)z >= count)
                     {
                         continue;
                     }
@@ -229,12 +227,12 @@ namespace WaterAndFloating
                         _vertices[(int)x * (_dimension + 1) + (int)z] = new Vector3(x, y, z);
                         continue;
                     }
-                
+
                     float perlinNoiseValue = Mathf.PerlinNoise(
-                                                 (x * octaveScaleX +  octaveSpeedX) / _dimension, 
-                                                 (z * octaveScaleY +  octaveSpeedY) / _dimension) 
+                                                 (x * octaveScaleX + octaveSpeedX) / _dimension,
+                                                 (z * octaveScaleY + octaveSpeedY) / _dimension)
                                              - 0.5f;
-                
+
                     y += perlinNoiseValue * octaveHeight;
 
                     vector.x = x;
@@ -243,7 +241,7 @@ namespace WaterAndFloating
                     _vertices[(int)x * (_dimension + 1) + (int)z] = vector;
                 }
             }
-        
+
             ManageCircularWaves();
             ManageLinearWaves();
             

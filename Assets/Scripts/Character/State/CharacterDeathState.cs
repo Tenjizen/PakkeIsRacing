@@ -23,6 +23,7 @@ namespace Character.State
         private void Respawn(Vector3 vector3)
         {
             //put kayak in checkpoint position & rotation
+            vector3.y = GameManager.Instance.WavesRef.GetHeight(vector3);
             _kayakController.transform.localPosition = vector3;
 
             _kayakController.transform.eulerAngles = new Vector3(_kayakController.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, _kayakController.transform.eulerAngles.z);
@@ -37,7 +38,7 @@ namespace Character.State
 
             Respawn(CharacterManagerRef.InCam.TargetRespawn);
 
-            if (_timerFadeOutStart > 0.5f)
+            if (_timerFadeOutStart > 0.2f)
             {
                 SwitchState(character);
             }
