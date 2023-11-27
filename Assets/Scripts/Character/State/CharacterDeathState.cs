@@ -19,9 +19,11 @@ namespace Character.State
             IsDead = true;
             _timerFadeOutStart = 0;
         }
-
-        private void Respawn(Vector3 vector3)
+        bool spawn;
+        private void Respawn(Vector3 vector3, CharacterManager character)
         {
+            if (spawn == true) return;
+
             //put kayak in checkpoint position & rotation
             vector3.y = GameManager.Instance.WavesRef.GetHeight(vector3);
             _kayakController.transform.localPosition = vector3;
@@ -29,19 +31,22 @@ namespace Character.State
             _kayakController.transform.eulerAngles = new Vector3(_kayakController.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, _kayakController.transform.eulerAngles.z);
             _kayakController.Rigidbody.velocity = Vector3.zero;
 
-            _timerFadeOutStart += Time.deltaTime;
+            spawn = true;
+            //_timerFadeOutStart += Time.deltaTime;
+            Debug.Log("respawn");
+            SwitchState(character);
 
         }
 
         public override void UpdateState(CharacterManager character)
         {
 
-            Respawn(CharacterManagerRef.InCam.TargetRespawn);
+            Respawn(CharacterManagerRef.InCam.TargetRespawn,character);
 
-            if (_timerFadeOutStart > 0.3f)
-            {
-                SwitchState(character);
-            }
+            //if (_timerFadeOutStart > 0.3f)
+            //{
+            //    SwitchState(character);
+            //}
 
         }
 

@@ -149,21 +149,21 @@ public class Penguin : MonoBehaviour
         int hitCount = Physics.RaycastNonAlloc(origin, direction, _hitBuffer, distance);
         if (hitCount > 0)
         {
-            int temp = 0;
-            while (_hitBuffer[temp].collider.GetComponent<WaterFlowBlock>() == true)
-            {
-                if (temp >= _hitBuffer.Length)
-                    return;
-                temp++;
-            }
-            for (int i = 0; i < hitCount; i++)
-            {
-                if (_hitBuffer[temp].distance > _hitBuffer[i].distance && _hitBuffer[i].collider.GetComponent<WaterFlowBlock>() == false)
-                {
-                    temp = i;
-                }
-            }
-            position.y = Mathf.Lerp(t.position.y, _hitBuffer[temp].point.y, 0.2f);
+            //int temp = 0;
+            //while (_hitBuffer[temp].collider.GetComponent<WaterFlowBlock>() == true)
+            //{
+            //    if (temp >= _hitBuffer.Length)
+            //        return;
+            //    temp++;
+            //}
+            //for (int i = 0; i < hitCount; i++)
+            //{
+            //    if (_hitBuffer[temp].distance > _hitBuffer[i].distance && _hitBuffer[i].collider.GetComponent<WaterFlowBlock>() == false)
+            //    {
+            //        temp = i;
+            //    }
+            //}
+            //position.y = Mathf.Lerp(t.position.y, _hitBuffer[temp].point.y, 0.2f);
 
         }
         t.position = position;

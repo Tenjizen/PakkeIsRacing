@@ -26,6 +26,10 @@ public class CharacterMultiPlayerManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.I))
+            Kayak.transform.position = Vector3.one * 100;
+
+
         if (InSharkZone == true && GameManager.Instance.EnnemyPossessed == true)
         {
             if (MaxPts == true) return;

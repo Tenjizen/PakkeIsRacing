@@ -43,7 +43,6 @@ namespace GPEs.WaterFlowGPE
         [Header("Infos")]
         [ReadOnly] public Vector3 Direction;
         [ReadOnly] public bool IsActive = true;
-        [HideInInspector] public WaterFlowManager WaterFlowManager;
         [ReadOnly, SerializeField] private float _playParticleTime;
 
         private void Start()
@@ -78,13 +77,12 @@ namespace GPEs.WaterFlowGPE
         {
             KayakController kayakController = character.CharacterManager.KayakControllerProperty;
 
-            if (kayakController.gameObject != collider.gameObject || WaterFlowManager == null ||
+            if (kayakController.gameObject != collider.gameObject ||
                 character.CharacterManager.CurrentStateBaseProperty.CanBeMoved == false)
             {
                 return;
             }
 
-            WaterFlowManager.SetClosestBlockToPlayer(kayakController.transform);
             if (IsActive == false)
             {
                 return;
@@ -124,25 +122,6 @@ namespace GPEs.WaterFlowGPE
                 velocity.x + speed * Mathf.Sign(velocity.x),
                 velocity.y,
                 velocity.z + speed * Mathf.Sign(velocity.z));
-
-            //balance
-            //double value = _balanceValue * UnityEngine.Random.Range(_balanceValueRandomMultiplierRange.x, _balanceValueRandomMultiplierRange.y);
-            //CharacterManager.Instance.AddBalanceValueToCurrentSide(value);
-        }
-
-        /// <summary>
-        /// Setup the water block and its values
-        /// </summary>
-        /// <param name="direction">the direction the block has to face</param>
-        /// <param name="waterFlowManager">the waterFlowManager script managing the block</param>
-        /// <param name="width">the width of the block</param>
-        public void SetupBlock(Vector3 direction, WaterFlowManager waterFlowManager, float width, float height, float depth)
-        {
-            WaterFlowManager = waterFlowManager;
-            Direction = direction;
-            transform.localScale = new Vector3(depth, height, width);
-            transform.rotation = Quaternion.LookRotation(Direction);
-            transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + 90, transform.rotation.eulerAngles.z));
         }
 
         private void ManageParticles()
