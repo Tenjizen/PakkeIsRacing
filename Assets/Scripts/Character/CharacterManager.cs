@@ -40,14 +40,12 @@ namespace Character
 
         //[field: SerializeField] public TransitionManager TransitionManagerProperty { get; private set; }
         //[field: SerializeField] public NotificationsController NotificationsUIController { get; private set; }
-        [field: SerializeField] public BalanceGaugeManager BalanceGaugeManagerRef { get; private set; }
-        [field: SerializeField] public ExperienceManager ExperienceManagerProperty { get; private set; }
         [field: SerializeField] public IKControl IKPlayerControl { get; private set; }
         [field: SerializeField] public PlayerParameters Parameters { get; set; }
         [field: SerializeField] public PlayerAbilities Abilities { get; set; }
 
         [field: SerializeField, Header("Sprint")]
-        public UISprintManager SprintUIManager { get; private set; }
+        //public UISprintManager SprintUIManager { get; private set; }
 
         public IsInCameraView InCam;
 
@@ -116,9 +114,6 @@ namespace Character
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.P)) SetCanMove(!CurrentStateBaseProperty.CanBeMoved);
-
-
             CurrentStateBaseProperty.UpdateState(this);
 
             if (CurrentStateBaseProperty.IsDead == false)

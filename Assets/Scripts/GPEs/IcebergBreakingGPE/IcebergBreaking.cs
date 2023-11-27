@@ -22,11 +22,6 @@ public class IcebergBreaking : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            DestroyIceberg();
-        }
-
         if (_startLifeTimer == true)
         {
             Destroy(this.gameObject, 3.0f);

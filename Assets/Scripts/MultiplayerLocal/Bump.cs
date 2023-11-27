@@ -20,7 +20,10 @@ public class Bump : MonoBehaviour
 
                 if (rb != null)
                 {
-                    rb.AddExplosionForce(_explosionForce, transform.position, _radius);
+                    var dir = collider.transform.position - transform.position;
+                    dir.y = 0;
+                    rb.AddRelativeForce(dir.normalized * _explosionForce, ForceMode.Impulse);
+                    //rb.AddExplosionForce(_explosionForce, transform.position, _radius);
                 }
             }
         }

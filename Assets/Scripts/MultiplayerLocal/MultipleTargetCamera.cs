@@ -25,9 +25,17 @@ namespace MultiplayerLocal
 
             Move();
             Zoom();
-            Rotate();
         }
+        private void FixedUpdate()
+        {
+            if (Targets.Count <= 0)
+            {
+                return;
+            }
 
+            Rotate();
+
+        }
         private void Zoom()
         {
             float greatestDistance = GetGreatestDistance();
@@ -50,10 +58,7 @@ namespace MultiplayerLocal
 
         private void Rotate()
         {
-            if (Targets.Count > 0)
-            {
                 transform.eulerAngles = new Vector3(transform.eulerAngles.x, Targets[0].transform.eulerAngles.y, transform.eulerAngles.z);
-            }
         }
 
         private float GetGreatestDistance()
@@ -96,6 +101,13 @@ namespace MultiplayerLocal
             if (Targets.Contains(transform) == false)
             {
                 Targets.Insert(index, transform);
+            }
+        }
+        public void AddTarget(Transform transform)
+        {
+            if (Targets.Contains(transform) == false)
+            {
+                Targets.Add(transform);
             }
         }
     }

@@ -84,12 +84,9 @@ namespace Character.State
         public override void UpdateState(CharacterManager character)
         {
             CheckCamView(character);
-
             if (CanBeMoved == false) return;
 
             PaddleCooldownManagement();
-
-            CheckBalance();
 
             MakeBoatRotationWithBalance(_kayakController.transform, 1);
 
@@ -98,20 +95,18 @@ namespace Character.State
                 CharacterManagerRef.SprintInProgress = false;
             }
 
-            if (CharacterManagerRef.InWaterFlow == false)
-            {
-                CharacterManagerRef.SprintUIManager.SprintEnded(_timerLastInputTrigger);
-            }
-            else if (CharacterManagerRef.InWaterFlow == true)
-            {
-                CharacterManagerRef.SprintUIManager.ParticleSpeedEmission(true);
-                CharacterManagerRef.SprintUIManager.TrailEmitting(true);
-            }
+            //if (CharacterManagerRef.InWaterFlow == false)
+            //{
+            //    CharacterManagerRef.SprintUIManager.SprintEnded(_timerLastInputTrigger);
+            //}
+            //else if (CharacterManagerRef.InWaterFlow == true)
+            //{
+            //    CharacterManagerRef.SprintUIManager.ParticleSpeedEmission(true);
+            //    CharacterManagerRef.SprintUIManager.TrailEmitting(true);
+            //}
 
             CheckPurify();
             CheckBump();
-
-
         }
 
         private void CheckCamView(CharacterManager character)
@@ -119,11 +114,26 @@ namespace Character.State
             
             if (CharacterManagerRef.InCam.IsInCameraViewValue == false && CharacterManagerRef.InCam.Timer >= CharacterManagerRef.InCam.TimerOutOfView)
             {
-                CharacterDeathState characterNavigationState = new CharacterDeathState(Character);
-                character.SwitchState(characterNavigationState);
+                Respawn(GameManager.Instance.SharkPossessed.transform.position, character);
             }
         }
+        bool spawn;
+        private void Respawn(Vector3 vector3, CharacterManager character)
+        {
 
+            //put kayak in checkpoint position & rotation
+            vector3.y = GameManager.Instance.WavesRef.GetHeight(vector3);
+            _kayakController.transform.position = vector3;
+
+            _kayakController.transform.eulerAngles = new Vector3(_kayakController.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, _kayakController.transform.eulerAngles.z);
+            _kayakController.Rigidbody.velocity = Vector3.zero;
+
+            CharacterManagerRef.InCam.MultipleTargetCamera.AddTarget(_kayakController.transform);
+            //CharacterManagerRef.InCam.IsInCameraViewValue = true;
+            //CharacterManagerRef.InCam.Timer = 0;
+
+            //SwitchState(character);
+        }
         private void CheckPurify()
         {
             if (_inputs.Inputs.Purify == true && Character.MaxPts == true && Character.InSharkZone == true)
@@ -398,33 +408,33 @@ namespace Character.State
 
         private void CheckIfSprint(Direction direction)
         {
-            CharacterManagerRef.SprintUIManager.EnableFeedback(direction);
-            if (_lastInputPaddle == direction || CharacterManagerRef.Abilities.SprintUnlock == false)
-            {
-                return;
-            }
+            //CharacterManagerRef.SprintUIManager.EnableFeedback(direction);
+            //if (_lastInputPaddle == direction || CharacterManagerRef.Abilities.SprintUnlock == false)
+            //{
+            //    return;
+            //}
 
-            if (_timerLastInputTrigger >= _kayakValues.TimerMinForSprint &&
-                _timerLastInputTrigger <= _kayakValues.TimerMaxForSprint)
-            {
-                CharacterManagerRef.SprintInProgress = true;
-                CharacterManagerRef.OnEnterSprint.Invoke();
-                MonoBehaviourRef.StartCoroutine(CharacterManagerRef.SprintUIManager.GoodTiming());
-            }
-            else
-            {
-                DisableSprint();
-            }
+            //if (_timerLastInputTrigger >= _kayakValues.TimerMinForSprint &&
+            //    _timerLastInputTrigger <= _kayakValues.TimerMaxForSprint)
+            //{
+            //    CharacterManagerRef.SprintInProgress = true;
+            //    CharacterManagerRef.OnEnterSprint.Invoke();
+            //    MonoBehaviourRef.StartCoroutine(CharacterManagerRef.SprintUIManager.GoodTiming());
+            //}
+            //else
+            //{
+            //    DisableSprint();
+            //}
 
-            _timerLastInputTrigger = 0;
-            _lastInputPaddle = direction;
+            //_timerLastInputTrigger = 0;
+            //_lastInputPaddle = direction;
         }
 
         public void DisableSprint()
         {
-            CharacterManagerRef.SprintInProgress = false;
-            CharacterManagerRef.OnStopSprint.Invoke();
-            CharacterManagerRef.SprintUIManager.DisableSprintUI();
+            //CharacterManagerRef.SprintInProgress = false;
+            //CharacterManagerRef.OnStopSprint.Invoke();
+            //CharacterManagerRef.SprintUIManager.DisableSprintUI();
         }
 
         /// <summary>
