@@ -25,10 +25,7 @@ namespace Character.State
             //put kayak in checkpoint position & rotation
             _kayakController.transform.localPosition = vector3;
 
-            var rota = _kayakController.transform.localRotation;
-            rota.y = CharacterManagerRef.InCam.CameraMain.transform.rotation.y;
-            _kayakController.transform.localRotation = rota;
-
+            _kayakController.transform.eulerAngles = new Vector3(_kayakController.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, _kayakController.transform.eulerAngles.z);
             _kayakController.Rigidbody.velocity = Vector3.zero;
 
             _timerFadeOutStart += Time.deltaTime;

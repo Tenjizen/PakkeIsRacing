@@ -59,8 +59,7 @@ namespace MultiplayerLocal
         private float GetGreatestDistance()
         {
             Bounds bounds = CreateBounds();
-            return bounds.size.z;
-            // return bounds.size.x > bounds.size.z ? bounds.size.x : bounds.size.z;
+            return bounds.size.x > bounds.size.z ? bounds.size.x : bounds.size.z;
         }
 
         private Vector3 GetCenterPoint()
