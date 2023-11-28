@@ -84,7 +84,9 @@ namespace Character.State
         public override void UpdateState(CharacterManager character)
         {
             CheckCamView(character);
-            if (CanBeMoved == false) return;
+            if (CanBeMoved == false) { CanCharacterMove = false; return; }
+
+            CanCharacterMove = true;
 
             PaddleCooldownManagement();
 
@@ -111,7 +113,7 @@ namespace Character.State
 
         private void CheckCamView(CharacterManager character)
         {
-            
+
             if (CharacterManagerRef.InCam.IsInCameraViewValue == false && CharacterManagerRef.InCam.Timer >= CharacterManagerRef.InCam.TimerOutOfView)
             {
                 Respawn(GameManager.Instance.SharkPossessed.transform.position, character);
@@ -141,8 +143,17 @@ namespace Character.State
                 Character.MaxPts = false;
                 Character.RemovePoint(GameManager.Instance.MaxPointToUnlockButton);
                 Debug.Log("wwwwiiiiiiiiiiiinnnnnnnnneeeeeeeeeerrrrrrrrrrrrr");
-                GameManager.Instance.SharkPossessed.SetActive(false);
-                GameManager.Instance.EnnemyPossessed = false;
+
+
+                GameManager.Instance.PurifyShark();
+
+
+                foreach (var player in GameManager.Instance.PlayerConfigManagerRef.PlayersParent.GetComponentsInChildren<CharacterMultiPlayerManager>())
+                {
+                    player.CharacterManager.SetCanMove(false);
+
+                }
+
             }
         }
 

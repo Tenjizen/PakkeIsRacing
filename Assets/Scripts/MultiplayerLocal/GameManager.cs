@@ -9,7 +9,7 @@ public class GameManager : Singleton<GameManager>
 {
     [field: SerializeField] public Waves WavesRef { get; private set; }
     [field: SerializeField] public MultipleTargetCamera MultiTargetRef { get; private set; }
-
+    [field: SerializeField] public PlayerConfigManager PlayerConfigManagerRef { get; private set; }
 
     [field: SerializeField] public float TimerInTriggerShark { get; private set; }
     [field: SerializeField] public int PointsWin { get; private set; }
@@ -31,6 +31,14 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    public void PurifyShark()
+    {
+        SharkPossessed.SetActive(false);
+        EnnemyPossessed = false;
+        SharkPossessed.GetComponentInParent<SharkWithPathController>().StartRunning = false;
 
     }
 }

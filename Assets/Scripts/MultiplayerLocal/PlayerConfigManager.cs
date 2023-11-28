@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerConfigManager : MonoBehaviour
 {
-    private List<PlayerConfig> playersConfig;
+    public List<PlayerConfig> PlayersConfig;
 
     [SerializeField] int _maxPlayer = 4;
 
@@ -23,18 +23,18 @@ public class PlayerConfigManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(this);
-            playersConfig = new List<PlayerConfig>();
+            PlayersConfig = new List<PlayerConfig>();
         }
     }
 
     public void ReadyPlayer(int index)
     {
-        playersConfig[index].IsReady = true;
+        PlayersConfig[index].IsReady = true;
         playerSpawn[index].gameObject.SetActive(false);
-        if (playersConfig.Count > 0 && playersConfig.Count <= _maxPlayer
-            && playersConfig.All(p => p.IsReady == true))
+        if (PlayersConfig.Count > 0 && PlayersConfig.Count <= _maxPlayer
+            && PlayersConfig.All(p => p.IsReady == true))
         {
-            var players = _playersParent.GetComponentsInChildren<CharacterMultiPlayerManager>();
+            var players = PlayersParent.GetComponentsInChildren<CharacterMultiPlayerManager>();
             foreach (var player in players) 
             {
                 player.CharacterManager.SetCanMove(true);
@@ -47,22 +47,22 @@ public class PlayerConfigManager : MonoBehaviour
 
     public List<PlayerConfig> GetPlayerConfigs()
     {
-        return playersConfig;
+        return PlayersConfig;
     }
 
     public void HandlePlayerJoin(PlayerInput pi)
     {
         Debug.Log(pi.playerIndex);
 
-        if (!playersConfig.Any(p => p.PlayerIndex == pi.playerIndex))
+        if (!PlayersConfig.Any(p => p.PlayerIndex == pi.playerIndex))
         {
             pi.transform.SetParent(transform);
-            playersConfig.Add(new PlayerConfig(pi));
+            PlayersConfig.Add(new PlayerConfig(pi));
 
-            CharacterMultiPlayerManager player = Instantiate(_playerPrefab, playerSpawn[pi.playerIndex].position, playerSpawn[pi.playerIndex].rotation, _playersParent);
+            CharacterMultiPlayerManager player = Instantiate(_playerPrefab, playerSpawn[pi.playerIndex].position, playerSpawn[pi.playerIndex].rotation, PlayersParent);
             _multipleTargetCamera.Targets.Add(player.Kayak.transform);
             player.GetComponentInChildren<IsInCameraView>().MultipleTargetCamera = _multipleTargetCamera;
-            player.InputManager.InitPlayer(playersConfig[pi.playerIndex]);
+            player.InputManager.InitPlayer(PlayersConfig[pi.playerIndex]);
 
             playerSpawn[pi.playerIndex].transform.GetChild(0).gameObject.SetActive(false);
             player.ColorPlayer.InitColor(pi.playerIndex);
@@ -74,7 +74,7 @@ public class PlayerConfigManager : MonoBehaviour
     [SerializeField] List<Transform> playerSpawn;
     [SerializeField] CharacterMultiPlayerManager _playerPrefab;
     [SerializeField] MultipleTargetCamera _multipleTargetCamera;
-    [SerializeField] Transform _playersParent;
+    public Transform PlayersParent;
 }
 public class PlayerConfig
 {
