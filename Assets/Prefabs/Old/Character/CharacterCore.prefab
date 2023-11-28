@@ -126,6 +126,37 @@ MonoBehaviour:
   m_YawDamping: 0
   m_RollDamping: 0
   m_AngularDamping: 0
+--- !u!1 &1200792241040892014
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4359173900981110484}
+  m_Layer: 0
+  m_Name: TargetFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4359173900981110484
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200792241040892014}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -10.9, z: 23.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3387405727807608120}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1938050121314540839
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,6 +418,7 @@ GameObject:
   - component: {fileID: 1967899735}
   - component: {fileID: -5038646530012617906}
   - component: {fileID: 3379999885806410755}
+  - component: {fileID: 5556065357262723731}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -408,6 +440,7 @@ Transform:
   m_Children:
   - {fileID: 889234006}
   - {fileID: 2696206347028872984}
+  - {fileID: 4359173900981110484}
   m_Father: {fileID: 7217796708230699272}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -573,6 +606,23 @@ MonoBehaviour:
   _minY: 35
   _maxY: 50
   _targetShark: {fileID: 0}
+--- !u!114 &5556065357262723731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3858187113969445702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f427beb4e06ac3c46a76c394c724d653, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particles:
+  - Name: Death
+    ParticleSystem: {fileID: 198039942544698878, guid: 36aa6e033f1e10c4ca8dc52f30955bfa,
+      type: 3}
+    Position: {fileID: 4359173900981110484}
 --- !u!1 &4652991038580386127
 GameObject:
   m_ObjectHideFlags: 0
@@ -2174,7 +2224,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _trails.Array.data[2]
       value: 
-      objectReference: {fileID: 8894560207582661030}
+      objectReference: {fileID: 0}
     - target: {fileID: 8278373982930158887, guid: 5f3937e671440d847b7282995fde0507,
         type: 3}
       propertyPath: _waterRipplePaggaieLeft
@@ -2591,12 +2641,6 @@ SpriteRenderer:
 --- !u!4 &7709316901156113542 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4774128453200700741, guid: 7bb67df9b55caf54c9d4179d591eea26,
-    type: 3}
-  m_PrefabInstance: {fileID: 2935751471092705731}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8894560207582661030 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6039943972380844133, guid: 7bb67df9b55caf54c9d4179d591eea26,
     type: 3}
   m_PrefabInstance: {fileID: 2935751471092705731}
   m_PrefabAsset: {fileID: 0}

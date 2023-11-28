@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,37 +6,60 @@ using UnityEngine;
 public class ColorPlayer : MonoBehaviour
 {
     public MeshRenderer MeshKayak;
-    public List<Material> MaterialColorKayak;
+    public List<ColorCharacter> Colors = new List<ColorCharacter>();
 
+    public List<SkinnedMeshRenderer> MeshCharacter = new List<SkinnedMeshRenderer>();
 
-    public List<SkinnedMeshRenderer> MeshCharacter;
-    public List<Material> MaterialColorCharacter;
-
-
+    public ColorCharacter CurrentColor;
+    
     private int _indexColor;
 
+    private void Start()
+    {
+        CurrentColor = Colors[0];
+    }
 
     public void ChangeColor()
     {
-        _indexColor = (_indexColor + 1) % MaterialColorKayak.Count;
+        _indexColor = (_indexColor + 1) % Colors.Count;
 
         foreach (var item in MeshCharacter)
         {
-            item.material = MaterialColorCharacter[_indexColor];
+            item.material = Colors[_indexColor].MaterialColorCharacter;
         }
 
-        MeshKayak.material = MaterialColorKayak[_indexColor];
+        MeshKayak.material = Colors[_indexColor].MaterialColorKayak;
+
+        CurrentColor = Colors[_indexColor];
     }
     public void InitColor(int index)
     {
-        _indexColor = (index) % MaterialColorKayak.Count;
+        _indexColor = (index) % Colors.Count;
 
         foreach (var item in MeshCharacter)
         {
-            item.material = MaterialColorCharacter[index];
+            item.material =  Colors[_indexColor].MaterialColorCharacter;
         }
 
-        MeshKayak.material = MaterialColorKayak[index];
+        MeshKayak.material =  Colors[_indexColor].MaterialColorKayak;
     }
 
+}
+
+[Serializable]
+public class ColorCharacter
+{
+    public Colors Color;
+    public Material MaterialColorKayak;
+    public Material MaterialColorCharacter;
+    public ParticleSystem PrefabRespawnFX;
+}
+
+public enum Colors
+{
+    White,
+    Red,
+    Green,
+    Blue,
+    Purple
 }
