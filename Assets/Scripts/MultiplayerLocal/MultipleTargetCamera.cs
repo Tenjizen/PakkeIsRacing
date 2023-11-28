@@ -13,6 +13,7 @@ namespace MultiplayerLocal
         [SerializeField] private float _smoothTime;
         [SerializeField] private float _minY;
         [SerializeField] private float _maxY;
+        [SerializeField] private Transform _targetShark;
 
         private Vector3 _velocity;
 
@@ -107,6 +108,12 @@ namespace MultiplayerLocal
                 Targets.Insert(index, transform);
             }
         }
+
+        public void SetFirstTarget()
+        {
+            AddTarget(_targetShark,0);
+        }
+        
         public void AddTarget(Transform transform)
         {
             if (Targets.Contains(transform) == false)

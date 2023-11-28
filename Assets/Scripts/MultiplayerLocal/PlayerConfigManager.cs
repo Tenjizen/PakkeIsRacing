@@ -41,7 +41,7 @@ public class PlayerConfigManager : MonoBehaviour
             }
             // _initlvl.gameObject.SetActive(false);
             GameManager.Instance.SharkPossessed.GetComponentInParent<SharkWithPathController>().StartRunning = true;
-            _multipleTargetCamera.AddTarget(GameManager.Instance.SharkPossessed.transform, 0);
+            _multipleTargetCamera.SetFirstTarget();
         }
     }
 
