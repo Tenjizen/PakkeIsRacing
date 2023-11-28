@@ -80,6 +80,8 @@ namespace Character
         public UnityEvent OnPaddle;
         public UnityEvent OnEnterSprint;
         public UnityEvent OnStopSprint;
+        public UnityEvent OnBump;
+        public UnityEvent OnRespawn;
 
         [HideInInspector] public float InvincibilityTime;
         [HideInInspector] public bool IsGameLaunched;
@@ -160,6 +162,7 @@ namespace Character
             {
                 Bump bump = Instantiate(_bumpPrefab, transform.position, Quaternion.identity);
                 bump.Explode(_collider);
+                OnBump.Invoke();
                 _canBump = false;
                 StartCoroutine(WaitToBumpAgain());
             }

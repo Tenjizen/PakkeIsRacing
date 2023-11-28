@@ -84,7 +84,11 @@ namespace Character.State
         public override void UpdateState(CharacterManager character)
         {
             CheckCamView(character);
-            if (CanBeMoved == false) { CanCharacterMove = false; return; }
+            if (CanBeMoved == false)
+            {
+                CanCharacterMove = false;
+                return;
+            }
 
             CanCharacterMove = true;
 
@@ -113,16 +117,17 @@ namespace Character.State
 
         private void CheckCamView(CharacterManager character)
         {
-
             if (CharacterManagerRef.InCam.IsInCameraViewValue == false && CharacterManagerRef.InCam.Timer >= CharacterManagerRef.InCam.TimerOutOfView)
             {
-                Respawn(GameManager.Instance.SharkPossessed.transform.position, character);
+                // Respawn(GameManager.Instance.SharkPossessed.transform.position - new Vector3(0, 0, 5), character);
+                // Debug.Log("Respawn");
             }
         }
-        bool spawn;
+
+        bool _spawn;
+
         private void Respawn(Vector3 vector3, CharacterManager character)
         {
-
             //put kayak in checkpoint position & rotation
             vector3.y = GameManager.Instance.WavesRef.GetHeight(vector3);
             _kayakController.transform.position = vector3;
@@ -131,11 +136,14 @@ namespace Character.State
             _kayakController.Rigidbody.velocity = Vector3.zero;
 
             CharacterManagerRef.InCam.MultipleTargetCamera.AddTarget(_kayakController.transform);
+
+            character.OnRespawn.Invoke();
             //CharacterManagerRef.InCam.IsInCameraViewValue = true;
             //CharacterManagerRef.InCam.Timer = 0;
 
             //SwitchState(character);
         }
+
         private void CheckPurify()
         {
             if (_inputs.Inputs.Purify == true && Character.MaxPts == true && Character.InSharkZone == true)
@@ -151,9 +159,7 @@ namespace Character.State
                 foreach (var player in GameManager.Instance.PlayerConfigManagerRef.PlayersParent.GetComponentsInChildren<CharacterMultiPlayerManager>())
                 {
                     player.CharacterManager.SetCanMove(false);
-
                 }
-
             }
         }
 
@@ -414,7 +420,6 @@ namespace Character.State
             //change the rotation inertia to 0
             RotationPaddleForceY = Mathf.Lerp(RotationPaddleForceY, 0, 0.1f);
             RotationStaticForceY = Mathf.Lerp(RotationStaticForceY, 0, 0.1f);
-
         }
 
         private void CheckIfSprint(Direction direction)
