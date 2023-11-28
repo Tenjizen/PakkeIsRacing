@@ -566,15 +566,12 @@ MonoBehaviour:
   <InputManagementProperty>k__BackingField: {fileID: 8723659837373602303}
   <PaddleAnimatorProperty>k__BackingField: {fileID: 8571992417096195542}
   <CharacterAnimatorProperty>k__BackingField: {fileID: 3675305721752544134}
-  <BalanceGaugeManagerRef>k__BackingField: {fileID: 0}
-  <ExperienceManagerProperty>k__BackingField: {fileID: 0}
   <IKPlayerControl>k__BackingField: {fileID: 296978694019486335}
   <Parameters>k__BackingField:
     InversedControls: 0
     Language: 0
   <Abilities>k__BackingField:
     SprintUnlock: 0
-  <SprintUIManager>k__BackingField: {fileID: 0}
   InCam: {fileID: 73538855098686107}
   _bumpPrefab: {fileID: 5544715627544484282, guid: 35288ed4ba5166c4f92464727337c0a4,
     type: 3}
@@ -1084,6 +1081,12 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 4950148468892883501, guid: bc06d1e844ba3694bbdecce4a99ba863,
+        type: 3}
+      propertyPath: Data
+      value: 
+      objectReference: {fileID: 11400000, guid: 9e1bb6d8d1cd8884094039f308ed0f06,
+        type: 2}
     - target: {fileID: 4950148468892883501, guid: bc06d1e844ba3694bbdecce4a99ba863,
         type: 3}
       propertyPath: Character
