@@ -43,10 +43,11 @@ public class SharkWithPathController : MonoBehaviour
                 if (distTarget < bestDist)
                 {
                     bestDist = distTarget;
+
                 }
             }
         }
-        if (bestDist < _data.MaxDistBetweenSharkAndClosestPlayer)
+        if (bestDist > _data.MaxDistBetweenSharkAndClosestPlayer)
         {
             _slow = true;
         }

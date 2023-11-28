@@ -33,7 +33,8 @@ namespace GPEs.WaterFlowGPE
 
         [Header("Particles"), SerializeField]
         private List<ParticleSystem> _particlesList;
-        [SerializeField] private List<Transform> _particlesTransformsList;
+        [SerializeField] private Transform _particlesTransformsRoot;
+        private List<Transform> _particlesTransformsList = new List<Transform>();
         private List<ParticleSystem> _particlesTempList = new List<ParticleSystem>(); //private list for take the particules you instantiate
 
         [SerializeField, Tooltip("One of the particles will play at a random time between those two values")]
@@ -44,14 +45,21 @@ namespace GPEs.WaterFlowGPE
         [ReadOnly] public Vector3 Direction;
         [ReadOnly] public bool IsActive = true;
         [ReadOnly, SerializeField] private float _playParticleTime;
+        [ReadOnly, SerializeField] private float _playSecondParticleTime;
 
         private void Start()
         {
             _playParticleTime = UnityEngine.Random.Range(_randomPlayOfParticleTime.x, _randomPlayOfParticleTime.y);
+            _playSecondParticleTime = _playParticleTime / 2;
+
+            for (int i = 0; i < _particlesTransformsRoot.childCount; i++)
+            {
+                _particlesTransformsList.Add(_particlesTransformsRoot.GetChild(i).transform);
+            }
 
             for (int i = 0; i < _particlesTransformsList.Count; i++)
             {
-                _particlesTempList.Add(Instantiate(_particlesList[i], _particlesTransformsList[i]));
+                _particlesTempList.Add(Instantiate(_particlesList[i % _particlesList.Count], _particlesTransformsList[i]));
             }
         }
 
@@ -127,11 +135,26 @@ namespace GPEs.WaterFlowGPE
         private void ManageParticles()
         {
             _playParticleTime -= Time.deltaTime;
+            _playSecondParticleTime -= Time.deltaTime;
             if (_playParticleTime <= 0)
             {
-                int particleIndex = new Random().Next(0, _particlesList.Count);
-                _particlesTempList[particleIndex].Emit(new ParticleSystem.EmitParams(), 1);
+                int rand = new Random().Next(4, _particlesTransformsList.Count);
+                for (int i = 0; i < rand; i++)
+                {
+                    _particlesTempList[i % _particlesTempList.Count].Emit(new ParticleSystem.EmitParams(), 1);
+
+                }
                 _playParticleTime = UnityEngine.Random.Range(_randomPlayOfParticleTime.x, _randomPlayOfParticleTime.y);
+            }
+            if (_playSecondParticleTime <= 0)
+            {
+                int rand = new Random().Next(4, _particlesTransformsList.Count);
+                for (int i = 0; i < rand; i++)
+                {
+                    _particlesTempList[i % _particlesTempList.Count].Emit(new ParticleSystem.EmitParams(), 1);
+
+                }
+                _playSecondParticleTime = UnityEngine.Random.Range(_randomPlayOfParticleTime.x, _randomPlayOfParticleTime.y);
             }
         }
 
