@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
 
     //public Image imageFade;
 
-    public GameObject Title;
+    //public GameObject Title;
 
     public GameObject accueil;
     public GameObject parameter;
@@ -29,8 +29,8 @@ public class MainMenu : MonoBehaviour
 
     private void Update()
     {
-        if (accueil.gameObject.activeInHierarchy == true) Title.SetActive(true);
-        else Title.SetActive(false);
+        //if (accueil.gameObject.activeInHierarchy == true) Title.SetActive(true);
+        //else Title.SetActive(false);
     }
     private void Awake()
     {
