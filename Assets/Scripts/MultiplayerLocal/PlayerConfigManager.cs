@@ -64,7 +64,7 @@ public class PlayerConfigManager : MonoBehaviour
             player.InputManager.InitPlayer(PlayersConfig[pi.playerIndex]);
 
             playerSpawn[pi.playerIndex].transform.GetChild(0).gameObject.SetActive(false);
-            player.ColorPlayer.InitColor(pi.playerIndex);
+            player.ColorPlayerRef.InitColor(pi.playerIndex);
 
         }
     }

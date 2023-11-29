@@ -8,7 +8,7 @@ public class CharacterMultiPlayerManager : MonoBehaviour
     public CharacterManager CharacterManager;
     public InputManagement InputManager;
     public KayakController Kayak;
-    public ColorPlayer ColorPlayer;
+    public ColorPlayer ColorPlayerRef;
 
     [SerializeField] ParticleSystem _particleSystem;
 
@@ -28,7 +28,7 @@ public class CharacterMultiPlayerManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            Kayak.transform.position = Vector3.one *100;
+            Kayak.transform.position = Vector3.one * 100;
         }
 
 
@@ -62,9 +62,13 @@ public class CharacterMultiPlayerManager : MonoBehaviour
         {
             _points += GameManager.Instance.PointsWin;
 
-            var emission = _particleSystem.emission;
-            _addRateOverTimeParticle += _addValueParticleRateOverTime;
-            emission.rateOverTime = _addRateOverTimeParticle;
+            for (int i = 0; i < _particleSystem.transform.childCount; i++)
+            {
+                var emission = _particleSystem.transform.GetChild(i).GetComponent<ParticleSystem>().emission;
+                _addRateOverTimeParticle += _addValueParticleRateOverTime;
+                emission.rateOverTime = _addRateOverTimeParticle;
+
+            }
         }
         else if (MaxPts == false)
         {
@@ -74,19 +78,43 @@ public class CharacterMultiPlayerManager : MonoBehaviour
         }
     }
 
+    public void ChangeColorParticule()
+    {
+        for (int i = 0; i < _particleSystem.transform.childCount; i++)
+        {
+            var emission = _particleSystem.transform.GetChild(i).GetComponent<ParticleSystem>().emission;
+            _addRateOverTimeParticle = 1;
+            emission.rateOverTime = _addRateOverTimeParticle;
+
+
+            var colorParticleChild = _particleSystem.transform.GetChild(i).GetComponent<ParticleSystem>().main;
+            var colorChild = ColorPlayerRef.CurrentColor.MaterialColorKayak.color;
+            colorChild.a = 1f;
+            colorParticleChild.startColor = colorChild;
+        }
+
+        var colorParticle = _particleSystem.main;
+        var color = ColorPlayerRef.CurrentColor.MaterialColorKayak.color;
+        color.a = 0.2f;
+        colorParticle.startColor = color;
+    }
+
     public void RemovePoint(int pts)
     {
         _points -= pts;
-
-        var emission = _particleSystem.emission;
-        _addRateOverTimeParticle -= _addValueParticleRateOverTime * pts;
-        emission.rateOverTime = _addRateOverTimeParticle;
+        for (int i = 0; i < _particleSystem.transform.childCount; i++)
+        {
+            var emission = _particleSystem.transform.GetChild(i).GetComponent<ParticleSystem>().emission;
+            _addRateOverTimeParticle -= _addValueParticleRateOverTime * pts;
+            emission.rateOverTime = _addRateOverTimeParticle;
+        }
 
         if (MaxPts == true)
         {
             MaxPts = false;
             var colorParticle = _particleSystem.main;
-            colorParticle.startColor = Color.white;
+            var color = ColorPlayerRef.CurrentColor.MaterialColorKayak.color;
+            colorParticle.startColor = color;
         }
     }
 }

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class ColorPlayer : MonoBehaviour
 {
+    public CharacterMultiPlayerManager Character;
+
+
     public MeshRenderer MeshKayak;
     public List<ColorCharacter> Colors = new List<ColorCharacter>();
 
@@ -17,6 +20,7 @@ public class ColorPlayer : MonoBehaviour
     private void Start()
     {
         CurrentColor = Colors[0];
+        Character.ChangeColorParticule();
     }
 
     public void ChangeColor()
@@ -31,6 +35,7 @@ public class ColorPlayer : MonoBehaviour
         MeshKayak.material = Colors[_indexColor].MaterialColorKayak;
 
         CurrentColor = Colors[_indexColor];
+        Character.ChangeColorParticule();
     }
     public void InitColor(int index)
     {

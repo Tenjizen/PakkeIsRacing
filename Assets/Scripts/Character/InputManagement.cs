@@ -80,7 +80,7 @@ namespace Character
 
                 if (obj.started && obj.action.name == _gameplayInputs.Boat.Color.name && Character.CharacterManager.CurrentStateBaseProperty.CanBeMoved == false)
                 {
-                    Character.ColorPlayer.ChangeColor();
+                    Character.ColorPlayerRef.ChangeColor();
                 }
             }
 
