@@ -83,6 +83,7 @@ namespace Character.State
 
         public override void UpdateState(CharacterManager character)
         {
+            Debug.Log("update player");
             CheckCamView(character);
             if (CanBeMoved == false)
             {

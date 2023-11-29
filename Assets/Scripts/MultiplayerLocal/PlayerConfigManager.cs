@@ -34,14 +34,13 @@ public class PlayerConfigManager : MonoBehaviour
         if (PlayersConfig.Count > 0 && PlayersConfig.Count <= _maxPlayer
             && PlayersConfig.All(p => p.IsReady == true))
         {
-            var players = PlayersParent.GetComponentsInChildren<CharacterMultiPlayerManager>();
-            foreach (var player in players) 
-            {
-                player.CharacterManager.SetCanMove(true);
-            }
+            //var players = PlayersParent.GetComponentsInChildren<CharacterMultiPlayerManager>();
+            //foreach (var player in players) 
+            //{
+            //    player.CharacterManager.SetCanMove(true);
+            //}
             // _initlvl.gameObject.SetActive(false);
             GameManager.Instance.SharkPossessed.GetComponentInParent<SharkWithPathController>().StartRunning = true;
-            _multipleTargetCamera.SetFirstTarget();
         }
     }
 
@@ -60,8 +59,8 @@ public class PlayerConfigManager : MonoBehaviour
             PlayersConfig.Add(new PlayerConfig(pi));
 
             CharacterMultiPlayerManager player = Instantiate(_playerPrefab, playerSpawn[pi.playerIndex].position, playerSpawn[pi.playerIndex].rotation, PlayersParent);
-            _multipleTargetCamera.Targets.Add(player.Kayak.transform);
-            player.GetComponentInChildren<IsInCameraView>().MultipleTargetCamera = _multipleTargetCamera;
+            MultipleTargetCamera.Targets.Add(player.Kayak.transform);
+            player.GetComponentInChildren<IsInCameraView>().MultipleTargetCamera = MultipleTargetCamera;
             player.InputManager.InitPlayer(PlayersConfig[pi.playerIndex]);
 
             playerSpawn[pi.playerIndex].transform.GetChild(0).gameObject.SetActive(false);
@@ -73,7 +72,7 @@ public class PlayerConfigManager : MonoBehaviour
 
     [SerializeField] List<Transform> playerSpawn;
     [SerializeField] CharacterMultiPlayerManager _playerPrefab;
-    [SerializeField] MultipleTargetCamera _multipleTargetCamera;
+    public MultipleTargetCamera MultipleTargetCamera;
     public Transform PlayersParent;
 }
 public class PlayerConfig

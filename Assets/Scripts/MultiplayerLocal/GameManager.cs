@@ -13,6 +13,7 @@ public class GameManager : Singleton<GameManager>
 
     [field: SerializeField] public float TimerInTriggerShark { get; private set; }
     [field: SerializeField] public int PointsWin { get; private set; }
+    [field: SerializeField] public int PointsForBump { get; private set; }
     [field: SerializeField] public int MaxPointToUnlockButton { get; private set; }
 
 
@@ -36,9 +37,12 @@ public class GameManager : Singleton<GameManager>
 
     public void PurifyShark()
     {
+        var shark = SharkPossessed.GetComponentInParent<SharkWithPathController>();
         SharkPossessed.SetActive(false);
         EnnemyPossessed = false;
-        SharkPossessed.GetComponentInParent<SharkWithPathController>().StartRunning = false;
+        shark.StartRunning = false;
+        shark.Shpere.SetActive(false);
+        shark.ParticleSystemPurify.gameObject.SetActive(true);
 
     }
 }

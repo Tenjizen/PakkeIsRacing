@@ -44,5 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf6ceda4798bd4a4d9a63cb9b5cd1b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosionForce: 1200
-  _radius: 24
+  _explosionForce: 300
+  _radius: 8
+  _bumping:
+    m_PersistentCalls:
+      m_Calls: []
+  _particleSystem: {fileID: 1142931038123454373, guid: 82206f8fa2adb4d4c8ab29969789049f,
+    type: 3}

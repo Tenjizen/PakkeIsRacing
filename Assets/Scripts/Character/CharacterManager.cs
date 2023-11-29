@@ -55,7 +55,7 @@ namespace Character
         [SerializeField] private Bump _bumpPrefab;
         [SerializeField] private float _bumpTimer;
         [SerializeField] private Collider _collider;
-        
+
         [Header("Character Data")] public CharacterData Data;
         [Range(0, 360)] public float BaseOrientation;
 
@@ -158,8 +158,11 @@ namespace Character
 
         public void CreateBump()
         {
-            if (_canBump)
+            if (_canBump && Character.Points > 0)
             {
+
+                Character.RemovePoint(GameManager.Instance.PointsForBump);
+
                 Bump bump = Instantiate(_bumpPrefab, transform.position, Quaternion.identity);
                 bump.Explode(_collider);
                 OnBump.Invoke();

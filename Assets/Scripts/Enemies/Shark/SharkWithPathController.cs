@@ -11,6 +11,8 @@ public class SharkWithPathController : MonoBehaviour
     private int _indexTarget;
     public bool StartRunning = false;
 
+    public GameObject Shpere;
+    public ParticleSystem ParticleSystemPurify;
     [SerializeField] Transform _targetRoot;
     private List<Transform> _targets = new List<Transform>();
 
@@ -102,7 +104,7 @@ public class SharkWithPathController : MonoBehaviour
 
     }
 
-
+   
 
 
 

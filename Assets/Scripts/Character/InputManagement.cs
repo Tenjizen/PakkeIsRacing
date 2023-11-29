@@ -67,7 +67,8 @@ namespace Character
             if (obj.action.name == _gameplayInputs.Boat.Purify.name)
                 inputsEnum.Purify = obj.ReadValue<float>() > DeadzoneJoystickTrigger;
 
-            if (obj.action.name == _gameplayInputs.Boat.Bump.name)
+            if (Character.InSharkZone == false && obj.action.name == _gameplayInputs.Boat.Bump.name ||
+                obj.action.name == _gameplayInputs.Boat.Bump.name && Character.MaxPts == false)
                 inputsEnum.Bump = obj.ReadValue<float>() > DeadzoneJoystickTrigger;
 
             if (Character.CharacterManager.CurrentStateBaseProperty != null)

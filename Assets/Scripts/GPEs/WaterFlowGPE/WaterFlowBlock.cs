@@ -70,6 +70,7 @@ namespace GPEs.WaterFlowGPE
 
         private void OnTriggerStay(Collider other)
         {
+            Debug.Log(other + " ontriggerstay");
             var character = other.gameObject.transform.GetComponentInParent<CharacterMultiPlayerManager>();
             if (character != null)
                 CheckForKayak(character, other);

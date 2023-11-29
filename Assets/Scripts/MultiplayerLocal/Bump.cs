@@ -9,9 +9,12 @@ public class Bump : MonoBehaviour
     [SerializeField] private float _explosionForce;
     [SerializeField] private float _radius;
     [SerializeField] private UnityEvent _bumping;
+    [SerializeField] private ParticleSystem _particleSystem;
 
     public void Explode(Collider mainCollider)
     {
+        _particleSystem.Play();
+
         Collider[] colliders = Physics.OverlapSphere(transform.position, _radius);
 
         foreach (Collider collider in colliders)
@@ -31,7 +34,7 @@ public class Bump : MonoBehaviour
             }
         }
 
-        Destroy(gameObject, 5);
+        Destroy(gameObject, 1);
     }
 
     private void OnDrawGizmosSelected()

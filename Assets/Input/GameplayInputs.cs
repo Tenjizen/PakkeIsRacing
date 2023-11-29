@@ -825,8 +825,8 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""2cee310d-6d5f-449d-93c2-e66abbc097b4"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""id"": ""03b893bc-97d1-41ea-9c2f-a9d113920414"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -836,8 +836,8 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""03b893bc-97d1-41ea-9c2f-a9d113920414"",
-                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""id"": ""2cee310d-6d5f-449d-93c2-e66abbc097b4"",
+                    ""path"": ""<Keyboard>/x"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
