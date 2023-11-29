@@ -5,6 +5,8 @@ using UI;
 using UnityEngine;
 using WaterAndFloating;
 using MultiplayerLocal;
+using UnityEngine.SceneManagement;
+
 public class GameManager : Singleton<GameManager>
 {
     [field: SerializeField] public Waves WavesRef { get; private set; }
@@ -44,5 +46,14 @@ public class GameManager : Singleton<GameManager>
         shark.Shpere.SetActive(false);
         shark.ParticleSystemPurify.gameObject.SetActive(true);
 
+        StartCoroutine(ReturnMenu(5));
+    }
+
+    IEnumerator ReturnMenu(float time)
+    {
+        yield return new WaitForSeconds(time);
+            Destroy(PlayerConfigManagerRef.transform.gameObject);
+        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 }
