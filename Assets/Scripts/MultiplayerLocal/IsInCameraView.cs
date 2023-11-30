@@ -14,6 +14,7 @@ public class IsInCameraView : MonoBehaviour
     public float Timer;
     public MultipleTargetCamera MultipleTargetCamera;
     public Vector3 TargetRespawn;
+    public float OffsetRespawnZ;
     public UnityEvent OnRespawn;
 
     private Plane[] _cameraFrustrum;
@@ -58,7 +59,7 @@ public class IsInCameraView : MonoBehaviour
                 IsInCameraViewValue = true;
             }
 
-            TargetRespawn = GameManager.Instance.SharkPossessed.transform.position + new Vector3(0, 0, -5);
+            TargetRespawn = GameManager.Instance.SharkPossessed.transform.position + (GameManager.Instance.SharkPossessed.transform.forward * OffsetRespawnZ);
         }
         else
         {
