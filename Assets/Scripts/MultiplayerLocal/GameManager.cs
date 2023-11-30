@@ -54,6 +54,6 @@ public class GameManager : Singleton<GameManager>
         yield return new WaitForSeconds(time);
             Destroy(PlayerConfigManagerRef.transform.gameObject);
         
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
