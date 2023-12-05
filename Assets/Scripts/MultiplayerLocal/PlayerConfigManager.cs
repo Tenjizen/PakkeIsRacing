@@ -67,7 +67,6 @@ public class PlayerConfigManager : MonoBehaviour
             playerPlaceHolder[pi.playerIndex].gameObject.SetActive(false);
             playerBtns[pi.playerIndex].gameObject.SetActive(true);
             player.ColorPlayerRef.InitColor(pi.playerIndex);
-
         }
     }
 
@@ -75,6 +74,7 @@ public class PlayerConfigManager : MonoBehaviour
     [SerializeField] List<Transform> playerSpawn;
     [SerializeField] List<GameObject> playerPlaceHolder;
     [SerializeField] List<GameObject> playerBtns;
+    [SerializeField] List<GameObject> PreviewColor;
     [SerializeField] CharacterMultiPlayerManager _playerPrefab;
     public MultipleTargetCamera MultipleTargetCamera;
     public Transform PlayersParent;

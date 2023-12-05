@@ -6,6 +6,7 @@ using UnityEngine;
 public class ColorPlayer : MonoBehaviour
 {
     public CharacterMultiPlayerManager Character;
+    public PlayerConfigManager ConfigManager;
 
 
     public MeshRenderer MeshKayak;
@@ -36,6 +37,7 @@ public class ColorPlayer : MonoBehaviour
 
         CurrentColor = Colors[_indexColor];
         Character.ChangeColorParticule();
+        ConfigManager.
     }
     public void InitColor(int index)
     {

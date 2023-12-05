@@ -75,7 +75,8 @@ MonoBehaviour:
       type: 2}
     MaterialColorCharacter: {fileID: 2100000, guid: 2ba078b9ea91df84aafb665d7fd00ad5,
       type: 2}
-    PrefabRespawnFX: {fileID: 0}
+    PrefabRespawnFX: {fileID: 97280944960812688, guid: 18e1b7aa09eb7394291717594297018d,
+      type: 3}
   - Color: 1
     MaterialColorKayak: {fileID: 2100000, guid: 75e5a64111620dc4d95c3b595f7217a9,
       type: 2}
@@ -91,9 +92,9 @@ MonoBehaviour:
     PrefabRespawnFX: {fileID: 97280944960812688, guid: 49000578aadd0f84c8547a9229d809c6,
       type: 3}
   - Color: 3
-    MaterialColorKayak: {fileID: 2100000, guid: 6d10476678cbe8344ba1902c99f1539a,
+    MaterialColorKayak: {fileID: 2100000, guid: 2c1a080afc10f074792c44052d38c3cf,
       type: 2}
-    MaterialColorCharacter: {fileID: 2100000, guid: 884c386bb2b366a4eabd2263d7e1c6e1,
+    MaterialColorCharacter: {fileID: 2100000, guid: 285685bd48622964ea7be7964653a608,
       type: 2}
     PrefabRespawnFX: {fileID: 97280944960812688, guid: 847a3f7e71614b14b921f7b7810573df,
       type: 3}
@@ -965,6 +966,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 85c90c068f01eb440abcca1acbcb8699, type: 2}
+    - target: {fileID: 3572886030207264346, guid: bc06d1e844ba3694bbdecce4a99ba863,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4950148468892883501, guid: bc06d1e844ba3694bbdecce4a99ba863,
         type: 3}
       propertyPath: Character
@@ -1833,6 +1839,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -2.220446e-16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1075964266022151133, guid: 90e5008432bdbda4ab6dd8c7ef373dab,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1190576432406003077, guid: 90e5008432bdbda4ab6dd8c7ef373dab,
         type: 3}
