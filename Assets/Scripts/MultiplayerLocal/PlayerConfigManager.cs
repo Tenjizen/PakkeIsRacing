@@ -63,7 +63,9 @@ public class PlayerConfigManager : MonoBehaviour
             player.GetComponentInChildren<IsInCameraView>().MultipleTargetCamera = MultipleTargetCamera;
             player.InputManager.InitPlayer(PlayersConfig[pi.playerIndex]);
 
-            playerSpawn[pi.playerIndex].transform.GetChild(0).gameObject.SetActive(false);
+            //playerSpawn[pi.playerIndex].transform.GetChild(1).gameObject.SetActive(false);
+            playerPlaceHolder[pi.playerIndex].gameObject.SetActive(false);
+            playerBtns[pi.playerIndex].gameObject.SetActive(true);
             player.ColorPlayerRef.InitColor(pi.playerIndex);
 
         }
@@ -71,6 +73,8 @@ public class PlayerConfigManager : MonoBehaviour
 
 
     [SerializeField] List<Transform> playerSpawn;
+    [SerializeField] List<GameObject> playerPlaceHolder;
+    [SerializeField] List<GameObject> playerBtns;
     [SerializeField] CharacterMultiPlayerManager _playerPrefab;
     public MultipleTargetCamera MultipleTargetCamera;
     public Transform PlayersParent;
