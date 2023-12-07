@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using DG.Tweening;
 using UnityEngine.InputSystem;
 
 public class PlayerConfigManager : MonoBehaviour
@@ -49,12 +50,24 @@ public class PlayerConfigManager : MonoBehaviour
         return PlayersConfig;
     }
 
+    [SerializeField] List<Transform> playerSpawn;
+    [SerializeField] List<GameObject> playerPlaceHolder;
+    [SerializeField] List<GameObject> playerBtns;
+    [SerializeField] List<SpriteRenderer> PreviewColor;
+    [SerializeField] CharacterMultiPlayerManager _playerPrefab;
+    public MultipleTargetCamera MultipleTargetCamera;
+    public Transform PlayersParent;
+    private PlayerInput _pi;
+    [SerializeField] float TimeFadeOut;
+    [SerializeField] float TimeFadeIn;
+
     public void HandlePlayerJoin(PlayerInput pi)
     {
         Debug.Log(pi.playerIndex);
 
         if (!PlayersConfig.Any(p => p.PlayerIndex == pi.playerIndex))
         {
+            _pi = pi;
             pi.transform.SetParent(transform);
             PlayersConfig.Add(new PlayerConfig(pi));
 
@@ -62,22 +75,16 @@ public class PlayerConfigManager : MonoBehaviour
             MultipleTargetCamera.Targets.Add(player.Kayak.transform);
             player.GetComponentInChildren<IsInCameraView>().MultipleTargetCamera = MultipleTargetCamera;
             player.InputManager.InitPlayer(PlayersConfig[pi.playerIndex]);
-
-            //playerSpawn[pi.playerIndex].transform.GetChild(1).gameObject.SetActive(false);
-            playerPlaceHolder[pi.playerIndex].gameObject.SetActive(false);
+            playerPlaceHolder[pi.playerIndex].gameObject.transform.GetComponentInChildren<SpriteRenderer>().DOFade(0, TimeFadeOut).OnComplete(
+                () => playerPlaceHolder[pi.playerIndex].gameObject.SetActive(false));
+            //playerSpawn[pi.playerIndex].gameObject.SetActive(false);
             playerBtns[pi.playerIndex].gameObject.SetActive(true);
+            playerBtns[pi.playerIndex].gameObject.transform.GetComponentInChildren<SpriteRenderer>().DOFade(0, 0.1f).OnComplete(
+                () => playerBtns[pi.playerIndex].gameObject.transform.GetComponentInChildren<SpriteRenderer>().DOFade(1, TimeFadeIn));
+            player.PreviewColor = PreviewColor[pi.playerIndex];
             player.ColorPlayerRef.InitColor(pi.playerIndex);
         }
     }
-
-
-    [SerializeField] List<Transform> playerSpawn;
-    [SerializeField] List<GameObject> playerPlaceHolder;
-    [SerializeField] List<GameObject> playerBtns;
-    [SerializeField] List<GameObject> PreviewColor;
-    [SerializeField] CharacterMultiPlayerManager _playerPrefab;
-    public MultipleTargetCamera MultipleTargetCamera;
-    public Transform PlayersParent;
 }
 public class PlayerConfig
 {

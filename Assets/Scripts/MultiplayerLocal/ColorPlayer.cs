@@ -37,7 +37,7 @@ public class ColorPlayer : MonoBehaviour
 
         CurrentColor = Colors[_indexColor];
         Character.ChangeColorParticule();
-        ConfigManager.
+        Character.PreviewColor.color = Colors[_indexColor].MaterialColorKayak.color;
     }
     public void InitColor(int index)
     {
@@ -49,6 +49,7 @@ public class ColorPlayer : MonoBehaviour
         }
 
         MeshKayak.material =  Colors[_indexColor].MaterialColorKayak;
+        Character.PreviewColor.color = Colors[_indexColor].MaterialColorKayak.color;
     }
 
 }
