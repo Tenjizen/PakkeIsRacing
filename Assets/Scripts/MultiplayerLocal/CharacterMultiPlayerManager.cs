@@ -10,6 +10,7 @@ public class CharacterMultiPlayerManager : MonoBehaviour
     public KayakController Kayak;
     public ColorPlayer ColorPlayerRef;
     public SpriteRenderer PreviewColor;
+    public SpriteRenderer Jauge;
 
     [SerializeField] ParticleSystem _particleSystem;
 
