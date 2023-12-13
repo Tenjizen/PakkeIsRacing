@@ -6,6 +6,7 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerConfigManager : MonoBehaviour
 {
@@ -55,7 +56,7 @@ public class PlayerConfigManager : MonoBehaviour
     [SerializeField] List<GameObject> playerPlaceHolder;
     [SerializeField] List<GameObject> playerBtns;
     [SerializeField] List<SpriteRenderer> PreviewColor;
-    [SerializeField] List<SpriteRenderer> Jauge;
+    [SerializeField] List<Image> Jauge;
     [SerializeField] CharacterMultiPlayerManager _playerPrefab;
     public MultipleTargetCamera MultipleTargetCamera;
     public Transform PlayersParent;
@@ -101,7 +102,7 @@ public class PlayerConfigManager : MonoBehaviour
             playerBtns[pi.playerIndex].gameObject.transform.GetChild(5).gameObject.transform.GetComponent<SpriteRenderer>().DOFade(0, 0).OnComplete(() =>
             playerBtns[pi.playerIndex].gameObject.transform.GetChild(5).gameObject.transform.GetComponent<SpriteRenderer>().DOFade(1, TimeFadeIn));
             player.PreviewColor = PreviewColor[pi.playerIndex];
-            player.Jauge = Jauge[pi.playerIndex];
+            player.Jauge.color = Jauge[pi.playerIndex].color;
             player.ColorPlayerRef.InitColor(pi.playerIndex);
         }
     }

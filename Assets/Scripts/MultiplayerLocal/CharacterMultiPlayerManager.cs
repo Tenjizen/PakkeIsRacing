@@ -2,6 +2,7 @@ using Character;
 using Kayak;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterMultiPlayerManager : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class CharacterMultiPlayerManager : MonoBehaviour
     public KayakController Kayak;
     public ColorPlayer ColorPlayerRef;
     public SpriteRenderer PreviewColor;
-    public SpriteRenderer Jauge;
+    public Image Jauge;
 
     [SerializeField] ParticleSystem _particleSystem;
 
